@@ -1,6 +1,6 @@
 ---
-title: "Show form fields based on other fields"
-description: As of Home Assistant Core 2026.11, config flows, options flows, and blueprints can show a field only while other fields have certain values.
+title: "根据其他字段显示表单字段"
+description: 自 Home Assistant Core 2026.11 起，配置流程、选项流程和蓝图可以仅在其他字段具有特定值时显示某个字段。
 date: 2026-10-21
 authors:
   - Paul Bottein
@@ -8,11 +8,11 @@ areas:
   - core
 ---
 
-As of Home Assistant Core 2026.11, config flows, options flows, and blueprints can show a field only while other fields have certain values. You no longer need an extra step, or to show the form again after submit, just to show or hide a few fields. Flows and blueprints use the same `visible` condition.
+自 Home Assistant Core 2026.11 起，配置流程、选项流程和蓝图可以仅在其他字段具有特定值时显示某个字段。您不再需要额外的步骤，或在提交后再次显示表单，仅仅为了显示或隐藏几个字段。流程和蓝图使用相同的 `visible` 条件。
 
-## Config and options flows
+## 配置流程和选项流程
 
-Give the `Required` or `Optional` marker from `homeassistant.data_entry_flow` a `visible` condition:
+为 `homeassistant.data_entry_flow` 中的 `Required` 或 `Optional` 标记添加 `visible` 条件：
 
 ```python
 from homeassistant import data_entry_flow
@@ -30,13 +30,13 @@ DATA_SCHEMA = probatio.Schema(
 )
 ```
 
-The **Verify SSL certificate** checkbox only shows when **Use SSL** is checked. While it is hidden, it is not required and its value is not saved.
+**验证 SSL 证书** 复选框仅在 **使用 SSL** 被选中时显示。当其隐藏时，它不是必填项，其值也不会被保存。
 
-Read [fields that show based on another field](/core/integrations/flow-steps/#fields-that-show-based-on-another-field) for the available conditions and how hidden fields behave.
+阅读 [根据其他字段显示的字段](/core/integrations/flow-steps/#fields-that-show-based-on-another-field) 了解可用的条件以及隐藏字段的行为。
 
-## Blueprints
+## 蓝图
 
-Blueprint inputs and input sections take the same `visible` key, next to `default` and `collapsed`:
+蓝图输入和输入部分接受相同的 `visible` 键，位于 `default` 和 `collapsed` 旁边：
 
 ```yaml
 blueprint:
@@ -63,6 +63,6 @@ blueprint:
           max: 100
 ```
 
-**Brightness** only shows when **Dimming** is set to `fixed`. A hidden input does not need a value. The automation then gets the input's `default` (`50` here), or `None` when it has no default, even if a value was entered before the input was hidden. Setting `visible` on an input section hides the whole section and its inputs.
+**亮度** 仅在 **调光** 设置为 `fixed` 时显示。隐藏的输入不需要值。自动化随后会获取输入的 `default`（此处为 `50`），或在其没有默认值时获取 `None`，即使在输入被隐藏之前已输入了值也是如此。在输入部分上设置 `visible` 会隐藏整个部分及其输入。
 
-Read [showing inputs based on other inputs](https://www.home-assistant.io/docs/blueprint/schema/#showing-inputs-based-on-other-inputs) in the user documentation for the details.
+阅读用户文档中的 [根据其他输入显示输入](https://www.home-assistant.io/docs/blueprint/schema/#showing-inputs-based-on-other-inputs) 了解详细信息。

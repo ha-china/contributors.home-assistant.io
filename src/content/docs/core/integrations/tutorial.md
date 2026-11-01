@@ -1,8 +1,8 @@
 ---
 title: 构建你的第一个集成
 description: 逐步构建一个小而完整的集成，从脚手架（scaffold）到配置流程（config flow）、协调器（coordinator）、传感器、测试，以及一个达到 Bronze 级别的拉取请求（pull request）。
-sidebarLabel: Tutorial
-sidebarGroup: Getting started
+sidebarLabel: 教程
+sidebarGroup: 入门
 order: 2
 ---
 

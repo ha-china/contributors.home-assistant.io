@@ -110,7 +110,7 @@ profile example flags=(attach_disconnected,mediate_deleted) {
 
 没有 `hassio_api` 时，你的应用仍然可以使用它自己的大部分 `/addons/self` 端点（不包括 `security` 和 `update`）、`/info`、服务、发现和身份验证。请参阅[与 Home Assistant 和 Supervisor 通信](/apps/guides/communication/#the-supervisor-api)。
 
-`homeassistant_api` is separate from these roles: it controls access to the Home Assistant Core API proxy at `/core/api`. Through the proxy, your app acts as an administrator of Home Assistant, so it can call everything an administrator can, including managing users. The roles above do not limit this. See [Home Assistant Core](/apps/guides/communication/#home-assistant-core).
+`homeassistant_api` 与这些角色是分开的：它控制对 `/core/api` 的 Home Assistant Core API 代理的访问。通过该代理，你的应用以 Home Assistant 管理员的身份运行，因此它可以调用管理员可以调用的所有内容，包括管理用户。上述角色不限制这一点。请参阅 [Home Assistant Core](/apps/guides/communication/#home-assistant-core)。
 
 ## 使用 Home Assistant 用户
 

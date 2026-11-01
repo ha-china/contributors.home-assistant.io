@@ -1,6 +1,6 @@
 ---
-title: Repair issues can belong to a config entry, and be refreshed
-description: Link a repair issue to its config entry, and Home Assistant deletes it when the entry is removed. Refresh a set of issues, and only the stale ones are deleted.
+title: 修复问题可以归属于配置条目，并可刷新
+description: 将修复问题链接到其配置条目，Home Assistant 会在条目被移除时删除该问题。刷新一组问题，仅删除过时的问题。
 date: 2026-10-28
 authors:
   - Erik Montnémery
@@ -8,11 +8,11 @@ areas:
   - core
 ---
 
-Two additions to the issue registry make it easier to keep repair issues correct, without annoying users. Both land in Home Assistant Core 2026.11, and are documented in [repairs](/core/integrations/repairs/).
+问题注册表的两项新增功能，让保持修复问题正确变得更容易，同时不会打扰用户。这两项功能均随 Home Assistant Core 2026.11 发布，并在 [repairs](/core/integrations/repairs/) 中有文档说明。
 
-## Issues that belong to a config entry
+## 归属于配置条目的问题
 
-You can now link a repair issue to the config entry it belongs to, by passing the new `config_entry_id` argument to `async_create_issue` or `create_issue`. Home Assistant deletes the issue when the config entry is removed, just like it does with the devices and entities of the entry.
+您现在可以通过向 `async_create_issue` 或 `create_issue` 传递新的 `config_entry_id` 参数，将修复问题链接到其所属的配置条目。当配置条目被移除时，Home Assistant 会删除该问题，就像删除该条目的设备和实体一样。
 
 ```python
 from homeassistant.helpers import issue_registry as ir
@@ -28,23 +28,23 @@ ir.async_create_issue(
 )
 ```
 
-Set `config_entry_id` on issues that are about a single config entry. If your integration has code that deletes those issues when the entry is removed, you can drop it once the issues are created with `config_entry_id`. An issue created before that belongs to no entry until it is created again. Most issues are created again on the next start, but a [persistent](/core/integrations/repairs/#persistence) issue that is never created again may still need to be deleted in `async_remove_entry` for a while.
+在涉及单个配置条目时，请设置 `config_entry_id`。如果您的集成有在条目被移除时删除这些问题的代码，一旦问题以 `config_entry_id` 创建，您就可以移除这些代码。在此之前创建的问题在再次创建之前不属于任何条目。大多数问题会在下次启动时重新创建，但一个 [持久化](/core/integrations/repairs/#persistence) 的问题如果不再被创建，可能仍需要在 `async_remove_entry` 中删除一段时间。
 
-A few things to keep in mind:
+需要注意的几点：
 
-- Issues are still identified by their domain and `issue_id`, so the `issue_id` must stay unique within your domain. When several config entries can raise the same kind of issue, put the entry ID in the `issue_id`.
-- The config entry must exist. Passing an unknown ID raises `HomeAssistantError`.
-- Creating an issue that already exists replaces its `config_entry_id`, also when you leave `config_entry_id` out.
-- Issues that belong to a config entry that no longer exists are deleted when Home Assistant starts.
-- While the config entry is disabled, its issues are hidden from **Repairs** and from the `issues()` template function.
+- 问题仍由其域和 `issue_id` 标识，因此 `issue_id` 必须在您的域内保持唯一。当多个配置条目可能引发同类型问题时，请将条目 ID 放入 `issue_id`。
+- 配置条目必须存在。传递未知 ID 会引发 `HomeAssistantError`。
+- 创建已存在的问题会替换其 `config_entry_id`，即使您省略 `config_entry_id` 也是如此。
+- 归属于已不存在配置条目的问题会在 Home Assistant 启动时被删除。
+- 当配置条目被禁用时，其问题会从 **Repairs** 和 `issues()` 模板函数中隐藏。
 
-This is implemented in core [PR #186197](https://github.com/home-assistant/core/pull/186197) and [PR #186369](https://github.com/home-assistant/core/pull/186369). For the details, see [issues that belong to a config entry](/core/integrations/repairs/#issues-that-belong-to-a-config-entry).
+此功能在核心 [PR #186197](https://github.com/home-assistant/core/pull/186197) 和 [PR #186369](https://github.com/home-assistant/core/pull/186369) 中实现。详情请参阅 [归属于配置条目的问题](/core/integrations/repairs/#issues-that-belong-to-a-config-entry)。
 
-## Refresh a set of issues
+## 刷新一组问题
 
-A common pattern is to delete all issues of a kind, and then create the ones that are still valid. It is simple, but every issue that is still valid is deleted and created again: users see it disappear and come back, and an issue they ignored shows up again. The same happens to issues that an integration deletes when its config entry unloads, because a reload unloads the entry too. Set their `config_entry_id` instead.
+一种常见模式是删除某类问题的所有实例，然后创建仍然有效的问题。这很简单，但每个仍然有效的问题都会被删除并重新创建：用户会看到它消失又出现，而且他们忽略的问题会再次显示。同样的情况也发生在集成在配置条目卸载时删除的问题上，因为重新加载也会卸载条目。请改为设置它们的 `config_entry_id`。
 
-The new `ir.async_refresh_issues` deletes only the stale issues:
+新的 `ir.async_refresh_issues` 仅删除过时的问题：
 
 ```python
 with ir.async_refresh_issues(
@@ -67,21 +67,21 @@ with ir.async_refresh_issues(
             )
 ```
 
-When the issue refresh finishes, it deletes the issues of its set that were not created or kept since it began. Issues that were created again are left alone, so they stay ignored. Any call to `ir.async_create_issue` counts, so helpers and callbacks can create the issues while the refresh runs. Put the refresh around the code that checks the issues, and don't wrap `async_forward_entry_setups`: it does not raise when a platform fails or is retried later, so the refresh would delete issues that were never checked. The set also includes issues from before a restart, so a refresh cleans up after devices that are gone.
+当问题刷新完成时，它会删除其集合中自刷新开始以来未被创建或保留的问题。被重新创建的问题会保留，因此它们会保持被忽略状态。任何对 `ir.async_create_issue` 的调用都算数，因此辅助功能和回调可以在刷新运行期间创建问题。请将刷新放在检查问题的代码周围，不要包裹 `async_forward_entry_setups`：它在平台失败或稍后重试时不会引发异常，因此刷新会删除从未被检查的问题。该集合还包括重启前的问题，因此刷新会清理已消失设备遗留的问题。
 
-The set is selected with one of:
+集合通过以下方式之一选择：
 
-- `issue_id_pattern`, a regular expression matched from the start of the issue ID, like `firmware_too_old_` or `(firmware_too_old|battery_low)_`. A plain prefix is a valid pattern.
-- `issue_ids`, a list of issue IDs.
-- Neither, to select every issue of the domain.
+- `issue_id_pattern`，一个从问题 ID 开头匹配的正则表达式，如 `firmware_too_old_` 或 `(firmware_too_old|battery_low)_`。纯前缀也是有效模式。
+- `issue_ids`，一个问题 ID 列表。
+- 两者都不选，以选择该域的所有问题。
 
-`config_entry_id` narrows the set down to the issues that belong to that config entry.
+`config_entry_id` 将集合缩小到归属于该配置条目的问题。
 
-Also new:
+其他新增功能：
 
-- `ir.async_keep_issue(hass, domain, issue_id)` and `IssuesRefresh.async_keep` keep issues that you could not check, like those of a device that did not answer.
-- `ir.async_delete_issue` takes a `defer_to_refresh` argument. An issue in the set of an active refresh is then left for that refresh to delete, so it survives if it is created or kept again while the refresh runs. This is meant for entities that are removed during a reload, which may create the issue again.
+- `ir.async_keep_issue(hass, domain, issue_id)` 和 `IssuesRefresh.async_keep` 用于保留您无法检查的问题，例如未响应的设备的问题。
+- `ir.async_delete_issue` 接受 `defer_to_refresh` 参数。处于活动刷新集合中的问题会留给该刷新删除，因此如果它在刷新运行期间被重新创建或保留，它就能存活。这适用于在重新加载期间被移除的实体，这些实体可能会再次创建问题。
 
-`ir.async_refresh_issues` returns an `IssuesRefresh`. Used in a `with` block, it finishes the refresh when the block completes, and cancels it when an exception is raised. A cancelled refresh only applies deferred deletes. You can also call `IssuesRefresh.async_finish()` and `IssuesRefresh.async_cancel()` yourself.
+`ir.async_refresh_issues` 返回一个 `IssuesRefresh`。在 `with` 块中使用时，它会在块完成时结束刷新，并在引发异常时取消刷新。取消的刷新仅应用延迟删除。您也可以自行调用 `IssuesRefresh.async_finish()` 和 `IssuesRefresh.async_cancel()`。
 
-The refresh API only works in the event loop. It is implemented in core [PR #187990](https://github.com/home-assistant/core/pull/187990). For the details, including overlapping refreshes and checking for issues in a worker thread, see [refresh a set of issues](/core/integrations/repairs/#refresh-a-set-of-issues).
+刷新 API 仅在事件循环中工作。它在核心 [PR #187990](https://github.com/home-assistant/core/pull/187990) 中实现。详情（包括重叠刷新和在工作者线程中检查问题）请参阅 [刷新一组问题](/core/integrations/repairs/#refresh-a-set-of-issues)。

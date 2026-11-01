@@ -1,6 +1,6 @@
 ---
-title: Custom section strategies in the dashboard editor
-description: As of Home Assistant 2026.11, custom section strategies can be registered so users can add them from the dashboard editor, with a live preview.
+title: 仪表盘编辑器中的自定义分区策略
+description: 自 Home Assistant 2026.11 起，可以注册自定义分区策略，用户可从仪表盘编辑器中添加它们，并带有实时预览。
 date: 2026-10-28
 authors:
   - Paul Bottein
@@ -8,17 +8,17 @@ areas:
   - frontend
 ---
 
-As of Home Assistant 2026.11, custom section strategies can be registered, like custom dashboard strategies. Users then find them in the dashboard editor, and add them without writing any YAML.
+自 Home Assistant 2026.11 起，可以注册自定义分区策略，就像自定义仪表盘策略一样。用户随后可在仪表盘编辑器中找到它们，无需编写任何 YAML 即可添加。
 
-A section strategy generates one section of a sections view from what is in the home, and keeps it up to date.
+分区策略（section strategy）根据家中的内容生成分区视图中的一个分区，并保持其最新状态。
 
-## What users see
+## 用户看到的内容
 
-When users create a section in a sections view, Home Assistant asks if they want a manual section, an automatic section, or a section they copied. **Automatic section** lists the built-in section strategies, and the registered ones under **Community sections**. Each one shows a live preview. Picking one opens the section editor.
+当用户在分区视图中创建分区时，Home Assistant 会询问他们想要手动分区、自动分区，还是复制的分区。**自动分区**列出内置的分区策略，以及注册在**社区分区**下的策略。每个策略都显示实时预览。选择其中一个会打开分区编辑器。
 
-## Register your section strategy
+## 注册你的分区策略
 
-Push an entry to `window.customStrategies`, with `strategyType: "section"`:
+向 `window.customStrategies` 推送一个条目，并设置 `strategyType: "section"`：
 
 ```js
 window.customStrategies = window.customStrategies || [];
@@ -30,9 +30,9 @@ window.customStrategies.push({
 });
 ```
 
-## Show a preview
+## 显示预览
 
-Add a static `getStubConfig(hass)` that returns the configuration your section starts with. Home Assistant uses it to render the preview, and as the configuration of the new section. Without it, the tile has no preview.
+添加一个静态的 `getStubConfig(hass)`，返回你的分区初始配置。Home Assistant 使用它来渲染预览，并作为新分区的配置。如果没有它，磁贴将没有预览。
 
 ```js
 class MyDomainSectionStrategy extends HTMLElement {
@@ -51,8 +51,8 @@ customElements.define(
 );
 ```
 
-## Add an editor
+## 添加编辑器
 
-Right after picking your section, users land in the section editor. Add a static `getConfigElement()` so they get a visual editor for your options. Without it, they only get the YAML editor.
+选择你的分区后，用户会立即进入分区编辑器。添加一个静态的 `getConfigElement()`，以便他们获得你的选项的可视化编辑器。如果没有它，他们只能获得 YAML 编辑器。
 
-Take a look at the updated [custom strategies](/frontend/custom-ui/strategy/#a-section-strategy) documentation for more details.
+请查看更新的 [自定义策略](/frontend/custom-ui/strategy/#a-section-strategy) 文档以了解更多详情。

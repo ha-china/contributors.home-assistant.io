@@ -1,7 +1,7 @@
 ---
 title: 备份
 description: 添加一个备份代理（backup agent）来存储 Home Assistant 备份，或者为备份准备你的集成。
-sidebarGroup: Integration features
+sidebarGroup: 集成功能
 order: 9
 ---
 
@@ -125,9 +125,9 @@ entry.async_on_unload(entry.async_on_state_change(_notify_backup_listeners))
 
 `DATA_BACKUP_AGENT_LISTENERS` 是你自己定义的键，位于 `const.py` 中。
 
-### Rename an agent
+### 重命名代理
 
-The ID of an agent is `<domain>.<unique_id>`, built from the `unique_id` of the agent. It doesn't have to match anything on the config entry. If a new version of your integration sets `unique_id` differently, users lose their backup settings for the agent. Call `async_rename_agent` once to move them to the new ID, for example in a config entry migration:
+代理的 ID 为 `<domain>.<unique_id>`，由代理的 `unique_id` 构建。它不必与配置条目上的任何内容匹配。如果你的集成的新版本以不同方式设置 `unique_id`，用户将失去该代理的备份设置。调用 `async_rename_agent` 一次，将其移动到新 ID，例如在配置条目迁移中：
 
 ```python
 from homeassistant.components.backup import async_get_manager
@@ -143,11 +143,11 @@ async def async_migrate_entry(hass: HomeAssistant, entry: ExampleConfigEntry) ->
         hass.config_entries.async_update_entry(entry, minor_version=2)
 ```
 
-- It moves the settings of the agent, whether automatic backups use it, and the failed uploads to it. The backups the agent stores are not touched.
-- Add `backup` to `after_dependencies` in `manifest.json`, so the backup integration is set up before your migration runs.
-- Only call it when the ID changes.
+- 它会移动代理的设置，包括自动备份是否使用它，以及失败的上传记录。代理存储的备份不受影响。
+- 在 `manifest.json` 中将 `backup` 添加到 `after_dependencies`，以便备份集成在你的迁移运行之前完成设置。
+- 仅在 ID 发生变化时调用它。
 
-## Prepare for a backup
+## 为备份做准备
 
 某些集成需要在备份前暂停或写入其数据，以便能够正确恢复。将这两个函数添加到 `backup.py`，或运行 `python3 -m script.scaffold backup`：
 

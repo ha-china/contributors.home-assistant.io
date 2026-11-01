@@ -1,6 +1,6 @@
 ---
-title: "Frontend component updates in 2026.11"
-description: ha-md-list and ha-md-list-item were removed, and themes can now set the background of every panel.
+title: "2026.11 前端组件更新"
+description: ha-md-list 和 ha-md-list-item 已被移除，主题现在可以为每个面板设置背景。
 date: 2026-10-28
 authors:
   - Wendelin Peleska
@@ -9,19 +9,19 @@ areas:
   - frontend
 ---
 
-## Component updates
+## 组件更新
 
-### Removed ha-md-list and ha-md-list-item
+### 移除 ha-md-list 和 ha-md-list-item
 
-`ha-md-list` and `ha-md-list-item` were removed. Use `ha-list-base` with `ha-list-item-base` for static rows, or `ha-list-item-button` for clickable rows. The `--md-list-item-*` CSS properties no longer have any effect; use `--ha-row-item-*` and `--ha-list-*` instead.
+`ha-md-list` 和 `ha-md-list-item` 已被移除。对于静态行，请使用 `ha-list-base` 搭配 `ha-list-item-base`；对于可点击的行，请使用 `ha-list-item-button`。`--md-list-item-*` CSS 属性不再生效；请改用 `--ha-row-item-*` 和 `--ha-list-*`。
 
 ### ha-outlined-icon-button
 
-`ha-outlined-icon-button` now builds on `ha-icon-button` instead of Material Web. Use `--ha-icon-button-size` for the size (default `40px`) and the new `--ha-outlined-icon-button-outline-color` for the outline. The `--md-outlined-icon-button-*` and `--md-sys-color-outline` properties no longer have any effect.
+`ha-outlined-icon-button` 现在基于 `ha-icon-button` 构建，而非 Material Web。使用 `--ha-icon-button-size` 设置大小（默认 `40px`），并使用新的 `--ha-outlined-icon-button-outline-color` 设置轮廓。`--md-outlined-icon-button-*` 和 `--md-sys-color-outline` 属性不再生效。
 
-### Chip CSS properties
+### Chip CSS 属性
 
-The chips no longer use the Material Web property names. Rename the properties you set on `ha-assist-chip`, `ha-input-chip` and `ha-filter-chip`:
+Chip 不再使用 Material Web 的属性名称。请重命名您在 `ha-assist-chip`、`ha-input-chip` 和 `ha-filter-chip` 上设置的属性：
 
 ```css
 --md-assist-chip-*  →  --ha-assist-chip-*
@@ -29,11 +29,11 @@ The chips no longer use the Material Web property names. Rename the properties y
 --md-filter-chip-*  →  --ha-filter-chip-*
 ```
 
-`--md-sys-color-on-surface` no longer colors the assist chip label; use `--ha-assist-chip-label-text-color`.
+`--md-sys-color-on-surface` 不再为 assist chip 标签着色；请使用 `--ha-assist-chip-label-text-color`。
 
-### Removed ha-formfield
+### 移除 ha-formfield
 
-`ha-formfield` was removed, so a leftover `ha-formfield` no longer renders its label. `ha-switch` and `ha-checkbox` render their own label, so put the label in the control's default slot:
+`ha-formfield` 已被移除，因此残留的 `ha-formfield` 不再渲染其标签。`ha-switch` 和 `ha-checkbox` 会渲染自己的标签，因此请将标签放入控件的默认插槽中：
 
 ```diff
 -<ha-formfield .label=${label}>
@@ -42,18 +42,18 @@ The chips no longer use the Material Web property names. Rename the properties y
 +<ha-switch .checked=${checked}>${label}</ha-switch>
 ```
 
-The label is now a real `<label>` around the input, so clicking it toggles the control. When `ha-switch` is disabled, only the control is dimmed; the label uses `--disabled-text-color`.
+标签现在是一个包裹输入的真正的 `<label>`，因此点击它会切换控件。当 `ha-switch` 被禁用时，只有控件会变暗；标签使用 `--disabled-text-color`。
 
-### Removed --mdc-typography-* properties
+### 移除 --mdc-typography-* 属性
 
-The frontend stopped reading the `--mdc-typography-*` CSS properties. Setting them in a theme or on a component no longer has any effect; use the `--ha-font-*` theme variables, such as `--ha-font-size-m` and `--ha-font-family-body`, instead.
+前端已停止读取 `--mdc-typography-*` CSS 属性。在主题或组件上设置它们不再生效；请改用 `--ha-font-*` 主题变量，例如 `--ha-font-size-m` 和 `--ha-font-family-body`。
 
-## Theme backgrounds for every panel
+## 每个面板的主题背景
 
-Themes can now set the background of every panel, not only of dashboards. The frontend paints the background once, behind all panels, so panels and layouts like `hass-subpage` and `hass-tabs-subpage` no longer paint their own. If your custom panel sets `background-color: var(--primary-background-color)` on its host, remove it, or it covers the theme background.
+主题现在可以为每个面板设置背景，而不仅仅是仪表盘。前端会在所有面板后面绘制一次背景，因此面板和布局（如 `hass-subpage` 和 `hass-tabs-subpage`）不再自行绘制背景。如果您的自定义面板在其宿主上设置了 `background-color: var(--primary-background-color)`，请将其移除，否则它会覆盖主题背景。
 
-Three new theme variables control it. They take any CSS `background` value, so gradients and images work too:
+三个新的主题变量控制此功能。它们接受任何 CSS `background` 值，因此渐变和图片也可以使用：
 
-- `--ha-panel-background`: the background behind all panels. Defaults to `--primary-background-color`. Dashboards use it when the theme does not set `--lovelace-background`.
-- `--ha-panel-toolbar-background`: the toolbars and sticky search bars, like the ones above data tables. Defaults to `--primary-background-color`.
-- `--ha-data-table-background`: data tables. Defaults to `--data-table-background-color`.
+- `--ha-panel-background`：所有面板后面的背景。默认为 `--primary-background-color`。当主题未设置 `--lovelace-background` 时，仪表盘会使用它。
+- `--ha-panel-toolbar-background`：工具栏和粘性搜索栏，例如数据表格上方的那些。默认为 `--primary-background-color`。
+- `--ha-data-table-background`：数据表格。默认为 `--data-table-background-color`。

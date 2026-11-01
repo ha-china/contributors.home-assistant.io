@@ -1,8 +1,8 @@
 ---
 title: 设置失败与异常
 description: 设备离线时重试设置，凭据失效时启动重新身份验证，并在动作中抛出正确的异常。
-sidebarLabel: Setup failures and exceptions
-sidebarGroup: Setup and configuration
+sidebarLabel: 设置失败与异常
+sidebarGroup: 设置与配置
 order: 9
 ---
 

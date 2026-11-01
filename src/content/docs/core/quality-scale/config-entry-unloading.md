@@ -29,9 +29,9 @@ async def async_unload_entry(
     await entry.runtime_data.client.disconnect()
 ```
 
-`async_unload_platforms_or_raise` raises `ConfigEntryError` when a platform fails to unload, so the cleanup after it only runs when unloading succeeded.
+当某个平台卸载失败时，`async_unload_platforms_or_raise` 会抛出 `ConfigEntryError`，因此其后的清理代码只在卸载成功时才会运行。
 
-Often, you do not need to keep track of the cleanup yourself. Register it during setup with `entry.async_on_unload`, and Home Assistant calls it for you:
+通常，你不需要自己跟踪清理工作。在设置期间使用 `entry.async_on_unload` 注册它，Home Assistant 会为你调用它：
 
 ```python
 async def async_setup_entry(
@@ -43,7 +43,7 @@ async def async_setup_entry(
     ...
 ```
 
-The callbacks registered with `entry.async_on_unload` run when `async_unload_entry` succeeds, and also whenever `async_setup_entry` fails: when it raises, like `ConfigEntryNotReady`, `ConfigEntryAuthFailed`, or `ConfigEntryError`. You still need `async_unload_entry` itself: without it, the entry cannot be unloaded at all.
+通过 `entry.async_on_unload` 注册的回调会在 `async_unload_entry` 成功时运行，也会在 `async_setup_entry` 失败时运行：例如当它抛出 `ConfigEntryNotReady`、`ConfigEntryAuthFailed` 或 `ConfigEntryError` 时。你仍然需要 `async_unload_entry` 本身：没有它，配置项根本无法被卸载。
 
 ## 如何检查
 

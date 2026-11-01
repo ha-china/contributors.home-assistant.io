@@ -1,6 +1,6 @@
 ---
-title: Config entry functions now return None
-description: async_setup_entry, async_unload_entry, and async_migrate_entry return None in core now. What changes, and what it means for custom integrations.
+title: 配置条目函数现在返回 None
+description: async_setup_entry、async_unload_entry 和 async_migrate_entry 现在在核心中返回 None。这改变了什么，以及对自定义集成意味着什么。
 date: 2026-10-23
 authors:
   - G Johansson
@@ -8,19 +8,19 @@ areas:
   - core
 ---
 
-The config entry functions in the `__init__.py` of an integration, `async_setup_entry`, `async_unload_entry`, and `async_migrate_entry`, now return `None` instead of a boolean. They either succeed, or raise one of the `ConfigEntry*` exceptions. Starting with Home Assistant 2026.11.0, core integrations must follow the new pattern. Custom integrations can keep returning a boolean.
+集成中 `__init__.py` 文件里的配置条目函数 `async_setup_entry`、`async_unload_entry` 和 `async_migrate_entry` 现在返回 `None` 而不是布尔值。它们要么成功，要么抛出其中一个 `ConfigEntry*` 异常。从 Home Assistant 2026.11.0 开始，核心集成必须遵循新的模式。自定义集成可以继续返回布尔值。
 
-## Why
+## 为什么
 
-Returning `True` or `False` dates back to the first days of config entries. An integration logged a problem, swallowed the exception, and returned `False`. Home Assistant then knew the setup failed, but not why, and neither did the user.
+返回 `True` 或 `False` 可以追溯到配置条目的早期阶段。集成记录了一个问题，吞掉了异常，然后返回 `False`。Home Assistant 知道设置失败了，但不知道原因，用户也不知道。
 
-Since then, `ConfigEntryNotReady`, `ConfigEntryAuthFailed`, and `ConfigEntryError` took over that job. They support translations, decide whether Home Assistant retries or starts reauthentication, and show the user what went wrong. Almost every integration already raised them, and only ended with `return True` because the type hints asked for it. The [architecture discussion](https://github.com/home-assistant/architecture/discussions/1463) has the full background.
+自那以后，`ConfigEntryNotReady`、`ConfigEntryAuthFailed` 和 `ConfigEntryError` 接管了这项工作。它们支持翻译，决定 Home Assistant 是重试还是启动重新认证，并向用户显示出了什么问题。几乎每个集成都已经抛出这些异常，只是因为类型提示要求才以 `return True` 结尾。[架构讨论](https://github.com/home-assistant/architecture/discussions/1463) 提供了完整的背景。
 
-## What changed in core
+## 核心中发生了什么变化
 
-All core integrations now return `None` from these functions. A `return False` became a raised `ConfigEntryError`, and the Pylint type hint checker requires `-> None`. When a core integration returns a boolean anyway, Home Assistant reports it as an error, and the setup, unload, or migration fails.
+所有核心集成现在都从这些函数返回 `None`。`return False` 变成了抛出的 `ConfigEntryError`，Pylint 类型提示检查器要求 `-> None`。当核心集成仍然返回布尔值时，Home Assistant 会将其报告为错误，并且设置、卸载或迁移会失败。
 
-Setting up looks like this:
+设置看起来像这样：
 
 ```python
 async def async_setup_entry(
@@ -34,7 +34,7 @@ async def async_setup_entry(
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 ```
 
-For unloading, use the new `async_unload_platforms_or_raise`. It raises a translated `ConfigEntryError` when a platform fails to unload, instead of returning `False`:
+对于卸载，使用新的 `async_unload_platforms_or_raise`。当平台卸载失败时，它会抛出一个带翻译的 `ConfigEntryError`，而不是返回 `False`：
 
 ```python
 async def async_unload_entry(
@@ -44,11 +44,11 @@ async def async_unload_entry(
     await hass.config_entries.async_unload_platforms_or_raise(entry, PLATFORMS)
 ```
 
-The scaffold templates generate this pattern for new integrations.
+脚手架模板会为新集成生成这种模式。
 
-## Tests
+## 测试
 
-When you patch `async_setup_entry` of a core integration in a test, for example in the `mock_setup_entry` fixture of your config flow tests, return `None` instead of `True`:
+当你在测试中修补核心集成的 `async_setup_entry` 时，例如在配置流测试的 `mock_setup_entry` 夹具中，返回 `None` 而不是 `True`：
 
 ```python
 @pytest.fixture
@@ -61,15 +61,15 @@ def mock_setup_entry() -> Generator[AsyncMock]:
         yield mock_setup_entry
 ```
 
-With `return_value=True`, the patched function returns a boolean, and the setup of the entry fails.
+使用 `return_value=True` 时，修补后的函数返回布尔值，条目的设置会失败。
 
-## Custom integrations
+## 自定义集成
 
-Nothing breaks for custom integrations, and there is no deprecation. Returning a boolean stays supported:
+自定义集成不会受到任何破坏，也没有弃用。返回布尔值仍然受支持：
 
-- `True` means success, as before.
-- `False` now becomes a `ConfigEntryError` with a generic, translated message, like "Failed to set up the config entry." The entry ends in the same state as before: `SETUP_ERROR`, `FAILED_UNLOAD`, or `MIGRATION_ERROR`. The difference is that the user now sees a reason.
+- `True` 表示成功，和以前一样。
+- `False` 现在变成带有通用翻译消息的 `ConfigEntryError`，例如“无法设置配置条目。”条目最终处于与以前相同的状态：`SETUP_ERROR`、`FAILED_UNLOAD` 或 `MIGRATION_ERROR`。区别在于用户现在能看到原因。
 
-Still, consider switching. Raise your own exception with a translated message, and users see what actually went wrong instead of the generic message.
+不过，还是建议切换。抛出你自己的带有翻译消息的异常，用户就能看到实际出了什么问题，而不是通用消息。
 
-Read more in the [config entries documentation](/core/integrations/config-entries/), and in [setup failures and exceptions](/core/integrations/setup-failures/).
+在[配置条目文档](/core/integrations/config-entries/)和[设置失败与异常](/core/integrations/setup-failures/)中了解更多信息。

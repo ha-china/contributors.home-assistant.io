@@ -58,89 +58,89 @@ sidebarGroup: Sensors and status
 
 [设备类](/glossary/device-class/)告诉 Home Assistant 传感器测量的是什么。它设置了图标、单位转换，以及前端显示该值的方式。具有设备类且没有名称的传感器以其设备类命名，`enum` 除外。参见[命名](/core/entities/naming/)。
 
-When you set a device class, the unit must be one of the units listed for it, and the state class must be one the device class allows. Home Assistant logs a warning when they do not match. The value column is what you put in YAML, for example as `device_class` of an [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/) or a [template sensor](https://www.home-assistant.io/integrations/template/).
+当您设置设备类时，单位必须是其列出的单位之一，状态类必须是该设备类允许的状态类之一。如果不匹配，Home Assistant 会记录警告。值列是您在 YAML 中填写的内容，例如作为 [MQTT 传感器](https://www.home-assistant.io/integrations/sensor.mqtt/)或[模板传感器](https://www.home-assistant.io/integrations/template/)的 `device_class`。
 
 非数值型设备类不接受单位，也不接受状态类：
 
-| Device class | Value | Description |
+| 设备类 | 值 | 描述 |
 | --- | --- | --- |
-| `SensorDeviceClass.DATE` | `date` | A date. `native_value` must be a `datetime.date`. |
-| `SensorDeviceClass.ENUM` | `enum` | One of a fixed list of text states. Set `options`. |
-| `SensorDeviceClass.TIMESTAMP` | `timestamp` | A moment in time. `native_value` must be a `datetime` with a time zone. |
-| `SensorDeviceClass.UPTIME` | `uptime` | When the device last booted, as a `datetime` with a time zone. Changes smaller than 60 seconds between updates are ignored, so a boot time calculated from an uptime counter does not change the state on every update. Set `_attr_uptime_drift_tolerance` to a number of seconds to change that tolerance (at least 5). |
+| `SensorDeviceClass.DATE` | `date` | 一个日期。`native_value` 必须是 `datetime.date`。 |
+| `SensorDeviceClass.ENUM` | `enum` | 固定文本状态列表中的某一个状态。设置 `options`。 |
+| `SensorDeviceClass.TIMESTAMP` | `timestamp` | 一个时间点。`native_value` 必须是带时区的 `datetime`。 |
+| `SensorDeviceClass.UPTIME` | `uptime` | 设备上次启动的时间，作为带时区的 `datetime`。更新之间小于 60 秒的变化会被忽略，因此根据运行时间计数器计算出的启动时间不会在每次更新时都改变状态。将 `_attr_uptime_drift_tolerance` 设置为一个秒数来更改该容差（至少 5）。 |
 
 数值型设备类及其单位：
 
-| Device class | Value | Units | Description |
+| 设备类 | 值 | 单位 | 描述 |
 | --- | --- | --- | --- |
-| `ABSOLUTE_HUMIDITY` | `absolute_humidity` | g/m³, mg/m³ | Absolute humidity |
-| `APPARENT_POWER` | `apparent_power` | mVA, VA, kVA | Apparent power |
-| `AQI` | `aqi` | None | Air quality index |
-| `AREA` | `area` | mm², cm², m², km², in², ft², yd², mi², ac, ha | Area |
-| `ATMOSPHERIC_PRESSURE` | `atmospheric_pressure` | Pa, hPa, kPa, mPa, cbar, mbar, bar, psi, inHg, inH₂O, mmHg, atm | Atmospheric pressure |
-| `BATTERY` | `battery` | % | Charge left in a battery |
-| `BLOOD_GLUCOSE_CONCENTRATION` | `blood_glucose_concentration` | mg/dL, mmol/L | Blood glucose concentration |
-| `CO` | `carbon_monoxide` | ppb, ppm, μg/m³, mg/m³ | Carbon monoxide concentration |
-| `CO2` | `carbon_dioxide` | ppm | Carbon dioxide concentration |
-| `CONDUCTIVITY` | `conductivity` | S/cm, mS/cm, μS/cm | Conductivity |
-| `CURRENT` | `current` | A, mA, μA | Electric current |
-| `DATA_RATE` | `data_rate` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate |
-| `DATA_SIZE` | `data_size` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size |
-| `DISTANCE` | `distance` | mm, cm, m, km, in, ft, yd, mi, nmi | Distance |
-| `DURATION` | `duration` | μs, ms, s, min, h, d | A length of time. It should only change when the device reports a new value, not because time passes. |
-| `ENERGY` | `energy` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | Energy used or produced, like an electricity meter. Not to be confused with power. |
-| `ENERGY_DISTANCE` | `energy_distance` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy used per distance, like the consumption of an electric car |
-| `ENERGY_STORAGE` | `energy_storage` | Same as `ENERGY` | Energy stored, like the charge in a home battery |
-| `FREQUENCY` | `frequency` | mHz, Hz, kHz, MHz, GHz | Frequency |
-| `GAS` | `gas` | L, m³, ft³, CCF, MCF | Gas volume. Gas measured in kWh is `ENERGY`. |
-| `HUMIDITY` | `humidity` | % | Relative humidity |
-| `ILLUMINANCE` | `illuminance` | lx | Light level |
-| `IRRADIANCE` | `irradiance` | W/m², BTU/(h⋅ft²) | Irradiance |
-| `MOISTURE` | `moisture` | % | Moisture |
-| `MONETARY` | `monetary` | An ISO 4217 currency code | Money |
-| `NITROGEN_DIOXIDE` | `nitrogen_dioxide` | ppb, ppm, μg/m³ | Nitrogen dioxide concentration |
-| `NITROGEN_MONOXIDE` | `nitrogen_monoxide` | ppb, μg/m³ | Nitrogen monoxide concentration |
-| `NITROUS_OXIDE` | `nitrous_oxide` | μg/m³ | Nitrous oxide concentration |
-| `OZONE` | `ozone` | ppb, ppm, μg/m³ | Ozone concentration |
-| `PH` | `ph` | None | pH of a water-based solution |
-| `PM1`, `PM25`, `PM4`, `PM10` | `pm1`, `pm25`, `pm4`, `pm10` | μg/m³ | Particulate matter smaller than 1, 2.5, 4, or 10 micrometers |
-| `POWER` | `power` | mW, W, kW, MW, GW, TW | Power |
-| `POWER_FACTOR` | `power_factor` | %, None | Power factor |
-| `PRECIPITATION` | `precipitation` | mm, cm, in | Accumulated precipitation |
-| `PRECIPITATION_INTENSITY` | `precipitation_intensity` | mm/h, mm/d, in/h, in/d | Precipitation intensity |
-| `PRESSURE` | `pressure` | Same as `ATMOSPHERIC_PRESSURE` | Pressure |
-| `RADON` | `radon` | Bq/m³, pCi/L | Radon concentration |
-| `REACTIVE_ENERGY` | `reactive_energy` | varh, kvarh | Reactive energy |
-| `REACTIVE_POWER` | `reactive_power` | mvar, var, kvar | Reactive power |
-| `SIGNAL_STRENGTH` | `signal_strength` | dB, dBm | Signal strength |
-| `SOUND_PRESSURE` | `sound_pressure` | dB, dBA | Sound pressure |
-| `SPEED` | `speed` | mm/s, in/s, ft/s, m/s, m/min, km/h, mph, kn, Beaufort, mm/h, mm/d, in/h, in/d | Speed |
-| `SULPHUR_DIOXIDE` | `sulphur_dioxide` | ppb, μg/m³ | Sulphur dioxide concentration |
-| `TEMPERATURE` | `temperature` | °C, °F, K | Temperature |
-| `TEMPERATURE_DELTA` | `temperature_delta` | °C, °F, K | The difference between two temperatures |
-| `VOLATILE_ORGANIC_COMPOUNDS` | `volatile_organic_compounds` | μg/m³, mg/m³ | Volatile organic compounds, as a concentration |
-| `VOLATILE_ORGANIC_COMPOUNDS_PARTS` | `volatile_organic_compounds_parts` | ppb, ppm | Volatile organic compounds, as a ratio |
-| `VOLTAGE` | `voltage` | μV, mV, V, kV, MV | Voltage |
-| `VOLUME` | `volume` | mL, L, fl. oz., gal, m³, ft³, CCF, MCF | A volume used, like the fuel a car used |
-| `VOLUME_FLOW_RATE` | `volume_flow_rate` | mL/s, L/s, L/min, L/h, m³/s, m³/min, m³/h, ft³/min, gal/min, gal/h, gal/d | A flow, like the water running through a pipe right now |
-| `VOLUME_STORAGE` | `volume_storage` | Same as `VOLUME` | A volume stored, like the fuel in a tank |
-| `WATER` | `water` | L, gal, m³, ft³, CCF, MCF | Water used |
-| `WEIGHT` | `weight` | μg, mg, g, kg, oz, lb, st | Mass. It is called weight because that is the everyday word. |
-| `WIND_DIRECTION` | `wind_direction` | ° | Wind direction. Report `None` when there is too little wind to measure a direction. |
-| `WIND_SPEED` | `wind_speed` | mm/s, in/s, ft/s, m/s, m/min, km/h, mph, kn, Beaufort | Wind speed |
+| `ABSOLUTE_HUMIDITY` | `absolute_humidity` | g/m³, mg/m³ | 绝对湿度 |
+| `APPARENT_POWER` | `apparent_power` | mVA, VA, kVA | 视在功率 |
+| `AQI` | `aqi` | 无 | 空气质量指数 |
+| `AREA` | `area` | mm², cm², m², km², in², ft², yd², mi², ac, ha | 面积 |
+| `ATMOSPHERIC_PRESSURE` | `atmospheric_pressure` | Pa, hPa, kPa, mPa, cbar, mbar, bar, psi, inHg, inH₂O, mmHg, atm | 大气压力 |
+| `BATTERY` | `battery` | % | 电池剩余电量 |
+| `BLOOD_GLUCOSE_CONCENTRATION` | `blood_glucose_concentration` | mg/dL, mmol/L | 血糖浓度 |
+| `CO` | `carbon_monoxide` | ppb, ppm, μg/m³, mg/m³ | 一氧化碳浓度 |
+| `CO2` | `carbon_dioxide` | ppm | 二氧化碳浓度 |
+| `CONDUCTIVITY` | `conductivity` | S/cm, mS/cm, μS/cm | 电导率 |
+| `CURRENT` | `current` | A, mA, μA | 电流 |
+| `DATA_RATE` | `data_rate` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | 数据速率 |
+| `DATA_SIZE` | `data_size` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | 数据大小 |
+| `DISTANCE` | `distance` | mm, cm, m, km, in, ft, yd, mi, nmi | 距离 |
+| `DURATION` | `duration` | μs, ms, s, min, h, d | 一段时间长度。它只应在设备报告新值时改变，而不是因为时间流逝而改变。 |
+| `ENERGY` | `energy` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | 使用或产生的能量，如电表。不要与功率混淆。 |
+| `ENERGY_DISTANCE` | `energy_distance` | kWh/100km, Wh/km, mi/kWh, km/kWh | 每距离使用的能量，如电动汽车的消耗 |
+| `ENERGY_STORAGE` | `energy_storage` | 与 `ENERGY` 相同 | 存储的能量，如家用电池中的电量 |
+| `FREQUENCY` | `frequency` | mHz, Hz, kHz, MHz, GHz | 频率 |
+| `GAS` | `gas` | L, m³, ft³, CCF, MCF | 气体体积。以 kWh 计量的气体是 `ENERGY`。 |
+| `HUMIDITY` | `humidity` | % | 相对湿度 |
+| `ILLUMINANCE` | `illuminance` | lx | 光照水平 |
+| `IRRADIANCE` | `irradiance` | W/m², BTU/(h⋅ft²) | 辐照度 |
+| `MOISTURE` | `moisture` | % | 湿度 |
+| `MONETARY` | `monetary` | ISO 4217 货币代码 | 金额 |
+| `NITROGEN_DIOXIDE` | `nitrogen_dioxide` | ppb, ppm, μg/m³ | 二氧化氮浓度 |
+| `NITROGEN_MONOXIDE` | `nitrogen_monoxide` | ppb, μg/m³ | 一氧化氮浓度 |
+| `NITROUS_OXIDE` | `nitrous_oxide` | μg/m³ | 一氧化二氮浓度 |
+| `OZONE` | `ozone` | ppb, ppm, μg/m³ | 臭氧浓度 |
+| `PH` | `ph` | 无 | 水基溶液的 pH 值 |
+| `PM1`, `PM25`, `PM4`, `PM10` | `pm1`, `pm25`, `pm4`, `pm10` | μg/m³ | 小于 1、2.5、4 或 10 微米的颗粒物 |
+| `POWER` | `power` | mW, W, kW, MW, GW, TW | 功率 |
+| `POWER_FACTOR` | `power_factor` | %, 无 | 功率因数 |
+| `PRECIPITATION` | `precipitation` | mm, cm, in | 累计降水量 |
+| `PRECIPITATION_INTENSITY` | `precipitation_intensity` | mm/h, mm/d, in/h, in/d | 降水强度 |
+| `PRESSURE` | `pressure` | 与 `ATMOSPHERIC_PRESSURE` 相同 | 压力 |
+| `RADON` | `radon` | Bq/m³, pCi/L | 氡浓度 |
+| `REACTIVE_ENERGY` | `reactive_energy` | varh, kvarh | 无功电能 |
+| `REACTIVE_POWER` | `reactive_power` | mvar, var, kvar | 无功功率 |
+| `SIGNAL_STRENGTH` | `signal_strength` | dB, dBm | 信号强度 |
+| `SOUND_PRESSURE` | `sound_pressure` | dB, dBA | 声压 |
+| `SPEED` | `speed` | mm/s, in/s, ft/s, m/s, m/min, km/h, mph, kn, Beaufort, mm/h, mm/d, in/h, in/d | 速度 |
+| `SULPHUR_DIOXIDE` | `sulphur_dioxide` | ppb, μg/m³ | 二氧化硫浓度 |
+| `TEMPERATURE` | `temperature` | °C, °F, K | 温度 |
+| `TEMPERATURE_DELTA` | `temperature_delta` | °C, °F, K | 两个温度之间的差值 |
+| `VOLATILE_ORGANIC_COMPOUNDS` | `volatile_organic_compounds` | μg/m³, mg/m³ | 挥发性有机化合物，以浓度表示 |
+| `VOLATILE_ORGANIC_COMPOUNDS_PARTS` | `volatile_organic_compounds_parts` | ppb, ppm | 挥发性有机化合物，以比例表示 |
+| `VOLTAGE` | `voltage` | μV, mV, V, kV, MV | 电压 |
+| `VOLUME` | `volume` | mL, L, fl. oz., gal, m³, ft³, CCF, MCF | 使用的体积，如汽车使用的燃料 |
+| `VOLUME_FLOW_RATE` | `volume_flow_rate` | mL/s, L/s, L/min, L/h, m³/s, m³/min, m³/h, ft³/min, gal/min, gal/h, gal/d | 流量，如现在流经管道的水 |
+| `VOLUME_STORAGE` | `volume_storage` | 与 `VOLUME` 相同 | 存储的体积，如油箱中的燃料 |
+| `WATER` | `water` | L, gal, m³, ft³, CCF, MCF | 使用的水量 |
+| `WEIGHT` | `weight` | μg, mg, g, kg, oz, lb, st | 质量。之所以称为重量，是因为这是日常用语。 |
+| `WIND_DIRECTION` | `wind_direction` | ° | 风向。当风太小无法测量方向时，报告 `None`。 |
+| `WIND_SPEED` | `wind_speed` | mm/s, in/s, ft/s, m/s, m/min, km/h, mph, kn, Beaufort | 风速 |
 
 每个设备类允许的状态类位于 `homeassistant/components/sensor/const.py` 中的 `DEVICE_CLASS_STATE_CLASSES`。大多数只允许 `measurement`。`AREA`、`DATA_SIZE`、`DISTANCE`、`DURATION` 和 `PRECIPITATION` 允许所有状态类，而 `WEIGHT` 允许 `measurement`、`total` 和 `total_increasing`。进行累加计数的设备类（如 `ENERGY`、`GAS`、`WATER`、`VOLUME` 和 `REACTIVE_ENERGY`）只允许 `total` 和 `total_increasing`。`MONETARY` 只允许 `total`，`WIND_DIRECTION` 只允许 `measurement_angle`。
 
 ## 状态类
 
-The [state class](/glossary/state-class/) says what kind of number the value is. Pick it with care: it decides which statistics Home Assistant keeps. The value column is what you put in YAML, for example as `state_class` of an [MQTT sensor](https://www.home-assistant.io/integrations/sensor.mqtt/) or a [template sensor](https://www.home-assistant.io/integrations/template/).
+[状态类](/glossary/state-class/)表示该值是什么类型的数字。请谨慎选择：它决定了 Home Assistant 保留哪些统计信息。值列是您在 YAML 中填写的内容，例如作为 [MQTT 传感器](https://www.home-assistant.io/integrations/sensor.mqtt/)或[模板传感器](https://www.home-assistant.io/integrations/template/)的 `state_class`。
 
-| State class | Value | Use it for |
+| 状态类 | 值 | 用途 |
 | --- | --- | --- |
-| `SensorStateClass.MEASUREMENT` | `measurement` | A value measured right now, like the current temperature or power. Not a forecast, and not an aggregate like yesterday's total. |
-| `SensorStateClass.MEASUREMENT_ANGLE` | `measurement_angle` | A measurement right now of an angle in degrees, like the wind direction. |
-| `SensorStateClass.TOTAL` | `total` | A total that can go up and down, like a net energy meter. |
-| `SensorStateClass.TOTAL_INCREASING` | `total_increasing` | A total that only goes up and restarts from 0 now and then, like a daily gas meter. |
+| `SensorStateClass.MEASUREMENT` | `measurement` | 当前测量的值，如当前温度或功率。不是预测，也不是像昨天的总量这样的聚合值。 |
+| `SensorStateClass.MEASUREMENT_ANGLE` | `measurement_angle` | 当前以度为单位的角度测量值，如风向。 |
+| `SensorStateClass.TOTAL` | `total` | 可以上升和下降的总量，如净电能表。 |
+| `SensorStateClass.TOTAL_INCREASING` | `total_increasing` | 只增不减且偶尔从 0 重新开始的总量，如日燃气表。 |
 
 在大多数情况下，您需要的是 `MEASUREMENT`，或不带 `last_reset` 的 `TOTAL`。
 

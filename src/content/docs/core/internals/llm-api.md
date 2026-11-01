@@ -1,6 +1,6 @@
 ---
 title: LLM API
-description: Home Assistant 如何向大型语言模型暴露工具，集成如何贡献工具或整个 API，以及 API 如何通过 MCP 提供。
+description: 大型语言模型（LLM）在获得工具之后，能做的远不止聊天。Home Assistant 中的 LLM API 是一组工具，外加一段解释如何使用这些工具的提示词。封装语言模型的对话代理（conversation agent）会把用户所选 API 的工具交给模型，并执行模型调用的工具。
 sidebarLabel: LLM API
 sidebarGroup: Voice and AI
 order: 54

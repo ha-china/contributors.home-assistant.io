@@ -25,7 +25,7 @@ sidebarGroup: Openings and security
 | `device_class` | `CoverDeviceClass \| None` | `None` | 卷帘的类别。参见[设备类别](#device-classes)。 |
 | `supported_speeds` | `list[str] \| None` | `None` | 卷帘在打开、关闭或移动到某个位置时的运行速度。`None` 或空列表表示不支持速度选择。 |
 
-When you set `supported_speeds` to a list, Home Assistant adds it as the `supported_speeds` attribute, and checks the `speed` in an action against it before it calls you. A speed that is not in the list is dropped, and the cover moves at its default speed. Without speeds, a `speed` in an action is dropped.
+当您将 `supported_speeds` 设置为列表时，Home Assistant 会将其添加为 `supported_speeds` 属性，并在调用您之前检查操作中的 `speed` 是否在列表中。不在列表中的速度会被丢弃，卷帘会以默认速度移动。如果没有速度，操作中的 `speed` 会被丢弃。
 
 ## 设备类别
 

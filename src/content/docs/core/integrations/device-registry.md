@@ -76,7 +76,7 @@ class ExampleEntity(CoordinatorEntity[ExampleCoordinator]):
 
 ## 自行注册设备
 
-A device without entities, like a hub, is registered directly. Do this in `async_setup_entry`:
+没有实体的设备，例如集线器，可以直接注册。请在 `async_setup_entry` 中执行此操作：
 
 ```python
 from homeassistant.helpers import device_registry as dr
@@ -95,9 +95,9 @@ hub = device_registry.async_get_or_create(
 )
 ```
 
-It returns the `DeviceEntry`, with its `id`.
+它会返回 `DeviceEntry` 及其 `id`。
 
-When you already hold a `DeviceInfo`, for example one built by a helper or shared with your entities, pass it as it is to `async_get_or_create_from_info`:
+当你已经持有一个 `DeviceInfo` 时，例如由辅助元素构建或与你的实体共享的，请将其原样传递给 `async_get_or_create_from_info`：
 
 ```python
 hub = device_registry.async_get_or_create_from_info(
@@ -121,7 +121,7 @@ via_device_id = dr.async_get_device_id_by_identifier(
 
 ## 子设备
 
-A child device is a lightweight device for a logical part of one physical product, like one outlet of a power strip or one gang of a wall switch. The parent device holds what belongs to the whole product, like the network connection and firmware updates. Each child holds the entities of its part, like a switch and an energy sensor per outlet. Users can put each part in a different area.
+子设备是一个轻量级设备，用于一个物理产品的逻辑部分，例如电源插排的一个插座或墙壁开关的一个开关组。父设备持有属于整个产品的内容，如网络连接和固件更新。每个子设备持有其部分的实体，如每个插座的开关和能量传感器。用户可以将每个部分放入不同的区域。
 
 不要将此与 `via_device_id` 混淆：那是关于独立产品之间的连接关系。子设备针对的是一个产品的各个部分。
 
@@ -158,7 +158,7 @@ outlet = device_registry.async_get_or_create_child(
 )
 ```
 
-Besides the required `config_entry_id`, `parent_device_id`, and `identifiers`, `async_get_or_create_child` takes `config_subentry_id`, `name`, `suggested_area`, `disabled_by`, `translation_key`, and `translation_placeholders`. There is deliberately no `via_device_id`, `connections`, `manufacturer`, `model`, or firmware argument: a child device doesn't have those. When you already hold a `ChildDeviceInfo`, pass it as it is to `async_get_or_create_child_from_info`.
+除了必需的 `config_entry_id`、`parent_device_id` 和 `identifiers` 之外，`async_get_or_create_child` 还接受 `config_subentry_id`、`name`、`suggested_area`、`disabled_by`、`translation_key` 和 `translation_placeholders`。故意没有 `via_device_id`、`connections`、`manufacturer`、`model` 或固件参数：子设备没有这些。当你已经持有一个 `ChildDeviceInfo` 时，请将其原样传递给 `async_get_or_create_child_from_info`。
 
 如果父设备属于某个子条目，请同时传递其 `config_subentry_id`。它不会被继承。注册表永远不会为你创建父设备：当父设备不存在、本身是子设备，或属于另一个配置条目或子条目时，它会抛出 `DeviceInfoError`。
 
@@ -166,9 +166,9 @@ Besides the required `config_entry_id`, `parent_device_id`, and `identifiers`, `
 
 如果子设备的标识符与同一配置条目下的某个现有设备匹配，该设备就会变成子设备，并保留其 ID。使用该设备的自动化将继续正常工作。这使得已经把产品拆分为独立设备的集成可以轻松迁移。
 
-This only works if the config entry has not registered the device as a normal device since the entry was set up: the registry raises a `DeviceInfoError` then. It forgets those registrations when the config entry unloads. So register the part only as a child device, and don't leave a `DeviceInfo` for it on one of its entities.
+这仅在配置条目自设置以来未将该设备注册为普通设备时才有效：否则注册表会抛出 `DeviceInfoError`。当配置条目卸载时，它会忘记这些注册。因此，请仅将部件注册为子设备，并且不要在其某个实体上为其留下 `DeviceInfo`。
 
-The other way around is not supported directly. `async_update_child_device` can't change the parent, and `async_get_or_create` with the identifiers of an existing child device raises an error instead of turning it into a normal device. To turn a child device back into a normal device, remove it with `async_remove_device`, then register it again with `async_get_or_create`, with the same identifiers. The order matters: the identifiers are only free once the child device is removed. Removing a device also removes the entity registry entries of its entities, so this fits a child device without entities. Entities only come back when your integration adds them again, with their settings, like the entity ID and name, restored.
+反向操作不受直接支持。`async_update_child_device` 无法更改父设备，而使用现有子设备的标识符调用 `async_get_or_create` 会抛出错误，而不是将其转换为普通设备。要将子设备转换回普通设备，请使用 `async_remove_device` 将其移除，然后使用相同的标识符通过 `async_get_or_create` 重新注册。顺序很重要：只有在子设备被移除后，标识符才可用。移除设备也会移除其实体的实体注册表条目，因此这适用于没有实体的子设备。实体只会在你的集成再次添加它们时恢复，并恢复其设置，如实体 ID 和名称。
 
 ### 随父设备联动的行为
 

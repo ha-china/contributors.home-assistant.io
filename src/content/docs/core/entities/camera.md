@@ -15,17 +15,17 @@ sidebarGroup: Media
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
-| `brand` | `str \| None` | `None` | The brand of the camera. |
-| `camera_entity_capabilities` | `CameraEntityCapabilities` | `CameraEntityCapabilities()` | What the camera supports. See [Two-way audio](#two-way-audio). |
-| `model` | `str \| None` | `None` | The model of the camera. |
-| `frame_interval` | `float` | `0.5` | Seconds between frames of the MJPEG stream that Home Assistant builds from still images. |
-| `is_on` | `bool` | `True` | Whether the camera is on. When it is off, image requests fail with a "service unavailable" response. |
-| `is_recording` | `bool` | `False` | Whether the camera is recording. Sets the state. |
-| `is_streaming` | `bool` | `False` | Whether the camera is streaming. Sets the state. |
-| `motion_detection_enabled` | `bool` | `False` | Whether motion detection is on. |
-| `use_stream_for_stills` | `bool` | `False` | Take still images from the stream instead of calling `async_camera_image`. Only a property: there is no `_attr_` for it. |
-| `content_type` | `str` | `"image/jpeg"` | The MIME type of the images you return. A plain instance attribute set in `__init__`, not a property. |
-| `stream_options` | `dict` | `{}` | Options passed to the stream integration when it opens your stream source. A plain instance attribute. |
+| `brand` | `str \| None` | `None` | 摄像头的品牌。 |
+| `camera_entity_capabilities` | `CameraEntityCapabilities` | `CameraEntityCapabilities()` | 摄像头支持的功能。参见[双向音频](#two-way-audio)。 |
+| `model` | `str \| None` | `None` | 摄像头的型号。 |
+| `frame_interval` | `float` | `0.5` | Home Assistant 从静态图像构建的 MJPEG 流的帧间隔（秒）。 |
+| `is_on` | `bool` | `True` | 摄像头是否开启。关闭时，图像请求会以“服务不可用”响应失败。 |
+| `is_recording` | `bool` | `False` | 摄像头是否正在录制。设置状态。 |
+| `is_streaming` | `bool` | `False` | 摄像头是否正在流式传输。设置状态。 |
+| `motion_detection_enabled` | `bool` | `False` | 移动侦测是否开启。 |
+| `use_stream_for_stills` | `bool` | `False` | 从视频流中获取静态图像，而不是调用 `async_camera_image`。仅是一个属性：没有对应的 `_attr_`。 |
+| `content_type` | `str` | `"image/jpeg"` | 你返回的图像的 MIME 类型。在 `__init__` 中设置的普通实例属性，不是属性。 |
+| `stream_options` | `dict` | `{}` | 当 stream 集成打开你的流源时传递给它的选项。普通实例属性。 |
 
 摄像头默认不进行轮询（`should_poll` 为 `False`）。当你重写 `__init__` 时，请调用 `super().__init__()`：它会完成访问令牌、视频流以及 WebRTC 内部记录的设置。
 
@@ -74,11 +74,11 @@ sidebarGroup: Media
 
 集成也可以基于其他集成的摄像头的流源，为这些摄像头提供 WebRTC。实现 `CameraWebRTCProvider`，并通过 `async_register_webrtc_provider(hass, provider)` 注册它。提供程序通过 `async_is_supported` 告诉 Home Assistant 它支持哪些流源，并为这些摄像头处理 offer 和 candidate。go2rtc 就是这样工作的，你很少会需要用到它。
 
-### Two-way audio
+### 双向音频
 
-When the camera has a speaker, people can talk through it while they watch the live stream. To offer this, set `camera_entity_capabilities` to a `CameraEntityCapabilities` with `two_way_audio` as `True`, imported from `homeassistant.components.camera`.
+当摄像头带有扬声器时，人们可以在观看实时视频流的同时通过它说话。要提供此功能，请将 `camera_entity_capabilities` 设置为 `CameraEntityCapabilities`，并将 `two_way_audio` 设为 `True`，从 `homeassistant.components.camera` 导入。
 
-Only declare it when the camera can receive audio over the stream Home Assistant uses.
+仅当摄像头可以通过 Home Assistant 使用的视频流接收音频时，才声明此功能。
 
 ```python
 self._attr_camera_entity_capabilities = CameraEntityCapabilities(
@@ -86,14 +86,13 @@ self._attr_camera_entity_capabilities = CameraEntityCapabilities(
 )
 ```
 
-The frontend gets two-way audio only when all of these hold:
+前端仅在以下所有条件成立时获得双向音频：
 
-- Your entity declares two-way audio.
-- The camera streams over WebRTC, natively or through a WebRTC provider. Two-way audio is not available over HLS.
-- The user turned on the **Two-way audio** preview feature of the camera integration in [Labs](/core/development/labs/). The browser only gives access to the microphone over HTTPS, so two-way audio needs Home Assistant to be opened over HTTPS.
+- 你的实体声明了双向音频。
+- 摄像头通过 WebRTC 进行流式传输，无论是原生还是通过 WebRTC 提供程序。双向音频在 HLS 上不可用。
+- 用户在[实验室](/core/development/labs/)中开启了摄像头集成的**双向音频**预览功能。浏览器只会在 HTTPS 下授予麦克风访问权限，因此双向音频需要 Home Assistant 通过 HTTPS 打开。
 
-
-## Methods
+## 方法
 
 每个方法都有一个同步（sync）和一个异步（async）变体。实现其中之一即可。
 

@@ -215,9 +215,9 @@ probatio.Optional(CONF_UNIT_OF_MEASUREMENT): UnitOfMeasurementSelector(
 
 上下文只会改变前端提供的选项。选择器不会对照其他字段检查提交的值，因此您的步骤仍然需要检查该组合是否合理。
 
-### Fields that show based on another field
+### 根据其他字段显示的字段
 
-A field can show only while other fields of the same step have certain values. That saves you an extra step, or showing the form again after submit, just to show or hide a few fields. Use the `Required` and `Optional` markers from `homeassistant.data_entry_flow` and give them a `visible` condition:
+一个字段可以仅在同一步骤的其他字段具有特定值时显示。这样可以省去额外的步骤，或在提交后再次显示表单，仅仅为了显示或隐藏几个字段。使用 `homeassistant.data_entry_flow` 中的 `Required` 和 `Optional` 标记，并为它们赋予 `visible` 条件：
 
 ```python
 from homeassistant import data_entry_flow
@@ -236,24 +236,24 @@ DATA_SCHEMA = probatio.Schema(
 )
 ```
 
-The **Verify SSL certificate** checkbox only shows when **Use SSL** is checked. A condition compares the value of another field of the same step. The `operator` key picks the comparison, and `exists` and `not_exists` take no `value`:
+**验证 SSL 证书**复选框仅在勾选**使用 SSL**时显示。条件会比较同一步骤中另一个字段的值。`operator` 键选择比较方式，而 `exists` 和 `not_exists` 不需要 `value`：
 
-| Operator | Matches when the field |
+| 运算符 | 当字段满足以下条件时匹配 |
 | --- | --- |
-| `eq` (default) | is equal to `value` |
-| `not_eq` | is not equal to `value` |
-| `in` | is one of the values in the `value` list |
-| `not_in` | is none of the values in the `value` list |
-| `exists` | has a value: it is not missing, `None`, or an empty string |
-| `not_exists` | has no value |
+| `eq`（默认） | 等于 `value` |
+| `not_eq` | 不等于 `value` |
+| `in` | 是 `value` 列表中的值之一 |
+| `not_in` | 不是 `value` 列表中的任何值 |
+| `exists` | 有值：不缺失、不是 `None`，也不是空字符串 |
+| `not_exists` | 没有值 |
 
-`visible` also takes a list of conditions, which all have to match, or a plain `True` or `False`.
+`visible` 也可以接受一个条件列表，所有条件都必须匹配，或者直接使用 `True` 或 `False`。
 
-A hidden field is not shown, not required, and left out of `user_input`, default included. For the conditions of the other fields, it counts as empty. A field missing from the submitted input is evaluated with its default, while a field submitted with an empty value keeps that value.
+隐藏的字段不会显示、不是必填项，并且会被排除在 `user_input` 之外，默认值也包括在内。对于其他字段的条件，它被视为空值。提交的输入中缺失的字段会以其默认值进行评估，而以空值提交的字段则保留该值。
 
-Because a hidden field is left out of `user_input`, it can be missing from the data you store. Read it with `.get()` and a fallback, like `entry.data.get(CONF_VERIFY_SSL, True)`.
+由于隐藏字段被排除在 `user_input` 之外，它可能不会出现在您存储的数据中。请使用 `.get()` 并提供一个回退值来读取它，例如 `entry.data.get(CONF_VERIFY_SSL, True)`。
 
-Inside a [section](#sections), conditions look at the fields of that section. To hide a whole section, put `visible` on the marker of the section:
+在[分区](#sections)内部，条件会查看该分区的字段。要隐藏整个分区，请将 `visible` 放在分区的标记上：
 
 ```python
 data_entry_flow.Required(
@@ -269,7 +269,7 @@ data_entry_flow.Required(
 ),
 ```
 
-### Advanced options
+### 高级选项
 
 `show_advanced_options` 属性已被弃用，并将在 Home Assistant 2027.6 中移除。在此之前它始终返回 `True`。请改为将大多数用户不需要的选项放入一个折叠的[分区](#sections)中。
 

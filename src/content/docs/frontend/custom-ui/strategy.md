@@ -1,6 +1,6 @@
 ---
-title: Custom strategies
-description: Generate a whole dashboard, a view, or a section from code, and offer it in the dashboard editor.
+title: 自定义策略
+description: 从代码生成整个仪表盘、视图或分区，并在仪表盘编辑器中提供它。
 order: 6
 ---
 
@@ -14,19 +14,19 @@ order: 6
 
 它们协同工作。仪表盘策略通常会生成一个视图列表，每个视图都使用一个视图策略，这样每个视图只有在有人打开时才会被构建。
 
-## How a strategy works
+## 策略的工作原理
 
-A strategy is a custom element with a static `generate()` method. It gets the strategy configuration and `hass`, and returns the configuration of what it generates: a dashboard, a view, or a section.
+策略是一个带有静态 `generate()` 方法的自定义元素。它接收策略配置和 `hass`，并返回它所生成内容的配置：仪表盘、视图或分区。
 
-The tag name decides the kind: `ll-strategy-dashboard-<name>`, `ll-strategy-view-<name>`, or `ll-strategy-section-<name>`. The `<name>` is what follows `custom:` in the configuration. Everything in the `strategy` section, including your own options, is passed to `generate()` as `config`.
+标签名决定了类型：`ll-strategy-dashboard-<name>`、`ll-strategy-view-<name>` 或 `ll-strategy-section-<name>`。`<name>` 是配置中 `custom:` 后面的部分。`strategy` 部分中的所有内容，包括你自己的选项，都会作为 `config` 传递给 `generate()`。
 
-Load your strategy as a [resource](/frontend/custom-ui/resources/), like a custom card.
+像自定义卡片一样，将你的策略作为[资源](/frontend/custom-ui/resources/)加载。
 
-The [built-in strategies](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies) are good examples. The [map dashboard strategy](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts) is a small one.
+[内置策略](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies)是很好的示例。[地图仪表盘策略](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts)是一个较小的示例。
 
-## A dashboard strategy
+## 仪表盘策略
 
-A dashboard strategy returns a whole dashboard configuration:
+仪表盘策略返回整个仪表盘的配置：
 
 ```js
 class MyDemoDashboardStrategy extends HTMLElement {
@@ -55,7 +55,7 @@ customElements.define(
 );
 ```
 
-Use it as the configuration of a dashboard:
+将其用作仪表盘的配置：
 
 ```yaml
 strategy:
@@ -63,11 +63,11 @@ strategy:
   title: Generated dashboard
 ```
 
-[Register it](#register-your-strategy) with `strategyType: "dashboard"`, and users can pick it under **Community dashboards** in the dialog to add a dashboard.
+使用 `strategyType: "dashboard"` [注册它](#register-your-strategy)，用户就可以在添加仪表盘的对话框中的**社区仪表盘**下选择它。
 
-### Suggest a title and icon
+### 建议标题和图标
 
-A dashboard strategy can suggest the title and icon of the new dashboard with a static `getCreateSuggestions(hass)`. Users can still change both before they create it.
+仪表盘策略可以通过静态的 `getCreateSuggestions(hass)` 为新仪表盘建议标题和图标。用户仍然可以在创建之前更改这两项。
 
 ```js
 static getCreateSuggestions(hass) {
@@ -132,9 +132,9 @@ customElements.define("ll-strategy-view-my-area", MyAreaViewStrategy);
 
 两者都使用名称 `my-area`：一个作为仪表盘策略，一个作为视图策略。这是允许的，因为类型是标签名的一部分。
 
-## A section strategy
+## 分区策略
 
-A section strategy returns the configuration of one section, with its cards. Use it in a sections view, next to regular sections:
+分区策略返回一个分区及其卡片的配置。在分区视图中使用它，与常规分区并列：
 
 ```yaml
 views:
@@ -145,7 +145,7 @@ views:
           domain: light
 ```
 
-The section strategy below shows a tile for every registered entity of one domain, like all the lights:
+下面的分区策略为某个域（domain）的每个已注册实体显示一个磁贴，例如所有灯：
 
 ```js
 class MyDomainSectionStrategy extends HTMLElement {
@@ -164,11 +164,11 @@ customElements.define(
 );
 ```
 
-[Register it](#register-your-strategy) with `strategyType: "section"`, and users can pick it under **Community sections** when they create a section and choose **Automatic section**. After they pick it, the section editor opens with your [settings](#settings).
+使用 `strategyType: "section"` [注册它](#register-your-strategy)，用户就可以在创建分区并选择**自动分区**时，在**社区分区**下选择它。选择后，分区编辑器会打开你的[设置](#settings)。
 
-### Show a preview
+### 显示预览
 
-The dialog shows each section strategy as a tile with a live preview. To get one, add a static `getStubConfig(hass)` that returns a strategy configuration with good defaults. It can be async. The dialog passes it to `generate()` to render the preview, and the new section starts with it.
+对话框将每个分区策略显示为带有实时预览的磁贴。要获得预览，请添加一个静态的 `getStubConfig(hass)`，返回一个带有良好默认值的策略配置。它可以是异步的。对话框将其传递给 `generate()` 以渲染预览，新分区也以该配置开始。
 
 ```js
 static getStubConfig(hass) {
@@ -176,11 +176,11 @@ static getStubConfig(hass) {
 }
 ```
 
-Include `custom:` in the `type`, like in the configuration. Without `getStubConfig()`, or when it throws, the tile shows no preview. Pick defaults that show something in most homes.
+在 `type` 中包含 `custom:`，就像在配置中一样。如果没有 `getStubConfig()`，或者它抛出异常，磁贴将不显示预览。选择在大多数家庭中都能显示内容的默认值。
 
-## Register your strategy
+## 注册你的策略
 
-Register your strategy in `window.customStrategies`, and users can pick it in the dashboard editor without writing any YAML:
+在 `window.customStrategies` 中注册你的策略，用户就可以在仪表盘编辑器中无需编写任何 YAML 即可选择它：
 
 ```js
 window.customStrategies = window.customStrategies || [];
@@ -193,19 +193,19 @@ window.customStrategies.push({
 });
 ```
 
-| Key | Required | Meaning |
+| 键 | 必需 | 含义 |
 | --- | --- | --- |
-| `type` | Yes | The name of the strategy, without `custom:`. |
-| `strategyType` | Yes | `"dashboard"` or `"section"`. |
-| `name` | | The name in the dialog. |
-| `description` | | A short description below the name. |
-| `documentationURL` | | A link to your documentation. The frontend does not show it anywhere yet. |
+| `type` | 是 | 策略的名称，不含 `custom:`。 |
+| `strategyType` | 是 | `"dashboard"` 或 `"section"`。 |
+| `name` | | 对话框中的名称。 |
+| `description` | | 名称下方的简短描述。 |
+| `documentationURL` | | 指向你的文档的链接。前端目前尚未在任何地方显示它。 |
 
-View strategies can't be picked in the editor yet, so there is no need to register them.
+视图策略目前还不能在编辑器中选择，因此无需注册它们。
 
-The resource has to be loaded for the dialog to see it. After adding or updating it, reload the page and open the dialog again.
+对话框必须加载资源才能看到它。添加或更新后，重新加载页面并再次打开对话框。
 
-## When to generate again
+## 何时再次生成
 
 策略在仪表盘加载时运行。默认情况下，当实体、设备、区域或楼层注册表发生变化时，它会再次运行，因此新设备无需重新加载页面即可显示。状态（state）变化不会触发它。
 
@@ -221,11 +221,11 @@ class MyDemoDashboardStrategy extends HTMLElement {
 }
 ```
 
-## Settings
+## 设置
 
 策略可以为其选项提供一个可视化编辑器。从静态的 `getConfigElement()` 返回一个编辑器元素。它的工作方式类似于[卡片编辑器](/frontend/custom-ui/card-editor/#a-visual-editor-of-your-own)：Home Assistant 会使用策略配置调用 `setConfig()` 并设置 `hass`，编辑器则通过 `config-changed` 事件发出新的配置。
 
-Give every section strategy an editor: it is the first thing users see after they pick your section in the dialog. Without one, they only get a YAML editor.
+为每个分区策略提供一个编辑器：这是用户在你的对话框中选择分区后首先看到的内容。如果没有编辑器，他们只能看到 YAML 编辑器。
 
 ```js
 class MyDomainSectionStrategy extends HTMLElement {
@@ -239,12 +239,12 @@ class MyDomainSectionStrategy extends HTMLElement {
 }
 ```
 
-A dashboard strategy has two more static options:
+仪表盘策略还有两个静态选项：
 
-- `configRequired = true`: the strategy can't work without settings. Home Assistant shows the editor before it creates the dashboard.
-- `noEditor = true`: the strategy has no settings to edit.
+- `configRequired = true`：策略在没有设置的情况下无法工作。Home Assistant 会在创建仪表盘之前显示编辑器。
+- `noEditor = true`：策略没有需要编辑的设置。
 
-## Tips
+## 提示
 
 - 保持 `generate()` 的速度。它在每次加载时都会运行，仪表盘会等待它完成。
 - `hass` 中已经以简短形式包含了区域、设备和实体。对于它没有的数据，例如完整的实体注册表条目，请使用 `hass.callWS()`。在仪表盘策略中只调用一次，并通过配置将结果传递给你的视图策略。

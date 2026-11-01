@@ -27,10 +27,10 @@ Home Assistant 会为每个浏览器提供它能运行的构建。在添加依�
 
 ## 从这里开始
 
-- [Your first frontend contribution](/frontend/first-contribution/): set up the environment, pick an issue, and open a pull request.
-- [Custom cards and more](/frontend/custom-ui/): build your own card for your dashboard. No development environment needed: a JavaScript file in your Home Assistant is enough to start.
-- [Open a pull request](/frontend/development/pull-requests/): what your pull request needs before it gets reviewed.
-- [Review and release](/frontend/development/review-and-release/): what happens to your pull request, and how it reaches users.
+- [你的第一个前端贡献](/frontend/first-contribution/)：设置环境、挑选一个问题，并提交一个 pull request。
+- [自定义卡片等](/frontend/custom-ui/)：为你的仪表盘构建自己的卡片。无需开发环境：Home Assistant 中的一个 JavaScript 文件就足以开始。
+- [提交 pull request](/frontend/development/pull-requests/)：你的 pull request 在审核前需要满足哪些要求。
+- [审核与发布](/frontend/development/review-and-release/)：你的 pull request 会发生什么，以及它如何到达用户手中。
 
 ## 指南与参考
 

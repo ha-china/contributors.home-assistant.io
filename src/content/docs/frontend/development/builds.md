@@ -1,6 +1,6 @@
 ---
-title: Builds
-description: Make a production build of the frontend, or run the build of a pull request on a real Home Assistant without a development setup.
+title: 构建
+description: 制作前端的正式构建，或在没有开发环境的情况下，在真实的 Home Assistant 上运行拉取请求的构建。
 order: 6
 ---
 

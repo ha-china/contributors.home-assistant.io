@@ -1,21 +1,21 @@
 ---
-title: "Strategy"
-description: "Code that builds a dashboard, a view, or a section from the home itself, its areas, devices, and entities, instead of a fixed configuration."
-sidebarGroup: "Frontend"
+title: "策略（Strategy）"
+description: "一种代码，用于根据家庭本身、其区域、设备和实体来构建仪表盘、视图或部分，而不是使用固定配置。"
+sidebarGroup: "前端"
 term:
   aliases:
-    - "strategies"
-    - "dashboard strategy"
+    - "策略"
+    - "仪表盘策略"
   code:
     - "strategy"
     - "ll-strategy-*"
   related:
-    - "dashboard"
-    - "view"
-    - "area"
+    - "仪表盘"
+    - "视图"
+    - "区域"
   autolink:
-    - "dashboard strategy"
-    - "dashboard strategies"
+    - "仪表盘策略"
+    - "仪表盘策略"
 ---
 
 用户首次打开 Home Assistant 时看到的仪表盘是由策略（strategy）构建的。当用户添加设备时，它会保持更新，直到用户接管控制并对其进行编辑。

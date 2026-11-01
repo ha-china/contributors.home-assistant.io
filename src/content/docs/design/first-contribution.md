@@ -26,7 +26,7 @@ sidebarLabel: 你的第一次贡献
 
 ## 3. 获取设计工具包
 
-The [Home Assistant Design Kit](https://www.figma.com/community/file/1697311104929761103/home-assistant-design-kit) on Figma has the components and styles of the interface. Working from it keeps your mockups close to what can actually be built. The [components](/design/components/) and [patterns](/design/patterns/) in this area show how those pieces behave.
+Figma 上的 [Home Assistant Design Kit](https://www.figma.com/community/file/1697311104929761103/home-assistant-design-kit) 包含界面的组件和样式。基于它进行设计，可以让你的线框图更接近实际可构建的内容。本区域中的[组件](/design/components/)和[模式](/design/patterns/)展示了这些部件的行为方式。
 
 ## 4. 分享你的提案
 

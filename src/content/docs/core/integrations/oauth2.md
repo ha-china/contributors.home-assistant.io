@@ -2,7 +2,7 @@
 title: OAuth 2.0 和应用凭据
 description: 通过 OAuth 2.0 链接用户在云服务上的帐户，并让 Home Assistant 为您处理令牌。
 sidebarLabel: OAuth 2.0
-sidebarGroup: Setup and configuration
+sidebarGroup: 设置与配置
 order: 7
 ---
 

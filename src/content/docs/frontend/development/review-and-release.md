@@ -1,6 +1,6 @@
 ---
-title: Review and release
-description: What happens to a frontend pull request after you open it, and how a merged change reaches the people using Home Assistant.
+title: 审查与发布
+description: 打开前端拉取请求后会发生什么，以及合并的更改如何到达使用 Home Assistant 的用户手中。
 order: 8
 ---
 
@@ -10,10 +10,10 @@ order: 8
 
 当你针对 `dev` 打开一个拉取请求时，有几件事会自动发生：
 
-- **The template check.** The pull request must use the [template](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md) and keep its **Proposed change**, **Type of change**, and **Checklist** sections, check exactly one **Type of change**, and describe the change under **Proposed change**. If it does not, the pull request gets the `Needs Template` label and a comment, and the check fails until you fix it. Drafts are skipped, so the check runs when you mark the pull request ready for review.
-- **Labels.** A bot labels the pull request by the files it changes, like `Dashboards`, `Automations`, or `Tests: Unit`. A second script adds `Companion App`, `Home Assistant Link`, `Labs`, and `Supervisor` when the change touches those parts of the code, even from outside their folders. Both remove a label again once it no longer matches, also one that was added by hand. The rules are in [`.github/labeler.yml`](https://github.com/home-assistant/frontend/blob/dev/.github/labeler.yml) and [`.github/scripts/label-content.mts`](https://github.com/home-assistant/frontend/blob/dev/.github/scripts/label-content.mts).
-- **The CLA.** The first time you contribute, a bot asks you to sign the contributor license agreement.
-- **CI.** Linters, type checks, unit tests, a production build, and the end-to-end tests run on every push. They need to pass before your pull request can be merged.
+- **模板检查。** 拉取请求必须使用[模板](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)，并保留其 **Proposed change**、**Type of change** 和 **Checklist** 部分，且只能勾选一个 **Type of change**，并在 **Proposed change** 下描述更改。如果不符合要求，拉取请求会被打上 `Needs Template` 标签并收到一条评论，检查会失败，直到你修复为止。草稿会被跳过，因此当你将拉取请求标记为准备审查时，检查才会运行。
+- **标签。** 机器人会根据拉取请求更改的文件为其打上标签，例如 `Dashboards`、`Automations` 或 `Tests: Unit`。第二个脚本会在更改触及这些代码部分时添加 `Companion App`、`Home Assistant Link`、`Labs` 和 `Supervisor` 标签，即使更改来自这些文件夹之外。当标签不再匹配时，两者都会再次移除标签，包括手动添加的标签。规则位于 [`.github/labeler.yml`](https://github.com/home-assistant/frontend/blob/dev/.github/labeler.yml) 和 [`.github/scripts/label-content.mts`](https://github.com/home-assistant/frontend/blob/dev/.github/scripts/label-content.mts) 中。
+- **CLA。** 你第一次贡献时，机器人会要求你签署贡献者许可协议。
+- **CI。** 每次推送都会运行代码检查器、类型检查、单元测试、生产构建和端到端测试。它们必须通过，你的拉取请求才能被合并。
 
 保持一个拉取请求只包含一个更改。如果你发现自己勾选了两个 **Type of change** 复选框，请将其拆分。小的拉取请求能更快得到审查。
 

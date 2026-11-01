@@ -1,7 +1,7 @@
 ---
 title: 创建集成
 description: 使用脚手架脚本生成一个新的集成，并了解最小规模的集成是什么样子。
-sidebarGroup: Getting started
+sidebarGroup: 入门
 order: 4
 ---
 

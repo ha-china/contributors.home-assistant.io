@@ -12,13 +12,13 @@ order: 10
 
 ## 页面
 
-- [Set up the environment](/frontend/development/environment/): with the devcontainer, or on your own machine.
-- [Run the frontend](/frontend/development/run/): against a development Home Assistant, or against one you already have.
-- [The gallery and the demo](/frontend/development/gallery-and-demo/): work on components and dashboards without a Home Assistant at all.
-- [Coding guidelines](/frontend/development/guidelines/): how frontend code is written, and what reviewers look for.
-- [Linting and tests](/frontend/development/testing/): the checks to run before you open a pull request.
-- [Builds](/frontend/development/builds/): make a production build, and try out someone else's pull request on a real Home Assistant.
-- [Open a pull request](/frontend/development/pull-requests/): what your pull request needs before it gets reviewed.
-- [Review and release](/frontend/development/review-and-release/): what happens to your pull request, and how it reaches users.
+- [设置环境](/frontend/development/environment/)：使用 devcontainer，或在你自己的机器上。
+- [运行前端](/frontend/development/run/)：针对开发版 Home Assistant，或针对你已有的 Home Assistant。
+- [画廊与演示](/frontend/development/gallery-and-demo/)：在完全没有 Home Assistant 的情况下处理组件和仪表盘。
+- [编码指南](/frontend/development/guidelines/)：前端代码的编写方式，以及审查者关注的内容。
+- [Linting 与测试](/frontend/development/testing/)：在打开拉取请求之前需要运行的检查。
+- [构建](/frontend/development/builds/)：进行生产构建，并在真实的 Home Assistant 上尝试他人的拉取请求。
+- [打开拉取请求](/frontend/development/pull-requests/)：你的拉取请求在审查前需要满足的条件。
+- [审查与发布](/frontend/development/review-and-release/)：你的拉取请求会发生什么，以及它如何到达用户手中。
 
 所有命令和端口汇总：[命令](/frontend/reference/commands/)。

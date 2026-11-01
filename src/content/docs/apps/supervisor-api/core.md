@@ -131,7 +131,7 @@ order: 4
 
 ## Home Assistant Core API 代理
 
-The proxy forwards your requests to the REST API and WebSocket API of Home Assistant Core, using your app's token. On the Core side, the requests run as an administrator of Home Assistant. Your app needs `homeassistant_api: true` in its configuration. It does not need `hassio_api` or a role. See [talk to Home Assistant](/apps/guides/communication/) for how to use it.
+代理会将您的请求转发到 Home Assistant Core 的 REST API 和 WebSocket API，并使用您应用的令牌。在 Core 端，这些请求以 Home Assistant 管理员身份运行。您的应用需要在其配置中设置 `homeassistant_api: true`。它不需要 `hassio_api` 或角色。有关如何使用，请参阅[与 Home Assistant 通信](/apps/guides/communication/)。
 
 以 `hassio` 开头的路径会被代理阻止。
 

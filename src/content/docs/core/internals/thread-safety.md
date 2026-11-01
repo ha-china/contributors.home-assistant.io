@@ -66,11 +66,11 @@ def _async_light_changed(
 
 有些 API 完全没有线程安全的版本：
 
-- The area, category, device, entity, floor, and label registries, including `async_get_or_create`, `async_update_entity`, `async_update_device`, and `async_remove`.
-- `hass.config_entries.async_update_entry` and `hass.config_entries.async_update_subentry`.
-- Rendering templates, like `async_render_to_info`.
-- Ignoring an issue with `issue_registry.async_ignore_issue`.
-- Refreshing a set of issues with `issue_registry.async_refresh_issues`, and keeping an issue with `issue_registry.async_keep_issue`. See [refresh from another thread](/core/integrations/repairs/#refresh-from-another-thread).
+- 区域（area）、类别（category）、设备（device）、实体（entity）、楼层（floor）和标签（label）注册表，包括 `async_get_or_create`、`async_update_entity`、`async_update_device` 和 `async_remove`。
+- `hass.config_entries.async_update_entry` 和 `hass.config_entries.async_update_subentry`。
+- 渲染模板，如 `async_render_to_info`。
+- 使用 `issue_registry.async_ignore_issue` 忽略问题。
+- 使用 `issue_registry.async_refresh_issues` 刷新一组问题，以及使用 `issue_registry.async_keep_issue` 保留问题。参见[从另一个线程刷新](/core/integrations/repairs/#refresh-from-another-thread)。
 
 对于这些情况，可以将进行调用的函数调度到事件循环上执行。`hass.add_job` 可以从任何线程做到这一点：
 

@@ -54,12 +54,12 @@ sidebarGroup: Sensors and status
 | `ip_address` | `str \| None` | `None` | 设备的 IP 地址。 |
 | `hostname` | `str \| None` | `None` | 设备的主机名。 |
 
-A `ScannerEntity` is keyed on the MAC address, and has a few defaults of its own:
+`ScannerEntity` 以 MAC 地址为键，并有一些自身的默认设置：
 
-- Its unique ID is the MAC address. You do not set one yourself.
-- Until Home Assistant Core 2028.11, the base class sets device info for a tracker that has a MAC address but no device info: a device with the MAC address as connection, named after the hostname, or after the MAC address when the device is new. The MAC address never replaces the name of an existing device. Do not rely on it: starting with 2028.11, a tracker without device info is not included in a device, like any other entity. To keep a tracker out of a device until then, set `_attr_device_info = DeviceInfo()`. An empty device info means no device, and the default only applies when the device info is `None`.
-- It is disabled by default. A router sees many clients, and most of them are not worth tracking: the devices users most want to track, like phones, are usually tracked with the Home Assistant Companion app instead. Override `_attr_entity_registry_enabled_default` when the tracker is not just another client seen on a network. For example, when tracking is the purpose of the device, like for the Zigbee presence tags that ZHA models as device trackers, or when the user set up the tracked device on its own.
-- When you set the MAC address and IP address, DHCP discovery uses them, with the hostname when you set one, to discover integrations for the device. That happens when Home Assistant sets up the entity while the device is connected, even when the tracker is disabled. DHCP discovery also looks at trackers with the `router` source type that are `home`: once when DHCP discovery starts, and when such a tracker gets its first state. A tracker that changes from `not_home` to `home` later does not trigger this.
+- 其唯一 ID 是 MAC 地址。你无需自行设置。
+- 在 Home Assistant Core 2028.11 之前，基类会为具有 MAC 地址但没有设备信息的跟踪器设置设备信息：一个以 MAC 地址作为连接、以主机名命名的设备，或者当设备是新的时以 MAC 地址命名。MAC 地址永远不会替换现有设备的名称。不要依赖它：从 2028.11 开始，没有设备信息的跟踪器不会包含在设备中，就像任何其他实体一样。在此之前，要将跟踪器排除在设备之外，请设置 `_attr_device_info = DeviceInfo()`。空的设备信息表示没有设备，默认设置仅在设备信息为 `None` 时适用。
+- 它默认是禁用的。路由器会看到许多客户端，其中大多数不值得跟踪：用户最想跟踪的设备（如手机）通常通过 Home Assistant Companion 应用进行跟踪。当跟踪器不仅仅是网络上看到的另一个客户端时，请覆盖 `_attr_entity_registry_enabled_default`。例如，当跟踪是设备的目的时，比如 ZHA 建模为设备跟踪器的 Zigbee 存在标签，或者当用户单独设置了被跟踪的设备时。
+- 当你设置 MAC 地址和 IP 地址时，DHCP 发现会使用它们，并在你设置主机名时使用主机名，来发现设备的集成。这发生在 Home Assistant 在设备连接时设置实体时，即使跟踪器被禁用。DHCP 发现还会查看具有 `router` 来源类型且状态为 `home` 的跟踪器：一次是在 DHCP 发现启动时，另一次是当这样的跟踪器获得其第一个状态时。之后从 `not_home` 变为 `home` 的跟踪器不会触发此操作。
 
 ## 支持的功能
 
@@ -115,7 +115,7 @@ class ExampleCarTracker(TrackerEntity):
         self.async_write_ha_state()
 ```
 
-A tracker for a client of a router, included in a device for the client. The client name goes on the device, and the device is renamed when the name changes on the router. That rename only happens while the tracker is enabled: Home Assistant does not add a disabled entity, so it gets no coordinator updates. The device info of a disabled tracker is still used each time the integration is set up, so its device gets the current name then.
+一个用于路由器客户端的跟踪器，包含在客户端的设备中。客户端名称放在设备上，当名称在路由器上更改时，设备会被重命名。该重命名仅在跟踪器启用时发生：Home Assistant 不会添加禁用的实体，因此它不会收到协调器更新。禁用跟踪器的设备信息在每次集成设置时仍会被使用，因此其设备在那时会获得当前名称。
 
 ```python
 from homeassistant.components.device_tracker import ScannerEntity

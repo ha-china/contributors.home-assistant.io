@@ -15,16 +15,17 @@ sidebarGroup: Media
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
-| `brand` | `str \| None` | `None` | 摄像头的品牌。 |
-| `model` | `str \| None` | `None` | 摄像头的型号。 |
-| `frame_interval` | `float` | `0.5` | Home Assistant 由静态图像构建 MJPEG 流时，帧与帧之间的间隔秒数。 |
-| `is_on` | `bool` | `True` | 摄像头是否开启。当摄像头关闭时，图像请求会失败并返回“服务不可用”（service unavailable）响应。 |
-| `is_recording` | `bool` | `False` | 摄像头是否正在录制。用于设置状态。 |
-| `is_streaming` | `bool` | `False` | 摄像头是否正在推流（streaming）。用于设置状态。 |
-| `motion_detection_enabled` | `bool` | `False` | 是否启用了移动侦测。 |
-| `use_stream_for_stills` | `bool` | `False` | 从视频流中获取静态图像，而不是调用 `async_camera_image`。它只是一个属性（property）：没有对应的 `_attr_`。 |
-| `content_type` | `str` | `"image/jpeg"` | 你返回的图像的 MIME 类型。它是在 `__init__` 中设置的普通实例属性，而不是属性（property）。 |
-| `stream_options` | `dict` | `{}` | stream 集成（integration）打开你的流源时传递给它的选项。它是一个普通实例属性。 |
+| `brand` | `str \| None` | `None` | The brand of the camera. |
+| `camera_entity_capabilities` | `CameraEntityCapabilities` | `CameraEntityCapabilities()` | What the camera supports. See [Two-way audio](#two-way-audio). |
+| `model` | `str \| None` | `None` | The model of the camera. |
+| `frame_interval` | `float` | `0.5` | Seconds between frames of the MJPEG stream that Home Assistant builds from still images. |
+| `is_on` | `bool` | `True` | Whether the camera is on. When it is off, image requests fail with a "service unavailable" response. |
+| `is_recording` | `bool` | `False` | Whether the camera is recording. Sets the state. |
+| `is_streaming` | `bool` | `False` | Whether the camera is streaming. Sets the state. |
+| `motion_detection_enabled` | `bool` | `False` | Whether motion detection is on. |
+| `use_stream_for_stills` | `bool` | `False` | Take still images from the stream instead of calling `async_camera_image`. Only a property: there is no `_attr_` for it. |
+| `content_type` | `str` | `"image/jpeg"` | The MIME type of the images you return. A plain instance attribute set in `__init__`, not a property. |
+| `stream_options` | `dict` | `{}` | Options passed to the stream integration when it opens your stream source. A plain instance attribute. |
 
 摄像头默认不进行轮询（`should_poll` 为 `False`）。当你重写 `__init__` 时，请调用 `super().__init__()`：它会完成访问令牌、视频流以及 WebRTC 内部记录的设置。
 
@@ -73,7 +74,26 @@ sidebarGroup: Media
 
 集成也可以基于其他集成的摄像头的流源，为这些摄像头提供 WebRTC。实现 `CameraWebRTCProvider`，并通过 `async_register_webrtc_provider(hass, provider)` 注册它。提供程序通过 `async_is_supported` 告诉 Home Assistant 它支持哪些流源，并为这些摄像头处理 offer 和 candidate。go2rtc 就是这样工作的，你很少会需要用到它。
 
-## 方法
+### Two-way audio
+
+When the camera has a speaker, people can talk through it while they watch the live stream. To offer this, set `camera_entity_capabilities` to a `CameraEntityCapabilities` with `two_way_audio` as `True`, imported from `homeassistant.components.camera`.
+
+Only declare it when the camera can receive audio over the stream Home Assistant uses.
+
+```python
+self._attr_camera_entity_capabilities = CameraEntityCapabilities(
+    two_way_audio=device.supports_two_way_audio and device.protocol == "rtsp"
+)
+```
+
+The frontend gets two-way audio only when all of these hold:
+
+- Your entity declares two-way audio.
+- The camera streams over WebRTC, natively or through a WebRTC provider. Two-way audio is not available over HLS.
+- The user turned on the **Two-way audio** preview feature of the camera integration in [Labs](/core/development/labs/). The browser only gives access to the microphone over HTTPS, so two-way audio needs Home Assistant to be opened over HTTPS.
+
+
+## Methods
 
 每个方法都有一个同步（sync）和一个异步（async）变体。实现其中之一即可。
 

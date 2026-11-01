@@ -71,7 +71,7 @@ pre-commit 钩子会自动格式化你提交的文件，因此大多数样式问
 
 ## 6. 提交 pull request
 
-将你的分支推送到你的 fork，并针对 `dev` 分支提交一个 pull request。完整填写 pull request 模板：从使用者的角度描述这次修改，准确勾选一个 **Type of change**，并为所有视觉上的改动附上修改前后的截图。如果模板缺失或不完整，检查将无法通过。
+Push your branch to your fork and open a pull request against the `dev` branch. Fill in the pull request template completely: describe the change from the point of view of the people using it, check exactly one **Type of change**, and add before and after screenshots for anything visual. A check fails the pull request when the template is missing or incomplete. [Open a pull request](/frontend/development/pull-requests/) has the details.
 
 然后就要准备回答问题了。审查者可能会要求你修改一些内容，这是正常的。[审查与发布](/frontend/development/review-and-release/)解释了接下来会发生什么。
 

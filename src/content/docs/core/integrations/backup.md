@@ -125,7 +125,29 @@ entry.async_on_unload(entry.async_on_state_change(_notify_backup_listeners))
 
 `DATA_BACKUP_AGENT_LISTENERS` 是你自己定义的键，位于 `const.py` 中。
 
-## 为备份做准备
+### Rename an agent
+
+The ID of an agent is `<domain>.<unique_id>`, built from the `unique_id` of the agent. It doesn't have to match anything on the config entry. If a new version of your integration sets `unique_id` differently, users lose their backup settings for the agent. Call `async_rename_agent` once to move them to the new ID, for example in a config entry migration:
+
+```python
+from homeassistant.components.backup import async_get_manager
+
+
+async def async_migrate_entry(hass: HomeAssistant, entry: ExampleConfigEntry) -> None:
+    """Migrate old entry."""
+    if entry.version == 1 and entry.minor_version == 1:
+        # The agent used the config entry ID, now it uses the account ID
+        async_get_manager(hass).async_rename_agent(
+            f"{DOMAIN}.{entry.entry_id}", f"{DOMAIN}.{entry.data[CONF_ACCOUNT_ID]}"
+        )
+        hass.config_entries.async_update_entry(entry, minor_version=2)
+```
+
+- It moves the settings of the agent, whether automatic backups use it, and the failed uploads to it. The backups the agent stores are not touched.
+- Add `backup` to `after_dependencies` in `manifest.json`, so the backup integration is set up before your migration runs.
+- Only call it when the ID changes.
+
+## Prepare for a backup
 
 某些集成需要在备份前暂停或写入其数据，以便能够正确恢复。将这两个函数添加到 `backup.py`，或运行 `python3 -m script.scaffold backup`：
 

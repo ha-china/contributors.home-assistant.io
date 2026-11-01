@@ -23,7 +23,7 @@ order: 19
 将库抛出的异常映射为设置时的异常：
 
 ```python
-async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
     """Set up My integration from a config entry."""
     client = MyClient(entry.data[CONF_HOST])
 
@@ -42,7 +42,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
 
     entry.runtime_data = client
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-    return True
 ```
 
 这通常是自动获得的。当 [coordinator](/glossary/coordinator/) 的首次更新失败时，`await coordinator.async_config_entry_first_refresh()` 会抛出 `ConfigEntryNotReady`，而更新过程中抛出的 `ConfigEntryAuthFailed` 和 `ConfigEntryError` 则会直接传递。在 OAuth2 会话上调用 `await session.async_ensure_token_valid()` 时，如果令牌无法刷新，就会抛出正确的异常。

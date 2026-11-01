@@ -204,11 +204,11 @@ ulimits:
 
 | 键 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |
-| `homeassistant_api` | bool | `false` | 通过 `http://supervisor/core/api` 的代理访问 Home Assistant Core API。 |
-| `hassio_api` | bool | `false` | 访问 Supervisor API 的更多功能，受 `hassio_role` 限制。 |
-| `hassio_role` | string | `default` | 应用在 Supervisor API 中的角色：`default`、`homeassistant`、`backup`、`manager` 或 `admin`。参见 [API 角色](/apps/guides/security/#api-roles)。 |
-| `auth_api` | bool | `false` | 访问身份验证 API，以便根据 Home Assistant 校验用户名和密码。 |
-| `docker_api` | bool | `false` | 以只读方式挂载 Docker 套接字。仅在关闭保护模式时有效。 |
+| `homeassistant_api` | bool | `false` | Access to the Home Assistant Core API, through the proxy at `http://supervisor/core/api`. Through the proxy, your app acts as an administrator of Home Assistant. See [Home Assistant Core](/apps/guides/communication/#home-assistant-core). |
+| `hassio_api` | bool | `false` | Access to the Supervisor API beyond the basics, limited by `hassio_role`. |
+| `hassio_role` | string | `default` | The role of the app in the Supervisor API: `default`, `homeassistant`, `backup`, `manager`, or `admin`. See [API roles](/apps/guides/security/#api-roles). |
+| `auth_api` | bool | `false` | Access to the authentication API, to check user names and passwords against Home Assistant. |
+| `docker_api` | bool | `false` | Mount the Docker socket, read-only. Only works with protection mode off. |
 
 更多信息请参见[与 Home Assistant 和 Supervisor 通信](/apps/guides/communication/)。
 

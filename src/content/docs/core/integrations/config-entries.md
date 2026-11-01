@@ -51,7 +51,7 @@ type ExampleConfigEntry = ConfigEntry[ExampleCoordinator]
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up Example from a config entry."""
     client = ExampleClient(
         entry.data[CONF_HOST], session=async_get_clientsession(hass)
@@ -63,11 +63,11 @@ async def async_setup_entry(
     entry.runtime_data = coordinator
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
-    return True
 ```
 
-### 将运行时数据保存在 runtime_data 中
+`async_setup_entry` returns nothing. When it returns, the setup succeeded, and the entry is `LOADED`. When setup cannot succeed, raise an exception instead, so Home Assistant knows whether to retry, start reauthentication, or give up. See [setup failures and exceptions](/core/integrations/setup-failures/). The same goes for `async_unload_entry` and `async_migrate_entry`.
+
+### Keep runtime data in runtime_data
 
 将你的集成在运行期间所需的内容（例如 API 客户端或[协调器](/glossary/coordinator/)（coordinator））存储在 `entry.runtime_data` 中。使用类型别名为其指定类型，例如上面的 `ExampleConfigEntry`，并在所有接收该配置项的地方使用该别名。这样你的平台就可以免费获得一个带有类型的 `runtime_data`。
 
@@ -104,12 +104,14 @@ async def async_setup_entry(
 ```python
 async def async_unload_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Unload a config entry."""
-    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    await hass.config_entries.async_unload_platforms_or_raise(entry, PLATFORMS)
 ```
 
-大多数清理工作不需要单独编写代码。在设置过程中注册清理逻辑，Home Assistant 会在配置项卸载时运行它：
+When one of the platforms fails to unload, `async_unload_platforms_or_raise` raises `ConfigEntryError` with a translated message, and the entry goes to `FAILED_UNLOAD`. If your own cleanup fails, raise `ConfigEntryError` too.
+
+Most cleanup does not need its own code. Register it while setting up, and Home Assistant runs it when the entry unloads:
 
 ```python
 entry.async_on_unload(client.disconnect)
@@ -120,7 +122,9 @@ entry.async_on_unload(
 
 要清理实体，请在[实体](/core/entities/)上实现 `async_will_remove_from_hass`。
 
-## 删除配置项
+Do not delete your repair issues when the entry unloads. A reload unloads the entry too, and an issue that is deleted and created again is no longer ignored. Set their [`config_entry_id`](/core/integrations/repairs/#issues-that-belong-to-a-config-entry) instead: they are hidden while the entry is disabled, and deleted when it is removed.
+
+## Remove a config entry
 
 如果用户删除配置项时需要执行某些操作，例如在服务端移除 webhook，请实现 `async_remove_entry`。该函数运行时，配置项已从 `hass.config_entries` 中移除。
 
@@ -131,7 +135,9 @@ async def async_remove_entry(
     """Handle removal of an entry."""
 ```
 
-## 更改配置项
+You do not need `async_remove_entry` to clean up the devices and entities of the entry, or the [repair issues that belong to it](/core/integrations/repairs/#issues-that-belong-to-a-config-entry). Home Assistant removes them for you.
+
+## Change a config entry
 
 切勿直接更改 `ConfigEntry` 的属性。应改为调用 `async_update_entry`。它会保存更改，并通知所有监听者：
 
@@ -167,7 +173,7 @@ class ExampleConfigFlow(ConfigFlow, domain=DOMAIN):
 ```python
 async def async_migrate_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Migrate an old config entry."""
     if entry.version == 1:
         data = {**entry.data}
@@ -182,8 +188,6 @@ async def async_migrate_entry(
             data={**entry.data, CONF_PORT: DEFAULT_PORT},
             minor_version=2,
         )
-
-    return True
 ```
 
 由较新版本的 Home Assistant 存储为 2.3 的配置项会原样通过这两项检查，并按原样完成设置。
@@ -192,16 +196,24 @@ async def async_migrate_entry(
 
 | 结果 | 发生的情况 |
 | --- | --- |
-| 返回 `True` | 迁移成功，设置继续 |
-| 返回 `False` | 设置停止，配置项进入 `MIGRATION_ERROR` |
-| 抛出 `ConfigEntryNotReady` | 设置停止，Home Assistant 稍后重试 |
-| 抛出 `ConfigEntryError` 或任何其他异常 | 设置停止，配置项进入 `MIGRATION_ERROR` |
+| Returns `None` | Migration succeeded, setup continues |
+| Raises `ConfigEntryNotReady` | Setup stops, Home Assistant retries later |
+| Raises `ConfigEntryError` or any other exception | Setup stops, the entry goes to `MIGRATION_ERROR` |
 
-比起返回 `False`，更推荐抛出 `ConfigEntryNotReady` 或 `ConfigEntryError`。两者都支持翻译，因此你可以告知用户出了什么问题。
+Give `ConfigEntryNotReady` and `ConfigEntryError` a translated message, so you can tell the user what went wrong.
 
 `MIGRATION_ERROR` 状态不会自行恢复。如果用户可以修复原因，请创建一个[修复](/core/integrations/repairs/)（repair），并在修复完成后从修复流程中调用 `hass.config_entries.async_retry_migration(entry_id)`。
 
-## 跟踪状态变化
+## Return values in custom integrations
+
+Custom integrations may still return a boolean from `async_setup_entry`, `async_unload_entry`, and `async_migrate_entry`, as they did before, and that is not deprecated. This is what it does:
+
+- `True` means success, like `None`.
+- `False` becomes a `ConfigEntryError` with a generic message, like "Failed to set up the config entry." The entry goes to `SETUP_ERROR`, `FAILED_UNLOAD`, or `MIGRATION_ERROR`, and the user sees that message.
+
+Switching to `None` and exceptions is still worth it: raise your own `ConfigEntryError` with a translated message, and users see what actually went wrong. The background is in the [architecture discussion](https://github.com/home-assistant/architecture/discussions/1463).
+
+## Follow state changes
 
 要在配置项更改状态时（例如从 `LOADED` 变为 `UNLOAD_IN_PROGRESS`）收到通知，请使用 `async_on_state_change` 注册回调。它返回一个用于移除监听器的函数，因此你可以一直监听直到配置项卸载：
 

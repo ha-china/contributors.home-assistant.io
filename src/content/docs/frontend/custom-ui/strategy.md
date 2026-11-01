@@ -1,6 +1,6 @@
 ---
-title: 自定义策略
-description: 用代码生成整个仪表盘、视图或分区，并在新建仪表盘对话框中提供你的仪表盘。
+title: Custom strategies
+description: Generate a whole dashboard, a view, or a section from code, and offer it in the dashboard editor.
 order: 6
 ---
 
@@ -14,9 +14,19 @@ order: 6
 
 它们协同工作。仪表盘策略通常会生成一个视图列表，每个视图都使用一个视图策略，这样每个视图只有在有人打开时才会被构建。
 
-## 仪表盘策略
+## How a strategy works
 
-策略是一个带有静态 `generate()` 方法的自定义元素（custom element）。它接收策略配置和 `hass`，并返回一个仪表盘配置：
+A strategy is a custom element with a static `generate()` method. It gets the strategy configuration and `hass`, and returns the configuration of what it generates: a dashboard, a view, or a section.
+
+The tag name decides the kind: `ll-strategy-dashboard-<name>`, `ll-strategy-view-<name>`, or `ll-strategy-section-<name>`. The `<name>` is what follows `custom:` in the configuration. Everything in the `strategy` section, including your own options, is passed to `generate()` as `config`.
+
+Load your strategy as a [resource](/frontend/custom-ui/resources/), like a custom card.
+
+The [built-in strategies](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies) are good examples. The [map dashboard strategy](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts) is a small one.
+
+## A dashboard strategy
+
+A dashboard strategy returns a whole dashboard configuration:
 
 ```js
 class MyDemoDashboardStrategy extends HTMLElement {
@@ -45,7 +55,7 @@ customElements.define(
 );
 ```
 
-将其作为[资源（resource）](/frontend/custom-ui/resources/)加载，并将其用作仪表盘的配置：
+Use it as the configuration of a dashboard:
 
 ```yaml
 strategy:
@@ -53,9 +63,17 @@ strategy:
   title: Generated dashboard
 ```
 
-标签名决定了策略的类型：`ll-strategy-dashboard-<name>`、`ll-strategy-view-<name>` 或 `ll-strategy-section-<name>`。`<name>` 就是配置中 `custom:` 后面的部分。`strategy` 部分中的所有内容（包括你自己的选项）都会作为 `config` 传递给 `generate()`。
+[Register it](#register-your-strategy) with `strategyType: "dashboard"`, and users can pick it under **Community dashboards** in the dialog to add a dashboard.
 
-[内置策略](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies)是很好的示例。[地图仪表盘策略](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts)是一个比较小的例子。
+### Suggest a title and icon
+
+A dashboard strategy can suggest the title and icon of the new dashboard with a static `getCreateSuggestions(hass)`. Users can still change both before they create it.
+
+```js
+static getCreateSuggestions(hass) {
+  return { title: "My demo dashboard", icon: "mdi:view-dashboard" };
+}
+```
 
 ## 视图策略
 
@@ -114,7 +132,80 @@ customElements.define("ll-strategy-view-my-area", MyAreaViewStrategy);
 
 两者都使用名称 `my-area`：一个作为仪表盘策略，一个作为视图策略。这是允许的，因为类型是标签名的一部分。
 
-## 何时重新生成
+## A section strategy
+
+A section strategy returns the configuration of one section, with its cards. Use it in a sections view, next to regular sections:
+
+```yaml
+views:
+  - type: sections
+    sections:
+      - strategy:
+          type: custom:my-domain
+          domain: light
+```
+
+The section strategy below shows a tile for every registered entity of one domain, like all the lights:
+
+```js
+class MyDomainSectionStrategy extends HTMLElement {
+  static async generate(config, hass) {
+    const cards = Object.keys(hass.entities)
+      .filter((entityId) => entityId.startsWith(`${config.domain}.`))
+      .map((entityId) => ({ type: "tile", entity: entityId }));
+
+    return { type: "grid", cards };
+  }
+}
+
+customElements.define(
+  "ll-strategy-section-my-domain",
+  MyDomainSectionStrategy
+);
+```
+
+[Register it](#register-your-strategy) with `strategyType: "section"`, and users can pick it under **Community sections** when they create a section and choose **Automatic section**. After they pick it, the section editor opens with your [settings](#settings).
+
+### Show a preview
+
+The dialog shows each section strategy as a tile with a live preview. To get one, add a static `getStubConfig(hass)` that returns a strategy configuration with good defaults. It can be async. The dialog passes it to `generate()` to render the preview, and the new section starts with it.
+
+```js
+static getStubConfig(hass) {
+  return { type: "custom:my-domain", domain: "light" };
+}
+```
+
+Include `custom:` in the `type`, like in the configuration. Without `getStubConfig()`, or when it throws, the tile shows no preview. Pick defaults that show something in most homes.
+
+## Register your strategy
+
+Register your strategy in `window.customStrategies`, and users can pick it in the dashboard editor without writing any YAML:
+
+```js
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+});
+```
+
+| Key | Required | Meaning |
+| --- | --- | --- |
+| `type` | Yes | The name of the strategy, without `custom:`. |
+| `strategyType` | Yes | `"dashboard"` or `"section"`. |
+| `name` | | The name in the dialog. |
+| `description` | | A short description below the name. |
+| `documentationURL` | | A link to your documentation. The frontend does not show it anywhere yet. |
+
+View strategies can't be picked in the editor yet, so there is no need to register them.
+
+The resource has to be loaded for the dialog to see it. After adding or updating it, reload the page and open the dialog again.
+
+## When to generate again
 
 策略在仪表盘加载时运行。默认情况下，当实体、设备、区域或楼层注册表发生变化时，它会再次运行，因此新设备无需重新加载页面即可显示。状态（state）变化不会触发它。
 
@@ -130,67 +221,30 @@ class MyDemoDashboardStrategy extends HTMLElement {
 }
 ```
 
-## 在新建仪表盘对话框中显示
-
-在 `window.customStrategies` 中注册你的仪表盘策略，它就会出现在添加仪表盘对话框的**社区仪表盘**部分：
-
-```js
-window.customStrategies = window.customStrategies || [];
-window.customStrategies.push({
-  type: "my-demo",
-  strategyType: "dashboard",
-  name: "My demo dashboard",
-  description: "A starter dashboard generated from JavaScript.",
-  documentationURL: "https://example.com/my-demo-dashboard",
-});
-```
-
-| 键 | 是否必需 | 含义 |
-| --- | --- | --- |
-| `type` | 是 | 策略的名称，不含 `custom:`。 |
-| `strategyType` | 是 | `"dashboard"`。 |
-| `name` | | 对话框中显示的名称。 |
-| `description` | | 名称下方的一段简短描述。 |
-| `documentationURL` | | 指向你的文档的链接。前端目前还不会在任何地方显示它。 |
-
-必须先加载资源，对话框才能看到它。添加或更新资源后，请重新加载页面并再次打开对话框。
-
-### 建议标题和图标
-
-仪表盘策略可以通过静态的 `getCreateSuggestions(hass)` 为新仪表盘建议标题和图标。用户在创建之前仍然可以修改这两者。
-
-```js
-static getCreateSuggestions(hass) {
-  return { title: "My demo dashboard", icon: "mdi:view-dashboard" };
-}
-```
-
-## 设置
+## Settings
 
 策略可以为其选项提供一个可视化编辑器。从静态的 `getConfigElement()` 返回一个编辑器元素。它的工作方式类似于[卡片编辑器](/frontend/custom-ui/card-editor/#a-visual-editor-of-your-own)：Home Assistant 会使用策略配置调用 `setConfig()` 并设置 `hass`，编辑器则通过 `config-changed` 事件发出新的配置。
 
-还有两个静态选项：
-
-- `configRequired = true`：该策略没有设置就无法工作。Home Assistant 会在创建仪表盘之前显示编辑器。
-- `noEditor = true`：该策略没有可编辑的设置。
+Give every section strategy an editor: it is the first thing users see after they pick your section in the dialog. Without one, they only get a YAML editor.
 
 ```js
-class MyDemoDashboardStrategy extends HTMLElement {
-  static configRequired = true;
-
+class MyDomainSectionStrategy extends HTMLElement {
   static getConfigElement() {
-    return document.createElement("my-demo-strategy-editor");
+    return document.createElement("my-domain-strategy-editor");
   }
 
   static async generate(config, hass) {
-    return {
-      views: [{ cards: [{ type: "iframe", url: config.url }] }],
-    };
+    // ...
   }
 }
 ```
 
-## 提示
+A dashboard strategy has two more static options:
+
+- `configRequired = true`: the strategy can't work without settings. Home Assistant shows the editor before it creates the dashboard.
+- `noEditor = true`: the strategy has no settings to edit.
+
+## Tips
 
 - 保持 `generate()` 的速度。它在每次加载时都会运行，仪表盘会等待它完成。
 - `hass` 中已经以简短形式包含了区域、设备和实体。对于它没有的数据，例如完整的实体注册表条目，请使用 `hass.callWS()`。在仪表盘策略中只调用一次，并通过配置将结果传递给你的视图策略。

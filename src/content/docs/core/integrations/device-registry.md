@@ -76,28 +76,34 @@ class ExampleEntity(CoordinatorEntity[ExampleCoordinator]):
 
 ## 自行注册设备
 
-没有实体的设备，例如集线器，可以直接注册。在 `async_setup_entry` 中执行此操作，使用与实体相同的 `DeviceInfo`：
+A device without entities, like a hub, is registered directly. Do this in `async_setup_entry`:
 
 ```python
 from homeassistant.helpers import device_registry as dr
 
 device_registry = dr.async_get(hass)
 
-hub = device_registry.async_get_or_create_device(
+hub = device_registry.async_get_or_create(
     config_entry_id=entry.entry_id,
-    device_info=dr.DeviceInfo(
-        connections={(dr.CONNECTION_NETWORK_MAC, dr.format_mac(info.mac))},
-        identifiers={(DOMAIN, info.bridge_id)},
-        manufacturer="Signify",
-        model=info.model_name,
-        model_id=info.model_id,
-        name=info.name,
-        sw_version=info.sw_version,
-    ),
+    connections={(dr.CONNECTION_NETWORK_MAC, dr.format_mac(info.mac))},
+    identifiers={(DOMAIN, info.bridge_id)},
+    manufacturer="Signify",
+    model=info.model_name,
+    model_id=info.model_id,
+    name=info.name,
+    sw_version=info.sw_version,
 )
 ```
 
-它返回 `DeviceEntry` 及其 `id`。除了 `config_entry_id` 和 `device_info` 之外，它还接受 `config_subentry_id` 和 `disabled_by` 来创建已禁用的设备。
+It returns the `DeviceEntry`, with its `id`.
+
+When you already hold a `DeviceInfo`, for example one built by a helper or shared with your entities, pass it as it is to `async_get_or_create_from_info`:
+
+```python
+hub = device_registry.async_get_or_create_from_info(
+    config_entry_id=entry.entry_id, device_info=hub_device_info
+)
+```
 
 ## 将设备链接到集线器
 
@@ -115,10 +121,7 @@ via_device_id = dr.async_get_device_id_by_identifier(
 
 ## 子设备
 
-> [!WARNING]
-> 子设备是新增功能，其设计仍在完善中。API 和行为可能会发生变化。
-
-子设备是用于一个物理产品的逻辑部分的轻量级设备，例如电源插排的一个插座，或墙壁开关的一个按键。父设备保存属于整个产品的内容，例如网络连接和固件更新。每个子设备保存其对应部分的实体，例如每个插座的开关和能耗传感器。用户可以把每个部分放在不同的区域。
+A child device is a lightweight device for a logical part of one physical product, like one outlet of a power strip or one gang of a wall switch. The parent device holds what belongs to the whole product, like the network connection and firmware updates. Each child holds the entities of its part, like a switch and an energy sensor per outlet. Users can put each part in a different area.
 
 不要将此与 `via_device_id` 混淆：那是关于独立产品之间的连接关系。子设备针对的是一个产品的各个部分。
 
@@ -147,17 +150,15 @@ self._attr_device_info = ChildDeviceInfo(
 或者直接注册：
 
 ```python
-outlet = device_registry.async_get_or_create_child_device(
+outlet = device_registry.async_get_or_create_child(
     config_entry_id=entry.entry_id,
-    device_info=ChildDeviceInfo(
-        identifiers={(DOMAIN, f"{strip_id}_outlet_1")},
-        name="Outlet 1",
-        parent_device_id=parent.id,
-    ),
+    parent_device_id=parent.id,
+    identifiers={(DOMAIN, f"{strip_id}_outlet_1")},
+    name="Outlet 1",
 )
 ```
 
-除了必需的 `identifiers` 和 `parent_device_id` 之外，`ChildDeviceInfo` 还接受 `name`、`suggested_area`、`translation_key` 和 `translation_placeholders`。故意没有 `via_device_id`、`connections`、`manufacturer`、`model` 或固件字段：子设备没有这些。除了子设备信息之外，`async_get_or_create_child_device` 还接受 `config_entry_id`、`config_subentry_id` 和 `disabled_by`。
+Besides the required `config_entry_id`, `parent_device_id`, and `identifiers`, `async_get_or_create_child` takes `config_subentry_id`, `name`, `suggested_area`, `disabled_by`, `translation_key`, and `translation_placeholders`. There is deliberately no `via_device_id`, `connections`, `manufacturer`, `model`, or firmware argument: a child device doesn't have those. When you already hold a `ChildDeviceInfo`, pass it as it is to `async_get_or_create_child_from_info`.
 
 如果父设备属于某个子条目，请同时传递其 `config_subentry_id`。它不会被继承。注册表永远不会为你创建父设备：当父设备不存在、本身是子设备，或属于另一个配置条目或子条目时，它会抛出 `DeviceInfoError`。
 
@@ -165,7 +166,9 @@ outlet = device_registry.async_get_or_create_child_device(
 
 如果子设备的标识符与同一配置条目下的某个现有设备匹配，该设备就会变成子设备，并保留其 ID。使用该设备的自动化将继续正常工作。这使得已经把产品拆分为独立设备的集成可以轻松迁移。
 
-反向操作不直接支持。`async_update_child_device` 无法更改父设备，而使用现有子设备的标识符调用 `async_get_or_create_device` 会抛出错误，而不是将其转换为普通设备。要将子设备恢复为普通设备，请使用 `async_remove_device` 将其移除，然后使用相同的标识符通过 `async_get_or_create_device` 重新注册。顺序很重要：只有移除子设备后，标识符才会被释放。
+This only works if the config entry has not registered the device as a normal device since the entry was set up: the registry raises a `DeviceInfoError` then. It forgets those registrations when the config entry unloads. So register the part only as a child device, and don't leave a `DeviceInfo` for it on one of its entities.
+
+The other way around is not supported directly. `async_update_child_device` can't change the parent, and `async_get_or_create` with the identifiers of an existing child device raises an error instead of turning it into a normal device. To turn a child device back into a normal device, remove it with `async_remove_device`, then register it again with `async_get_or_create`, with the same identifiers. The order matters: the identifiers are only free once the child device is removed. Removing a device also removes the entity registry entries of its entities, so this fits a child device without entities. Entities only come back when your integration adds them again, with their settings, like the entity ID and name, restored.
 
 ### 随父设备联动的行为
 

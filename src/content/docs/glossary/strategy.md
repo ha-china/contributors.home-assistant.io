@@ -1,6 +1,6 @@
 ---
-title: "策略（Strategy）"
-description: "根据住宅本身及其区域、设备和实体来构建仪表盘或视图的代码，而不是使用固定配置。"
+title: "Strategy"
+description: "Code that builds a dashboard, a view, or a section from the home itself, its areas, devices, and entities, instead of a fixed configuration."
 sidebarGroup: "Frontend"
 term:
   aliases:

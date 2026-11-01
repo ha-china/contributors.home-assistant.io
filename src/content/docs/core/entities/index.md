@@ -79,9 +79,9 @@ sidebarGroups:
 
 ### 遥控和信号
 
-- [遥控器（remote）](/core/entities/remote/)：向其他设备发送命令。
-- [红外（infrared）](/core/entities/infrared/)：共享的红外发射器和接收器。
-- [射频（radio frequency）](/core/entities/radio-frequency/)：共享的射频发射器。
+- [Remote](/core/entities/remote/): send commands to other devices.
+- [Infrared](/core/entities/infrared/): shared infrared transmitters and receivers.
+- [Radio frequency](/core/entities/radio-frequency/): shared RF transmitters and receivers.
 
 ### 语音和 AI
 

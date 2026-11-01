@@ -7,7 +7,7 @@ order: 3
 
 区域注册表（area registry）记录[区域](/glossary/area/)（area）：即家中的物理位置，例如厨房或车库。用户将设备（device）和实体（entity）放入区域，并将区域归入[楼层](/glossary/floor/)（floor）。
 
-区域属于用户。你的集成不会创建或更改它们。集成可以做的，是为新设备建议一个区域，方法是在你提供给实体的 `DeviceInfo` 中或传递给[设备注册表](/core/integrations/device-registry/)时使用 `suggested_area`。当设备或服务知道它位于哪个房间时（例如在其自己的应用中设置了房间名称），请使用此功能。
+Areas belong to the user. Your integration does not create or change them. What it can do is suggest an area for a new device, with `suggested_area` in the `DeviceInfo` or in `async_get_or_create` of the [device registry](/core/integrations/device-registry/). Use it when the device or service knows which room it is in, like a room name set in its own app.
 
 ## 区域属性
 

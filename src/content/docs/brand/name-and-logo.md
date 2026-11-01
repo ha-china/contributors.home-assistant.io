@@ -44,7 +44,7 @@ home-assistant.io 的[服务条款](https://www.home-assistant.io/tos/)将 Home 
 - **房子**代表家，简化为其最具标志性的形状：一座带斜屋顶的正交房子，没有山墙，也没有烟囱。
 - **天线**是旧标志中最易识别的部分。有人把它看作一棵树、一组节点或一块电路板。它代表着智能、互联且常青生长的技术。
 
-从[素材仓库](https://github.com/home-assistant/assets/tree/master/logo)下载标志的所有版本。
+Download every version of the logo from the [assets repository](https://github.com/OpenHomeFoundation/brand-assets/tree/main/home-assistant/logo).
 
 ## 布局
 

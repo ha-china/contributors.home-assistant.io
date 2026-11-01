@@ -220,7 +220,7 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up Example from a config entry."""
     implementation = await async_get_config_entry_implementation(
         hass, entry
@@ -235,8 +235,6 @@ async def async_setup_entry(
     entry.runtime_data = coordinator
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
-    return True
 ```
 
 在每次请求之前，库会调用 `await session.async_ensure_token_valid()`，它会在需要时刷新令牌，然后从 `session.token["access_token"]` 读取令牌。请将令牌处理保留在库、安装过程或协调器（coordinator）中，绝不要放在实体（entity）代码中。

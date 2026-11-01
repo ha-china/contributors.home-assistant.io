@@ -54,12 +54,12 @@ sidebarGroup: Sensors and status
 | `ip_address` | `str \| None` | `None` | 设备的 IP 地址。 |
 | `hostname` | `str \| None` | `None` | 设备的主机名。 |
 
-`ScannerEntity` 的行为与大多数实体不同，因为它以 MAC 地址为键：
+A `ScannerEntity` is keyed on the MAC address, and has a few defaults of its own:
 
-- 它的唯一 ID 就是 MAC 地址，你无需自行设置。
-- 你无需提供设备信息：`device_info` 是 final 属性，且始终为 `None`。相反，一旦另一个集成（integration）在[设备注册表（device registry）](/core/entities/registry/)中注册了具有相同 MAC 地址的设备，Home Assistant 就会为你的配置条目（config entry）创建一个设备，以该 MAC 地址作为连接信息，并以主机名或 MAC 地址命名，然后将实体链接到该设备。
-- 当它的 MAC 地址属于某个已知设备，或者它没有 MAC 地址时，它默认处于启用状态。网络上其他所有客户端的跟踪器初始为禁用，这样路由器就不会用大量实体淹没用户。当具有该 MAC 地址的设备之后出现在设备注册表中时，Home Assistant 会启用该跟踪器。这只有在集成（而非用户）禁用了该跟踪器，且用户没有为该配置条目关闭新实体时才会发生。
-- 当你设置了 MAC 地址和 IP 地址时，DHCP 发现会使用它们（如果你设置了主机名，则还包括主机名）来为该设备发现集成。这发生在 Home Assistant 在设备处于连接状态时设置该实体的过程中，即使跟踪器处于禁用状态也是如此。DHCP 发现还会查看源类型为 `router` 且状态为 `home` 的跟踪器：在 DHCP 发现开始时查看一次，以及在此类跟踪器获得其第一个状态时查看一次。之后才从 `not_home` 变为 `home` 的跟踪器不会触发此操作。
+- Its unique ID is the MAC address. You do not set one yourself.
+- Until Home Assistant Core 2028.11, the base class sets device info for a tracker that has a MAC address but no device info: a device with the MAC address as connection, named after the hostname, or after the MAC address when the device is new. The MAC address never replaces the name of an existing device. Do not rely on it: starting with 2028.11, a tracker without device info is not included in a device, like any other entity. To keep a tracker out of a device until then, set `_attr_device_info = DeviceInfo()`. An empty device info means no device, and the default only applies when the device info is `None`.
+- It is disabled by default. A router sees many clients, and most of them are not worth tracking: the devices users most want to track, like phones, are usually tracked with the Home Assistant Companion app instead. Override `_attr_entity_registry_enabled_default` when the tracker is not just another client seen on a network. For example, when tracking is the purpose of the device, like for the Zigbee presence tags that ZHA models as device trackers, or when the user set up the tracked device on its own.
+- When you set the MAC address and IP address, DHCP discovery uses them, with the hostname when you set one, to discover integrations for the device. That happens when Home Assistant sets up the entity while the device is connected, even when the tracker is disabled. DHCP discovery also looks at trackers with the `router` source type that are `home`: once when DHCP discovery starts, and when such a tracker gets its first state. A tracker that changes from `not_home` to `home` later does not trigger this.
 
 ## 支持的功能
 
@@ -113,4 +113,45 @@ class ExampleCarTracker(TrackerEntity):
         self._attr_longitude = self._car.longitude
         self._attr_location_accuracy = self._car.accuracy
         self.async_write_ha_state()
+```
+
+A tracker for a client of a router, included in a device for the client. The client name goes on the device, and the device is renamed when the name changes on the router. That rename only happens while the tracker is enabled: Home Assistant does not add a disabled entity, so it gets no coordinator updates. The device info of a disabled tracker is still used each time the integration is set up, so its device gets the current name then.
+
+```python
+from homeassistant.components.device_tracker import ScannerEntity
+from homeassistant.core import callback
+from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers.device_registry import CONNECTION_NETWORK_MAC, DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+
+class ExampleClientTracker(CoordinatorEntity[ExampleCoordinator], ScannerEntity):
+    """A client connected to an example router."""
+
+    _attr_has_entity_name = True
+    _attr_name = None
+
+    def __init__(self, coordinator: ExampleCoordinator, client: ExampleClient) -> None:
+        """Initialize the tracker."""
+        super().__init__(coordinator)
+        self._attr_mac_address = client.mac
+        self._attr_hostname = client.hostname
+        self._attr_device_info = DeviceInfo(
+            connections={(CONNECTION_NETWORK_MAC, client.mac)},
+            name=client.name,
+            via_device_id=coordinator.router_device_id,
+        )
+
+    @property
+    def is_connected(self) -> bool:
+        """Return if the client is connected to the router."""
+        return self.mac_address in self.coordinator.data.connected
+
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Rename the device when the client is renamed on the router."""
+        name = self.coordinator.data.clients[self.mac_address].name
+        if name and (device := self.device_entry) and device.name != name:
+            dr.async_get(self.hass).async_update_device(device.id, name=name)
+        super()._handle_coordinator_update()
 ```

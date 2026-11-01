@@ -27,7 +27,7 @@ Home Assistant 的设计工作在公开环境中进行。提案、反馈、研�
 
 ### Figma
 
-Figma 上的 [Home Assistant Design Kit](https://www.figma.com/design/2WGI8IDGyxINjSV6NRvPur/Home-Assistant-Design-Kit) 包含界面的组件和样式。基于它制作的模型（mockup）会与实际可构建的效果保持一致。
+The [Home Assistant Design Kit](https://www.figma.com/community/file/1697311104929761103/home-assistant-design-kit) on Figma Community is the official Figma library for the Home Assistant interface, maintained by the Open Home Foundation. Its variables, text styles, and components are generated from the [frontend](https://github.com/home-assistant/frontend) source, so what you design matches what ships. It includes light and dark modes, the [components](/design/components/) documented in this area, and usage guidelines with links to the docs and source for each one. Mockups that start from it stay close to what can be built.
 
 ### 前端仓库
 

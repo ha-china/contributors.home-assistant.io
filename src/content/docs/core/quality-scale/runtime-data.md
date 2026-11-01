@@ -22,13 +22,12 @@ order: 17
 type MyConfigEntry = ConfigEntry[MyClient]
 
 
-async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
     """Set up My integration from a config entry."""
     client = MyClient(entry.data[CONF_HOST])
     entry.runtime_data = client
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-    return True
 ```
 
 平台在读取它时类型完整：

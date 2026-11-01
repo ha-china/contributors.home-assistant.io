@@ -1,0 +1,163 @@
+// Writes the redirects of the old sites from the maps in redirects/.
+//
+// - public/_redirects: the Netlify redirects, from redirects/*.tsv.
+// - public/redirect-fragments.json: old heading anchors and the heading they
+//   became, from redirects/fragments.tsv. A small script on every page uses
+//   it when a link arrives with an anchor that no longer exists (see
+//   src/lib/redirect-fragments.ts).
+//
+// Both files are generated, and not committed: `pnpm build` and `pnpm dev`
+// run this first. Edit the maps in redirects/, never the output.
+//
+// A map is a tab-separated file with two columns: the old path and the new
+// one. One file per area keeps them reviewable. When two files map the same
+// old path, overrides.tsv wins, then the first file in alphabetical order.
+// Lines starting with # are comments. Old paths of developers.home-assistant.io
+// start with /docs/, old paths of the data site with
+// data.home-assistant.io/.
+//
+// The old design site used hash routes, which a server never sees. Those
+// are mapped in the browser, by src/components/docs/DesignHashRedirect.astro
+// with src/data/design-redirects.json.
+//
+// Usage:
+//   pnpm redirects
+
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
+const MAPS = new URL("../redirects/", import.meta.url);
+const REDIRECTS_FILE = fileURLToPath(new URL("../public/_redirects", import.meta.url));
+const FRAGMENTS_FILE = fileURLToPath(new URL("../public/redirect-fragments.json", import.meta.url));
+const SITE = "https://contributors.home-assistant.io";
+
+// The rows of a tab-separated file in redirects/, without comments.
+export function readMap(name: string) {
+  return readFileSync(new URL(name, MAPS), "utf8")
+    .split("\n")
+    .filter((line) => line.trim() && !line.startsWith("#"))
+    .map((line, index) => {
+      const columns = line.split("\t");
+      if (columns.some((column) => !column.trim())) {
+        throw new Error(`redirects/${name}, row ${index + 1}: empty column in "${line}"`);
+      }
+      return columns;
+    });
+}
+
+// Every old path and where it goes now, after overrides.
+export function readRedirects() {
+  const redirects = new Map(readMap("overrides.tsv").map(([from, to]): [string, string] => [from, to]));
+  const areaMaps = readdirSync(MAPS)
+    .filter((name) => name.endsWith(".tsv") && !["overrides.tsv", "fragments.tsv"].includes(name))
+    .sort();
+
+  for (const name of areaMaps) {
+    for (const [from, to] of readMap(name)) {
+      if (!redirects.has(from)) {
+        redirects.set(from, to);
+      }
+    }
+  }
+
+  for (const [from, to] of redirects) {
+    if (!to.startsWith("/")) {
+      throw new Error(`The redirect of ${from} goes to "${to}", which is not a path on this site.`);
+    }
+  }
+
+  return redirects;
+}
+
+// { "/new/page/": { "old-anchor": "new-anchor" } }. A new anchor of "-"
+// means the old heading has no counterpart: the link lands at the top.
+export function readFragments() {
+  const fragments: Record<string, Record<string, string>> = {};
+  if (!existsSync(new URL("fragments.tsv", MAPS))) {
+    return fragments;
+  }
+
+  for (const [page, oldId, newId] of readMap("fragments.tsv")) {
+    if (newId === "-") {
+      continue;
+    }
+    fragments[page] ??= {};
+    fragments[page][oldId] = newId;
+  }
+
+  return fragments;
+}
+
+// The old developers site started on Docusaurus 1, which served a doc as
+// /docs/en/<id>.html, and the docs of the next release as
+// /docs/en/next/<id>.html. Its ids had no folders, so only an old path of a
+// single id gets these variants. Links like that still live in issues, pull
+// requests, and code comments.
+function docusaurusV1Paths(from: string) {
+  const id = /^\/docs\/([^/.]+)$/.exec(from)?.[1];
+  if (!id) {
+    return [];
+  }
+  return [`/docs/en/${id}.html`, `/docs/en/next/${id}.html`];
+}
+
+function writeRedirects(redirects: Map<string, string>) {
+  const developers: string[] = [];
+  const data: string[] = [];
+
+  const withV1Paths = new Map(redirects);
+  for (const [from, to] of redirects) {
+    for (const v1Path of docusaurusV1Paths(from)) {
+      if (!withV1Paths.has(v1Path)) {
+        withV1Paths.set(v1Path, to);
+      }
+    }
+  }
+
+  for (const [from, to] of [...withV1Paths].sort()) {
+    if (from.startsWith("data.home-assistant.io")) {
+      const path = from.slice("data.home-assistant.io".length) || "/";
+      data.push(`https://data.home-assistant.io${path} ${SITE}${to} 301!`);
+    } else {
+      // Same paths on both hosts: the old domain, and links in our own blog
+      // posts that still point at /docs/.
+      developers.push(`${from} ${SITE}${to} 301!`);
+    }
+  }
+
+  writeFileSync(
+    REDIRECTS_FILE,
+    `# Old URLs of developers.home-assistant.io, data.home-assistant.io, and
+# design.home-assistant.io.
+# developers.home-assistant.io is served by this site as a domain alias.
+# Generated by scripts/generate-redirects.ts from redirects/, ${withV1Paths.size} entries.
+# Do not edit by hand: edit the maps in redirects/.
+
+# developers.home-assistant.io
+${developers.join("\n")}
+https://developers.home-assistant.io/blog/* ${SITE}/blog/:splat 301!
+https://developers.home-assistant.io/* ${SITE}/ 301!
+
+# data.home-assistant.io
+${data.join("\n")}
+https://data.home-assistant.io/* ${SITE}/data/ 301!
+
+# design.home-assistant.io: the old gallery used hash routes (#components/ha-button).
+# Browsers keep the hash across this redirect, and a script on /design/ maps
+# it to the new page (src/data/design-redirects.json).
+https://design.home-assistant.io/* ${SITE}/design/ 301!
+`,
+  );
+}
+
+// Run as a script, not imported by another one.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const redirects = readRedirects();
+  writeRedirects(redirects);
+
+  const fragments = readFragments();
+  writeFileSync(FRAGMENTS_FILE, `${JSON.stringify(fragments)}\n`);
+
+  const anchors = Object.values(fragments).reduce((sum, page) => sum + Object.keys(page).length, 0);
+  console.log(`Wrote ${redirects.size} redirects, and ${anchors} old anchors on ${Object.keys(fragments).length} pages.`);
+}

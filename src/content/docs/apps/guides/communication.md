@@ -47,7 +47,10 @@ WebSocket API 位于 `ws://supervisor/core/websocket`。在认证消息中，将
 
 代理不会转发 `supervisor/` 和 `hassio/` 类型的命令，并会阻止 REST API 的 `hassio` 端点。这些仅供 Home Assistant 前端使用。
 
-你也可以在端口 8123 上直接连接 `homeassistant` 来访问 Home Assistant，但那样你需要用户的访问令牌，并且必须了解用户是如何配置 Home Assistant 的。代理几乎总是更好的选择。
+> [!WARNING]
+> Through the proxy, your app acts as an administrator of Home Assistant. Everything else an administrator can do, your app can do too, including managing users and their credentials. Only add `homeassistant_api: true` when your app needs Home Assistant, and treat your `SUPERVISOR_TOKEN` as an administrator credential.
+
+You can also connect to Home Assistant directly at `homeassistant` on port 8123, but then you need a user's access token and you have to know how the user configured Home Assistant. The proxy is almost always the better choice.
 
 ## Supervisor API
 

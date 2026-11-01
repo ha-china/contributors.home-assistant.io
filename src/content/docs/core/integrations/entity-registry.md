@@ -52,7 +52,7 @@ from homeassistant.helpers import entity_registry as er
 
 async def async_migrate_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Migrate an old config entry."""
     if entry.version == 1:
 
@@ -75,8 +75,6 @@ async def async_migrate_entry(
         hass.config_entries.async_update_entry(
             entry, version=2, minor_version=1
         )
-
-    return True
 ```
 
 这是一次主版本升级，因此请在你的配置流程（config flow）中设置 `VERSION = 2`。不了解新唯一 ID 的旧代码在降级后将找不到其实体，并会重新创建它们。此示例基于配置条目的唯一 ID，因此它假设每个条目都有一个唯一 ID。

@@ -5,7 +5,7 @@ sidebarLabel: Continuous integration
 sidebarGroup: Ship
 order: 2
 source: https://github.com/home-assistant/android/tree/main/.github/workflows
-lastVerified: 2026-10-14
+lastVerified: 2026-10-27
 ---
 
 Android 应用在所有环节都使用 GitHub Actions：检查拉取请求、构建发布版本，并通过 [Fastlane](https://fastlane.tools/) 将其发布到应用商店。共享的步骤以本地 action 的形式存放在 `.github/actions` 中。
@@ -16,28 +16,30 @@ Android 应用在所有环节都使用 GitHub Actions：检查拉取请求、构
 
 | 工作流 | 运行时机 | 作用 |
 | --- | --- | --- |
-| `pr.yml` | 在每个拉取请求上 | Lint、构建、测试，并附加 APK |
-| `pr-emulator-wtf.yml` | 在 `pr.yml` 完成后 | 在 Emulator.wtf 上运行 `:app` 的插桩测试 |
-| `onPush.yml` | 在每次推送到 `main` 时 | 构建发布版本，并将其发布到 Play Store 的内部测试轨道 |
-| `weekly.yml` | 每周日 04:00 UTC | 标记一个新版本，并带 `beta` 标志运行 `onPush.yml`，这会创建一个 GitHub 预发布版本，并将构建提升到 beta 轨道 |
-| `e2e.yml` | 每天 05:00 UTC | 针对真实的 Home Assistant 运行[端到端测试](/companion/android/e2e-testing/)。当测试失败时，它会启动 `e2e-triage`，这是一个 agentic 工作流，会调查失败原因并在 issue 中报告 |
-| `monthly.yml` | 每月第一天 | 创建当月的第一个版本标签 `YYYY.MM.0` |
-| `release.yml` | 当预发布版本变为正式发布版本时，或手动触发 | 在 Play Store 上将 beta 提升到生产环境 |
-| `updateScreenshot.yml` | 由维护者手动触发 | 重新生成[截图](/companion/android/screenshot-testing/)参考 |
-| `renovate-lockfiles.yml` | 在每次推送到 `renovate/` 分支时 | 更新 Renovate 拉取请求的[锁文件](/companion/android/dependencies/)并推送 |
+| `pr.yml` | On every pull request | Lint, build, test, and attach APKs |
+| `pr-emulator-wtf.yml` | After `pr.yml` finishes | Run the `:app` instrumentation tests on Emulator.wtf |
+| `zizmor.yml` | On every pull request, and Mondays at 05:30 UTC | Scan the workflows and local actions themselves with [zizmor](https://docs.zizmor.sh/) and upload the findings to Code Scanning |
+| `onPush.yml` | On every push to `main` | Build release versions and publish them to the internal track of the Play Store |
+| `weekly.yml` | Sundays at 04:00 UTC | Tag a new version and run `onPush.yml` with the `beta` flag, which creates a GitHub pre-release and promotes the build to the beta track |
+| `e2e.yml` | Daily at 05:00 UTC | Run the [end-to-end test](/companion/android/e2e-testing/) against a real Home Assistant. When it fails, it starts `e2e-triage`, an agentic workflow that looks into the failure and reports it in an issue |
+| `monthly.yml` | The first day of each month | Create the first version tag of the month, `YYYY.MM.0` |
+| `release.yml` | When a pre-release becomes a release, or manually | Promote the beta to production on the Play Store |
+| `updateScreenshot.yml` | Manually, by a maintainer | Regenerate [screenshot](/companion/android/screenshot-testing/) references |
+| `renovate-lockfiles.yml` | On every push to a `renovate/` branch | Update the [lockfiles](/companion/android/dependencies/) of Renovate pull requests and push them |
 
 ## 在你的拉取请求上
 
 `pr.yml` 会检查你的更改：
 
-- KTLint、Detekt、Android Lint 和 Yamllint。参见[代码风格与 linting](/companion/android/code-style/)。
-- 锁文件与版本目录是否一致。
-- 所有依赖的许可证是否与项目的 Apache 2.0 许可证兼容，使用 `.github/scripts/check_licenses.py` 检查。
-- 单元测试和截图测试。
-- 每个应用都能构建，包括 debug 和 release。
-- `common/schemas` 中已有的数据库 schema 没有被更改，并且构建不会产生你忘记提交的 schema 更改。要修改数据库，请改为增加其版本号。
-- 如果你的拉取请求更改了 `.github/actions/download-translations` 中的 Lokalise 配置，则检查翻译是否仍能下载。
-- 它会将 APK 作为 artifact 上传，这样任何人都可以[测试你的更改](/companion/android/get-started/#test-a-pull-request-build)。
+- KTLint, Detekt, Android Lint, and Yamllint. See [code style and linting](/companion/android/code-style/).
+- That the lockfiles match the version catalog.
+- That the licenses of all dependencies are compatible with the Apache 2.0 license of the project, with `.github/scripts/check_licenses.py`.
+- The unit tests and the screenshot tests.
+- That every app builds, in debug and release.
+- That no existing database schema in `common/schemas` was changed, and that the build doesn't produce schema changes you forgot to commit. To change the database, increase its version instead.
+- If your pull request changes the Lokalise setup in `.github/actions/download-translations`, that the translations still download.
+- `zizmor.yml` scans every workflow and local action with [zizmor](https://docs.zizmor.sh/) in pedantic mode, whether or not your pull request touches them. The generated `e2e-triage.lock.yml` is skipped, since it can't be edited by hand. Any finding fails the check, and the findings also appear as Code Scanning annotations on your pull request. See [changing a workflow](#changing-a-workflow).
+- It uploads the APKs as an artifact, so anyone can [test your change](/companion/android/get-started/#test-a-pull-request-build).
 
 CI 上的 debug 构建使用 `.github/mock-google-services.json` 中的模拟 Firebase 文件。
 
@@ -65,9 +67,12 @@ CI 上的 debug 构建使用 `.github/mock-google-services.json` 中的模拟 Fi
 
 ## 修改工作流
 
-- 将多个工作流都需要的步骤放在 `.github/actions` 中的本地 action 里，而不是复制它们。
-- 谨慎选择触发器。每次运行都会消耗资源，因此工作流应该只在其结果有意义时才运行。
-- 永远不要把 secrets 放在工作流文件中。在运行时从仓库的 secrets 中传入，就像现有工作流所做的那样。
+- Put steps that more than one workflow needs in a local action in `.github/actions`, instead of copying them.
+- Choose triggers carefully. Every run costs resources, so a workflow should only run when its result matters.
+- Never put secrets in a workflow file. Pass them in from the repository secrets at run time, like the existing workflows do.
+- Keep [zizmor](https://docs.zizmor.sh/) happy: name every job, give it only the permissions it needs with a comment saying why, set a `concurrency` group, and pin actions to a commit SHA.
+- Suppress a false positive on the flagged line with `# zizmor: ignore[rule-name]` and a reason, like `pr-emulator-wtf.yml` does. Don't ignore whole files.
+- The Monday run also checks for new advisories and stale pins, and opens or comments on a `zizmor-failure` issue when it fails.
 
 ## F-Droid
 

@@ -70,12 +70,10 @@ class ExampleOptionsFlow(OptionsFlowWithReload):
 ```python
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up Example from a config entry."""
     ...
     entry.async_on_unload(entry.add_update_listener(async_update_options))
-
-    return True
 
 
 async def async_update_options(

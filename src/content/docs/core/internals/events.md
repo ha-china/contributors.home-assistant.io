@@ -63,7 +63,7 @@ from homeassistant.core import Event, HomeAssistant, callback
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry
-) -> bool:
+) -> None:
     """Set up my integration."""
 
     @callback
@@ -74,7 +74,6 @@ async def async_setup_entry(
     entry.async_on_unload(
         hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, handle_stop)
     )
-    return True
 ```
 
 `entry.async_on_unload` 会在配置条目（config entry）被卸载时调用移除函数。在实体中，以同样的方式使用 `self.async_on_remove`。

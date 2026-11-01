@@ -45,7 +45,7 @@ type ExampleConfigEntry = ConfigEntry[PassiveBluetoothProcessorCoordinator]
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up an Example Bluetooth device."""
     assert entry.unique_id is not None
     parser = ExampleParser()
@@ -63,8 +63,6 @@ async def async_setup_entry(
 
     # Start after the platforms subscribed
     entry.async_on_unload(coordinator.async_start())
-
-    return True
 ```
 
 `connectable` 在此处默认为 `False`，因此你可以从所有适配器接收广播数据。

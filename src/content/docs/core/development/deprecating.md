@@ -22,7 +22,7 @@ order: 1
 
 ## 面向用户的弃用
 
-每一个需要用户采取行动的弃用都会生成一个[修复问题](/glossary/repair/)。当一个集成可以被多次设置时，请在 `issue_id` 中包含配置条目（config entry），否则不同条目的问题会相互覆盖。弃用期结束后，打开一个后续的拉取请求（pull request），移除旧行为和该问题。
+Every deprecation that needs the user to do something gets a [repair issue](/glossary/repair/). When an integration can be set up more than once, include the config entry in the `issue_id`, or the issues of different entries overwrite each other. Set the [`config_entry_id`](/core/integrations/repairs/#issues-that-belong-to-a-config-entry) of the issue too, so it is deleted together with the entry. After the deprecation period, open a follow up pull request that removes the old behavior and the issue.
 
 你在自己域名下创建的每个问题都需要在集成的 `strings.json` 中有一个 `issues.<translation_key>` 条目。在 `HOMEASSISTANT_DOMAIN` 下创建的问题（如 `deprecated_yaml`）使用 core 中已有的文本。
 
@@ -201,7 +201,7 @@ async def async_setup_entry(
 当一个集成永久停止工作时，例如因为供应商关闭了其 API，就将其移除。将它精简为一个抛出 `ERROR` 问题的存根（stub），并保留一个最小的 `config_flow.py`，这样现有的条目仍能加载，用户也能看到发生了什么。既定的翻译键是 `integration_removed`：
 
 ```python
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Set up the integration from a config entry."""
     ir.async_create_issue(
         hass,
@@ -214,7 +214,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             "entries": f"/config/integrations/integration/{DOMAIN}",
         },
     )
-    return True
 ```
 
 `entries` 占位符链接到用户的配置条目。在文本中解释集成为何被移除，以及他们可以移除这些条目。在该域的最后一个配置条目被卸载后，在 `async_unload_entry` 中再次删除该问题。

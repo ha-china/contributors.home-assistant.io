@@ -128,11 +128,9 @@ from homeassistant.const import Platform
 PLATFORMS = [Platform.LIGHT, Platform.SENSOR]
 
 
-async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
     """Set up the integration from a config entry."""
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
-    return True
 ```
 
 完整的设置与卸载流程请参阅[配置条目](/core/integrations/config-entries/#set-up-the-platforms)；每种实体类型支持的功能请参阅[实体与平台](/core/entities/)。

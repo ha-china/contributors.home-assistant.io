@@ -26,39 +26,39 @@ sidebarGroup: 传感器与状态
 
 ## 设备类
 
-[设备类](/glossary/device-class/)决定了前端如何显示开和关，以及实体获得的图标。带有设备类且没有名称的二元传感器会根据其设备类命名。参见[命名](/core/entities/naming/)。
+The [device class](/glossary/device-class/) changes how the frontend shows on and off, and which icon the entity gets. A binary sensor with a device class and no name is named after its device class. See [naming](/core/entities/naming/). The value column is what you put in YAML, for example as `device_class` of an [MQTT binary sensor](https://www.home-assistant.io/integrations/binary_sensor.mqtt/) or a [template binary sensor](https://www.home-assistant.io/integrations/template/).
 
-| 设备类 | 开表示 | 关表示 |
-| --- | --- | --- |
-| `BATTERY` | 电量低 | 正常 |
-| `BATTERY_CHARGING` | 正在充电 | 未在充电 |
-| `CO` | 检测到一氧化碳 | 无异常 |
-| `COLD` | 寒冷 | 正常 |
-| `CONNECTIVITY` | 已连接 | 已断开 |
-| `DOOR` | 打开 | 关闭 |
-| `GARAGE_DOOR` | 打开 | 关闭 |
-| `GAS` | 检测到气体 | 无异常 |
-| `GLASS_BREAK` | 检测到玻璃破碎 | 无异常 |
-| `HEAT` | 炎热 | 正常 |
-| `LIGHT` | 检测到光 | 无光 |
-| `LOCK` | 已解锁 | 已上锁 |
-| `MOISTURE` | 潮湿 | 干燥 |
-| `MOTION` | 检测到移动 | 无异常 |
-| `MOVING` | 正在移动 | 已停止 |
-| `OCCUPANCY` | 有人 | 无人 |
-| `OPENING` | 打开 | 关闭 |
-| `PLUG` | 已插入 | 已拔出 |
-| `POWER` | 检测到电力 | 无电力 |
-| `PRESENCE` | 在家 | 离家 |
-| `PROBLEM` | 检测到问题 | 正常 |
-| `RUNNING` | 正在运行 | 未在运行 |
-| `SAFETY` | 不安全 | 安全 |
-| `SMOKE` | 检测到烟雾 | 无异常 |
-| `SOUND` | 检测到声音 | 无异常 |
-| `TAMPER` | 检测到篡改 | 无异常 |
-| `UPDATE` | 有可用更新 | 已是最新 |
-| `VIBRATION` | 检测到振动 | 无振动 |
-| `WINDOW` | 打开 | 关闭 |
+| Device class | Value | On means | Off means |
+| --- | --- | --- | --- |
+| `BATTERY` | `battery` | Low | Normal |
+| `BATTERY_CHARGING` | `battery_charging` | Charging | Not charging |
+| `CO` | `carbon_monoxide` | Carbon monoxide detected | Clear |
+| `COLD` | `cold` | Cold | Normal |
+| `CONNECTIVITY` | `connectivity` | Connected | Disconnected |
+| `DOOR` | `door` | Open | Closed |
+| `GARAGE_DOOR` | `garage_door` | Open | Closed |
+| `GAS` | `gas` | Gas detected | Clear |
+| `GLASS_BREAK` | `glass_break` | Glass break detected | Clear |
+| `HEAT` | `heat` | Hot | Normal |
+| `LIGHT` | `light` | Light detected | No light |
+| `LOCK` | `lock` | Unlocked | Locked |
+| `MOISTURE` | `moisture` | Wet | Dry |
+| `MOTION` | `motion` | Motion detected | Clear |
+| `MOVING` | `moving` | Moving | Stopped |
+| `OCCUPANCY` | `occupancy` | Occupied | Clear |
+| `OPENING` | `opening` | Open | Closed |
+| `PLUG` | `plug` | Plugged in | Unplugged |
+| `POWER` | `power` | Power detected | No power |
+| `PRESENCE` | `presence` | Home | Away |
+| `PROBLEM` | `problem` | Problem detected | OK |
+| `RUNNING` | `running` | Running | Not running |
+| `SAFETY` | `safety` | Unsafe | Safe |
+| `SMOKE` | `smoke` | Smoke detected | Clear |
+| `SOUND` | `sound` | Sound detected | Clear |
+| `TAMPER` | `tamper` | Tampering detected | Clear |
+| `UPDATE` | `update` | Update available | Up to date |
+| `VIBRATION` | `vibration` | Vibration detected | No vibration |
+| `WINDOW` | `window` | Open | Closed |
 
 设备类定义在 `homeassistant/components/binary_sensor/const.py` 的 `BinarySensorDeviceClass` 中。
 

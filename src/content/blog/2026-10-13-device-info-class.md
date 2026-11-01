@@ -71,7 +71,7 @@ new_device_info = copy.copy(device_info)
 new_device_info.name = "Other name"
 ```
 
-要自行在设备注册表中注册设备，请将设备信息原样传递给 `async_get_or_create_device`，而不是将其解包到 `async_get_or_create` 中：
+To register a device in the device registry yourself, pass the device fields as keyword arguments to `async_get_or_create`, as before. When you already hold a `DeviceInfo`, for example one built by a helper or shared with your entities, pass it as it is to the new `async_get_or_create_from_info`, instead of unpacking it:
 
 ```python
 # Old
@@ -80,14 +80,12 @@ device_registry.async_get_or_create(
 )
 
 # New
-device_registry.async_get_or_create_device(
+device_registry.async_get_or_create_from_info(
     config_entry_id=entry.entry_id, device_info=device_info
 )
 ```
 
-`async_get_or_create` 继续支持将字段作为关键字参数使用，并会为您构建一个 `DeviceInfo`。
-
-## 未设置的字段
+## Unset fields
 
 未设置的字段读取为 `UNDEFINED`，而不是 `None`，并且 `None` 与其他值一样是有效值。例如，`via_device_id=None` 会移除与上游设备的链接。请注意，`UNDEFINED` 为真值，因此请显式测试：
 
@@ -141,7 +139,7 @@ device_info = DeviceInfo(**device_payload)
 device_info["config_entry_id"] = entry.entry_id
 ```
 
-非设备信息字段的参数，例如 `config_entry_id`、`config_subentry_id` 和 `disabled_by`，会与设备信息一起传递给 `async_get_or_create_device`。
+Arguments of `async_get_or_create` which are not device info fields, such as `config_entry_id`, are passed to the method directly.
 
 ### 从映射构建
 
@@ -175,12 +173,10 @@ self._attr_device_info = ChildDeviceInfo(
 )
 ```
 
-要自行在设备注册表中注册子设备，请以相同方式将子设备信息传递给 `async_get_or_create_child_device`：
+To register a child device in the device registry yourself, pass the fields as keyword arguments to `async_get_or_create_child`, as before. When you already hold a `ChildDeviceInfo`, pass it to the new `async_get_or_create_child_from_info`:
 
 ```python
-device_registry.async_get_or_create_child_device(
+device_registry.async_get_or_create_child_from_info(
     config_entry_id=entry.entry_id, device_info=child_device_info
 )
 ```
-
-`async_get_or_create_child` 继续支持将字段作为关键字参数使用。

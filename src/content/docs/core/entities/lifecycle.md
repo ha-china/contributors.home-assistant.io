@@ -4,6 +4,8 @@ description: Home Assistant 添加和移除实体时会发生什么，以及你�
 sidebarLabel: Lifecycle
 sidebarGroup: Basics
 order: 4
+source: https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/entity.py
+lastVerified: 2026-10-21
 ---
 
 你在集成（integration）的平台设置中创建实体（entity）对象，并通过 `async_add_entities` 把它们交给 Home Assistant。从那时起，由 Home Assistant 决定实体何时被添加、更新和移除。生命周期钩子（lifecycle hooks）让你能在这些时刻运行代码。所有这些钩子都是可选的。
@@ -23,7 +25,9 @@ order: 4
 
 ### `async_added_to_hass()`
 
-最主要的钩子。它只在添加成功时运行，就在第一个状态被写入之前。到那时实体已经有了自己的实体 ID 和注册表条目。用它来订阅更新、注册监听器，或恢复先前的状态。
+The main hook. It runs as the last step of adding, right before the first state is written. The entity has its entity ID and registry entry by then. Use it to subscribe to updates, register listeners, or restore an earlier state.
+
+The hook doesn't run when adding stops at an earlier step. But adding can still fail after the hook has started: when the hook raises, when adding is cancelled, or when writing the first state raises. `async_will_remove_from_hass` doesn't run in that case, so register the cleanup of anything you set up here with `async_on_remove`, like in the example below.
 
 ```python
 async def async_added_to_hass(self) -> None:
@@ -38,9 +42,30 @@ async def async_added_to_hass(self) -> None:
 
 由于被禁用的实体永远不会被添加，如果你的集成需要保留对某个实体的引用，这个钩子也是合适的位置。你在这里注册的任何内容，只会为实际正在运行的实体注册。
 
+The hook doesn't run again when the user changes the entity ID, except for some entities of custom integrations. See [`async_entity_id_changed`](#async_entity_id_changedold_entity_id).
+
 ### `async_prepare_to_add_to_hass()`
 
-在 Home Assistant 查看注册表之前，每次尝试添加实体时都会运行。对于最终不会被添加的实体它也会运行，例如因为它们被禁用了。你很少需要用到它。如果你在这里设置了任何内容，请用 `async_on_remove` 注册其清理逻辑，因为当添加被中止时 `async_will_remove_from_hass` 不会运行。
+Runs on every attempt to add the entity, before Home Assistant looks at the registry. It also runs for entities that won't be added in the end, for example because they are disabled. Use it for work that must happen before Home Assistant processes the registry entry, or even when the entity turns out to be disabled. For example, seed entity registry options that are read when the registry entry is created or looked up, or register the entity with a helper of your integration, so an entity that is created disabled can be enabled later.
+
+You rarely need it. Keep in mind:
+
+- Don't rely on `entity_id` or `registry_entry` here. Depending on how the entity is added, they may be unset, set by your integration, or left over from an earlier attempt.
+- Raising an exception aborts adding.
+- `async_added_to_hass` may never run, and `async_will_remove_from_hass` doesn't run when adding is aborted. `async_on_remove` callbacks do run, right when adding is aborted, also when the entity is disabled. Use `async_on_remove` to clean up what only matters for this attempt to add the entity. Don't use it for a registration that has to survive a disabled entity, like in the example below: that registration belongs to your integration, so keep it there, keyed on something stable like the unique ID.
+- Don't write the state, and don't subscribe to updates that write it. The entity may not have an entity ID yet, so writing the state fails. Subscribe in `async_added_to_hass` instead.
+
+```python
+async def async_prepare_to_add_to_hass(self) -> None:
+    """Run before the entity is added."""
+    await super().async_prepare_to_add_to_hass()
+    # Let the hub know about the entity, even when it turns out to be
+    # disabled, so it can be enabled later. Not undone when adding is aborted.
+    self._hub.register_known_entity(self.unique_id, self._channel)
+```
+
+> [!WARNING]
+> `add_to_platform_start()`, `add_to_platform_finish()`, and `add_to_platform_abort()` of `Entity` are implementation details of the entity platform. Don't override them in your integration. Use the hooks on this page instead.
 
 ## 移除实体
 
@@ -52,11 +77,13 @@ async def async_added_to_hass(self) -> None:
 
 ### `async_on_remove(func)`
 
-注册一个在实体被移除或添加被中止时要调用的函数。大多数订阅辅助函数（subscription helpers）会返回一个取消订阅的函数，你可以直接把它传入。这是确保你不会泄漏监听器的最干净的方式。
+Registers a function to call when the entity is removed, or when adding it is aborted. Most subscription helpers return an unsubscribe function, so you can pass that straight in. This is the cleanest way to make sure you never leak a listener. The one exception is a subscription you replace later, for example when the entity ID changes. See [`async_entity_id_changed`](#async_entity_id_changedold_entity_id).
 
 ### `async_will_remove_from_hass()`
 
 `async_added_to_hass` 的对应钩子。用它来撤销 `async_on_remove` 无法完成的工作，例如关闭仅属于该实体的连接。
+
+It only runs for an entity that was added. When adding is aborted or fails, even after `async_added_to_hass` already ran, only the `async_on_remove` callbacks run. It also doesn't run when the user changes the entity ID, because the entity isn't removed, except for some entities of custom integrations. See [`async_entity_id_changed`](#async_entity_id_changedold_entity_id).
 
 ### `async_removed_from_registry()`
 
@@ -72,7 +99,46 @@ async def async_added_to_hass(self) -> None:
 
 ### `async_entity_id_changed(old_entity_id)`
 
-在用户更改了实体 ID 时运行。到那时，`self.entity_id` 已经是新 ID，Home Assistant 也已将自身的内部记录转移到该 ID 上。如果你按实体 ID 跟踪某些内容，例如你自己实体上的状态变化监听器，请在这里把它移动到新 ID 并调用 `super()`。该方法不能使用 await。Home Assistant 会在它返回之后把状态写入新 ID。
+Runs when the user changed the entity ID. The entity is changed in place: it isn't removed and added again, so `async_will_remove_from_hass` and `async_added_to_hass` don't run. Unlike those hooks, this one is a `@callback` that runs in the event loop, so it must not await.
+
+> [!IMPORTANT]
+> Until Home Assistant 2027.11, custom integrations have to opt in to in-place changes. If a class of a custom integration implements `async_prepare_to_add_to_hass`, `async_added_to_hass`, or `async_will_remove_from_hass`, but neither that class nor a subclass of it implements `async_entity_id_changed`, its entities are still removed and added again when the entity ID changes. Then the add and remove hooks run again, and this hook doesn't run. See the [blog post about the new lifecycle hooks](/blog/2026/10/12/new-entity-lifecycle-hooks/).
+
+By then, `self.entity_id` is the new ID, and the old ID is passed as `old_entity_id`. The state under the old ID is already removed, `async_registry_entry_updated` already ran, and Home Assistant has moved its own bookkeeping to the new ID, like registry tracking and restore state. The state under the new ID isn't written yet.
+
+If you track something by your own entity ID, like a state change listener or a dispatcher signal keyed on `self.entity_id`, or a lookup table from entity IDs to entities, move it to the new ID here. Always call `super()`, so base classes can do the same. If your entity sets up nothing keyed on its own entity ID, you don't need this hook. A custom integration that implements the add or remove hooks still needs it to opt in to in-place changes, and then a hook that only calls `super()` is enough.
+
+Home Assistant writes the state under the new ID when the hook returns, unless you already did. If you need your own state under the new ID, for example to render a template that references `this`, write it with `self.async_write_ha_state()` yourself, but only after calling `super()`, so base classes have updated what the state depends on.
+
+Work that has to await can run in a task. Registry updates don't wait for that task, so after each `await`, check that the entity is still added and that `self.entity_id` didn't change again.
+
+If the hook raises, Home Assistant logs the exception and the change completes anyway: the state is written under the new ID.
+
+Take care that whatever you subscribe again is still cleaned up when the entity is removed. `self.async_on_remove(self._unsub_signal)` registers the unsubscribe function of the *first* subscription. After the entity ID changed, removing the entity calls that stale function again, and the new subscription leaks. Instead, register a callback once that calls the current unsubscribe function:
+
+```python
+async def async_added_to_hass(self) -> None:
+    """Subscribe once the entity is added."""
+    await super().async_added_to_hass()
+    self._subscribe_signal()
+    self.async_on_remove(lambda: self._unsub_signal())
+
+@callback
+def _subscribe_signal(self) -> None:
+    """Subscribe to the signal for the current entity ID."""
+    self._unsub_signal = async_dispatcher_connect(
+        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
+    )
+
+@callback
+def async_entity_id_changed(self, old_entity_id: str) -> None:
+    """Move the subscription to the new entity ID."""
+    super().async_entity_id_changed(old_entity_id)
+    self._unsub_signal()
+    self._subscribe_signal()
+```
+
+Unsubscribing in `async_will_remove_from_hass` avoids the stale function too, but that hook doesn't run when adding fails after `async_added_to_hass` ran.
 
 ## 恢复状态
 

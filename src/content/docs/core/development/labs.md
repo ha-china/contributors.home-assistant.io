@@ -93,14 +93,12 @@ from homeassistant.components.labs import async_is_preview_feature_enabled
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up Example from a config entry."""
     if async_is_preview_feature_enabled(hass, DOMAIN, "new_dashboard"):
         await async_setup_new_dashboard(hass)
     else:
         await async_setup_classic_panel(hass)
-
-    return True
 ```
 
 请像这样将预览代码和标准代码清晰地分开。将 `preview=True` 标志深入传递到你的代码中，会让以后难以移除其中任何一部分。
@@ -120,7 +118,7 @@ from homeassistant.components.labs import (
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ExampleConfigEntry
-) -> bool:
+) -> None:
     """Set up Example from a config entry."""
 
     async def _async_preview_toggled(
@@ -136,7 +134,6 @@ async def async_setup_entry(
             hass, DOMAIN, "new_dashboard", _async_preview_toggled
         )
     )
-    return True
 ```
 
 在运行时效果良好的做法：加载和卸载界面的一部分、创建和移除实体（entity）、启动和停止后台任务，以及注册事件监听器。效果不佳的做法：更改 Home Assistant 的启动方式、更改仅在启动时加载的集成，以及任何需要修改 `configuration.yaml` 的操作。

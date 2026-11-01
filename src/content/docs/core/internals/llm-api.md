@@ -191,7 +191,7 @@ class MyAPI(llm.API):
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: MyConfigEntry
-) -> bool:
+) -> None:
     """Set up my integration."""
     entry.async_on_unload(
         llm.async_register_api(
@@ -203,7 +203,6 @@ async def async_setup_entry(
             ),
         )
     )
-    return True
 ```
 
 `llm.API` 只接受关键字参数：`hass`、一个唯一的 `id`，以及用户看到的 `name`。对于只有管理员才能使用的 API，请设置 `requires_admin=True`。`async_register_api` 会返回一个用于注销该 API 的函数：当该 API 属于某个配置条目时，请在卸载时调用它，如上例所示。

@@ -29,11 +29,11 @@ order: 3
 
 一项弃用会在发布说明中出现两次：
 
-1. **弃用开始时。** 弃用某个功能的版本的发布说明可以在 **不向后兼容的变更** 下列出它，例如“uptime 传感器已被弃用，并将在未来的版本中移除。请改用新的 last restart 传感器。”
-2. **弃用结束时。** 在弃用期限过后，移除旧方式的拉取请求（pull request）属于不向后兼容的变更。其拉取请求中的文字会出现在该版本发布的同一章节中。参见[记录不向后兼容的变更](/releases/guides/backward-incompatible-changes/)。
+1. **When it starts.** The release notes of the version that deprecates something can list it under **Backward-incompatible changes**, like "The uptime sensor is deprecated and will be removed in a future release. Use the new last restart sensor instead."
+2. **When it ends.** The pull request that removes the old way, after the deprecation period, is a backward-incompatible change when it can still affect users who did not act on the deprecation. Its text from the pull request ends up in the same section of that release. See [When it is backward-incompatible](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible).
 
 影响自定义集成开发者的 Python API 弃用会在[开发者博客](/blog/)上公告。发布说明会链接该版本中最值得关注的文章，而旧代码在仍然可用期间会记录一条警告。
 
 ## 在拉取请求中
 
-[core 仓库](https://github.com/home-assistant/core)的拉取请求模板中有一个变更类型选项：当破坏发生在未来时，勾选 **Deprecation**；当破坏现在发生时，勾选 **Breaking change**。发起弃用的拉取请求属于前者，结束弃用的拉取请求属于后者。
+The pull request template of the [core repository](https://github.com/home-assistant/core) has a type of change for this: check **Deprecation** when the break happens in the future, and **Breaking change** when it happens now. A pull request that starts a deprecation is the first. The one that ends it is the second, unless it only removes a core API that nothing in Home Assistant Core uses anymore.

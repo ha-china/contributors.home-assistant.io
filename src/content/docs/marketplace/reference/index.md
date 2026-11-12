@@ -7,6 +7,7 @@ sidebarLabel: 参考
 
 本节中的页面用于查阅信息。有关如何使用它们，请从[指南](/marketplace/guides/)开始。
 
-- [hacs.json](/marketplace/reference/hacs-json/)：该文件的每个键，以及 Marketplace 对它们的处理方式。
-- [仓库结构](/marketplace/reference/repository-structure/)：按类型划分的文件存放位置。
-- [验证检查](/marketplace/reference/validation/)：HACS action 会检查什么，以及 Marketplace 拒绝安装什么。
+- [hacs.json](/marketplace/reference/hacs-json/): every key of the file, and what the Marketplace does with it.
+- [Repository structure](/marketplace/reference/repository-structure/): where the files go, per type.
+- [Validation checks](/marketplace/reference/validation/): what the HACS action checks, and what the Marketplace refuses to install.
+- [Theme variables](/marketplace/reference/theme-variables/): every variable a theme can set, with its defaults.

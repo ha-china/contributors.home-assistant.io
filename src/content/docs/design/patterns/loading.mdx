@@ -57,7 +57,15 @@ import Demo from "../../../../components/docs/Demo.astro";
   </div>
 </Demo>
 
-### 加载的终点
+### Fading in
+
+Loading indicators fade in rather than pop up, but not all at the same pace:
+
+- **A skeleton** fades in straight away, over about 300 milliseconds. It stands in for the content, so waiting would leave a gap where the layout should be.
+- **A spinner or progress bar** usually waits half a second before it fades in. Some slower areas, such as backups and updates, wait a full second. When the load finishes within that time, people never see a spinner flash on and off.
+- **The content itself** appears as soon as it arrives, without a fade.
+
+### Where loading ends
 
 加载状态总是以下列三种结果之一结束：内容、[空状态（empty state）](/design/patterns/empty-states/)，或[错误（error）](/design/patterns/errors/)。当请求失败时，绝不要让加载指示器一直转下去；当数据仍在途中时，也绝不要显示“这里什么都没有”。
 
@@ -65,9 +73,9 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 ## 无障碍
 
-- 加载指示器具有进度条的角色，并带有翻译后的“Loading”标签。
-- 骨架屏和加载指示器在没有动画时仍保持其含义。当人们要求减少动画时，骨架屏会停止脉动。参见[动效（Motion）](/design/foundations/motion/)。
-- 当加载以错误结束时，应以人们可读的文字显示，而不仅仅是一个红色按钮。
+- The spinner has the role of a progress bar, with a translated "Loading" label. Give a group of skeletons the same role and label, rather than visible "Loading" text.
+- Skeletons and spinners keep their meaning without motion. Skeletons stop pulsing when people ask for reduced motion. See [Motion](/design/foundations/motion/).
+- When loading ends in an error, show it as text people can read, not only as a red button.
 
 ## 组件
 
@@ -87,4 +95,17 @@ html`
 `;
 ```
 
-当进度按钮的操作完成时，在其上调用 `actionSuccess()` 或 `actionError()`。骨架屏组件 `ha-skeleton`、`ha-skeleton-text` 和 `ha-skeleton-icon` 位于 `src/components/skeleton/` 中。
+When the action of a progress button is done, call `actionSuccess()` or `actionError()` on it. The skeletons, `ha-skeleton`, `ha-skeleton-text`, and `ha-skeleton-icon`, live in `src/components/skeleton/`.
+
+Wrap a loading indicator in `ha-fade-in`, from `src/components/animation/`, to fade it in:
+
+```ts
+html`
+  <ha-fade-in .duration=${300} easing="ease-in">
+    <div role="progressbar" aria-label=${localize("ui.common.loading")}>
+      <ha-skeleton-text></ha-skeleton-text>
+    </div>
+  </ha-fade-in>
+  <ha-fade-in .delay=${500}><ha-spinner></ha-spinner></ha-fade-in>
+`;
+```

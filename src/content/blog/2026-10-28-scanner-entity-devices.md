@@ -16,7 +16,7 @@ areas:
 
 现在，`device_info` 不再是最终的。设置 `_attr_device_info` 以将跟踪器包含在设备中，就像任何其他实体一样。要将其包含在跟踪客户端的设备中，请使用客户端的 MAC 地址作为连接。
 
-直到 Home Assistant Core 2028.11，基类仍会为具有 MAC 地址但没有设备信息的跟踪器设置设备信息：一个以 MAC 地址作为连接、以主机名命名的设备，或者当设备是新的时以 MAC 地址命名。从 2028.11 开始，没有设备信息的跟踪器不会包含在设备中。
+Until Home Assistant Core 2027.11, the base class still sets device info for a tracker that has a MAC address but no device info: a device with the MAC address as connection, named after the hostname, or after the MAC address when the device is new. Starting with 2027.11, a tracker without device info is not included in a device.
 
 如果您的跟踪器不应包含在设备中，请在弃用期间设置 `_attr_device_info = DeviceInfo()`。空的设备信息表示没有设备，默认值仅在设备信息为 `None` 时适用，因此基类不会干扰您的跟踪器。
 
@@ -50,10 +50,10 @@ class ExampleClientTracker(ScannerEntity):
 
 ## 您的集成需要更改的内容
 
-- 为您希望跟踪器所在的设备设置 `_attr_device_info`。对于被跟踪客户端的设备，请使用客户端的 MAC 地址作为连接，并使用客户端名称作为 `name`。不要依赖基类的默认设备信息，它将在 2028.11 中移除。要将跟踪器排除在设备之外，请设置 `_attr_device_info = DeviceInfo()`。
-- 当跟踪器是其设备的主要功能时，移除跟踪器的名称：`_attr_name` 或 `name` 属性。
-- 当客户端名称在运行时发生变化时，重命名设备。
-- 当您的集成从跟踪器的实体注册表条目中读取 `original_name`（例如在启动时恢复离线的客户端）时，请改为读取设备名称：对于没有名称的跟踪器，`original_name` 为 `None`。
-- 当您的跟踪器的基类为另一个设备（如路由器）设置 `_attr_device_info` 时，请检查您是否希望跟踪器包含在该设备中。以前它会被忽略，现在它会将跟踪器包含在该设备中。
+- Set `_attr_device_info` for the device you want the tracker in. For a device for the tracked client, use the MAC address of the client as connection and the name of the client as `name`. Do not rely on the default device info from the base class, it will be removed in 2027.11. To keep the tracker out of a device, set `_attr_device_info = DeviceInfo()`.
+- When the tracker is the main feature of its device, remove the name of the tracker: an `_attr_name`, or a `name` property.
+- When the name of the client changes at runtime, rename the device.
+- When your integration reads `original_name` from the entity registry entry of a tracker, like to restore clients that are offline at startup, read the name of the device instead: `original_name` is `None` for a tracker without a name.
+- When a base class of your tracker sets `_attr_device_info` for another device, like the router, check that you want the tracker in that device. It was ignored before, and now includes the tracker in that device.
 
 阅读更多关于 [`ScannerEntity`](/core/entities/device-tracker/#scannerentity) 的内容，或查看核心集成在 [core PR #188883](https://github.com/home-assistant/core/pull/188883) 中的迁移方式。

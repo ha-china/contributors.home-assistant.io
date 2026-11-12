@@ -67,7 +67,7 @@ python3 -m script.hassfest --skip-plugins quality_scale
 
 ## Pylint
 
-除了标准检查之外，core 还有自己的 pylint 插件，位于 `pylint/plugins/`。它的检查覆盖了 Ruff 无法发现的模式，因为这些检查需要类型推断或读取其他文件，比如 `manifest.json` 和 `quality_scale.yaml`。其中许多检查对应的是审查者过去手动指出的问题。[该插件的 README](https://github.com/home-assistant/core/blob/dev/pylint/plugins/README.md) 解释了每一项检查。
+Next to the standard checks, core has its own pylint plugin, in `packages/pylint-home-assistant/`. Its checks cover patterns Ruff cannot see, because they need type inference or read other files, like `manifest.json` and `quality_scale.yaml`. Many of them check the rules reviewers used to point out by hand. The [README of the plugin](https://github.com/home-assistant/core/blob/dev/packages/pylint-home-assistant/README.md) explains every check.
 
 如果 pylint 对你的代码判断有误（且仅在这种情况下），请使用检查的名称（而不是其代码）为那一行禁用该检查：
 

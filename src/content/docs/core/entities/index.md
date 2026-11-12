@@ -116,6 +116,6 @@ sidebarGroups:
 
 ## 向谁咨询
 
-- 在构建实体时有疑问？请在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 **#core** 频道中提问。
-- 想为某个领域添加特性、状态或设备类别？请在[架构仓库](https://github.com/home-assistant/architecture/discussions)中发起讨论。一旦做出决定，就会以架构决策记录（architecture decision record）的形式记录在那里。
-- 在实体平台中发现了 bug？请在 [core 仓库](https://github.com/home-assistant/core/issues)中提交 issue。
+- Questions while building an entity? Start a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/).
+- Want to add a feature, state, or device class to a domain? Open a discussion in the [architecture repository](https://github.com/home-assistant/architecture/discussions). When a decision is made, it is recorded there as an architecture decision record.
+- Found a bug in an entity platform? Open an issue in the [core repository](https://github.com/home-assistant/core/issues).

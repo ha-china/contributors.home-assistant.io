@@ -91,18 +91,18 @@ An area groups devices and entities that belong to a room or another part of you
 
 ### 任务的标题
 
-- 写出动作及其对象："Creating an area"，而不是 "Task"。
-- 使用 `-ing` 短语，如 "Creating an area" 或 "Updating Home Assistant"，这与大多数现有页面的用法一致。
-- 对于较长流程的各个阶段，使用祈使句效果很好："Write the image to your SD card"。
-- 保持同级标题的平行结构。如果一个以 `-ing` 动词开头，那么它们都应该如此。
-- 当任务有更具体的结果时，避免使用 "Usage"、"Configuration" 或 "Working with areas" 这类模糊的标题。
+- Name the action and its object: "Creating an area", not "Task".
+- An `-ing` phrase, like "Creating an area" or "Updating Home Assistant", matches what most existing pages use.
+- An imperative works well for the stages of a longer procedure: "Write the image to your SD card". Number the stages when their order matters.
+- Keep sibling headings parallel. If one starts with an `-ing` verb, they all do.
+- Avoid vague headings like "Usage", "Configuration", or "Working with areas" when the task has a more specific outcome.
 
 ### 任务的内容
 
-1. 如果标题没有说明清楚，用一句话说明何时或为什么要做这件事。
-2. 在步骤之前直接列出前提条件，以 `Prerequisites:` 引导，例如硬件、权限或必须先完成的设置。只有当要求适用于整页时，才使用单独的 `## Prerequisites` 章节。没有值得一提的前提条件？那就省略列表。
-3. 将步骤写成编号列表。每个步骤以操作指令开头。把解释或预期结果放在其下方。
-4. 以结果结尾，并在有用时提供验证是否成功的方法。
+1. If the heading does not make it clear, say in a few sentences when or why you would do this, and link to relevant information.
+2. List the prerequisites directly before the steps, under a `Prerequisites:` lead-in, like hardware, permissions, or setup that must be done first. Use a separate `## Prerequisites` section only when the requirements apply to the whole page. No prerequisites worth mentioning? Leave the list out.
+3. Write the steps as a numbered list. Start each step with the instruction. Put explanations or the expected result below it.
+4. End with the outcome and, when useful, a way to check that it worked.
 
 ```markdown
 ## Creating an area
@@ -181,14 +181,25 @@ An area groups devices and entities that belong to a room or another part of you
 
 ## 故障排除
 
-故障排除主题帮助读者识别问题并从中恢复。它可以是功能页面中的一个章节，也可以是覆盖相关问题的独立页面。
+A troubleshooting topic helps the reader recognize a problem and recover from it.
+
+### Where troubleshooting goes
+
+Keep the troubleshooting for a page in one place, so the reader knows where to look when something goes wrong:
+
+- In a section of the page: put the problems in a `## Troubleshooting` section at the end of the page. On an integration page, the section goes in its place in the [section order](/writing/reference/integration-page/#sections).
+- On a page of its own: when a feature has many problems, move them to a separate troubleshooting page. Link to it from the page of the feature.
+
+Do not put troubleshooting next to the part of the page it relates to, like a troubleshooting subsection under one feature or setting.
+Put the problem in the troubleshooting section of the page instead.
+When it helps, link to the troubleshooting section from the part of the page it relates to.
 
 ### 故障排除的标题
 
-- 将每个问题放在各自的[可折叠详情块](/writing/reference/liquid/#collapsible-details)中。
-- 使用症状或确切的错误消息作为块的标题，例如 `Can't access Home Assistant in my browser` 或 `Stuck at "Preparing Home Assistant"`。
-- 对于包含多个问题的页面，使用 "Troubleshooting" 后接主题："Troubleshooting Assist"。
-- 避免使用只有在知道原因后才有意义的标题。读者搜索的是他们看到的现象，而不是问题所在。
+- Put each problem in its own [collapsible details block](/writing/reference/liquid/#collapsible-details).
+- Use the symptom or the exact error message as the title of the block, like `Can't access Home Assistant in my browser` or `Stuck at "Preparing Home Assistant"`.
+- For a separate troubleshooting page, use "Troubleshooting" followed by the subject: "Troubleshooting Assist".
+- Avoid titles that only make sense once you know the cause. The reader searches for what they see, not for what is wrong.
 
 ### 故障排除的内容
 

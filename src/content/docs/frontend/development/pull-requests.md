@@ -26,12 +26,12 @@ order: 7
 
 使用[拉取请求模板](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)。逐节填写，并且只删除模板指示在不适用时删除的部分。如果模板缺失或不完整，检查将失败，如[审查与发布](/frontend/development/review-and-release/#before-review)所述。
 
-- **破坏性更改**：如果你的更改对现有用户造成了破坏，请告诉他们破坏了什么、如何恢复，以及原因。请面向用户撰写，而不是面向维护者。如果没有破坏任何内容，请删除该部分。
-- **提议的更改**：描述更改了什么以及原因，以便审查者获得概览。几句话就足够了。不要逐行描述代码：差异（diff）已经展示了这些。如果你使用 AI 工具，不要让它们为你写冗长的描述。请用自己的话撰写。
-- **截图**：对于任何可见的更改，请添加前后截图或短视频。如果没有可见更改，请删除该部分。
-- **更改类型**：只勾选一个框。如果需要两个，请拆分拉取请求。
-- **附加信息**：链接它修复的问题，以及任何相关的后端或文档拉取请求。
-- **检查清单**：勾选真实适用的框。只有你能说明你理解代码并已测试过。
+- **Breaking change**: if your change breaks something for existing users, tell them what breaks, how to make it work again, and why. Write it for users, not for maintainers. Remove the section if nothing breaks. [When it is backward-incompatible](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible) helps you decide.
+- **Proposed change**: describe what changes and why, so a reviewer gets the overview. A few sentences are enough. Don't describe every line of code: the diff already shows that. If you use AI tools, don't let them write long descriptions for you. Write it in your own words.
+- **Screenshots**: add before and after screenshots, or a short video, for anything visible. Remove the section if nothing visible changes.
+- **Type of change**: check exactly one box. If you need two, split the pull request.
+- **Additional information**: link the issue it fixes, and any related backend or documentation pull request.
+- **Checklist**: check the boxes that are true. Only you can say that you understand the code and tested it.
 
 ## 处理 Copilot 审查
 

@@ -10,13 +10,13 @@ order: 2
 
 | 内容 | 原因 |
 | --- | --- |
-| GitHub 上的公开仓库 | Marketplace 和 HACS 只读取公开的 GitHub 仓库。 |
-| 根目录中的 `hacs.json` | 没有它，Marketplace 无法安装或更新仓库。参见 [hacs.json](/marketplace/reference/hacs-json/)。 |
-| `README.md` | 用户在安装前阅读的内容。Marketplace 会在你仓库的页面上显示它。 |
-| GitHub 上的描述 | 显示在 Marketplace 的列表中。加入目录的必要条件。 |
-| GitHub 上的主题标签（Topics） | 帮助用户找到你的仓库。加入目录的必要条件。 |
-| 开启 Issues | 用户报告问题的地方。加入目录的必要条件。 |
-| GitHub releases | 所有类型都建议提供，模板和加入目录则必须提供。参见 [发布与更新](/marketplace/guides/releases/)。 |
+| Public repository on GitHub | The Marketplace and HACS only read public GitHub repositories. |
+| `hacs.json` in the root | The Marketplace can not install or update a repository without it. See [hacs.json](/marketplace/reference/hacs-json/). |
+| `README.md` | What users read before they install. The Marketplace shows it on the page of your repository, without the parts you [leave out](#leave-part-of-your-readme-out-of-the-marketplace). |
+| A description on GitHub | Shown in the list of the Marketplace. Required for the catalog. |
+| Topics on GitHub | Help users find your repository. Required for the catalog. |
+| Issues turned on | Where users report problems. Required for the catalog. |
+| GitHub releases | Recommended for every type, required for templates and for the catalog. See [releases and updates](/marketplace/guides/releases/). |
 
 ## 集成（integration）
 
@@ -86,4 +86,26 @@ README.md
 
 HACS 还支持 AppDaemon 应用（`apps/`）和 Python 脚本（`python_scripts/`），目录中也有它们的列表。但 Marketplace 不安装这两者。从 2026.11 开始，Home Assistant 还会屏蔽 HACS 自定义集成，因为 Marketplace 已取代它。因此在 2026.11 及更高版本上，这两者都无法安装。
 
-Marketplace 还会拒绝包含适用于 Home Assistant OS 的[应用](/glossary/app/)的仓库。这些仓库应改为在 **设置** > **应用** 下作为应用仓库添加：参见[创建并分享仓库](/apps/guides/repository/)。
+The Marketplace also refuses repositories with [apps](/glossary/app/) for Home Assistant OS. Those are added as an app repository under **Settings** > **Apps** instead: see [create and share a repository](/apps/guides/repository/).
+
+## Leave part of your README out of the Marketplace
+
+Your README is read in two places: on GitHub, where people find your repository, and in the Marketplace, on the page of your repository. Installation instructions, a [My link](/glossary/my-link/) badge, or an install badge help on GitHub, but the page in the Marketplace already has an install button, so there they are in the way. Put the parts that are only for GitHub between two HTML comments, and the Marketplace leaves them out:
+
+```markdown title="README.md"
+# Awesome card
+
+<!-- ha-marketplace:exclude-start -->
+## Installation
+
+Add this repository in the Marketplace, or install it through HACS.
+<!-- ha-marketplace:exclude-end -->
+
+## Configuration
+```
+
+GitHub does not show HTML comments, so there the README reads as before.
+
+- A section runs from the start marker to the next end marker. Without an end marker, it runs to the end of the README.
+- The spaces inside the markers are optional.
+- Markers inside a code block or inline code are text, not markers, so a README can show them as an example.

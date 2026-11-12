@@ -89,21 +89,23 @@ interface ErrorResult {
 
 | 键 | 类型 | 含义 |
 | --- | --- | --- |
-| `hasSettingsScreen` | boolean | 应用在 `config_screen/show` 时显示自己的设置界面。 |
-| `hasSidebar` | boolean | 应用有自己的侧边栏。 |
-| `canWriteTag` | boolean | 设备可以写入 NFC 标签。 |
-| `hasExoPlayer` | boolean | 应用可以使用 ExoPlayer 原生播放 HLS 视频。 |
-| `canCommissionMatter` | boolean | 应用可以调试（commission）Matter 设备。 |
-| `hasMatterStatusReport` | boolean | 应用通过 `matter/commission/finish` 报告 Matter 调试的结束。 |
-| `canImportThreadCredentials` | boolean | 应用可以导入 Thread 凭据。 |
-| `canTransferThreadCredentialsToKeychain` | boolean | 应用可以将 Thread 凭据存储在平台的钥匙串中。仅限 Apple。 |
-| `hasAssist` | boolean | 应用有原生的 Assist 界面，用于替代前端的 Assist 界面。 |
-| `hasAssistSettings` | boolean | 应用有针对设备的 Assist 设置，显示在语音助手设置中。 |
-| `hasBarCodeScanner` | number | 当应用可以扫描条形码时为 `1`，否则为 `0`。 |
-| `canSetupImprov` | boolean | 应用可以设置 Improv Wi-Fi 设备。 |
-| `hasEntityAddTo` | boolean | 应用可以在更多信息（more-info）对话框中把实体（entity）添加到自己的位置，例如小组件。 |
-| `hasSplashscreen` | boolean | 应用用自己的加载屏幕覆盖前端，直到 `frontend/loaded`。 |
-| `appVersion` | string | 应用的版本。 |
+| `hasSettingsScreen` | boolean | The app shows its own settings on `config_screen/show`. |
+| `hasSidebar` | boolean | The app has a sidebar of its own. |
+| `canWriteTag` | boolean | The device can write NFC tags. |
+| `hasExoPlayer` | boolean | The app can play HLS video natively with ExoPlayer. |
+| `canCommissionMatter` | boolean | The app can commission Matter devices. |
+| `hasMatterStatusReport` | boolean | The app reports the end of Matter commissioning with `matter/commission/finish`. |
+| `canShareMatterDeviceToAppleHome` | boolean | The app can add a Matter device that Home Assistant already has to Apple Home, with `matter/share_device`. |
+| `canShareMatterDeviceToOtherApps` | boolean | The app can share a Matter device that Home Assistant already has with an app the user picks in the Matter share sheet of the platform, with `matter/share_device`. |
+| `canImportThreadCredentials` | boolean | The app can import Thread credentials. |
+| `canTransferThreadCredentialsToKeychain` | boolean | The app can store Thread credentials in the keychain of the platform. Apple only. |
+| `hasAssist` | boolean | The app has a native Assist interface, used instead of the one of the frontend. |
+| `hasAssistSettings` | boolean | The app has Assist settings for the device, shown in the voice assistant settings. |
+| `hasBarCodeScanner` | number | `1` when the app can scan barcodes, `0` otherwise. |
+| `canSetupImprov` | boolean | The app can set up Improv Wi-Fi devices. |
+| `hasEntityAddTo` | boolean | The app can add entities to places of its own, like a widget, from the more-info dialog. |
+| `hasSplashscreen` | boolean | The app covers the frontend with its own loading screen until `frontend/loaded`. |
+| `appVersion` | string | The version of the app. |
 
 #### entity/add_to/get_actions
 
@@ -131,7 +133,45 @@ interface ErrorResult {
 
 `name` 和 `details` 会按原样显示，因此请在应用中翻译它们。`mdi_icon` 是类似 `mdi:car` 的图标名称。`app_payload` 是任意字符串，当用户选择该操作时，前端会通过 `entity/add_to` 将其传回。
 
-### 无需应答的消息
+#### matter/share_device
+
+The frontend asks the app to share a Matter device with another platform, like Apple Home. The device is already set up in Home Assistant, and Home Assistant has opened a commissioning window for it: a short time in which another platform can add the device too. The frontend offers this in the dialog that opens that window.
+
+The frontend only sends this message when the app supports it:
+
+- With `canShareMatterDeviceToAppleHome`, it always offers to add the device to Apple Home. When the app sets both keys, this one wins.
+- With `canShareMatterDeviceToOtherApps`, it only offers the share sheet when the Matter server reported the `discriminator` and the timeout of the window. The share sheet opens a window of its own, and needs both.
+
+Payload:
+
+```ts
+{
+  setup_qr_code: string;
+  setup_pin_code: number;
+  discriminator?: number;
+  vendor_id?: number;
+  product_id?: number;
+  device_name?: string;
+  remaining_seconds?: number;
+}
+```
+
+| Key | Meaning |
+| --- | --- |
+| `setup_qr_code` | The QR code payload of the commissioning window, starting with `MT:`. Always sent. |
+| `setup_pin_code` | The setup passcode of the commissioning window. Always sent. |
+| `discriminator` | The discriminator the device advertises while the window is open, when the Matter server reported it. |
+| `vendor_id` | The vendor ID of the device, when the Matter server reported it. |
+| `product_id` | The product ID of the device, when the Matter server reported it. |
+| `device_name` | The name of the device in Home Assistant, to suggest to the other platform. |
+| `remaining_seconds` | Estimated seconds until the window closes, when the Matter server reported its timeout. When 30 seconds or less remain, the frontend treats the code as expired, does not send the message, and asks you to get a new code. When sent, this value is greater than 30. |
+
+Answer: an empty object once the flow of the platform has completed. When it did not work, answer with an error result:
+
+- `canceled`: the user closed the sheet of the platform. The frontend takes that as a choice, not an error.
+- Any other code, like `failed`: the frontend shows that sharing failed, with its own text. It does not show your `message`.
+
+### Messages without an answer
 
 | 类型 | 载荷 | 含义 |
 | --- | --- | --- |

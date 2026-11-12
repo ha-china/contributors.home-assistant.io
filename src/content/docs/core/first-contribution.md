@@ -11,7 +11,7 @@ order: 1
 
 ## 1. 打个招呼
 
-加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 **#core** 频道。在 **Channels & Roles** 下选择 **I want to contribute dev skills to Home Assistant** 即可看到该频道。开始并不需要获得许可，但知道遇到问题时该去哪里提问会很有帮助。
+Join the [Home Assistant Discord](https://www.home-assistant.io/join-chat/). Under **Channels & Roles**, choose **I want to contribute dev skills to Home Assistant** to see the channels for development. General development questions, like whether an integration belongs in core, fit **#developers**. When you are stuck on code, start a thread in **#coding-support**. You do not need permission to start, but it helps to know where to ask when you get stuck.
 
 ## 2. 搭建你的环境
 

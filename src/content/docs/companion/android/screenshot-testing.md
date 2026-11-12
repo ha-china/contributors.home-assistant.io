@@ -5,7 +5,7 @@ sidebarLabel: 截图测试
 sidebarGroup: Test
 order: 2
 source: https://github.com/home-assistant/android/blob/main/.github/workflows/pr.yml
-lastVerified: 2026-10-14
+lastVerified: 2026-11-06
 ---
 
 截图测试会将 UI 与仓库中的参考图像进行比较。当渲染出的 UI 不再与其参考图像匹配时，测试就会失败，因此每一次 UI 更改都是有意的。它们只测试外观，从不测试逻辑。
@@ -14,14 +14,14 @@ lastVerified: 2026-10-14
 
 ## 工作原理
 
-该应用使用 [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing)。它在 JVM 上渲染 composable，因此不需要模拟器。这使得它们比 instrumentation 测试快得多，成本也低得多。
+The app uses [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing-with-testsuites), set up as a test suite of the Android Gradle Plugin. It renders composables on the JVM, so no emulator is needed. That makes them much faster and cheaper than instrumentation tests.
 
-测试位于 `screenshotTest` 源集中。参考图像按模块存储：
+Tests live in `src/screenshotTest` of each module. That is the only source set the suite compiles: there is no flavor or build type variation of it. The suite runs against one variant per module, and the reference images are stored next to it:
 
-| 模块 | 参考图像 |
-| --- | --- |
-| `:app` | `src/screenshotTestFullDebug/reference` |
-| `:common` 和 `:wear` | `src/screenshotTestDebug/reference` |
+| Module | Variant | Reference images |
+| --- | --- | --- |
+| `:app` | `fullDebug` | `src/screenshotTestDefaultFullDebug/reference` |
+| `:common` and `:wear` | `debug` | `src/screenshotTestDefaultDebug/reference` |
 
 ## 编写截图测试
 
@@ -34,18 +34,24 @@ lastVerified: 2026-10-14
 检查是否有任何变化：
 
 ```bash
-./gradlew validateDebugScreenshotTest validateFullDebugScreenshotTest
+./gradlew \
+  testDebugScreenshotTestDefaultTestSuite \
+  testFullDebugScreenshotTestDefaultTestSuite
 ```
 
-第一个任务覆盖 `:common` 和 `:wear`，第二个任务覆盖带有 flavor 的 `:app`。CI 在每个 pull request 上都会在 **Screenshot Tests** 任务中运行相同的验证，只要存在差异，检查就会一直失败，直到问题得到解决。
+The first task covers `:common` and `:wear`, the second `:app`, which has flavors. Android Studio has the same two tasks in the **Screenshot tests verification** run configuration. When a test fails, the report in `build/reports/tests/<task name>/index.html` of the module shows the reference, the new image, and their difference.
+
+CI runs the same validation on every pull request, in the **Screenshot Tests** job, and a difference fails the check until it is resolved.
 
 在有意的 UI 更改之后，更新参考图像：
 
 ```bash
-./gradlew updateDebugScreenshotTest updateFullDebugScreenshotTest
+./gradlew \
+  updateDebugScreenshotTestDefaultTestSuite \
+  updateFullDebugScreenshotTestDefaultTestSuite
 ```
 
-不要在更新之后立即运行 validate 任务：它比较的是你刚刚用同一份代码生成的图像。应该改为查看更新后的图像，并确认只有你打算更改的部分发生了变化。在你的 pull request 中说明这些更改。
+Don't run the test task right after an update: it compares against images you just generated from the same code. Look at the updated images instead, and check that only what you meant to change has changed. Explain the changes in your pull request.
 
 ## 当 CI 与你的机器不一致时
 

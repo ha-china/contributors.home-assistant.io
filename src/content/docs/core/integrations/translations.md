@@ -353,4 +353,4 @@ Hassfest 也会校验自定义集成的 `translations/en.json`。你可以在自
 
 ## 与谁交流
 
-对 `strings.json` 或 hassfest 错误有疑问？请在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 **#core** 频道中提问。关于翻译本身的问题，请参阅[翻译](/translate/)板块。
+Questions about `strings.json` or a hassfest error? Start a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/). For questions about translating itself, see the [Translate](/translate/) area.

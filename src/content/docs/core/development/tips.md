@@ -41,7 +41,7 @@ order: 6
 
 ## 附上链接寻求帮助
 
-当你在 [Discord](https://www.home-assistant.io/join-chat/) 的 **#core** 频道提问时，请先将你的工作推送到一个分支并分享链接。能看到你代码的人可以更快地帮助你。不要将大段代码粘贴到频道中：它们难以阅读，还会把其他问题挤出视野。
+When you ask a technical question on [Discord](https://www.home-assistant.io/join-chat/), start a thread in **#coding-support**, push your work to a branch first, and share the link. Someone who can see your code can help you much faster. Do not paste large blocks of code into the thread: they are hard to read.
 
 ## 参考优秀的示例
 

@@ -110,6 +110,6 @@ core 中的更改可能会破坏自定义集成。对自定义集成所使用的
 
 ## 将它带入 core
 
-一旦你的集成成熟并拥有用户群，请联系维护者，例如在 [Discord](https://www.home-assistant.io/join-chat/) 上的 **#core** 频道，看看它是否应该内置发布。[它是否属于 core](/core/integrations/create/#does-it-belong-in-core) 列出了 core 的要求，并且 core 中的每个新集成都需要满足质量分级的[青铜（Bronze）规则](/core/quality-scale/rules/#bronze)。
+Once your integration has matured and has a user base, ask in the **#developers** channel on [Discord](https://www.home-assistant.io/join-chat/) whether it should ship built in. [Does it belong in core](/core/integrations/create/#does-it-belong-in-core) lists what core asks for, and every new integration in core needs the [Bronze rules](/core/quality-scale/rules/#bronze) of the quality scale.
 
 本页中的一些差异在 core 中会反过来。例如，品牌图片要放到 [brands 仓库](/core/integrations/brands/)中，翻译则来自 `strings.json`。

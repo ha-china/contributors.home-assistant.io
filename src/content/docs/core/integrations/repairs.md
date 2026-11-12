@@ -28,18 +28,19 @@ ir.async_create_issue(
 
 | 参数 | 默认值 | 说明 |
 | --- | --- | --- |
-| `domain` | | 创建问题的域 |
-| `issue_id` | | 问题的 ID，在域内唯一。使用现有 ID 创建问题会更新它。 |
-| `is_fixable` | | 用户是否可以通过维修流程修复问题 |
-| `severity` | | 严重程度。见下文。 |
-| `translation_key` | | `strings.json` 中标题和描述的键 |
-| `translation_placeholders` | `None` | 文本中占位符的值 |
-| `config_entry_id` | `None` | 问题所属的配置条目。当该条目被禁用时，问题被隐藏；当条目被移除时，问题被删除。参见[属于配置条目的问题](#issues-that-belong-to-a-config-entry)。 |
-| `breaks_in_ha_version` | `None` | 某些内容失效的版本，如 `"2027.4.0"` |
-| `learn_more_url` | `None` | 用户获取更多信息的地方 |
-| `is_persistent` | `False` | 问题是否在重启后保留。参见[持久性](#persistence)。 |
-| `issue_domain` | `None` | 当您代表另一个集成创建问题时设置 |
-| `data` | `None` | 用于维修流程的数据。不向用户显示。 |
+| `domain` | | The domain that creates the issue |
+| `issue_id` | | An ID for the issue, unique within the domain. Creating an issue with an existing ID updates it. |
+| `is_fixable` | | Whether users can fix the issue with a repair flow |
+| `severity` | | How bad it is. See below. |
+| `translation_key` | | The key of the title and description in `strings.json` |
+| `translation_placeholders` | `None` | Values for the placeholders in the text |
+| `config_entry_id` | `None` | The config entry the issue belongs to. The issue is hidden while that entry is disabled, and deleted when the entry is removed. See [issues that belong to a config entry](#issues-that-belong-to-a-config-entry). |
+| `config_subentry_id` | `None` | The subentry of `config_entry_id` the issue belongs to. The issue is deleted when the subentry is removed. See [issues that belong to a config subentry](#issues-that-belong-to-a-config-subentry). |
+| `breaks_in_ha_version` | `None` | The version in which something breaks, like `"2027.4.0"` |
+| `learn_more_url` | `None` | Where users find more information |
+| `is_persistent` | `False` | Whether the issue survives a restart. See [persistence](#persistence). |
+| `issue_domain` | `None` | Set when you create an issue on behalf of another integration |
+| `data` | `None` | Data for your repair flow. Not shown to users. |
 
 | 严重程度 | 使用时机 |
 | --- | --- |
@@ -123,7 +124,33 @@ ir.async_create_issue(
 
 对于不涉及单个配置条目的问题，例如不再受支持的 YAML 配置，请省略 `config_entry_id`。
 
-## 通过维修流程修复问题
+### Issues that belong to a config subentry
+
+When an issue is about one [subentry](/core/integrations/subentries/) of a config entry, like a weather station, a topic, or an AI agent, also set `config_subentry_id` to the ID of that subentry. The issue is then deleted when the subentry is removed, not only when the whole entry is.
+
+```python
+ir.async_create_issue(
+    hass,
+    DOMAIN,
+    f"station_offline_{subentry.subentry_id}",
+    config_entry_id=entry.entry_id,
+    config_subentry_id=subentry.subentry_id,
+    is_fixable=False,
+    severity=ir.IssueSeverity.WARNING,
+    translation_key="station_offline",
+    translation_placeholders={"station": subentry.title},
+)
+```
+
+The rules of `config_entry_id` apply here too, plus these:
+
+- `config_subentry_id` requires `config_entry_id`, and the subentry must belong to that config entry. Otherwise, `HomeAssistantError` is raised.
+- Put the subentry ID in the `issue_id`, so the subentries of an entry do not share one issue.
+- Creating an issue that already exists replaces its `config_subentry_id`, also when you leave it out. Pass it every time you create the issue.
+- Issues that belong to a subentry that no longer exists are deleted when Home Assistant starts.
+- Subentries cannot be disabled. The issue is only hidden while its config entry is disabled.
+
+## Fix an issue with a repair flow
 
 对于 `is_fixable=True` 的问题，用户会看到一个 **修复** 按钮。它会启动维修流程：一个[数据录入流程（data entry flow）](/core/integrations/flow-steps/)，与配置流程类似。当流程以 `async_create_entry` 结束时，该问题即被移除。
 
@@ -257,9 +284,9 @@ with ir.async_refresh_issues(
 
 | 参数 | 选择内容 |
 | --- | --- |
-| `issue_id_pattern` | ID 与正则表达式匹配的问题，从 ID 开头匹配。传递字符串或编译后的 `re.Pattern`。 |
-| `issue_ids` | 恰好这些问题。不存在的问题的 ID 会被跳过。 |
-| `config_entry_id` | 仅[属于](#issues-that-belong-to-a-config-entry)此配置条目的问题。与其他两个参数组合使用。 |
+| `issue_id_pattern` | Issues whose ID matches the regular expression, from the start of the ID. Pass a string or a compiled `re.Pattern`. |
+| `issue_ids` | Exactly these issues. IDs of issues that do not exist are skipped. |
+| `config_entry_id` | Only issues that [belong to](#issues-that-belong-to-a-config-entry) this config entry. Combines with the other two. There is no filter for a subentry. To refresh the issues of one subentry, put its ID in their issue IDs, and select them with `issue_id_pattern` or `issue_ids`. |
 
 传递 `issue_id_pattern` 或 `issue_ids`，不能同时传递：这会引发 `ValueError`。两者都不传递则刷新该域的所有问题。
 
@@ -479,7 +506,7 @@ def update_issues(hass: HomeAssistant) -> None:
 
 ## 持久性
 
-问题会一直存在，直到创建它的集成删除它、用户修复它，或[它所属的配置条目](#issues-that-belong-to-a-config-entry)被移除。重启后发生什么取决于 `is_persistent`：
+An issue stays until the integration that created it deletes it, the user fixes it, or the [config entry](#issues-that-belong-to-a-config-entry) or [subentry](#issues-that-belong-to-a-config-subentry) it belongs to is removed. What happens after a restart depends on `is_persistent`:
 
 - **非持久**（默认）：重启后问题不会显示，直到您的集成重新创建它。请将其用于您可以主动检查的问题，例如固件过旧。无论如何，您的集成在下一次启动时都会再次检查。
 - **持久**：重启后问题会再次显示。请将其用于只有在发生时才能发现的问题，例如更新失败。

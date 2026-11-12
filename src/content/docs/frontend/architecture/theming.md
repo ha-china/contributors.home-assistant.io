@@ -23,7 +23,7 @@ order: 5
 
 ## 主题变量
 
-没有 `--ha-` 前缀的旧变量，如 `--primary-color`、`--primary-text-color` 和 `--card-background-color`，仍然随处可见。它们定义在 `src/resources/theme/color/color.globals.ts` 中，大多基于这些令牌之上，并且是大多数用户主题所设置的变量。当你修改使用它们的组件时，请保持它们正常工作。
+Older variables without the `--ha-` prefix, like `--primary-color`, `--primary-text-color`, and `--card-background-color`, are still everywhere. They are defined in `src/resources/theme/color/color.globals.ts`, mostly on top of the tokens, and they are what most user themes set. Keep them working when you change a component that uses them. [Theme variables](/marketplace/reference/theme-variables/) in the Marketplace area lists them for theme authors, together with the component variables meant for themes.
 
 Web Awesome 组件有自己的变量，如 `--wa-color-brand-fill-loud`。`src/resources/theme/color/wa.globals.ts` 将它们映射到 Home Assistant 令牌，因此 `ha-*` 包装组件也能跟随主题。
 

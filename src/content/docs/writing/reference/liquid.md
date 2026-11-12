@@ -48,13 +48,17 @@ Go to {% my integrations title="**Settings** > **Devices & services**" %} and se
 
 大多数 My 链接只需要一个 `title`。针对特殊情况，还有一些额外的选项：
 
-- `badge` 将链接显示为 My 徽章图片而不是文本。徽章不能有 `title`。
-- `domain` 为需要指定集成的页面设置集成，例如 `config_flow_start`，它会开始设置一个特定的集成。
-- `addon`、`blueprint_url`、`brand`、`repository_url` 和 `service` 用于传递页面应打开的应用、蓝图、品牌、仓库或操作。
+- `badge` shows the link as a My badge image instead of text. A badge cannot have a `title`.
+- `domain` sets the integration for pages that need one, like `config_flow_start`, which starts setting up a specific integration.
+- `addon`, `blueprint_url`, `brand`, `repository_url`, and `service` pass the app, blueprint, brand, repository, or action that the page should open.
+- `search` fills in the search field on pages that have one, like `logs`.
+- `provider`, `integration`, and `raw` pick what the `logs` page shows. `provider` is the log to open, like `supervisor` or an app slug. `integration` filters the Home Assistant Core log to one or more integrations, separated by commas. `raw` shows the full Home Assistant Core log instead of only the errors.
 
 ```liquid
 {% my config_flow_start badge domain="hue" %}
 {% my blueprint_import badge blueprint_url="https://example.com/blueprint.yaml" %}
+{% my logs title="**Settings** > **System** > **Logs**"
+   provider="supervisor" search="token" %}
 ```
 
 没有 `title` 时，链接会回退到默认文本。该默认文本并不总是符合[风格指南](/writing/reference/style/)的要求，因此在正文中的链接请添加 `title`。

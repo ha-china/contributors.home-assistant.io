@@ -27,6 +27,23 @@ order: 3
 
 `:wear`、`:automotive`、`:common` 和 `:microwakeword` 的测试在 GitHub Actions 上的常规 Android 模拟器中运行，因为 Emulator.wtf 不提供这些目标。这会更慢，因此它们覆盖的 API 级别更少。
 
-## 不稳定的模拟器
+## Emulators with an outdated WebView
+
+The app shows the Home Assistant frontend in a WebView. An emulator system image ships with the WebView that was current when the image was published. The older the API level, the older that WebView.
+
+When the WebView is too old for the frontend you run, the frontend doesn't render, or the WebView crashes. You are most likely to run into this on the oldest API levels the app supports.
+
+How you update the WebView depends on the system image:
+
+- Images with Google Play include the [Play Store app](https://developer.android.com/studio/run/managing-avds). Sign in and update the WebView there, like on a real device. Android 9 and older only get [up to the last WebView release](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/prerelease.md) for those versions, so on those API levels an update might not be enough.
+- Images without the Play Store, like Google APIs and AOSP images, need a newer WebView APK installed by hand. [This Stack Overflow answer](https://stackoverflow.com/a/79514205/3289338) shows how, with a script written for an API 21 emulator. It needs the emulator in writable mode, and you adjust its variables to your emulator.
+
+If you run your own [frontend development server](/frontend/development/run/), you can also start it with `ES5=1`. It then also builds the legacy version of the frontend, which older WebViews can run:
+
+```shell
+ES5=1 pnpm dev
+```
+
+## Flaky emulators
 
 Android 模拟器有时会毫无缘由地失败。解决办法是重新运行该任务（job）。只有维护者才能重新运行任务，所以如果你认为这只是偶然失败，请在 pull request 中说明。

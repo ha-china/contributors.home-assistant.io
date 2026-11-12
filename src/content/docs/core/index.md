@@ -42,8 +42,8 @@ Home Assistant Core 是每个 Home Assistant 安装的核心 Python 应用程序
 
 ## 与谁交流
 
-- [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 **#core** 频道是询问有关核心和集成问题的地方。一般性的开发问题适合发在 **#developers**。对于较长的问题，请在 **#support** 中发起一个讨论串。看不到这些频道？在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant**。
-- 缺陷和拉取请求位于[核心仓库](https://github.com/home-assistant/core)中。功能想法请提交到 [GitHub discussions](https://github.com/orgs/home-assistant/discussions)。
-- 对核心工作方式的较大改动会先在[架构仓库](https://github.com/home-assistant/architecture/discussions)中讨论。
+- On the [Home Assistant Discord](https://www.home-assistant.io/join-chat/), general development questions, like whether an integration belongs in core, fit **#developers**. For a technical question, start a thread in **#coding-support**. The **#core** channel is where the core team discusses Core itself, not the place for questions. Can't see the channels? Under **Channels & Roles**, choose **I want to contribute dev skills to Home Assistant**.
+- Bugs and pull requests live in the [core repository](https://github.com/home-assistant/core). Feature ideas go to [GitHub discussions](https://github.com/orgs/home-assistant/discussions).
+- Bigger changes to how core works are discussed in the [architecture repository](https://github.com/home-assistant/architecture/discussions) first.
 
 当你寻求帮助时，请将你的工作推送到一个分支并分享链接。当人们能够看到代码时，他们能更快地为你提供帮助，而且链接也能保持频道整洁易读。

@@ -73,10 +73,12 @@ self._attr_device_info = DeviceInfo(
 
 ## 实体类别
 
-并非每个实体都是其设备的主要功能。请使用 `homeassistant.const` 中的[实体类别](/glossary/entity-category/)（entity category）来标记其他实体：
+Not every entity is a main feature of its device. Mark the others with an [entity category](/glossary/entity-category/) from `homeassistant.const`. The value column is what you put in YAML, for example as `entity_category` of an [MQTT switch](https://www.home-assistant.io/integrations/switch.mqtt/).
 
-- `EntityCategory.CONFIG`：该实体更改设备的某项设置，例如状态 LED 的开关，或移动传感器灵敏度的数值。
-- `EntityCategory.DIAGNOSTIC`：该实体显示有关设备的信息而不更改设备，例如信号强度或 IP 地址。对于让设备标识自身的按钮，也使用此类别。
+| Entity category | Value | Use it for |
+| --- | --- | --- |
+| `EntityCategory.CONFIG` | `config` | The entity changes a setting of the device, like a switch for the status LED, or a number for the sensitivity of a motion sensor. |
+| `EntityCategory.DIAGNOSTIC` | `diagnostic` | The entity shows information about the device without changing it, like the signal strength or the IP address. Also use it for a button that makes a device identify itself. |
 
 已分类的实体会显示在设备页面各自的分区中，不会被添加到自动生成的仪表盘，默认不会暴露给语音助手，并且当操作面向整个设备或区域时也不会成为目标。传感器和二进制传感器不能使用 `CONFIG` 类别。
 

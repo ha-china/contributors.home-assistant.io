@@ -67,7 +67,7 @@ rules:
 
 ## pylint 检查的内容
 
-Core 在[核心仓库](https://github.com/home-assistant/core)的 `pylint/plugins/` 中有自己的 pylint 插件。其中一些检查只针对将某条规则标记为 `done` 的集成运行。这能确保声明在做出之后依然属实，即使其他人后来修改了代码也是如此：
+Core has its own pylint plugin, in `packages/pylint-home-assistant/` of the [core repository](https://github.com/home-assistant/core). Some of its checks only run for integrations that mark a rule as `done`. This keeps a claim honest after it was made, also when other people change the code later:
 
 | 规则 | 检查 |
 | ---- | ----- |
@@ -80,7 +80,7 @@ Core 在[核心仓库](https://github.com/home-assistant/core)的 `pylint/plugin
 | [reauthentication-flow](/core/quality-scale/reauthentication-flow/) | `home-assistant-missing-reauthentication-flow` |
 | [test-before-configure](/core/quality-scale/test-before-configure/) | `home-assistant-missing-test-before-configure` |
 
-插件的其他检查会针对每个集成运行，其中许多检查同样用于强制执行某条规则，例如 `home-assistant-use-runtime-data` 或 `home-assistant-service-registered-in-setup-entry`。规则页面在“How it is checked”（检查方式）部分列出了这些检查。[pylint 插件 README](https://github.com/home-assistant/core/blob/dev/pylint/plugins/README.md) 描述了每一项检查。
+Other checks of the plugin run for every integration, and many of them enforce a rule too, like `home-assistant-use-runtime-data` or `home-assistant-service-registered-in-setup-entry`. The rule pages list them under "How it is checked". The [pylint plugin README](https://github.com/home-assistant/core/blob/dev/packages/pylint-home-assistant/README.md) describes every check.
 
 ## 评审检查的内容
 

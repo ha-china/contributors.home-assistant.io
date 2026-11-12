@@ -17,13 +17,13 @@ sidebarGroup: Openings and security
 
 | 名称 | 类型 | 默认值 | 描述 |
 | ---- | ---- | ------- | ----------- |
-| `is_closed` | `bool \| None` | 必填 | 卷帘是否处于关闭状态。用于状态（state）。 |
-| `is_opening` | `bool \| None` | `None` | 卷帘是否正在打开。用于状态。 |
-| `is_closing` | `bool \| None` | `None` | 卷帘是否正在关闭。用于状态。 |
-| `current_cover_position` | `int \| None` | `None` | 位置，取值从 0（关闭）到 100（完全打开）。 |
-| `current_cover_tilt_position` | `int \| None` | `None` | 倾斜角度，取值从 0（关闭或无倾斜）到 100（打开或最大倾斜）。 |
-| `device_class` | `CoverDeviceClass \| None` | `None` | 卷帘的类别。参见[设备类别](#device-classes)。 |
-| `supported_speeds` | `list[str] \| None` | `None` | 卷帘在打开、关闭或移动到某个位置时的运行速度。`None` 或空列表表示不支持速度选择。 |
+| `is_closed` | `bool \| None` | Required | Whether the cover is closed. Used for the state. |
+| `is_opening` | `bool \| None` | `None` | Whether the cover is opening. Used for the state. |
+| `is_closing` | `bool \| None` | `None` | Whether the cover is closing. Used for the state. |
+| `current_cover_position` | `int \| None` | `None` | The position, from 0 (closed) to 100 (fully open). |
+| `current_cover_tilt_position` | `int \| None` | `None` | The tilt, from 0 (closed or no tilt) to 100 (open or maximum tilt). |
+| `device_class` | `CoverDeviceClass \| None` | `None` | What kind of cover it is. See [Device classes](#device-classes). |
+| `supported_speeds` | `list[str] \| None` | `None` | The speeds the cover can move at when it opens, closes, or moves to a position. `None` or an empty list means no speed selection. Use the standard speeds `CoverSpeed.FAST`, `CoverSpeed.MEDIUM`, and `CoverSpeed.SLOW` from `homeassistant.components.cover` where they fit your device. An action without a speed moves the cover at the device's default speed. |
 
 当您将 `supported_speeds` 设置为列表时，Home Assistant 会将其添加为 `supported_speeds` 属性，并在调用您之前检查操作中的 `speed` 是否在列表中。不在列表中的速度会被丢弃，卷帘会以默认速度移动。如果没有速度，操作中的 `speed` 会被丢弃。
 

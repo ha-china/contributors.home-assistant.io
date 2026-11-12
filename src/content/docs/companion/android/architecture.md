@@ -49,7 +49,19 @@ Home Assistant 一直是一个强大的渐进式 Web 应用（progressive web ap
 | 应用设置 | SharedPreferences，封装在 `LocalStorage` 抽象之后 |
 | 日志 | [Timber](https://github.com/JakeWharton/timber) |
 
-## 与 Home Assistant 通信
+## Picking a flow type
+
+When you expose a stream, pick its type by what must happen to a value while nobody collects it:
+
+| What it carries | Use |
+| --- | --- |
+| State: only the latest value matters, and rendering it again is fine, like screen state or a mode | `StateFlow` |
+| An event every collector must receive, or one that means nothing once its context is gone and must be dropped when nobody listens, like WebView actions bound to the loaded page | `SharedFlow` |
+| An event one consumer must handle exactly once, never lost and never repeated, like navigation, a snackbar, or opening a link | `Channel(Channel.BUFFERED)` exposed with `receiveAsFlow()` |
+
+A `Channel` keeps a value until a consumer is there, and hands each value to a single collector. An event sent before the screen starts collecting still arrives. A `SharedFlow` without replay drops it. Use `send` from a coroutine, and `trySend` only in callbacks that can't suspend.
+
+## Talking to Home Assistant
 
 该应用使用三个通道：
 

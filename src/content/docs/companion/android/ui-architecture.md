@@ -68,7 +68,7 @@ ViewModel 持有这些输出，并将各模块连接起来：
 
 ```kotlin
 val viewState: StateFlow<UiState> // what to render
-val events: SharedFlow<UiEvent>   // one-shot effects
+val events: Flow<UiEvent>         // one-shot effects, from a Channel
 val actions: Flow<UiAction>       // only if the view owns a handle
 ```
 
@@ -118,7 +118,7 @@ sealed interface UiEvent {
 }
 ```
 
-在 `Flow` 上发出它们，并且每个事件只消费一次，通常在导航层中。绝不要重放事件：重组后重放“返回上一页”会导致导航两次。如果 UI 在旋转后必须再次显示某些内容，那它是状态，而不是事件。
+Send them through a `Channel`, exposed as a `Flow` with `receiveAsFlow()`, and consume each one once, usually in the navigation layer. The buffered `Channel` holds events for its single consumer, so an event sent before the collector starts still arrives, where a `SharedFlow` without replay drops it. See [picking a flow type](/companion/android/architecture/#picking-a-flow-type). Never replay an event: replaying "navigate back" after a recomposition navigates twice. If the UI must show something again after rotation, it is state, not an event.
 
 ### 动作
 
@@ -141,7 +141,7 @@ LaunchedEffect(webView) {
 }
 ```
 
-该流是一个带缓冲的 `SharedFlow`，只消费一次，因此当视图短暂消失时命令不会丢失。需要返回结果的动作可以携带一个 `CompletableDeferred`。
+The flow is a `SharedFlow` with a small extra buffer, consumed once. It doesn't replay: an action sent while the view is gone is dropped, which suits commands that only mean something for the object the view holds right now. When an action must not be dropped, wait for a collector first, like `FrontendViewModel` does with `subscriptionCount` before it emits. An action that needs a result can carry a `CompletableDeferred`.
 
 动作不是状态：作为状态持有的命令会在每次重组时再次执行。它也不是事件：事件是宿主做出反应的信号，比如导航，而动作驱动的是该屏幕拥有的某一个对象。
 

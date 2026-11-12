@@ -18,9 +18,9 @@ order: 1
 
 ## 示例
 
-大多数集成将动作放在 `services.py` 模块中，并用一个函数注册所有动作：
+Register the actions in `services.py`, in one function called `async_setup_services`. It is a synchronous function, decorated with `@callback`, that takes only `hass`:
 
-```python
+```python title="services.py"
 @callback
 def async_setup_services(hass: HomeAssistant) -> None:
     """Register the actions of My integration."""
@@ -46,7 +46,7 @@ def async_setup_services(hass: HomeAssistant) -> None:
 
 在 `__init__.py` 的 `async_setup` 中调用该函数。仅通过 UI 设置的集成还需要一个说明这一点的 `CONFIG_SCHEMA`：
 
-```python
+```python title="__init__.py"
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
@@ -58,8 +58,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 ## 如何检查
 
-- 当动作在 `async_setup_entry` 中注册时，Pylint 会发出警告，包括通过 `async_setup_entry` 调用的同一模块中的辅助函数注册的情况（`home-assistant-service-registered-in-setup-entry`）。从其他模块（如 `services.py`）导入的辅助函数则不会被跟踪。
-- 动作内部的检查在审查中验证。
+- Pylint warns when actions are registered in `async_setup_entry` (`home-assistant-service-registered-in-setup-entry`).
+- Pylint warns when actions are registered outside `services.py` (`home-assistant-action-registered-outside-services-module`).
+- Pylint warns when `async_setup_services` does not have the shape shown in the example (`home-assistant-invalid-setup-services`).
+- The checks inside the action are verified in review.
 
 ## 例外
 

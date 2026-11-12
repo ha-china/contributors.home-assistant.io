@@ -19,7 +19,9 @@ sidebarLabel: Actions
 
 请在您集成的 `async_setup` 中注册动作，不要在 `async_setup_entry` 中注册，也不要在平台中注册。这样，即使没有加载任何配置条目（config entry），这些动作也存在，因此使用它们的自动化可以被编辑和验证，用户也会得到明确的错误提示，而不是未知动作。这是[质量等级](/core/quality-scale/)中铜级（Bronze）的一项规则。
 
-由于您的集成现在有了 `async_setup`，因此它需要一个 `CONFIG_SCHEMA`。参见[不使用 YAML 的集成](/core/integrations/yaml/#integrations-without-yaml)。
+Put the registration in `services.py`, in a function called `async_setup_services`, and call that function from `async_setup`. It is a synchronous function, decorated with `@callback`, that takes only `hass`. Pylint warns about actions registered outside `services.py` (`home-assistant-action-registered-outside-services-module`), and about an `async_setup_services` with another shape (`home-assistant-invalid-setup-services`).
+
+Since your integration now has an `async_setup`, it needs a `CONFIG_SCHEMA`. See [integrations without YAML](/core/integrations/yaml/#integrations-without-yaml).
 
 ## 选择正确的目标
 
@@ -33,7 +35,7 @@ sidebarLabel: Actions
 
 ## 配置条目的动作
 
-```python
+```python title="services.py"
 import probatio
 
 from homeassistant.const import ATTR_CONFIG_ENTRY_ID
@@ -42,11 +44,11 @@ from homeassistant.core import (
     ServiceCall,
     ServiceResponse,
     SupportsResponse,
+    callback,
 )
 from homeassistant.helpers import config_validation as cv, service
-from homeassistant.helpers.typing import ConfigType
 
-CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+from .const import DOMAIN
 
 GET_FORECAST_SCHEMA = probatio.Schema(
     {
@@ -56,8 +58,9 @@ GET_FORECAST_SCHEMA = probatio.Schema(
 )
 
 
-async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the Example integration."""
+@callback
+def async_setup_services(hass: HomeAssistant) -> None:
+    """Register the actions of the Example integration."""
 
     async def async_get_forecast(call: ServiceCall) -> ServiceResponse:
         """Return the forecast for the coming days."""
@@ -77,7 +80,22 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         schema=GET_FORECAST_SCHEMA,
         supports_response=SupportsResponse.ONLY,
     )
+```
 
+```python title="__init__.py"
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers.typing import ConfigType
+
+from .const import DOMAIN
+from .services import async_setup_services
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the Example integration."""
+    async_setup_services(hass)
     return True
 ```
 
@@ -87,17 +105,21 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 实体动作在用户定位的实体上运行。用户可以按实体、设备、区域（area）、楼层（floor）或标签（label）来定位它们，Home Assistant 会将这些解析为您的实体。请使用 `async_register_platform_entity_service` 在您自己的域（如 `sonos`）下注册它们，而不是在实体域（如 `media_player`）下注册：
 
-```python
+```python title="services.py"
 import probatio
 
 from homeassistant.components.media_player import (
     DOMAIN as MEDIA_PLAYER_DOMAIN,
 )
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import config_validation as cv, service
 
+from .const import DOMAIN
 
-async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the Sonos integration."""
+
+@callback
+def async_setup_services(hass: HomeAssistant) -> None:
+    """Register the actions of the Sonos integration."""
     service.async_register_platform_entity_service(
         hass,
         DOMAIN,
@@ -106,8 +128,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         schema={probatio.Required("sleep_time"): cv.positive_int},
         func="set_sleep_timer",
     )
-
-    return True
 ```
 
 这会调用每个被定位实体的 `set_sleep_timer` 方法，并以 `sleep_time` 作为关键字参数。除了方法名之外，`func` 也可以是一个接收实体和 `ServiceCall` 的异步函数。模式（schema）可以是一个字典，系统会自动将其转换为实体动作模式。若只想允许具有某些功能的实体，请传入 `required_features`。

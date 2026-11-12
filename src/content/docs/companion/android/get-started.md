@@ -5,7 +5,7 @@ sidebarLabel: 入门
 sidebarGroup: 设置
 order: 1
 source: https://github.com/home-assistant/android/blob/main/.github/workflows/pr.yml
-lastVerified: 2026-10-14
+lastVerified: 2026-11-06
 ---
 
 Android Studio 是你唯一需要的工具。它自带 Android SDK、模拟器和 JDK。本页面将带你从零开始，直到应用在模拟器上运行。
@@ -91,10 +91,10 @@ debug 构建有自己的应用 ID，即 `io.homeassistant.companion.android.debu
 ./gradlew detektMain :build-logic:convention:detektMain --continue
 ./gradlew lint --continue
 
-# 截图测试，按模块进行
-./gradlew :app:validateFullDebugScreenshotTest
-./gradlew :wear:validateDebugScreenshotTest
-./gradlew :common:validateDebugScreenshotTest
+# Screenshot tests, per module
+./gradlew :app:testFullDebugScreenshotTestDefaultTestSuite
+./gradlew :wear:testDebugScreenshotTestDefaultTestSuite
+./gradlew :common:testDebugScreenshotTestDefaultTestSuite
 
 # 更改依赖之后
 ./gradlew alldependencies --write-locks

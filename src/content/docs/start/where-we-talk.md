@@ -24,20 +24,20 @@ Home Assistant 有几个人们聚集的地方。每个地方各有所长。选�
 
 | 领域 | 相关人员交流的地方 |
 | --- | --- |
-| [架构](/architecture/) | Discord 上的 **#developers**，以及 GitHub 上的[架构讨论](https://github.com/home-assistant/architecture/discussions) |
-| [安全](/security/) | 漏洞：通过 [GitHub 安全通告](https://github.com/home-assistant/core/security/advisories/new)报告，切勿公开。其他问题：Discord 上的 **#developers** |
-| [核心与集成](/core/) | Discord 上的 **#core**，一般开发问题在 **#developers**（较长的问题可在 **#support** 开一个帖子），以及 GitHub 上的 [home-assistant/core](https://github.com/home-assistant/core) |
-| [前端](/frontend/) | Discord 上的 **#frontend**，以及 GitHub 上的 [home-assistant/frontend](https://github.com/home-assistant/frontend)。设计问题：**#designers**、**#product-and-ux**，或 [UX 设计讨论](https://github.com/OpenHomeFoundation/ux-design/discussions) |
-| [应用](/apps/) | Discord 上的 **#developers**（关于 Supervisor 的问题在 **#operating-system**），[home-assistant/supervisor](https://github.com/home-assistant/supervisor/issues) 和 [home-assistant/addons](https://github.com/home-assistant/addons/issues) 的 issue，以及论坛上的[分享你的项目](https://community.home-assistant.io/c/projects/9) |
-| [伴侣应用](/companion/) | Discord 上的 **#apple-apps**、Discord 上的 [Android 项目帖子](discord:android-project)，以及 [home-assistant/android](https://github.com/home-assistant/android/issues) 和 [home-assistant/iOS](https://github.com/home-assistant/iOS/issues) 的 issue |
-| [OS 与 Supervisor](/os/) | Discord 上的 **#operating-system**，以及 GitHub 上的 [home-assistant/operating-system](https://github.com/home-assistant/operating-system) 和 [home-assistant/supervisor](https://github.com/home-assistant/supervisor) |
-| [设计](/design/) | Discord 上的 **#designers** 和 **#product-and-ux**，用于想法和提案的 [ux-design 讨论](https://github.com/OpenHomeFoundation/ux-design/discussions)，以及用于具体问题的带 [`UX` 标签](https://github.com/home-assistant/frontend/labels/UX)的前端 issue |
-| [撰写文档](/writing/) | Discord 上的 **#documentation**、你的 pull request，以及 [home-assistant.io 的 issue](https://github.com/home-assistant/home-assistant.io/issues) |
-| [翻译](/translate/) | 在 Lokalise 中对该字符串发表评论，以及 GitHub 上的[本地化讨论](https://github.com/home-assistant/frontend/discussions/categories/localization) |
-| [语音](/translate/voice/) | [意图（intents）讨论](https://github.com/OHF-Voice/intents/discussions)、你的语言负责人，以及 Discord 上的 **#language-leaders** |
-| [发布](/releases/) | 测试周期间的 Discord **#beta**，以及出现问题的部分的 issue 跟踪器 |
-| [社区](/community/) | 发送电子邮件至社区团队 [community@openhomefoundation.org](mailto:community@openhomefoundation.org) |
-| [数据](/data/) | Discord 上的设备数据库频道，以及 [analytics.home-assistant.io 仓库](https://github.com/home-assistant/analytics.home-assistant.io) |
+| [Architecture](/architecture/) | **#developers** on Discord, and the [architecture discussions](https://github.com/home-assistant/architecture/discussions) on GitHub |
+| [Security](/security/) | A vulnerability: a [GitHub security advisory](https://github.com/home-assistant/core/security/advisories/new), never in public. Other questions: **#developers** on Discord |
+| [Core and integrations](/core/) | **#developers** on Discord for general development questions, like whether an integration belongs in core, a thread in **#coding-support** for a technical question, and [home-assistant/core](https://github.com/home-assistant/core) on GitHub |
+| [Frontend](/frontend/) | **#frontend** on Discord, and [home-assistant/frontend](https://github.com/home-assistant/frontend) on GitHub. Design questions: **#designers**, **#product-and-ux**, or the [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) |
+| [Apps](/apps/) | **#developers** on Discord (**#operating-system** for questions about the Supervisor), the issues of [home-assistant/supervisor](https://github.com/home-assistant/supervisor/issues) and [home-assistant/addons](https://github.com/home-assistant/addons/issues), and [Share your Projects](https://community.home-assistant.io/c/projects/9) on the forum |
+| [Companion apps](/companion/) | **#apple-apps** on Discord, the [Android project thread](discord:android-project) on Discord, and the issues of [home-assistant/android](https://github.com/home-assistant/android/issues) and [home-assistant/iOS](https://github.com/home-assistant/iOS/issues) |
+| [OS and Supervisor](/os/) | **#operating-system** on Discord, and [home-assistant/operating-system](https://github.com/home-assistant/operating-system) and [home-assistant/supervisor](https://github.com/home-assistant/supervisor) on GitHub |
+| [Design](/design/) | **#designers** and **#product-and-ux** on Discord, the [ux-design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) for ideas and proposals, and frontend [issues with the `UX` label](https://github.com/home-assistant/frontend/labels/UX) for concrete problems |
+| [Writing docs](/writing/) | **#documentation** on Discord, your pull request, and the [issues of home-assistant.io](https://github.com/home-assistant/home-assistant.io/issues) |
+| [Translations](/translate/) | A comment on the string in Lokalise, and the [localization discussions](https://github.com/home-assistant/frontend/discussions/categories/localization) on GitHub |
+| [Voice](/translate/voice/) | The [intents discussions](https://github.com/OHF-Voice/intents/discussions), the language leader of your language, and **#language-leaders** on Discord |
+| [Releases](/releases/) | **#beta** on Discord during the beta week, and the issue tracker of the part that broke |
+| [Community](/community/) | Email the community team at [community@openhomefoundation.org](mailto:community@openhomefoundation.org) |
+| [Data](/data/) | The device database channel on Discord, and the [analytics.home-assistant.io repository](https://github.com/home-assistant/analytics.home-assistant.io) |
 
 ## Discord
 

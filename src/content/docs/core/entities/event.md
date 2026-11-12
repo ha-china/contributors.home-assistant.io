@@ -40,16 +40,29 @@ sidebarGroup: Sensors and status
 
 `BUTTON` 实体可以使用这些 `ButtonEventType` 值。它们都不是强制性的：只使用您的硬件能够产生的那些。
 
-| 事件类型 | 含义 |
-| --- | --- |
-| `PRESS_START` | 按钮被按下。 |
-| `PRESS_END` | 按钮在短按后松开。 |
-| `LONG_PRESS_START` | 按钮被按住超过阈值。 |
-| `LONG_PRESS_END` | 按钮在长按后松开。 |
-| `MULTI_PRESS_ONGOING` | 检测到一系列按压中的一次按压，且该系列尚未结束。 |
-| `MULTI_PRESS_END` | 一系列按压结束。 |
+The types come in two layers. The physical types, `PRESS_START` and `PRESS_END`, describe the button going down and up. The gesture types describe what the device concluded from the presses.
 
-两种多次按压类型都包含一个带有按压次数的 `multi_press_count` 属性（即 `ATTR_MULTI_PRESS_COUNT` 常量）。如果设备每次交互只发送一个事件，没有单独的按下和松开，请使用匹配的结束类型，例如短按使用 `PRESS_END`。对于从单一来源报告方向的按钮，例如上下翘板开关，最好为每个方向使用一个实体。当无法使用单独的实体时，可以使用非标准的 `direction` 属性。也允许使用其他非标准的事件类型。
+| Event type | Layer | Meaning |
+| --- | --- | --- |
+| `PRESS_START` | Physical | The button went down. Only use it if the device reports it for every press. |
+| `PRESS_END` | Physical | The button was released after a press the device did not classify as long. |
+| `LONG_PRESS_START` | Gesture | The button reached the hold threshold and is still down. Fired once per hold. |
+| `LONG_PRESS_END` | Gesture | The button was released after a press the device classified as long. |
+| `SINGLE_PRESS` | Gesture | The device concluded that exactly one short press happened. |
+| `MULTI_PRESS` | Gesture | The device finished counting a series of two or more presses. A long press never counts. |
+
+`MULTI_PRESS` includes a `press_count` attribute (the `ATTR_PRESS_COUNT` constant) with the number of presses. Only list `MULTI_PRESS` in `event_types` if you also list `SINGLE_PRESS`. A device that reports a double press, but never a resolved single press, keeps its double press as a non-standard event type.
+
+When mapping the events of your device:
+
+- Map one event of the device to one standard event. Do not suppress, delay, or synthesize events, and do not run timers.
+- Only list a type in `event_types` if its meaning holds for every event you fire under that name.
+- A device that reports both the release and the resolved single press fires both, as `PRESS_END` and `SINGLE_PRESS`.
+- A device that sends one event per press maps it by what that event is. Sent when the button goes down, it is `PRESS_START`. Sent when the button is released, it is `PRESS_END`. Reported as a completed press, like after a debounce or through a cloud service, it is `SINGLE_PRESS`. When in doubt, use `SINGLE_PRESS`.
+- A hold reported when the threshold is reached is `LONG_PRESS_START`. A hold reported after the release is `LONG_PRESS_END`.
+- Only keep local state to classify a release as `PRESS_END` or `LONG_PRESS_END` after a `LONG_PRESS_START`, or to fire `LONG_PRESS_START` once when the device repeats it.
+
+For a button that reports a direction from one source, like an up and down rocker, prefer one entity per direction. A non-standard `direction` attribute is acceptable when separate entities are not practical. Other, non-standard event types are allowed too.
 
 ## 方法
 

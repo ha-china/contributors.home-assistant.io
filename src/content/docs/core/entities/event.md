@@ -40,29 +40,29 @@ sidebarGroup: Sensors and status
 
 `BUTTON` 实体可以使用这些 `ButtonEventType` 值。它们都不是强制性的：只使用您的硬件能够产生的那些。
 
-The types come in two layers. The physical types, `PRESS_START` and `PRESS_END`, describe the button going down and up. The gesture types describe what the device concluded from the presses.
+类型分为两层。物理类型 `PRESS_START` 和 `PRESS_END` 描述按钮按下和释放。手势类型描述设备从按压中得出的结论。
 
-| Event type | Layer | Meaning |
+| 事件类型 | 层 | 含义 |
 | --- | --- | --- |
-| `PRESS_START` | Physical | The button went down. Only use it if the device reports it for every press. |
-| `PRESS_END` | Physical | The button was released after a press the device did not classify as long. |
-| `LONG_PRESS_START` | Gesture | The button reached the hold threshold and is still down. Fired once per hold. |
-| `LONG_PRESS_END` | Gesture | The button was released after a press the device classified as long. |
-| `SINGLE_PRESS` | Gesture | The device concluded that exactly one short press happened. |
-| `MULTI_PRESS` | Gesture | The device finished counting a series of two or more presses. A long press never counts. |
+| `PRESS_START` | 物理 | 按钮被按下。仅当设备对每次按压都报告时才使用。 |
+| `PRESS_END` | 物理 | 按钮在设备未归类为长按的按压后被释放。 |
+| `LONG_PRESS_START` | 手势 | 按钮达到保持阈值并且仍处于按下状态。每次保持触发一次。 |
+| `LONG_PRESS_END` | 手势 | 按钮在设备归类为长按的按压后被释放。 |
+| `SINGLE_PRESS` | 手势 | 设备得出结论，恰好发生了一次短按。 |
+| `MULTI_PRESS` | 手势 | 设备完成了对两次或更多次按压的计数。长按不计入。 |
 
-`MULTI_PRESS` includes a `press_count` attribute (the `ATTR_PRESS_COUNT` constant) with the number of presses. Only list `MULTI_PRESS` in `event_types` if you also list `SINGLE_PRESS`. A device that reports a double press, but never a resolved single press, keeps its double press as a non-standard event type.
+`MULTI_PRESS` 包含一个 `press_count` 属性（`ATTR_PRESS_COUNT` 常量），表示按压次数。仅在 `event_types` 中同时列出 `SINGLE_PRESS` 时才列出 `MULTI_PRESS`。报告双击但从不报告已解析的单按的设备，将其双击保留为非标准事件类型。
 
-When mapping the events of your device:
+在映射设备的事件时：
 
-- Map one event of the device to one standard event. Do not suppress, delay, or synthesize events, and do not run timers.
-- Only list a type in `event_types` if its meaning holds for every event you fire under that name.
-- A device that reports both the release and the resolved single press fires both, as `PRESS_END` and `SINGLE_PRESS`.
-- A device that sends one event per press maps it by what that event is. Sent when the button goes down, it is `PRESS_START`. Sent when the button is released, it is `PRESS_END`. Reported as a completed press, like after a debounce or through a cloud service, it is `SINGLE_PRESS`. When in doubt, use `SINGLE_PRESS`.
-- A hold reported when the threshold is reached is `LONG_PRESS_START`. A hold reported after the release is `LONG_PRESS_END`.
-- Only keep local state to classify a release as `PRESS_END` or `LONG_PRESS_END` after a `LONG_PRESS_START`, or to fire `LONG_PRESS_START` once when the device repeats it.
+- 将设备的一个事件映射到一个标准事件。不要抑制、延迟或合成事件，也不要运行定时器。
+- 仅当某个类型对您在该名称下触发的每个事件都成立时，才在 `event_types` 中列出该类型。
+- 同时报告释放和已解析的单按的设备会触发两者，即 `PRESS_END` 和 `SINGLE_PRESS`。
+- 每次按压发送一个事件的设备根据该事件的内容进行映射。在按钮按下时发送，则为 `PRESS_START`。在按钮释放时发送，则为 `PRESS_END`。报告为已完成的按压（如去抖后或通过云服务），则为 `SINGLE_PRESS`。如有疑问，请使用 `SINGLE_PRESS`。
+- 在达到阈值时报告的保持为 `LONG_PRESS_START`。在释放后报告的保持为 `LONG_PRESS_END`。
+- 仅在 `LONG_PRESS_START` 之后保留本地状态以将释放分类为 `PRESS_END` 或 `LONG_PRESS_END`，或在设备重复报告时触发一次 `LONG_PRESS_START`。
 
-For a button that reports a direction from one source, like an up and down rocker, prefer one entity per direction. A non-standard `direction` attribute is acceptable when separate entities are not practical. Other, non-standard event types are allowed too.
+对于报告来自单一来源的方向的按钮（如上下翘板开关），建议每个方向使用一个实体。当单独实体不切实际时，非标准的 `direction` 属性是可以接受的。其他非标准事件类型也允许。
 
 ## 方法
 

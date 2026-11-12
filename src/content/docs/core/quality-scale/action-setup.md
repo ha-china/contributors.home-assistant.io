@@ -18,7 +18,7 @@ order: 1
 
 ## 示例
 
-Register the actions in `services.py`, in one function called `async_setup_services`. It is a synchronous function, decorated with `@callback`, that takes only `hass`:
+在 `services.py` 中注册动作，放在一个名为 `async_setup_services` 的函数中。它是一个同步函数，用 `@callback` 装饰，只接受 `hass`：
 
 ```python title="services.py"
 @callback
@@ -58,10 +58,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 ## 如何检查
 
-- Pylint warns when actions are registered in `async_setup_entry` (`home-assistant-service-registered-in-setup-entry`).
-- Pylint warns when actions are registered outside `services.py` (`home-assistant-action-registered-outside-services-module`).
-- Pylint warns when `async_setup_services` does not have the shape shown in the example (`home-assistant-invalid-setup-services`).
-- The checks inside the action are verified in review.
+- Pylint 在动作于 `async_setup_entry` 中注册时发出警告（`home-assistant-service-registered-in-setup-entry`）。
+- Pylint 在动作于 `services.py` 之外注册时发出警告（`home-assistant-action-registered-outside-services-module`）。
+- Pylint 在 `async_setup_services` 不符合示例所示形式时发出警告（`home-assistant-invalid-setup-services`）。
+- 动作内部的检查在审查中验证。
 
 ## 例外
 

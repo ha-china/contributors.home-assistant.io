@@ -13,23 +13,23 @@ order: 2
 - 旧的方式能否在一段时间内与新方式并存继续工作？那么它是一个[弃用（deprecation）](/releases/guides/deprecations/)，还不是不向后兼容的变更。
 - Home Assistant 能否自动迁移旧配置？那么任何人都不需要做任何事。
 
-## When it is backward-incompatible
+## 何时属于不向后兼容的变更
 
-The question to ask is: can this change affect someone right after they update? Mark your pull request as a backward-incompatible change, with the **Breaking change** section and the `breaking-change` label, when:
+要问的问题是：这个变更是否会在用户更新后立即影响到他们？当出现以下情况时，请将你的拉取请求标记为不向后兼容的变更，填写 **Breaking change** 部分并添加 `breaking-change` 标签：
 
-- It breaks something right away, without a [deprecation](/releases/guides/deprecations/) first. Users were not told in advance, and had no chance to act before they updated.
-- It removes something from an integration after its deprecation period. Users were warned with a [repair](/glossary/repair/), but some of them may not have acted on it, and the removal still affects them.
+- 它立即破坏了某些功能，且没有事先[弃用（deprecation）](/releases/guides/deprecations/)。用户没有提前收到通知，也没有机会在更新前采取行动。
+- 它在弃用期结束后移除了集成中的某些内容。用户曾通过[修复（repair）](/glossary/repair/)收到警告，但有些人可能没有采取行动，移除仍然会影响他们。
 
-Do not mark it when:
+在以下情况下不要标记：
 
-- Nothing breaks.
-- It removes a deprecated [core API](/core/development/deprecating/#developer-facing-deprecations), like a helper or a constant, after its deprecation period, and no integration or other code in Home Assistant Core uses it anymore. Only custom integrations can still be affected, and their developers were told on the [developer blog](/blog/) when the deprecation started.
+- 没有任何功能被破坏。
+- 它在弃用期结束后移除了已弃用的[核心 API](/core/development/deprecating/#developer-facing-deprecations)，例如辅助元素或常量，并且 Home Assistant Core 中不再有任何集成或其他代码使用它。只有自定义集成可能仍然受到影响，而它们的开发者在弃用开始时已在[开发者博客](/blog/)上收到通知。
 
-The minimum deprecation periods, 6 months for what users see and 12 months for core APIs, are in [Deprecate something](/releases/guides/deprecations/#how-long).
+最短弃用期——用户可见内容为 6 个月，核心 API 为 12 个月——请参阅[弃用某些内容](/releases/guides/deprecations/#how-long)。
 
-## Mark the pull request
+## 标记拉取请求
 
-The pull request template of the [core repository](https://github.com/home-assistant/core) has a type of change checklist. Check **Breaking change** when existing functionality breaks for users, as described above, or **Deprecation** when the break happens in a future release. The pull request then gets the `breaking-change` label, which is what puts your text in the release notes.
+[核心仓库](https://github.com/home-assistant/core)的拉取请求模板包含一个变更类型清单。当现有功能如上所述对用户造成破坏时，勾选 **Breaking change**；当破坏发生在未来版本时，勾选 **Deprecation**。拉取请求随后会获得 `breaking-change` 标签，这会使你的文字出现在发布说明中。
 
 ## 编写不向后兼容的变更部分
 

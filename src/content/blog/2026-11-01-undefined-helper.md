@@ -1,6 +1,6 @@
 ---
-title: Undefined sentinel changes
-description: Deprecate UNDEFINED and UndefinedType in favor of Undefined
+title: 未定义哨兵值变更
+description: 弃用 UNDEFINED 和 UndefinedType，改用 Undefined
 date: 2026-11-01
 authors:
   - Marc Mueller
@@ -8,7 +8,7 @@ areas:
   - core
 ---
 
-As of Home Assistant Core 2026.12, the `UNDEFINED` and `UndefinedType` helpers are deprecated in favor of just `Undefined`.
+自 Home Assistant Core 2026.12 起，`UNDEFINED` 和 `UndefinedType` 辅助元素（helper）已弃用，建议改用 `Undefined`。
 
 ```python
 # old

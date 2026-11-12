@@ -27,23 +27,23 @@ order: 3
 
 `:wear`、`:automotive`、`:common` 和 `:microwakeword` 的测试在 GitHub Actions 上的常规 Android 模拟器中运行，因为 Emulator.wtf 不提供这些目标。这会更慢，因此它们覆盖的 API 级别更少。
 
-## Emulators with an outdated WebView
+## WebView 过时的模拟器
 
-The app shows the Home Assistant frontend in a WebView. An emulator system image ships with the WebView that was current when the image was published. The older the API level, the older that WebView.
+应用在 WebView 中显示 Home Assistant 前端。模拟器系统镜像自带发布时最新的 WebView。API 级别越旧，WebView 就越旧。
 
-When the WebView is too old for the frontend you run, the frontend doesn't render, or the WebView crashes. You are most likely to run into this on the oldest API levels the app supports.
+当 WebView 对于你运行的前端来说太旧时，前端无法渲染，或者 WebView 会崩溃。你最有可能在应用支持的最旧 API 级别上遇到这种情况。
 
-How you update the WebView depends on the system image:
+如何更新 WebView 取决于系统镜像：
 
-- Images with Google Play include the [Play Store app](https://developer.android.com/studio/run/managing-avds). Sign in and update the WebView there, like on a real device. Android 9 and older only get [up to the last WebView release](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/prerelease.md) for those versions, so on those API levels an update might not be enough.
-- Images without the Play Store, like Google APIs and AOSP images, need a newer WebView APK installed by hand. [This Stack Overflow answer](https://stackoverflow.com/a/79514205/3289338) shows how, with a script written for an API 21 emulator. It needs the emulator in writable mode, and you adjust its variables to your emulator.
+- 带有 Google Play 的镜像包含 [Play Store 应用](https://developer.android.com/studio/run/managing-avds)。登录并在那里更新 WebView，就像在真实设备上一样。Android 9 及更早版本只能获得[这些版本的最后一次 WebView 发布](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/prerelease.md)，因此在这些 API 级别上，更新可能还不够。
+- 没有 Play Store 的镜像，例如 Google APIs 和 AOSP 镜像，需要手动安装较新的 WebView APK。[这个 Stack Overflow 回答](https://stackoverflow.com/a/79514205/3289338)展示了如何操作，其中包含一个为 API 21 模拟器编写的脚本。它需要模拟器处于可写模式，并且你需要根据你的模拟器调整其变量。
 
-If you run your own [frontend development server](/frontend/development/run/), you can also start it with `ES5=1`. It then also builds the legacy version of the frontend, which older WebViews can run:
+如果你运行自己的[前端开发服务器](/frontend/development/run/)，你也可以使用 `ES5=1` 启动它。它还会构建前端的旧版本，较旧的 WebView 可以运行该版本：
 
 ```shell
 ES5=1 pnpm dev
 ```
 
-## Flaky emulators
+## 不稳定的模拟器
 
 Android 模拟器有时会毫无缘由地失败。解决办法是重新运行该任务（job）。只有维护者才能重新运行任务，所以如果你认为这只是偶然失败，请在 pull request 中说明。

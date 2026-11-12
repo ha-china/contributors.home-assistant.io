@@ -70,6 +70,6 @@ Home Assistant 拥有由数千人编写的数千个集成（integration）。集
 
 ## 与谁交流
 
-- Ask about a rule, or whether an exemption is reasonable, in a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/).
-- The integration owners of an integration, listed as `codeowners` in its `manifest.json`, know best where it stands. Mention them in your pull request.
-- Ideas to change a rule, or to add one, belong in the [architecture discussions](https://github.com/home-assistant/architecture/discussions).
+- 在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 **#coding-support** 频道中发起讨论，询问关于某条规则的问题，或某个豁免是否合理。
+- 集成的负责人（在 `manifest.json` 中列为 `codeowners`）最了解其现状。在你的拉取请求中提及他们。
+- 关于修改规则或添加新规则的想法，请提交到 [架构讨论](https://github.com/home-assistant/architecture/discussions)。

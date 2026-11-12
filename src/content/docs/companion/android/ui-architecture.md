@@ -118,7 +118,7 @@ sealed interface UiEvent {
 }
 ```
 
-Send them through a `Channel`, exposed as a `Flow` with `receiveAsFlow()`, and consume each one once, usually in the navigation layer. The buffered `Channel` holds events for its single consumer, so an event sent before the collector starts still arrives, where a `SharedFlow` without replay drops it. See [picking a flow type](/companion/android/architecture/#picking-a-flow-type). Never replay an event: replaying "navigate back" after a recomposition navigates twice. If the UI must show something again after rotation, it is state, not an event.
+通过 `Channel` 发送它们，以 `receiveAsFlow()` 的形式暴露为 `Flow`，并且每个事件只消费一次，通常在导航层消费。带缓冲的 `Channel` 为其单一消费者持有事件，因此在收集器启动之前发送的事件仍然会到达，而没有重放的 `SharedFlow` 会丢弃它。参见[选择流类型](/companion/android/architecture/#picking-a-flow-type)。绝不要重放事件：在重组后重放“返回导航”会导致导航两次。如果 UI 在旋转后必须再次显示某些内容，那是状态，而不是事件。
 
 ### 动作
 
@@ -141,7 +141,7 @@ LaunchedEffect(webView) {
 }
 ```
 
-The flow is a `SharedFlow` with a small extra buffer, consumed once. It doesn't replay: an action sent while the view is gone is dropped, which suits commands that only mean something for the object the view holds right now. When an action must not be dropped, wait for a collector first, like `FrontendViewModel` does with `subscriptionCount` before it emits. An action that needs a result can carry a `CompletableDeferred`.
+该流是一个带有少量额外缓冲的 `SharedFlow`，只消费一次。它不重放：在视图消失时发送的动作会被丢弃，这适合那些只对视图当前持有的对象有意义的命令。当动作不能被丢弃时，先等待收集器，就像 `FrontendViewModel` 在发出之前用 `subscriptionCount` 所做的那样。需要结果的动作可以携带一个 `CompletableDeferred`。
 
 动作不是状态：作为状态持有的命令会在每次重组时再次执行。它也不是事件：事件是宿主做出反应的信号，比如导航，而动作驱动的是该屏幕拥有的某一个对象。
 

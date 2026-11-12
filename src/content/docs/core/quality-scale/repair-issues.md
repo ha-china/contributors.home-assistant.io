@@ -69,11 +69,11 @@ async def async_setup_entry(
 }
 ```
 
-Delete the issue once the problem is solved, like the example does on a successful setup. Do not delete it when the entry unloads: that throws away the choice of a user who ignored the issue, every time the entry reloads.
+问题解决后，删除该问题，就像示例在成功设置后所做的那样。不要在条目卸载时删除它：那会丢弃那些忽略问题的用户的选择，并且每次条目重新加载时都会重复发生。
 
-The issue is about one config entry, so its `issue_id` contains the entry ID, or the entries of an integration that is set up more than once overwrite each other's issue. `config_entry_id` links the issue to the entry, so Home Assistant hides it while the entry is disabled and deletes it when the entry is removed: see [issues that belong to a config entry](/core/integrations/repairs/#issues-that-belong-to-a-config-entry).
+该问题涉及一个配置条目，因此其 `issue_id` 包含条目 ID，否则多次设置的集成条目会互相覆盖对方的问题。`config_entry_id` 将问题链接到条目，因此当条目被禁用时，Home Assistant 会隐藏该问题，并在条目被移除时删除它：参见[属于配置条目的问题](/core/integrations/repairs/#issues-that-belong-to-a-config-entry)。
 
-When an issue is about a single subentry, also pass `config_subentry_id`, so the issue is removed together with the subentry: see [issues that belong to a config subentry](/core/integrations/repairs/#issues-that-belong-to-a-config-subentry).
+当问题涉及单个子条目时，也要传递 `config_subentry_id`，以便问题与子条目一起被移除：参见[属于配置子条目的问题](/core/integrations/repairs/#issues-that-belong-to-a-config-subentry)。
 
 ## 如何检查
 

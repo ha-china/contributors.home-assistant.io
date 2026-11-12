@@ -1,42 +1,42 @@
 ---
-title: Layout
-description: How wide the content of a page can get, and how much space it keeps from the edges of the screen.
+title: 布局
+description: 页面内容的最大宽度，以及内容与屏幕边缘之间保留的空间。
 order: 3.5
 source: https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/core.globals.ts
 lastVerified: 2026-11-02
 ---
 
-Every page in Home Assistant has a maximum width for its content, and space between the content and the edges of the screen. When every page picks its own values, moving between pages feels uneven. So there are three content widths and one gutter for the settings, profile, and marketplace pages. Some parts of the interface are not covered yet. They are listed at the end of this page.
+Home Assistant 中的每个页面都有内容的最大宽度，以及内容与屏幕边缘之间的空间。当每个页面自行选择数值时，页面之间的切换会显得不协调。因此，设置、个人资料和商店页面有三种内容宽度和一种边距。界面的某些部分尚未涵盖。它们列在本页末尾。
 
-## Content widths
+## 内容宽度
 
-Pick the width that fits what is on your page. The widths are generous on purpose: on a desktop screen, they show more at once.
+选择适合页面内容的宽度。这些宽度有意设置得较为宽裕：在桌面屏幕上，它们能一次显示更多内容。
 
-| Width | Token | Max width | Use it for |
+| 宽度 | Token | 最大宽度 | 用途 |
 | --- | --- | --- | --- |
-| Narrow | `--ha-content-width-narrow` | 720px | A single column of cards or forms, like the settings sections, the profile, backups, and the pages of an integration like Z-Wave or Zigbee |
-| Wide | `--ha-content-width-wide` | 1280px | A grid of cards, or two columns side by side, like the device, area, and integration pages |
-| Full | None | 100% | Content that uses all the space it gets, like data tables, logs, history, maps, the calendar, and energy |
+| 窄 | `--ha-content-width-narrow` | 720px | 单列卡片或表单，如设置分区、个人资料、备份，以及 Z-Wave 或 Zigbee 等集成的页面 |
+| 宽 | `--ha-content-width-wide` | 1280px | 卡片网格，或并排两列，如设备、区域和集成页面 |
+| 全宽 | 无 | 100% | 使用所有可用空间的内容，如数据表、日志、历史记录、地图、日历和能源 |
 
-The max width is the width of the content itself. The gutter comes on top of it.
+最大宽度是内容本身的宽度。边距在此基础上额外添加。
 
-### Pick a width for your page
+### 为页面选择宽度
 
-- Your page is one column of settings, cards, or a form: use narrow.
-- Your page shows a grid of cards about one thing, or two columns next to each other: use wide.
-- Your page is a table, a chart, a map, or a log: use full width, and don't set a max width.
+- 页面是单列设置、卡片或表单：使用窄宽度。
+- 页面显示关于某一事物的卡片网格，或并排两列：使用宽宽度。
+- 页面是表格、图表、地图或日志：使用全宽，且不设置最大宽度。
 
-A narrow page at the wide width looks stretched: rows get long, and the eye has to travel far from a label to its switch. If your single column feels cramped at 720px, that is worth a discussion, not a custom width.
+窄页面在宽宽度下会显得拉伸：行变长，视线需要从标签到开关移动很远。如果单列在 720px 下感到局促，这值得讨论，而不是自定义宽度。
 
-## Gutter
+## 边距
 
-The gutter is the space between the content and the left and right edges of the screen. Use `--ha-content-gutter` (16px) on every screen size. On a large screen, the max width already keeps the content away from the edges. The gutter matters when the screen is narrower than the content.
+边距是内容与屏幕左右边缘之间的空间。在所有屏幕尺寸下使用 `--ha-content-gutter`（16px）。在大屏幕上，最大宽度已经使内容远离边缘。当屏幕窄于内容时，边距才起作用。
 
-You don't add the safe area of a phone, like a notch or rounded corners, to the gutter yourself. The page layouts `hass-subpage` and `hass-tabs-subpage` already keep their content inside the safe area.
+您不需要自行将手机的安全区域（如刘海或圆角）添加到边距中。页面布局 `hass-subpage` 和 `hass-tabs-subpage` 已经将其内容保持在安全区域内。
 
-Below 600px, the settings dashboard and the system navigation page let their cards run from edge to edge, without rounded corners. Keep that for pages that are only a list of links to other pages. The connectivity page is an exception: it had edge-to-edge cards before these widths, and keeps them. Other pages keep the gutter.
+在 600px 以下，设置仪表盘和系统导航页面让卡片从边缘延伸到边缘，没有圆角。仅对仅包含指向其他页面的链接列表的页面保留此设置。连接页面是个例外：它在这些宽度之前就有边缘到边缘的卡片，并保留此样式。其他页面保留边距。
 
-## Example
+## 示例
 
 ```css
 .content {
@@ -46,6 +46,6 @@ Below 600px, the settings dashboard and the system navigation page let their car
 }
 ```
 
-## Not covered yet
+## 尚未涵盖
 
-Breakpoints, dialogs, dashboards, and the automation and script editors are not part of these widths yet.
+断点、对话框、仪表盘以及自动化和脚本编辑器尚未纳入这些宽度。

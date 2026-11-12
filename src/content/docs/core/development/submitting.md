@@ -47,11 +47,11 @@ Git 钩子（hooks）会在你提交时运行，并且可能更改你的集成�
 
 在 GitHub 上，从你的分支向 [home-assistant/core](https://github.com/home-assistant/core) 的 `dev` 分支打开一个拉取请求。然后填写模板。不要从中删除任何内容，包括你没有勾选的复选框。
 
-- **Breaking change**: if your change breaks something for existing users, explain what breaks, how to fix it, and why. This text goes into the release notes, so write it for users, not for developers. Remove the section if nothing breaks. [When it is backward-incompatible](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible) helps you decide, also for the removal at the end of a deprecation.
-- **Proposed change**: explain *why*, not only what. Reviewers need the reason to judge the solution.
-- **Type of change**: check exactly one box. If more than one fits, your pull request does too much: split it. A bot uses this box to label your pull request.
-- **Additional information**: link the issue you fix with `fixes #12345`, and the pull requests for the documentation or frontend.
-- **Checklist**: go through it honestly.
+- **Breaking change**：如果你的更改对现有用户造成了破坏，请说明破坏了什么、如何修复以及原因。这段文字会进入发布说明，因此请面向用户而非开发者来撰写。如果没有破坏任何内容，请删除该部分。[何时属于向后不兼容](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible)可帮助你做出判断，也适用于弃用功能在周期结束时的移除。
+- **Proposed change**：解释*为什么*，而不仅仅是做了什么。审查者需要理由来评判解决方案。
+- **Type of change**：只勾选一个框。如果有多项符合，说明你的拉取请求内容过多：请拆分。机器人会使用此框为你的拉取请求添加标签。
+- **Additional information**：使用 `fixes #12345` 链接你修复的 issue，以及文档或前端的拉取请求。
+- **Checklist**：如实逐项核对。
 
 在你的第一个拉取请求上，机器人会要求你签署贡献者许可协议（Contributor License Agreement）。在此之前，你的拉取请求无法被合并。如果你的 GitHub 账户是新建的，CI 也会等到维护者批准运行后才开始。
 
@@ -65,7 +65,7 @@ CI 必须通过，你的拉取请求才能被审查和合并。有些测试是�
 
 ## 新集成
 
-Before you build a new integration, read [does it belong in core](/core/integrations/create/#does-it-belong-in-core). The project recommends that you publish it in the [Marketplace](/marketplace/) first. Once it has matured and has a user base, ask in the **#developers** channel on [Discord](https://www.home-assistant.io/join-chat/) whether it should ship built in.
+在构建新集成之前，请阅读[它是否属于 core](/core/integrations/create/#does-it-belong-in-core)。项目建议你先将其发布到 [Marketplace](/marketplace/) 中。一旦它成熟并拥有用户群，请在 [Discord](https://www.home-assistant.io/join-chat/) 的 **#developers** 频道询问它是否应该内置。
 
 如果应该内置，请[保持第一个拉取请求精简](/core/integrations/create/#keep-the-first-pull-request-small)：Bronze 等级、一个平台，没有额外内容。
 

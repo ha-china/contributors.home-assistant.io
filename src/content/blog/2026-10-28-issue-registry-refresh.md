@@ -8,7 +8,7 @@ areas:
   - core
 ---
 
-Additions to the issue registry make it easier to keep repair issues correct, without annoying users. Linking issues to a config entry and the issue refresh helper land in Home Assistant Core 2026.11. Linking issues to a config subentry lands in 2026.12. All the additions are documented in [repairs](/core/integrations/repairs/).
+对问题注册表的增强使得保持修复问题的正确性更加容易，同时不会打扰用户。将问题链接到配置条目以及问题刷新辅助功能已随 Home Assistant Core 2026.11 发布。将问题链接到配置子条目的功能将于 2026.12 发布。所有新增功能均已在 [repairs](/core/integrations/repairs/) 中记录。
 
 ## 归属于配置条目的问题
 
@@ -40,7 +40,7 @@ ir.async_create_issue(
 
 此功能在核心 [PR #186197](https://github.com/home-assistant/core/pull/186197) 和 [PR #186369](https://github.com/home-assistant/core/pull/186369) 中实现。详情请参阅 [归属于配置条目的问题](/core/integrations/repairs/#issues-that-belong-to-a-config-entry)。
 
-An issue about one [subentry](/core/integrations/subentries/), like a station or an AI agent, can also pass `config_subentry_id`, so it is deleted when the subentry is removed. It requires `config_entry_id`, and the subentry must belong to that entry. This is implemented in core [PR #190351](https://github.com/home-assistant/core/pull/190351). For the details, see [issues that belong to a config subentry](/core/integrations/repairs/#issues-that-belong-to-a-config-subentry).
+关于某个 [子条目](/core/integrations/subentries/)（如站点或 AI 代理）的问题，也可以传递 `config_subentry_id`，这样当子条目被移除时，该问题会被删除。它需要 `config_entry_id`，并且该子条目必须属于该条目。此功能在核心 [PR #190351](https://github.com/home-assistant/core/pull/190351) 中实现。详情请参阅 [归属于配置子条目的问题](/core/integrations/repairs/#issues-that-belong-to-a-config-subentry)。
 
 ```python
 ir.async_create_issue(
@@ -55,7 +55,7 @@ ir.async_create_issue(
 )
 ```
 
-## Refresh a set of issues
+## 刷新一组问题
 
 一种常见模式是删除某类问题的所有实例，然后创建仍然有效的问题。这很简单，但每个仍然有效的问题都会被删除并重新创建：用户会看到它消失又出现，而且他们忽略的问题会再次显示。同样的情况也发生在集成在配置条目卸载时删除的问题上，因为重新加载也会卸载条目。请改为设置它们的 `config_entry_id`。
 

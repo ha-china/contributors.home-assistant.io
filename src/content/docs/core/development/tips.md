@@ -41,11 +41,11 @@ order: 6
 
 ## 附上链接寻求帮助
 
-When you ask a technical question on [Discord](https://www.home-assistant.io/join-chat/), start a thread in **#coding-support**, push your work to a branch first, and share the link. Someone who can see your code can help you much faster. Do not paste large blocks of code into the thread: they are hard to read.
+当你在 [Discord](https://www.home-assistant.io/join-chat/) 上提出技术问题时，请在 **#coding-support** 中开启一个线程，先将你的工作推送到一个分支，然后分享链接。能看到你代码的人能更快地帮助你。不要将大段代码粘贴到线程中：它们难以阅读。
 
 ## 参考优秀的示例
 
-[integration quality scale](/core/quality-scale/)（集成质量标准）中 Platinum 和 Gold 等级的集成维护良好，是了解某项功能如何实现的绝佳参考。等级信息位于集成的 `manifest.json` 中。
+[集成质量标准](/core/quality-scale/)中 Platinum 和 Gold 等级的集成维护良好，是了解某项功能如何实现的绝佳参考。等级信息位于集成的 `manifest.json` 中。
 
 ## 生成一个新集成
 

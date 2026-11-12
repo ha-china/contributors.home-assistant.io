@@ -61,6 +61,6 @@ sidebarGroups:
 
 ## 与谁交流
 
-- Have a technical question about core internals? Start a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/).
-- Much of the voice work, like the sentences and the wake word engines, happens in the [OHF-Voice](https://github.com/OHF-Voice) organization on GitHub. The integrations themselves, like `conversation` and `assist_pipeline`, live in core.
-- Proposals to change how core works start as a discussion in the [architecture repository](https://github.com/home-assistant/architecture/discussions).
+- 对核心内部有技术问题？在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 **#coding-support** 中发起讨论。
+- 大部分语音工作，例如句子和唤醒词引擎，都在 GitHub 上的 [OHF-Voice](https://github.com/OHF-Voice) 组织中进行。集成本身，如 `conversation` 和 `assist_pipeline`，则位于核心中。
+- 改变核心工作方式的提案始于[架构仓库](https://github.com/home-assistant/architecture/discussions)中的讨论。

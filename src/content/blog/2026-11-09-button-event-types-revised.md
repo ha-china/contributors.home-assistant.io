@@ -1,6 +1,6 @@
 ---
-title: Revised standard event types for button event entities
-description: Button event entities get SINGLE_PRESS and MULTI_PRESS, PRESS_END now only means the release, and the old multi-press types are deprecated.
+title: 按钮事件实体的修订标准事件类型
+description: 按钮事件实体新增 SINGLE_PRESS 和 MULTI_PRESS，PRESS_END 现在仅表示释放，旧的多次按压类型已弃用。
 date: 2026-11-09
 authors:
   - Abílio Costa
@@ -8,38 +8,38 @@ areas:
   - core
 ---
 
-The [standard event types for button event entities](/blog/2026/07/22/button-standard-event-types/) are revised. `PRESS_END` now only means that the button was released, the new `SINGLE_PRESS` and `MULTI_PRESS` types describe the presses the device counted, and `MULTI_PRESS_ONGOING`, `MULTI_PRESS_END`, and `ATTR_MULTI_PRESS_COUNT` are deprecated.
+[按钮事件实体的标准事件类型](/blog/2026/07/22/button-standard-event-types/)已修订。`PRESS_END` 现在仅表示按钮被释放，新的 `SINGLE_PRESS` 和 `MULTI_PRESS` 类型描述设备计数的按压次数，而 `MULTI_PRESS_ONGOING`、`MULTI_PRESS_END` 和 `ATTR_MULTI_PRESS_COUNT` 已弃用。
 
-See the [architecture discussion](https://github.com/home-assistant/architecture/discussions/1502) for the full background.
+有关完整背景，请参阅[架构讨论](https://github.com/home-assistant/architecture/discussions/1502)。
 
 <!--truncate-->
 
-## What changes
+## 变更内容
 
-The types now come in two layers. The physical types describe the button going down and up. The gesture types describe what the device concluded from the presses.
+事件类型现在分为两层。物理层类型描述按钮按下和释放。手势层类型描述设备根据按压次数得出的结论。
 
-| Event type | Status | Layer | Meaning |
+| 事件类型 | 状态 | 层 | 含义 |
 | --- | --- | --- | --- |
-| `SINGLE_PRESS` | New | Gesture | The device concluded that exactly one short press happened. |
-| `MULTI_PRESS` | New | Gesture | The device finished counting a series of two or more presses. |
-| `PRESS_END` | Changed | Physical | The button was released after a press the device did not classify as long. It no longer means a counted single press. |
+| `SINGLE_PRESS` | 新增 | 手势 | 设备得出结论，恰好发生了一次短按。 |
+| `MULTI_PRESS` | 新增 | 手势 | 设备已完成对两次或更多次按压的计数。 |
+| `PRESS_END` | 变更 | 物理 | 按钮在设备未归类为长按的按压后被释放。它不再表示已计数的单次按压。 |
 
-`MULTI_PRESS` has the number of presses in the `press_count` attribute (the `ATTR_PRESS_COUNT` constant). Only list it in `event_types` if you also list `SINGLE_PRESS`.
+`MULTI_PRESS` 在 `press_count` 属性（`ATTR_PRESS_COUNT` 常量）中包含按压次数。仅在同时列出 `SINGLE_PRESS` 时，才在 `event_types` 中列出它。
 
-## Deprecations
+## 弃用项
 
-| Deprecated | Use instead |
+| 已弃用 | 改用 |
 | --- | --- |
 | `ATTR_MULTI_PRESS_COUNT` | `ATTR_PRESS_COUNT` |
 | `ButtonEventType.MULTI_PRESS_END` | `ButtonEventType.MULTI_PRESS` |
-| `ButtonEventType.MULTI_PRESS_ONGOING` | An integration-specific event type |
+| `ButtonEventType.MULTI_PRESS_ONGOING` | 集成特定的事件类型 |
 
-Using them logs a warning, and they are removed in Home Assistant 2027.5.0.
+使用它们会记录警告，并将在 Home Assistant 2027.5.0 中移除。
 
-## What to do
+## 需要做什么
 
-- If your integration fires `PRESS_END` for a single press the device reports after counting it, switch to `SINGLE_PRESS`.
-- Replace the deprecated types and constant with the ones in the table above.
-- Switching changes the event types and attributes your users see, so let them know.
+- 如果您的集成在设备计数后为单次按压触发 `PRESS_END`，请改用 `SINGLE_PRESS`。
+- 将弃用的类型和常量替换为上表中的内容。
+- 切换会改变用户看到的事件类型和属性，因此请告知他们。
 
-For full details, see the [event entity documentation](/core/entities/event/#standard-event-types).
+有关完整详细信息，请参阅[事件实体文档](/core/entities/event/#standard-event-types)。

@@ -11,8 +11,8 @@ Home Assistant 支持 64 种语言，每一种都是由使用它的用户翻译�
 
 翻译工作分为两类，使用不同的工具：
 
-- **Interface text** is everything you read on screen: menus, settings, dialogs, error messages, and the names of entities and their states. You translate it in your browser, in [Home Assistant's projects on Lokalise](/translate/first-contribution/#1-pick-a-project).
-- **Voice commands** are the sentences Home Assistant understands when you talk to Assist, and the answers it gives back. They live in YAML files on GitHub, and language leaders review the changes for their language. See [Voice](/translate/voice/).
+- **界面文本（Interface text）** 是你在屏幕上看到的所有内容：菜单、设置、对话框、错误消息，以及实体及其状态的名称。你可以在浏览器中，通过 [Home Assistant 在 Lokalise 上的项目](/translate/first-contribution/#1-pick-a-project) 进行翻译。
+- **语音命令（Voice commands）** 是 Home Assistant 在你与 Assist 对话时能理解的句子，以及它给出的回答。它们存放在 GitHub 上的 YAML 文件中，语言负责人会审核其语言的更改。参见[语音](/translate/voice/)。
 
 大多数人从界面文本开始。上手只需几分钟，而且你翻译的内容无需审核即可发布，参见[翻译如何回归](/translate/how-it-works/#how-translations-get-back)。
 

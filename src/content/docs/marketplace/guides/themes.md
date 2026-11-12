@@ -40,7 +40,7 @@ frontend:
 
 ### 经典变量
 
-Most themes set the variables below. They are defined in the frontend in `src/resources/theme/color/color.globals.ts`, and many components use them. [Theme variables](/marketplace/reference/theme-variables/) lists all of them, with their default values in light and dark mode: copy the ones you want to change.
+大多数主题会设置下面的变量。它们在前端的 `src/resources/theme/color/color.globals.ts` 中定义，许多组件会使用它们。[主题变量（Theme variables）](/marketplace/reference/theme-variables/)列出了全部变量，并带有浅色和深色模式下的默认值：复制你想更改的那些。
 
 | 变量 | 用途 |
 | --- | --- |
@@ -58,7 +58,7 @@ Most themes set the variables below. They are defined in the frontend in `src/re
 | `app-header-background-color`, `app-header-text-color` | 仪表盘和其他页面顶部的页眉 |
 | `state-icon-color` | 实体（entity）的图标 |
 
-Cards have variables of their own, from `ha-card`, the container of the built-in cards. Other components have some too, like the gaps of the sections view: they are under [component variables](/marketplace/reference/theme-variables/#component-variables).
+卡片有自己的变量，来自内置卡片的容器 `ha-card`。其他组件也有一些，比如分区视图的间距：它们位于[组件变量（component variables）](/marketplace/reference/theme-variables/#component-variables)之下。
 
 | 变量 | 它改变什么 |
 | --- | --- |
@@ -68,7 +68,7 @@ Cards have variables of their own, from `ha-card`, the container of the built-in
 | `ha-card-box-shadow` | 阴影。默认没有。 |
 | `ha-card-header-color`, `ha-card-header-font-size` | 卡片的标题 |
 
-The colors of entity states have variables too, like `state-light-active-color` or `state-lock-locked-color`. They are all under [entity states](/marketplace/reference/theme-variables/#entity-states).
+实体状态的颜色也有变量，比如 `state-light-active-color` 或 `state-lock-locked-color`。它们全部位于[实体状态（entity states）](/marketplace/reference/theme-variables/#entity-states)之下。
 
 ### 设计令牌
 

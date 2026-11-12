@@ -48,11 +48,11 @@ Go to {% my integrations title="**Settings** > **Devices & services**" %} and se
 
 大多数 My 链接只需要一个 `title`。针对特殊情况，还有一些额外的选项：
 
-- `badge` shows the link as a My badge image instead of text. A badge cannot have a `title`.
-- `domain` sets the integration for pages that need one, like `config_flow_start`, which starts setting up a specific integration.
-- `addon`, `blueprint_url`, `brand`, `repository_url`, and `service` pass the app, blueprint, brand, repository, or action that the page should open.
-- `search` fills in the search field on pages that have one, like `logs`.
-- `provider`, `integration`, and `raw` pick what the `logs` page shows. `provider` is the log to open, like `supervisor` or an app slug. `integration` filters the Home Assistant Core log to one or more integrations, separated by commas. `raw` shows the full Home Assistant Core log instead of only the errors.
+- `badge` 将链接显示为 My 徽章图片，而不是文本。徽章不能有 `title`。
+- `domain` 为需要集成的页面设置集成，例如 `config_flow_start`，它会开始设置特定的集成。
+- `addon`、`blueprint_url`、`brand`、`repository_url` 和 `service` 传递页面应打开的应用程序、蓝图、品牌、仓库或操作。
+- `search` 在带有搜索字段的页面（如 `logs`）上填充搜索字段。
+- `provider`、`integration` 和 `raw` 选择 `logs` 页面显示的内容。`provider` 是要打开的日志，如 `supervisor` 或应用程序 slug。`integration` 将 Home Assistant Core 日志过滤为一个或多个集成，用逗号分隔。`raw` 显示完整的 Home Assistant Core 日志，而不仅仅是错误。
 
 ```liquid
 {% my config_flow_start badge domain="hue" %}

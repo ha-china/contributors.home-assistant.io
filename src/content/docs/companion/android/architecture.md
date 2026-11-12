@@ -49,19 +49,19 @@ Home Assistant 一直是一个强大的渐进式 Web 应用（progressive web ap
 | 应用设置 | SharedPreferences，封装在 `LocalStorage` 抽象之后 |
 | 日志 | [Timber](https://github.com/JakeWharton/timber) |
 
-## Picking a flow type
+## 选择流类型
 
-When you expose a stream, pick its type by what must happen to a value while nobody collects it:
+当你暴露一个流时，根据在无人收集时值必须发生什么来选择其类型：
 
-| What it carries | Use |
+| 它承载的内容 | 使用 |
 | --- | --- |
-| State: only the latest value matters, and rendering it again is fine, like screen state or a mode | `StateFlow` |
-| An event every collector must receive, or one that means nothing once its context is gone and must be dropped when nobody listens, like WebView actions bound to the loaded page | `SharedFlow` |
-| An event one consumer must handle exactly once, never lost and never repeated, like navigation, a snackbar, or opening a link | `Channel(Channel.BUFFERED)` exposed with `receiveAsFlow()` |
+| 状态：只有最新值重要，重新渲染也没问题，比如屏幕状态或模式 | `StateFlow` |
+| 每个收集器都必须收到的事件，或者一旦其上下文消失就毫无意义、无人监听时必须丢弃的事件，比如绑定到已加载页面的 WebView 操作 | `SharedFlow` |
+| 一个消费者必须恰好处理一次、绝不丢失也绝不重复的事件，比如导航、snackbar 或打开链接 | `Channel(Channel.BUFFERED)` 通过 `receiveAsFlow()` 暴露 |
 
-A `Channel` keeps a value until a consumer is there, and hands each value to a single collector. An event sent before the screen starts collecting still arrives. A `SharedFlow` without replay drops it. Use `send` from a coroutine, and `trySend` only in callbacks that can't suspend.
+`Channel` 会保留值直到有消费者出现，并将每个值交给单个收集器。在屏幕开始收集之前发送的事件仍然会到达。没有重放的 `SharedFlow` 会将其丢弃。在协程中使用 `send`，仅在无法挂起的回调中使用 `trySend`。
 
-## Talking to Home Assistant
+## 与 Home Assistant 通信
 
 该应用使用三个通道：
 

@@ -89,6 +89,6 @@ sidebarGroups:
 
 ## 与谁交流
 
-- Have a technical question? Start a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/). Share a link to your branch, so people can see the code you are asking about.
-- Look at a well maintained integration that does something similar. Many integrations at the Platinum tier of the quality scale, like `airgradient`, are good examples of current patterns.
-- Not sure if your idea fits Home Assistant? Open a discussion in the [architecture repository](https://github.com/home-assistant/architecture/discussions) before you write a lot of code.
+- 有技术问题？在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 **#coding-support** 中发起一个主题。分享你的分支链接，以便人们可以看到你正在询问的代码。
+- 查看一个维护良好且功能类似的集成。质量规模中 Platinum 级别的许多集成，如 `airgradient`，都是当前模式的良好示例。
+- 不确定你的想法是否适合 Home Assistant？在编写大量代码之前，先在[架构仓库](https://github.com/home-assistant/architecture/discussions)中发起讨论。

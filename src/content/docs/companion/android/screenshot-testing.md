@@ -14,14 +14,14 @@ lastVerified: 2026-11-06
 
 ## 工作原理
 
-The app uses [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing-with-testsuites), set up as a test suite of the Android Gradle Plugin. It renders composables on the JVM, so no emulator is needed. That makes them much faster and cheaper than instrumentation tests.
+该应用使用 [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing-with-testsuites)，并将其设置为 Android Gradle Plugin 的一个测试套件。它在 JVM 上渲染 composable，因此无需模拟器。这使得它们比仪器测试更快、更便宜。
 
-Tests live in `src/screenshotTest` of each module. That is the only source set the suite compiles: there is no flavor or build type variation of it. The suite runs against one variant per module, and the reference images are stored next to it:
+测试位于每个模块的 `src/screenshotTest` 中。这是该套件编译的唯一源集：没有 flavor 或构建类型的变体。该套件针对每个模块的一个变体运行，参考图像存储在其旁边：
 
-| Module | Variant | Reference images |
+| 模块 | 变体 | 参考图像 |
 | --- | --- | --- |
 | `:app` | `fullDebug` | `src/screenshotTestDefaultFullDebug/reference` |
-| `:common` and `:wear` | `debug` | `src/screenshotTestDefaultDebug/reference` |
+| `:common` 和 `:wear` | `debug` | `src/screenshotTestDefaultDebug/reference` |
 
 ## 编写截图测试
 
@@ -39,9 +39,9 @@ Tests live in `src/screenshotTest` of each module. That is the only source set t
   testFullDebugScreenshotTestDefaultTestSuite
 ```
 
-The first task covers `:common` and `:wear`, the second `:app`, which has flavors. Android Studio has the same two tasks in the **Screenshot tests verification** run configuration. When a test fails, the report in `build/reports/tests/<task name>/index.html` of the module shows the reference, the new image, and their difference.
+第一个任务覆盖 `:common` 和 `:wear`，第二个覆盖 `:app`，后者有 flavor。Android Studio 在 **Screenshot tests verification** 运行配置中也有相同的两个任务。当测试失败时，模块中 `build/reports/tests/<task name>/index.html` 的报告会显示参考图像、新图像以及它们的差异。
 
-CI runs the same validation on every pull request, in the **Screenshot Tests** job, and a difference fails the check until it is resolved.
+CI 在每个 pull request 上运行相同的验证，在 **Screenshot Tests** 任务中，差异会导致检查失败，直到问题解决。
 
 在有意的 UI 更改之后，更新参考图像：
 
@@ -51,7 +51,7 @@ CI runs the same validation on every pull request, in the **Screenshot Tests** j
   updateFullDebugScreenshotTestDefaultTestSuite
 ```
 
-Don't run the test task right after an update: it compares against images you just generated from the same code. Look at the updated images instead, and check that only what you meant to change has changed. Explain the changes in your pull request.
+更新后不要立即运行测试任务：它会与你刚刚从相同代码生成的图像进行比较。相反，请查看更新后的图像，并检查只有你打算更改的内容发生了变化。在你的 pull request 中解释这些更改。
 
 ## 当 CI 与你的机器不一致时
 

@@ -1,16 +1,16 @@
 ---
-title: Android end-to-end tests
-description: The nightly Maestro tests that run the Android app against a real Home Assistant on every API level, and how to debug a failure.
-sidebarLabel: End-to-end tests
-sidebarGroup: Test
+title: Android 端到端测试
+description: 每晚针对真实 Home Assistant 在所有 API 级别上运行 Android 应用的 Maestro 测试，以及如何调试失败。
+sidebarLabel: 端到端测试
+sidebarGroup: 测试
 order: 4
 source: https://github.com/home-assistant/android/blob/main/.github/workflows/e2e.yml
 lastVerified: 2026-11-05
 ---
 
-All other tests fake the server. The end-to-end (E2E) tests don't: they run the real app against a real Home Assistant, the way a user does. That catches what nothing else can, like a change in Core or the frontend that breaks onboarding, or a web view problem on one specific Android version.
+所有其他测试都模拟服务器。端到端（E2E）测试则不然：它们像用户一样，针对真实的 Home Assistant 运行真实的应用程序。这能捕获其他测试无法发现的问题，例如 Core 或前端的更改破坏了引导流程，或某个特定 Android 版本上的 web view 问题。
 
-There are two: one onboards over plain HTTP, the other through a proxy that requires a client certificate, known as mutual TLS (mTLS).
+共有两个测试：一个通过普通 HTTP 进行引导，另一个通过需要客户端证书的代理进行引导，即双向 TLS（mTLS）。
 
 ## 运行时机
 
@@ -23,53 +23,53 @@ There are two: one onboards over plain HTTP, the other through a proxy that requ
 
 ## 它做什么
 
-1. Generates the certificates for the mTLS test. They only exist for the run.
-2. Builds the `fullDebug` APK, with [StrictMode](/companion/android/debugging/#strictmode) off, and with the certificate authority (CA) of the run trusted.
-3. Installs the [Maestro](https://maestro.dev/) CLI, and checks the download against its published checksum.
-4. Starts Home Assistant from the configuration in `.github/e2e/homeassistant`, and checks that `mobile_app` is loaded.
-5. Starts the mTLS proxy in front of Home Assistant, and checks that it refuses a request without the client certificate.
-6. Starts one emulator per API level on Emulator.wtf, from API 29 to `androidSdk-target`, and installs the app.
-7. Runs the plain flow on all emulators in parallel.
-8. Opens the certificate installer on the emulators, and runs the mTLS flow. This only happens when the plain flow passed.
-9. Uploads the files you need to debug, whatever the result.
+1. 为 mTLS 测试生成证书。这些证书仅在该次运行期间存在。
+2. 构建 `fullDebug` APK，关闭 [StrictMode](/companion/android/debugging/#strictmode)，并信任该次运行的证书颁发机构（CA）。
+3. 安装 [Maestro](https://maestro.dev/) CLI，并根据其发布的校验和检查下载内容。
+4. 从 `.github/e2e/homeassistant` 中的配置启动 Home Assistant，并检查 `mobile_app` 是否已加载。
+5. 在 Home Assistant 前启动 mTLS 代理，并检查它是否拒绝没有客户端证书的请求。
+6. 在 Emulator.wtf 上为每个 API 级别（从 API 29 到 `androidSdk-target`）启动一个模拟器，并安装该应用。
+7. 在所有模拟器上并行运行普通流程。
+8. 在模拟器上打开证书安装程序，并运行 mTLS 流程。这仅在普通流程通过后才会发生。
+9. 无论结果如何，都会上传调试所需的文件。
 
 设备列表从 API 29 开始，尽管应用支持更旧的版本。在更旧的镜像上，web view 会渲染前端，但其内容永远不会出现在 Maestro 能看到的内容中，因此其上的所有检查都会失败。拉取请求上的[插桩测试](/companion/android/instrumentation-testing/)仍然覆盖完整范围，直到应用的最低 API 级别。
 
-The Home Assistant container and the proxy run on the GitHub runner, and the emulators on Emulator.wtf. A tunnel connects them, and inside the emulators `homeassistant.internal` resolves to the runner: port 8123 is Home Assistant, and port 8443 the proxy.
+Home Assistant 容器和代理在 GitHub runner 上运行，模拟器在 Emulator.wtf 上运行。一个隧道连接它们，在模拟器内部，`homeassistant.internal` 解析到 runner：端口 8123 是 Home Assistant，端口 8443 是代理。
 
-## How the mTLS test works
+## mTLS 测试如何工作
 
-The proxy in `.github/e2e/mtls` is nginx in front of Home Assistant. It refuses every request without the client certificate, from the first page of onboarding on.
+`.github/e2e/mtls` 中的代理是 Home Assistant 前面的 nginx。它拒绝每个没有客户端证书的请求，从引导的第一页开始。
 
-Its server certificate is signed by a CA that only exists for the run. To make the app trust it, the workflow builds with the Gradle property `debugExtraResDir`. That replaces the network security config of the app with the copy in `.github/e2e/mtls`, which trusts that CA in a debuggable build. A build without the property is unchanged.
+其服务器证书由仅在该次运行期间存在的 CA 签名。为了使应用信任它，工作流使用 Gradle 属性 `debugExtraResDir` 进行构建。这会用 `.github/e2e/mtls` 中的副本替换应用的网络安全配置，该副本在可调试构建中信任该 CA。没有该属性的构建则保持不变。
 
-The client certificate is installed the way a user does it: the workflow opens the system certificate installer, and the flow goes through it.
+客户端证书的安装方式与用户相同：工作流打开系统证书安装程序，流程会经过它。
 
 > [!IMPORTANT]
-> `.github/e2e/mtls/network_security_config.xml` is a copy of `app/src/main/res/xml/network_security_config.xml` with one section added. When you change the config of the app, make the same change in the copy.
+> `.github/e2e/mtls/network_security_config.xml` 是 `app/src/main/res/xml/network_security_config.xml` 的副本，并添加了一个部分。当你更改应用的配置时，请在副本中进行相同的更改。
 
-## The flows
+## 流程
 
-The flows live in the `.maestro` folder at the root of the repository, and every step of the tests is written there:
+流程位于仓库根目录的 `.maestro` 文件夹中，测试的每一步都写在那里：
 
-- [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml) onboards over plain HTTP.
-- [`.maestro/onboarding-mtls.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding-mtls.yaml) installs the client certificate, then onboards through the proxy.
+- [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml) 通过普通 HTTP 进行引导。
+- [`.maestro/onboarding-mtls.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding-mtls.yaml) 安装客户端证书，然后通过代理进行引导。
 
-They share their steps through `.maestro/subflows`, and cover the most critical path of the app:
+它们通过 `.maestro/subflows` 共享步骤，并覆盖应用最关键路径：
 
 - **登录**：真实的登录页面，使用真实凭据，走完整个授权流程。
 - **注册**：应用向 `mobile_app` 注册自己，其他一切都依赖于此。
 - **前端渲染**：能够到达概览仪表盘（dashboard）证明 web view 在该 API 级别上正常工作。
 - **外部总线双向工作**：只有在应用通过[外部总线](/frontend/reference/external-bus/)（external bus）宣告自己之后，前端才会在其设置中显示 **Companion app** 条目，而选中它会让前端请求应用打开其原生设置。
 
-The flows take the instance to test against from three parameters: `HOME_ASSISTANT_URL`, `HOME_ASSISTANT_USERNAME`, and `HOME_ASSISTANT_PASSWORD`. The mTLS flow takes two more, `MTLS_P12_PASSWORD` and `MTLS_CERT_ALIAS`: the password of the certificate file, and the name to give the certificate.
+流程从三个参数获取要测试的实例：`HOME_ASSISTANT_URL`、`HOME_ASSISTANT_USERNAME` 和 `HOME_ASSISTANT_PASSWORD`。mTLS 流程还需要两个参数，`MTLS_P12_PASSWORD` 和 `MTLS_CERT_ALIAS`：证书文件的密码，以及给证书的名称。
 
-When you change a flow:
+当你更改流程时：
 
-- It drives the debug app, `io.homeassistant.companion.android.debug`. Don't change the `appId`.
-- It runs on every API level, so anything version specific must be conditional, like the existing steps for permission dialogs.
-- Steps match on text on screen. If you rename a label in the app, update the flow in the same pull request.
-- Put a step that multiple flows need in a subflow.
+- 它驱动调试应用 `io.homeassistant.companion.android.debug`。不要更改 `appId`。
+- 它在每个 API 级别上运行，因此任何特定于版本的内容都必须是条件性的，例如现有的权限对话框步骤。
+- 步骤匹配屏幕上的文本。如果你在应用中重命名了标签，请在同一个拉取请求中更新流程。
+- 将多个流程需要的步骤放在子流程中。
 
 [Maestro 文档](https://docs.maestro.dev/api-reference/commands)列出了所有命令。
 
@@ -88,11 +88,11 @@ maestro test \
 
 该流程会先清除应用状态，因此总是从全新的引导流程开始。请使用一次性实例：每次运行都会在其上注册一台新设备。
 
-### Run the mTLS flow
+### 运行 mTLS 流程
 
-To run a test with mTLS, you'll need a reverse proxy requiring mTLS in front of Home Assistant and the certificate installer dialog open for your certificate file. The easiest way to get to this state is using the steps described below which also run on GitHub Actions. You will need to use an emulator, Docker, and Home Assistant on port 8123 of your machine. From the emulator, your machine is `10.0.2.2`.
+要运行带 mTLS 的测试，你需要在 Home Assistant 前设置一个需要 mTLS 的反向代理，并为你的证书文件打开证书安装程序对话框。达到此状态的最简单方法是使用下面描述的步骤，这些步骤也在 GitHub Actions 上运行。你需要使用模拟器、Docker，以及在你机器 8123 端口上的 Home Assistant。从模拟器来看，你的机器是 `10.0.2.2`。
 
-1. Generate the certificates, with that address in the server certificate:
+1. 生成证书，服务器证书中包含该地址：
 
    ```bash
    OUT=/tmp/mtls
@@ -100,7 +100,7 @@ To run a test with mTLS, you'll need a reverse proxy requiring mTLS in front of 
      "DNS:homeassistant.internal,IP:10.0.2.2"
    ```
 
-2. Start the proxy. With Docker Desktop, `host.docker.internal` is your machine:
+2. 启动代理。使用 Docker Desktop 时，`host.docker.internal` 是你的机器：
 
    ```bash
    TEMPLATE=/etc/nginx/templates/default.conf.template
@@ -111,21 +111,21 @@ To run a test with mTLS, you'll need a reverse proxy requiring mTLS in front of 
      nginx:stable-alpine
    ```
 
-3. Install the app, built to trust the CA:
+3. 安装构建为信任该 CA 的应用：
 
    ```bash
    ./gradlew :app:installFullDebug -PdebugExtraResDir="$OUT/res"
    ```
 
-4. Open the certificate installer on the emulator:
+4. 在模拟器上打开证书安装程序：
 
    ```bash
    .github/e2e/mtls/open-cert-installer.sh emulator-5554 "$OUT/client.p12"
    ```
 
-   On API 32 and below, the script installs `client_legacy.p12` from the same folder instead, because the certificate installer of those versions can't read `client.p12`. To use another legacy file, pass its path as an optional third argument.
+   在 API 32 及以下版本，脚本会改为安装同一文件夹中的 `client_legacy.p12`，因为这些版本的证书安装程序无法读取 `client.p12`。要使用另一个旧版文件，请将其路径作为可选的第三个参数传递。
 
-5. Run the flow, with the default password and name of `generate-certs.sh`:
+5. 运行流程，使用 `generate-certs.sh` 的默认密码和名称：
 
    ```bash
    maestro test \
@@ -137,20 +137,20 @@ To run a test with mTLS, you'll need a reverse proxy requiring mTLS in front of 
      .maestro/onboarding-mtls.yaml
    ```
 
-## Debug a failure
+## 调试失败
 
 每次运行都会上传一个 `e2e-artifacts` 工件：
 
 | 文件 | 内容 |
 | --- | --- |
-| `maestro-results/` | The command trace per flow and shard, `maestro.log`, and screenshots of failures |
-| `logcat-*.txt` | The full logcat, one file per emulator |
-| `mtls-proxy.log` | The log of the mTLS proxy, one line per request |
-| `homeassistant.log` | The Home Assistant log |
-| `homeassistant-config.json` | The `/api/config` response, with the version and loaded components |
-| `homeassistant-container.json` | The container details, including the exact image |
+| `maestro-results/` | 每个流程和分片的命令跟踪、`maestro.log` 以及失败截图 |
+| `logcat-*.txt` | 完整的 logcat，每个模拟器一个文件 |
+| `mtls-proxy.log` | mTLS 代理的日志，每个请求一行 |
+| `homeassistant.log` | Home Assistant 日志 |
+| `homeassistant-config.json` | `/api/config` 响应，包含版本和已加载组件 |
+| `homeassistant-container.json` | 容器详细信息，包括确切的镜像 |
 
-Read them in that order, and stop at the first one that explains the failure. Most failures show in the failing Maestro command and its screenshot: that tells a broken screen apart from an element Maestro just couldn't see. Starting with the Home Assistant log usually wastes time. In the proxy log, a `400` is a request without the client certificate.
+按此顺序阅读它们，并在第一个能解释失败的文件处停止。大多数失败会显示在失败的 Maestro 命令及其截图中：这可以区分损坏的屏幕和 Maestro 无法看到的元素。从 Home Assistant 日志开始通常会浪费时间。在代理日志中，`400` 表示没有客户端证书的请求。
 
 只有在排除了应用和流程之后，才去查看上游。`dev` 镜像每晚都会变化，因此请与上一次通过的运行进行比较：两份 `homeassistant-config.json` 文件给出了故障两侧的 Home Assistant 版本。然后查看在此期间 [Core](https://github.com/home-assistant/core) 或[前端](https://github.com/home-assistant/frontend)合入了什么。
 

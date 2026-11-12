@@ -19,7 +19,7 @@ Home Assistant 中的每一段文本都以英文形式存在于源代码中。�
 
 ## 翻译在哪里进行
 
-Each of those sources has its own Lokalise project. That is why there are [four projects to join](/translate/first-contribution/#1-pick-a-project): frontend, backend, iOS, and Android. Within a project, every language is translated by the community. Anyone who joins can translate strings and improve existing translations. There is no separate approval step: the translation saved in Lokalise is the one that ships.
+这些来源中的每一个都有其自己的 Lokalise 项目。这就是为什么有[四个项目可以加入](/translate/first-contribution/#1-pick-a-project)：前端、后端、iOS 和 Android。在一个项目中，每种语言都由社区翻译。任何加入的人都可以翻译字符串并改进现有翻译。没有单独的审批步骤：保存在 Lokalise 中的翻译就是最终发布的翻译。
 
 ## 翻译如何返回
 

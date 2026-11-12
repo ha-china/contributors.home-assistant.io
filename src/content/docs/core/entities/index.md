@@ -79,9 +79,9 @@ sidebarGroups:
 
 ### 遥控和信号
 
-- [Remote](/core/entities/remote/): send commands to other devices.
-- [Infrared](/core/entities/infrared/): shared infrared transmitters and receivers.
-- [Radio frequency](/core/entities/radio-frequency/): shared RF transmitters and receivers.
+- [Remote](/core/entities/remote/): 向其他设备发送命令。
+- [Infrared](/core/entities/infrared/): 共享的红外发射器和接收器。
+- [Radio frequency](/core/entities/radio-frequency/): 共享的射频发射器和接收器。
 
 ### 语音和 AI
 
@@ -116,6 +116,6 @@ sidebarGroups:
 
 ## 向谁咨询
 
-- Questions while building an entity? Start a thread in **#coding-support** on the [Home Assistant Discord](https://www.home-assistant.io/join-chat/).
-- Want to add a feature, state, or device class to a domain? Open a discussion in the [architecture repository](https://github.com/home-assistant/architecture/discussions). When a decision is made, it is recorded there as an architecture decision record.
-- Found a bug in an entity platform? Open an issue in the [core repository](https://github.com/home-assistant/core/issues).
+- 在构建实体时有疑问？请在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 **#coding-support** 中发起讨论。
+- 想为某个领域添加功能、状态或设备类别？请在[架构仓库](https://github.com/home-assistant/architecture/discussions)中发起讨论。当做出决定时，会以架构决策记录的形式记录在那里。
+- 发现实体平台中的错误？请在[核心仓库](https://github.com/home-assistant/core/issues)中提交问题。

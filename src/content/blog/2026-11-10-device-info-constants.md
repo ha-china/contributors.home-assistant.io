@@ -1,6 +1,6 @@
 ---
-title: "Deprecated device info constants"
-description: "The device info constants in homeassistant.const are deprecated in Home Assistant Core 2026.12 and will be removed in 2027.12. Use the DeviceInfo fields instead."
+title: "已弃用的设备信息常量"
+description: "homeassistant.const 中的设备信息常量在 Home Assistant Core 2026.12 中已弃用，并将在 2027.12 中移除。请改用 DeviceInfo 字段。"
 date: 2026-11-10
 authors:
   - epenet
@@ -8,7 +8,7 @@ areas:
   - core
 ---
 
-As of Home Assistant Core 2026.12, the device info constants in `homeassistant.const` are deprecated, because Home Assistant Core no longer uses them. They will be removed in Home Assistant Core 2027.12. Until then, using one of them logs a warning. If your custom integration doesn't import any of these constants, you don't need to do anything:
+自 Home Assistant Core 2026.12 起，`homeassistant.const` 中的设备信息常量已弃用，因为 Home Assistant Core 不再使用它们。它们将在 Home Assistant Core 2027.12 中被移除。在此之前，使用其中任何一个都会记录一条警告。如果您的自定义集成未导入这些常量中的任何一个，则无需执行任何操作：
 
 - `ATTR_CONFIGURATION_URL`
 - `ATTR_CONNECTIONS`
@@ -22,11 +22,11 @@ As of Home Assistant Core 2026.12, the device info constants in `homeassistant.c
 - `ATTR_SUGGESTED_AREA`
 - `ATTR_SW_VERSION`
 
-Since Home Assistant Core 2026.11, [`DeviceInfo` is a dataclass with typed fields](/blog/2026/10/13/device-info-class/), so you can use its fields directly, without these constants.
+自 Home Assistant Core 2026.11 起，[`DeviceInfo` 是一个带有类型字段的数据类](/blog/2026/10/13/device-info-class/)，因此您可以直接使用其字段，而无需这些常量。
 
-## Migrating device info
+## 迁移设备信息
 
-Use the `DeviceInfo` keyword arguments and attributes instead. Each field has the same name as the value of its constant:
+请改用 `DeviceInfo` 的关键字参数和属性。每个字段的名称与其常量的值相同：
 
 ```python
 # Old
@@ -56,11 +56,11 @@ device_registry.async_get_or_create(
 )
 ```
 
-There is one exception: `ATTR_DEFAULT_NAME`. The `default_name` field is deprecated too, and will be removed in Home Assistant Core 2027.9. Use `name` instead.
+有一个例外：`ATTR_DEFAULT_NAME`。`default_name` 字段也已弃用，并将在 Home Assistant Core 2027.9 中被移除。请改用 `name`。
 
-## Migrating your own data
+## 迁移您自己的数据
 
-If your integration uses one of these constants for its own data, like a state attribute, use a plain string or a local constant instead:
+如果您的集成将这些常量之一用于自身数据（如状态属性），请改用普通字符串或本地常量：
 
 ```python
 # Old

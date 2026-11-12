@@ -22,7 +22,7 @@ order: 1
 
 ## 面向用户的弃用
 
-Every deprecation that needs the user to do something gets a [repair issue](/glossary/repair/). When an integration can be set up more than once, include the config entry in the `issue_id`, or the issues of different entries overwrite each other. Set the [`config_entry_id`](/core/integrations/repairs/#issues-that-belong-to-a-config-entry) of the issue too, so it is deleted together with the entry. After the deprecation period, open a follow up pull request that removes the old behavior and the issue. Mark it as a [backward-incompatible change](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible): some users may not have acted on the repair yet.
+每个需要用户采取行动的弃用都会产生一个[修复问题](/glossary/repair/)。当一个集成可以被设置多次时，请在 `issue_id` 中包含配置条目，否则不同条目的问题会互相覆盖。同时设置问题的 [`config_entry_id`](/core/integrations/repairs/#issues-that-belong-to-a-config-entry)，以便它与条目一起被删除。弃用期结束后，开启一个后续拉取请求，移除旧行为和该问题。将其标记为[不向后兼容的更改](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible)：有些用户可能尚未对修复问题采取行动。
 
 你在自己域名下创建的每个问题都需要在集成的 `strings.json` 中有一个 `issues.<translation_key>` 条目。在 `HOMEASSISTANT_DOMAIN` 下创建的问题（如 `deprecated_yaml`）使用 core 中已有的文本。
 
@@ -159,9 +159,9 @@ def async_deprecate_entity(
     return True
 ```
 
-`config_entry_id` links the issue to the config entry of the entity, so it is hidden while that entry is disabled and deleted when it is removed.
+`config_entry_id` 将问题链接到实体的配置条目，因此当该条目被禁用时问题会被隐藏，当条目被移除时问题会被删除。
 
-Call it in `async_setup_entry` of the platform, and let its answer decide which entities are added. An entity that does not exist yet returns `False`, so new users never get the deprecated entity.
+在平台的 `async_setup_entry` 中调用它，并让其返回值决定添加哪些实体。一个尚不存在的实体返回 `False`，因此新用户永远不会得到被弃用的实体。
 
 ```python
 async def async_setup_entry(
@@ -229,7 +229,7 @@ async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
         ir.async_delete_issue(hass, DOMAIN, DOMAIN)
 ```
 
-The `entries` placeholder links to the config entries of the user. Explain in the text why the integration was removed, and that they can remove the entries. The issue is about the integration, not one config entry, so all entries share it and it has no `config_entry_id`. Keep an empty `async_unload_entry`, so the entries can still be unloaded and reloaded, and delete the issue in `async_remove_entry` once no loaded entry is left. Do not delete it on unload: a reload would bring back an issue the user ignored.
+`entries` 占位符链接到用户的配置条目。在文本中解释集成被移除的原因，以及他们可以移除这些条目。该问题针对的是集成，而不是某个配置条目，因此所有条目共享它，并且它没有 `config_entry_id`。保留一个空的 `async_unload_entry`，以便条目仍然可以被卸载和重新加载，并在没有剩余已加载条目时在 `async_remove_entry` 中删除该问题。不要在卸载时删除它：重新加载会带回一个用户已忽略的问题。
 
 当集成被后继者取代时，这属于弃用：使用带有 `breaks_in_ha_version` 的 `WARNING`，并以 `deprecated` 为原因中止配置流程，这样任何人都无法添加新条目。
 
@@ -237,7 +237,7 @@ The `entries` placeholder links to the config entries of the user. Explain in th
 
 修复问题和版本发布说明会宣布弃用。不要在 [home-assistant.io](https://www.home-assistant.io/) 的文档中添加弃用通知：它只描述今天可用的功能。
 
-Test with the `issue_registry` fixture that the issue is created, and that it is deleted again when the last config entry is removed, and that it is not deleted when an entry is reloaded.
+使用 `issue_registry` 夹具进行测试，验证问题被创建，并且在最后一个配置条目被移除时被删除，以及在条目被重新加载时不会被删除。
 
 ## 面向开发者的弃用
 
@@ -337,4 +337,4 @@ report_usage(
 
 ### 测试
 
-`pytest_homeassistant.common` has `import_and_test_deprecated_constant`, `import_and_test_deprecated_constant_enum`, `import_and_test_deprecated_alias`, and `help_test_all` for deprecated names. The `mock_integration_frame` fixture helps you test `report_usage()` warnings.
+`pytest_homeassistant.common` 具有 `import_and_test_deprecated_constant`、`import_and_test_deprecated_constant_enum`、`import_and_test_deprecated_alias` 和 `help_test_all` 用于测试被弃用的名称。`mock_integration_frame` 夹具帮助你测试 `report_usage()` 警告。

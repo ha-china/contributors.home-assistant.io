@@ -13,7 +13,7 @@ order: 4
 
 在编写任何代码之前，请先确认这一点。
 
-For a new integration, the project recommends that you publish it in the [Marketplace](/marketplace/) first, as a [custom integration](/glossary/custom-integration/). You gain experience, and you can iterate faster. Once it has matured and has a user base, ask in the **#developers** channel on [Discord](https://www.home-assistant.io/join-chat/) whether it should ship built in. [Publish a custom integration](/marketplace/guides/integrations/) explains what is different outside core.
+对于新集成，项目建议你首先在[市场](/marketplace/)中将其发布为[自定义集成](/glossary/custom-integration/)。你可以积累经验，并且可以更快地迭代。一旦它成熟并拥有用户群，请在 [Discord](https://www.home-assistant.io/join-chat/) 的 **#developers** 频道询问它是否应该内置发布。[发布自定义集成](/marketplace/guides/integrations/)说明了在 core 之外有何不同。
 
 要作为内置功能发布，集成必须满足以下要求：
 
@@ -21,7 +21,7 @@ For a new integration, the project recommends that you publish it in the [Market
 - 它必须已经站稳脚跟，拥有真实的用户群。Home Assistant 不是新产品的营销平台。
 - 所有通信都必须通过 PyPI 上符合[依赖透明度](/core/quality-scale/dependency-transparency/)规则的 Python 库进行。请参阅[构建 Python 库](/core/integrations/api-library/)。
 
-Not sure where yours fits? Ask in **#developers** before you start.
+不确定你的集成属于哪种情况？在开始之前，请在 **#developers** 中提问。
 
 ## 保持第一个拉取请求（pull request）足够小
 

@@ -8,12 +8,12 @@ order: 10
 
 颜色、排版和间距页面直接读取这些令牌。你在那里看到的就是前端所使用的内容。
 
-- [Color](/design/foundations/color/): the palettes, and the semantic colors built on them.
-- [Typography](/design/foundations/typography/): the type scale and font weights.
-- [Spacing](/design/foundations/spacing/): the spacing scale and corner radius.
-- [Layout](/design/foundations/layout/): content widths and the gutter at the sides of a page.
-- [Accessibility](/design/foundations/accessibility/): contrast, focus, keyboard, labels, target size, and screen readers. What WCAG asks, and how the frontend does it.
-- [Motion](/design/foundations/motion/): the animation durations, and how reduced motion works.
+- [颜色](/design/foundations/color/)：调色板，以及基于它们构建的语义颜色。
+- [排版](/design/foundations/typography/)：字号阶梯和字重。
+- [间距](/design/foundations/spacing/)：间距阶梯和圆角半径。
+- [布局](/design/foundations/layout/)：内容宽度和页面两侧的边距。
+- [无障碍](/design/foundations/accessibility/)：对比度、焦点、键盘、标签、目标大小和屏幕阅读器。WCAG 的要求，以及前端如何实现。
+- [动效](/design/foundations/motion/)：动画时长，以及减少动态效果如何工作。
 
 > [!TIP]
 > 在设计新东西？请坚持使用令牌。自定义的颜色或间距值意味着基础中缺少了某些东西，这值得在 [UX 设计讨论](https://github.com/OpenHomeFoundation/ux-design/discussions)的 **Design system** 分类中发起讨论。

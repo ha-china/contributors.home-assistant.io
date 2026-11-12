@@ -1,7 +1,7 @@
 ---
 title: 你对 core 的首次贡献
 description: 搭建开发环境，找一些小的修复任务，然后向 Home Assistant Core 发起你的第一个拉取请求（pull request）。
-sidebarLabel: Your first contribution
+sidebarLabel: 你的首次贡献
 order: 1
 ---
 
@@ -11,7 +11,7 @@ order: 1
 
 ## 1. 打个招呼
 
-Join the [Home Assistant Discord](https://www.home-assistant.io/join-chat/). Under **Channels & Roles**, choose **I want to contribute dev skills to Home Assistant** to see the channels for development. General development questions, like whether an integration belongs in core, fit **#developers**. When you are stuck on code, start a thread in **#coding-support**. You do not need permission to start, but it helps to know where to ask when you get stuck.
+加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat/)。在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant** 以查看开发频道。一般的开发问题，比如某个集成是否属于 core，适合放在 **#developers**。当你卡在代码上时，在 **#coding-support** 中发起一个主题（thread）。你不需要获得许可才能开始，但知道卡住时该去哪里提问会很有帮助。
 
 ## 2. 搭建你的环境
 

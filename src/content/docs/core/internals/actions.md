@@ -15,7 +15,7 @@ sidebarLabel: Actions
 
 ## 注册表
 
-`hass.services.async_register(domain, service, handler)` adds an action to the registry. It takes an optional `schema`, and `supports_response` for actions that return data. Integrations should register their actions from `async_setup`, through `async_setup_services` in their `services.py`. See [register actions in async_setup](/core/integrations/actions/#register-actions-in-async_setup).
+`hass.services.async_register(domain, service, handler)` 会将动作添加到注册表中。对于返回数据的动作，它接受可选的 `schema` 和 `supports_response`。集成（integration）应从 `async_setup` 中，通过其 `services.py` 中的 `async_setup_services` 来注册动作。请参阅[在 async_setup 中注册动作](/core/integrations/actions/#register-actions-in-async_setup)。
 
 Home Assistant 使用 `probatio` 来处理模式（schema）。请以 `probatio` 的名称导入，不要使用别名。当您注册了一个模式后，它会在您的处理程序之前运行，因此无效的数据绝不会到达您这里。如果没有模式，`call.data` 就是调用者发送的任何内容。
 

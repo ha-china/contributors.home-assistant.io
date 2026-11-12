@@ -19,9 +19,9 @@ sidebarLabel: Actions
 
 请在您集成的 `async_setup` 中注册动作，不要在 `async_setup_entry` 中注册，也不要在平台中注册。这样，即使没有加载任何配置条目（config entry），这些动作也存在，因此使用它们的自动化可以被编辑和验证，用户也会得到明确的错误提示，而不是未知动作。这是[质量等级](/core/quality-scale/)中铜级（Bronze）的一项规则。
 
-Put the registration in `services.py`, in a function called `async_setup_services`, and call that function from `async_setup`. It is a synchronous function, decorated with `@callback`, that takes only `hass`. Pylint warns about actions registered outside `services.py` (`home-assistant-action-registered-outside-services-module`), and about an `async_setup_services` with another shape (`home-assistant-invalid-setup-services`).
+将注册代码放在 `services.py` 中，放在名为 `async_setup_services` 的函数里，并从 `async_setup` 调用该函数。它是一个同步函数，用 `@callback` 装饰，只接收 `hass`。Pylint 会警告在 `services.py` 之外注册的动作（`home-assistant-action-registered-outside-services-module`），以及形状不同的 `async_setup_services`（`home-assistant-invalid-setup-services`）。
 
-Since your integration now has an `async_setup`, it needs a `CONFIG_SCHEMA`. See [integrations without YAML](/core/integrations/yaml/#integrations-without-yaml).
+由于您的集成现在有了 `async_setup`，它需要一个 `CONFIG_SCHEMA`。参见[无 YAML 的集成](/core/integrations/yaml/#integrations-without-yaml)。
 
 ## 选择正确的目标
 

@@ -18,7 +18,7 @@ term:
     - "backward-incompatible changes"
 ---
 
-Pull requests with a backward-incompatible change that can affect users get the `breaking-change` label, and explain in their description what changes and what to do about it. That text ends up in the **Backward-incompatible changes** section of the release notes. Removing a deprecated core API after its deprecation period, when only custom integrations can still use it, does not get the label: those developers hear about it on the developer blog instead. [Document a backward-incompatible change](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible) has the details.
+带有向后不兼容变更的拉取请求（pull request）如果可能影响用户，会获得 `breaking-change` 标签，并在其描述中说明变更内容及应对措施。该文本会出现在发布说明的**向后不兼容的变更**部分。在弃用期结束后移除已弃用的核心 API，且仅自定义集成仍可使用该 API 时，不会获得此标签：这些开发者会在开发者博客上得知相关信息。[记录向后不兼容的变更](/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible) 中有详细说明。
 
 Home Assistant Core 的拉取请求模板和该标签将其称为“breaking change”。两者含义相同。发布说明将其称为向后不兼容变更，你所撰写的一切内容也应如此。
 

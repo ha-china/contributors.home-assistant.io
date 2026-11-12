@@ -16,16 +16,16 @@ Android 应用在所有环节都使用 GitHub Actions：检查拉取请求、构
 
 | 工作流 | 运行时机 | 作用 |
 | --- | --- | --- |
-| `pr.yml` | On every pull request | Lint, build, test, and attach APKs |
-| `pr-emulator-wtf.yml` | After `pr.yml` finishes | Run the `:app` instrumentation tests on Emulator.wtf |
-| `zizmor.yml` | On every pull request, and Mondays at 05:30 UTC | Scan the workflows and local actions themselves with [zizmor](https://docs.zizmor.sh/) and upload the findings to Code Scanning |
-| `onPush.yml` | On every push to `main` | Build release versions and publish them to the internal track of the Play Store |
-| `weekly.yml` | Sundays at 04:00 UTC | Tag a new version and run `onPush.yml` with the `beta` flag, which creates a GitHub pre-release and promotes the build to the beta track |
-| `e2e.yml` | Daily at 05:00 UTC | Run the [end-to-end tests](/companion/android/e2e-testing/) against a real Home Assistant. When it fails, it starts `e2e-triage`, an agentic workflow that looks into the failure and reports it in an issue |
-| `monthly.yml` | The first day of each month | Create the first version tag of the month, `YYYY.MM.0` |
-| `release.yml` | When a pre-release becomes a release, or manually | Promote the beta to production on the Play Store |
-| `updateScreenshot.yml` | Manually, by a maintainer | Regenerate [screenshot](/companion/android/screenshot-testing/) references |
-| `renovate-lockfiles.yml` | On every push to a `renovate/` branch | Update the [lockfiles](/companion/android/dependencies/) of Renovate pull requests and push them |
+| `pr.yml` | 每次拉取请求 | Lint、构建、测试并附加 APK |
+| `pr-emulator-wtf.yml` | 在 `pr.yml` 完成后 | 在 Emulator.wtf 上运行 `:app` 插桩测试 |
+| `zizmor.yml` | 每次拉取请求，以及每周一 05:30 UTC | 使用 [zizmor](https://docs.zizmor.sh/) 扫描工作流和本地 action 本身，并将发现上传到代码扫描 |
+| `onPush.yml` | 每次推送到 `main` | 构建发布版本并发布到 Play Store 的内部测试轨道 |
+| `weekly.yml` | 每周日 04:00 UTC | 标记新版本并以 `beta` 标志运行 `onPush.yml`，这会创建 GitHub 预发布版本并将构建提升到 beta 轨道 |
+| `e2e.yml` | 每天 05:00 UTC | 针对真实的 Home Assistant 运行[端到端测试](/companion/android/e2e-testing/)。失败时，它会启动 `e2e-triage`，一个代理工作流，调查失败并在 issue 中报告 |
+| `monthly.yml` | 每月第一天 | 创建当月第一个版本标签 `YYYY.MM.0` |
+| `release.yml` | 当预发布版本成为正式版本时，或手动触发 | 将 beta 版本提升到 Play Store 的生产环境 |
+| `updateScreenshot.yml` | 由维护者手动触发 | 重新生成[截图](/companion/android/screenshot-testing/)参考 |
+| `renovate-lockfiles.yml` | 每次推送到 `renovate/` 分支 | 更新 Renovate 拉取请求的[锁文件](/companion/android/dependencies/)并推送它们 |
 
 ## 在你的拉取请求上
 

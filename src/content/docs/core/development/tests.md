@@ -45,12 +45,12 @@ tests/components/airgradient/
 
 按照 Home Assistant 使用你的集成的方式来测试它：通过其公共接口，绝不要直接探查集成的内部。以这种方式工作的测试在集成被重构后仍然有效。
 
-- Set up the integration with `hass.config_entries.async_setup()`, or with `async_setup_component()` if it has no config entries.
-- Read the state of entities from the state machine, with `hass.states.get()`.
-- Call actions through `hass.services.async_call()`.
-- Check devices and entities in the device and entity registries.
-- Check the state of a config entry with its `state` attribute.
-- Create config entries with `MockConfigEntry` from `pytest_homeassistant.common`.
+- 使用 `hass.config_entries.async_setup()` 设置集成，或者如果没有配置条目，则使用 `async_setup_component()`。
+- 使用 `hass.states.get()` 从状态机读取实体的状态。
+- 通过 `hass.services.async_call()` 调用服务。
+- 在设备和实体注册表中检查设备和实体。
+- 使用配置条目的 `state` 属性检查其状态。
+- 使用 `pytest_homeassistant.common` 中的 `MockConfigEntry` 创建配置条目。
 
 针对辅助函数或纯逻辑的聚焦单元测试可以直接调用该代码。这没有问题，只要集成的行为是通过 Home Assistant 测试的。
 
@@ -75,7 +75,7 @@ def mock_example_client() -> Generator[MagicMock]:
 
 Mock 协调器（coordinator）、`hass` 辅助函数或实体内部会使测试变得脆弱，并且跳过了你真正想要测试的代码。
 
-Put sample data, like a JSON response of the device, in the `fixtures/` folder of your tests, and load it with the helpers in `pytest_homeassistant.common`. `load_fixture("status.json", DOMAIN)` returns the text of `tests/components/<domain>/fixtures/status.json`. `load_json_object_fixture` and `load_json_array_fixture` parse it as JSON. In async code, use the `async_` versions, like `await async_load_json_object_fixture(hass, "status.json", DOMAIN)`: they read the file outside the event loop.
+将示例数据（比如设备的 JSON 响应）放在测试的 `fixtures/` 文件夹中，并使用 `pytest_homeassistant.common` 中的辅助函数加载它。`load_fixture("status.json", DOMAIN)` 返回 `tests/components/<domain>/fixtures/status.json` 的文本内容。`load_json_object_fixture` 和 `load_json_array_fixture` 将其解析为 JSON。在异步代码中，使用 `async_` 版本，比如 `await async_load_json_object_fixture(hass, "status.json", DOMAIN)`：它们会在事件循环之外读取文件。
 
 Core 还为你经常需要的东西提供了 fixture，比如 `hass`、`entity_registry`、`device_registry`、用于 WebSocket API 的 `hass_ws_client`，以及 `issue_registry`。还有一些更多的约定：
 

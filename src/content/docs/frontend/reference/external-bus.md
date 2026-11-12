@@ -89,23 +89,23 @@ interface ErrorResult {
 
 | 键 | 类型 | 含义 |
 | --- | --- | --- |
-| `hasSettingsScreen` | boolean | The app shows its own settings on `config_screen/show`. |
-| `hasSidebar` | boolean | The app has a sidebar of its own. |
-| `canWriteTag` | boolean | The device can write NFC tags. |
-| `hasExoPlayer` | boolean | The app can play HLS video natively with ExoPlayer. |
-| `canCommissionMatter` | boolean | The app can commission Matter devices. |
-| `hasMatterStatusReport` | boolean | The app reports the end of Matter commissioning with `matter/commission/finish`. |
-| `canShareMatterDeviceToAppleHome` | boolean | The app can add a Matter device that Home Assistant already has to Apple Home, with `matter/share_device`. |
-| `canShareMatterDeviceToOtherApps` | boolean | The app can share a Matter device that Home Assistant already has with an app the user picks in the Matter share sheet of the platform, with `matter/share_device`. |
-| `canImportThreadCredentials` | boolean | The app can import Thread credentials. |
-| `canTransferThreadCredentialsToKeychain` | boolean | The app can store Thread credentials in the keychain of the platform. Apple only. |
-| `hasAssist` | boolean | The app has a native Assist interface, used instead of the one of the frontend. |
-| `hasAssistSettings` | boolean | The app has Assist settings for the device, shown in the voice assistant settings. |
-| `hasBarCodeScanner` | number | `1` when the app can scan barcodes, `0` otherwise. |
-| `canSetupImprov` | boolean | The app can set up Improv Wi-Fi devices. |
-| `hasEntityAddTo` | boolean | The app can add entities to places of its own, like a widget, from the more-info dialog. |
-| `hasSplashscreen` | boolean | The app covers the frontend with its own loading screen until `frontend/loaded`. |
-| `appVersion` | string | The version of the app. |
+| `hasSettingsScreen` | boolean | 应用在 `config_screen/show` 时显示自己的设置。 |
+| `hasSidebar` | boolean | 应用有自己的侧边栏。 |
+| `canWriteTag` | boolean | 设备可以写入 NFC 标签。 |
+| `hasExoPlayer` | boolean | 应用可以使用 ExoPlayer 原生播放 HLS 视频。 |
+| `canCommissionMatter` | boolean | 应用可以调试（commission）Matter 设备。 |
+| `hasMatterStatusReport` | boolean | 应用通过 `matter/commission/finish` 报告 Matter 调试的结束。 |
+| `canShareMatterDeviceToAppleHome` | boolean | 应用可以通过 `matter/share_device` 将 Home Assistant 已有的 Matter 设备添加到 Apple Home。 |
+| `canShareMatterDeviceToOtherApps` | boolean | 应用可以通过 `matter/share_device` 将 Home Assistant 已有的 Matter 设备与用户在平台 Matter 分享面板中选择的应用分享。 |
+| `canImportThreadCredentials` | boolean | 应用可以导入 Thread 凭据。 |
+| `canTransferThreadCredentialsToKeychain` | boolean | 应用可以将 Thread 凭据存储在平台的钥匙串中。仅限 Apple。 |
+| `hasAssist` | boolean | 应用有原生 Assist 界面，用于替代前端的界面。 |
+| `hasAssistSettings` | boolean | 应用有设备的 Assist 设置，显示在语音助手设置中。 |
+| `hasBarCodeScanner` | number | 应用可以扫描条形码时为 `1`，否则为 `0`。 |
+| `canSetupImprov` | boolean | 应用可以设置 Improv Wi-Fi 设备。 |
+| `hasEntityAddTo` | boolean | 应用可以从更多信息（more-info）对话框将实体添加到自己的位置，例如小组件。 |
+| `hasSplashscreen` | boolean | 应用用自己的加载屏幕覆盖前端，直到 `frontend/loaded`。 |
+| `appVersion` | string | 应用的版本。 |
 
 #### entity/add_to/get_actions
 
@@ -135,14 +135,14 @@ interface ErrorResult {
 
 #### matter/share_device
 
-The frontend asks the app to share a Matter device with another platform, like Apple Home. The device is already set up in Home Assistant, and Home Assistant has opened a commissioning window for it: a short time in which another platform can add the device too. The frontend offers this in the dialog that opens that window.
+前端要求应用将 Matter 设备分享到另一个平台，例如 Apple Home。该设备已在 Home Assistant 中设置好，并且 Home Assistant 已为其打开了调试窗口：在这段短时间内，另一个平台也可以添加该设备。前端在打开该窗口的对话框中提供此选项。
 
-The frontend only sends this message when the app supports it:
+前端仅在应用支持时发送此消息：
 
-- With `canShareMatterDeviceToAppleHome`, it always offers to add the device to Apple Home. When the app sets both keys, this one wins.
-- With `canShareMatterDeviceToOtherApps`, it only offers the share sheet when the Matter server reported the `discriminator` and the timeout of the window. The share sheet opens a window of its own, and needs both.
+- 使用 `canShareMatterDeviceToAppleHome` 时，它始终提供将设备添加到 Apple Home 的选项。当应用同时设置两个键时，此键优先。
+- 使用 `canShareMatterDeviceToOtherApps` 时，仅当 Matter 服务器报告了 `discriminator` 和窗口超时时间时，它才提供分享面板。分享面板会打开自己的窗口，并且需要这两项。
 
-Payload:
+载荷：
 
 ```ts
 {
@@ -156,22 +156,22 @@ Payload:
 }
 ```
 
-| Key | Meaning |
+| 键 | 含义 |
 | --- | --- |
-| `setup_qr_code` | The QR code payload of the commissioning window, starting with `MT:`. Always sent. |
-| `setup_pin_code` | The setup passcode of the commissioning window. Always sent. |
-| `discriminator` | The discriminator the device advertises while the window is open, when the Matter server reported it. |
-| `vendor_id` | The vendor ID of the device, when the Matter server reported it. |
-| `product_id` | The product ID of the device, when the Matter server reported it. |
-| `device_name` | The name of the device in Home Assistant, to suggest to the other platform. |
-| `remaining_seconds` | Estimated seconds until the window closes, when the Matter server reported its timeout. When 30 seconds or less remain, the frontend treats the code as expired, does not send the message, and asks you to get a new code. When sent, this value is greater than 30. |
+| `setup_qr_code` | 调试窗口的二维码载荷，以 `MT:` 开头。始终发送。 |
+| `setup_pin_code` | 调试窗口的设置密码。始终发送。 |
+| `discriminator` | 窗口打开时设备广播的 discriminator，当 Matter 服务器报告时。 |
+| `vendor_id` | 设备的供应商 ID，当 Matter 服务器报告时。 |
+| `product_id` | 设备的产品 ID，当 Matter 服务器报告时。 |
+| `device_name` | 设备在 Home Assistant 中的名称，用于向其他平台建议。 |
+| `remaining_seconds` | 窗口关闭前的估计秒数，当 Matter 服务器报告其超时时。当剩余 30 秒或更少时，前端将代码视为已过期，不发送消息，并要求您获取新代码。发送时，此值大于 30。 |
 
-Answer: an empty object once the flow of the platform has completed. When it did not work, answer with an error result:
+应答：平台流程完成后返回一个空对象。如果未成功，请以错误结果应答：
 
-- `canceled`: the user closed the sheet of the platform. The frontend takes that as a choice, not an error.
-- Any other code, like `failed`: the frontend shows that sharing failed, with its own text. It does not show your `message`.
+- `canceled`：用户关闭了平台的分享面板。前端将其视为选择，而非错误。
+- 任何其他代码，例如 `failed`：前端显示分享失败，并使用自己的文本。它不会显示您的 `message`。
 
-### Messages without an answer
+### 无需应答的消息
 
 | 类型 | 载荷 | 含义 |
 | --- | --- | --- |

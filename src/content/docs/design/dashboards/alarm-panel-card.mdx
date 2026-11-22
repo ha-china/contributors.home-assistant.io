@@ -4,11 +4,12 @@ description: 报警面板卡片可布防和撤防报警系统，并提供用于�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "alarm-panel", "entity": "alarm_control_panel.home_alarm"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "alarm-panel", entity: "alarm_control_panel.home_alarm" }]}
+/>
 
 ## 用法
 
@@ -18,17 +19,31 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 请将报警面板卡片用于作为报警面板的仪表盘（dashboard），例如前门的平板电脑。如果只是快速查看状态，或从您所在的房间进行布防，带有报警模式功能的[磁贴卡片](/design/dashboards/tile-card/)要小得多。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "alarm_control_panel.home_alarm", "features": [{"type": "alarm-modes", "modes": ["armed_home", "armed_away", "disarmed"]}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "tile",
+      entity: "alarm_control_panel.home_alarm",
+      features: [{ type: "alarm-modes", modes: ["armed_home", "armed_away", "disarmed"] }],
+    },
+  ]}
+/>
 
 ### 布防按钮
 
 如果报警系统支持，卡片默认显示**在家布防**和**离家布防**。通过 `states`，您可以选择显示哪些按钮以及显示顺序。只显示人们实际使用的模式。每多一个按钮，就多一项需要匆忙中阅读的内容。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "alarm-panel", "entity": "alarm_control_panel.home_alarm", "states": ["arm_home", "arm_away", "arm_night"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "alarm-panel",
+      entity: "alarm_control_panel.home_alarm",
+      states: ["arm_home", "arm_away", "arm_night"],
+    },
+  ]}
+/>
 
 ### 内容
 

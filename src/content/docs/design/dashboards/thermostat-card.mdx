@@ -4,11 +4,12 @@ description: 恒温器卡片将气候或热水器实体显示为一个旋钮，�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "climate.thermostat"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "thermostat", entity: "climate.thermostat" }]}
+/>
 
 ## 用法
 
@@ -16,10 +17,13 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 旋钮会根据设备的运行状态显示颜色：制热时为橙色，制冷时为蓝色。当设备关闭时，旋钮为灰色，控件也会退隐。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "climate.bedroom_air_conditioner"}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "water_heater.water_heater"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "thermostat", entity: "climate.bedroom_air_conditioner" },
+    { type: "thermostat", entity: "water_heater.water_heater" },
+  ]}
+/>
 
 当调整温度是人们打开仪表盘（dashboard）的主要原因时，可以使用恒温器卡片，例如在气候视图中，或放在走廊的平板电脑上。该卡片较高：在分区（sections）视图中它占据五行。当温度只是房间中众多信息之一时，带有目标温度功能的[磁贴卡片](/design/dashboards/tile-card/)只占一行，也能完成同样的工作。
 
@@ -27,18 +31,30 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `show_current_as_primary: true` 后，大数字显示当前温度，目标温度则移到较小的那一行。当人们主要想了解现在有多暖和，只是偶尔更改目标温度时，可以使用此选项。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "climate.thermostat", "show_current_as_primary": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "thermostat", entity: "climate.thermostat", show_current_as_primary: true }]}
+/>
 
 ### 功能
 
 与磁贴卡片一样，恒温器卡片可以在旋钮下方添加功能（feature）。设备的各种模式非常适合：HVAC 模式、预设模式或风扇模式。每个功能都会在分区视图中为卡片增加行数，因此只添加人们经常更改的功能即可。其余功能只需在更多信息对话框中轻点一下即可访问。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "climate.thermostat", "features": [{"type": "climate-hvac-modes", "hvac_modes": ["off", "heat", "cool", "auto"]}]}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "thermostat", "entity": "climate.bedroom_air_conditioner", "features": [{"type": "climate-fan-modes", "style": "icons"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "thermostat",
+      entity: "climate.thermostat",
+      features: [{ type: "climate-hvac-modes", hvac_modes: ["off", "heat", "cool", "auto"] }],
+    },
+    {
+      type: "thermostat",
+      entity: "climate.bedroom_air_conditioner",
+      features: [{ type: "climate-fan-modes", style: "icons" }],
+    },
+  ]}
+/>
 
 ### 内容
 

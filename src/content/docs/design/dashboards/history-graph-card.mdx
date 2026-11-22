@@ -4,11 +4,17 @@ description: 历史图表卡片显示一个或多个实体（entity）的状态�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 460px" data-props='{"config": {"type": "history-graph", "entities": ["sensor.living_room_temperature", "sensor.outdoor_temperature"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "history-graph",
+      entities: ["sensor.living_room_temperature", "sensor.outdoor_temperature"],
+    },
+  ]}
+/>
 
 ## 用法
 

@@ -4,12 +4,20 @@ description: 仪表盘卡片在一个表盘上显示一个数值，并用颜色�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "gauge", "entity": "sensor.living_room_humidity"}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "gauge", "entity": "sensor.monstera_battery", "name": "Monstera sensor battery", "severity": {"red": 0, "yellow": 20, "green": 40}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "gauge", entity: "sensor.living_room_humidity" },
+    {
+      type: "gauge",
+      entity: "sensor.monstera_battery",
+      name: "Monstera sensor battery",
+      severity: { red: 0, yellow: 20, green: 40 },
+    },
+  ]}
+/>
 
 ## 用法
 
@@ -27,11 +35,26 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 表盘的颜色可以表示数值是好是坏。通过 `severity`，你可以设置绿色、黄色和红色的起始位置。每种颜色从其起始值延伸到下一个起始值。未设置 severity 时，表盘使用不带任何含义的信息色（info color）。
 
-<Demo hass>
-  <hui-card style="width: 240px" data-props='{"config": {"type": "gauge", "entity": "sensor.living_room_humidity", "severity": {"green": 30, "yellow": 60, "red": 70}}}'></hui-card>
-  <hui-card style="width: 240px" data-props='{"config": {"type": "gauge", "entity": "sensor.outdoor_humidity", "severity": {"green": 30, "yellow": 60, "red": 70}}}'></hui-card>
-  <hui-card style="width: 240px" data-props='{"config": {"type": "gauge", "entity": "sensor.monstera_moisture", "severity": {"red": 0, "yellow": 15, "green": 25}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "gauge",
+      entity: "sensor.living_room_humidity",
+      severity: { green: 30, yellow: 60, red: 70 },
+    },
+    {
+      type: "gauge",
+      entity: "sensor.outdoor_humidity",
+      severity: { green: 30, yellow: 60, red: 70 },
+    },
+    {
+      type: "gauge",
+      entity: "sensor.monstera_moisture",
+      severity: { red: 0, yellow: 15, green: 25 },
+    },
+  ]}
+/>
 
 绿色不一定在低端。对于电池或植物的土壤湿度，低是不好的，因此红色排在最前面。
 
@@ -41,10 +64,30 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `needle: true` 后，表盘会同时显示所有范围，并由一根指针指向该数值。人们可以看到数值所在的位置，以及它距离下一个范围有多近。请与 severity 或 segments 配合使用；不使用它们时，整个表盘只有单一颜色。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "gauge", "entity": "sensor.living_room_humidity", "needle": true, "severity": {"green": 30, "yellow": 60, "red": 70}}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "gauge", "entity": "sensor.living_room_temperature", "needle": true, "min": 10, "max": 30, "segments": [{"from": 10, "color": "var(--info-color)"}, {"from": 18, "color": "var(--success-color)"}, {"from": 24, "color": "var(--warning-color)"}, {"from": 27, "color": "var(--error-color)"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "gauge",
+      entity: "sensor.living_room_humidity",
+      needle: true,
+      severity: { green: 30, yellow: 60, red: 70 },
+    },
+    {
+      type: "gauge",
+      entity: "sensor.living_room_temperature",
+      needle: true,
+      min: 10,
+      max: 30,
+      segments: [
+        { from: 10, color: "var(--info-color)" },
+        { from: 18, color: "var(--success-color)" },
+        { from: 24, color: "var(--warning-color)" },
+        { from: 27, color: "var(--error-color)" },
+      ],
+    },
+  ]}
+/>
 
 每个分段（segment）可以有一个 `label`。使用指针时，当数值位于该分段内，标签会替换中间的数字，例如**舒适**或**过热**。
 

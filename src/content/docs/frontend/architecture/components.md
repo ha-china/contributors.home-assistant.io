@@ -83,7 +83,7 @@ export class HaButton extends Button {
 
 请始终使用 `ha-*` 元素，绝不要直接使用 Web Awesome 元素。封装器是主题、翻译以及针对 Home Assistant 的修复所在之处，它也是保持每个界面一致性的关键。
 
-前端较旧的部分仍在使用 Material Web Components（`mwc-*`）。它们正在被替换。不要添加新的。
+The frontend no longer uses Material Web Components (`mwc-*`). Don't add them back. Some `--mdc-*` CSS properties are still read for theming, but new code uses the `--ha-*` ones.
 
 每个共享组件在[设计区域](/design/components/)中都有一个页面，包含使用指南、实时示例及其属性。在构建新东西之前，请先查看那里。
 

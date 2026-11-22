@@ -4,12 +4,19 @@ description: 时钟卡片以数字或模拟时钟的形式显示当前时间，�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "clock", "clock_size": "large", "date_format": ["weekday-long", "day-numeric", "month-long"]}}'></hui-card>
-  <hui-card style="width: 200px" data-props='{"config": {"type": "clock", "clock_style": "analog", "clock_size": "medium"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "clock",
+      clock_size: "large",
+      date_format: ["weekday-long", "day-numeric", "month-long"],
+    },
+    { type: "clock", clock_style: "analog", clock_size: "medium" },
+  ]}
+/>
 
 ## 用法
 
@@ -23,10 +30,25 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 默认为数字时钟。设置 `clock_style: analog` 后，卡片会显示一个带指针的表盘。数字时钟在远距离更易于读取，而模拟时钟更适合风格更沉稳、更具装饰性的仪表盘。请选定一种样式，并在整个仪表盘中统一使用。
 
-<Demo hass>
-  <hui-card style="width: 200px" data-props='{"config": {"type": "clock", "clock_style": "analog", "clock_size": "medium", "face_style": "numbers_upright", "border": true, "show_seconds": true}}'></hui-card>
-  <hui-card style="width: 200px" data-props='{"config": {"type": "clock", "clock_style": "analog", "clock_size": "medium", "ticks": "minute"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "clock",
+      clock_style: "analog",
+      clock_size: "medium",
+      face_style: "numbers_upright",
+      border: true,
+      show_seconds: true,
+    },
+    {
+      type: "clock",
+      clock_style: "analog",
+      clock_size: "medium",
+      ticks: "minute",
+    },
+  ]}
+/>
 
 模拟时钟有自己的选项：`face_style` 用于显示刻度、数字或罗马数字，`ticks` 用于设置表盘上的刻度数量，`border` 则会在表盘周围画一个圆圈。
 
@@ -34,18 +56,19 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 `clock_size` 可将时钟设为 `small`、`medium` 或 `large`。在分区视图（sections view）中，卡片会随之变大。当时钟是屏幕上的主要内容时，请使用大尺寸；当它位于角落时，请使用小尺寸。
 
-<Demo hass layout="stack">
-  <hui-card style="width: 340px" data-props='{"config": {"type": "clock"}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "clock", "clock_size": "medium"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "clock" }, { type: "clock", clock_size: "medium" }]}
+/>
 
 ### 日期和标题
 
 `date_format` 会在时间下方添加日期。它是一个由多个部分组成的列表，例如星期几、日、月，因此可以遵循任何本地顺序。`title` 会在时间上方添加一行文字，例如当卡片显示另一个时区的时间时，显示该城市的名称。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "clock", "title": "Tokyo", "time_zone": "Asia/Tokyo", "clock_size": "medium"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "clock", title: "Tokyo", time_zone: "Asia/Tokyo", clock_size: "medium" }]}
+/>
 
 ### 无背景
 

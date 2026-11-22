@@ -4,12 +4,21 @@ description: 区域卡片汇总家中的一个区域，包括其图片、传感�
 sidebarGroup: Grouping and layout
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 360px" data-props='{"config": {"type": "area", "area": "living_room", "sensor_classes": ["temperature", "humidity"]}}'></hui-card>
-  <hui-card style="width: 360px" data-props='{"config": {"type": "area", "area": "living_room", "display_type": "compact", "sensor_classes": ["temperature", "humidity"], "features": [{"type": "area-controls"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "area", area: "living_room", sensor_classes: ["temperature", "humidity"] },
+    {
+      type: "area",
+      area: "living_room",
+      display_type: "compact",
+      sensor_classes: ["temperature", "humidity"],
+      features: [{ type: "area-controls" }],
+    },
+  ]}
+/>
 
 ## 用法
 
@@ -26,10 +35,13 @@ import Demo from "../../../../components/docs/Demo.astro";
 - `icon`：在纯色背景上显示区域的图标，大小与图片相同。
 - `compact`：完全不显示图片。卡片小如磁贴，图标位于名称之前。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "area", "area": "hallway", "display_type": "icon"}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "area", "area": "hallway", "display_type": "compact"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "area", area: "hallway", display_type: "icon" },
+    { type: "area", area: "hallway", display_type: "compact" },
+  ]}
+/>
 
 当人们能通过图片认出自己的房间时（例如在墙壁平板上），请使用图片。当概览页面包含许多区域时，请使用紧凑类型，以便它们能在一屏内显示。紧凑卡片可以是 `vertical`（垂直）的，就像垂直磁贴一样。
 
@@ -41,10 +53,24 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 通过 `alert_classes`，卡片为区域中每个处于开启状态的二进制传感器（binary sensor）类别显示一个图标，例如移动、打开的窗户或漏水。在较大的类型中，警报以一列的形式显示在图片上。在紧凑类型中，只显示第一个警报，作为图标上的徽章。警报只在实际发生情况时出现，因此空白处是好消息。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "area", "area": "kitchen", "display_type": "compact", "alert_classes": ["window", "moisture"]}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "area", "area": "hallway", "display_type": "compact", "sensor_classes": ["illuminance"], "alert_classes": ["motion", "door"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "area",
+      area: "kitchen",
+      display_type: "compact",
+      alert_classes: ["window", "moisture"],
+    },
+    {
+      type: "area",
+      area: "hallway",
+      display_type: "compact",
+      sensor_classes: ["illuminance"],
+      alert_classes: ["motion", "door"],
+    },
+  ]}
+/>
 
 如果没有 `sensor_classes` 或 `alert_classes`，卡片将不显示任何读数或警报。请选择对概览最重要的少数几个类别，例如温度和湿度，以及移动和漏水。
 
@@ -52,9 +78,17 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 区域卡片支持功能（feature），就像磁贴卡片一样。`area-controls` 功能添加按钮，可将区域的灯光、风扇和窗帘一起打开或关闭。默认情况下，它最多显示四个按钮，对应区域所拥有的设备类型。通过 `controls`，您可以自行选择。
 
-<Demo hass>
-  <hui-card style="width: 360px" data-props='{"config": {"type": "area", "area": "bedroom", "display_type": "compact", "features": [{"type": "area-controls", "controls": ["fan", "cover-blind"]}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "area",
+      area: "bedroom",
+      display_type: "compact",
+      features: [{ type: "area-controls", controls: ["fan", "cover-blind"] }],
+    },
+  ]}
+/>
 
 ### 内容
 

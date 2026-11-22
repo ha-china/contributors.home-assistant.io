@@ -4,11 +4,12 @@ description: 天气预报卡片显示当前天气以及来自天气实体（enti
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "weather-forecast", "entity": "weather.home", "forecast_type": "daily"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "weather-forecast", entity: "weather.home", forecast_type: "daily" }]}
+/>
 
 ## 用法
 
@@ -20,9 +21,10 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 `forecast_type` 设置卡片显示哪种预报：`daily`、`hourly` 或 `twice_daily`（白天和夜间）。可用的类型取决于天气服务。卡片编辑器只提供该实体支持的类型。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "weather-forecast", "entity": "weather.home", "forecast_type": "hourly"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "weather-forecast", entity: "weather.home", forecast_type: "hourly" }]}
+/>
 
 `forecast_slots` 设置卡片显示多少天或多少小时，默认为 5。
 
@@ -30,18 +32,35 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 `show_current: false` 会省略当前天气，`show_forecast: false` 会省略预报。只包含其中之一的卡片会更矮。当旁边的卡片已经显示当前温度时，可以使用仅显示预报的版本。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "weather-forecast", "entity": "weather.home", "forecast_type": "daily", "show_current": false}}'></hui-card>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "weather-forecast", "entity": "weather.home", "show_forecast": false}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "weather-forecast",
+      entity: "weather.home",
+      forecast_type: "daily",
+      show_current: false,
+    },
+    { type: "weather-forecast", entity: "weather.home", show_forecast: false },
+  ]}
+/>
 
 ### 窄卡片
 
 卡片会根据自身宽度进行调整。随着宽度变窄，当前天气会使用更小的图标和更小的字号，在最窄的尺寸下名称和额外数值会消失。当卡片较矮时，预报也会变得紧凑。因此该卡片可以在半个区块中使用，但在全宽时能显示更多内容。
 
-<Demo hass>
-  <hui-card style="width: 260px" data-props='{"config": {"type": "weather-forecast", "entity": "weather.home", "forecast_type": "daily", "forecast_slots": 3}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "weather-forecast",
+      entity: "weather.home",
+      forecast_type: "daily",
+      forecast_slots: 3,
+      grid_options: { columns: 6 },
+    },
+  ]}
+/>
 
 ### 内容
 

@@ -4,12 +4,23 @@ description: 标题卡片在一组卡片上方显示标题，并可通过可选�
 sidebarGroup: Grouping and layout
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass layout="stack">
-  <hui-card style="width: 420px" data-props='{"config": {"type": "heading", "heading": "Living room", "icon": "mdi:sofa", "badges": [{"type": "entity", "entity": "sensor.living_room_temperature"}, {"type": "entity", "entity": "sensor.living_room_humidity"}]}}'></hui-card>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "tile", "entity": "light.living_room_lamp"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "heading",
+      heading: "Living room",
+      icon: "mdi:sofa",
+      badges: [
+        { type: "entity", entity: "sensor.living_room_temperature" },
+        { type: "entity", entity: "sensor.living_room_humidity" },
+      ],
+    },
+    { type: "tile", entity: "light.living_room_lamp" },
+  ]}
+/>
 
 ## 用法
 
@@ -21,11 +32,14 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 `title` 样式是默认样式，用于分区顶部。`subtitle` 样式更小更轻，用于分区内的一个组。使用副标题来拆分较长的分区，比如同一房间的灯光和气候。
 
-<Demo hass layout="stack">
-  <hui-card style="width: 420px" data-props='{"config": {"type": "heading", "heading": "Bedroom"}}'></hui-card>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "heading", "heading": "Climate", "heading_style": "subtitle"}}'></hui-card>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "tile", "entity": "climate.bedroom_air_conditioner"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "heading", heading: "Bedroom" },
+    { type: "heading", heading: "Climate", heading_style: "subtitle" },
+    { type: "tile", entity: "climate.bedroom_air_conditioner" },
+  ]}
+/>
 
 ### 徽章
 
@@ -33,17 +47,37 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 徽章数量要控制在几个以内。当它们放不下时，会横向滚动，超出视野的徽章很容易被忽略。
 
-<Demo hass>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "heading", "heading": "Hallway", "heading_style": "subtitle", "badges": [{"type": "entity", "entity": "binary_sensor.front_door"}, {"type": "entity", "entity": "lock.front_door"}, {"type": "entity", "entity": "light.hallway", "show_state": false}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "heading",
+      heading: "Hallway",
+      heading_style: "subtitle",
+      badges: [
+        { type: "entity", entity: "binary_sensor.front_door" },
+        { type: "entity", entity: "lock.front_door" },
+        { type: "entity", entity: "light.hallway", show_state: false },
+      ],
+    },
+  ]}
+/>
 
 ### 操作
 
 默认情况下，选中标题时不会有任何反应。为它设置一个 `tap_action`，比如导航到房间的仪表盘（dashboard），标题旁边就会出现一个箭头图标，表示它可以跳转到某处。
 
-<Demo hass>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "heading", "heading": "Garden", "icon": "mdi:flower", "tap_action": {"action": "navigate", "navigation_path": "/dashboard-garden"}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "heading",
+      heading: "Garden",
+      icon: "mdi:flower",
+      tap_action: { action: "navigate", navigation_path: "/dashboard-garden" },
+    },
+  ]}
+/>
 
 ### 内容
 

@@ -4,12 +4,15 @@ description: 实体卡片以大号数值显示一个实体的状态，并附带�
 sidebarGroup: Entity cards
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "sensor.outdoor_temperature"}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "sensor.desk_plug_power"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "entity", entity: "sensor.outdoor_temperature" },
+    { type: "entity", entity: "sensor.desk_plug_power" },
+  ]}
+/>
 
 ## 用法
 
@@ -21,26 +24,45 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 使用 `attribute`，卡片将显示一个属性（attribute）而不是状态。当该属性本身没有单位时，请添加 `unit`。自定义单位始终显示在数值之后。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "climate.thermostat", "attribute": "current_temperature", "name": "Living room", "unit": "°C"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "entity",
+      entity: "climate.thermostat",
+      attribute: "current_temperature",
+      name: "Living room",
+      unit: "°C",
+    },
+  ]}
+/>
 
 ### 状态颜色
 
 对于灯，图标会采用状态对应的颜色，比如灯打开时为琥珀色，或者灯本身的颜色。对于其他实体，图标保持默认的图标颜色。设置 `state_color: true` 可以让这些实体的图标也按状态着色，或设置 `state_color: false` 为灯关闭该功能。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "light.living_room_lamp"}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "lock.front_door", "state_color": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "entity", entity: "light.living_room_lamp" },
+    { type: "entity", entity: "lock.front_door", state_color: true },
+  ]}
+/>
 
 ### 页脚
 
 卡片可以带有页脚（footer），比如实体的图表或一排按钮。使用图表时，卡片会变成一个小型传感器卡片，因此这种情况建议使用[传感器卡片](/design/dashboards/sensor-card/)。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "entity", "entity": "sensor.living_room_temperature", "footer": {"type": "graph", "entity": "sensor.living_room_temperature"}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "entity",
+      entity: "sensor.living_room_temperature",
+      footer: { type: "graph", entity: "sensor.living_room_temperature" },
+    },
+  ]}
+/>
 
 ### 内容
 

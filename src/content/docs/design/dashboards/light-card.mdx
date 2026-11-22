@@ -4,12 +4,15 @@ description: 灯光卡片将一盏灯显示为一个大的圆形按钮，周围�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "light", "entity": "light.living_room_lamp"}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "light", "entity": "light.kitchen_ceiling"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "light", entity: "light.living_room_lamp" },
+    { type: "light", entity: "light.kitchen_ceiling" },
+  ]}
+/>
 
 ## 用法
 
@@ -19,9 +22,10 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 当一盏灯是仪表盘（dashboard）或某个分区中的主要内容时，可以使用灯光卡片，例如门旁的壁挂平板。对于大多数灯，带有亮度功能的[瓷砖卡片（tile card）](/design/dashboards/tile-card/)更合适：它只占用四分之一的空间，并且可以与同一区域（area）中的其他灯很好地并排放置。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "light.living_room_lamp", "features": [{"type": "light-brightness"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "tile", entity: "light.living_room_lamp", features: [{ type: "light-brightness" }] }]}
+/>
 
 ### 不支持亮度的灯
 

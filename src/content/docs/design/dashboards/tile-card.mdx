@@ -4,12 +4,15 @@ description: 磁贴卡片显示一个实体（entity）的图标、名称和状�
 sidebarGroup: Entity cards
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "light.living_room_lamp", "features": [{"type": "light-brightness"}]}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "climate.thermostat"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "tile", entity: "light.living_room_lamp", features: [{ type: "light-brightness" }] },
+    { type: "tile", entity: "climate.thermostat" },
+  ]}
+/>
 
 ## 用法
 
@@ -23,10 +26,17 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 功能为磁贴添加控件：亮度滑块、打开和关闭窗帘的按钮、目标温度、一组模式。功能只会为支持它的实体显示。添加人们最常用的功能，而不是实体拥有的所有功能。对于大多数磁贴来说，一到两个就足够了。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "cover.bedroom_blinds", "features": [{"type": "cover-open-close"}, {"type": "cover-position"}]}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "climate.thermostat", "features": [{"type": "target-temperature"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "tile",
+      entity: "cover.bedroom_blinds",
+      features: [{ type: "cover-open-close" }, { type: "cover-position" }],
+    },
+    { type: "tile", entity: "climate.thermostat", features: [{ type: "target-temperature" }] },
+  ]}
+/>
 
 相同的功能也适用于[区域卡片](/design/dashboards/area-card/)、[温控器卡片](/design/dashboards/thermostat-card/)和[加湿器卡片](/design/dashboards/humidifier-card/)。一个功能只需构建一次，每个支持功能的卡片都可以使用它。
 
@@ -34,28 +44,42 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 使用 `features_position: inline` 时，功能会显示在名称旁边而不是下方。磁贴保持单行的高度，但需要分区的完整宽度。它最适合单个紧凑的功能，例如滑块。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "tile", "entity": "fan.bedroom_fan", "features": [{"type": "fan-speed"}], "features_position": "inline"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "tile",
+      entity: "fan.bedroom_fan",
+      features: [{ type: "fan-speed" }],
+      features_position: "inline",
+    },
+  ]}
+/>
 
 ### 垂直布局
 
 使用 `vertical: true` 时，图标会显示在名称和状态的上方。垂直磁贴可以更窄，最窄可达分区的四分之一。将其用于一排人们主要进行切换操作的小磁贴。
 
-<Demo hass>
-  <hui-card style="width: 160px" data-props='{"config": {"type": "tile", "entity": "light.living_room_lamp", "vertical": true}}'></hui-card>
-  <hui-card style="width: 160px" data-props='{"config": {"type": "tile", "entity": "light.hallway", "vertical": true}}'></hui-card>
-  <hui-card style="width: 160px" data-props='{"config": {"type": "tile", "entity": "light.kitchen_ceiling", "vertical": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "tile", entity: "light.living_room_lamp", vertical: true, grid_options: { columns: 3 } },
+    { type: "tile", entity: "light.hallway", vertical: true, grid_options: { columns: 3 } },
+    { type: "tile", entity: "light.kitchen_ceiling", vertical: true, grid_options: { columns: 3 } },
+  ]}
+/>
 
 ### 状态内容
 
 默认情况下，磁贴显示实体的状态。使用 `state_content`，你可以选择它显示的其他内容，例如某个属性（attribute），或自上次更改以来的时间。列表会显示多项内容，用点分隔。使用 `hide_state` 可以只显示名称。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "climate.thermostat", "state_content": ["state", "current_temperature"]}}'></hui-card>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "lock.front_door", "hide_state": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "tile", entity: "climate.thermostat", state_content: ["state", "current_temperature"] },
+    { type: "tile", entity: "lock.front_door", hide_state: true },
+  ]}
+/>
 
 ### 内容
 

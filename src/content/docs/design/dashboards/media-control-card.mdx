@@ -4,11 +4,12 @@ description: 媒体控制卡片显示媒体播放器正在播放的内容，包�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "media-control", "entity": "media_player.living_room_speaker"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "media-control", entity: "media_player.living_room_speaker" }]}
+/>
 
 ## 用法
 
@@ -16,24 +17,35 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 卡片的颜色取自封面图片。图片位于右侧，背景采用图片的主色调，文字则使用在背景上保持可读的颜色。没有封面图片时，卡片使用主色调。当播放器处于关闭状态时，卡片呈灰色，只保留电源按钮。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "media-control", "entity": "media_player.living_room_tv"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "media-control", entity: "media_player.living_room_tv" }]}
+/>
 
 当正在播放的内容值得占据空间时，可以使用媒体控制卡片，例如客厅的音箱。对于人们主要只是开关或只调节音量的播放器，带有播放或音量功能的[磁贴卡片（tile card）](/design/dashboards/tile-card/)会更小巧。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "tile", "entity": "media_player.living_room_speaker", "features": [{"type": "media-player-playback"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "tile",
+      entity: "media_player.living_room_speaker",
+      features: [{ type: "media-player-playback" }],
+    },
+  ]}
+/>
 
 ### 窄卡片
 
 卡片会测量自身的宽度，并舍弃放不下的内容。宽度低于 350 像素时，进度条会消失。宽度低于 300 像素时，在正在播放内容的情况下，控制按钮也会消失。将卡片放在窄列或网格中时，请记住这一点。
 
-<Demo hass>
-  <hui-card style="width: 320px" data-props='{"config": {"type": "media-control", "entity": "media_player.living_room_speaker"}}'></hui-card>
-  <hui-card style="width: 280px" data-props='{"config": {"type": "media-control", "entity": "media_player.living_room_speaker"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "media-control", entity: "media_player.living_room_speaker", grid_options: { columns: 8 } },
+    { type: "media-control", entity: "media_player.living_room_speaker", grid_options: { columns: 7 } },
+  ]}
+/>
 
 ### 内容
 

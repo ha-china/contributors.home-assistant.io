@@ -4,11 +4,22 @@ description: 概览卡片并排显示多个实体的状态，每个实体包括�
 sidebarGroup: Entity cards
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "glance", "entities": ["binary_sensor.front_door", "lock.front_door", "binary_sensor.hallway_motion", "light.hallway"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "glance",
+      entities: [
+        "binary_sensor.front_door",
+        "lock.front_door",
+        "binary_sensor.hallway_motion",
+        "light.hallway",
+      ],
+    },
+  ]}
+/>
 
 ## 用法
 
@@ -20,25 +31,62 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 卡片每行最多容纳五个实体，其余的换到下一行。设置 `columns` 可以自行指定列数。列数越少，较长的名称就有更多空间。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "glance", "title": "Climate", "columns": 3, "entities": ["sensor.living_room_temperature", "sensor.living_room_humidity", "sensor.monstera_temperature", "sensor.outdoor_temperature", "sensor.outdoor_humidity"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "glance",
+      title: "Climate",
+      columns: 3,
+      entities: [
+        "sensor.living_room_temperature",
+        "sensor.living_room_humidity",
+        "sensor.monstera_temperature",
+        "sensor.outdoor_temperature",
+        "sensor.outdoor_humidity",
+      ],
+    },
+  ]}
+/>
 
 ### 显示更少的内容
 
 使用 `show_name`、`show_icon` 和 `show_state` 可以为所有实体隐藏某一部分。当图标本身已经足够说明问题（比如门窗）时，一行不带名称、只带状态的图标效果很好。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "glance", "show_name": false, "entities": ["binary_sensor.front_door", "binary_sensor.kitchen_window", "cover.garage_door", "lock.front_door"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "glance",
+      show_name: false,
+      entities: [
+        "binary_sensor.front_door",
+        "binary_sensor.kitchen_window",
+        "cover.garage_door",
+        "lock.front_door",
+      ],
+    },
+  ]}
+/>
 
 ### 上次更改
 
 在实体上设置 `show_last_changed: true` 后，将显示状态在多久之前发生了更改，而不是状态本身。适用于门之类的对象，因为“什么时候”往往比“是什么”更值得关注。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "glance", "entities": [{"entity": "binary_sensor.front_door", "show_last_changed": true}, {"entity": "binary_sensor.hallway_motion", "show_last_changed": true}, "person.alex", "person.sam"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "glance",
+      entities: [
+        { entity: "binary_sensor.front_door", show_last_changed: true },
+        { entity: "binary_sensor.hallway_motion", show_last_changed: true },
+        "person.alex",
+        "person.sam",
+      ],
+    },
+  ]}
+/>
 
 ### 内容
 

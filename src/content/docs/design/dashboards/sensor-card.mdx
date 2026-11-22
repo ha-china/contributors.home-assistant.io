@@ -4,11 +4,12 @@ description: 传感器卡片以大号字体显示一个数值传感器的值，�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "sensor", "entity": "sensor.living_room_temperature", "graph": "line"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "sensor", entity: "sensor.living_room_temperature", graph: "line" }]}
+/>
 
 ## 用法
 
@@ -22,10 +23,13 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `graph: line` 时，卡片会添加折线图。不设置时，卡片只显示数值。这个纯数值版本与[实体卡片](/design/dashboards/entity-card/)相同，所以如果你不想要折线图，请改用那张卡片。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "sensor", "entity": "sensor.desk_plug_power", "graph": "line"}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "sensor", "entity": "sensor.outdoor_humidity"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "sensor", entity: "sensor.desk_plug_power", graph: "line" },
+    { type: "sensor", entity: "sensor.outdoor_humidity" },
+  ]}
+/>
 
 折线图是一种迷你图（sparkline）：没有坐标轴、没有标签、没有工具提示。它显示的是趋势的形状，而不是具体数字。这让卡片保持简洁，而且由于当前数值就显示在图的上方，所以这样设计是可行的。
 
@@ -35,10 +39,13 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `detail: 2` 时，折线图使用更多的数据点，并跟随每一次变化。默认值 `detail: 1` 会对每小时的数值取平均，从而得到更平滑的曲线。除非峰值本身才是重点，否则请选择平滑曲线。
 
-<Demo hass>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "sensor", "entity": "sensor.desk_plug_power", "graph": "line", "hours_to_show": 6, "detail": 2}}'></hui-card>
-  <hui-card style="width: 300px" data-props='{"config": {"type": "sensor", "entity": "sensor.desk_plug_power", "graph": "line", "hours_to_show": 6}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "sensor", entity: "sensor.desk_plug_power", graph: "line", hours_to_show: 6, detail: 2 },
+    { type: "sensor", entity: "sensor.desk_plug_power", graph: "line", hours_to_show: 6 },
+  ]}
+/>
 
 ### 内容
 

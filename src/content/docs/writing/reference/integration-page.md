@@ -387,9 +387,9 @@ monitored_conditions:
 
 集成的图标和标志来自[品牌仓库](https://github.com/home-assistant/brands)。你不需要在文档中为它们添加任何内容。页面会根据集成的域名自动获取它们。
 
-- 在品牌仓库中打开一个拉取请求，将图片添加到 `core_integrations/<domain>/`，并在你的文档拉取请求中链接它。
-- 至少要添加一个 `icon.png`。`logo.png`、深色背景版本以及高分辨率 `@2x` 版本都是受欢迎的。[品牌 README](https://github.com/home-assistant/brands/blob/master/README.md) 列出了确切的尺寸和要求。
-- 如果该集成最初是自定义集成，现在是 Home Assistant 的一部分，请将其图片从 `custom_integrations` 移动到 `core_integrations`。
+- Open a pull request in the brands repository that adds the images to `core_integrations/<domain>/`. List it under **This PR belongs together with** in the core pull request, and the core pull request on the same line of the brands pull request.
+- At minimum, add an `icon.png`. A `logo.png`, versions for dark backgrounds, and high-resolution `@2x` versions are welcome. The [brands README](https://github.com/home-assistant/brands/blob/master/README.md) lists the exact sizes and requirements.
+- If the integration started as a custom integration and is now part of Home Assistant, move its images from `custom_integrations` to `core_integrations`.
 
 ### 其他图片
 

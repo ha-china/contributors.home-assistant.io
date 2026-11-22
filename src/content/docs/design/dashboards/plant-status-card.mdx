@@ -4,11 +4,12 @@ description: 植物状态卡片显示植物的读数，例如湿度和光照，�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 380px" data-props='{"config": {"type": "plant-status", "entity": "plant.monstera"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "plant-status", entity: "plant.monstera" }]}
+/>
 
 ## 用法
 

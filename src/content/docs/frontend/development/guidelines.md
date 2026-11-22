@@ -47,7 +47,7 @@ declare global {
 
 ## 应使用的组件
 
-在编写自己的组件之前，先使用 `src/components/` 中的共享组件。其中许多组件，例如 `ha-button`、`ha-dialog`、`ha-switch` 和 `ha-tooltip`，都是对 [Web Awesome](https://webawesome.com/) 组件的封装。不要添加新的 `mwc-*` Material 组件：它们正在被替换。
+Build with the shared components in `src/components/` before you write your own. Many of them, like `ha-button`, `ha-dialog`, `ha-switch`, and `ha-tooltip`, wrap [Web Awesome](https://webawesome.com/) components. Don't add `mwc-*` Material components: the frontend no longer uses them.
 
 - **对话框**：使用 `ha-dialog` 以及 `src/dialogs/dialog-mixin.ts` 中的 `DialogMixin`。通过触发 `show-dialog` 事件并传入标签、导入函数和参数来打开对话框。将操作按钮放在 `ha-dialog-footer` 的 `primaryAction` 和 `secondaryAction` 插槽中。
 - **按钮**：`ha-button` 有 `variant`（`brand`、`neutral`、`danger`、`warning`、`success`）、`appearance`（`accent`、`filled`、`outlined`、`plain`）和 `size`。取消操作使用 `appearance="plain"`，破坏性操作使用 `variant="danger"`。

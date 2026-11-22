@@ -50,6 +50,14 @@ http://localhost:8090/?demo=<slug>#/energy
 
 一些演示数据由 Core 生成：`src/fake_data/demo_services.ts` 中的动作描述，以及 `demo/src/stubs/` 中的触发器和条件描述。不要手动编辑它们。运行 `script/gen_demo_core_data` 可以从 Core 的 `dev` 分支重新生成它们。
 
-## 画廊和演示中的翻译
+## Embed cards on other sites
+
+The demo also builds `embed.js`, which puts dashboard cards on any web page with the `<ha-embed-provider>` and `<ha-embed-card>` elements. Card authors use it for [live demos of their cards](/frontend/custom-ui/demo/). Its code is in `demo/src/embed/`, and `demo/src/html/components.html.template` is the page that documents it, at `/components.html` of the demo.
+
+The provider registers its own set of mocks. Most come from the stubs in `demo/src/stubs/`, and a few, like energy, are defined in `ha-embed-provider.ts`. A fix to a stub reaches each of the demo, the embed, and the gallery pages that import that stub, and they don't all import the same ones. The calendar stub, for example, is used by the embed and the gallery, but not by the demo. For a new stub, import it in `ha-embed-provider.ts` and call it in the constructor too.
+
+The production build of the script loads its other files from the site it came from, so it works on other sites too. The development and legacy builds load them from the site of the page instead, so try changes that need to work on other sites with a production build.
+
+## Translations in the gallery and the demo
 
 两者默认以英文启动。添加 `--fetch-translations` 可以加载最新翻译，例如 `pnpm dev:demo --fetch-translations`。两者也接受[后台运行标志](/frontend/development/run/#keep-a-server-running-in-the-background)。

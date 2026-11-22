@@ -8,34 +8,30 @@ import Demo from "../../../../components/docs/Demo.astro";
 import DoDont from "../../../../components/docs/DoDont.astro";
 
 <Demo layout="stack">
-  <ha-list style="width: 100%">
-    <ha-list-item graphic="icon" twoline hasMeta>
-      <ha-svg-icon slot="graphic" path="M12,21L15.6,16.2C14.6,15.45 13.35,15 12,15C10.65,15 9.4,15.45 8.4,16.2L12,21M12,3C7.95,3 4.21,4.34 1.2,6.6L3,9C5.5,7.12 8.62,6 12,6C15.38,6 18.5,7.12 21,9L22.8,6.6C19.79,4.34 16.05,3 12,3M12,9C9.3,9 6.81,9.89 4.8,11.4L6.6,13.8C8.1,12.67 9.97,12 12,12C14.03,12 15.9,12.67 17.4,13.8L19.2,11.4C17.19,9.89 14.7,9 12,9Z"></ha-svg-icon>
-      Network
-      <span slot="secondary">Connected over Wi-Fi</span>
-      <ha-svg-icon slot="meta" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
-    </ha-list-item>
-    <ha-list-item graphic="icon" twoline hasMeta>
-      <ha-svg-icon slot="graphic" path="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"></ha-svg-icon>
-      Location
-      <span slot="secondary">Home</span>
-      <ha-svg-icon slot="meta" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
-    </ha-list-item>
-    <ha-list-item graphic="icon" twoline hasMeta>
-      <ha-svg-icon slot="graphic" path="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"></ha-svg-icon>
-      System
-      <span slot="secondary">Updates, backups, and logs</span>
-      <ha-svg-icon slot="meta" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
-    </ha-list-item>
-  </ha-list>
+  <ha-list-base aria-label="Settings" style="width: 100%">
+    <ha-list-item-button headline="Network" supporting-text="Connected over Wi-Fi">
+      <ha-svg-icon slot="start" path="M12,21L15.6,16.2C14.6,15.45 13.35,15 12,15C10.65,15 9.4,15.45 8.4,16.2L12,21M12,3C7.95,3 4.21,4.34 1.2,6.6L3,9C5.5,7.12 8.62,6 12,6C15.38,6 18.5,7.12 21,9L22.8,6.6C19.79,4.34 16.05,3 12,3M12,9C9.3,9 6.81,9.89 4.8,11.4L6.6,13.8C8.1,12.67 9.97,12 12,12C14.03,12 15.9,12.67 17.4,13.8L19.2,11.4C17.19,9.89 14.7,9 12,9Z"></ha-svg-icon>
+      <ha-svg-icon slot="end" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
+    </ha-list-item-button>
+    <ha-list-item-button headline="Location" supporting-text="Home">
+      <ha-svg-icon slot="start" path="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"></ha-svg-icon>
+      <ha-svg-icon slot="end" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
+    </ha-list-item-button>
+    <ha-list-item-button headline="System" supporting-text="Updates, backups, and logs">
+      <ha-svg-icon slot="start" path="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"></ha-svg-icon>
+      <ha-svg-icon slot="end" path="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></ha-svg-icon>
+    </ha-list-item-button>
+  </ha-list-base>
 </Demo>
 
 ## 概述
 
 列表显示一组相似的内容，供人们浏览、选择或打开：用于登录的提供方、菜单选项、某个区域（area）中的设备。每一行的结构都相同，因此视线可以沿着左边缘快速找到所需内容。
 
-> [!NOTE]
-> `ha-list` 和 `ha-list-item` 是较旧的列表，基于 Material Web Components 构建。前端正在迁移到一套更新的列表组件：`ha-list-base`、`ha-list-item-base`、`ha-list-item-button`、`ha-list-selectable` 和 `ha-list-nav`。前端中的许多列表已经在使用它们。对于新代码，请使用新组件族：参见本页末尾的[新列表组件族](#the-new-list-family)。本页大部分内容介绍的是较旧的列表，因为仍有不少界面在使用它。
+A list is built from two parts. Pick the container by what the list means, then the row by what it does:
+
+- **Containers**: `ha-list-base` for a plain list, `ha-list-selectable` for a list people pick from, and `ha-list-nav` for a list of links.
+- **Rows**: `ha-list-item-base` for a row that only shows information, `ha-list-item-button` for a row that does something, and `ha-list-item-option` for a row people pick.
 
 ## 何时使用
 
@@ -53,12 +49,12 @@ import DoDont from "../../../../components/docs/DoDont.astro";
 
 ## 结构剖析
 
-1. **列表**：容器，顶部和底部各有 8px 的内边距
-2. **行**：列表中的一个项目
-3. **图形（Graphic）**：可选，行开头的图标、头像或控件
-4. **第一行**：该行的主要文本
-5. **第二行**：可选，第一行下方的简短细节
-6. **Meta**：可选，末尾的内容，例如箭头图标或简短的值
+1. **List**: the container. It has no padding of its own.
+2. **Row**: one item of the list
+3. **Start**: optional, an icon, image, or avatar at the start of the row
+4. **Headline**: the main text of the row
+5. **Supporting text**: optional, a short detail below the headline
+6. **End**: optional, content at the end, like a chevron, a short value, or a button
 
 ## 变体
 
@@ -66,75 +62,93 @@ import DoDont from "../../../../components/docs/DoDont.astro";
 
 以文本为主，只添加有助于人们识别该行的内容：
 
-- 开头的一个**图标**。
-- 一个**第二行**，用于简短的细节，例如状态或描述。
-- **末尾**的内容，例如当该行会打开某些内容时的箭头图标，或一个简短的值。
+- An **icon** at the start.
+- A **supporting text**, for a short detail, like a state or a description.
+- Something at the **end**, like a chevron when the row opens something, or a short value.
 
 <Demo layout="stack">
-  <ha-list style="width: 100%">
-    <ha-list-item>Just text</ha-list-item>
-    <ha-list-item twoline>
-      Two lines
-      <span slot="secondary">With a second line of detail</span>
-    </ha-list-item>
-    <ha-list-item graphic="icon">
-      <ha-svg-icon slot="graphic" path="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z"></ha-svg-icon>
-      With an icon
-    </ha-list-item>
-    <ha-list-item hasMeta>
-      With something at the end
-      <span slot="meta">3</span>
-    </ha-list-item>
-    <ha-list-item disabled>Disabled</ha-list-item>
-  </ha-list>
+  <ha-list-base aria-label="Rows" style="width: 100%">
+    <ha-list-item-base headline="Just text"></ha-list-item-base>
+    <ha-list-item-base headline="Two lines" supporting-text="With a second line of detail"></ha-list-item-base>
+    <ha-list-item-base headline="With an icon">
+      <ha-svg-icon slot="start" path="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z"></ha-svg-icon>
+    </ha-list-item-base>
+    <ha-list-item-base headline="With something at the end">
+      <span slot="end">3</span>
+    </ha-list-item-base>
+    <ha-list-item-base headline="Disabled" disabled></ha-list-item-base>
+  </ha-list-base>
 </Demo>
 
-### 图形尺寸
+### Rows that only show information
 
-行会在开头为其图形预留空间，尺寸可以是以下之一：图标、头像（圆形图片）、中等或大尺寸图片，或复选框之类的控件。
+`ha-list-item-base` is a row that does nothing when selected, like a row that only shows a value or a message. It has no ripple and no keyboard focus. Set `interactive` to put it in the keyboard navigation of the list anyway, like for a row people can sort.
 
-### 仅显示信息的行
+### Rows that do something
 
-选中时不执行任何操作的行，例如仅显示一个值或一条消息的行，可以设为非交互式。此时它没有涟漪效果，也不会获得键盘焦点。
+`ha-list-item-button` opens something or runs an action. With an `href`, it renders a link, otherwise a button. The whole row is the target.
+
+### Lists people pick from
+
+In `ha-list-selectable`, the rows are `ha-list-item-option`. The list owns the selection: people pick one option, or several with `multi`.
+
+The default appearance, `line`, highlights the selected row. With `appearance="checkbox"`, the row shows a checkbox, at the start or, with `selection-position="end"`, at the end.
+
+<Demo layout="stack">
+  <ha-list-selectable aria-label="Days" multi style="width: 100%">
+    <ha-list-item-option appearance="checkbox" selection-position="end" headline="Monday" selected></ha-list-item-option>
+    <ha-list-item-option appearance="checkbox" selection-position="end" headline="Tuesday"></ha-list-item-option>
+    <ha-list-item-option appearance="checkbox" selection-position="end" headline="Wednesday" selected></ha-list-item-option>
+  </ha-list-selectable>
+</Demo>
+
+<Demo layout="stack">
+  <ha-list-selectable aria-label="View" style="width: 100%">
+    <ha-list-item-option headline="Overview" selected></ha-list-item-option>
+    <ha-list-item-option headline="Energy"></ha-list-item-option>
+    <ha-list-item-option headline="Map"></ha-list-item-option>
+  </ha-list-selectable>
+</Demo>
+
+### Lists of links
+
+`ha-list-nav` wraps the list in a `<nav>` landmark, for a list of places people go to. Its rows are `ha-list-item-button` with an `href`. Give it a name with `aria-label`, so people can tell the landmarks of a page apart.
 
 ## 行为
 
-- **悬停与按下**：可交互的行会显示涟漪效果。除非主题设置了其他颜色，否则为黑色。深色主题将其设为浅灰色。已激活的行的涟漪使用主色。
-- **焦点**：同一时间只有一行处于 Tab 键序中。方向键在行之间移动焦点。
-- **激活**：在行可被激活的列表中，被选中的行会获得 12% 不透明度的主色调，其图形会变为主色。
-- **禁用**：文本变为禁用文本颜色，且该行无法被选中。
-- **长文本**：第一行放不下时会以省略号截断。第二行也会被截断，除非该行允许换行。此时行会随之变高。
+- **Hover and pressed**: a row that does something, or that people pick, shows a ripple.
+- **Focus**: one row at a time is in the tab order. The arrow keys move focus between the rows. The focused row gets an outline in the focus color and a light background.
+- **Selected**: in `line` appearance, the selected row gets a primary tint, and its text turns to the primary color. In `checkbox` appearance, the checkbox shows the state.
+- **Disabled**: the text turns to the disabled text color, and the row can't be selected or focused.
+- **Long text**: the headline and the supporting text are cut off with an ellipsis when they don't fit.
+- **Focus outside the list**: with `virtual-focus`, focus stays in another element, like the search field of a picker. The list marks the row the keyboard points at with `active`, and scrolls it into view.
 
 ## 规格参数
 
 | 属性 | 值 | Token |
 | --- | --- | --- |
-| 行高，单行 | 48px | 无 |
-| 行高，带图标或头像的单行 | 48px | 无 |
-| 行高，两行 | 72px | 无 |
-| 行高，带中等或大尺寸图形的单行 | 72px | 无 |
-| 左右内边距 | 20px | `--mdc-list-side-padding` |
-| 列表上下内边距 | 8px | `--mdc-list-vertical-padding` |
-| 图标尺寸 | 24px | `--mdc-list-item-graphic-size` |
-| 头像尺寸 | 40px | `--mdc-list-item-graphic-size` |
-| 中等和大尺寸图形 | 56px | `--mdc-list-item-graphic-size` |
-| 图标与文本之间的间距，单行 | 20px | `--mdc-list-item-graphic-margin` |
-| 图标与文本之间的间距，两行 | 32px | `--mdc-list-item-graphic-margin` |
-| Meta 尺寸 | 24px | `--mdc-list-item-meta-size` |
-| 第一行字号 | 1rem | `--mdc-typography-subtitle1-font-size` |
-| 第二行字号 | 0.875rem | `--mdc-typography-body2-font-size` |
-| 禁用文本颜色 | 浅色主题中为 `#bdbdbd`，深色主题中为 `#6f6f6f` | `--disabled-text-color` |
-| 激活色调 | 12% 不透明度 | `--mdc-ripple-activated-opacity` |
+| Row height, minimum | 48px | `--ha-row-item-min-height` |
+| Padding top and bottom of a row | 12px | `--ha-row-item-padding-block` |
+| Padding left and right of a row | 16px | `--ha-row-item-padding-inline` |
+| Space between start, text, and end | 16px | `--ha-row-item-gap` |
+| List padding | 0 | `--ha-list-padding` |
+| Space between rows | 0 | `--ha-list-gap` |
+| Headline font size | 14px | `--ha-font-size-m` |
+| Supporting text font size | 12px | `--ha-font-size-s` |
+| Supporting text color | Secondary text color | `--secondary-text-color` |
+| Disabled text color | `#bdbdbd` in the light theme, `#6f6f6f` in the dark theme | `--disabled-text-color` |
+| Focus outline | 2px, in the focus color | `--ha-list-item-focus-width` |
+| Selected background, `line` appearance | Primary tint | `--ha-list-item-selected-background` |
 
 ## 准则
 
-<DoDont doText="保持第一行简短，把细节放在第二行。" dontText="把所有内容都塞进会被截断的第一行。">
-  <ha-list slot="do" style="width: 100%">
-    <ha-list-item twoline>Network<span slot="secondary">Connected over Wi-Fi</span></ha-list-item>
-  </ha-list>
-  <ha-list slot="dont" style="width: 100%">
-    <ha-list-item>Network settings, connected over Wi-Fi to your home network</ha-list-item>
-  </ha-list>
+<DoDont doText="Keep the headline short, and put details in the supporting text." dontText="Put everything in a headline that gets cut off.">
+  <ha-list-base slot="do" aria-label="Do" style="width: 100%">
+    <ha-list-item-base headline="Network" supporting-text="Connected over Wi-Fi"></ha-list-item-base>
+  </ha-list-base>
+  <ha-list-base slot="dont" aria-label="Don't" style="width: 100%">
+    <ha-list-item-base headline="Network settings, connected over Wi-Fi to your home network"></ha-list-item-base>
+  </ha-list-base>
 </DoDont>
 
 关于如何撰写标签，参见 [UI 文本](/design/ui-text/)。
@@ -145,14 +159,15 @@ import DoDont from "../../../../components/docs/DoDont.astro";
 
 | 按键 | 操作 |
 | --- | --- |
-| <kbd>Tab</kbd> | 将焦点移入列表中的一行，并可再次移出。 |
-| <kbd>Arrow down</kbd> 和 <kbd>Arrow up</kbd> | 将焦点移到下一行或上一行。列表可以让焦点从最后一行循环到第一行，反之亦然。 |
-| <kbd>Home</kbd> 和 <kbd>End</kbd> | 将焦点移到第一行或最后一行。 |
-| <kbd>Enter</kbd> 或 <kbd>Space</kbd> | 激活获得焦点的行。 |
+| <kbd>Tab</kbd> | Moves focus into the list, to one row, and out of it again. |
+| <kbd>Arrow down</kbd> and <kbd>Arrow up</kbd> | Move focus to the next or previous row. With `wrap-focus`, focus wraps from the last row to the first, and back. |
+| <kbd>Home</kbd> and <kbd>End</kbd> | Move focus to the first or last row. |
+| <kbd>Page down</kbd> and <kbd>Page up</kbd> | Move focus a page down or up. |
+| <kbd>Enter</kbd> or <kbd>Space</kbd> | Activates the focused row, or picks the focused option. |
 
 ### 焦点
 
-同一时间只有一行处于 Tab 键序中。方向键在行之间移动焦点。
+One row at a time is in the tab order. The arrow keys move focus between the rows. Rows that only show information are skipped, unless they are `interactive`.
 
 ### 目标尺寸
 
@@ -160,14 +175,15 @@ import DoDont from "../../../../components/docs/DoDont.astro";
 
 ### 屏幕阅读器
 
-默认情况下，屏幕阅读器不会获得列表结构：列表及其行没有 role，因此它只会听到各行的文本。禁用的行会被播报为已禁用。可以在代码中为列表设置 role 和名称，见下文。
+- `ha-list-base` has the role `list`, and its rows the role `listitem`.
+- `ha-list-selectable` has the role `listbox`, with `aria-multiselectable` when `multi` is set. Its options have the role `option`, and `aria-selected`.
+- `ha-list-nav` is a navigation landmark, with a list inside.
+- A disabled option has `aria-disabled="true"`. A disabled link row sets `aria-disabled="true"` on its link, and a disabled button row uses a disabled native button. A plain `ha-list-item-base` row does not tell screen readers that it is disabled.
 
 ### 在代码中
 
-- 列表及其行默认没有 role。在列表上设置 `innerRole`，为行设置 `itemRoles`，例如 `listbox` 和 `option`，并用 `innerAriaLabel` 设置列表的名称。
-- 禁用的行带有 `aria-disabled="true"`。
-- 当 role 为 `option` 时，被选中的行带有 `aria-selected="true"`。
-- 带有 `noninteractive` 的行无法获得焦点。
+- Give every list a name with `aria-label`, unless a visible heading already names it.
+- Use `ha-list-item-option` only in `ha-list-selectable`, and `ha-list-item-button` with an `href` for links.
 
 ## 相关内容
 
@@ -177,109 +193,122 @@ import DoDont from "../../../../components/docs/DoDont.astro";
 
 ## 代码实现
 
-该元素是 `<ha-list>`，其行为 `<ha-list-item>`。两者都继承自 [Material Web Components list](https://github.com/material-components/material-web/tree/mwc/packages/list)。
+The elements are `<ha-list-base>`, `<ha-list-selectable>`, and `<ha-list-nav>`, with `<ha-list-item-base>`, `<ha-list-item-button>`, and `<ha-list-item-option>` rows.
 
 ```html
-<ha-list>
-  <ha-list-item graphic="icon" twoline hasMeta>
-    <ha-svg-icon slot="graphic" path="..."></ha-svg-icon>
-    Network
-    <span slot="secondary">Connected over Wi-Fi</span>
-    <ha-svg-icon slot="meta" path="..."></ha-svg-icon>
-  </ha-list-item>
-</ha-list>
+<ha-list-base aria-label="Settings">
+  <ha-list-item-button
+    headline="Network"
+    supporting-text="Connected over Wi-Fi"
+  >
+    <ha-svg-icon slot="start" path="..."></ha-svg-icon>
+    <ha-icon-next slot="end"></ha-icon-next>
+  </ha-list-item-button>
+</ha-list-base>
 ```
 
-HTML 中属性名不区分大小写，因此 `hasMeta` 和 `hasmeta` 是相同的。
+```html
+<ha-list-selectable multi aria-label="Days">
+  <ha-list-item-option
+    appearance="checkbox"
+    value="monday"
+    headline="Monday"
+  ></ha-list-item-option>
+  <ha-list-item-option
+    appearance="checkbox"
+    value="tuesday"
+    headline="Tuesday"
+  ></ha-list-item-option>
+</ha-list-selectable>
+```
 
-### ha-list 的属性
+### Attributes of ha-list-base
 
-- `activatable`：将被选中的行显示为已激活状态。
-- `multi`：允许选中多行。
-- `wrapFocus`：方向键从最后一行循环到第一行，反之亦然。
-- `rootTabbable`：使列表本身可聚焦，而不是第一行。
-- `noninteractive`：关闭整个列表的选择和键盘导航。
-- `innerRole` 和 `innerAriaLabel`：内部列表元素的 role 和无障碍名称。
-- `itemRoles`：赋予每一行的 role，例如 `option`。
+- `wrap-focus`: the arrow keys wrap around at the ends.
+- `virtual-focus`: focus stays outside the list. The list marks the row the keyboard points at with `active`, instead of focusing it.
+- `aria-label`: the accessible name of the list.
 
-### ha-list-item 的属性
+### Slots of ha-list-base
 
-- `graphic`：为 `graphic` 插槽中的内容预留空间。可为 `icon`、`avatar`、`medium`、`large` 或 `control`。
-- `twoline`：将 `secondary` 插槽显示为第二行。
-- `multiline-secondary`：让第二行换行，而不是截断。
-- `hasMeta`：在末尾显示 `meta` 插槽。
-- `noninteractive`：该行无法被选中或聚焦。
-- `disabled`：禁用该行。
-- `selected` 和 `activated`：选中状态。
-- `value`：标识该行的值。
+- Default: the rows.
 
-### ha-list-item 的插槽
+### Events of ha-list-base
 
-- 默认：第一行文本。
-- `secondary`：第二行，需设置 `twoline`。
-- `graphic`：开头的图标、头像或控件，需设置 `graphic`。
-- `meta`：末尾的内容，需设置 `hasMeta`。
+- `ha-list-activated`: <kbd>Enter</kbd> or <kbd>Space</kbd> on the focused row. `detail` has the `index` and the `item`.
 
-### 事件
+### Methods of ha-list-base
 
-- `ha-list` 上的 `action`：某一行被激活。`detail.index` 是该行的索引。
-- `ha-list` 上的 `selected`：选择发生了变化。`detail.index` 是被选中的索引，使用 `multi` 时为一组索引。
-- `ha-list-item` 上的 `request-selected`：该行请求被选中或取消选中。`detail.selected` 是新状态，`detail.source` 说明它来自 `interaction` 还是 `property` 变化。
+- `moveActiveItem()`: moves the active row to `next`, `previous`, `first`, `last`, `next-page`, or `previous-page`. Use it with `virtual-focus`.
+- `getActiveItemIndex()`: the index of the active row.
+- `focusItemAtIndex()`: focuses the row at an index.
 
-### 样式
+### Styling of ha-list-base
 
-- `--mdc-list-side-padding`：行两侧的内边距。默认为 `20px`。
-- `--mdc-list-side-padding-left` 和 `--mdc-list-side-padding-right`：单侧的内边距。
-- `--mdc-list-item-graphic-margin`：图形与文本之间的间距。
-- `--mdc-list-item-meta-display`：meta 插槽的 display。
+- `--ha-list-gap`: the space between rows. Defaults to `0`.
+- `--ha-list-padding`: the padding around the rows. Defaults to `0`.
 
-Source: [`src/components/ha-list.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/ha-list.ts) and [`src/components/ha-list-item.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/ha-list-item.ts)
+### Attributes of ha-list-selectable
 
-## 新列表组件族
+- `multi`: people can pick more than one option.
+- `controlled`: a click only fires the events, and does not change `selected`. Set it when the selection comes from your own state.
 
-新列表从一开始就具备无障碍和键盘友好特性。根据列表的含义选择容器，再根据行的行为选择项目。它们尚未作为本站的实时组件提供，因此没有演示。
+`ha-list-selectable` also has the attributes of `ha-list-base`.
 
-### 容器
+### Events of ha-list-selectable
 
-- `<ha-list-base>`：普通列表，role 为 `list`。方向键在行之间移动焦点，<kbd>Home</kbd> 和 <kbd>End</kbd> 跳转到第一个和最后一个可用的行，<kbd>Page up</kbd> 和 <kbd>Page down</kbd> 翻页，<kbd>Enter</kbd> 或 <kbd>Space</kbd> 激活获得焦点的行。同一时间只有一行处于 Tab 键序中。
-- `<ha-list-selectable>`：供人们选择的列表，role 为 `listbox`。其行为 `<ha-list-item-option>`。设置 `multi` 以允许多选。
-- `<ha-list-nav>`：链接列表，包裹在 `<nav>` 地标中。其行为带有 `href` 的 `<ha-list-item-button>`。使用 `aria-label` 为地标命名。
+- `ha-list-item-selected`: an option was picked. `detail` is the index of the option.
+- `ha-list-item-deselected`: an option was unpicked, with `multi` only. `detail` is the index of the option.
 
-容器的属性：
+### Methods of ha-list-selectable
 
-- `wrap-focus`：方向键在两端循环。
-- `virtual-focus`：焦点保持在列表之外，例如选择器的搜索框中。列表用 `active` 标记键盘指向的行，并将其滚动到可视区域。获得焦点的元素通过 `moveActiveItem()` 移动它。
-- `aria-label`：无障碍名称。
-- `multi`：仅用于 `ha-list-selectable`，允许选择多个选项。
+- `clearSelection()`: unpicks every option.
 
-事件：
+### Attributes of ha-list-nav
 
-- `ha-list-activated`：在获得焦点的行上按下 <kbd>Enter</kbd> 或 <kbd>Space</kbd>。`detail` 包含 `index` 和 `item`。
-- `ha-list-item-selected` 和 `ha-list-item-deselected`：在 `ha-list-selectable` 上，某个选项被选中或取消选中。`detail` 是该选项的索引。取消选中仅在 `multi` 时触发。
+- `aria-label`: the name of the `<nav>` landmark.
 
-样式：`--ha-list-gap` 设置行之间的间距，`--ha-list-padding` 设置列表四周的内边距。两者默认均为 `0`。
+### Slots of ha-list-item-base
 
-### 项目
+- `start`: an icon, image, or avatar at the start.
+- `end`: content at the end, like a chevron, a value, or a button.
+- `headline`: the first line. Overrides the `headline` attribute.
+- `supporting-text`: the second line. Overrides the `supporting-text` attribute.
+- `content`: replaces the headline and the supporting text.
 
-每个项目都具有相同的行布局，包含以下插槽和属性：
+`ha-list-item-button` and `ha-list-item-option` have the same slots.
 
-- `start`：起始部分，例如图标或头像。
-- `end`：末尾部分，例如一个值或箭头图标。
-- `headline` 和 `supporting-text`：第一行和第二行，可作为属性或插槽。
-- `content`：替换整个中间部分。
-- `disabled`：使该行变暗并阻止指针操作。
+### Attributes of ha-list-item-base
 
-这些项目：
+- `headline`: the first line.
+- `supporting-text`: the second line.
+- `disabled`: disables the row.
+- `interactive`: puts the row in the keyboard navigation of the list, without an action.
+- `active`: set by a list with `virtual-focus` on the row the keyboard points at.
 
-- `<ha-list-item-base>`：仅显示信息的行，role 为 `listitem`。设置 `interactive` 可将其纳入列表的键盘导航但不执行操作，例如可供排序的行。
-- `<ha-list-item-button>`：执行某种操作的行。带有 `href` 时渲染为链接，否则渲染为按钮。整行都是点击目标。
-- `<ha-list-item-option>`：可供选择的行，带有 role `option` 和 `aria-selected`。选择状态由列表管理。使用 `appearance="checkbox"` 时会显示一个复选框，通过 `selection-position` 放在 `start` 或 `end`。默认外观 `line` 会高亮被选中的行。
+### Styling of ha-list-item-base
 
-行的样式：
+- `--ha-row-item-min-height`: the minimum height of a row. Defaults to `48px`.
+- `--ha-row-item-padding-block` and `--ha-row-item-padding-inline`: the padding of a row. Default to `12px` and `16px`.
+- `--ha-row-item-gap`: the space between the start, the text, and the end. Defaults to `16px`.
+- `--ha-list-item-focus-background`: the background on keyboard focus.
+- `--ha-list-item-active-background`: the background of the `active` row.
+- `--ha-list-item-focus-radius`, `--ha-list-item-focus-width`, `--ha-list-item-focus-width-start`, and `--ha-list-item-focus-offset`: the focus outline.
 
-- `--ha-row-item-min-height`：行的最小高度。默认为 `48px`。
-- `--ha-row-item-padding-block`、`--ha-row-item-padding-inline` 和 `--ha-row-item-gap`：行的内边距，以及其各部分之间的间距。
-- `--ha-list-item-focus-background` 和 `--ha-list-item-active-background`：键盘焦点时的背景，以及 `active` 行的背景。
-- `--ha-list-item-selected-background`：被选中选项的背景，需使用 `appearance="line"`。
+### Attributes of ha-list-item-button
 
-Source: [`src/components/list/`](https://github.com/home-assistant/frontend/tree/dev/src/components/list) and [`src/components/item/`](https://github.com/home-assistant/frontend/tree/dev/src/components/item)
+- `href`: the row renders a link to this URL.
+- `target`, `rel`, and `download`: the attributes of the link, with `href`.
+
+### Attributes of ha-list-item-option
+
+- `selected`: the option is picked. Set by the list, or by you with `controlled`.
+- `indeterminate`: the checkbox shows a partly picked state, like for a group.
+- `value`: a value that identifies the option.
+- `appearance`: `line` highlights the selected row, `checkbox` shows a checkbox. Defaults to `line`.
+- `selection-position`: `start` or `end`, where the checkbox goes. Defaults to `start`.
+
+### Styling of ha-list-item-option
+
+- `--ha-list-item-selected-background`: the background of a selected option, in `line` appearance.
+
+Source: [`src/components/list/ha-list-base.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/list/ha-list-base.ts), [`src/components/list/ha-list-selectable.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/list/ha-list-selectable.ts), [`src/components/list/ha-list-nav.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/list/ha-list-nav.ts), [`src/components/item/ha-list-item-base.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/item/ha-list-item-base.ts), [`src/components/item/ha-list-item-button.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/item/ha-list-item-button.ts), and [`src/components/item/ha-list-item-option.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/item/ha-list-item-option.ts)

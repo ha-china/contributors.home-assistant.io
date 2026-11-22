@@ -4,11 +4,19 @@ description: 实体筛选卡片只显示列表中符合筛选条件的实体，�
 sidebarGroup: Entity cards
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 380px" data-props='{"config": {"type": "entity-filter", "entities": ["light.living_room_lamp", "light.hallway", "light.kitchen_ceiling"], "conditions": [{"condition": "state", "state": "on"}], "card": {"title": "Lights on"}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "entity-filter",
+      entities: ["light.living_room_lamp", "light.hallway", "light.kitchen_ceiling"],
+      conditions: [{ condition: "state", state: "on" }],
+      card: { title: "Lights on" },
+    },
+  ]}
+/>
 
 ## 用法
 
@@ -16,9 +24,17 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 它本身不显示任何内容，而是把匹配的实体交给另一张卡片，默认是[实体卡片](/design/dashboards/entities-card/)，除非你选择其他卡片，例如[概览卡片](/design/dashboards/glance-card/)。你放在 `card` 中的任何内容都会传递给那张卡片，比如 `title`。
 
-<Demo hass>
-  <hui-card style="width: 400px" data-props='{"config": {"type": "entity-filter", "entities": ["sensor.living_room_humidity", "sensor.outdoor_humidity", "sensor.monstera_moisture"], "conditions": [{"condition": "numeric_state", "below": 50}], "card": {"type": "glance", "title": "Running dry"}}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "entity-filter",
+      entities: ["sensor.living_room_humidity", "sensor.outdoor_humidity", "sensor.monstera_moisture"],
+      conditions: [{ condition: "numeric_state", below: 50 }],
+      card: { type: "glance", title: "Running dry" },
+    },
+  ]}
+/>
 
 要根据状态显示或隐藏整张卡片，请使用[条件卡片](/design/dashboards/conditional-card/)，或在分区视图中使用卡片自身的可见性选项。
 

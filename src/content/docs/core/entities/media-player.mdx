@@ -1,0 +1,307 @@
+---
+title: 媒体播放器实体
+description: 控制任何播放音频或视频的设备，从智能音箱到电视或 AV 功放。
+sidebarLabel: Media player
+sidebarGroup: Media
+---
+
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
+
+A media player entity controls something that plays media: a smart speaker, a TV, a streaming stick, an AV receiver, or a projector. It reports what is playing, with artwork and position, and takes commands like play, pause, volume, source, and play this URL. It is one of the richest entity types in Home Assistant, but you only implement what your device can do: the [supported features](/glossary/supported-features/) decide which actions and controls exist.
+
+从 `homeassistant.components.media_player` 导入并继承 `MediaPlayerEntity`。关于前端如何展示媒体播放器，请参阅[媒体播放器更多信息视图](/design/more-info/media-player/)。
+
+<EmbedDemo
+  entities={[
+    {
+      entity_id: "media_player.living_room_speaker",
+      state: "playing",
+      attributes: {
+        friendly_name: "Living room speaker",
+        media_content_type: "music",
+        media_title: "Clair de lune",
+        media_artist: "Claude Debussy",
+        volume_level: 0.4,
+        supported_features: 16437,
+      },
+    },
+  ]}
+  cards={[
+    {
+      type: "tile",
+      entity: "media_player.living_room_speaker",
+      features: [{ type: "media-player-playback" }, { type: "media-player-volume-slider" }],
+    },
+    {
+      type: "media-control",
+      entity: "media_player.living_room_speaker",
+    },
+  ]}
+  caption="A speaker that plays, pauses, skips tracks, and sets its volume, in a tile card and a media control card."
+/>
+
+## Properties
+
+这些属性是媒体播放器实体特有的。每个实体都具有的通用属性见[实体类](/core/entities/entity-class/)。除非表格中另有说明，它们的默认值均为 `None`。
+
+### 播放器
+
+| 名称 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `state` | `MediaPlayerState \| None` | `None` | 播放器的状态。参见[状态](#states)。 |
+| `device_class` | `MediaPlayerDeviceClass \| None` | `None` | 这台设备属于哪种类型。参见[设备类](#device-classes)。 |
+| `volume_level` | `float \| None` | `None` | 音量，范围为 `0` 到 `1`。 |
+| `volume_step` | `float` | `0.1` | 使用 `volume_up` 和 `volume_down` 时音量每次变化的幅度，范围为 `0` 到 `1`。也可以在实体描述中设置。 |
+| `is_volume_muted` | `bool \| None` | `None` | 音量是否已静音。 |
+| `source` | `str \| None` | `None` | 当前选定的输入源。 |
+| `source_list` | `list[str] \| None` | `None` | 用户可以选择的输入源，以人类可读的名称表示。仅当播放器具有 `SELECT_SOURCE` 时才会显示。 |
+| `sound_mode` | `str \| None` | `None` | 当前选定的声音模式。 |
+| `sound_mode_list` | `list[str] \| None` | `None` | 用户可以选择的声音模式。仅当播放器具有 `SELECT_SOUND_MODE` 时才会显示。 |
+| `shuffle` | `bool \| None` | `None` | 随机播放是否开启。 |
+| `repeat` | `RepeatMode \| str \| None` | `None` | 重复模式：`RepeatMode.OFF`、`RepeatMode.ALL` 或 `RepeatMode.ONE`。 |
+| `group_members` | `list[str] \| None` | `None` | 与此播放器分组以进行同步播放的其他播放器的实体 ID。如果你的平台有组主设备（group leader），请将其放在首位。 |
+| `app_id` | `str \| None` | `None` | 正在运行的应用的 ID。 |
+| `app_name` | `str \| None` | `None` | 正在运行的应用的名称。 |
+| `supported_features` | `MediaPlayerEntityFeature` | `MediaPlayerEntityFeature(0)` | 播放器能够做什么。参见[受支持的功能](#supported-features)。 |
+
+### 当前媒体
+
+| 名称 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `media_content_id` | `str \| None` | `None` | 正在播放的媒体的 ID。 |
+| `media_content_type` | `MediaType \| str \| None` | `None` | 正在播放的媒体的类型，例如 `MediaType.MUSIC` 或 `MediaType.TVSHOW`。 |
+| `media_duration` | `int \| None` | `None` | 媒体的时长，以秒为单位。 |
+| `media_position` | `int \| None` | `None` | 媒体中的播放位置，以秒为单位。 |
+| `media_position_updated_at` | `datetime \| None` | `None` | `media_position` 上次有效的时间。使用 `homeassistant.util.dt.utcnow()`。 |
+| `media_title` | `str \| None` | `None` | 媒体的标题。 |
+| `media_artist` | `str \| None` | `None` | 艺术家，用于音乐。 |
+| `media_album_name` | `str \| None` | `None` | 专辑，用于音乐。 |
+| `media_album_artist` | `str \| None` | `None` | 专辑艺术家，用于音乐。 |
+| `media_track` | `int \| None` | `None` | 音轨编号，用于音乐。 |
+| `media_series_title` | `str \| None` | `None` | 剧集名称，用于电视节目。 |
+| `media_season` | `str \| None` | `None` | 季数，用于电视节目。 |
+| `media_episode` | `str \| None` | `None` | 集数，用于电视节目。 |
+| `media_channel` | `str \| None` | `None` | 正在播放的频道。 |
+| `media_playlist` | `str \| None` | `None` | 正在播放的播放列表的标题。 |
+| `media_image_url` | `str \| None` | `None` | 封面图的 URL。 |
+| `media_image_remotely_accessible` | `bool` | `False` | 前端是否可以直接加载 `media_image_url`。当为 `False` 时，Home Assistant 会代理该图像。 |
+| `media_image_hash` | `str \| None` | URL 的哈希值 | 封面图变化时它会随之变化，这样浏览器就不会显示缓存的图像。当 URL 不变但图像已改变时，请设置此项。 |
+
+前端会根据 `media_position` 和 `media_position_updated_at` 自行推进进度条。因此，只有当播放位置真正发生跳变时（例如执行跳转或切换到新曲目之后）才更新这两项，而不是每秒更新一次。每秒更新它们只会填满数据库。
+
+当状态为 `off` 时，Home Assistant 会省略媒体属性、音量、输入源、声音模式、随机播放和重复模式属性，以及实体图片。`group_members` 属性仍会保留，供支持分组的播放器使用。
+
+## 受支持的功能
+
+使用按位或（`|`）运算符组合 `MediaPlayerEntityFeature` 的各个标志位。只有当实体具有对应标志位时，Home Assistant 才会提供相应的动作。
+
+| 标志位 | 描述 | 实现方法 |
+| --- | --- | --- |
+| `TURN_ON` | 打开播放器。 | `turn_on` |
+| `TURN_OFF` | 关闭播放器。 | `turn_off` |
+| `PLAY` | 开始或恢复播放。 | `media_play` |
+| `PAUSE` | 暂停播放。 | `media_pause` |
+| `STOP` | 停止播放。 | `media_stop` |
+| `PREVIOUS_TRACK` | 跳转到上一曲目。 | `media_previous_track` |
+| `NEXT_TRACK` | 跳转到下一曲目。 | `media_next_track` |
+| `SEEK` | 跳转到某个位置。 | `media_seek` |
+| `VOLUME_SET` | 将音量设置为指定音量级别。 | `set_volume_level` |
+| `VOLUME_STEP` | 调高和调低音量。 | `volume_up` 和 `volume_down`，或依赖 `set_volume_level` |
+| `VOLUME_MUTE` | 静音和取消静音。 | `mute_volume` |
+| `SELECT_SOURCE` | 选择一个输入源。 | `select_source`，以及 `source_list` |
+| `SELECT_SOUND_MODE` | 选择一个声音模式。 | `select_sound_mode`，以及 `sound_mode_list` |
+| `PLAY_MEDIA` | 播放指定的媒体内容。 | `play_media` |
+| `MEDIA_ENQUEUE` | 播放器会处理 `play_media` 的 `enqueue` 选项。 | `play_media` |
+| `MEDIA_ANNOUNCE` | 播放器会处理 `play_media` 的 `announce` 选项。 | `play_media` |
+| `BROWSE_MEDIA` | 浏览播放器可以播放的媒体。 | `async_browse_media` |
+| `SEARCH_MEDIA` | 搜索播放器可以播放的媒体。 | `async_search_media` |
+| `CLEAR_PLAYLIST` | 清空播放队列。 | `clear_playlist` |
+| `SHUFFLE_SET` | 开启或关闭随机播放。 | `set_shuffle` |
+| `REPEAT_SET` | 设置重复模式。 | `set_repeat` |
+| `GROUPING` | 将播放器分组以进行同步播放。 | `join_players` 和 `unjoin_player`，以及 `group_members` |
+
+## 设备类
+
+设备类（device class）会告诉 Home Assistant 以及与之同步的语音助手，这台设备属于哪种类型。请使用 `MediaPlayerDeviceClass` 枚举。
+
+| 设备类 | 描述 |
+| --- | --- |
+| `tv` | 电视。 |
+| `speaker` | 扬声器或立体声音响系统。 |
+| `receiver` | 音视频接收机，它将音频发送到扬声器，将视频发送到显示器。 |
+| `projector` | 投影仪。 |
+
+## 播放媒体
+
+`media_player.play_media` 动作会调用 `play_media`，并传入媒体类型、媒体 ID 以及一些位于 `kwargs` 中的选项：
+
+- `enqueue`：一个 `MediaPlayerEnqueue`，说明如何处理队列。`add` 将媒体添加到队列末尾，`next` 在当前项目之后播放该媒体，`play` 立即播放该媒体并保留队列，`replace` 立即播放该媒体并清空队列。动作编辑器只为具有 `MEDIA_ENQUEUE` 的播放器提供该选项，但 Home Assistant 不会将其过滤掉，因此如果你不支持它，直接忽略即可。
+- `announce`：设为 `True` 表示这是一次播报，例如门铃声音或文字转语音消息。此时应暂停正在播放的内容，播放播报内容，然后再恢复播放。动作编辑器只为具有 `MEDIA_ANNOUNCE` 的播放器提供该选项。
+- `extra`：一个字典，包含来自动作调用的额外选项。始终存在，默认为空。
+
+一次动作调用可以包含 `enqueue` 或 `announce`，但不能同时包含两者。
+
+`media_type` 通常是 `MediaType` 的值。如果你的集成（integration）所处理的媒体不属于其中任何一种，也可以使用你的集成域名作为类型。
+
+## 浏览媒体
+
+对于 `BROWSE_MEDIA`，请实现 `async_browse_media`。它会接收一个 `media_content_type` 和一个 `media_content_id`（对于根节点，两者均为 `None`），并返回一个 `BrowseMedia` 对象：一个由条目组成的树，每个条目包含标题、媒体类（`MediaClass`）、ID、是否可以播放或展开，以及缩略图。如果遇到你不知道的 ID，请抛出 `BrowseError`。
+
+### 媒体来源
+
+媒体来源（media source）集成让任何集成都能提供媒体：本地文件、文字转语音、电台、摄像头。如果你的播放器可以播放 URL，就可以免费把这些来源添加到你的浏览器中。将浏览调用传递给 `media_source.async_browse_media`，或者把它的根节点添加到你自己的树中。当播放媒体来源 ID 时，先用 `media_source.async_resolve_media` 将其解析为 URL，再将该 URL 通过 `async_process_play_media_url` 处理，它会把相对 URL 转换为你的设备可以访问的 URL。
+
+### 浏览器中的封面图
+
+如果你的缩略图只能从本地网络访问，请通过 Home Assistant 代理它们，这样即使出门在外，它们也能在伴侣应用（companion app）中正常工作。将 `BrowseMedia` 条目的 `thumbnail` 设置为 `self.get_browse_image_url(media_content_type, media_content_id, media_image_id)`。当浏览器加载它时，Home Assistant 会调用你的 `async_get_browse_image`。在该方法中用 `self._async_fetch_image(url)` 获取图像，并返回内容和内容类型组成的元组。
+
+> [!WARNING]
+> 切勿将 URL 用作 `media_image_id`。否则，任何能够访问该代理的人都可以利用它从本地网络获取任何内容。
+
+只有当请求来自网络外部时才进行代理：`homeassistant.helpers.network` 中的 `is_local_request(hass)` 可以告诉你这一点。当前播放内容的封面图通过 `async_get_media_image` 获取，它有自己的缓存：你只需设置 `media_image_url`。
+
+## 搜索媒体
+
+对于 `SEARCH_MEDIA`，请实现 `async_search_media`。它会接收一个带有 `search_query` 的 `SearchMediaQuery`，还可以选择接收一个 `media_content_type`、一个要在其中搜索的 `media_content_id`，以及 `media_filter_classes`（一个用于限制结果的 `MediaClass` 值列表）。返回一个 `SearchMedia`，将匹配的 `BrowseMedia` 条目放在 `result` 中。
+
+## 方法
+
+每个方法都有一个同步版本和一个异步版本，实现其中之一即可。异步版本以 `async_` 开头，例如 `async_media_play`。
+
+| 方法 | 描述 |
+| --- | --- |
+| `turn_on()` | 打开播放器。 |
+| `turn_off()` | 关闭播放器。 |
+| `media_play()` | 开始或恢复播放。 |
+| `media_pause()` | 暂停播放。 |
+| `media_stop()` | 停止播放。 |
+| `media_previous_track()` | 跳转到上一曲目。 |
+| `media_next_track()` | 跳转到下一曲目。 |
+| `media_seek(position: float)` | 跳转到指定位置，单位为秒。 |
+| `set_volume_level(volume: float)` | 设置音量，范围为 `0` 到 `1`。 |
+| `mute_volume(mute: bool)` | 静音或取消静音。 |
+| `select_source(source: str)` | 选择一个输入源。 |
+| `select_sound_mode(sound_mode: str)` | 选择一个声音模式。 |
+| `play_media(media_type, media_id, **kwargs)` | 播放一段媒体。参见[播放媒体](#playing-media)。 |
+| `clear_playlist()` | 清空播放队列。 |
+| `set_shuffle(shuffle: bool)` | 开启或关闭随机播放。 |
+| `set_repeat(repeat: RepeatMode)` | 设置重复模式。 |
+| `join_players(group_members: list[str])` | 让这些播放器与此播放器分组。 |
+| `unjoin_player()` | 将此播放器从其所在分组中移除。 |
+| `async_browse_media(media_content_type, media_content_id)` | 仅异步。返回一个 `BrowseMedia` 树。 |
+| `async_search_media(query)` | 仅异步。返回一个 `SearchMedia` 结果。 |
+| `async_get_browse_image(media_content_type, media_content_id, media_image_id)` | 仅异步。返回浏览器缩略图的字节和内容类型。 |
+
+有些方法带有默认实现，你可以覆盖它们：
+
+- `toggle`：当播放器处于 `off` 状态时将其打开，否则将其关闭。
+- `media_play_pause`：当状态为 `playing` 时暂停，否则播放。
+- `volume_up` 和 `volume_down`：当播放器具有 `VOLUME_SET` 时，通过 `set_volume_level` 按 `volume_step` 改变 `volume_level`。如果你的设备有自己的音量按钮，请自行实现这两个方法。
+
+## 状态
+
+从 `state` 返回一个 `MediaPlayerState`。
+
+| 状态 | 描述 |
+| --- | --- |
+| `off` | 播放器已关闭，在被打开之前不会接受任何命令。 |
+| `on` | 播放器已打开，但你不知道更多信息。 |
+| `idle` | 播放器已打开并接受命令，但没有播放任何内容，例如处于主屏幕时。 |
+| `playing` | 媒体正在播放。 |
+| `paused` | 媒体已加载并暂停。 |
+| `buffering` | 播放器正在准备播放。 |
+
+> [!NOTE]
+> `MediaPlayerState.STANDBY` 已弃用。请改用 `off` 或 `idle`。
+
+许多播放器在待机状态下无法被控制。如果 Home Assistant 仍能通过其他方式打开设备，例如 Wake-on-LAN 或通过其他连接发送电源命令，则将其显示为 `off`。如果无法从 Home Assistant 打开它，请将该实体标记为[不可用](/glossary/unavailable/)（unavailable）。质量分级（quality scale）中的[实体不可用规则](/core/quality-scale/entity-unavailable/)有详细说明。
+
+## 示例
+
+一个可以播放、暂停、设置音量并播放 URL（包括媒体来源）的网络音箱。
+
+```python
+from typing import Any
+
+from homeassistant.components import media_source
+from homeassistant.components.media_player import (
+    BrowseMedia,
+    MediaPlayerDeviceClass,
+    MediaPlayerEntity,
+    MediaPlayerEntityFeature,
+    MediaPlayerState,
+    MediaType,
+    async_process_play_media_url,
+)
+
+
+class MySpeaker(MediaPlayerEntity):
+    """A network speaker."""
+
+    _attr_has_entity_name = True
+    _attr_name = None
+    _attr_device_class = MediaPlayerDeviceClass.SPEAKER
+    _attr_supported_features = (
+        MediaPlayerEntityFeature.PLAY
+        | MediaPlayerEntityFeature.PAUSE
+        | MediaPlayerEntityFeature.VOLUME_SET
+        | MediaPlayerEntityFeature.PLAY_MEDIA
+        | MediaPlayerEntityFeature.BROWSE_MEDIA
+    )
+
+    def __init__(self, speaker: MySpeakerClient) -> None:
+        """Initialize the speaker."""
+        self._speaker = speaker
+        self._attr_unique_id = speaker.serial
+
+    @property
+    def state(self) -> MediaPlayerState:
+        """Return the state of the speaker."""
+        if self._speaker.is_playing:
+            return MediaPlayerState.PLAYING
+        return MediaPlayerState.IDLE
+
+    @property
+    def volume_level(self) -> float:
+        """Return the volume, from 0 to 1."""
+        return self._speaker.volume / 100
+
+    async def async_media_play(self) -> None:
+        """Resume playback."""
+        await self._speaker.play()
+
+    async def async_media_pause(self) -> None:
+        """Pause playback."""
+        await self._speaker.pause()
+
+    async def async_set_volume_level(self, volume: float) -> None:
+        """Set the volume."""
+        await self._speaker.set_volume(round(volume * 100))
+
+    async def async_browse_media(
+        self,
+        media_content_type: MediaType | str | None = None,
+        media_content_id: str | None = None,
+    ) -> BrowseMedia:
+        """Browse the audio of media sources."""
+        return await media_source.async_browse_media(
+            self.hass,
+            media_content_id,
+            content_filter=lambda item: item.media_content_type.startswith(
+                "audio/"
+            ),
+        )
+
+    async def async_play_media(
+        self, media_type: MediaType | str, media_id: str, **kwargs: Any
+    ) -> None:
+        """Play a URL or a media source."""
+        if media_source.is_media_source_id(media_id):
+            play_item = await media_source.async_resolve_media(
+                self.hass, media_id, self.entity_id
+            )
+            media_id = play_item.url
+
+        url = async_process_play_media_url(self.hass, media_id)
+        await self._speaker.play_url(url)
+```

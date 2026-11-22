@@ -4,13 +4,16 @@ description: 按钮卡片是一个带有图标和名称的大方形按钮。它�
 sidebarGroup: Entity cards
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "light.living_room_lamp"}}'></hui-card>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "scene.movie_night"}}'></hui-card>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "lock.front_door"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "button", entity: "light.living_room_lamp" },
+    { type: "button", entity: "scene.movie_night" },
+    { type: "button", entity: "lock.front_door" },
+  ]}
+/>
 
 ## 用法
 
@@ -24,20 +27,35 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 按钮显示名称和图标。添加 `show_state: true` 可以在名称下方显示状态，并使用 `show_name` 和 `show_icon` 来隐藏其中任意一项。仅显示图标的按钮需要一个其图标本身含义足够明确的实体。
 
-<Demo hass>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "light.hallway", "show_state": true}}'></hui-card>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "switch.desk_plug", "show_name": false}}'></hui-card>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "light.kitchen_ceiling", "show_icon": false, "show_state": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    { type: "button", entity: "light.hallway", show_state: true },
+    { type: "button", entity: "switch.desk_plug", show_name: false },
+    {
+      type: "button",
+      entity: "light.kitchen_ceiling",
+      show_icon: false,
+      show_state: true,
+    },
+  ]}
+/>
 
 ### 图标大小
 
 默认情况下，图标会随卡片缩放：它占卡片宽度的 40%。设置 `icon_height`，例如 `40px`，可以获得固定且更小的图标，让按钮看起来更简洁。当所有按钮使用相同高度时，按钮网格的阅读体验更好。
 
-<Demo hass>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "light.living_room_lamp", "icon_height": "40px"}}'></hui-card>
-  <hui-card style="width: 180px" data-props='{"config": {"type": "button", "entity": "light.hallway", "icon_height": "40px"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "button",
+      entity: "light.living_room_lamp",
+      icon_height: "40px",
+    },
+    { type: "button", entity: "light.hallway", icon_height: "40px" },
+  ]}
+/>
 
 ### 内容
 

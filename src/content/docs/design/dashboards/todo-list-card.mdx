@@ -4,11 +4,12 @@ description: 待办事项列表卡片显示待办事项列表中的条目，可�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 360px" data-props='{"config": {"type": "todo-list", "entity": "todo.shopping_list"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "todo-list", entity: "todo.shopping_list" }]}
+/>
 
 ## 用法
 
@@ -22,9 +23,10 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `hide_completed: true` 后，卡片只显示尚未完成的条目。适用于会不断变长的列表，例如从不清理的购物清单。设置 `hide_create: true` 后，添加条目的输入框会消失，适用于在壁挂平板上更多是查看而非编辑的列表。
 
-<Demo hass>
-  <hui-card style="width: 360px" data-props='{"config": {"type": "todo-list", "entity": "todo.shopping_list", "hide_completed": true, "hide_create": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "todo-list", entity: "todo.shopping_list", hide_completed: true, hide_create: true }]}
+/>
 
 ### 排序
 

@@ -1,0 +1,169 @@
+---
+title: 热水器实体（Water heater entity）
+description: 为将水加热至目标温度的锅炉和水箱构建热水器实体。
+sidebarLabel: Water heater
+sidebarGroup: Lights and climate
+---
+
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
+
+A water heater entity controls a device that heats water: a boiler, a hot water tank, or a heat pump water heater. It has a target temperature, operation modes, and optionally an away mode. Inherit from `WaterHeaterEntity` in `homeassistant.components.water_heater`.
+
+如果设备为房间供暖或制冷，请改用[气候实体（climate entity）](/core/entities/climate/)。
+
+有关前端如何显示热水器，请参阅[热水器更多信息视图（more-info view）](/design/more-info/water-heater/)。
+
+<EmbedDemo
+  entities={[
+    {
+      entity_id: "water_heater.boiler",
+      state: "eco",
+      attributes: {
+        friendly_name: "Boiler",
+        current_temperature: 48,
+        temperature: 55,
+        min_temp: 40,
+        max_temp: 65,
+        target_temp_step: 1,
+        operation_list: ["eco", "electric", "performance", "off"],
+        operation_mode: "eco",
+        supported_features: 11,
+      },
+    },
+  ]}
+  cards={[
+    {
+      type: "tile",
+      entity: "water_heater.boiler",
+      features: [{ type: "target-temperature" }, { type: "water-heater-operation-modes" }],
+    },
+  ]}
+  caption="A water heater with a target temperature and operation modes, in a tile card. The card is live: change the temperature or the mode."
+/>
+
+## Properties
+
+除了[通用实体属性（generic entity properties）](/core/entities/entity-class/)之外，热水器实体还具有以下属性。每个属性都可以通过其对应的 `_attr_` 属性来设置，例如 `_attr_current_operation`。
+
+| 名称 | 类型 | 默认值 | 描述 |
+| ---- | ---- | ------- | ----------- |
+| `native_temperature_unit` | `str` | 必填 | 设备报告温度所用的单位：`UnitOfTemperature.CELSIUS`、`UnitOfTemperature.FAHRENHEIT` 或 `UnitOfTemperature.KELVIN`。 |
+| `current_operation` | `str \| None` | `None` | 当前运行模式。它是实体的状态。 |
+| `operation_list` | `list[str] \| None` | `None` | 设备支持的运行模式。 |
+| `native_current_temperature` | `float \| None` | `None` | 测得的水温，以 `native_temperature_unit` 为单位。 |
+| `native_target_temperature` | `float \| None` | `None` | 要达到的温度，以 `native_temperature_unit` 为单位。 |
+| `native_target_temperature_high` | `float \| None` | `None` | 目标范围的上限，以 `native_temperature_unit` 为单位。 |
+| `native_target_temperature_low` | `float \| None` | `None` | 目标范围的下限，以 `native_temperature_unit` 为单位。 |
+| `target_temperature_step` | `float \| None` | `None` | 目标温度的步长，以 `native_temperature_unit` 为单位。 |
+| `min_temp` | `float` | 110 °F | 最低目标温度，以 `native_temperature_unit` 为单位。默认值会转换为您的单位。 |
+| `max_temp` | `float` | 140 °F | 最高目标温度，以 `native_temperature_unit` 为单位。默认值会转换为您的单位。 |
+| `precision` | `float` | 摄氏为十分位，其他为整数 | 温度显示的精度。若无值，则遵循安装的单位系统。 |
+| `is_away_mode_on` | `bool \| None` | `None` | 离家模式是否开启。需要 `AWAY_MODE`。 |
+
+与气候实体一样，热水器以设备单位报告温度，Home Assistant 会将其转换为安装的单位系统。它会添加一个 `temperature_unit` 状态属性，其值为转换后数值的单位。您不能覆盖该属性。传递给 `set_temperature` 的温度会在调用您的方法之前转换为 `native_temperature_unit`。
+
+> [!WARNING]
+> 不带 `native_` 的旧名称，例如 `current_temperature`、`target_temperature` 和 `temperature_unit`（及其对应的 `_attr_` 属性），已被弃用，并将在 Home Assistant 2027.11 中停止工作。请在新代码中使用 `native_` 名称。
+
+## 运行模式
+
+运行模式是字符串。Home Assistant 为常见模式提供了带有内置翻译的常量：
+
+| 值 | 描述 |
+| ----- | ----------- |
+| `STATE_ECO` | 节能模式，在性能和成本之间取得平衡。 |
+| `STATE_ELECTRIC` | 仅使用电加热元件加热。 |
+| `STATE_PERFORMANCE` | 最高性能，但能耗成本更高。 |
+| `STATE_HIGH_DEMAND` | 为热水需求量大的场景而设计。 |
+| `STATE_HEAT_PUMP` | 仅使用热泵加热。 |
+| `STATE_GAS` | 仅使用燃气加热。 |
+| `STATE_OFF` | 设备已关闭。此常量来自 `homeassistant.const`。 |
+
+您可以添加自己的模式，并使用实体的[翻译键（translation key）](/core/entities/naming/)为它们提供翻译和图标（参见[图标](/core/entities/icons/)）。在调用 `set_operation_mode` 之前，Home Assistant 会根据 `operation_list` 检查动作（action）中的模式，如果不在列表中，则会引发验证错误。
+
+## 支持的功能
+
+将 `WaterHeaterEntityFeature` 标志用 `|` 组合，并将结果设置为 `supported_features`。参见[支持的功能（supported features）](/glossary/supported-features/)。
+
+| 值 | 描述 |
+| ----- | ----------- |
+| `TARGET_TEMPERATURE` | 可以设置目标温度。需实现 `set_temperature`。 |
+| `OPERATION_MODE` | 可以设置运行模式。需设置 `operation_list` 并实现 `set_operation_mode`。 |
+| `AWAY_MODE` | 设备具有离家模式。需实现 `turn_away_mode_on` 和 `turn_away_mode_off`。 |
+| `ON_OFF` | 可以打开和关闭设备。需实现 `turn_on` 和 `turn_off`。 |
+
+## 方法
+
+每个方法只需实现同步或异步变体之一，不要两者都实现。
+
+| 方法 | 异步变体 | 功能 |
+| ------ | ------------- | ------- |
+| `set_temperature(**kwargs: Any)` | `async_set_temperature` | `TARGET_TEMPERATURE` |
+| `set_operation_mode(operation_mode: str)` | `async_set_operation_mode` | `OPERATION_MODE` |
+| `turn_away_mode_on()` | `async_turn_away_mode_on` | `AWAY_MODE` |
+| `turn_away_mode_off()` | `async_turn_away_mode_off` | `AWAY_MODE` |
+| `turn_on(**kwargs: Any)` | `async_turn_on` | `ON_OFF` |
+| `turn_off(**kwargs: Any)` | `async_turn_off` | `ON_OFF` |
+
+`set_temperature` 会接收以 `native_temperature_unit` 为单位的 `ATTR_TEMPERATURE`，当动作同时设置模式时，还会接收 `ATTR_OPERATION_MODE`。
+
+## 状态
+
+状态是 `current_operation` 的值，例如 `eco`、`performance` 或 `off`，也可以是您自己的模式之一。当 `current_operation` 为 `None` 时，状态为 `unknown`。
+
+## 示例
+
+```python
+from typing import Any
+
+from homeassistant.components.water_heater import (
+    STATE_ECO,
+    STATE_PERFORMANCE,
+    WaterHeaterEntity,
+    WaterHeaterEntityFeature,
+)
+from homeassistant.const import ATTR_TEMPERATURE, UnitOfTemperature
+
+
+class MyWaterHeater(WaterHeaterEntity):
+    """A boiler with two modes."""
+
+    _attr_has_entity_name = True
+    _attr_name = None
+    _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
+    _attr_min_temp = 40
+    _attr_max_temp = 75
+    _attr_operation_list = [STATE_ECO, STATE_PERFORMANCE]
+    _attr_supported_features = (
+        WaterHeaterEntityFeature.TARGET_TEMPERATURE
+        | WaterHeaterEntityFeature.OPERATION_MODE
+    )
+
+    def __init__(self, device: MyDevice) -> None:
+        """Set up the water heater."""
+        self._device = device
+        self._attr_unique_id = device.serial
+
+    @property
+    def current_operation(self) -> str:
+        """Return the current mode."""
+        return self._device.mode
+
+    @property
+    def native_current_temperature(self) -> float:
+        """Return the water temperature."""
+        return self._device.temperature
+
+    @property
+    def native_target_temperature(self) -> float:
+        """Return the target temperature."""
+        return self._device.setpoint
+
+    async def async_set_temperature(self, **kwargs: Any) -> None:
+        """Set the target temperature."""
+        await self._device.set_setpoint(kwargs[ATTR_TEMPERATURE])
+
+    async def async_set_operation_mode(self, operation_mode: str) -> None:
+        """Set the mode."""
+        await self._device.set_mode(operation_mode)
+```

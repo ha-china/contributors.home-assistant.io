@@ -18,7 +18,7 @@ order: 7
 
 ### 使用协调器时
 
-协调器（coordinator）会为您完成这项工作。当更新失败时抛出 `UpdateFailed`。协调器会记录第一次失败，在失败持续期间保持安静，并在数据获取恢复时以 `info` 级别记录日志：
+The coordinator does this for you. Raise `UpdateFailedUnreachable` when the update fails. The coordinator logs the first failure at `info` level, stays quiet while the failures continue, and logs at `info` level when fetching the data recovers:
 
 ```python
 async def _async_update_data(self) -> MyData:
@@ -26,9 +26,9 @@ async def _async_update_data(self) -> MyData:
     try:
         return await self.client.get_data()
     except MyConnectionError as err:
-        raise UpdateFailed(
+        raise UpdateFailedUnreachable(
             translation_domain=DOMAIN,
-            translation_key="update_failed",
+            translation_key="update_unreachable",
         ) from err
 ```
 

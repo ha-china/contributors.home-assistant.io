@@ -15,10 +15,12 @@ sidebarLabel: 你的第一次贡献
 
 ## 1. 打开页面
 
-1. 前往 [home-assistant.io](https://www.home-assistant.io/) 上你想要修复的页面。
-2. 滚动到底部的 **帮助我们改进文档**，选择 **编辑**。
-3. GitHub 会显示页面的源码。选择文件右上角的铅笔图标 **编辑此文件**。
-4. 第一次操作时，GitHub 会提议创建你自己的仓库副本，称为 [fork](/start/github/#fork)。接受即可。之后你无需对它做任何其他操作。
+1. Go to the page on [home-assistant.io](https://www.home-assistant.io/) that you want to fix.
+2. Scroll to **Help us improve our documentation** at the bottom, and select **Edit**.
+3. GitHub shows the source of the page. Select the pencil icon, **Edit this file**, at the top right of the file.
+
+   If the pencil icon doesn't show up, sign in to your GitHub account.
+4. The first time, GitHub offers to create your own copy of the repository, called a [fork](/start/github/#fork). Accept it. You don't have to do anything else with it.
 
 ## 2. 进行修改
 

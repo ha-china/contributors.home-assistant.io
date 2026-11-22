@@ -4,11 +4,12 @@ description: 加湿器卡片以表盘形式显示加湿器或除湿器，用于�
 sidebarGroup: Controls
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "humidifier", "entity": "humidifier.bedroom_humidifier"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "humidifier", entity: "humidifier.bedroom_humidifier" }]}
+/>
 
 ## 用法
 
@@ -22,17 +23,25 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 设置 `show_current_as_primary: true` 后，大数字显示当前湿度，目标湿度移到较小的那一行。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "humidifier", "entity": "humidifier.bedroom_humidifier", "show_current_as_primary": true}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "humidifier", entity: "humidifier.bedroom_humidifier", show_current_as_primary: true }]}
+/>
 
 ### 功能
 
 加湿器卡片可以在表盘下方添加功能（feature）。表盘本身没有打开或关闭设备的按钮，因此在仪表盘编辑器中添加此卡片时，会自带开关功能。模式功能是另一个合适的选择。
 
-<Demo hass>
-  <hui-card style="width: 340px" data-props='{"config": {"type": "humidifier", "entity": "humidifier.bedroom_humidifier", "features": [{"type": "humidifier-toggle"}, {"type": "humidifier-modes", "style": "icons"}]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[
+    {
+      type: "humidifier",
+      entity: "humidifier.bedroom_humidifier",
+      features: [{ type: "humidifier-toggle" }, { type: "humidifier-modes", style: "icons" }],
+    },
+  ]}
+/>
 
 ### 内容
 

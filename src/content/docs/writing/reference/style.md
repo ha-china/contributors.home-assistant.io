@@ -44,9 +44,15 @@ sidebarLabel: 风格指南
 
 ## 格式基础
 
-- **使用连贯的文本写作。** 没有行长度限制。每个段落保持在单行内，不要在固定宽度处换行。这使页面更易于编辑，尤其是在 GitHub 的在线编辑器中。
-- **优先使用 Markdown 而非 HTML。** 仅在 Markdown 无法完成工作时才使用 HTML，例如带说明文字的图片。
-- **用空行包围块。** 标题、列表、代码块和文本框前后都需要一个空行。
+- **Write each sentence on its own line.** There is no line length limit, so do not wrap lines at a fixed width.
+  Instead, start each sentence of a paragraph on a new line, with a single line break.
+  Markdown still renders the lines as one paragraph.
+  This makes reviews easier: when you change a sentence, the diff shows only that line, and reviewers can comment on or suggest a change to exactly that sentence.
+  This is optional, but recommended, and keeping a whole paragraph on a single line is still fine.
+  When you change a paragraph that is on a single line, split only that paragraph into sentences, and leave the other paragraphs as they are.
+  Do not make edits that only change how paragraphs are split into lines.
+- **Prefer Markdown over HTML.** Use HTML only when Markdown cannot do the job, like for an image with a caption.
+- **Surround blocks with blank lines.** Headings, lists, code blocks, and text boxes all need an empty line before and after them.
 
 ## 标题
 
@@ -83,7 +89,7 @@ title: "Create an automation"
 
 ## UI 元素和步骤
 
-使用双星号以粗体书写 UI 元素的名称：`**Settings**`。要与界面中显示的完全一致。
+Write the names of UI elements or displayed UI text, such as a sensor state, in bold, using double asterisks: `**Settings**`. Write them exactly as they appear in the interface.
 
 要描述界面中的路径，请在各步骤之间使用大于号（`>`）。`>` 本身不加粗：
 
@@ -92,7 +98,9 @@ title: "Create an automation"
 2. Select **Restart Home Assistant** > **Quick reload**.
 ```
 
-当路径从 Home Assistant 中的某个页面开始时，请使用 [My link](/writing/reference/liquid/#my-links)，以便读者可以直接跳转到他们自己安装中的该页面。要指向界面中的图标，请使用[内联图标](/writing/reference/liquid/#inline-icons)。
+To write an error message that you see in the UI, don't use bold. Enclose the message in quotation marks.
+
+When the path starts at a page in Home Assistant, use a [My link](/writing/reference/liquid/#my-links) so the reader can jump straight to that page in their own installation. To point at an icon in the interface, use an [inline icon](/writing/reference/liquid/#inline-icons).
 
 ## 文件路径、名称和输入
 

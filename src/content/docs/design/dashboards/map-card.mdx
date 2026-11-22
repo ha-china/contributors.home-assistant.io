@@ -4,11 +4,12 @@ description: 地图卡片在交互式地图上显示人员、设备和地理位�
 sidebarGroup: Information
 ---
 
-import Demo from "../../../../components/docs/Demo.astro";
+import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-<Demo hass>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "map", "entities": ["person.alex", "person.sam", "zone.home", "zone.work"]}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "map", entities: ["person.alex", "person.sam", "zone.home", "zone.work"] }]}
+/>
 
 ## 用法
 
@@ -32,9 +33,10 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 使用 `theme_mode` 时，无论主题如何，地图始终为 `light` 或始终为 `dark`。默认值 `auto` 跟随主题。深色地图在夜间的壁挂平板上效果很好，但强制指定模式意味着它不再与仪表盘（dashboard）的其余部分匹配。
 
-<Demo hass>
-  <hui-card style="width: 420px" data-props='{"config": {"type": "map", "entities": ["person.alex", "person.sam"], "theme_mode": "dark"}}'></hui-card>
-</Demo>
+<EmbedDemo
+  home
+  cards={[{ type: "map", entities: ["person.alex", "person.sam"], theme_mode: "dark" }]}
+/>
 
 ### 地图样式
 

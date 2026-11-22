@@ -7,7 +7,7 @@ sidebarGroup: Lights and climate
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A light entity controls a light source: turning it on and off, and where the hardware allows it, its brightness, color, color temperature, and effects. Inherit from `LightEntity` in `homeassistant.components.light`. Use it for anything that is a light to the person in the room, like a bulb, an LED strip, or a dimmer that drives a lamp. A plain relay that happens to power a lamp is often still a light, but a relay that powers anything else is a [switch](/core/entities/switch/).
+灯实体（light entity）控制光源：开启和关闭，以及在硬件允许的情况下，控制其亮度、颜色、色温和效果。继承自 `homeassistant.components.light` 中的 `LightEntity`。将其用于对房间内的人来说是灯的任何东西，例如灯泡、LED 灯带或驱动灯具的调光器。一个恰好为灯具供电的普通继电器通常仍然是灯，但为其他任何东西供电的继电器则是[开关](/core/entities/switch/)。
 
 关于前端如何展示灯，请参见[灯的更多信息视图](/design/more-info/light/)。
 
@@ -38,10 +38,10 @@ A light entity controls a light source: turning it on and off, and where the har
       entity: "light.living_room",
     },
   ]}
-  caption="A light with brightness and color temperature, in a tile card and a light card. The cards are live: dim it, change its color temperature, or turn it off."
+  caption="一个具有亮度和色温的灯，显示在磁贴卡片和灯卡片中。这些卡片是实时的：调暗它、更改其色温或将其关闭。"
 />
 
-## Properties
+## 属性
 
 灯实体除了[通用实体属性](/core/entities/entity-class/)之外，还具有以下属性。每个属性都可以通过其 `_attr_` 属性进行设置，例如 `_attr_brightness`。
 

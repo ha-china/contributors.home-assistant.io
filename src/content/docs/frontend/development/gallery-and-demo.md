@@ -50,14 +50,14 @@ http://localhost:8090/?demo=<slug>#/energy
 
 一些演示数据由 Core 生成：`src/fake_data/demo_services.ts` 中的动作描述，以及 `demo/src/stubs/` 中的触发器和条件描述。不要手动编辑它们。运行 `script/gen_demo_core_data` 可以从 Core 的 `dev` 分支重新生成它们。
 
-## Embed cards on other sites
+## 在其他网站上嵌入卡片
 
-The demo also builds `embed.js`, which puts dashboard cards on any web page with the `<ha-embed-provider>` and `<ha-embed-card>` elements. Card authors use it for [live demos of their cards](/frontend/custom-ui/demo/). Its code is in `demo/src/embed/`, and `demo/src/html/components.html.template` is the page that documents it, at `/components.html` of the demo.
+演示还构建了 `embed.js`，它通过 `<ha-embed-provider>` 和 `<ha-embed-card>` 元素将仪表盘卡片放到任何网页上。卡片作者使用它来[实时演示他们的卡片](/frontend/custom-ui/demo/)。其代码位于 `demo/src/embed/`，而 `demo/src/html/components.html.template` 是记录该功能的页面，位于演示的 `/components.html`。
 
-The provider registers its own set of mocks. Most come from the stubs in `demo/src/stubs/`, and a few, like energy, are defined in `ha-embed-provider.ts`. A fix to a stub reaches each of the demo, the embed, and the gallery pages that import that stub, and they don't all import the same ones. The calendar stub, for example, is used by the embed and the gallery, but not by the demo. For a new stub, import it in `ha-embed-provider.ts` and call it in the constructor too.
+提供者注册了自己的一组模拟数据。大多数来自 `demo/src/stubs/` 中的 stub，少数（如能源）在 `ha-embed-provider.ts` 中定义。对某个 stub 的修复会影响到导入该 stub 的演示、嵌入和画廊页面，而它们并不都导入相同的 stub。例如，日历 stub 被嵌入和画廊使用，但演示不使用。对于新的 stub，请在 `ha-embed-provider.ts` 中导入它，并在构造函数中调用它。
 
-The production build of the script loads its other files from the site it came from, so it works on other sites too. The development and legacy builds load them from the site of the page instead, so try changes that need to work on other sites with a production build.
+脚本的生产构建会从其来源网站加载其他文件，因此它也能在其他网站上运行。开发和旧版构建则改为从页面所在网站加载这些文件，因此请尝试使用生产构建来测试需要在其他网站上运行的更改。
 
-## Translations in the gallery and the demo
+## 画廊和演示中的翻译
 
 两者默认以英文启动。添加 `--fetch-translations` 可以加载最新翻译，例如 `pnpm dev:demo --fetch-translations`。两者也接受[后台运行标志](/frontend/development/run/#keep-a-server-running-in-the-background)。

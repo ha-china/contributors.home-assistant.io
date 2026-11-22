@@ -7,7 +7,7 @@ sidebarGroup: Inputs and helpers
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A to-do list entity represents a list of items, each with a status: open or done. Think of a shopping list, the tasks in a task manager, or the chores a robot vacuum app keeps track of. Inherit from `TodoListEntity` in `homeassistant.components.todo`.
+待办事项列表实体（entity）表示一个项目列表，每个项目都有状态：未完成或已完成。可以想象一下购物清单、任务管理器中的任务，或扫地机器人应用跟踪的家务。继承自 `homeassistant.components.todo` 中的 `TodoListEntity`。
 
 用户可以在待办事项面板中查看该列表，自动化、脚本和 Assist 可以读取它并向其中添加内容。它们能修改什么取决于您设置的[支持的功能](#supported-features)。
 
@@ -34,7 +34,7 @@ A to-do list entity represents a list of items, each with a status: open or done
   caption="A read-only shopping list in a tile card and a to-do list card. The state is the number of open items. The items are sample items of the demo."
 />
 
-## Properties
+## 属性
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |

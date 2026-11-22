@@ -7,7 +7,7 @@ sidebarGroup: Media
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A media player entity controls something that plays media: a smart speaker, a TV, a streaming stick, an AV receiver, or a projector. It reports what is playing, with artwork and position, and takes commands like play, pause, volume, source, and play this URL. It is one of the richest entity types in Home Assistant, but you only implement what your device can do: the [supported features](/glossary/supported-features/) decide which actions and controls exist.
+媒体播放器实体（media player entity）控制播放媒体的设备：智能音箱、电视、流媒体棒、AV 功放或投影仪。它报告正在播放的内容，包括封面图和播放位置，并接受播放、暂停、音量、输入源以及播放此 URL 等命令。它是 Home Assistant 中最丰富的实体类型之一，但你只需实现你的设备能做的部分：[受支持的功能](/glossary/supported-features/)决定了存在哪些动作和控制。
 
 从 `homeassistant.components.media_player` 导入并继承 `MediaPlayerEntity`。关于前端如何展示媒体播放器，请参阅[媒体播放器更多信息视图](/design/more-info/media-player/)。
 
@@ -40,7 +40,7 @@ A media player entity controls something that plays media: a smart speaker, a TV
   caption="A speaker that plays, pauses, skips tracks, and sets its volume, in a tile card and a media control card."
 />
 
-## Properties
+## 属性
 
 这些属性是媒体播放器实体特有的。每个实体都具有的通用属性见[实体类](/core/entities/entity-class/)。除非表格中另有说明，它们的默认值均为 `None`。
 

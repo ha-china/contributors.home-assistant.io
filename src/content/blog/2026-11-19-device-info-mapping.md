@@ -1,6 +1,6 @@
 ---
-title: "Dict-style access to device info is deprecated"
-description: "Using a DeviceInfo or ChildDeviceInfo like a dict is deprecated in Home Assistant Core 2026.12 and will stop working in 2027.12. Read and set the attributes instead."
+title: "对设备信息的字典式访问已弃用"
+description: "在 Home Assistant Core 2026.12 中，像使用字典一样使用 DeviceInfo 或 ChildDeviceInfo 已被弃用，并将在 2027.12 中停止工作。请改为读取和设置属性。"
 date: 2026-11-19
 authors:
   - epenet
@@ -8,24 +8,24 @@ areas:
   - core
 ---
 
-As of Home Assistant Core 2026.12, using a `DeviceInfo` or `ChildDeviceInfo` like a dict is deprecated. It will stop working in Home Assistant Core 2027.12. Until then, it logs a warning. This is the compatibility layer announced in [DeviceInfo is now a dataclass](/blog/2026/10/13/device-info-class/). These uses are deprecated:
+自 Home Assistant Core 2026.12 起，像使用字典一样使用 `DeviceInfo` 或 `ChildDeviceInfo` 已被弃用。它将在 Home Assistant Core 2027.12 中停止工作。在此之前，它会记录一条警告。这是 [DeviceInfo 现在是一个数据类](/blog/2026/10/13/device-info-class/) 中宣布的兼容层。以下用法已被弃用：
 
-- Reading or setting a field by key, like `device_info["name"]`
-- Testing a field with `in`
-- `get()`, `keys()`, `items()`, and `update()`
-- `dict(device_info)` and `**device_info` unpacking
-- Comparing a device info with a plain dict
-- The `__required_keys__` and `__optional_keys__` attributes
+- 按键读取或设置字段，如 `device_info["name"]`
+- 使用 `in` 测试字段是否存在
+- `get()`、`keys()`、`items()` 和 `update()`
+- `dict(device_info)` 和 `**device_info` 解包
+- 将设备信息与普通字典进行比较
+- `__required_keys__` 和 `__optional_keys__` 属性
 
-Since Home Assistant Core 2026.11, `DeviceInfo` is a dataclass with typed fields. The dict-style access was kept so integrations had time to move, and Home Assistant Core no longer uses it. If your custom integration already reads and sets device info fields as attributes, you don't need to do anything.
+自 Home Assistant Core 2026.11 起，`DeviceInfo` 是一个具有类型字段的数据类。保留字典式访问是为了让集成有时间迁移，而 Home Assistant Core 不再使用它。如果你的自定义集成已经以属性的方式读取和设置设备信息字段，则无需进行任何更改。
 
-To check whether you are affected, search your logs for `which is deprecated as device infos are dataclasses`. Each warning names the use it found, and what to use instead.
+要检查你是否受到影响，请在日志中搜索 `which is deprecated as device infos are dataclasses`。每条警告都会指出它发现的用法，以及应使用的替代方法。
 
-`as_dict()`, comparing two device infos, and the representation of a device info are not deprecated. An entity can also still return a plain dict as its `device_info`: only a `DeviceInfo` or `ChildDeviceInfo` used like a dict is affected.
+`as_dict()`、比较两个设备信息以及设备信息的表示形式并未弃用。实体仍然可以返回普通字典作为其 `device_info`：只有像字典一样使用 `DeviceInfo` 或 `ChildDeviceInfo` 才会受到影响。
 
-## Reading and setting fields
+## 读取和设置字段
 
-Read and set the attributes instead:
+请改为读取和设置属性：
 
 ```python
 # Old
@@ -39,7 +39,7 @@ name = device_info.name
 model = device_info.model
 ```
 
-A field which has not been set reads as `UNDEFINED`, where `get()` returned `None`, as explained in [unset fields](/blog/2026/10/13/device-info-class/#unset-fields). To test whether a field is set, compare it with `UNDEFINED`, instead of using `in`:
+未设置的字段读取为 `UNDEFINED`，而 `get()` 返回 `None`，如 [未设置字段](/blog/2026/10/13/device-info-class/#unset-fields) 中所述。要测试字段是否已设置，请将其与 `UNDEFINED` 进行比较，而不是使用 `in`：
 
 ```python
 from homeassistant.helpers.typing import UNDEFINED
@@ -53,7 +53,7 @@ if device_info.name is UNDEFINED:
     device_info.name = "My device"
 ```
 
-Set each field, instead of using `update()`:
+请逐个设置字段，而不是使用 `update()`：
 
 ```python
 # Old
@@ -64,9 +64,9 @@ device_info.model = "My model"
 device_info.manufacturer = "My manufacturer"
 ```
 
-## Getting the fields which are set
+## 获取已设置的字段
 
-Use `as_dict()`, instead of `keys()`, `items()`, or `dict(device_info)`. It returns the fields which are set:
+使用 `as_dict()`，而不是 `keys()`、`items()` 或 `dict(device_info)`。它返回已设置的字段：
 
 ```python
 # Old
@@ -76,7 +76,7 @@ data = dict(device_info)
 data = device_info.as_dict()
 ```
 
-To register a device from a device info, pass it to `async_get_or_create_from_info`, or to `async_get_or_create_child_from_info` for a `ChildDeviceInfo`, instead of unpacking it:
+要从设备信息注册设备，请将其传递给 `async_get_or_create_from_info`，或对于 `ChildDeviceInfo` 传递给 `async_get_or_create_child_from_info`，而不是解包它：
 
 ```python
 # Old
@@ -90,9 +90,9 @@ device_registry.async_get_or_create_from_info(
 )
 ```
 
-## Comparing with a dict
+## 与字典进行比较
 
-Comparing a device info with a plain dict is deprecated. This is common in tests. Compare `as_dict()` instead, or compare with another `DeviceInfo`:
+将设备信息与普通字典进行比较已被弃用。这在测试中很常见。请改为比较 `as_dict()`，或与另一个 `DeviceInfo` 进行比较：
 
 ```python
 # Old
@@ -104,9 +104,9 @@ assert device_info == DeviceInfo(
 )
 ```
 
-## Checking which fields exist
+## 检查哪些字段存在
 
-`__required_keys__` and `__optional_keys__` come from the time `DeviceInfo` was a `TypedDict`. To check whether a field exists, for example to support older Home Assistant versions, use `__annotations__`. It works both on the dataclass and on the `TypedDict` of releases before Home Assistant Core 2026.11:
+`__required_keys__` 和 `__optional_keys__` 来自 `DeviceInfo` 还是 `TypedDict` 的时代。要检查字段是否存在，例如为了支持旧版 Home Assistant，请使用 `__annotations__`。它既适用于数据类，也适用于 Home Assistant Core 2026.11 之前版本的 `TypedDict`：
 
 ```python
 # Old
@@ -116,4 +116,4 @@ has_via_device_id = "via_device_id" in DeviceInfo.__optional_keys__
 has_via_device_id = "via_device_id" in DeviceInfo.__annotations__
 ```
 
-If your integration only supports Home Assistant Core 2026.11 and later, you can also use `dataclasses.fields(DeviceInfo)`, which the warning suggests. On older releases, it raises a `TypeError`.
+如果你的集成仅支持 Home Assistant Core 2026.11 及更高版本，你也可以使用 `dataclasses.fields(DeviceInfo)`，这是警告建议的方法。在旧版本上，它会引发 `TypeError`。

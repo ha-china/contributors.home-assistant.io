@@ -82,8 +82,8 @@ async def async_update(self) -> None:
 - 一旦用户设置了打开它的自动化，它在待机时就是 `off`。
 - 一旦它被打开且连接恢复，它就是 `on`。
 
-When you report a device in standby as unavailable with a coordinator, raise `UpdateFailedUnreachable`, like for any device that cannot be reached. It is a subclass of `UpdateFailed`, so the entities become unavailable the same way, and the coordinator logs it at `info` level, as [log-when-unavailable](/core/quality-scale/log-when-unavailable/) asks.
+当使用 coordinator 将待机设备报告为不可用时，请抛出 `UpdateFailedUnreachable`，就像对待任何无法连接的设备一样。它是 `UpdateFailed` 的子类，因此实体会以相同方式变为不可用，并且 coordinator 会以 `info` 级别记录日志，正如 [log-when-unavailable](/core/quality-scale/log-when-unavailable/) 所要求的那样。
 
-## Related rules
+## 相关规则
 
 - [log-when-unavailable](/core/quality-scale/log-when-unavailable/)：在变为不可用时记录一次日志，恢复时再记录一次。

@@ -7,7 +7,7 @@ sidebarGroup: Lights and climate
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A water heater entity controls a device that heats water: a boiler, a hot water tank, or a heat pump water heater. It has a target temperature, operation modes, and optionally an away mode. Inherit from `WaterHeaterEntity` in `homeassistant.components.water_heater`.
+热水器实体控制加热水的设备：锅炉、热水箱或热泵热水器。它具有目标温度、运行模式，并且可选地具有离家模式。继承自 `homeassistant.components.water_heater` 中的 `WaterHeaterEntity`。
 
 如果设备为房间供暖或制冷，请改用[气候实体（climate entity）](/core/entities/climate/)。
 
@@ -41,7 +41,7 @@ A water heater entity controls a device that heats water: a boiler, a hot water 
   caption="A water heater with a target temperature and operation modes, in a tile card. The card is live: change the temperature or the mode."
 />
 
-## Properties
+## 属性
 
 除了[通用实体属性（generic entity properties）](/core/entities/entity-class/)之外，热水器实体还具有以下属性。每个属性都可以通过其对应的 `_attr_` 属性来设置，例如 `_attr_current_operation`。
 

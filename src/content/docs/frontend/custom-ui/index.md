@@ -50,6 +50,6 @@ sidebarLabel: 自定义卡片及更多
 
 ## 分享你的作品
 
-To publish what you built, so others can install it from the Marketplace, see [dashboard cards and plugins](/marketplace/guides/dashboard/). To let people try your card on a web page first, see [live demos](/frontend/custom-ui/demo/).
+要发布你所构建的内容，以便他人可以从 Marketplace 安装，请参阅[仪表盘卡片和插件](/marketplace/guides/dashboard/)。要让他人先在网页上试用你的卡片，请参阅[实时演示](/frontend/custom-ui/demo/)。
 
 你认为你的卡片应该进入前端本身吗？项目建议你先在 [Marketplace](/marketplace/) 上发布新卡片。你可以积累经验，并且能够更快地迭代。一旦它成熟并拥有用户群，请联系维护者，例如在 [Discord](https://www.home-assistant.io/join-chat/) 上的 **#frontend** 频道，探讨它是否应该作为内置功能发布。

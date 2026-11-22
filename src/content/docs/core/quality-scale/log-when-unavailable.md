@@ -18,7 +18,7 @@ order: 7
 
 ### 使用协调器时
 
-The coordinator does this for you. Raise `UpdateFailedUnreachable` when the update fails. The coordinator logs the first failure at `info` level, stays quiet while the failures continue, and logs at `info` level when fetching the data recovers:
+协调器（coordinator）会为您完成此操作。当更新失败时，抛出 `UpdateFailedUnreachable`。协调器在第一次失败时以 `info` 级别记录日志，在失败持续期间保持静默，并在数据获取恢复时以 `info` 级别记录日志：
 
 ```python
 async def _async_update_data(self) -> MyData:

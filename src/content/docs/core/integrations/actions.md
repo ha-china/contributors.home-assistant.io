@@ -132,11 +132,11 @@ def async_setup_services(hass: HomeAssistant) -> None:
 
 这会调用每个被定位实体的 `set_sleep_timer` 方法，并以 `sleep_time` 作为关键字参数。除了方法名之外，`func` 也可以是一个接收实体和 `ServiceCall` 的异步函数。模式（schema）可以是一个字典，系统会自动将其转换为实体动作模式。若只想允许具有某些功能的实体，请传入 `required_features`。
 
-Entity actions support the `exclude` block of a target for you. When a user targets a floor and excludes an area, the entities of that area are not called, also when the target is `entity_id: all`. The `exclude` block is not passed on to your method.
+实体动作会为您处理目标的 `exclude` 块。当用户定位一个楼层并排除一个区域时，该区域的实体不会被调用，即使目标是 `entity_id: all` 也是如此。`exclude` 块不会传递给您的方法。
 
-If an action resolves its target itself instead, use `service.async_extract_entities` or `target.async_extract_referenced_entity_ids`, which remove the exclusions. Do not read `entity_id`, `device_id`, or `area_id` from `call.data` and resolve them yourself: the entity action schema accepts `exclude`, so your action would act on exactly the entities the user left out. When you require at least one target in your own schema, use `probatio.AtLeastOne(*cv.TARGET_ID_KEYS)`, so a target with only an exclude block doesn't pass.
+如果动作自行解析目标，请改用 `service.async_extract_entities` 或 `target.async_extract_referenced_entity_ids`，它们会移除排除项。不要从 `call.data` 中读取 `entity_id`、`device_id` 或 `area_id` 并自行解析：实体动作模式接受 `exclude`，因此您的动作会作用于用户排除的实体。当您在自己的模式中要求至少一个目标时，请使用 `probatio.AtLeastOne(*cv.TARGET_ID_KEYS)`，这样只有排除块的目标就不会通过。
 
-## Admin-only actions
+## 仅限管理员的动作
 
 能够更改配置或具有其他安全影响的动作，应该只对管理员开放。请使用 `homeassistant.helpers.service` 中的 `async_register_admin_service` 来注册它们，而不是使用 `hass.services.async_register`。它先接收 `hass`，然后接收相同的参数，并在您的处理函数运行之前检查调用者是否为管理员。
 

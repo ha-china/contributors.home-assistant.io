@@ -7,7 +7,7 @@ sidebarGroup: Sensors and status
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A calendar entity represents a set of events, each with a start and an end date or time. Its state shows whether an event is going on right now, which makes it useful in automations. Inherit from `CalendarEntity`, imported from `homeassistant.components.calendar`.
+日历实体（entity）表示一组事件，每个事件都有开始和结束日期或时间。其状态显示当前是否有事件正在进行，这使得它在自动化（automation）中非常有用。继承自 `CalendarEntity`，从 `homeassistant.components.calendar` 导入。
 
 日历集成（integration）遵循 iCalendar 标准，即 [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545)。如果您的集成支持重复事件，则需要自行展开它们：将一个系列中的每次出现作为独立的事件返回。
 
@@ -35,7 +35,7 @@ A calendar entity represents a set of events, each with a start and an end date 
   caption="A calendar in a tile card and a calendar card. The state is off while no event is going on. The events are sample events of the demo, around today."
 />
 
-## Properties
+## 属性
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |

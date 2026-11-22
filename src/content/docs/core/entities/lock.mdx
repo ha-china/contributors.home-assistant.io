@@ -7,7 +7,7 @@ sidebarGroup: Openings and security
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A lock entity controls a lock: it locks, unlocks, and on some locks, opens the door by pulling back the latch. It can ask for a code. Inherit from `LockEntity` in `homeassistant.components.lock`.
+锁实体（lock entity）控制一把锁：它可以上锁、解锁，并且在某些锁上，通过收回锁舌来开门。它可以要求输入密码。继承自 `homeassistant.components.lock` 中的 `LockEntity`。
 
 有关前端如何显示锁，请参阅[锁的更多信息视图](/design/more-info/lock/)。
 
@@ -32,7 +32,7 @@ A lock entity controls a lock: it locks, unlocks, and on some locks, opens the d
   caption="A lock that locks, unlocks, and opens the door, in a tile card. The card is live: unlock it, or open the door."
 />
 
-## Properties
+## 属性
 
 除了[通用实体属性](/core/entities/entity-class/)之外，锁实体还具有以下属性。每个属性都可以通过其 `_attr_` 属性设置，例如 `_attr_is_locked`。
 

@@ -7,7 +7,7 @@ sidebarGroup: Appliances
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A lawn mower entity controls a robotic lawn mower: start mowing, pause, stop, and send it back to its dock. Inherit from `LawnMowerEntity` in `homeassistant.components.lawn_mower`. The entity only covers these commands. Settings like the cutting height go in other entities of the same device, such as a [number](/core/entities/number/) or a [select](/core/entities/select/).
+割草机实体（entity）控制机器人割草机：开始割草、暂停、停止，并将其送回基座。继承自 `homeassistant.components.lawn_mower` 中的 `LawnMowerEntity`。该实体仅涵盖这些命令。诸如切割高度之类的设置应放在同一设备的其他实体中，例如[数字（number）](/core/entities/number/)或[选择（select）](/core/entities/select/)。
 
 有关前端如何展示割草机，请参阅[割草机更多信息视图](/design/more-info/lawn-mower/)。
 
@@ -32,7 +32,7 @@ A lawn mower entity controls a robotic lawn mower: start mowing, pause, stop, an
   caption="A lawn mower that starts, pauses, and docks, in a tile card. The card is live: send it out to mow, or back to its dock."
 />
 
-## Properties
+## 属性
 
 除了[通用实体属性](/core/entities/entity-class/)之外，割草机实体还具有以下属性。使用 `_attr_activity` 设置它，或者重写该属性。
 

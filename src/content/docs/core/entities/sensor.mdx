@@ -7,7 +7,7 @@ sidebarGroup: Sensors and status
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A sensor is a read-only entity that reports a value: a temperature, the power a plug draws, the time a device last booted, or one of a fixed list of text states. It can carry a unit of measurement, and Home Assistant converts that unit to what the user prefers. Inherit from `SensorEntity`, imported from `homeassistant.components.sensor`.
+传感器（sensor）是一种只读实体（entity），用于报告一个值：温度、插座消耗的功率、设备上次启动的时间，或固定文本状态列表中的某一项。它可以带有测量单位，Home Assistant 会将该单位转换为用户偏好的单位。继承自 `homeassistant.components.sensor` 中的 `SensorEntity`。
 
 当值具有两种以上的状态且用户无法更改它时，请使用传感器。只有两种状态的是[二进制传感器](/core/entities/binary-sensor/)。用户可以设置的值则是[数字](/core/entities/number/)、[选择](/core/entities/select/)或[文本](/core/entities/text/)实体。
 
@@ -51,7 +51,7 @@ A sensor is a read-only entity that reports a value: a temperature, the power a 
   caption="A temperature and a power sensor in tile cards. The trend graphs are made up by the demo from the current state of each sensor."
 />
 
-## Properties
+## 属性
 
 您以 _原生_ 单位设置值，即设备或服务报告的单位。切勿自行设置 `state` 或 `unit_of_measurement`：基类拥有它们，会将原生值转换为用户想要的单位，并对结果进行校验。
 

@@ -12,27 +12,27 @@ sidebarLabel: 风格指南
 ## 语言和语气
 
 - **使用美式英语写作。** Home Assistant 在全世界范围内被使用，许多读者并非以英语为母语。简短的句子和朴实的词语对每个人都有帮助。
-- **与读者对话。** 使用"你"和"你的"，而不是"用户"。
+- **与读者对话。** 使用“你”和“你的”，而不是“用户”。
 - **友好而直接。** 像向一位喜欢技术的朋友解释某件事那样写作。要有信息量且亲切，而不是正式或技术化。
 - **为使用 UI 的用户写作。** 大多数读者从不打开 YAML 文件。先展示 UI 路径，将 YAML 或其他手动配置作为需要时的选项。
-- **让 Home Assistant 显得平易近人。** 避免使用让它听起来脆弱、困难或容易出错的措辞。不要将 YAML 或更复杂的功能称为"高级"，除非产品本身使用了这个词。
+- **让 Home Assistant 显得平易近人。** 避免使用让它听起来脆弱、困难或容易出错的措辞。不要将 YAML 或更复杂的功能称为“高级”，除非产品本身使用了这个词。
 - **诚实。** 不要用营销语言掩盖局限性或复杂性。如实说明某项功能能做什么、不能做什么。
 - **包容。** 保持写作客观，避免性别偏见、两极分化的言论，以及任何基于种族或宗教排斥他人的内容。不遵守此要求的写作可能违反[行为准则](https://github.com/home-assistant/home-assistant.io/blob/current/CODE_OF_CONDUCT.md)。
 
 ## 词语和术语
 
-- **完整书写"Home Assistant"。** 不要写"HA"或"HASS"。
-- **使用"select"（选择），而不是"click"（点击）。** "Click"只适用于鼠标。"Select"也适用于触摸屏、键盘和屏幕阅读器。只有在描述特定的鼠标操作（如右键单击或双击）时才使用"click"。
-- **避免拉丁语缩写。** 不要写"e.g."、"i.e."、"etc."或"etcetera"。改用"like"、"for example"或"such as"。
-- **不要使用"master/slave"。** 使用符合上下文的[替代词](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave)，例如"client/server"、"leader/follower"、"main/replica"或"controller/device"。
-- **匹配名称的官方拼写。** 品牌、服务、协议、集成（integration）和平台的书写方式与其所有者的写法一致。例如，是"Z-Wave"，而不是"Zwave"、"Z-wave"、"Z Wave"或"ZWave"。"GitHub"、"WebSocket"和"Wi-Fi"也是如此。
+- **完整书写“Home Assistant”。** 不要写“HA”或“HASS”。
+- **使用“选择”（select），而不是“点击”（click）。** “Click”只适用于鼠标。“Select”也适用于触摸屏、键盘和屏幕阅读器。只有在描述特定的鼠标操作（如右键单击或双击）时才使用“click”。
+- **避免拉丁语缩写。** 不要写“e.g.”、“i.e.”、“etc.”或“etcetera”。改用“like”、“for example”或“such as”。
+- **不要使用“master/slave”。** 使用符合上下文的[替代词](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave)，例如“client/server”、“leader/follower”、“main/replica”或“controller/device”。
+- **匹配名称的官方拼写。** 品牌、服务、协议、集成（integration）和平台的书写方式与其所有者的写法一致。例如，是“Z-Wave”，而不是“Zwave”、“Z-wave”、“Z Wave”或“ZWave”。“GitHub”、“WebSocket”和“Wi-Fi”也是如此。
 - **一致地使用术语表中的术语。** 当页面使用 Home Assistant 的术语（如实体（entity）、设备（device）或集成）时，请按照[术语表](/glossary/)定义的方式使用。在 [home-assistant.io](https://www.home-assistant.io/) 上，你可以将定义显示为工具提示，参见[术语表工具提示](/writing/reference/liquid/#glossary-tooltips)。
 
 自动检查会强制执行一份很长的品牌和产品拼写列表。该列表位于[`.textlintrc.json`](https://github.com/home-assistant/home-assistant.io/blob/current/.textlintrc.json)中。如果检查标记了一个拼写正确的名称，请在同一个 pull request 中将其添加到那里。有关检查的工作方式，请参阅[自动检查](/writing/reference/checks/)。
 
 ## 标点和语法
 
-- **使用牛津逗号。** 在包含三个或更多项目的列表中，在"and"或"or"之前加逗号："Zigbee, Z-Wave, and Matter"。
+- **使用牛津逗号。** 在包含三个或更多项目的列表中，在“and”或“or”之前加逗号：“Zigbee, Z-Wave, and Matter”。
 - **句子以句号结尾。** 遵循正常的语法规则，包括作为完整句子的列表项。
 - **句号后使用一个空格。** 绝不要两个。
 - **少用破折号。** 太多破折号会产生冗长、纠缠的句子，而且它们是机器生成文本的常见标志。应改为重组句子：
@@ -40,19 +40,19 @@ sidebarLabel: 风格指南
   - 要引出列表或解释？使用冒号。
   - 要插入补充说明？使用括号或逗号。
 
-  如果破折号确实是最佳选择，请遵循 [Merriam-Webster 风格](https://www.merriam-webster.com/grammar/em-dash-en-dash-how-to-use)：em dash（长破折号）前后不加空格。复合词中的连字符，如"built-in"或"Z-Wave"，没有问题。
+  如果破折号确实是最佳选择，请遵循 [Merriam-Webster 风格](https://www.merriam-webster.com/grammar/em-dash-en-dash-how-to-use)：em dash（长破折号）前后不加空格。复合词中的连字符，如“built-in”或“Z-Wave”，没有问题。
 
 ## 格式基础
 
-- **Write each sentence on its own line.** There is no line length limit, so do not wrap lines at a fixed width.
-  Instead, start each sentence of a paragraph on a new line, with a single line break.
-  Markdown still renders the lines as one paragraph.
-  This makes reviews easier: when you change a sentence, the diff shows only that line, and reviewers can comment on or suggest a change to exactly that sentence.
-  This is optional, but recommended, and keeping a whole paragraph on a single line is still fine.
-  When you change a paragraph that is on a single line, split only that paragraph into sentences, and leave the other paragraphs as they are.
-  Do not make edits that only change how paragraphs are split into lines.
-- **Prefer Markdown over HTML.** Use HTML only when Markdown cannot do the job, like for an image with a caption.
-- **Surround blocks with blank lines.** Headings, lists, code blocks, and text boxes all need an empty line before and after them.
+- **每个句子单独一行。** 没有行长度限制，因此不要按固定宽度换行。
+  相反，将段落的每个句子放在新的一行，使用单个换行符。
+  Markdown 仍会将这几行渲染为一个段落。
+  这使审阅更容易：当你更改一个句子时，差异只显示该行，审阅者可以准确评论或建议更改该句子。
+  这是可选的，但推荐这样做，将整个段落保持在一行上也是可以的。
+  当你更改一个单行的段落时，只将该段落拆分为句子，并保持其他段落不变。
+  不要进行仅更改段落换行方式的编辑。
+- **优先使用 Markdown 而不是 HTML。** 仅在 Markdown 无法完成时使用 HTML，例如带标题的图片。
+- **用空行包围块。** 标题、列表、代码块和文本框前后都需要一个空行。
 
 ## 标题
 
@@ -74,10 +74,10 @@ title: "Create an automation"
 ###### Heading level 6
 ```
 
-- **使用句首大写。** 仅首单词和专有名词大写："Create an automation"，而不是"Create An Automation"。Microsoft 有[更多关于大写的内容](https://learn.microsoft.com/en-us/style-guide/capitalization)。
+- **使用句首大写。** 仅首单词和专有名词大写：“Create an automation”，而不是“Create An Automation”。Microsoft 有[更多关于大写的内容](https://learn.microsoft.com/en-us/style-guide/capitalization)。
 - **不要跳级。** 四级标题必须位于三级标题之下。
 - **了解目录中显示的内容。** 在 home-assistant.io 上，只有二级和三级标题会出现在页面旁边的目录中。将读者需要单独查找的任何内容放在二级或三级标题下。
-- **为主题命名。** 像"区域设置"这样的标题能告诉读者接下来的内容。"概述"或"须知"则不能。[组织页面结构](/writing/guides/structure/)针对每种类型的章节提供了建议。
+- **为主题命名。** 像“区域设置”这样的标题能告诉读者接下来的内容。“概述”或“须知”则不能。[组织页面结构](/writing/guides/structure/)针对每种类型的章节提供了建议。
 
 ## 强调
 
@@ -89,7 +89,7 @@ title: "Create an automation"
 
 ## UI 元素和步骤
 
-Write the names of UI elements or displayed UI text, such as a sensor state, in bold, using double asterisks: `**Settings**`. Write them exactly as they appear in the interface.
+使用双星号以粗体书写 UI 元素或显示的 UI 文本（如传感器状态）的名称：`**Settings**`。按照界面中的原样书写。
 
 要描述界面中的路径，请在各步骤之间使用大于号（`>`）。`>` 本身不加粗：
 
@@ -98,9 +98,9 @@ Write the names of UI elements or displayed UI text, such as a sensor state, in 
 2. Select **Restart Home Assistant** > **Quick reload**.
 ```
 
-To write an error message that you see in the UI, don't use bold. Enclose the message in quotation marks.
+要书写你在 UI 中看到的错误消息，不要使用粗体。将消息括在引号中。
 
-When the path starts at a page in Home Assistant, use a [My link](/writing/reference/liquid/#my-links) so the reader can jump straight to that page in their own installation. To point at an icon in the interface, use an [inline icon](/writing/reference/liquid/#inline-icons).
+当路径从 Home Assistant 中的页面开始时，使用 [My 链接](/writing/reference/liquid/#my-links)，以便读者可以直接跳转到他们自己安装中的该页面。要指向界面中的图标，请使用[内联图标](/writing/reference/liquid/#inline-icons)。
 
 ## 文件路径、名称和输入
 
@@ -120,7 +120,7 @@ When the path starts at a page in Home Assistant, use a [My link](/writing/refer
 - **正确编号有序列表。** 写 `1.`、`2.`、`3.`，而不是每行都写 `1.`。
 - **每个项目以大写字母开头**，除非有理由不这样做，例如命令或代码值。
 - **保持标点一致。** 如果至少有一个项目是完整句子，则每个项目都以句号结尾。如果都不是，则完全不加句号。
-- **不要以分号、逗号或"and"、"or"结尾项目。**
+- **不要以分号、逗号或“and”、“or”结尾项目。**
 - **列表前后留一个空行。**
 
 ```markdown
@@ -197,7 +197,7 @@ YAML 示例在缩进、引号等方面有自己的规则。请参阅 [YAML 风�
 
 - **不要使用裸 URL。** 不要将 `https://example.org` 或 `<https://example.org>` 直接粘贴到文本中。为每个链接提供描述性文字。
 - **不要使用联盟或跟踪链接。**
-- **链接文字应描述目标。** 避免使用"这里"或"此链接"。
+- **链接文字应描述目标。** 避免使用“这里”或“此链接”。
 
 ## 缩写和首字母缩略词
 

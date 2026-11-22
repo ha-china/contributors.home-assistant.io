@@ -59,9 +59,9 @@ Marketplace 会查找一个文件，并通过文件名找到它。如果 `hacs.j
 
 用户根据卡片的外观来选择卡片。将截图放在你的 README 中，Marketplace 会在你的仓库页面上显示它。目录会检查仪表盘仓库的 README 中是否包含图片。
 
-To let people try your card before they install it, put a [live demo](/frontend/custom-ui/demo/) of it on your own site, and link to it from your README.
+为了让人们在安装之前试用你的卡片，请在你自己的网站上放置一个[实时演示](/frontend/custom-ui/demo/)，并从你的 README 中链接到它。
 
-## Check it in your repository
+## 在你的仓库中检查它
 
 在每次 push 和 pull request 上运行带有 `category: "plugin"` 的 [HACS action](https://github.com/hacs/action)。参见[验证检查](/marketplace/reference/validation/)。
 

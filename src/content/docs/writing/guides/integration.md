@@ -8,9 +8,9 @@ Home Assistant 中的每个集成（integration）在 [home-assistant.io](https:
 
 ## 开始之前
 
-- Target the `next` branch. Your integration is not released yet, so neither is its page.
-- Open one documentation pull request per core pull request, and list each under **This PR belongs together with** in the other.
-- Add the icon and logo of the integration to the [brands repository](https://github.com/home-assistant/brands), and pair that pull request with the core pull request the same way.
+- 目标分支为 `next`。你的集成尚未发布，因此其页面也尚未发布。
+- 每个核心拉取请求对应一个文档拉取请求，并在另一个请求中列出每个请求，标注为 **This PR belongs together with**。
+- 将集成的图标和徽标添加到 [brands 仓库](https://github.com/home-assistant/brands)，并以相同方式将该拉取请求与核心拉取请求配对。
 
 ## 创建页面
 

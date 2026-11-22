@@ -7,7 +7,7 @@ sidebarGroup: Openings and security
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A valve entity controls the flow of a fluid or gas through a pipe: a water main shutoff, an irrigation valve, or a gas valve. Some valves only open and close, others can be set to a position in between. Inherit from `ValveEntity` in `homeassistant.components.valve`.
+阀门实体（valve entity）控制管道中流体或气体的流动：例如主水管关闭阀、灌溉阀或燃气阀。有些阀门只能打开和关闭，其他阀门可以设置到中间位置。从 `homeassistant.components.valve` 中的 `ValveEntity` 继承。
 
 在开口上打开和关闭的东西，比如百叶窗或车库门，属于[盖板（cover）](/core/entities/cover/)。
 
@@ -36,7 +36,7 @@ A valve entity controls the flow of a fluid or gas through a pipe: a water main 
   caption="A water valve that opens, closes, and sets a position, in a tile card. The card is live: close it, or set how far it opens."
 />
 
-## Properties
+## 属性
 
 阀门实体除了[通用实体属性](/core/entities/entity-class/)之外，还具有以下属性。每个属性都可以通过其 `_attr_` 属性设置，例如 `_attr_is_closed`。
 

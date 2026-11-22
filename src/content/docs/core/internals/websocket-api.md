@@ -267,7 +267,7 @@ Home Assistant 在 `/api/websocket` 提供 WebSocket API。它是主要的 API�
 
 ### 使用目标（target）
 
-These commands take a `target` in the same format as an action call, with `entity_id`, `device_id`, `area_id`, `floor_id`, and `label_id`. The target can have an `exclude` block with the same keys, and the results leave out whatever it matches:
+这些命令接受一个 `target`，其格式与动作调用相同，包含 `entity_id`、`device_id`、`area_id`、`floor_id` 和 `label_id`。目标可以包含一个具有相同键的 `exclude` 块，结果会排除其匹配的内容：
 
 - `extract_from_target`：将目标解析为 `referenced_entities`、`referenced_devices` 和 `referenced_areas`，并在 `missing_devices`、`missing_areas`、`missing_floors` 和 `missing_labels` 下列出不存在的内容。使用 `"expand_group": true` 时，分组会被替换为其成员。默认为 `false`。
 - `get_triggers_for_target`、`get_conditions_for_target` 和 `get_services_for_target`：返回适用于目标中至少一个实体的触发器、条件或动作，例如 `light.turn_on`。这里 `expand_group` 默认为 `true`。

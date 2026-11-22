@@ -7,7 +7,7 @@ sidebarGroup: Lights and climate
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A fan entity controls a fan: its speed, the direction it turns, whether it oscillates, and preset modes like `auto` or `breeze`. Inherit from `FanEntity` in `homeassistant.components.fan`. It builds on the toggle entity, so it has `is_on`, `turn_on`, and `turn_off`.
+风扇实体（fan entity）控制风扇：其转速、转动方向、是否摆动，以及预设模式（如 `auto` 或 `breeze`）。继承自 `homeassistant.components.fan` 中的 `FanEntity`。它基于开关实体（toggle entity）构建，因此具有 `is_on`、`turn_on` 和 `turn_off`。
 
 空调或热泵中的风扇属于[气候实体（climate entity）](/core/entities/climate/)，作为其风扇模式。对于独立风扇、吊扇或空气净化器风扇，请使用风扇实体。
 
@@ -45,7 +45,7 @@ A fan entity controls a fan: its speed, the direction it turns, whether it oscil
   caption="A fan with speeds, presets, oscillation, and direction, in a tile card. The card is live: change the speed or pick a preset."
 />
 
-## Properties
+## 属性
 
 除[通用实体属性（generic entity properties）](/core/entities/entity-class/)之外，风扇实体还具有以下属性。每个属性都可以通过其 `_attr_` 属性进行设置，例如 `_attr_percentage`。
 

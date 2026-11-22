@@ -7,7 +7,7 @@ sidebarGroup: Lights and climate
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A humidifier entity controls a device that adds moisture to the air (a humidifier) or removes it (a dehumidifier), toward a target humidity. Inherit from `HumidifierEntity` in `homeassistant.components.humidifier`. It builds on the toggle entity, so it has `is_on`, `turn_on`, and `turn_off`.
+加湿器实体控制一台向空气中增加湿气（加湿器）或去除湿气（除湿器）的设备，使其达到目标湿度。继承自 `homeassistant.components.humidifier` 中的 `HumidifierEntity`。它基于开关实体构建，因此具有 `is_on`、`turn_on` 和 `turn_off`。
 
 如果设备还能制热或制冷，请改用带有 `TARGET_HUMIDITY` 功能的[气候实体（climate entity）](/core/entities/climate/)。
 
@@ -47,7 +47,7 @@ A humidifier entity controls a device that adds moisture to the air (a humidifie
   caption="A humidifier with a target humidity and modes, in a tile card and a humidifier card. The cards are live: change the target, the mode, or turn it off."
 />
 
-## Properties
+## 属性
 
 加湿器实体在[通用实体属性](/core/entities/entity-class/)之外还具有以下属性。每个属性都可以通过其对应的 `_attr_` 属性来设置，例如 `_attr_target_humidity`。
 

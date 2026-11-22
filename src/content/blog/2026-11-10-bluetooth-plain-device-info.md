@@ -1,6 +1,6 @@
 ---
-title: "Plain device info dicts are deprecated in Bluetooth data updates"
-description: "Passing a plain dict as a device info in PassiveBluetoothDataUpdate will stop working in Home Assistant Core 2027.12. Here is what to change, and how to keep advertisements fast."
+title: "纯设备信息字典在蓝牙数据更新中已弃用"
+description: "在 PassiveBluetoothDataUpdate 中传递纯字典作为设备信息将在 Home Assistant Core 2027.12 中停止工作。以下是需要更改的内容，以及如何保持广播快速。"
 date: 2026-11-10
 authors:
   - epenet
@@ -8,27 +8,27 @@ areas:
   - core
 ---
 
-As of Home Assistant Core 2026.12, passing a plain dict as a device info in `PassiveBluetoothDataUpdate(devices=...)` is deprecated. It will stop working in Home Assistant Core 2027.12. Until then, Home Assistant converts the dict to a `DeviceInfo` and logs a warning.
+自 Home Assistant Core 2026.12 起，在 `PassiveBluetoothDataUpdate(devices=...)` 中传递纯字典作为设备信息已被弃用。它将在 Home Assistant Core 2027.12 中停止工作。在此之前，Home Assistant 会将字典转换为 `DeviceInfo` 并记录警告。
 
-This only concerns integrations that use a [Bluetooth processor coordinator](/core/integrations/bluetooth-data/#processor-coordinators), either `PassiveBluetoothProcessorCoordinator` or `ActiveBluetoothProcessorCoordinator`. If yours doesn't, you can stop reading here.
+这仅涉及使用 [蓝牙处理器协调器](/core/integrations/bluetooth-data/#processor-coordinators) 的集成，即 `PassiveBluetoothProcessorCoordinator` 或 `ActiveBluetoothProcessorCoordinator`。如果您的集成不使用这些，您可以在此停止阅读。
 
-## What you need to change
+## 您需要更改的内容
 
-Look at what your integration passes to `devices`:
+查看您的集成传递给 `devices` 的内容：
 
-| What you pass to `devices` | What to do |
+| 您传递给 `devices` 的内容 | 需要做什么 |
 | --- | --- |
-| The result of `sensor_device_info_to_hass_device_info()`, unmodified | Nothing. It is already cached for you. |
-| A `DeviceInfo` you build once or cache | Nothing. |
-| A new `DeviceInfo` for every advertisement | Nothing is required, but [caching it](#why-caching-matters) is worth doing. |
-| A plain dict | [Replace it](#replacing-a-plain-dict) before Home Assistant Core 2027.12. |
-| The result of `sensor_device_info_to_hass_device_info()`, with fields changed | [Fix this now](#changing-the-result-of-the-helper). It has raised a `TypeError` since Home Assistant Core 2026.11. |
+| `sensor_device_info_to_hass_device_info()` 的结果，未修改 | 无需操作。它已经为您缓存。 |
+| 您构建一次或缓存的 `DeviceInfo` | 无需操作。 |
+| 每次广播都创建新的 `DeviceInfo` | 无需操作，但 [缓存它](#为什么缓存很重要) 值得做。 |
+| 纯字典 | 在 Home Assistant Core 2027.12 之前 [替换它](#替换纯字典)。 |
+| `sensor_device_info_to_hass_device_info()` 的结果，但字段已更改 | [立即修复](#更改辅助函数的结果)。自 Home Assistant Core 2026.11 起，它已引发 `TypeError`。 |
 
-To check whether you are affected by the deprecation, search your logs for `passes a plain dict as a device info in a PassiveBluetoothDataUpdate`. The warning is logged the first time an update with a plain dict arrives, so your device needs to have sent an advertisement. You won't get it for every advertisement.
+要检查您是否受到弃用影响，请在日志中搜索 `passes a plain dict as a device info in a PassiveBluetoothDataUpdate`。警告仅在首次收到包含纯字典的更新时记录，因此您的设备需要发送过广播。您不会在每次广播时都收到警告。
 
-## Replacing a plain dict
+## 替换纯字典
 
-A `DeviceInfo` in place of the dict is all the deprecation asks for. We recommend also caching it, in a function that takes the values that can change:
+用 `DeviceInfo` 替代字典正是弃用所要求的。我们还建议缓存它，在一个接受可能变化值的函数中：
 
 ```python
 from functools import lru_cache
@@ -67,36 +67,36 @@ def sensor_update_to_bluetooth_data_update(
     )
 ```
 
-The conversion quietly drops keys that are not device info fields, but `DeviceInfo(...)` raises a `TypeError` on them. If your dict has any, remove them when you migrate.
+转换会静默丢弃不是设备信息字段的键，但 `DeviceInfo(...)` 会对它们引发 `TypeError`。如果您的字典中有任何此类键，请在迁移时移除它们。
 
-## Why caching matters
+## 为什么缓存很重要
 
-A device can send many advertisements per second, and each one goes through your code and through `PassiveBluetoothDataUpdate.update()`, which compares the device info with the one it has stored. If both are the same object, that check is over immediately. If they aren't, it compares every field, even though almost every advertisement carries the same values.
+设备每秒可能发送许多广播，每个广播都会经过您的代码和 `PassiveBluetoothDataUpdate.update()`，后者会将设备信息与其存储的信息进行比较。如果两者是同一个对象，该检查会立即结束。如果不是，它会比较每个字段，即使几乎每个广播都携带相同的值。
 
-A plain dict is the slow way around this: it becomes a new `DeviceInfo` for every advertisement, so it never passes the quick check.
+纯字典是绕过此问题的慢速方式：每次广播都会生成一个新的 `DeviceInfo`，因此它永远不会通过快速检查。
 
-Here is what that looked like for a thermometer with four entities, measured while [`DeviceInfo` became a dataclass](https://github.com/home-assistant/core/pull/180251). The machine was slow, so compare the ratios and not the absolute numbers:
+以下是一个带有四个实体的温度计在 [`DeviceInfo` 成为数据类](https://github.com/home-assistant/core/pull/180251) 时测量的结果。机器较慢，因此请比较比率而不是绝对数字：
 
-| Device info, per unchanged advertisement | Time for the whole update |
+| 设备信息，每次未更改的广播 | 整个更新的时间 |
 | --- | --- |
-| Cached, using `sensor_device_info_to_hass_device_info()` | About 6.7 µs |
-| A new `DeviceInfo(...)` | About 9.3 µs |
-| A copy of the cached one, with `sw_version` set | About 12.4 µs |
+| 缓存，使用 `sensor_device_info_to_hass_device_info()` | 约 6.7 µs |
+| 新的 `DeviceInfo(...)` | 约 9.3 µs |
+| 缓存副本，设置了 `sw_version` | 约 12.4 µs |
 
-These are microseconds, so a single device won't make a difference you can notice. They do add up, because Home Assistant does this for every device in range. A cached `DeviceInfo` of your own passes the same quick check as the one from the helper.
+这些是微秒，因此单个设备不会产生您能注意到的差异。但它们会累积，因为 Home Assistant 会对范围内的每个设备执行此操作。您自己缓存的 `DeviceInfo` 会通过与辅助函数生成的相同的快速检查。
 
-When you cache a device info yourself, keep these in mind:
+当您自己缓存设备信息时，请记住以下几点：
 
-- The same object is shared by every advertisement with those values, so don't change it after your function returns it. `PassiveBluetoothProcessorEntity` copies the fields it needs, so the framework leaves it alone too.
-- Pass every value that can change as an argument, or a change won't reach the device registry. Arguments of an `lru_cache` function must be hashable. Strings are, but sets aren't, so build `connections` and `identifiers` inside the function.
-- Set `maxsize` above the number of different devices you expect. With more devices than that, entries keep getting evicted, and you pay for rebuilding them.
+- 相同的对象会被具有这些值的每个广播共享，因此不要在您的函数返回后更改它。`PassiveBluetoothProcessorEntity` 会复制它需要的字段，因此框架也不会修改它。
+- 将每个可能变化的值作为参数传递，否则更改不会到达设备注册表。`lru_cache` 函数的参数必须是可哈希的。字符串是可哈希的，但集合不是，因此请在函数内部构建 `connections` 和 `identifiers`。
+- 将 `maxsize` 设置为高于您预期的不同设备数量。如果设备数量超过该值，条目会不断被逐出，您将付出重建它们的代价。
 
 > [!IMPORTANT]
-> `sensor_device_info_to_hass_device_info()` leaves values that are `None` unset. `DeviceInfo(name=None)` does not: it sets the name to `None`, and your entity loses its fallback to the coordinator name. If a value can be `None`, only set the field when it has a value.
+> `sensor_device_info_to_hass_device_info()` 会保留值为 `None` 的字段未设置。`DeviceInfo(name=None)` 则不会：它会将名称设置为 `None`，您的实体将失去对协调器名称的回退。如果某个值可能为 `None`，请仅在该值存在时设置该字段。
 
-## Changing the result of the helper
+## 更改辅助函数的结果
 
-`sensor_device_info_to_hass_device_info()` [returns a shared, read-only device info](/blog/2026/10/13/device-info-class/#modifying-a-converted-sensor-device-info), so setting a field on it raises a `TypeError`. The error message suggests copying it first. That works, but doing it for every advertisement is the slowest option in the table above. Build and cache your own instead, with the extra fields as arguments:
+`sensor_device_info_to_hass_device_info()` [返回一个共享的、只读的设备信息](/blog/2026/10/13/device-info-class/#modifying-a-converted-sensor-device-info)，因此在其上设置字段会引发 `TypeError`。错误消息建议先复制它。这可行，但每次广播都这样做是上表中速度最慢的选项。请改为构建并缓存您自己的，将额外字段作为参数：
 
 ```python
 # Old: raises a TypeError
@@ -131,4 +131,4 @@ device_info = _device_info(
 )
 ```
 
-A new firmware version gives you a different object with a different `sw_version`, so `update()` still sees the device change.
+新的固件版本会为您提供具有不同 `sw_version` 的不同对象，因此 `update()` 仍然会看到设备的变化。

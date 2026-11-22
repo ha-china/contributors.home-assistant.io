@@ -71,7 +71,7 @@ python3 -m script.hassfest
 - **机器人命令。** 该评论列出了只有该集成的负责人才能使用的命令，通过评论 `@home-assistant <command>` 来使用：关闭、重新打开或重命名问题，移除你集成的标签，以及添加或移除一些分类标签如 `needs-more-information`。在拉取请求上，你还可以将其标记为草稿、标记为可审查，或更新其分支。不指定集成的命令只在问题或拉取请求带有单一集成标签时才有效。
 - **任务问题。** 在 Core 和 home-assistant.io 中，只有 GitHub 组织成员和列在 `CODEOWNERS` 中的人才能打开 Task 类型的问题。其他人的任务问题会被自动关闭。
 
-The bot's source is in [OpenHomeFoundation/bots](https://github.com/OpenHomeFoundation/bots). It shows exactly what each command does.
+机器人的源代码在 [OpenHomeFoundation/bots](https://github.com/OpenHomeFoundation/bots) 中。它展示了每个命令的确切作用。
 
 ## 3. 在你的领域承担角色
 

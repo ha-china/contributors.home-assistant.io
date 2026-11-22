@@ -7,7 +7,7 @@ sidebarGroup: Openings and security
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A cover entity controls something that opens and closes over an opening: blinds, shades, curtains, awnings, garage doors, gates, and motorized windows. It can report and set a position, and a tilt for blinds with slats. Inherit from `CoverEntity` in `homeassistant.components.cover`.
+卷帘实体（cover entity）控制遮挡开口并可开合的物体：百叶窗、遮光帘、窗帘、遮阳篷、车库门、大门以及电动窗户。它可以报告和设置位置，以及带有叶片的百叶窗的倾斜角度。继承自 `homeassistant.components.cover` 中的 `CoverEntity`。
 
 卷帘只能用于遮挡开口的物体。控制水或气体流动的设备应使用[阀门（valve）](/core/entities/valve/)。需要上锁和解锁的门应使用[锁（lock）](/core/entities/lock/)。对于其他任何情况，请使用其他实体（entity）类型，例如[数字（number）](/core/entities/number/)，即使在旧集成中使用的是卷帘。
 
@@ -36,7 +36,7 @@ A cover entity controls something that opens and closes over an opening: blinds,
   caption="A cover that opens, closes, stops, and sets a position, in a tile card. The card is live: open, close, or move the blinds."
 />
 
-## Properties
+## 属性
 
 卷帘实体除了具有[通用实体属性](/core/entities/entity-class/)之外，还具有以下属性。每个属性都可以通过其对应的 `_attr_` 属性来设置，例如 `_attr_is_closed`。
 

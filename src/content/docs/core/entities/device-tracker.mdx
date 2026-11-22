@@ -7,7 +7,7 @@ sidebarGroup: Sensors and status
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A device tracker reports presence: whether a phone, a tag, or a car is home, away, or in a [zone](/glossary/zone/). It is read-only. There are three base classes, all imported from `homeassistant.components.device_tracker`, and you pick one by how your device knows where it is:
+设备跟踪器（device tracker）报告存在性：手机、标签或汽车是否在家、外出，或位于某个[地理位置区域（zone）](/glossary/zone/)。它是只读的。有三个基类，均从 `homeassistant.components.device_tracker` 导入，你根据设备如何知道其位置来选择：
 
 - `TrackerEntity`：设备报告其位置，形式为 GPS 坐标或其所在的区域。比如手机应用或汽车。
 - `ScannerEntity`：设备会被本地 IP 网络发现，并通过其 MAC 地址进行识别。比如会列出已连接客户端的路由器。
@@ -52,7 +52,7 @@ A device tracker reports presence: whether a phone, a tag, or a car is home, awa
   caption="A phone tracked by GPS that is home, and a laptop tracked by a router that is away, in tile cards."
 />
 
-## Properties
+## 属性
 
 每个实体（entity）都具有的通用属性（例如 `name` 或 `available`）位于[实体类](/core/entities/entities-class/)中。
 

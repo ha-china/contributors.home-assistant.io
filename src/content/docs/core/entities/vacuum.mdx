@@ -7,7 +7,7 @@ sidebarGroup: Appliances
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A vacuum entity controls a robot vacuum cleaner: start and pause cleaning, send it back to its dock, and, where the robot supports it, set the suction power, find it, or clean specific rooms. Inherit from `StateVacuumEntity` in `homeassistant.components.vacuum`. Robot mops and combined vacuum and mop robots use the same entity.
+吸尘器实体（entity）控制扫地机器人：开始和暂停清扫、将其送回充电座，并且在机器人支持的情况下，设置吸力、寻找它或清扫特定房间。继承自 `homeassistant.components.vacuum` 中的 `StateVacuumEntity`。扫地拖地机器人和扫拖一体机器人使用相同的实体。
 
 关于前端如何展示吸尘器，请参阅[吸尘器更多信息视图](/design/more-info/vacuum/)。
 
@@ -34,7 +34,7 @@ A vacuum entity controls a robot vacuum cleaner: start and pause cleaning, send 
   caption="A robot vacuum that starts, pauses, stops, returns to its dock, and has fan speeds, in a tile card. The card is live: start cleaning, or change the fan speed."
 />
 
-## Properties
+## 属性
 
 吸尘器实体在[通用实体属性](/core/entities/entity-class/)的基础上还具有以下属性。每个属性都可以通过其 `_attr_` 属性来设置，例如 `_attr_activity`。
 

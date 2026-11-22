@@ -88,9 +88,9 @@ self._attr_camera_entity_capabilities = CameraEntityCapabilities(
 
 前端仅在以下所有条件成立时获得双向音频：
 
-- Your entity declares two-way audio.
-- The camera streams over WebRTC, natively or through a WebRTC provider. Two-way audio is not available over HLS.
-- The user turned on the **Two-way audio** preview feature of the camera integration in [Labs](/core/development/labs/). The browser only gives access to the microphone over HTTPS, so in a browser, two-way audio needs Home Assistant to be opened over HTTPS. An app that embeds the frontend can capture the microphone itself instead, with [`webrtc/stream/start`](/frontend/reference/external-bus/#webrtcstreamstart) on the external bus. Two-way audio then also works without HTTPS.
+- 你的实体声明了双向音频。
+- 摄像头通过 WebRTC 流式传输，无论是原生还是通过 WebRTC 提供程序。双向音频在 HLS 上不可用。
+- 用户在 [Labs](/core/development/labs/) 中开启了摄像头集成的**双向音频**预览功能。浏览器只会在 HTTPS 下授予麦克风访问权限，因此在浏览器中，双向音频需要 Home Assistant 通过 HTTPS 打开。嵌入前端的应用可以改为自行捕获麦克风，通过外部总线上的 [`webrtc/stream/start`](/frontend/reference/external-bus/#webrtcstreamstart)。这样双向音频在没有 HTTPS 的情况下也能工作。
 
 ## 方法
 

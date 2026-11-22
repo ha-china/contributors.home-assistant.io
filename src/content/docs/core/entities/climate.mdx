@@ -7,7 +7,7 @@ sidebarGroup: Lights and climate
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A climate entity controls the climate of a space: a thermostat, an air conditioner, a heat pump, or a radiator valve with a target temperature. It can also control humidity and the fan of the unit. Inherit from `ClimateEntity` in `homeassistant.components.climate`.
+气候实体（climate entity）控制空间的气候：恒温器、空调、热泵或带有目标温度的暖气阀。它还可以控制湿度和设备的风扇。继承自 `homeassistant.components.climate` 中的 `ClimateEntity`。
 
 如果设备只进行除湿或加湿，请使用[加湿器](/core/entities/humidifier/)。如果它加热水，请使用[热水器](/core/entities/water-heater/)。独立的风扇则是[风扇](/core/entities/fan/)。
 
@@ -47,7 +47,7 @@ A climate entity controls the climate of a space: a thermostat, an air condition
   caption="A climate entity with a target temperature, HVAC modes, and presets, in a tile card and a thermostat card. The cards are live: change the temperature, the mode, or the preset."
 />
 
-## Properties
+## 属性
 
 气候实体在[通用实体属性](/core/entities/entity-class/)的基础上还具有以下属性。每个属性都可以通过其 `_attr_` 属性来设置，例如 `_attr_hvac_mode`。
 

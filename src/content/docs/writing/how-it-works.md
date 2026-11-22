@@ -31,17 +31,17 @@ sidebarLabel: 运作方式
 
 ## 父拉取请求
 
-A documentation pull request that documents a code change has a _parent_: the pull request with that code change, in a repository like core or frontend. Link them both ways: list the parent under **This PR belongs together with** in your documentation pull request, and your documentation pull request on the same line of the parent.
+记录代码更改的文档拉取请求有一个_父级_：包含该代码更改的拉取请求，位于 core 或 frontend 等仓库中。请双向链接它们：在你的文档拉取请求的 **This PR belongs together with** 下列出父级，并在父级的同一行中列出你的文档拉取请求。
 
 机器人会跟踪这些链接，并为你的文档拉取请求添加标签：
 
-- `has-parent`: your pull request and its parent list each other. A pull request that lists a code pull request is expected to target `next`, and one without is expected to target `current`.
-- `parent-merged`: the parent is merged, so the documentation can follow.
-- `needs-rebase`: the pull request targets the wrong branch. Change the base branch, and rebase if needed.
+- `has-parent`：你的拉取请求及其父级相互列出。列出代码拉取请求的拉取请求预期以 `next` 为目标，而没有列出的则预期以 `current` 为目标。
+- `parent-merged`：父级已合并，因此文档可以跟进。
+- `needs-rebase`：拉取请求的目标分支错误。更改基础分支，并在需要时进行变基（rebase）。
 
 你还可能看到 `awaits-parent`，这表示该拉取请求正在等待其父拉取请求合并。
 
-The bot keeps both pull requests in step, too. When your pull request has a single parent and the parent is closed without being merged, your documentation pull request is closed as well. When the parent is reopened, so is yours.
+机器人也会让两个拉取请求保持同步。当你的拉取请求只有一个父级，且父级在未合并的情况下被关闭时，你的文档拉取请求也会被关闭。当父级被重新打开时，你的也会被重新打开。
 
 因此，`next` 上的文档拉取请求会等待其父拉取请求。这可能需要一段时间，这没有问题：带有 `has-parent` 标签的拉取请求永远不会被标记为过期（stale）。
 

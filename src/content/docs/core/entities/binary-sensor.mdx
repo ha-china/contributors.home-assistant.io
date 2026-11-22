@@ -7,7 +7,7 @@ sidebarGroup: 传感器与状态
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A binary sensor reports one of two states: on or off. What on and off mean depends on its device class: a door is open or closed, a smoke detector sees smoke or is clear, a battery is low or normal. Inherit from `BinarySensorEntity`, imported from `homeassistant.components.binary_sensor`.
+二元传感器（binary sensor）报告两种状态之一：开或关。开和关的含义取决于其设备类（device class）：门是打开或关闭，烟雾探测器检测到烟雾或正常，电池电量低或正常。继承自 `homeassistant.components.binary_sensor` 中的 `BinarySensorEntity`。
 
 当值恰好只有两种状态且用户无法更改时，使用二元传感器。如果用户可以打开和关闭它，请使用[开关（switch）](/core/entities/switch/)。如果它有两种以上的状态，请使用带有 `enum` 设备类的[传感器（sensor）](/core/entities/sensor/)。
 
@@ -42,10 +42,10 @@ A binary sensor reports one of two states: on or off. What on and off mean depen
       grid_options: { columns: 6 },
     },
   ]}
-  caption="A door sensor that is on and a motion sensor that is off, in tile cards. The device class turns on and off into Open and Clear."
+  caption="一个开启的门传感器和一个关闭的移动传感器，显示在磁贴卡片中。设备类将开和关转换为打开和正常。"
 />
 
-## Properties
+## 属性
 
 | 名称 | 类型 | 默认值 | 描述 |
 | --- | --- | --- | --- |

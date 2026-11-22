@@ -7,7 +7,7 @@ sidebarGroup: Sensors and status
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-A weather entity reports the current weather at a location: the condition, the temperature, and readings like humidity and wind. It can also serve forecasts. Inherit from `WeatherEntity`, imported from `homeassistant.components.weather`. If you use a [coordinator](/glossary/coordinator/), inherit from `CoordinatorWeatherEntity` or `SingleCoordinatorWeatherEntity` instead (see [using coordinators](#using-coordinators)).
+天气实体（weather entity）报告某个位置的当前天气状况：天气状况、温度，以及湿度和风速等读数。它还可以提供天气预报。继承自 `WeatherEntity`，从 `homeassistant.components.weather` 导入。如果您使用[协调器](/glossary/coordinator/)，请改为继承自 `CoordinatorWeatherEntity` 或 `SingleCoordinatorWeatherEntity`（参见[使用协调器](#using-coordinators)）。
 
 要了解前端如何显示天气实体，请参阅[天气更多信息视图](/design/more-info/weather/)。
 
@@ -42,7 +42,7 @@ A weather entity reports the current weather at a location: the condition, the t
   caption="A weather entity with daily and hourly forecasts, in a tile card and a weather forecast card. The forecasts are made up by the demo from the current condition and temperature."
 />
 
-## Properties
+## 属性
 
 将每个值设置为其_原生_单位，并告知 Home Assistant 该单位是什么。基类会将这些值转换为用户单位系统对应的单位，或用户在实体设置中选择的单位。
 

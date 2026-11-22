@@ -7,7 +7,7 @@ sidebarGroup: Openings and security
 
 import EmbedDemo from "../../../../components/docs/EmbedDemo.astro";
 
-An alarm control panel entity controls a security system: it arms the system in one or more modes, disarms it, and can trigger the alarm. It can ask for a code. Inherit from `AlarmControlPanelEntity` in `homeassistant.components.alarm_control_panel`.
+报警控制面板实体控制一个安防系统：它可以以一种或多种模式布防系统、撤防系统，并可以触发报警。它可以要求输入密码。继承自 `homeassistant.components.alarm_control_panel` 中的 `AlarmControlPanelEntity`。
 
 系统的传感器，如门磁和移动探测器，是[二进制传感器（binary sensor）](/core/entities/binary-sensor/)。属于系统一部分的警报器（siren）则是一个[警报器（siren）](/core/entities/siren/)。
 
@@ -36,10 +36,10 @@ An alarm control panel entity controls a security system: it arms the system in 
       entity: "alarm_control_panel.home_alarm",
     },
   ]}
-  caption="An alarm control panel that arms home, away, and night, in a tile card and an alarm panel card. The cards are live: arm or disarm it in either one."
+  caption="一个报警控制面板，可在在家、离家、夜间模式下布防，显示在磁贴卡片和报警面板卡片中。这些卡片是实时的：您可以在任一卡片中布防或撤防。"
 />
 
-## Properties
+## 属性
 
 报警控制面板实体在[通用实体属性](/core/entities/entity-class/)的基础上还具有以下属性。每个属性都可以通过其对应的 `_attr_` 特性进行设置，例如 `_attr_alarm_state`。
 

@@ -1,6 +1,6 @@
 ---
-title: "Targets can exclude entities"
-description: "A target can now leave out entities, devices, areas, floors, and labels with an exclude block. What that means for integrations that resolve targets themselves."
+title: "目标现在可以排除实体"
+description: "目标现在可以通过排除块来排除实体、设备、区域、楼层和标签。这对自行解析目标的集成意味着什么。"
 date: 2026-10-21
 authors:
   - Jan-Philipp Benecke
@@ -8,9 +8,9 @@ areas:
   - core
 ---
 
-Targeting an area, floor, or label is handy, until you want all of it except one or two things. Until now, the only way out was listing every entity separately, which loses the point of targeting the area in the first place.
+针对区域、楼层或标签进行定位很方便，直到你想要其中的全部内容，但除了一两个东西。到目前为止，唯一的办法是逐一列出每个实体，这失去了首先针对区域的意义。
 
-So a target can now have an `exclude` block. It uses the same keys as the target itself, and Home Assistant removes whatever it matches from the resolved target:
+因此，目标现在可以有一个 `exclude` 块。它使用与目标本身相同的键，Home Assistant 会从解析后的目标中移除它匹配到的任何内容：
 
 ```yaml
 action: light.turn_on
@@ -21,22 +21,22 @@ target:
     label_id: night_light
 ```
 
-Exclusions are resolved like the target, so they stay up to date. A light added to the kitchen later is left out as well. An exclusion applies to the whole target, including entities listed in the target directly. An `exclude` block on its own is not a valid target, and it can't be nested or use `all` or `none`.
+排除项与目标一样被解析，因此它们会保持最新。之后添加到厨房的灯也会被排除。排除项适用于整个目标，包括直接在目标中列出的实体。单独的 `exclude` 块不是有效的目标，它不能嵌套，也不能使用 `all` 或 `none`。
 
-## Nothing to do for most integrations
+## 对大多数集成无需任何操作
 
-If Home Assistant resolves the target for you, your integration supports exclusions already:
+如果 Home Assistant 为您解析目标，您的集成已经支持排除：
 
-- Entity actions registered with `async_register_platform_entity_service` or `async_register_entity_service`, including `entity_id: all`
-- Triggers and conditions built on the entity helpers, like `make_entity_target_state_trigger`
-- Code that uses `service.async_extract_entities`, `service.async_extract_entity_ids`, or `target.async_extract_referenced_entity_ids`
-- Triggers that follow a target with `target.async_track_target_selector_state_change_event` or `TargetEntityChangeTracker`
+- 使用 `async_register_platform_entity_service` 或 `async_register_entity_service` 注册的实体操作，包括 `entity_id: all`
+- 基于实体辅助元素构建的触发器和条件，例如 `make_entity_target_state_trigger`
+- 使用 `service.async_extract_entities`、`service.async_extract_entity_ids` 或 `target.async_extract_referenced_entity_ids` 的代码
+- 使用 `target.async_track_target_selector_state_change_event` 或 `TargetEntityChangeTracker` 跟踪目标的触发器
 
-## If you resolve targets yourself
+## 如果您自行解析目标
 
-`cv.TARGET_FIELDS`, `cv.ENTITY_SERVICE_FIELDS`, and `cv.TARGET_SERVICE_FIELDS` now accept `exclude`, and so does every schema built from them, like `cv.make_entity_service_schema`. If your code reads `entity_id`, `device_id`, or `area_id` from the target and resolves them on its own, it now accepts an `exclude` block and silently ignores it. That is worse than an error: the action or trigger then acts on exactly the entities the user asked to leave out.
+`cv.TARGET_FIELDS`、`cv.ENTITY_SERVICE_FIELDS` 和 `cv.TARGET_SERVICE_FIELDS` 现在接受 `exclude`，并且由它们构建的每个模式（如 `cv.make_entity_service_schema`）也接受。如果您的代码从目标中读取 `entity_id`、`device_id` 或 `area_id` 并自行解析它们，它现在会接受 `exclude` 块并静默忽略它。这比错误更糟糕：操作或触发器随后会作用于用户要求排除的实体。
 
-Resolve the target with the target helpers instead. They apply the exclude block for you:
+请改用目标辅助元素来解析目标。它们会为您应用排除块：
 
 ```python
 from homeassistant.helpers import target as target_helpers
@@ -48,13 +48,13 @@ selected = target_helpers.async_extract_referenced_entity_ids(
 entity_ids = selected.referenced | selected.indirectly_referenced
 ```
 
-If your integration can't support exclusions, build its schema from `cv.TARGET_ID_FIELDS`. It has the target keys without `exclude`, so an exclude block fails validation instead of being ignored.
+如果您的集成无法支持排除，请从 `cv.TARGET_ID_FIELDS` 构建其模式。它包含没有 `exclude` 的目标键，因此排除块会验证失败，而不是被忽略。
 
-## New public API
+## 新的公共 API
 
-- `TargetSelection.exclude`: the exclude block as a `TargetSelection`, or `None`. `TargetSelection.has_any_target` doesn't look at it, so a target with only an exclude block targets nothing.
-- `target.async_extract_excluded_entity_ids(hass, target_selection)`: the entity IDs the exclude block matches.
-- `cv.TARGET_ID_KEYS`: the keys that select what a target refers to. Use them instead of the keys of `cv.ENTITY_SERVICE_FIELDS` when you require at least one target, like `probatio.AtLeastOne(*cv.TARGET_ID_KEYS)`. That way a target with only an exclude block doesn't pass.
-- `cv.TARGET_ID_FIELDS`: the target fields without `exclude`.
+- `TargetSelection.exclude`：作为 `TargetSelection` 的排除块，或 `None`。`TargetSelection.has_any_target` 不查看它，因此只有排除块的目标不会指向任何内容。
+- `target.async_extract_excluded_entity_ids(hass, target_selection)`：排除块匹配的实体 ID。
+- `cv.TARGET_ID_KEYS`：选择目标所指内容的键。当您要求至少一个目标时，请使用它们而不是 `cv.ENTITY_SERVICE_FIELDS` 的键，例如 `probatio.AtLeastOne(*cv.TARGET_ID_KEYS)`。这样，只有排除块的目标就不会通过。
+- `cv.TARGET_ID_FIELDS`：没有 `exclude` 的目标字段。
 
-The details are in [entity actions](/core/integrations/actions/#entity-actions) and [triggers and conditions](/core/integrations/triggers-and-conditions/#targets-and-exclusions). The background is in [core pull request #187290](https://github.com/home-assistant/core/pull/187290).
+详细信息请参阅 [实体操作](/core/integrations/actions/#entity-actions) 和 [触发器与条件](/core/integrations/triggers-and-conditions/#targets-and-exclusions)。背景信息请参阅 [核心拉取请求 #187290](https://github.com/home-assistant/core/pull/187290)。

@@ -1,6 +1,6 @@
 ---
-title: "Frontend component updates in 2026.12"
-description: ha-list, ha-list-item, ha-check-list-item and ha-radio-list-item were removed, so the frontend no longer uses Material Web Components.
+title: "2026.12 前端组件更新"
+description: ha-list、ha-list-item、ha-check-list-item 和 ha-radio-list-item 已被移除，因此前端不再使用 Material Web Components。
 date: 2026-11-25
 authors:
   - Wendelin Peleska
@@ -8,19 +8,19 @@ areas:
   - frontend
 ---
 
-## Component updates
+## 组件更新
 
-### Removed ha-list, ha-list-item, ha-check-list-item and ha-radio-list-item
+### 移除了 ha-list、ha-list-item、ha-check-list-item 和 ha-radio-list-item
 
-`ha-list`, `ha-list-item`, `ha-check-list-item` and `ha-radio-list-item` were removed. They were the last components built on Material Web Components, so the frontend no longer includes `@material/mwc-list` or any other `mwc-*` element.
+`ha-list`、`ha-list-item`、`ha-check-list-item` 和 `ha-radio-list-item` 已被移除。它们是最后一批基于 Material Web Components 构建的组件，因此前端不再包含 `@material/mwc-list` 或任何其他 `mwc-*` 元素。
 
-Use the list family that also replaced `ha-md-list` in 2026.11. Pick the container by what the list means, and the row by what it does:
+请使用在 2026.11 中同样取代了 `ha-md-list` 的列表系列。根据列表的含义选择容器，根据行的功能选择行：
 
-- `ha-list-base` with `ha-list-item-base` for rows that only show information, or `ha-list-item-button` for clickable rows. With an `href`, `ha-list-item-button` renders a link.
-- `ha-list-nav` for a list of links. It wraps the list in a `<nav>` landmark.
-- `ha-list-selectable` with `ha-list-item-option` for lists people pick from. Set `multi` to allow more than one option, and `appearance="checkbox"` on the options instead of `ha-check-list-item`. Without `multi`, it replaces `ha-radio-list-item`: the picked option is highlighted, there is no radio button.
+- `ha-list-base` 搭配 `ha-list-item-base` 用于仅显示信息的行，或搭配 `ha-list-item-button` 用于可点击的行。当带有 `href` 时，`ha-list-item-button` 会渲染为链接。
+- `ha-list-nav` 用于链接列表。它会将列表包裹在 `<nav>` 地标中。
+- `ha-list-selectable` 搭配 `ha-list-item-option` 用于供人们选择的列表。设置 `multi` 以允许多选，并在选项上使用 `appearance="checkbox"` 代替 `ha-check-list-item`。如果不设置 `multi`，它取代 `ha-radio-list-item`：选中的选项会高亮显示，没有单选按钮。
 
-The slots and attributes of a row map like this:
+行的插槽（slot）和属性映射如下：
 
 ```text
 graphic="…" + slot="graphic"  →  slot="start"
@@ -53,12 +53,12 @@ noninteractive                →  ha-list-item-base
 +</ha-list-base>
 ```
 
-The events changed too. A clickable row fires a regular `click` instead of `request-selected`. `ha-list-selectable` fires `ha-list-item-selected` and `ha-list-item-deselected` instead of `action` and `selected`:
+事件也发生了变化。可点击的行触发常规的 `click` 事件，而不是 `request-selected`。`ha-list-selectable` 触发 `ha-list-item-selected` 和 `ha-list-item-deselected` 事件，而不是 `action` 和 `selected`：
 
-- The index is now `detail` itself, a number, instead of `detail.index`.
-- Without `multi`, `selected` had the index of the picked row. Listen to `ha-list-item-selected` instead.
-- With `multi`, `selected` had the set of all selected indexes. The new events name one option at a time, so keep track of the selection yourself, or read the `selected` property of the options.
+- 索引现在是 `detail` 本身，是一个数字，而不是 `detail.index`。
+- 在不设置 `multi` 的情况下，`selected` 包含选中行的索引。请监听 `ha-list-item-selected` 事件。
+- 在设置 `multi` 的情况下，`selected` 包含所有选中索引的集合。新事件一次只命名一个选项，因此您需要自行跟踪选择状态，或读取选项的 `selected` 属性。
 
-The `--mdc-list-*` CSS properties no longer have any effect; use `--ha-list-padding`, `--ha-list-gap` and the `--ha-row-item-*` properties instead. The new lists have no padding of their own, so set `--ha-list-padding: 8px 0` to keep the spacing of the old list.
+`--mdc-list-*` CSS 属性不再有任何效果；请改用 `--ha-list-padding`、`--ha-list-gap` 和 `--ha-row-item-*` 属性。新列表本身没有内边距，因此请设置 `--ha-list-padding: 8px 0` 以保持旧列表的间距。
 
-See [the new list family](/design/components/list/#in-code) on the list page for all attributes, slots, and events.
+有关所有属性、插槽和事件，请参阅列表页面上的[新列表系列](/design/components/list/#in-code)。

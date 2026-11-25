@@ -89,19 +89,19 @@ Marketplace 在安装之前进行检查，并在写入文件之后再次检查�
 
 | 检查 | 类型 | 失败原因 |
 | --- | --- | --- |
-| `hacs.json` in the root | All | A repository without it can not be installed or updated. |
-| Not archived, not removed | All | An archived repository can not be installed, and neither can most repositories the catalog removed. |
-| Files in the right place | All | No files where the [repository structure](/marketplace/reference/repository-structure/) says they go. |
-| Minimum Home Assistant version | All with releases | The release needs a newer Home Assistant than the user has. The user is offered older versions instead. |
-| Domain | Integration | A `domain` in `manifest.json` with other characters than lowercase letters, numbers, underscores, and hyphens. |
-| Owner of the domain | Integration | Another installed repository has the same domain. |
-| Replaces a built-in integration | Integration | The domain is one of core, and the user did not confirm. |
-| Loadable manifest | Integration | After writing: the `manifest.json` has another domain, or no `version` the loader accepts. |
-| Owner of the folder | Dashboard, theme | Another installed repository uses the same folder. |
-| Module present | Dashboard | After writing: the JavaScript file is missing. |
-| ZIP file of the module | Dashboard | A release asset named like the JavaScript file, ending in `.zip`, is damaged, too large, has a file outside the folder of the card, or has no JavaScript file in its root or in a single folder at its root. The Marketplace installs the other assets of the release instead, and fails when the JavaScript file is not one of them. |
-| Theme YAML | Theme | After writing: a YAML file with tags, or one that does not pass the validation of themes. |
-| Template file | Template | `filename` is not a `.jinja` file in the root, `zip_release` is set, or another repository has a file with that name. After writing: the file is not UTF-8, or larger than 5 MiB. |
-| Download size | All | A download, or a ZIP file unpacked, of more than 100 MiB, or more than 50,000 files. |
+| 根目录中的 `hacs.json` | 全部 | 没有它的仓库无法安装或更新。 |
+| 未归档、未移除 | 全部 | 已归档的仓库无法安装，目录移除的大多数仓库也无法安装。 |
+| 文件位于正确位置 | 全部 | 没有文件位于[仓库结构](/marketplace/reference/repository-structure/)规定的位置。 |
+| 最低 Home Assistant 版本 | 全部（有发布版本） | 该发布版本需要比用户拥有的更新版本的 Home Assistant。用户会被提供较旧的版本。 |
+| 域名 | 集成 | `manifest.json` 中的 `domain` 包含小写字母、数字、下划线和连字符以外的字符。 |
+| 域名的所有者 | 集成 | 另一个已安装的仓库具有相同的域名。 |
+| 替换内置集成 | 集成 | 该域名属于核心，且用户未确认。 |
+| 可加载的清单 | 集成 | 写入后：`manifest.json` 具有另一个域名，或没有加载器接受的 `version`。 |
+| 文件夹的所有者 | 仪表盘、主题 | 另一个已安装的仓库使用相同的文件夹。 |
+| 模块存在 | 仪表盘 | 写入后：JavaScript 文件缺失。 |
+| 模块的 ZIP 文件 | 仪表盘 | 名为 JavaScript 文件、以 `.zip` 结尾的发布资产已损坏、过大、在卡片文件夹之外有文件，或在其根目录或根目录的单个文件夹中没有 JavaScript 文件。Marketplace 会安装发布版本的其他资产，并在 JavaScript 文件不在其中时失败。 |
+| 主题 YAML | 主题 | 写入后：带有标签的 YAML 文件，或未通过主题校验的文件。 |
+| 模板文件 | 模板 | `filename` 不是根目录中的 `.jinja` 文件，设置了 `zip_release`，或另一个仓库具有该名称的文件。写入后：文件不是 UTF-8 编码，或大于 5 MiB。 |
+| 下载大小 | 全部 | 下载或解压后的 ZIP 文件超过 100 MiB，或超过 50,000 个文件。 |
 
 这些检查位于核心的 `marketplace` 集成中：[`homeassistant/components/marketplace/repositories/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/marketplace/repositories)。

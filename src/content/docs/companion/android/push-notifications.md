@@ -1,8 +1,8 @@
 ---
 title: Android 上的推送通知
 description: 设置你自己的 Firebase 项目和推送服务，适用于开发通过 Firebase Cloud Messaging 传递的通知时。
-sidebarLabel: Push notifications
-sidebarGroup: Set up
+sidebarLabel: 推送通知
+sidebarGroup: 设置
 order: 2
 ---
 

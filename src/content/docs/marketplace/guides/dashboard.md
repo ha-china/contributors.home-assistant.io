@@ -32,7 +32,7 @@ Marketplace 会查找一个文件，并通过文件名找到它。如果 `hacs.j
 
 它会首先在最新 GitHub release 的资产中查找。如果没有包含这些文件的 release，它会在仓库根目录中查找，然后在 `dist` 文件夹中查找。如果 `hacs.json` 中将 `content_in_root` 设置为 `true`，则只会在根目录中查找。
 
-If your card needs other files, like images or translations, put them in `dist` together with the card, attach them all to the release, or [ship it as a ZIP file](#ship-it-as-a-zip-file).
+如果你的卡片需要其他文件，如图片或翻译，请将它们与卡片一起放在 `dist` 中，将它们全部附加到 release 中，或者[将其作为 ZIP 文件发布](#ship-it-as-a-zip-file)。
 
 使用其他名称的文件需要在 `hacs.json` 中指定 `filename`：
 
@@ -51,13 +51,13 @@ If your card needs other files, like images or translations, put them in `dist` 
 
 单个打包文件最容易安装。将你的依赖项（例如 Lit）打包进去：前端不会共享它自己的副本，正如[使用哪些工具](/frontend/custom-ui/#which-tools-to-use)中所解释的。
 
-## Ship it as a ZIP file
+## 将其作为 ZIP 文件发布
 
-When your card is more than one file, like a build that splits its code into chunks that load when they are needed, ship the whole card as one ZIP file attached to your release. Release assets can not have folders, a ZIP file can, and users download one file instead of many.
+当你的卡片包含多个文件时，例如构建时将代码拆分为按需加载的块，请将整个卡片作为一个 ZIP 文件附加到你的 release 中。Release 资产不能包含文件夹，但 ZIP 文件可以，而且用户下载一个文件而不是多个文件。
 
-Give the ZIP file the same name as your JavaScript file, with `.zip` instead of `.js`. Without `filename` in `hacs.json`, that is a [name made from your repository](#name-your-file-after-your-repository): for the repository `awesome-card`, that is `awesome-card.zip`. With `filename`, it is that name, so `"filename": "my-card.js"` gives `my-card.zip`. Nothing else changes in `hacs.json`: `filename` still names the JavaScript file, not the ZIP file.
+给 ZIP 文件起一个与你的 JavaScript 文件相同的名称，只是将 `.js` 改为 `.zip`。如果 `hacs.json` 中没有 `filename`，那就是[根据你的仓库名称生成的名称](#以仓库名称命名你的文件)：对于仓库 `awesome-card`，即 `awesome-card.zip`。如果有 `filename`，则使用该名称，因此 `"filename": "my-card.js"` 对应 `my-card.zip`。`hacs.json` 中其他内容不变：`filename` 仍然指定 JavaScript 文件，而不是 ZIP 文件。
 
-Put the JavaScript file in the root of the ZIP file, or in a single folder at its root, like `dist`. The Marketplace extracts that folder, with everything in it, into the folder of your card, and adds the JavaScript file as the resource:
+将 JavaScript 文件放在 ZIP 文件的根目录中，或放在其根目录下的单个文件夹（如 `dist`）中。Marketplace 会将该文件夹及其中的所有内容解压到你的卡片文件夹中，并将 JavaScript 文件添加为资源：
 
 ```text title="awesome-card.zip"
 awesome-card.js
@@ -67,14 +67,14 @@ chunks/
     en-d4e5f6.js
 ```
 
-- When your release has the JavaScript file and the ZIP file, the Marketplace installs the ZIP file.
-- When it can not use the ZIP file, like when the ZIP file is damaged, too large, or has no JavaScript file where it looks, it installs the other assets of the release instead, as long as your JavaScript file is one of them. Without it, the install fails and the installed version stays.
-- The ZIP file only comes from a release. Installed from your default branch or a commit, your card comes from the repository, as described above.
-- With `content_in_root` set to `true` in `hacs.json`, the Marketplace does not look at release assets, so it does not use the ZIP file either. Remove the setting, or set it to `false`.
+- 当你的 release 同时包含 JavaScript 文件和 ZIP 文件时，Marketplace 会安装 ZIP 文件。
+- 当它无法使用 ZIP 文件时，例如 ZIP 文件损坏、过大，或在预期位置找不到 JavaScript 文件，它会安装 release 的其他资产，只要你的 JavaScript 文件是其中之一。如果没有，安装将失败，已安装的版本保持不变。
+- ZIP 文件仅来自 release。从你的默认分支或提交安装时，你的卡片来自仓库，如上所述。
+- 当 `hacs.json` 中将 `content_in_root` 设置为 `true` 时，Marketplace 不会查看 release 资产，因此也不会使用 ZIP 文件。请移除该设置，或将其设置为 `false`。
 
-Home Assistant 2026.12 is the first version that installs the ZIP file. Earlier versions only look for the JavaScript file. To support them, attach a single-file build as the JavaScript file next to the ZIP file. If your release only has the ZIP file, set `"homeassistant": "2026.12.0"` in `hacs.json`, so earlier versions are not offered it. See [require a Home Assistant version](/marketplace/guides/releases/#require-a-home-assistant-version).
+Home Assistant 2026.12 是第一个安装 ZIP 文件的版本。更早的版本只查找 JavaScript 文件。为了支持它们，请在 ZIP 文件旁边附加一个单文件构建作为 JavaScript 文件。如果你的 release 只有 ZIP 文件，请在 `hacs.json` 中设置 `"homeassistant": "2026.12.0"`，这样更早的版本就不会被提供该版本。参见[要求 Home Assistant 版本](/marketplace/guides/releases/#require-a-home-assistant-version)。
 
-## Two cards can not share a folder
+## 两个卡片不能共享一个文件夹
 
 文件夹以仓库名称命名，不包含所有者。当用户已经安装了来自 `someone/awesome-card` 的卡片时，Marketplace 会拒绝在其旁边安装 `someone-else/awesome-card`。
 

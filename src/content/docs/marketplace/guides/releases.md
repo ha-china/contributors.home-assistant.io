@@ -60,9 +60,9 @@ Marketplace 不会向使用较旧 Home Assistant 的用户提供该 release。�
 
 Marketplace 会下载该资源并将其解压到集成文件夹中。当你在发布工作流中构建或生成文件时，可以使用此方式。HACS 仅对集成支持此功能，Marketplace 拒绝对模板使用此方式。
 
-Dashboard cards do not use `zip_release`. They ship a ZIP file with the same name as their JavaScript file, which is usually named after the repository: for `awesome-card`, that is `awesome-card.zip`. See [ship it as a ZIP file](/marketplace/guides/dashboard/#ship-it-as-a-zip-file).
+仪表盘卡片不使用 `zip_release`。它们随附一个与其 JavaScript 文件同名的 ZIP 文件，通常以仓库命名：对于 `awesome-card`，即 `awesome-card.zip`。请参阅[以 ZIP 文件形式发布](/marketplace/guides/dashboard/#ship-it-as-a-zip-file)。
 
-## Older versions
+## 旧版本
 
 用户可以从 Marketplace 中你仓库的菜单安装最新版本以外的其他版本。他们会从你的 release 中选择，因此请保留旧的 release。
 

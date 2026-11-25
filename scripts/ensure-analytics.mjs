@@ -86,4 +86,35 @@ if (layout !== original) {
   changed = true;
 }
 
+// 5. astro.config.ts must define SITE_URL/BASE_PATH for the mirror deploy.
+//    An upstream merge can drop the declarations while keeping our
+//    `site: SITE_URL` lines, which breaks `pnpm build` with
+//    "SITE_URL is not defined". Restore them when missing.
+const CONFIG = "astro.config.ts";
+let config = await readFile(CONFIG, "utf8");
+if (!config.includes("const SITE_URL")) {
+  const anchor = "export default defineConfig({";
+  if (!config.includes(anchor)) {
+    console.error(`Could not find ${anchor} in ${CONFIG}, skipping`);
+    process.exit(1);
+  }
+  const declarations =
+    "// Chinese mirror deployment: served from hasscn.top/contributors. Both\n" +
+    "// overridable so the upstream root deploy keeps working from this branch.\n" +
+    'const SITE_URL = process.env.SITE_URL || "https://www.hasscn.top";\n' +
+    'const BASE_PATH = process.env.SITE_BASE_PATH || "/contributors";\n\n';
+  config = config.replace(anchor, `${declarations}${anchor}`);
+  console.log(`restored SITE_URL/BASE_PATH declarations in ${CONFIG}`);
+  changed = true;
+}
+if (!config.includes("site: SITE_URL")) {
+  config = config.replace(/site: "[^"]*"/, "site: SITE_URL,\n  base: BASE_PATH");
+  console.log(`restored site/base mirror values in ${CONFIG}`);
+  changed = true;
+}
+if (config !== (await readFile(CONFIG, "utf8"))) {
+  await writeFile(CONFIG, config, "utf8");
+  changed = true;
+}
+
 console.log(changed ? "analytics include re-applied" : "analytics include already in place");

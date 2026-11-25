@@ -11,6 +11,11 @@ import { headingAnchors } from "./src/lib/heading-anchors.ts";
 import { redirectFragments } from "./src/lib/redirect-fragments.ts";
 import { sourcePaths, sourcePathsWatch } from "./src/lib/source-paths.ts";
 
+// Chinese mirror deployment: served from hasscn.top/contributors. Both
+// overridable so the upstream root deploy keeps working from this branch.
+const SITE_URL = process.env.SITE_URL || "https://www.hasscn.top";
+const BASE_PATH = process.env.SITE_BASE_PATH || "/contributors";
+
 export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,

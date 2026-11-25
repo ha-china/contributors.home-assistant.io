@@ -112,6 +112,29 @@ if (!config.includes("site: SITE_URL")) {
   console.log(`restored site/base mirror values in ${CONFIG}`);
   changed = true;
 }
+// The markdown plugin that prefixes content links for the /contributors base
+// can likewise be dropped from the imports or the hastPlugins array by a merge.
+const BASEPATH_IMPORT = 'import { basePath } from "./src/lib/base-path.mjs";';
+if (!config.includes('from "./src/lib/base-path.mjs"')) {
+  const anchor = /^import \{ headingAnchors \} from ".*";$/m;
+  if (!anchor.test(config)) {
+    console.error("Could not find the headingAnchors import in astro.config.ts, skipping");
+    process.exit(1);
+  }
+  config = config.replace(anchor, (m) => `${m}\n${BASEPATH_IMPORT}`);
+  console.log("restored the basePath import in astro.config.ts");
+  changed = true;
+}
+if (!config.includes("basePath(),")) {
+  const anchor = "        headingAnchors(),";
+  if (!config.includes(anchor)) {
+    console.error("Could not find the headingAnchors() plugin call in astro.config.ts, skipping");
+    process.exit(1);
+  }
+  config = config.replace(anchor, `${anchor}\n        basePath(),`);
+  console.log("restored the basePath() plugin in astro.config.ts");
+  changed = true;
+}
 if (config !== (await readFile(CONFIG, "utf8"))) {
   await writeFile(CONFIG, config, "utf8");
   changed = true;

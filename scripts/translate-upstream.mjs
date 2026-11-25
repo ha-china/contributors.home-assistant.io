@@ -255,6 +255,17 @@ async function translateFile(path) {
     }
   }
 
+  // The glossary `term.related` lists reference other pages by SLUG
+  // (validated at build time), but models keep translating the values.
+  // Restore every `related:` block verbatim from the source file.
+  const relatedBlock = /(?:^|\n)(\s*related:\n(?:\s+-[^\n]*\n)+)/;
+  const sourceRelated = original.match(relatedBlock);
+  if (sourceRelated) {
+    translated = translated.replace(relatedBlock, (m) =>
+      m.startsWith("\n") ? `\n${sourceRelated[1]}` : sourceRelated[1],
+    );
+  }
+
   await writeFile(path, `${translated.replace(/\s+$/, "")}\n`, "utf8");
   return { path, status: "translated" };
 }

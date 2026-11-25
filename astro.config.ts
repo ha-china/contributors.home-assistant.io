@@ -8,6 +8,7 @@ import { codeSymbols, codeSymbolsWatch } from "./src/lib/code-symbols.ts";
 import { discordLinks, discordLinksWatch } from "./src/lib/discord-links.ts";
 import { glossaryAutolink, glossaryAutolinkWatch } from "./src/lib/glossary-autolink.ts";
 import { headingAnchors } from "./src/lib/heading-anchors.ts";
+import { basePath } from "./src/lib/base-path.mjs";
 import { redirectFragments } from "./src/lib/redirect-fragments.ts";
 import { sourcePaths, sourcePathsWatch } from "./src/lib/source-paths.ts";
 

@@ -10,9 +10,9 @@ term:
     - "strategy"
     - "ll-strategy-*"
   related:
-    - "仪表盘"
-    - "视图"
-    - "区域"
+    - "dashboard"
+    - "view"
+    - "area"
   autolink:
     - "仪表盘策略"
     - "仪表盘策略"

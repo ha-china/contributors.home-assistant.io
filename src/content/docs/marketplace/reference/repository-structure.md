@@ -45,10 +45,10 @@ hacs.json
 README.md
 ```
 
-- 一个以仓库命名的 JavaScript 文件：`<name>.js`、`<name>.umd.js` 或 `<name>-bundle.js`。对于 `<name>.js`，还会尝试去掉名称中的 `lovelace-` 再匹配。其他任何名称都需在 `hacs.json` 的 `filename` 中指定。
-- 该文件附加在你最新的 release 上，或位于根目录，或位于 `dist` 中。
-- 模块所需的文件（如图片）与它一起放在 `dist` 中，或附加在 release 上。
-- 安装到 `www/community/<repository name>/`，并作为仪表盘资源添加。
+- A JavaScript file named after the repository: `<name>.js`, `<name>.umd.js`, or `<name>-bundle.js`. For `<name>.js`, the name is also tried without `lovelace-` in it. Any other name goes in `filename` in `hacs.json`.
+- The file is attached to your latest release, or is in the root, or in `dist`. A release can also ship it in a [ZIP file named like it](/marketplace/guides/dashboard/#ship-it-as-a-zip-file), which needs Home Assistant 2026.12 or later.
+- Files the module needs, like images, go in `dist` with it, are attached to the release, or are in the ZIP file.
+- Installed to `www/community/<repository name>/`, and added as a dashboard resource.
 
 参见 [仪表盘卡片与插件](/marketplace/guides/dashboard/)。
 

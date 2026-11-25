@@ -18,15 +18,15 @@ order: 1
 
 | 键 | 类型 | 作用 |
 | --- | --- | --- |
-| `name` | string | 用户看到的名称。HACS 和目录（catalog）都要求提供。如果没有它，Marketplace 会显示集成的清单（manifest）中的 `name`，或者根据你的仓库名称生成一个名称。 |
-| `content_in_root` | boolean | 你的内容位于仓库根目录，而不是在 `custom_components/<domain>/` 或 `themes/` 中。对于仪表盘（dashboard）插件，此时只会在根目录中查找文件，而不会在发布（release）或 `dist` 中查找。 |
-| `filename` | string | 要安装的文件的名称，适用于仪表盘插件或模板（template）。使用 `zip_release` 时，则是 ZIP 资源的名称。模板必须提供此项。 |
-| `zip_release` | boolean | 从每个发布（release）附带的 ZIP 文件安装，文件名由 `filename` 指定。HACS 仅对集成（integration）支持此功能，Marketplace 拒绝对模板使用它。 |
-| `persistent_directory` | string | 集成内部的一个文件夹，在更新后会被保留，路径相对于集成文件夹。仅适用于集成。 |
-| `homeassistant` | string | 此发布所需的最低 Home Assistant 版本，例如 `"2026.11.0"`。添加 `b0`，例如 `"2026.11.0b0"`，以允许该版本的 beta 版本。仅对有发布（release）的仓库进行检查。 |
-| `hide_default_branch` | boolean | HACS 不会将默认分支作为可安装的版本提供。 |
-| `hacs` | string | 最低 HACS 版本。Marketplace 会读取它，但不会进行比较。 |
-| `country` | string or list | 两位字母的国家代码（[ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)），适用于仅在某些国家/地区可用的仓库。在这种情况下，目录（catalog）会要求提供此项。Marketplace 不使用它。 |
+| `name` | string | The name users see. Required by HACS and by the catalog. Without it, the Marketplace shows the `name` from the manifest of an integration, or a name made from your repository name. |
+| `content_in_root` | boolean | Your content is in the root of the repository, instead of in `custom_components/<domain>/` or `themes/`. For a dashboard plugin, the file is then only looked for in the root, not in a release or in `dist`, so a [ZIP file](/marketplace/guides/dashboard/#ship-it-as-a-zip-file) is not used either. |
+| `filename` | string | The name of the file to install, for a dashboard plugin or a template. With `zip_release`, the name of the ZIP asset. Required for templates. For a dashboard plugin, a release asset with the same name ending in `.zip` instead of `.js` is installed in its place, see [ship it as a ZIP file](/marketplace/guides/dashboard/#ship-it-as-a-zip-file). |
+| `zip_release` | boolean | Install from a ZIP file attached to each release, named by `filename`. HACS supports it for integrations only, the Marketplace refuses it for templates. |
+| `persistent_directory` | string | A folder inside an integration that is kept across updates, as a path relative to the integration folder. Integrations only. |
+| `homeassistant` | string | The minimum Home Assistant version for this release, like `"2026.11.0"`. Add `b0`, like `"2026.11.0b0"`, to allow the betas of that release. Only checked for repositories with releases. |
+| `hide_default_branch` | boolean | HACS does not offer the default branch as a version to install. |
+| `hacs` | string | The minimum HACS version. The Marketplace reads it, but does not compare it. |
+| `country` | string or list | Two-letter country codes ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)), for a repository that only works in some countries. The catalog asks for it in that case. The Marketplace does not use it. |
 
 Marketplace 会忽略类型错误的键，并记录一条警告。其他键会被忽略。
 

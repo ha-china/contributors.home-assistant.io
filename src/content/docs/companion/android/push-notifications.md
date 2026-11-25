@@ -26,13 +26,13 @@ order: 2
 5. 将应用指向你的服务。将已部署的 `androidV1` 函数的 URL 添加到 Gradle 用户主目录（`~/.gradle/gradle.properties`）中的 `gradle.properties`，而不是仓库中的那个文件：
 
    ```properties
-   homeAssistantAndroidPushUrl=https://push.example.com/androidV1
+   homeAssistantAndroidPushUrl=https://push.example.com/api/sendPush/android/v1
    ```
 
    （可选）也可以将速率限制检查指向你的服务：
 
    ```properties
-   homeAssistantAndroidRateLimitUrl=https://push.example.com/checkRateLimits
+   homeAssistantAndroidRateLimitUrl=https://push.example.com/api/checkRateLimits
    ```
 
    如果没有这些覆盖配置，应用将使用仓库 `gradle.properties` 中设置的项目自带的推送服务。

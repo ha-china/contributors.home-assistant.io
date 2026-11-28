@@ -1,6 +1,6 @@
 ---
-title: Leave part of your README out of the Marketplace
-description: Mark the parts of your README that are only for GitHub, like installation steps and install badges, and the Marketplace leaves them out.
+title: 将部分README内容排除在Marketplace之外
+description: 标记README中仅适用于GitHub的部分，如安装步骤和安装徽章，Marketplace将不会显示这些内容。
 date: 2026-11-25
 authors:
   - Aidan Timson
@@ -8,9 +8,9 @@ areas:
   - marketplace
 ---
 
-Your README does two jobs. On GitHub, it's where people find your repository, so it tells them how to install it, often with a [My link](/glossary/my-link/) badge or an install badge. In the Marketplace, it's shown on the page of your repository, right below an install button. There, those installation steps are in the way.
+你的README承担两项工作。在GitHub上，它是人们找到你仓库的地方，因此它告诉他们如何安装，通常带有[My链接](/glossary/my-link/)徽章或安装徽章。在Marketplace中，它显示在你仓库页面上，位于安装按钮正下方。在那里，这些安装步骤反而碍事。
 
-From Home Assistant 2026.12, one README can do both. Put the parts that are only for GitHub between two HTML comments, and the Marketplace leaves them out:
+从Home Assistant 2026.12开始，一个README可以同时满足两种用途。将仅适用于GitHub的部分放在两个HTML注释之间，Marketplace将不会显示它们：
 
 ```markdown title="README.md"
 # 3D printer dashboard
@@ -30,20 +30,20 @@ Add this repository in the Marketplace, or install it through HACS.
 ...
 ```
 
-GitHub doesn't show HTML comments, so there your README reads as before.
+GitHub不显示HTML注释，因此在那里你的README阅读起来和以前一样。
 
-## The details
+## 详细信息
 
-- A section runs from the start marker to the next end marker. Without an end marker, it runs to the end of the README.
-- The spaces inside the markers are optional, so `<!--ha-marketplace:exclude-start-->` works too.
-- Markers inside a code block or inline code are text, not markers. That way, a template README can show them as an example.
-- You can mark as many sections as you like.
+- 一个区块从起始标记开始，到下一个结束标记结束。如果没有结束标记，则一直延伸到README末尾。
+- 标记内的空格是可选的，因此`<!--ha-marketplace:exclude-start-->`同样有效。
+- 代码块或行内代码中的标记被视为文本，而非标记。这样，模板README可以将它们作为示例展示。
+- 你可以标记任意数量的区块。
 
-## When it works
+## 生效时间
 
-Starting with Home Assistant 2026.12 and its beta, the Marketplace leaves the marked sections out. Older versions show the whole README, as they do today, so you can add the markers now.
+从Home Assistant 2026.12及其测试版开始，Marketplace将排除标记的区块。旧版本会像现在一样显示整个README，因此你现在就可以添加标记。
 
-## Read more
+## 了解更多
 
-- [Leave part of your README out of the Marketplace](/marketplace/reference/repository-structure/#leave-part-of-your-readme-out-of-the-marketplace): the reference, next to everything else your repository needs.
-- [The change in the frontend](https://github.com/home-assistant/frontend/pull/55571): how the Marketplace finds the markers.
+- [将部分README内容排除在Marketplace之外](/marketplace/reference/repository-structure/#leave-part-of-your-readme-out-of-the-marketplace)：参考文档，与你的仓库所需的其他所有内容并列。
+- [前端中的更改](https://github.com/home-assistant/frontend/pull/55571)：Marketplace如何找到这些标记。

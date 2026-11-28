@@ -46,9 +46,9 @@ import Demo from "../../../../components/docs/Demo.astro";
 
 骨架屏在内容加载期间保持布局不变，这样内容到达时不会发生跳动。前端提供了 `ha-skeleton`，以及用于常见形状的 `ha-skeleton-text` 和 `ha-skeleton-icon`。数据表格、磁贴和设备仪表盘都使用了它们。
 
-By default, a soft wave sweeps across the `effect="sheen"` skeletons on the page. It is one slanted wave from the top corner of the content on the side where text starts to the opposite bottom corner, with each skeleton showing its own slice of it. It flows from one skeleton into the next, starts again as soon as it reaches the end, and a skeleton that appears halfway through joins in rather than starting over.
+默认情况下，一道柔和的波光会扫过页面上的 `effect="sheen"` 骨架屏。它是一道斜向的波光，从文本起始侧内容的顶角扫向相对的底角，每个骨架屏显示其中的一段。它从一个骨架屏流向下一个，到达末尾后重新开始，中途出现的骨架屏会加入其中，而不是重新开始。
 
-<Demo layout="stack" caption="A row of a data table while it loads: ha-skeleton-icon and ha-skeleton-text.">
+<Demo layout="stack" caption="数据表格的一行在加载时：ha-skeleton-icon 和 ha-skeleton-text。">
   <div style="display: flex; align-items: center; gap: 16px">
     <ha-skeleton-icon></ha-skeleton-icon>
     <ha-skeleton-text></ha-skeleton-text>
@@ -75,9 +75,9 @@ By default, a soft wave sweeps across the `effect="sheen"` skeletons on the page
 
 ## 无障碍
 
-- The spinner has the role of a progress bar, with a translated "Loading" label. Give a group of skeletons the same role and label, rather than visible "Loading" text.
-- Skeletons and spinners keep their meaning without motion. The wave stops when people ask for reduced motion. See [Motion](/design/foundations/motion/).
-- When loading ends in an error, show it as text people can read, not only as a red button.
+- 加载指示器具有进度条的角色，并带有翻译后的“加载”标签。给一组骨架屏赋予相同的角色和标签，而不是显示可见的“加载”文字。
+- 骨架屏和加载指示器在无动画的情况下也能保持其含义。当人们要求减少动态效果时，波光会停止。参见[动态效果（Motion）](/design/foundations/motion/)。
+- 当加载以错误结束时，应以人们可阅读的文字形式显示，而不仅仅是一个红色按钮。
 
 ## 组件
 

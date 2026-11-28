@@ -18,11 +18,11 @@ order: 2
 | 开启 Issues | 用户在此报告问题。目录（catalog）必需。 |
 | GitHub Releases | 建议所有类型都使用，模板和目录（catalog）必需。参见 [发布与更新](/marketplace/guides/releases/)。 |
 
-## Leave part of your README out of the Marketplace
+## 将 README 的部分内容排除在 Marketplace 之外
 
-Your README does two jobs. On GitHub, it's where people find your repository, so it tells them how to install it, often with a [My link](/glossary/my-link/) badge or an install badge. In the Marketplace, it's shown on the page of your repository, right below an install button. There, those installation steps are in the way.
+你的 README 承担两项工作。在 GitHub 上，它是人们找到你仓库的地方，因此它告诉他们如何安装，通常带有 [My 链接](/glossary/my-link/) 徽章或安装徽章。在 Marketplace 中，它显示在你的仓库页面上，位于安装按钮的正下方。在那里，这些安装步骤会碍事。
 
-Put the parts that are only for GitHub between two HTML comments, and the Marketplace leaves them out:
+将仅用于 GitHub 的部分放在两个 HTML 注释之间，Marketplace 会将其排除：
 
 ```markdown title="README.md"
 # 3D printer dashboard
@@ -42,16 +42,16 @@ Add this repository in the Marketplace, or install it through HACS.
 ...
 ```
 
-GitHub doesn't show HTML comments, so there your README reads as before.
+GitHub 不显示 HTML 注释，因此你的 README 在那里照常显示。
 
-- A section runs from the start marker to the next end marker. Without an end marker, it runs to the end of the README.
-- The spaces inside the markers are optional, so `<!--ha-marketplace:exclude-start-->` works too.
-- Markers inside a code block or inline code are text, not markers. That way, a template README can show them as an example.
-- You can mark as many sections as you like.
+- 一个区块从起始标记开始，到下一个结束标记结束。如果没有结束标记，则一直延伸到 README 的末尾。
+- 标记内的空格是可选的，因此 `<!--ha-marketplace:exclude-start-->` 也可以。
+- 代码块或行内代码中的标记是文本，不是标记。这样，模板 README 可以将其作为示例展示。
+- 你可以标记任意数量的区块。
 
-Starting with Home Assistant 2026.12, the Marketplace leaves the marked sections out. Older versions show the whole README, so you can add the markers now.
+从 Home Assistant 2026.12 开始，Marketplace 会排除标记的区块。旧版本会显示整个 README，因此你现在就可以添加标记。
 
-## Integrations
+## 集成
 
 ```text
 custom_components/awesome/__init__.py
@@ -119,4 +119,4 @@ README.md
 
 HACS 还支持 AppDaemon 应用（`apps/`）和 Python 脚本（`python_scripts/`），目录中也有它们的列表。但 Marketplace 不安装这两者。从 2026.11 开始，Home Assistant 还会屏蔽 HACS 自定义集成，因为 Marketplace 已取代它。因此在 2026.11 及更高版本上，这两者都无法安装。
 
-The Marketplace also refuses repositories with [apps](/glossary/app/) for Home Assistant OS. Those are added as an app repository under **Settings** > **Apps** instead: see [create and share a repository](/apps/guides/repository/).
+Marketplace 还会拒绝包含 [应用（app）](/glossary/app/) 的仓库，这些应用适用于 Home Assistant OS。它们会作为应用仓库添加到 **设置** > **应用** 下：参见 [创建并分享仓库](/apps/guides/repository/)。

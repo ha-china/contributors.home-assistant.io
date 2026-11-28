@@ -1,0 +1,2057 @@
+# 应用市场: full text
+
+> Every page of the 应用市场 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/marketplace/llms.txt.
+
+# 市场（Marketplace）
+
+> 与所有运行 Home Assistant 的用户分享你的作品。发布自定义集成、仪表盘卡片、主题、模板宏和蓝图，并保持它们及时更新。
+
+Source: https://www.hasscn.top/contributors/marketplace/
+
+人们为 Home Assistant 构建的东西，并非所有都适合放进 Home Assistant 本体。一张针对某个特定设备的卡片、一个使用你喜爱配色的主题、一个只有少数人使用的服务的集成、一个解决了你家中问题的自动化：它们都值得分享，而且有成千上万的人正在这样做。
+
+分享是让 Home Assistant 成为 Home Assistant 的重要原因之一。有人为自己的壁挂平板做了一张卡片并分享出来。另一个人在自己家中使用它，发现了一个 bug，并提交了修复。第三个人看到它，萌生了一个新想法。你分享的内容会启发他人、帮助他们前进，而他们分享的内容也会同样回馈于你。这就是社区：热爱 Home Assistant、并乐于分享自己用它所做成果的人们。
+
+[市场（Marketplace）](https://www.hasscn.top/contributors/glossary/marketplace/)是用户查找并安装这些作品的地方。从 2026.11 版本开始，它内置于 Home Assistant 中，位于**设置** > **市场**。它源自 [HACS](https://www.hasscn.top/contributors/glossary/hacs/)——多年来人们作为自定义集成安装的社区商店——并使用相同的目录和相同的 `hacs.json` 文件。今天能与 HACS 配合使用的集成、卡片、主题或模板，大概率也能在市场中使用，不过市场在安装前会以更严格的标准检查一些事项。AppDaemon 应用和 Python 脚本是例外：市场不支持它们。
+
+市场也是新集成或仪表盘卡片的起点。在这里发布它，等它成熟并拥有用户群后，联系维护者，看看它是否应该作为内置功能发布。参见[它是否属于 core](https://www.hasscn.top/contributors/core/integrations/create/#does-it-belong-in-core)。
+
+## 你可以分享什么
+
+| 内容 | 作用 | 分享方式 |
+| --- | --- | --- |
+| [自定义集成](https://www.hasscn.top/contributors/marketplace/guides/integrations/) | 为设备或服务添加支持，就像内置集成一样 | 市场 |
+| [仪表盘卡片或插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/) | 为仪表盘添加卡片、卡片功能、徽章或其他构建模块 | 市场 |
+| [主题](https://www.hasscn.top/contributors/marketplace/guides/themes/) | 更改界面的颜色和部分尺寸 | 市场 |
+| [模板宏](https://www.hasscn.top/contributors/marketplace/guides/templates/) | 可供他人导入到自己模板中的可复用 Jinja 宏 | 市场 |
+| [蓝图（blueprint）](https://www.hasscn.top/contributors/marketplace/guides/blueprints/) | 带有留空供他人填写的自动化、脚本或模板实体 | 通过导入链接，以及论坛上的 [Blueprint Exchange](https://community.home-assistant.io/c/blueprints-exchange/53) |
+
+蓝图不在市场中。用户通过链接导入它们，Home Assistant 会记住该链接以获取更新。它们出现在这里是因为分享的精神是相同的：你发布，他人安装，你保持它正常运作。
+
+## 这适合谁
+
+如果你为自己的 Home Assistant 构建了一些东西，并希望他人也能使用，那么这个板块就是为你准备的。你需要什么取决于你分享的内容：
+
+- 蓝图需要 YAML 和一个在你自己家中可正常运行的自动化。无需编程。
+- 主题需要 YAML 和对色彩的敏锐眼光。
+- 卡片或其他仪表盘插件需要 JavaScript。
+- 集成需要 Python。
+
+除蓝图外的所有类型都存放在公开的 GitHub 仓库中。你不需要成为 Git 专家，但需要一个账号，并且能够发布 release。
+
+以这种方式分享的一切都由你制作和支持，而非 Home Assistant 项目。用户在从市场安装任何内容之前，都会看到说明这一点的警告。请准备好回复 issue，并在 Home Assistant 发生变化时更新你的作品。
+
+## 从这里开始
+
+1. [你的第一次贡献](https://www.hasscn.top/contributors/marketplace/first-contribution/)：把你已经在使用的自动化变成蓝图，并分享它。
+2. [工作原理](https://www.hasscn.top/contributors/marketplace/how-it-works/)：市场如何查找、检查、安装和更新你发布的内容，以及蓝图如何被分享和更新。
+3. 在下方选择与你构建内容对应的指南。
+
+## 指南
+
+- [自定义集成](https://www.hasscn.top/contributors/marketplace/guides/integrations/)：当你的集成位于 core 之外时有什么不同。
+- [仪表盘卡片和插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/)：打包卡片、卡片功能或其他 JavaScript 模块。
+- [主题](https://www.hasscn.top/contributors/marketplace/guides/themes/)：结构、可设置的变量、浅色和深色模式，以及测试。
+- [模板宏](https://www.hasscn.top/contributors/marketplace/guides/templates/)：以模板文件的形式分享 Jinja 宏。
+- [蓝图](https://www.hasscn.top/contributors/marketplace/guides/blueprints/)：编写、测试、版本管理和分享蓝图。
+- [发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/)：用户如何获取你的新版本，以及如何保持它们正常运作。
+- [进入目录](https://www.hasscn.top/contributors/marketplace/guides/catalog/)：将你的仓库添加到目录中，让所有人都能找到它。
+
+## 参考
+
+- [hacs.json](https://www.hasscn.top/contributors/marketplace/reference/hacs-json/)：该文件的每个键，以及市场如何处理它们。
+- [仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)：按类型划分的文件存放位置。
+- [校验检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)：HACS action 检查什么，以及市场拒绝安装什么。
+
+## 相关板块
+
+- [Core 与集成](https://www.hasscn.top/contributors/core/integrations/)：如何构建集成，无论是否为自定义。
+- [自定义卡片等](https://www.hasscn.top/contributors/frontend/custom-ui/)：如何构建卡片、卡片功能、徽章、视图、策略和面板。
+- [主题与设计令牌](https://www.hasscn.top/contributors/frontend/architecture/theming/)：从前端角度了解主题会更改的 CSS 变量。
+- [安全](https://www.hasscn.top/contributors/security/)：在他人家中运行的代码需要注意什么。
+
+## 联系谁
+
+- [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道是构建集成和卡片的人们互相帮助的地方。看不到该频道？在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant**。
+- 关于目录、`hacs.json` 或 HACS action 的问题：[HACS Discord 服务器](https://discord.gg/apgchf8)，以及 [hacs/integration](https://github.com/hacs/integration/issues) 的 issues。
+- 蓝图在社区论坛的 [Blueprint Exchange](https://community.home-assistant.io/c/blueprints-exchange/53) 中分享和讨论。
+- 在市场本身发现了 bug？在 [core 仓库](https://github.com/home-assistant/core/issues)中提交 issue。
+
+---
+
+# 分享你的第一个蓝图
+
+> 把家里已经在正常运行的自动化改造成蓝图，自己导入测试，然后分享到 Blueprint Exchange。
+
+Source: https://www.hasscn.top/contributors/marketplace/first-contribution/
+
+最快的分享方式是[蓝图](https://www.hasscn.top/contributors/glossary/blueprint/)（blueprint）。你已经完成了最难的部分：一个在家里能正常工作的自动化。蓝图就是同一个自动化，只是把那些与你家相关的部分——比如用哪个传感器、哪盏灯——留空，让别人来填写。
+
+这大约需要半小时。第 4 步需要一个 GitHub 账号。不需要编程。
+
+如果你已经在 GitHub 上有卡片、主题或集成（integration）？直接跳到[发布要求](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)和 [HACS action](https://www.hasscn.top/contributors/marketplace/reference/validation/)。让检查变绿也是很好的第一步。
+
+## 1. 挑选一个自动化
+
+挑选一个你在用、而且能正常工作的自动化。小一点更好：一个触发器，一两个动作。比如“检测到有人走动时打开走廊的灯，两分钟后关闭”。
+
+在自动化编辑器中打开它，选择三个点的菜单，然后选择 **Edit in YAML**。把 YAML 复制到文本编辑器中。
+
+## 2. 添加 blueprint 块
+
+在顶部添加一个 `blueprint` 块。它需要一个 `name` 和一个 `domain`。这里的 domain 是 `automation`：蓝图也可以为脚本和模板实体（entity）创建。
+
+```yaml
+blueprint:
+  name: "Motion light with a timeout"
+  description: >
+    Turns on a light when motion is detected, and turns it off
+    again when there has been no motion for a while.
+  domain: automation
+  author: "Your name"
+```
+
+删除你自动化的 `id` 和 `alias`。从你的蓝图创建的每个自动化都会有自己的这两个值。
+
+## 3. 把特定的部分变成输入
+
+每个与你家相关的实体 ID、区域（area）或数字都变成一个输入。在 `input` 下用[选择器](https://www.hasscn.top/contributors/glossary/selector/)（selector）定义每个输入，这样用户会得到正确的选择器，然后在自动化中用 `!input` 使用它：
+
+```yaml
+blueprint:
+  name: "Motion light with a timeout"
+  description: >
+    Turns on a light when motion is detected, and turns it off
+    again when there has been no motion for a while.
+  domain: automation
+  author: "Your name"
+  input:
+    motion_sensor:
+      name: "Motion sensor"
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: motion
+    light:
+      name: "Light"
+      selector:
+        target:
+          entity:
+            - domain: light
+    wait_time:
+      name: "Wait time"
+      description: "How long to keep the light on after the last motion."
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+
+mode: restart
+max_exceeded: silent
+
+triggers:
+  - trigger: state
+    entity_id: !input motion_sensor
+    from: "off"
+    to: "on"
+
+actions:
+  - action: light.turn_on
+    target: !input light
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: !input motion_sensor
+        from: "on"
+        to: "off"
+  - delay: !input wait_time
+  - action: light.turn_off
+    target: !input light
+```
+
+Home Assistant 会拒绝使用了未定义的 `!input` 的蓝图。每个带有 `default` 的输入对用户来说都是可选的。这个例子与 Home Assistant 自带的运动灯蓝图很接近，即 core 中的 [`motion_light.yaml`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/automation/blueprints/motion_light.yaml)。把它和你的放在一起对照阅读是个很好的检查方法。
+
+## 4. 以 gist 的形式发布
+
+1. 前往 [GitHub Gists](https://gist.github.com/)。
+2. 以你的蓝图命名文件，以 `.yaml` 结尾，比如 `motion_light_timeout.yaml`。
+3. 粘贴你的蓝图，并将 gist 创建为公开 gist。
+4. 复制 gist 的 URL。
+
+## 5. 自己导入测试
+
+按照用户获取它的方式来测试：
+
+1. 在 Home Assistant 中，前往 **Settings** > **Automations & scenes** > **Blueprints**。
+2. 选择 **Import blueprint**，粘贴你的 gist 的 URL，然后选择 **Preview**。
+3. 选择 **Import blueprint**。
+4. 选择你的蓝图，然后选择 **Create automation**。
+5. 填写输入，保存，并检查自动化是否按预期工作。
+
+在 gist 中修复不能正常工作的部分，然后再次导入。Home Assistant 会询问是否覆盖你之前导入的蓝图。
+
+当一切正常后，关闭你原来的自动化，以免两者争夺同一盏灯。
+
+## 6. 分享它
+
+把你的蓝图发布到 [Blueprint Exchange](https://community.home-assistant.io/c/blueprints-exchange/53)，即社区论坛的蓝图版块。先阅读它的 [About Blueprints](https://community.home-assistant.io/t/about-blueprints/253788) 主题。简而言之：
+
+- 每个蓝图一个主题，标题要说明它的功能。
+- 描述蓝图做什么，需要哪些设备。
+- 在第一个帖子中用 YAML 代码块包含完整的蓝图。Home Assistant 可以直接从该主题导入。
+- 添加一个导入徽章。在 [my.home-assistant.io](https://my.home-assistant.io/create-link/?redirect=blueprint_import) 上用你的主题 URL 创建一个。
+- 从你自己的主题导入一次，以检查它是否正常工作。
+
+就是这样：你分享了你的第一个蓝图。当人们使用它时，他们会在你的主题中提问并提出改进建议。[蓝图](https://www.hasscn.top/contributors/marketplace/guides/blueprints/)介绍了如何修改蓝图而不破坏人们基于它创建的自动化。
+
+---
+
+# Marketplace 的工作原理
+
+> Marketplace 如何找到你的仓库、检查它、安装它并保持更新，以及蓝图（blueprint）如何在不经过 Marketplace 的情况下共享和更新。
+
+Source: https://www.hasscn.top/contributors/marketplace/how-it-works/
+
+[Marketplace](https://www.hasscn.top/contributors/glossary/marketplace/) 是 Home Assistant Core 中的一个集成（integration），名为 `marketplace`，在 **设置** > **Marketplace** 下有一个面板。它随 Home Assistant 2026.11 一起发布，并且默认启用。本页将带你了解你的作品从 GitHub 仓库到用户 Home Assistant 的全过程，让你知道它在途中经历了什么。
+
+Marketplace 就是 [HACS](https://www.hasscn.top/contributors/glossary/hacs/)，以尽可能少的改动被引入 Home Assistant。[添加它的 pull request](https://github.com/home-assistant/core/pull/183502) 是这样说的，并表示进一步扩展它的想法以后再说。以下所有内容描述的都是 Marketplace 目前在 core 中的样子。它与 HACS 不同的地方，本页会明确指出。
+
+## 目录
+
+Marketplace 展示目录（catalog）中的内容。目录是一份按类型分类的 GitHub 仓库列表，保存在 [hacs/default](https://github.com/hacs/default) 仓库中：一个文件用于集成，一个用于 `plugin`（仪表盘卡片和插件），一个用于主题，一个用于模板。你通过在那里打开一个 pull request 来把你的仓库加进去：参见[进入目录](https://www.hasscn.top/contributors/marketplace/guides/catalog/)。
+
+目录以数据的形式从 `data-v2.hacs.xyz` 提供，与 HACS 使用的数据相同。它包含的不只是列表：还有每个仓库的最新版本、描述、星标数，以及两个被移除的仓库列表：
+
+- **Removed（已移除）**：该仓库不再提供，例如因为它已被放弃或归档。已安装的副本仍可继续工作，但不会再收到更新，并且用户会收到一个说明原因的修复（repair）提示。
+- **Critical（严重）**：该仓库有害。Marketplace 会立即卸载它，并重启 Home Assistant。
+
+Marketplace 在启动时读取目录，之后每 6 小时读取一次。
+
+用户也可以添加一个不在目录中的仓库，通过[链接](https://www.hasscn.top/contributors/marketplace/guides/catalog/#the-link-to-your-repository)添加：即自定义仓库。这需要 GitHub 连接，并且该仓库必须满足与目录中仓库相同的要求。Marketplace 会拒绝 core 仓库以及包含应用（app）的仓库。
+
+## 类型
+
+Marketplace 认识四种类型。每种类型在用户的配置文件夹中都有自己的文件夹：
+
+| 类型 | 在目录中 | 安装到 | 安装后 |
+| --- | --- | --- | --- |
+| 集成 | `integration` | `custom_components/<domain>/` | 如果它有配置流程（config flow）且之前未被加载过，则立即加载。否则会通过修复提示要求重启。 |
+| 仪表盘 | `plugin` | `www/community/<repository name>/` | 作为仪表盘资源添加。用户需要刷新浏览器。 |
+| 主题 | `theme` | `themes/<theme file name>/` | 主题会被重新加载。 |
+| 模板 | `template` | `custom_templates/` | 自定义模板会被重新加载。 |
+
+HACS 还支持 AppDaemon 应用和 Python 脚本。Marketplace 不支持。安装过这些内容的用户会保留文件，但不会再收到更新，并且会有修复提示告知他们这一点。
+
+## 检查内容
+
+Marketplace 在安装每个版本时都会从你仓库的根目录读取 `hacs.json`。没有这个文件，它就无法安装或更新你的仓库。[hacs.json 参考](https://www.hasscn.top/contributors/marketplace/reference/hacs-json/)列出了每一个键。
+
+然后它会在[仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)所描述的位置查找你所属类型的文件。如果文件不在那里，该仓库就不合规，也就无法安装。
+
+在写入文件之后、宣布安装完成之前，它会检查 Home Assistant 能否使用这些文件。当某项检查失败时，安装就会失败，文件会被恢复原样：
+
+- 集成需要一个具有相同 `domain` 的 `manifest.json`，以及一个加载器（loader）能接受的 `version`。
+- 主题文件必须是有效的 YAML，不能包含像 `!include` 这样的标签，并且要通过与 `configuration.yaml` 中主题相同的验证。
+- 模板文件必须是 UTF-8 编码，且不能超过 Home Assistant 读取的大小限制。
+- 仪表盘插件需要其 JavaScript 文件存在。
+
+完整列表（连同 HACS action 的检查）见[验证检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)。
+
+## 版本
+
+当你的仓库有 GitHub release 时，最新 release 的标签就是用户获得的版本。预发布（pre-release）版本只提供给开启了你仓库预发布开关的用户，并且仅在其比你的最新 release 更新时提供。没有 release 时，用户会获得你默认分支的最新提交。[release 指南](https://www.hasscn.top/contributors/marketplace/guides/releases/)有详细说明。
+
+来自目录的版本直接从该版本的 release 资源或归档文件安装，不经过 GitHub API，因此无需 GitHub 连接即可工作。其他版本以及自定义仓库则通过 GitHub API。
+
+每个已安装的仓库都会获得一个[更新实体（update entity）](https://www.home-assistant.io/integrations/update/)，因此新版本会显示在 **设置** > **更新** 下，与 Home Assistant 自身的更新并列。用户可以在那里阅读你的 release 说明。
+
+## Home Assistant 2026.11 之前
+
+在 Marketplace 出现之前，HACS 是一个由用户自行安装的自定义集成。更新后的首次启动时，Marketplace 会接管 HACS 的安装：已安装的仓库、自定义仓库和更新实体会被保留，而 HACS 会被移除。指向 `/hacs` 的链接会打开 Marketplace，仪表盘文件在旧的 `/hacsfiles/` 路径下仍然可以访问。
+
+对于作为发布者的你来说，几乎没有变化。目录、`hacs.json`、文件夹结构以及 [HACS action](https://github.com/hacs/action) 都保持不变。[My Home Assistant](https://www.hasscn.top/contributors/glossary/my-link/) 中类型为 `hacs_repository` 的链接仍然有效，并会在 Marketplace 中打开你的仓库。新的类型是 `marketplace_repository`。
+
+## 蓝图
+
+[蓝图（blueprint）](https://www.hasscn.top/contributors/glossary/blueprint/)不在 Marketplace 中。Home Assistant 通过 URL 导入它们：
+
+- [社区论坛](https://community.home-assistant.io/)上的一个主题。Home Assistant 会从第一个帖子中提取第一个包含蓝图的 YAML 代码块。
+- GitHub 上的一个文件，或一个 GitHub gist。
+- home-assistant.io 上的一个 YAML 文件。
+- 任何其他返回蓝图 YAML 的 URL。当 URL 不在 GitHub 或 Home Assistant 网站上时，导入对话框会警告用户。
+
+Home Assistant 会将 URL 保存在蓝图中，作为 `source_url`。这个 URL 就是更新的工作方式：用户选择 **重新导入蓝图**，Home Assistant 会从同一位置重新下载蓝图，并覆盖已有的副本。基于该蓝图构建的自动化和脚本从那时起就会使用新版本。没有更新实体，也没有新版本存在的通知：用户在听说有新版本时才会重新导入。[蓝图指南](https://www.hasscn.top/contributors/marketplace/guides/blueprints/)解释了如何在不破坏他人已有成果的情况下修改蓝图。
+
+---
+
+# Marketplace 指南
+
+> 如何发布各类作品、保持其更新，并将其收录到目录中。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/
+
+每篇指南涵盖一种作品类型。它们建立在 [Marketplace 的工作原理](https://www.hasscn.top/contributors/marketplace/how-it-works/)之上，如果你还没有读过，请先阅读那篇。
+
+- [自定义集成（integration）](https://www.hasscn.top/contributors/marketplace/guides/integrations/)：当你的集成位于 core 之外时有什么不同。
+- [仪表盘卡片和插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/)：打包卡片、卡片功能或其他 JavaScript 模块。
+- [主题（theme）](https://www.hasscn.top/contributors/marketplace/guides/themes/)：结构、可设置的变量、浅色和深色模式，以及测试。
+- [模板宏（macro）](https://www.hasscn.top/contributors/marketplace/guides/templates/)：以模板文件的形式分享 Jinja 宏。
+- [蓝图（blueprint）](https://www.hasscn.top/contributors/marketplace/guides/blueprints/)：编写、测试、版本管理并分享蓝图。
+- [发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/)：用户如何获取你的新版本，以及如何保持它们正常工作。
+- [收录到目录](https://www.hasscn.top/contributors/marketplace/guides/catalog/)：将你的仓库添加到目录中，让所有人都能找到它。
+
+---
+
+# 发布自定义集成
+
+> 当你的集成位于独立仓库而不是 core 中时有什么不同，以及 Marketplace 对它的要求。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/integrations/
+
+[自定义集成](https://www.hasscn.top/contributors/glossary/custom-integration/)的构建方式与 core 中的集成相同。[构建集成](https://www.hasscn.top/contributors/core/integrations/)中的所有内容都适用：manifest、配置流程、实体（entity）、获取数据和测试。本页只介绍你自己发布时有什么不同。
+
+对于新集成，Marketplace 是推荐的起点，即使你希望有一天它能进入 core 也是如此。参见[它是否属于 core](https://www.hasscn.top/contributors/core/integrations/create/#does-it-belong-in-core)。
+
+## 放在独立的仓库中
+
+一个仓库只放一个集成，位于 `custom_components/<domain>/`：
+
+```text
+custom_components/my_integration/__init__.py
+custom_components/my_integration/manifest.json
+custom_components/my_integration/sensor.py
+custom_components/my_integration/translations/en.json
+custom_components/my_integration/brand/icon.png
+hacs.json
+README.md
+```
+
+Marketplace 会安装它在 `custom_components/` 下找到的第一个文件夹，安装到用户配置文件夹中的 `custom_components/<domain>/`。集成所需的每个文件都必须位于该文件夹内。[仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/#integrations)列出了它接受的其他布局。
+
+## manifest
+
+自定义集成需要两个 core 中的集成会省略的键：
+
+- `version`：必填。如果加载器无法接受版本号，Marketplace 会拒绝安装。使用与你发布标签相同的版本号。
+- `issue_tracker`：用户报告 bug 的地方。HACS 要求目录中的集成提供它。
+
+`documentation` 指向你自己的文档，比如你的 README。[manifest 参考](https://www.hasscn.top/contributors/core/integrations/manifest/#custom-integrations-only)中有详细信息。
+
+只列出那些还不是 Home Assistant 本身依赖的 `requirements`。
+
+## 类别
+
+在 manifest 中添加 `categories`：一到三个[集成类别](https://www.hasscn.top/contributors/glossary/integration-category/)，说明你的集成是做什么的。自定义集成不需要它们，但目录会在为 Marketplace 发布的数据中包含它们。
+
+```json title="manifest.json"
+{
+  "categories": ["energy.ev_charging"]
+}
+```
+
+选择方式与 core 中的集成相同。[集成类别](https://www.hasscn.top/contributors/core/integrations/categories/)列出了所有类别以及如何选择。HACS action 会检查它们：缺少该键是警告，未知类别会导致检查失败。
+
+## 选择属于你的 domain
+
+`domain` 是文件夹名称，也是 Home Assistant 识别你的集成的标识。选择一个 core 中没有集成使用的名称。
+
+使用与内置集成相同 domain 的自定义集成会替换它。Home Assistant 允许这样做，但用户会失去内置集成的更新，并且 Marketplace 会要求用户在安装前确认。目录不接受替换 core 集成的集成。用户仍然可以通过链接添加它们。
+
+两个仓库不能安装相同的 domain。当用户已经安装了其中一个时，Marketplace 会拒绝另一个。
+
+## 翻译
+
+自定义集成不使用 `strings.json`，也不会在 Lokalise 上翻译。请在 `translations/` 中提供已完成的文件，并包含完整的 `en.json`。参见[自定义集成的翻译](https://www.hasscn.top/contributors/core/integrations/translations/#custom-integrations)。
+
+## 品牌图片
+
+把你的图标和 logo 放在集成文件夹内的 `brand/` 文件夹中。一旦你的集成被安装，Home Assistant 就会显示它们。在此之前 Marketplace 也会显示它们：brands 网站会从目录中每个集成的最新发布中获取它们。
+
+不要使用 Home Assistant 品牌的图片。用户会把你的集成误认为是官方的。[brands 页面](https://www.hasscn.top/contributors/core/integrations/brands/#brand-images-for-custom-integrations)列出了图片的名称和尺寸。
+
+## 在更新时保留用户文件
+
+更新会替换整个集成文件夹。如果你的集成在该文件夹中写入了用户需要保留的文件，请把它们放在一个子文件夹中，并在 `hacs.json` 中指定名称：
+
+```json
+{
+  "name": "My integration",
+  "persistent_directory": "userfiles"
+}
+```
+
+Marketplace 会在更新期间把该文件夹移开，更新后再放回原处。
+
+## 重启
+
+首次安装时，带有配置流程的集成会立即加载，因此用户无需重启即可添加它。通过 YAML 设置的集成需要重启，Home Assistant 已加载的集成在每次更新或移除时也需要重启。Marketplace 会为此创建一个修复项，并带有重启按钮。
+
+## 链接到设置
+
+一旦你的集成被安装，[My 链接](https://www.hasscn.top/contributors/glossary/my-link/)可以让用户直接进入它的设置。`config_flow_start` 链接会在用户自己的 Home Assistant 中启动你指定的 domain 的[配置流程](https://www.hasscn.top/contributors/glossary/config-flow/)。[My 链接创建器](https://my.home-assistant.io/create-link/?redirect=config_flow_start)可以为你的 README 生成徽章：
+
+```markdown
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=my_integration)
+```
+
+要在 Marketplace 中链接到你的仓库，以便用户先安装它，参见[指向你仓库的链接](https://www.hasscn.top/contributors/marketplace/guides/catalog/#the-link-to-your-repository)。
+
+## 在你的仓库中进行检查
+
+在每次推送和拉取请求上运行两个 GitHub Actions：
+
+- [hassfest](https://github.com/home-assistant/actions#hassfest) 检查你的 manifest、翻译以及集成的其他文件。
+- 使用 `category: "integration"` 的 [HACS action](https://github.com/hacs/action) 检查目录所需的内容。参见[验证检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)。
+
+两者都必须通过才能[进入目录](https://www.hasscn.top/contributors/marketplace/guides/catalog/)。
+
+## 跟上 Home Assistant 的步伐
+
+core 中的更改可能会破坏自定义集成。对自定义集成所使用的 core 内容（如辅助元素（helper）、常量和实体属性）的更改，会先被弃用 12 个月，并在[博客](https://www.hasscn.top/contributors/blog/)上公布。[弃用政策](https://www.hasscn.top/contributors/core/development/deprecating/#developer-facing-deprecations)中有详细信息。针对[测试版](https://www.hasscn.top/contributors/releases/)测试你的集成，当某个发布需要更新的 Home Assistant 时，在 `hacs.json` 中设置 `homeassistant`。参见[发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/)。
+
+[集成质量分级](https://www.hasscn.top/contributors/core/quality-scale/)没有针对自定义集成的级别，但它的规则仍然是很好的指南。
+
+## 将它带入 core
+
+一旦你的集成成熟并拥有用户群，请在 [Discord](https://www.home-assistant.io/join-chat/) 的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道询问它是否应该内置。[它是否属于 core](https://www.hasscn.top/contributors/core/integrations/create/#does-it-belong-in-core) 列出了 core 的要求，而 core 中的每个新集成都需要质量分级的 [Bronze 规则](https://www.hasscn.top/contributors/core/quality-scale/rules/#bronze)。
+
+本页中的一些差异在 core 中会反过来。例如，品牌图片要放到 [brands 仓库](https://www.hasscn.top/contributors/core/integrations/brands/)中，翻译则来自 `strings.json`。
+
+---
+
+# 发布仪表盘卡片或插件
+
+> 打包自定义卡片、卡片功能、徽章或其他 JavaScript 模块，让 Marketplace 能够安装它并在每个仪表盘上加载。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/dashboard/
+
+卡片、卡片功能（card feature）、徽章（badge）、视图布局（view layout）和仪表盘策略（dashboard strategy）都是 Home Assistant 加载到前端的 JavaScript 模块。如何构建它们请参阅前端区域的[自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/)。本页介绍如何打包，以便 Marketplace 能够安装它。
+
+目录、`hacs.json` 和 HACS action 将此类型称为 `plugin`。Marketplace 将其显示为**仪表盘**。它们是同一种东西。
+
+## Marketplace 会用它做什么
+
+当用户安装你的仓库时，Marketplace 会：
+
+1. 将你的 JavaScript 文件及其旁边的其他文件下载到配置文件夹中的 `www/community/<repository name>/`。
+2. 将该文件添加为类型为 `module` 的[仪表盘资源](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)，路径为 `/local/community/<repository name>/<file name>`，并在 URL 中带上版本号，例如 `?v=<id>-1.2.0`。版本号在每次更新时都会变化，这样浏览器会加载新文件而不是缓存的文件。
+3. 其余工作交给用户，由用户重新加载浏览器以加载你的模块。
+
+当用户在 YAML 中管理资源时，Marketplace 无法添加资源。安装对话框会向用户显示需要添加的内容。当你的模块已经通过 `frontend` 配置中的 `extra_module_url` 加载时，Marketplace 不会添加资源，因此不会被重复加载。
+
+卸载时，Marketplace 会移除这些文件和资源。
+
+## 以仓库名称命名你的文件
+
+Marketplace 会查找一个文件，并通过文件名找到它。如果 `hacs.json` 中没有 `filename`，它会尝试以下名称，其中 `<name>` 是你的仓库名称：
+
+1. `<name>.js`，并移除 `lovelace-` 前缀。仓库 `lovelace-awesome-card` 对应 `awesome-card.js`。
+2. `<name>.js`
+3. `<name>.umd.js`
+4. `<name>-bundle.js`
+
+它会首先在最新 GitHub release 的资产中查找。如果没有包含这些文件的 release，它会在仓库根目录中查找，然后在 `dist` 文件夹中查找。如果 `hacs.json` 中将 `content_in_root` 设置为 `true`，则只会在根目录中查找。
+
+如果你的卡片需要其他文件，如图片或翻译，请将它们与卡片一起放在 `dist` 中，将它们全部附加到 release 中，或者[将其作为 ZIP 文件发布](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#ship-it-as-a-zip-file)。
+
+使用其他名称的文件需要在 `hacs.json` 中指定 `filename`：
+
+```json
+{
+  "name": "Awesome card",
+  "filename": "awesome-card-bundle.js"
+}
+```
+
+[仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/#dashboard)中有示例。
+
+## 在发布之前先构建
+
+用户得到的就是你发布的文件：Marketplace 不会构建任何东西。将构建好的文件提交到 `dist`，或者更好的做法是，在发布 release 时通过 GitHub Action 进行构建，并将其作为资产附加到 release 上。这样你的仓库只保存源代码，而每个 release 都带有自己的构建产物。
+
+单个打包文件最容易安装。将你的依赖项（例如 Lit）打包进去：前端不会共享它自己的副本，正如[使用哪些工具](https://www.hasscn.top/contributors/frontend/custom-ui/#which-tools-to-use)中所解释的。
+
+## 将其作为 ZIP 文件发布
+
+当你的卡片包含多个文件时，例如构建时将代码拆分为按需加载的块，请将整个卡片作为一个 ZIP 文件附加到你的 release 中。Release 资产不能包含文件夹，但 ZIP 文件可以，而且用户下载一个文件而不是多个文件。
+
+给 ZIP 文件起一个与你的 JavaScript 文件相同的名称，只是将 `.js` 改为 `.zip`。如果 `hacs.json` 中没有 `filename`，那就是[根据你的仓库名称生成的名称](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#%E4%BB%A5%E4%BB%93%E5%BA%93%E5%90%8D%E7%A7%B0%E5%91%BD%E5%90%8D%E4%BD%A0%E7%9A%84%E6%96%87%E4%BB%B6)：对于仓库 `awesome-card`，即 `awesome-card.zip`。如果有 `filename`，则使用该名称，因此 `"filename": "my-card.js"` 对应 `my-card.zip`。`hacs.json` 中其他内容不变：`filename` 仍然指定 JavaScript 文件，而不是 ZIP 文件。
+
+将 JavaScript 文件放在 ZIP 文件的根目录中，或放在其根目录下的单个文件夹（如 `dist`）中。Marketplace 会将该文件夹及其中的所有内容解压到你的卡片文件夹中，并将 JavaScript 文件添加为资源：
+
+```text title="awesome-card.zip"
+awesome-card.js
+chunks/
+  editor-a1b2c3.js
+  translations/
+    en-d4e5f6.js
+```
+
+- 当你的 release 同时包含 JavaScript 文件和 ZIP 文件时，Marketplace 会安装 ZIP 文件。
+- 当它无法使用 ZIP 文件时，例如 ZIP 文件损坏、过大，或在预期位置找不到 JavaScript 文件，它会安装 release 的其他资产，只要你的 JavaScript 文件是其中之一。如果没有，安装将失败，已安装的版本保持不变。
+- ZIP 文件仅来自 release。从你的默认分支或提交安装时，你的卡片来自仓库，如上所述。
+- 当 `hacs.json` 中将 `content_in_root` 设置为 `true` 时，Marketplace 不会查看 release 资产，因此也不会使用 ZIP 文件。请移除该设置，或将其设置为 `false`。
+
+Home Assistant 2026.12 是第一个安装 ZIP 文件的版本。更早的版本只查找 JavaScript 文件。为了支持它们，请在 ZIP 文件旁边附加一个单文件构建作为 JavaScript 文件。如果你的 release 只有 ZIP 文件，请在 `hacs.json` 中设置 `"homeassistant": "2026.12.0"`，这样更早的版本就不会被提供该版本。参见[要求 Home Assistant 版本](https://www.hasscn.top/contributors/marketplace/guides/releases/#require-a-home-assistant-version)。
+
+## 两个卡片不能共享一个文件夹
+
+文件夹以仓库名称命名，不包含所有者。当用户已经安装了来自 `someone/awesome-card` 的卡片时，Marketplace 会拒绝在其旁边安装 `someone-else/awesome-card`。
+
+## 展示它的外观
+
+用户根据卡片的外观来选择卡片。将截图放在你的 README 中，Marketplace 会在你的仓库页面上显示它。目录会检查仪表盘仓库的 README 中是否包含图片。
+
+为了让人们在安装之前试用你的卡片，请在你自己的网站上放置一个[实时演示](https://www.hasscn.top/contributors/frontend/custom-ui/demo/)，并从你的 README 中链接到它。
+
+## 在你的仓库中检查它
+
+在每次 push 和 pull request 上运行带有 `category: "plugin"` 的 [HACS action](https://github.com/hacs/action)。参见[验证检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)。
+
+## 将它带入前端
+
+当你的卡片成熟并拥有用户群后，请联系维护者，例如在 [Discord](https://www.home-assistant.io/join-chat/) 上的 [**#frontend**](https://discord.com/channels/330944238910963714/1475552784278360176) 频道，看看它是否应该作为内置功能发布。将新卡片加入前端既是代码决策，也是设计决策：参见[需要设计输入的变更](https://www.hasscn.top/contributors/frontend/development/review-and-release/#changes-that-need-design-input)。
+
+---
+
+# 发布主题
+
+> 编写主题文件、选择要设置的变量、支持浅色和深色模式、进行测试，并打包以供 Marketplace 使用。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/themes/
+
+[主题（theme）](https://www.hasscn.top/contributors/glossary/theme/)是一个 YAML 文件，包含 Home Assistant 界面的颜色和一些尺寸。用户可以在自己的个人资料中选择主题，也可以为单个仪表盘视图或卡片设置主题。制作主题不需要编程知识：只需要 YAML，以及一双能看出什么在浅色和深色下都好看的眼睛。
+
+关于前端如何从代码层面应用主题，请参阅[主题与设计令牌（Theming and design tokens）](https://www.hasscn.top/contributors/frontend/architecture/theming/)。本页面面向编写主题的人。
+
+## 主题文件
+
+主题文件是一个映射（mapping）。键是主题的名称，也就是用户在个人资料中看到的名称。其下是各个变量，但不带 CSS 中变量前面的 `--`：
+
+```yaml title="themes/nordic.yaml"
+Nordic:
+  primary-color: "#5e81ac"
+  accent-color: "#d08770"
+  card-background-color: "#eceff4"
+  primary-background-color: "#e5e9f0"
+  primary-text-color: "#2e3440"
+  ha-card-border-radius: "16px"
+```
+
+每个值都要加引号。在 YAML 中，`#` 会开始一段注释，所以不加引号的颜色会丢失，而且前端本来就要求每个值都是字符串。
+
+一个文件可以包含多个主题，每个主题都在自己的名称之下。Home Assistant 通过 `configuration.yaml` 中的这一行从用户配置的 `themes` 文件夹读取这些文件，这一行是它在创建该文件时自动添加的：
+
+```yaml title="configuration.yaml"
+frontend:
+  themes: !include_dir_merge_named themes
+```
+
+删除了这一行的用户，或者配置较旧的用户，需要把它加回来。请在你的 README 中说明这一点：当你的主题没有显示时，这是首先要检查的事情。
+
+## 要设置哪些变量
+
+前端有两层变量，一个好的主题会同时设置这两层。
+
+### 经典变量
+
+大多数主题会设置下面的变量。它们在前端的 [`src/resources/theme/color/color.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/color.globals.ts) 中定义，许多组件会使用它们。[主题变量（Theme variables）](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/)列出了全部变量，并带有浅色和深色模式下的默认值：复制你想更改的那些。
+
+| 变量 | 用途 |
+| --- | --- |
+| `primary-color` | 主强调色。其他变量（如 `sidebar-selected-icon-color`）默认使用它。 |
+| `accent-color` | 第二强调色 |
+| `primary-background-color` | 页面的背景 |
+| `secondary-background-color` | 第二背景，用于与页面区分开来的表面 |
+| `card-background-color` | 卡片。`sidebar-background-color` 和 `ha-card-background` 默认使用它。 |
+| `primary-text-color` | 大部分文本 |
+| `secondary-text-color` | 次要文本，比如描述 |
+| `text-primary-color` | 位于 `primary-color` 之上的文本 |
+| `divider-color` | 项目之间的分隔线 |
+| `error-color`, `warning-color`, `success-color`, `info-color` | 状态消息和提醒 |
+| `sidebar-background-color`, `sidebar-text-color`, `sidebar-icon-color`, `sidebar-selected-icon-color`, `sidebar-selected-text-color` | 侧边栏 |
+| `app-header-background-color`, `app-header-text-color` | 仪表盘和其他页面顶部的页眉 |
+| `state-icon-color` | 实体（entity）的图标 |
+
+卡片有自己的变量，来自内置卡片的容器 `ha-card`。其他组件也有一些，比如分区视图的间距：它们位于[组件变量（component variables）](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/#component-variables)之下。
+
+| 变量 | 它改变什么 |
+| --- | --- |
+| `ha-card-background` | 卡片的背景。回退到 `card-background-color`。 |
+| `ha-card-border-radius` | 圆角的圆度 |
+| `ha-card-border-width`, `ha-card-border-color` | 边框 |
+| `ha-card-box-shadow` | 阴影。默认没有。 |
+| `ha-card-header-color`, `ha-card-header-font-size` | 卡片的标题 |
+
+实体状态的颜色也有变量，比如 `state-light-active-color` 或 `state-lock-locked-color`。它们全部位于[实体状态（entity states）](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/#entity-states)之下。
+
+### 设计令牌
+
+较新的组件使用[设计令牌（design token）](https://www.hasscn.top/contributors/glossary/design-token/)，其名称以 `ha-` 开头。它们的颜色并不来自 `primary-color`。例如，一个开关的颜色来自 `ha-color-fill-primary-normal-resting`，它指向 `ha-color-primary-90`，即主色板中的一级。因此，只设置 `primary-color` 的主题会让这些组件保持默认的蓝色。
+
+要让它们也使用你的颜色，请设置主色板：十一个层级，从 `ha-color-primary-05`（最暗）到 `ha-color-primary-95`（最亮）。
+
+```yaml title="themes/nordic.yaml"
+Nordic:
+  primary-color: "#5e81ac"
+  ha-color-primary-05: "#0d1520"
+  ha-color-primary-10: "#18263a"
+  ha-color-primary-20: "#25384f"
+  ha-color-primary-30: "#3a5577"
+  ha-color-primary-40: "#5e81ac"
+  ha-color-primary-50: "#7896bb"
+  ha-color-primary-60: "#90a9c8"
+  ha-color-primary-70: "#a9bdd5"
+  ha-color-primary-80: "#c4d2e3"
+  ha-color-primary-90: "#dfe7f0"
+  ha-color-primary-95: "#eff3f8"
+```
+
+`ha-color-primary-40` 是默认主题中 `primary-color` 的值，所以从这里开始。语义令牌（semantic token），比如 `ha-color-fill-primary-normal-resting`，会自行在深色模式下选择其他层级。这些令牌及其默认值在 Design 区域的[颜色（color）](https://www.hasscn.top/contributors/design/foundations/color/)页面上。
+
+默认主题会为用户做这件事：当用户在个人资料中选择自己的主色时，前端会根据它计算出整个色板。自定义主题得不到这样的帮助，必须自己设置色板。
+
+### RGB 变体
+
+有些组件需要带透明度的颜色，会使用变量的 RGB 变体，比如 `rgb-primary-color`。当你把一个变量设置为十六进制颜色（如 `"#5e81ac"`）时，前端会自动为它创建 RGB 变体。对于其他格式的颜色，比如 `rgb(94, 129, 172)`，你需要自己设置 RGB 变体，用三个数字表示：
+
+```yaml
+Nordic:
+  primary-color: "rgb(94, 129, 172)"
+  rgb-primary-color: "94, 129, 172"
+```
+
+### 变量会变化
+
+前端不承诺哪些变量会一直保留。变量可能会在任何版本中被重命名或停止使用。请用每个 beta 版本测试你的主题。
+
+## 浅色和深色
+
+主题可以在 `modes` 之下为浅色和深色模式设置不同的值：
+
+```yaml title="themes/nordic.yaml"
+Nordic:
+  primary-color: "#5e81ac"
+  accent-color: "#d08770"
+  modes:
+    light:
+      primary-background-color: "#e5e9f0"
+      card-background-color: "#eceff4"
+      primary-text-color: "#2e3440"
+    dark:
+      primary-background-color: "#2e3440"
+      card-background-color: "#3b4252"
+      primary-text-color: "#eceff4"
+```
+
+`modes` 之外的变量在两种模式下都适用。`modes` 至少需要 `light` 或 `dark` 中的一个。前端对它的处理方式：
+
+- 同时有 `light` 和 `dark` 时，主题会跟随用户或其设备的设置。
+- 只有 `dark` 时，主题始终是深色。没有 `dark`，或者完全没有 `modes` 时，主题始终是浅色。
+- 在深色模式下，前端先应用它自己的深色配色，然后是你的变量，最后是你的 `dark` 值。你只需要设置你想改变的部分。
+
+## 测试
+
+1. 把你的主题文件复制到配置的 `themes` 文件夹中，与 `configuration.yaml` 放在一起。
+2. 运行 `frontend.reload_themes` 动作，或者重启 Home Assistant。有错误的主题不会加载，日志中会说明原因。
+3. 在你的个人资料中选择你的主题。如果你的主题同时支持浅色和深色，也在那里切换一下。
+4. 浏览用户最常看到的地方：一个包含多种卡片的仪表盘、一个更多信息对话框、设置页面，以及一个带输入框的表单。
+5. 检查文本在每个背景上都清晰可读。[无障碍（accessibility）](https://www.hasscn.top/contributors/design/foundations/accessibility/)页面列出了内置主题所满足的对比度，以及应该达到的目标。
+
+也要在手机上检查：窄屏布局对页眉和侧边栏的显示方式不同。
+
+## 打包
+
+把文件放在你仓库的 `themes` 文件夹中：
+
+```text
+themes/nordic.yaml
+hacs.json
+README.md
+```
+
+Marketplace 会把你 `themes` 文件夹中的所有内容安装到用户配置的 `themes/<name of your theme file>/` 中，并重新加载主题。在它宣布安装完成之前，它会检查它安装的每个 YAML 文件：
+
+- 必须是不带标签（tag）的有效 YAML。`!include`、`!secret` 和其他标签都会被拒绝：主题会提供给每个用户，而标签可能拉取任意文件。
+- 必须通过与 `configuration.yaml` 中主题相同的校验。一个损坏的主题会导致 Home Assistant 在下次启动时无法加载其配置。
+
+把截图放在你的 README 中，包括浅色和深色：目录会检查主题的 README 中是否有图片。[仓库结构（repository structure）](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/#themes)中有详细说明，带有 `category: "theme"` 的 [HACS action](https://github.com/hacs/action) 会对此进行检查。
+
+---
+
+# 发布模板宏
+
+> 分享可供他人导入到自己模板中的 Jinja 宏，以单个模板文件的形式由 Marketplace 安装到 custom_templates 中。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/templates/
+
+[模板（template）](https://www.hasscn.top/contributors/glossary/template/)文件存放 Jinja 宏：可复用的模板片段，其他人可以将其导入到自己的模板中，用于自动化、脚本和模板实体。宏的工作方式以及用户如何导入它们，请参阅 home-assistant.io 上的[自定义模板与宏](https://www.home-assistant.io/docs/templating/custom-templates/)。
+
+这是 Marketplace 中最小的一种类型：只有一个文件。目录和 HACS action 将其称为 `template`。
+
+## 文件
+
+将你的宏写在一个 `.jinja` 文件中：
+
+```jinja title="battery.jinja"
+{% macro battery_icon(entity_id) %}
+{% set level = states(entity_id) | int(0) %}
+{{ 'mdi:battery-alert' if level < 20 else 'mdi:battery' }}
+{% endmacro %}
+```
+
+用户通过你的文件名来导入宏：
+
+```jinja
+{% from 'battery.jinja' import battery_icon %}
+{{ battery_icon('sensor.front_door_battery') }}
+```
+
+这意味着你的文件名会成为人们使用它的一部分。请选择一个不太可能与他人冲突的名称，并且之后不要重命名。当 `filename` 发生变化时，Marketplace 会在下次更新时删除旧文件，所有导入它的模板都会失效。
+
+## 打包
+
+将文件放在仓库的根目录，并在 `hacs.json` 中通过 `filename` 指定它的名称：
+
+```text
+battery.jinja
+hacs.json
+README.md
+```
+
+```json title="hacs.json"
+{
+  "name": "Battery macros",
+  "filename": "battery.jinja"
+}
+```
+
+当 `filename` 指定的不是根目录下的 `.jinja` 文件时，Marketplace 会拒绝该模板仓库。它只安装这一个文件，安装到用户配置的 `custom_templates` 文件夹中，并重新加载自定义模板，因此立即可用。
+
+还有一些额外的规则，因为 Home Assistant 在启动时会读取 `custom_templates` 中的每一个文件：
+
+- 文件必须是 UTF-8 编码。Home Assistant 无法解码的文件会阻止它启动。
+- 文件必须小于 5 MiB。Home Assistant 会跳过更大的文件。
+- 模板不支持 `zip_release`：压缩包会解压到所有模板共享的文件夹中。
+- 两个仓库不能安装同名文件。Marketplace 会拒绝第二个。
+
+HACS 要求模板使用 GitHub releases。请为每个版本发布一个 release。参见[发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/)。
+
+## 在你的仓库中检查
+
+在每次推送和拉取请求（pull request）时，使用 `category: "template"` 运行 [HACS action](https://github.com/hacs/action)。在 README 中添加几个宏的使用示例：这是用户决定是否想要使用它时阅读的内容。
+
+---
+
+# 编写并分享蓝图
+
+> 编写一个带有良好输入项和选择器的蓝图，进行测试，在不破坏他人已有配置的前提下进行修改，并分享它。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/blueprints/
+
+[蓝图（blueprint）](https://www.hasscn.top/contributors/glossary/blueprint/)是一种自动化、脚本或模板实体，其中留有空白供用户填写。一个蓝图可以被多次使用：一次用于走廊，一次用于浴室，每次使用各自的设备和设置。
+
+蓝图并不在 Marketplace 中。用户通过 URL 导入它们，Home Assistant 会记住该 URL 以获取新版本。[工作原理](https://www.hasscn.top/contributors/marketplace/how-it-works/#blueprints)介绍了用户可以从哪些地方导入。刚接触蓝图？[你的第一个贡献](https://www.hasscn.top/contributors/marketplace/first-contribution/)会从头到尾带你完成第一个蓝图。
+
+完整的模式（schema）以及每个选择器（selector）都在 home-assistant.io 上为用户提供了文档：[蓝图模式](https://www.home-assistant.io/docs/blueprint/schema/)和[选择器](https://www.home-assistant.io/docs/blueprint/selectors/)。本页讲的是如何编写一个让他人乐于使用并持续使用的蓝图。
+
+## 蓝图块
+
+每个蓝图都以一个 `blueprint` 块开始，随后是其所属域（domain）的配置：自动化的触发器、条件和动作，脚本的序列，或模板实体的配置。
+
+```yaml
+blueprint:
+  name: "Notify when a door stays open"
+  description: >
+    Sends a notification when a door has been open for too long.
+    Needs a door sensor and a device with the companion app.
+  domain: automation
+  author: "Your name"
+  homeassistant:
+    min_version: "2024.6.0"
+  input:
+    door:
+      name: "Door"
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: door
+```
+
+| 键 | |
+| --- | --- |
+| `name` | 必填。简短，并说明它的用途。 |
+| `domain` | 必填。`automation`、`script` 或 `template`。 |
+| `description` | 蓝图的功能，以及用户需要什么。支持 Markdown。导入对话框和编辑器中会显示它。 |
+| `author` | 你的名字，或你的论坛用户名。 |
+| `homeassistant` | `min_version`：你的蓝图所支持的最早的 Home Assistant 版本，格式为 `major.minor.patch`。 |
+| `input` | 空白项。见下文。 |
+| `source_url` | 不要填写。Home Assistant 会将其设置为用户导入时使用的 URL。 |
+
+## 输入项
+
+每个输入项都有一个键，你可以在 `!input` 中使用它，此外还有这些选项：
+
+- `name` 和 `description`：用户在表单中看到的内容。
+- `selector`：用户获得的控件。如果没有选择器，用户只会得到一个纯文本框，只能猜测该输入什么。
+- `default`：使输入项变为可选。没有默认值时，用户必须填写它。
+
+在配置中使用 `!input <key>` 来引用每个输入项。如果蓝图使用了未定义的 `!input`，Home Assistant 会拒绝它。
+
+输入项不是模板变量。要在模板中使用输入项，请先将其定义为变量：
+
+```yaml
+variables:
+  door_entity: !input door
+
+actions:
+  - action: notify.notify
+    data:
+      message: "{{ state_attr(door_entity, 'friendly_name') }} is still open."
+```
+
+### 选择合适的选择器
+
+选择器决定了你的蓝图是否易于使用。以下几点会有所帮助：
+
+- 对实体选择器按 `domain` 和 `device_class` 进行过滤，让用户只看到有意义的实体。一个列出全屋所有传感器的门传感器选择器就像一道谜题。
+- 对动作所作用的对象使用 `target` 选择器。这样用户可以选择实体、设备、区域（area）、楼层或标签（label），而你只需将其直接传递给 `target`。
+- 为 `number` 输入项设置合理的 `min`、`max` 和 `unit_of_measurement`。
+- 对用户可以开启或关闭的可选行为使用 `boolean`。
+
+[选择器](https://www.home-assistant.io/docs/blueprint/selectors/)页面列出了所有选择器，设计区的[选择器组件](https://www.hasscn.top/contributors/design/components/selector/)展示了每个选择器的外观。
+
+### 将输入项分组到分区中
+
+当输入项较多时，将它们分组到分区（section）中。分区有自己的 `input` 键，还可以选择性地包含 `name`、`icon`、`description` 和 `collapsed`：
+
+```yaml
+blueprint:
+  name: "Notify when a door stays open"
+  domain: automation
+  homeassistant:
+    min_version: "2024.6.0"
+  input:
+    door:
+      name: "Door"
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: door
+    advanced:
+      name: "Advanced"
+      icon: mdi:cog
+      collapsed: true
+      input:
+        wait_time:
+          name: "Wait time"
+          default: 300
+          selector:
+            number:
+              min: 30
+              max: 3600
+              unit_of_measurement: seconds
+```
+
+分区只改变表单的外观。你仍然通过输入项自身的键来使用它们，例如 `!input wait_time`，因此每个键在所有分区中都必须是唯一的。分区需要 Home Assistant 2024.6 或更新版本：使用它们时请设置 `min_version`。
+
+## 模板实体蓝图
+
+`domain: template` 的蓝图描述一个模板实体。用户在 `configuration.yaml` 中通过 `use_blueprint` 进行设置：
+
+```yaml
+template:
+  - use_blueprint:
+      path: homeassistant/inverted_binary_sensor.yaml
+      input:
+        reference_entity: binary_sensor.front_door
+    name: "Front door closed"
+    unique_id: front_door_closed
+```
+
+Home Assistant 自带的[反转二进制传感器](https://github.com/home-assistant/core/blob/dev/homeassistant/components/template/blueprints/inverted_binary_sensor.yaml)是一个完整的示例。其他内置蓝图也是很好的示例：[自动化](https://github.com/home-assistant/core/tree/dev/homeassistant/components/automation/blueprints)和[脚本](https://github.com/home-assistant/core/tree/dev/homeassistant/components/script/blueprints)。
+
+## 测试它
+
+按照用户获取蓝图的方式进行测试：从你将要分享的 URL 导入它。
+
+1. 前往 **设置** > **自动化与场景** > **蓝图**，选择 **导入蓝图**，并输入你的 URL。
+2. 基于它创建一个自动化或脚本。先只填写必填的输入项，以便测试你的默认值。
+3. 在你的家中让场景实际发生，当自动化没有按预期运行时，检查自动化的追踪（trace）信息。
+4. 再创建第二个，将每个输入项都设置为不同的值。
+
+然后考虑边界情况：一个 `unavailable` 的传感器、一个留空的可选输入项、一个目标是区域而非实体的目标，以及当自动化仍在运行时触发器再次触发会发生什么。最后一点就是自动化的 `mode`：对于类似人体感应灯的场景，`restart` 通常是正确的选择。
+
+## 在不破坏它的前提下修改它
+
+每个基于你蓝图构建的自动化都使用用户导入的那份副本。当用户选择 **重新导入蓝图** 时，Home Assistant 会用你的新版本覆盖旧版本，所有基于它构建的自动化都会立即使用新版本。用户没有机会先填写任何新的内容。因此：
+
+- 永远不要重命名输入项。人们构建的自动化仍然以旧名称传递值。在新名称下，该输入项就缺失了。
+- 为每个新增输入项提供 `default`。Home Assistant 会拒绝缺少无默认值输入项的自动化，因此如果不提供默认值，所有基于你蓝图构建的自动化都会停止工作。
+- 不要改变输入项所期望的内容，比如它的选择器，或者把秒改成分钟。Home Assistant 不会将已存储的值与新选择器进行校验：旧值会原样传入。
+- 当你开始使用 Home Assistant 的新功能时，提高 `min_version`。这样旧版本的用户会得到清晰的错误提示，而不是一个损坏的自动化。
+- 对于较大的改动，以新的 URL 发布一个新蓝图。用户准备好后会自行迁移。
+
+蓝图模式没有版本号。在你的论坛主题或仓库中说明改了什么、什么时候改的，以便用户知道何时需要重新导入。
+
+## 分享它
+
+用户导入所用的 URL 就是你的蓝图的标识：重新导入时会从那里获取。选定一个地方，并把蓝图一直放在那里。
+
+- **社区论坛上的一个主题。** 将它发布在 [Blueprint Exchange](https://community.home-assistant.io/c/blueprints-exchange/53)。Home Assistant 会导入首帖中第一个包含蓝图的 YAML 代码块，因此要发布新版本时，请编辑该帖子。请遵循 [About Blueprints](https://community.home-assistant.io/t/about-blueprints/253788) 主题中的规则：每个蓝图一个主题、标题清晰、说明其功能和所需条件、在帖子中包含完整蓝图，以及一个导入徽章。
+- **GitHub 上的一个文件。** 仓库会保留每次更改的历史记录，人们还可以提交 issue 和 pull request。分享默认分支上该文件的 URL，这样重新导入时就能获取最新版本。
+- **一个 GitHub gist。** 快捷，适合小东西。
+
+论坛主题和 GitHub 文件可以很好地配合：把蓝图放在 GitHub 上，用主题来讨论它。然后让 GitHub URL 成为导入徽章中使用的那个链接。
+
+导入徽章是一个 [My link](https://www.hasscn.top/contributors/glossary/my-link/)：它会在读者自己的 Home Assistant 中打开导入对话框，并预填你的蓝图 URL。[My link 创建器](https://my.home-assistant.io/create-link/?redirect=blueprint_import)可以根据你的蓝图 URL 为你生成它。它会给你如下 Markdown：
+
+```markdown
+[![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fme%2Fmy-blueprints%2Fblob%2Fmain%2Fmotion_light.yaml)
+```
+
+`blueprint_url` 是你的蓝图的 URL，经过 URL 编码。已导入该蓝图的用户也可以从他们的蓝图列表中通过 **分享蓝图** 来分享它：这会创建同样的链接。
+
+正在为某个集成（integration）编写文档？与集成页面配套的蓝图可以放在 home-assistant.io 上。参见[集成页面](https://www.hasscn.top/contributors/writing/reference/integration-page/)。
+
+---
+
+# 发布与更新
+
+> 用户如何通过 Marketplace 获取你的新版本、如何发布预发布版本，以及如何防止某个发布版本被推送到过旧的 Home Assistant 上。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/releases/
+
+Marketplace 的用户可以在 **设置** > **更新** 中获取你的更新，与 Home Assistant 本身的更新并列。每个已安装的仓库都有一个更新实体（entity），其中包含你的发布说明。本页解释这些版本从何而来，以便你控制用户获取的内容。
+
+这适用于集成（integration）、仪表盘（dashboard）插件、主题和模板。蓝图（blueprint）没有发布版本：请参阅[在不破坏蓝图的情况下修改它](https://www.hasscn.top/contributors/marketplace/guides/blueprints/#change-it-without-breaking-it)。
+
+## 发布 GitHub release
+
+你的版本号就是最新 GitHub release 的标签（tag）。仅有标签是不够的：它必须是一个已发布的 release。
+
+如果没有任何 release，用户将获得你默认分支的最新提交，他们看到的版本号是一个提交哈希。这虽然可行，但用户无法区分一个小修复和一次重写。HACS 要求模板以及所有想进入目录的仓库必须有 release。
+
+对于集成，请确保 `manifest.json` 中的版本与标签中的版本一致。Marketplace 拒绝安装清单中没有 `version` 的集成。
+
+## 撰写发布说明
+
+更新实体会显示你的 release 说明：即 GitHub release 的正文。用户正是在这里决定是立即更新还是稍后更新。说明改动了什么，并把用户需要先做的任何事情（例如选项变更或实体被移除）放在最前面。
+
+## 发布版本如何到达用户
+
+1. 你在 GitHub 上发布一个 release。
+2. 目录会收录它。目录的 HACS 数据每 4 小时生成一次。
+3. Marketplace 每 6 小时读取一次目录，更新实体随后显示新版本。
+
+因此，一个 release 可能需要几个小时才会出现。通过链接添加了你仓库的用户则改为通过 GitHub API 获取更新，每 48 小时一次，且仅在连接了 GitHub 的情况下才会获取。
+
+## 预发布版本
+
+在 GitHub 上将一个 release 标记为预发布版本（pre-release），以便与愿意参与测试的用户一起测试。只有当用户打开你仓库的 **预发布版本** 开关时才会收到它，并且仅在该版本比你的最新正式版本更新时才会收到。
+
+## 要求特定的 Home Assistant 版本
+
+当某个 release 需要更新的 Home Assistant 时，请在该 release 的 `hacs.json` 中设置 `homeassistant`：
+
+```json title="hacs.json"
+{
+  "name": "My integration",
+  "homeassistant": "2026.11.0"
+}
+```
+
+Marketplace 不会向使用较旧 Home Assistant 的用户提供该 release。当他们安装时，会显示可用的较早版本。若要同时允许该版本的 beta 版，请添加 `b0`，例如 `"2026.11.0b0"`。这仅适用于有 release 的仓库。
+
+## 以 ZIP 文件形式发布
+
+集成可以以附加到每个 release 的 ZIP 文件形式发布，而不是使用仓库中的文件。将 `zip_release` 设置为 `true`，并将 `filename` 设置为该资源的名称：
+
+```json title="hacs.json"
+{
+  "name": "My integration",
+  "zip_release": true,
+  "filename": "my_integration.zip"
+}
+```
+
+Marketplace 会下载该资源并将其解压到集成文件夹中。当你在发布工作流中构建或生成文件时，可以使用此方式。HACS 仅对集成支持此功能，Marketplace 拒绝对模板使用此方式。
+
+仪表盘卡片不使用 `zip_release`。它们随附一个与其 JavaScript 文件同名的 ZIP 文件，通常以仓库命名：对于 `awesome-card`，即 `awesome-card.zip`。请参阅[以 ZIP 文件形式发布](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#ship-it-as-a-zip-file)。
+
+## 旧版本
+
+用户可以从 Marketplace 中你仓库的菜单安装最新版本以外的其他版本。他们会从你的 release 中选择，因此请保留旧的 release。
+
+## 安全地移除一个 release
+
+如果你删除了一个 release 或其标签，已安装该版本的用户会保留他们的文件。当 Marketplace 在 GitHub 上再也找不到某个版本时，它会回退到默认会安装的版本。
+
+---
+
+# 进入目录
+
+> 将你的仓库添加到 Marketplace 和 HACS 向所有人展示的目录中，了解审查会检查什么，以及重命名和移除是如何运作的。
+
+Source: https://www.hasscn.top/contributors/marketplace/guides/catalog/
+
+Last verified on 2026-10-12, against https://github.com/hacs/documentation/blob/main/source/docs/publish/include.md.
+
+任何用户都可以通过链接添加你的仓库。要让它在没有链接的情况下对所有人显示，它需要被收录进目录。目录是 [hacs/default](https://github.com/hacs/default) 仓库，由 HACS 团队维护，Marketplace 读取同一个目录。你通过一个 pull request 即可加入。
+
+请做好等待的准备。HACS 文档对此很坦诚：新收录的审查需要数月时间。你可以在[积压列表](https://github.com/hacs/default/pulls?q=is%3Apr+is%3Aopen+draft%3Afalse+sort%3Acreated-asc)中查看你的 pull request 的进度。在此期间，用户仍然可以通过链接添加你的仓库。
+
+## 你的仓库的链接
+
+用户用来添加你的仓库的链接是一个 [My link](https://www.hasscn.top/contributors/glossary/my-link/)。它会在他们自己的 Home Assistant 的 Marketplace 中打开你的仓库。当 Marketplace 还不知道你的仓库，且链接中指明了其类别时，它会先提议将其添加为自定义仓库。类别为 `integration`、`plugin`、`template` 或 `theme`，与目录中对应类型的文件相同。
+
+[My link 创建器](https://my.home-assistant.io/create-link/?redirect=marketplace_repository)会根据你仓库的所有者、名称和类别生成链接。将徽章放入你的 README 中：
+
+```markdown
+[![Open your Home Assistant instance and open a repository in the Marketplace.](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=me&repository=my-card&category=plugin)
+```
+
+`marketplace_repository` 链接是 Home Assistant 2026.11 中新增的。较旧的 `hacs_repository` 链接接受相同的 `owner`、`repository` 和 `category`。它在 2026.11 之前打开 HACS，之后打开 Marketplace，因此可以覆盖两边的用户。HACS 在其 [My Home Assistant](https://hacs.xyz/docs/use/my/) 页面上对此进行了说明。
+
+> [!TIP]
+> 徽章是用于 GitHub 的。在 Marketplace 中你的仓库页面上，用户已经有一个安装按钮。请标记徽章以及任何安装步骤，以[将它们从 Marketplace 中排除](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/#leave-part-of-your-readme-out-of-the-marketplace)。
+
+## 谁可以提交
+
+只有仓库的所有者或主要贡献者才能提交。
+
+仅用于测试核心集成的 alpha 或 beta 版本的集成，或者替换核心集成的集成，不会被接受。用户仍然可以通过链接添加它们。
+
+## 在打开 pull request 之前
+
+1. 确保你的仓库满足[其类型的要求](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)，并且有描述、topics、已开启的 issues 以及 README。
+2. 将 [HACS action](https://github.com/hacs/action) 添加到你的仓库，并使其在不忽略任何检查的情况下通过。参见[验证检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)。
+3. 对于集成，添加 [hassfest action](https://github.com/home-assistant/actions#hassfest)，并使其也通过。
+4. 在两者都通过后，发布一个完整的 GitHub release。仅有 tag 是不够的。
+
+## 打开 pull request
+
+1. Fork [hacs/default](https://github.com/hacs/default)，并从 `master` 创建一个新分支。不要直接在 `master` 上工作。
+2. 将你的仓库以 `owner/repository` 的形式添加到其对应类型的文件中：`integration`、`plugin`、`theme` 或 `template`。每个文件都是一个 JSON 列表。按字母顺序添加你的仓库，而不是加在末尾。
+3. 从你自己的账户（而不是组织）打开 pull request，以便 HACS 团队可以编辑它。
+4. 完整填写 pull request 模板：检查清单、指向你最新 release 的链接、指向一次未使用 `ignore` 且通过的 HACS action 运行的链接，对于集成，还需要指向一次通过的 hassfest 运行的链接。
+
+模板填写不完整或包含不实陈述的 pull request 会被直接关闭，不予通知。请求他人审查的 pull request 也是如此。有小问题的仓库，其 pull request 会被设为草稿：修复问题后，再次将其标记为准备好接受审查。有重大问题则会关闭。
+
+这些文件中还有 `appdaemon`、`python_script` 和 `netdaemon` 列表。HACS 仍然会读取它们，但 Marketplace 不会安装这些类型。
+
+## 审查会检查什么
+
+当你的 pull request 进入审查时，会运行自动化检查。所有检查都必须通过，除非 HACS 团队在你打开之前另有约定：
+
+| 检查 | 检查内容 |
+| --- | --- |
+| Brands | 仅限集成。一个至少包含 `icon.png` 的 `brand` 文件夹，或者在 [brands 仓库](https://github.com/home-assistant/brands)中该域名的图片。 |
+| Manifest | 仅限集成。一个有效的 `manifest.json`，包含 `domain`、`documentation`、`issue_tracker`、`codeowners`、`name` 和 `version`。 |
+| HACS validation | HACS 对仓库运行的相同验证。 |
+| HACS manifest | 一个至少包含 `name` 的 `hacs.json`。 |
+| Archived | 仓库未被归档。 |
+| Releases | 至少有一个 release。 |
+| Owner | 你拥有该仓库，或者是主要贡献者。 |
+| Images | 仅限仪表盘插件和主题。README 中有图片。 |
+| Repository | 有描述、已开启的 issues 以及 topics。 |
+| Lint | 你修改的文件是有效的 JSON，并且已排序。 |
+
+在你的 pull request 合并后，你的仓库将被包含在下一次计划扫描中。
+
+## 重命名或移动你的仓库
+
+当你重命名你的仓库，或将其转移到另一个账户时，你不需要做任何事情。HACS 团队会更新目录。
+
+## 将其移除
+
+当你在 GitHub 上归档你的仓库时，HACS 团队会将其从目录中移除。已安装它的用户会保留它，但不会再收到更新，并且一个修复提示会告知他们原因。
+
+如果因其他原因需要将其移除，请在 [hacs/integration](https://github.com/hacs/integration/issues/new?template=removal.yml) 中使用 **Request for repository removal** 模板打开一个 issue。请在删除仓库之前这样做：如果你删除了一个已在目录中的仓库，你将来将无法向目录添加任何仓库。
+
+仓库在被放弃、破坏 Home Assistant、窃取凭据或被删除时也会被移除。有害的仓库会被标记为 critical：Marketplace 随后会立即从每一台安装了它的 Home Assistant 中将其卸载。
+
+---
+
+# Marketplace 参考
+
+> 你需要查阅的细节。hacs.json 文件、文件存放位置，以及安装前的检查内容。
+
+Source: https://www.hasscn.top/contributors/marketplace/reference/
+
+本节中的页面用于查阅信息。有关如何使用它们，请从[指南](https://www.hasscn.top/contributors/marketplace/guides/)开始。
+
+- [hacs.json](https://www.hasscn.top/contributors/marketplace/reference/hacs-json/)：该文件的每个键，以及 Marketplace 如何处理它。
+- [仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)：文件存放位置，按类型分类。
+- [验证检查](https://www.hasscn.top/contributors/marketplace/reference/validation/)：HACS 操作检查的内容，以及 Marketplace 拒绝安装的内容。
+- [主题变量](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/)：主题可以设置的每个变量及其默认值。
+
+---
+
+# hacs.json
+
+> 仓库根目录下 hacs.json 文件中的每个键、HACS 对它的文档说明，以及 Marketplace 如何处理它。
+
+Source: https://www.hasscn.top/contributors/marketplace/reference/hacs-json/
+
+`hacs.json` 向 Marketplace 和 HACS 描述你的仓库。它位于仓库的根目录，每个仓库都需要一个：Marketplace 在安装每个版本时都会读取它，没有它就无法安装或更新仓库。
+
+```json title="hacs.json"
+{
+  "name": "My awesome card",
+  "filename": "my-awesome-card.js",
+  "homeassistant": "2026.11.0"
+}
+```
+
+## 键
+
+| 键 | 类型 | 作用 |
+| --- | --- | --- |
+| `name` | string | 用户看到的名称。HACS 和目录（catalog）均要求提供。如果没有它，Marketplace 会显示集成清单（manifest）中的 `name`，或根据你的仓库名称生成的名称。 |
+| `content_in_root` | boolean | 你的内容位于仓库根目录，而不是在 `custom_components/<domain>/` 或 `themes/` 中。对于仪表盘插件，文件将只在根目录中查找，而不会在发布版本或 `dist` 中查找，因此也不会使用 [ZIP 文件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#ship-it-as-a-zip-file)。 |
+| `filename` | string | 对于仪表盘插件或模板，这是要安装的文件名。使用 `zip_release` 时，这是 ZIP 资产的名称。模板必须提供此键。对于仪表盘插件，如果发布资产中有一个同名但以 `.zip` 结尾的文件，则会安装该文件，参见 [以 ZIP 文件形式发布](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#ship-it-as-a-zip-file)。 |
+| `zip_release` | boolean | 从每个发布版本附带的 ZIP 文件中安装，该文件由 `filename` 指定。HACS 仅支持集成使用此选项，Marketplace 拒绝将其用于模板。 |
+| `persistent_directory` | string | 集成内部的一个文件夹，在更新时保留，路径相对于集成文件夹。仅适用于集成。 |
+| `homeassistant` | string | 此版本所需的最低 Home Assistant 版本，例如 `"2026.11.0"`。添加 `b0`，例如 `"2026.11.0b0"`，以允许该版本的测试版。仅对具有发布版本的仓库进行检查。 |
+| `hide_default_branch` | boolean | HACS 不将默认分支作为可安装的版本提供。 |
+| `hacs` | string | 最低 HACS 版本。Marketplace 会读取它，但不会进行比较。 |
+| `country` | string 或 list | 两位字母的国家代码（[ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)），用于仅在某些国家/地区可用的仓库。在这种情况下，目录会要求提供此信息。Marketplace 不使用它。 |
+
+Marketplace 会忽略类型错误的键，并记录一条警告。其他键会被忽略。
+
+## 版本
+
+`homeassistant` 和 `hacs` 中的版本号使用 [AwesomeVersion](https://github.com/ludeeus/awesomeversion) 进行比较，这也是 Home Assistant 使用的同一个库。[AwesomeVersion 演示](https://awesomeversion.ludeeus.dev/)展示了两个版本如何比较。
+
+## 来源
+
+- Marketplace 读取的内容：core 中 `marketplace` 集成的 [`utils/validate.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/utils/validate.py) 中的 `REPOSITORY_MANIFEST_VALUES`。
+- HACS 文档记录的内容：HACS 发布文档中的 [hacs.json 部分](https://hacs.xyz/docs/publish/start#hacsjson)。
+
+---
+
+# 仓库结构
+
+> 每种类型的文件应放在仓库中的什么位置，Marketplace 会从仓库安装什么，以及这些内容最终会出现在用户配置的哪里。
+
+Source: https://www.hasscn.top/contributors/marketplace/reference/repository-structure/
+
+每种类型都需要一个公开的 GitHub 仓库，根目录中包含 `hacs.json` 和 README。除此之外，每种类型都有自己的布局。一个仓库只包含一种类型的一个项目。
+
+## 所有仓库
+
+| 内容 | 原因 |
+| --- | --- |
+| GitHub 上的公开仓库 | Marketplace 和 HACS 只读取公开的 GitHub 仓库。 |
+| 根目录中的 `hacs.json` | 没有它，Marketplace 无法安装或更新仓库。参见 [hacs.json](https://www.hasscn.top/contributors/marketplace/reference/hacs-json/)。 |
+| `README.md` | 用户在安装前阅读的内容。Marketplace 会在你的仓库页面上显示它，但不包括你[在 Marketplace 中省略的部分](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/#leave-part-of-your-readme-out-of-the-marketplace)。 |
+| GitHub 上的描述 | 显示在 Marketplace 的列表中。目录（catalog）必需。 |
+| GitHub 上的主题（Topics） | 帮助用户找到你的仓库。目录（catalog）必需。 |
+| 开启 Issues | 用户在此报告问题。目录（catalog）必需。 |
+| GitHub Releases | 建议所有类型都使用，模板和目录（catalog）必需。参见 [发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/)。 |
+
+## 将 README 的部分内容排除在 Marketplace 之外
+
+你的 README 承担两项工作。在 GitHub 上，它是人们找到你仓库的地方，因此它告诉他们如何安装，通常带有 [My 链接](https://www.hasscn.top/contributors/glossary/my-link/) 徽章或安装徽章。在 Marketplace 中，它显示在你的仓库页面上，位于安装按钮的正下方。在那里，这些安装步骤会碍事。
+
+将仅用于 GitHub 的部分放在两个 HTML 注释之间，Marketplace 会将其排除：
+
+```markdown title="README.md"
+# 3D printer dashboard
+
+Keep an eye on every print: progress, temperatures, and the camera...
+
+<!-- ha-marketplace:exclude-start -->
+## Installation
+
+Add this repository in the Marketplace, or install it through HACS.
+<!-- ha-marketplace:exclude-end -->
+
+...
+
+## Configuration
+
+...
+```
+
+GitHub 不显示 HTML 注释，因此你的 README 在那里照常显示。
+
+- 一个区块从起始标记开始，到下一个结束标记结束。如果没有结束标记，则一直延伸到 README 的末尾。
+- 标记内的空格是可选的，因此 `<!--ha-marketplace:exclude-start-->` 也可以。
+- 代码块或行内代码中的标记是文本，不是标记。这样，模板 README 可以将其作为示例展示。
+- 你可以标记任意数量的区块。
+
+从 Home Assistant 2026.12 开始，Marketplace 会排除标记的区块。旧版本会显示整个 README，因此你现在就可以添加标记。
+
+## 集成
+
+```text
+custom_components/awesome/__init__.py
+custom_components/awesome/manifest.json
+custom_components/awesome/sensor.py
+custom_components/awesome/brand/icon.png
+hacs.json
+README.md
+```
+
+- 每个仓库一个集成，位于 `custom_components/<domain>/`。Marketplace 会取 `custom_components/` 中的第一个文件夹。
+- 集成所需的一切都在该文件夹内。
+- `manifest.json` 中的 `domain` 只能包含小写字母、数字、下划线和连字符，并且要有 `version`。HACS 还要求提供 `documentation`、`issue_tracker`、`codeowners` 和 `name`。
+- 使用 `content_in_root` 时，集成的文件改为放在仓库的根目录中。
+- 安装到 `custom_components/<domain>/`。
+
+参见 [自定义集成](https://www.hasscn.top/contributors/marketplace/guides/integrations/)。
+
+## 仪表盘（dashboard）
+
+```text
+dist/awesome-card.js
+hacs.json
+README.md
+```
+
+- 一个以仓库命名的 JavaScript 文件：`<name>.js`、`<name>.umd.js` 或 `<name>-bundle.js`。对于 `<name>.js`，也会尝试去掉 `lovelace-` 前缀的名称。任何其他名称都放在 `hacs.json` 的 `filename` 中。
+- 该文件附加在你的最新发布中，或位于根目录，或位于 `dist` 中。发布也可以将其打包在[以它命名的 ZIP 文件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/#ship-it-as-a-zip-file)中，这需要 Home Assistant 2026.12 或更高版本。
+- 模块所需的文件（如图像）与它一起放在 `dist` 中，附加在发布中，或位于 ZIP 文件中。
+- 安装到 `www/community/<repository name>/`，并作为仪表盘资源添加。
+
+参见 [仪表盘卡片与插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/)。
+
+## 主题（theme）
+
+```text
+themes/awesome.yaml
+hacs.json
+README.md
+```
+
+- 一个位于 `themes/` 中的 YAML 文件。HACS 为每个仓库管理一个主题文件。
+- 使用 `content_in_root` 时，该文件改为放在仓库的根目录中。
+- 必须是有效的 YAML，不能包含 `!include` 或 `!secret` 之类的标签。
+- 安装到 `themes/<name of the theme file>/`。
+
+参见 [主题](https://www.hasscn.top/contributors/marketplace/guides/themes/)。
+
+## 模板（template）
+
+```text
+awesome.jinja
+hacs.json
+README.md
+```
+
+- 一个位于根目录的 `.jinja` 文件，其名称在 `hacs.json` 的 `filename` 中指定。不能放在子文件夹中。
+- UTF-8 编码，且小于 5 MiB。
+- 不使用 `zip_release`。
+- 安装到 `custom_templates/`。
+
+参见 [模板宏](https://www.hasscn.top/contributors/marketplace/guides/templates/)。
+
+## Marketplace 不安装的类型
+
+HACS 还支持 AppDaemon 应用（`apps/`）和 Python 脚本（`python_scripts/`），目录中也有它们的列表。但 Marketplace 不安装这两者。从 2026.11 开始，Home Assistant 还会屏蔽 HACS 自定义集成，因为 Marketplace 已取代它。因此在 2026.11 及更高版本上，这两者都无法安装。
+
+Marketplace 还会拒绝包含 [应用（app）](https://www.hasscn.top/contributors/glossary/app/) 的仓库，这些应用适用于 Home Assistant OS。它们会作为应用仓库添加到 **设置** > **应用** 下：参见 [创建并分享仓库](https://www.hasscn.top/contributors/apps/guides/repository/)。
+
+---
+
+# 校验检查
+
+> 每次推送时检查你的仓库的 HACS action，以及 Marketplace 在判定安装完成之前运行的检查。
+
+Source: https://www.hasscn.top/contributors/marketplace/reference/validation/
+
+有两类检查会审视你的工作。HACS action 在你自己的仓库中运行，目录审查（catalog review）运行的也是它。Marketplace 在用户安装时会运行自己的检查，并拒绝未通过检查的安装。两者都在下面说明。
+
+## HACS action
+
+[hacs/action](https://github.com/hacs/action) 以 GitHub Action 的形式运行与 HACS 相同的校验。将它添加到你的仓库中，文件为 `.github/workflows/validate.yaml`：
+
+```yaml title=".github/workflows/validate.yaml"
+name: Validate
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  validate-hacs:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: HACS validation
+        uses: "hacs/action@main"
+        with:
+          category: "integration"
+```
+
+将 `category` 设置为你的仓库类型：`integration`、用于仪表盘（dashboard）插件的 `plugin`、`theme` 或 `template`。该 action 还接受 `appdaemon` 和 `python_script`，但 Marketplace 不安装这些类型。
+
+它会在每次推送和拉取请求（pull request）时运行，每晚运行，并且当你从 **Actions** 标签页手动启动时也会运行。要固定某个版本而不是 `main`，请在 `@` 后使用标签，并让 Dependabot 保持其更新。
+
+### 输入
+
+| 输入 | |
+| --- | --- |
+| `category` | 必填。仓库的类型。 |
+| `ignore` | 要跳过的检查，以空格分隔。仅用于你自己的运行：目录不接受被忽略的检查。 |
+| `repository` | 要检查的仓库的完整名称（如果不是当前仓库）。 |
+| `comment` | 将结果作为评论发布到拉取请求上。默认为 `true`。 |
+| `github_token` | 要使用的令牌。默认为工作流的令牌。 |
+
+### 可以跳过的检查
+
+| 检查 | 检查内容 |
+| --- | --- |
+| `archived` | 仓库未被归档。 |
+| `brands` | 集成（integration）拥有品牌图片：一个包含 `icon.png` 的 `brand` 文件夹，或 [brands 仓库](https://github.com/home-assistant/brands) 中的图片。 |
+| `description` | 仓库有描述。 |
+| `hacsjson` | `hacs.json` 存在。 |
+| `images` | README 中有图片。 |
+| `information` | 仓库有信息文件，例如 README。 |
+| `integration_categories` | 集成清单（manifest）中的 `categories` 有效：为已知的[集成类别](https://www.hasscn.top/contributors/core/integrations/categories/)，一到三个，且无重复。没有 `categories` 的清单只会收到警告。 |
+| `issues` | Issue 功能已开启。 |
+| `topics` | 仓库有主题（topics）。 |
+
+[目录审查](https://www.hasscn.top/contributors/marketplace/guides/catalog/#what-the-review-checks)会运行比这些更多的检查。
+
+## hassfest
+
+对于集成，还要运行 [hassfest](https://github.com/home-assistant/actions#hassfest)，即核心（core）中的集成所接受的相同校验。目录要求运行它。
+
+```yaml title=".github/workflows/hassfest.yaml"
+name: Validate with hassfest
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  validate:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "home-assistant/actions/hassfest@master"
+```
+
+## Marketplace 检查什么
+
+Marketplace 在安装之前进行检查，并在写入文件之后再次检查。当写入后的检查失败时，文件会被恢复到安装之前的状态。
+
+| 检查 | 类型 | 失败原因 |
+| --- | --- | --- |
+| 根目录中的 `hacs.json` | 全部 | 没有它的仓库无法安装或更新。 |
+| 未归档、未移除 | 全部 | 已归档的仓库无法安装，目录移除的大多数仓库也无法安装。 |
+| 文件位于正确位置 | 全部 | 没有文件位于[仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/)规定的位置。 |
+| 最低 Home Assistant 版本 | 全部（有发布版本） | 该发布版本需要比用户拥有的更新版本的 Home Assistant。用户会被提供较旧的版本。 |
+| 域名 | 集成 | `manifest.json` 中的 `domain` 包含小写字母、数字、下划线和连字符以外的字符。 |
+| 域名的所有者 | 集成 | 另一个已安装的仓库具有相同的域名。 |
+| 替换内置集成 | 集成 | 该域名属于核心，且用户未确认。 |
+| 可加载的清单 | 集成 | 写入后：`manifest.json` 具有另一个域名，或没有加载器接受的 `version`。 |
+| 文件夹的所有者 | 仪表盘、主题 | 另一个已安装的仓库使用相同的文件夹。 |
+| 模块存在 | 仪表盘 | 写入后：JavaScript 文件缺失。 |
+| 模块的 ZIP 文件 | 仪表盘 | 名为 JavaScript 文件、以 `.zip` 结尾的发布资产已损坏、过大、在卡片文件夹之外有文件，或在其根目录或根目录的单个文件夹中没有 JavaScript 文件。Marketplace 会安装发布版本的其他资产，并在 JavaScript 文件不在其中时失败。 |
+| 主题 YAML | 主题 | 写入后：带有标签的 YAML 文件，或未通过主题校验的文件。 |
+| 模板文件 | 模板 | `filename` 不是根目录中的 `.jinja` 文件，设置了 `zip_release`，或另一个仓库具有该名称的文件。写入后：文件不是 UTF-8 编码，或大于 5 MiB。 |
+| 下载大小 | 全部 | 下载或解压后的 ZIP 文件超过 100 MiB，或超过 50,000 个文件。 |
+
+这些检查位于核心的 `marketplace` 集成中：[`homeassistant/components/marketplace/repositories/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/marketplace/repositories)。
+
+---
+
+# 主题变量
+
+> 主题可以设置的每个变量，及其在浅色和深色模式下的默认值。
+
+Source: https://www.hasscn.top/contributors/marketplace/reference/theme-variables/
+
+<!-- 由 `pnpm theme-variables` 从 scripts/theme-variables/ 生成。请编辑那些文件，而不是此文件。 -->
+
+[主题](https://www.hasscn.top/contributors/glossary/theme/)设置前端的变量。此页面列出了主题可以设置的变量及其默认值。有关如何编写主题以及大多数主题设置哪些变量的信息，请从[发布主题](https://www.hasscn.top/contributors/marketplace/guides/themes/)开始。
+
+此页面上的表格是从前端源代码生成的，位于 `dev` 分支的 [`afcf7d4e08`](https://github.com/home-assistant/frontend/commit/afcf7d4e080b86bc2bf01e32070099e60dc74dab) 提交。变量可以在任何版本中重命名或删除，因此请在每个测试版中测试您的主题。
+
+在主题文件中，变量前面没有 `--`，就像此页面显示的那样。在前端源代码和 CSS 中，它有：您主题中的 `primary-color` 在代码中是 `--primary-color`。
+
+许多默认值指向另一个变量，例如 `var(--primary-color)`。这些变量会跟随该变量：更改 `primary-color`，所有默认值指向它的变量都会随之更改。因此，请先设置链条顶部的变量，并且只在需要不同效果的地方设置其下方的变量。
+
+**深色**列显示前端在深色模式下使用的值（当它与浅色模式不同时）。**未设置**表示前端在该模式下未设置任何值，读取该变量的组件会使用它们自己的默认值。
+
+## 设计令牌
+
+较新的组件使用[设计令牌](https://www.hasscn.top/contributors/glossary/design-token/)，其名称以 `ha-` 开头。主题也可以设置它们。设计区域显示了其中几个及其用途，因此此处不再重复：
+
+- [颜色](https://www.hasscn.top/contributors/design/foundations/color/)：调色板，如 `ha-color-primary-40`。设置主调色板以将您的颜色应用于较新的组件，如[发布主题](https://www.hasscn.top/contributors/marketplace/guides/themes/#the-design-tokens)所述。
+- [间距](https://www.hasscn.top/contributors/design/foundations/spacing/)：间距比例，`ha-space-1` 到 `ha-space-20`，以及圆角比例，`ha-border-radius-*`。
+- [排版](https://www.hasscn.top/contributors/design/foundations/typography/)：字体大小，`ha-font-size-*`。
+
+其他令牌如下，按定义它们的前端文件分组，以及在同一文件中设置的一些较旧变量，如 `header-height`。
+
+### 边框、圆角和动画
+
+来自 [`src/resources/theme/core.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/core.globals.ts)。
+
+| 变量 | 默认值 |
+| --- | --- |
+| `ha-border-width-sm` | `1px` |
+| `ha-border-width-md` | `2px` |
+| `ha-border-width-lg` | `3px` |
+| `ha-picture-border-radius` | `var(--ha-border-radius-lg)` |
+| `ha-picture-border-radius-sm` | `var(--ha-border-radius-sm)` |
+| `ha-content-width-narrow` | `720px` |
+| `ha-content-width-wide` | `1280px` |
+| `ha-content-gutter` | `var(--ha-space-4)` |
+| `ha-animation-duration-none` | `1ms` |
+| `ha-animation-duration-instant` | `75ms` |
+| `ha-animation-duration-fast` | `150ms` |
+| `ha-animation-duration-normal` | `250ms` |
+| `ha-animation-duration-slow` | `350ms` |
+
+### 页眉和对话框
+
+来自 [`src/resources/theme/main.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/main.globals.ts)。
+
+| 变量 | 默认值 |
+| --- | --- |
+| `header-height` | `56px` |
+| `ha-dialog-scrim-backdrop-filter` | `brightness(68%)` |
+
+### 排版
+
+来自 [`src/resources/theme/typography.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/typography.globals.ts)。
+
+| 变量 | 默认值 |
+| --- | --- |
+| `ha-font-family-body` | `Roboto, Noto, sans-serif` |
+| `ha-font-family-code` | `monospace` |
+| `ha-font-family-longform` | `ui-sans-serif, system-ui, sans-serif` |
+| `ha-font-size-scale` | `1` |
+| `ha-font-weight-light` | `300` |
+| `ha-font-weight-normal` | `400` |
+| `ha-font-weight-medium` | `500` |
+| `ha-font-weight-bold` | `700` |
+| `ha-font-family-heading` | `var(--ha-font-family-body)` |
+| `ha-font-weight-body` | `var(--ha-font-weight-normal)` |
+| `ha-font-weight-heading` | `var(--ha-font-weight-bold)` |
+| `ha-font-weight-action` | `var(--ha-font-weight-medium)` |
+| `ha-line-height-condensed` | `1.2` |
+| `ha-line-height-normal` | `1.6` |
+| `ha-line-height-expanded` | `2` |
+| `ha-font-smoothing` | `antialiased` |
+| `ha-moz-osx-font-smoothing` | `grayscale` |
+
+### 阴影
+
+来自 [`src/resources/theme/semantic.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/semantic.globals.ts)。
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `ha-box-shadow-s` | `0 1px 2px 0 rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.12)` | `0 1px 2px 0 rgba(0, 0, 0, 0.4), 0 1px 3px 0 rgba(0, 0, 0, 0.5)` |
+| `ha-box-shadow-m` | `0 3px 6px -1px rgba(0, 0, 0, 0.1), 0 8px 16px -2px rgba(0, 0, 0, 0.15)` | `0 3px 6px -1px rgba(0, 0, 0, 0.35), 0 8px 16px -2px rgba(0, 0, 0, 0.45)` |
+| `ha-box-shadow-l` | `0 6px 12px -3px rgba(0, 0, 0, 0.12), 0 16px 32px -6px rgba(0, 0, 0, 0.2)` | `0 6px 12px -3px rgba(0, 0, 0, 0.4), 0 16px 32px -6px rgba(0, 0, 0, 0.55)` |
+
+### 纯色
+
+来自 [`src/resources/theme/color/core.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/core.globals.ts)。
+
+| 变量 | 默认值 |
+| --- | --- |
+| `ha-color-black` | `#000000` |
+| `ha-color-white` | `#ffffff` |
+
+### 语义颜色
+
+来自 [`src/resources/theme/color/semantic.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/semantic.globals.ts)。
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `ha-color-focus` | `var(--ha-color-neutral-60)` | 相同 |
+| `ha-color-text-primary` | `var(--ha-color-neutral-05)` | `var(--white-color)` |
+| `ha-color-text-secondary` | `var(--ha-color-neutral-40)` | `var(--ha-color-neutral-80)` |
+| `ha-color-text-disabled` | `var(--ha-color-neutral-60)` | 相同 |
+| `ha-color-text-link` | `var(--ha-color-primary-40)` | `var(--ha-color-primary-60)` |
+| `ha-color-text-primary-inverted` | `var(--ha-color-white)` | `var(--ha-color-black)` |
+| `ha-color-text-secondary-inverted` | `var(--ha-color-neutral-20)` | `var(--ha-color-neutral-40)` |
+| `ha-color-border-primary-quiet` | `var(--ha-color-primary-90)` | 相同 |
+| `ha-color-border-primary-normal` | `var(--ha-color-primary-70)` | 相同 |
+| `ha-color-border-primary-loud` | `var(--ha-color-primary-40)` | 相同 |
+| `ha-color-border-neutral-quiet` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-40)` |
+| `ha-color-border-neutral-normal` | `var(--ha-color-neutral-60)` | `var(--ha-color-neutral-50)` |
+| `ha-color-border-neutral-loud` | `var(--ha-color-neutral-40)` | `var(--ha-color-neutral-70)` |
+| `ha-color-border-danger-quiet` | `var(--ha-color-red-90)` | 相同 |
+| `ha-color-border-danger-normal` | `var(--ha-color-red-70)` | `var(--ha-color-red-50)` |
+| `ha-color-border-danger-loud` | `var(--ha-color-red-40)` | `var(--ha-color-red-50)` |
+| `ha-color-border-warning-quiet` | `var(--ha-color-orange-90)` | 相同 |
+| `ha-color-border-warning-normal` | `var(--ha-color-orange-70)` | `var(--ha-color-orange-50)` |
+| `ha-color-border-warning-loud` | `var(--ha-color-orange-40)` | `var(--ha-color-orange-50)` |
+| `ha-color-border-success-quiet` | `var(--ha-color-green-90)` | 相同 |
+| `ha-color-border-success-normal` | `var(--ha-color-green-70)` | 相同 |
+| `ha-color-border-success-loud` | `var(--ha-color-green-40)` | 相同 |
+| `ha-color-fill-primary-quiet-resting` | `var(--ha-color-primary-95)` | `var(--ha-color-primary-05)` |
+| `ha-color-fill-primary-quiet-hover` | `var(--ha-color-primary-90)` | `var(--ha-color-primary-10)` |
+| `ha-color-fill-primary-quiet-active` | `var(--ha-color-primary-95)` | `var(--ha-color-primary-05)` |
+| `ha-color-fill-primary-normal-resting` | `var(--ha-color-primary-90)` | `var(--ha-color-primary-10)` |
+| `ha-color-fill-primary-normal-hover` | `var(--ha-color-primary-80)` | `var(--ha-color-primary-20)` |
+| `ha-color-fill-primary-normal-active` | `var(--ha-color-primary-90)` | `var(--ha-color-primary-10)` |
+| `ha-color-fill-primary-loud-resting` | `var(--ha-color-primary-40)` | 相同 |
+| `ha-color-fill-primary-loud-hover` | `var(--ha-color-primary-30)` | 相同 |
+| `ha-color-fill-primary-loud-active` | `var(--ha-color-primary-40)` | 相同 |
+| `ha-color-fill-neutral-quiet-resting` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-05)` |
+| `ha-color-fill-neutral-quiet-hover` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-10)` |
+| `ha-color-fill-neutral-quiet-active` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-00)` |
+| `ha-color-fill-neutral-normal-resting` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-10)` |
+| `ha-color-fill-neutral-normal-hover` | `var(--ha-color-neutral-80)` | `var(--ha-color-neutral-20)` |
+| `ha-color-fill-neutral-normal-active` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-10)` |
+| `ha-color-fill-neutral-loud-resting` | `var(--ha-color-neutral-40)` | `var(--ha-color-neutral-60)` |
+| `ha-color-fill-neutral-loud-hover` | `var(--ha-color-neutral-30)` | `var(--ha-color-neutral-70)` |
+| `ha-color-fill-neutral-loud-active` | `var(--ha-color-neutral-40)` | `var(--ha-color-neutral-60)` |
+| `ha-color-fill-disabled-quiet-resting` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-10)` |
+| `ha-color-fill-disabled-quiet-hover` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-20)` |
+| `ha-color-fill-disabled-normal-resting` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-20)` |
+| `ha-color-fill-disabled-normal-hover` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-30)` |
+| `ha-color-fill-disabled-loud-resting` | `var(--ha-color-neutral-80)` | `var(--ha-color-neutral-30)` |
+| `ha-color-fill-disabled-loud-hover` | `var(--ha-color-neutral-70)` | `var(--ha-color-neutral-40)` |
+| `ha-color-fill-danger-quiet-resting` | `var(--ha-color-red-95)` | `var(--ha-color-red-05)` |
+| `ha-color-fill-danger-quiet-hover` | `var(--ha-color-red-90)` | `var(--ha-color-red-10)` |
+| `ha-color-fill-danger-quiet-active` | `var(--ha-color-red-95)` | `var(--ha-color-red-05)` |
+| `ha-color-fill-danger-normal-resting` | `var(--ha-color-red-90)` | `var(--ha-color-red-10)` |
+| `ha-color-fill-danger-normal-hover` | `var(--ha-color-red-80)` | `var(--ha-color-red-20)` |
+| `ha-color-fill-danger-normal-active` | `var(--ha-color-red-90)` | `var(--ha-color-red-10)` |
+| `ha-color-fill-danger-loud-resting` | `var(--ha-color-red-50)` | `var(--ha-color-red-40)` |
+| `ha-color-fill-danger-loud-hover` | `var(--ha-color-red-40)` | `var(--ha-color-red-30)` |
+| `ha-color-fill-danger-loud-active` | `var(--ha-color-red-50)` | `var(--ha-color-red-40)` |
+| `ha-color-fill-warning-quiet-resting` | `var(--ha-color-orange-95)` | `var(--ha-color-orange-05)` |
+| `ha-color-fill-warning-quiet-hover` | `var(--ha-color-orange-90)` | `var(--ha-color-orange-10)` |
+| `ha-color-fill-warning-quiet-active` | `var(--ha-color-orange-95)` | `var(--ha-color-orange-05)` |
+| `ha-color-fill-warning-normal-resting` | `var(--ha-color-orange-90)` | `var(--ha-color-orange-10)` |
+| `ha-color-fill-warning-normal-hover` | `var(--ha-color-orange-80)` | `var(--ha-color-orange-20)` |
+| `ha-color-fill-warning-normal-active` | `var(--ha-color-orange-90)` | `var(--ha-color-orange-10)` |
+| `ha-color-fill-warning-loud-resting` | `var(--ha-color-orange-70)` | `var(--ha-color-orange-40)` |
+| `ha-color-fill-warning-loud-hover` | `var(--ha-color-orange-50)` | `var(--ha-color-orange-30)` |
+| `ha-color-fill-warning-loud-active` | `var(--ha-color-orange-70)` | `var(--ha-color-orange-40)` |
+| `ha-color-fill-success-quiet-resting` | `var(--ha-color-green-95)` | `var(--ha-color-green-05)` |
+| `ha-color-fill-success-quiet-hover` | `var(--ha-color-green-90)` | `var(--ha-color-green-10)` |
+| `ha-color-fill-success-quiet-active` | `var(--ha-color-green-95)` | `var(--ha-color-green-05)` |
+| `ha-color-fill-success-normal-resting` | `var(--ha-color-green-90)` | `var(--ha-color-green-10)` |
+| `ha-color-fill-success-normal-hover` | `var(--ha-color-green-80)` | `var(--ha-color-green-20)` |
+| `ha-color-fill-success-normal-active` | `var(--ha-color-green-90)` | `var(--ha-color-green-10)` |
+| `ha-color-fill-success-loud-resting` | `var(--ha-color-green-50)` | `var(--ha-color-green-40)` |
+| `ha-color-fill-success-loud-hover` | `var(--ha-color-green-40)` | `var(--ha-color-green-30)` |
+| `ha-color-fill-success-loud-active` | `var(--ha-color-green-50)` | `var(--ha-color-green-40)` |
+| `ha-color-on-primary-quiet` | `var(--ha-color-primary-50)` | `var(--ha-color-primary-70)` |
+| `ha-color-on-primary-normal` | `var(--ha-color-primary-40)` | `var(--ha-color-primary-60)` |
+| `ha-color-on-primary-loud` | `var(--white-color)` | 相同 |
+| `ha-color-on-neutral-quiet` | `var(--ha-color-neutral-50)` | `var(--ha-color-neutral-70)` |
+| `ha-color-on-neutral-normal` | `var(--ha-color-neutral-40)` | `var(--ha-color-neutral-60)` |
+| `ha-color-on-neutral-loud` | `var(--white-color)` | 相同 |
+| `ha-color-on-disabled-quiet` | `var(--ha-color-neutral-80)` | `var(--ha-color-neutral-40)` |
+| `ha-color-on-disabled-normal` | `var(--ha-color-neutral-70)` | `var(--ha-color-neutral-50)` |
+| `ha-color-on-disabled-loud` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-50)` |
+| `ha-color-on-danger-quiet` | `var(--ha-color-red-50)` | `var(--ha-color-red-70)` |
+| `ha-color-on-danger-normal` | `var(--ha-color-red-40)` | `var(--ha-color-red-60)` |
+| `ha-color-on-danger-loud` | `var(--white-color)` | 相同 |
+| `ha-color-on-warning-quiet` | `var(--ha-color-orange-50)` | `var(--ha-color-orange-70)` |
+| `ha-color-on-warning-normal` | `var(--ha-color-orange-40)` | `var(--ha-color-orange-60)` |
+| `ha-color-on-warning-loud` | `var(--white-color)` | 相同 |
+| `ha-color-on-success-quiet` | `var(--ha-color-green-50)` | `var(--ha-color-green-70)` |
+| `ha-color-on-success-normal` | `var(--ha-color-green-40)` | `var(--ha-color-green-60)` |
+| `ha-color-on-success-loud` | `var(--white-color)` | 相同 |
+| `ha-color-surface-default` | `var(--ha-color-white)` | `var(--ha-color-neutral-10)` |
+| `ha-color-surface-low` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-05)` |
+| `ha-color-surface-lower` | `var(--ha-color-neutral-90)` | `var(--ha-color-black)` |
+| `ha-color-surface-default-inverted` | `var(--ha-color-neutral-10)` | `var(--ha-color-white)` |
+| `ha-color-surface-low-inverted` | `var(--ha-color-neutral-05)` | `var(--ha-color-neutral-95)` |
+| `ha-color-surface-lower-inverted` | `var(--ha-color-black)` | `var(--ha-color-90)` |
+| `ha-color-on-surface-default` | `var(--ha-color-neutral-05)` | `var(--ha-color-neutral-95)` |
+| `ha-color-form-background` | `var(--ha-color-neutral-95)` | `var(--ha-color-neutral-20)` |
+| `ha-color-form-background-hover` | `var(--ha-color-neutral-90)` | `var(--ha-color-neutral-30)` |
+| `ha-color-form-background-disabled` | `var(--ha-color-neutral-80)` | `var(--ha-color-neutral-20)` |
+| `ha-color-shadow-scrollable-fade` | `rgba(0, 0, 0, 0.08)` | 相同 |
+| `ha-color-border-normal` | 未设置 | `var(--ha-color-primary-50)` |
+
+## 组件变量
+
+某些组件会读取它们自己的变量，并在组件本身中具有默认值。这些是专为主题设计的变量。当主题未设置某个变量时，组件将使用表中的默认值。
+
+### 卡片
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `ha-card-background` | `var(--card-background-color, white)` | 卡片的背景。 |
+| `ha-card-backdrop-filter` | `none` | 卡片后面的背景滤镜，例如模糊。 |
+| `ha-card-border-radius` | `var(--ha-border-radius-lg)` | 卡片角落的圆度。许多其他表面（如磁贴和扩展面板）都遵循它。 |
+| `ha-card-border-width` | `1px` | 卡片边框的宽度。 |
+| `ha-card-border-color` | `var(--divider-color, #e0e0e0)` | 卡片边框的颜色。 |
+| `ha-card-box-shadow` | `none` | 卡片的阴影。 |
+| `ha-card-header-color` | `var(--primary-text-color)` | 卡片标题的颜色。 |
+| `ha-card-header-font-family` | `inherit` | 卡片标题的字体。 |
+| `ha-card-header-font-size` | `var(--ha-font-size-2xl)` | 卡片标题的大小。 |
+| `ha-card-feature-gap` | `12px` | 卡片功能之间的空间。 |
+
+### 仪表盘布局
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `masonry-view-card-margin` | `4px 4px 8px` | 瀑布流和侧边栏视图中卡片周围的边距。 |
+| `ha-view-sections-column-min-width` | `320px` | 分区视图列的最窄宽度。 |
+| `ha-view-sections-column-max-width` | `500px` | 分区视图列的最宽宽度。 |
+| `ha-view-sections-column-gap` | `32px` | 分区视图列之间的空间。 |
+| `ha-view-sections-narrow-column-gap` | `8px` | 窄屏幕上分区视图列之间的空间。 |
+| `ha-view-sections-row-gap` | `24px` | 分区视图行之间的空间。 |
+| `ha-view-sections-row-height` | `56px` | 分区视图行的高度。 |
+| `ha-view-sections-extra-top-margin` | `80px` | 分区视图上方的空间。 |
+| `ha-section-grid-column-gap` | `8px` | 分区中并排卡片之间的空间。 |
+| `ha-section-grid-row-gap` | `8px` | 分区中卡片行之间的空间。 |
+| `ha-section-grid-row-height` | `56px` | 分区中卡片行的高度。 |
+| `ha-section-background-color` | `var(--secondary-background-color)` | 已启用背景的分区的背景。 |
+| `ha-section-border-radius` | `var(--ha-border-radius-xl)` | 分区角落的圆度。 |
+| `grid-card-gap` | `8px` | 网格卡片中卡片之间的空间。 |
+| `stack-card-gap` | `8px` | 水平或垂直堆叠卡片中卡片之间的空间。 |
+| `horizontal-stack-card-gap` | `var(--stack-card-gap, 8px)` | 水平堆叠卡片中卡片之间的空间。 |
+| `vertical-stack-card-gap` | `var(--stack-card-gap, 8px)` | 垂直堆叠卡片中卡片之间的空间。 |
+
+### 卡片和行
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `ha-heading-card-title-color` | `var(--primary-text-color)` | 标题卡片标题的颜色。 |
+| `ha-heading-card-title-font-size` | `var(--ha-font-size-l)` | 标题卡片标题的大小。 |
+| `ha-heading-card-subtitle-color` | `var(--secondary-text-color)` | 标题卡片副标题的颜色。 |
+| `ha-picture-card-text-color` | `white` | 图片实体和图片概览卡片图片顶部的文本。 |
+| `ha-picture-icon-button-color` | `#a9a9a9` | 图片概览卡片的图标，用于关闭的实体。 |
+| `ha-picture-icon-button-on-color` | `white` | 图片概览卡片的图标，用于开启的实体。 |
+| `section-header-text-color` | `var(--primary-text-color)` | 实体卡片中分区行的标签。 |
+| `entities-divider-color` | `var(--divider-color)` | 实体卡片中分隔线或分区行的线条。 |
+
+### 徽章
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `ha-heading-badge-text-color` | `var(--secondary-text-color)` | 标题卡片徽章的文本。 |
+| `ha-heading-badge-font-size` | `var(--ha-font-size-m)` | 标题卡片徽章文本的大小。 |
+| `ha-heading-badge-font-weight` | `400` | 标题卡片徽章文本的粗细。 |
+| `ha-heading-badge-line-height` | `20px` | 标题卡片徽章的行高。 |
+| `ha-heading-badge-size` | `26px` | 标题卡片按钮徽章的高度。 |
+| `ha-heading-badge-icon-size` | `16px` | 标题卡片按钮徽章图标的大小。 |
+| `ha-label-badge-color` | `var(--primary-color)` | 标签徽章的环和标签背景。 |
+| `ha-label-badge-label-color` | `white` | 标签徽章标签的文本。 |
+| `ha-label-badge-label-text-transform` | `uppercase` | 标签徽章标签的大写。 |
+| `ha-label-badge-size` | `2.5em` | 标签徽章的大小。 |
+| `ha-label-badge-font-size` | `1.5em` | 标签徽章中值的大小。 |
+| `ha-label-badge-border-radius` | `50%` | 标签徽章的圆度。 |
+| `ha-label-badge-padding` | `0 0 0 0` | 标签徽章周围的填充。 |
+| `ha-label-badge-title-font-size` | `0.9em` | 标签徽章下方标题的大小。 |
+| `ha-label-badge-title-width` | `5em` | 标签徽章下方标题的宽度。 |
+
+### 仪表盘页眉
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `app-header-backdrop-filter` | `none` | 仪表盘页眉后面的背景滤镜，例如模糊。 |
+| `app-header-edit-background-color` | `#455a64` | 编辑仪表盘时的页眉。 |
+| `app-header-edit-text-color` | `white` | 编辑仪表盘时页眉中的文本和图标。 |
+
+### Markdown
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `markdown-link-color` | `var(--primary-color)` | Markdown 中的链接，例如 Markdown 卡片中的链接。 |
+| `markdown-code-text-color` | `inherit` | Markdown 中代码的文本。 |
+| `markdown-list-indent` | `revert` | Markdown 中列表的缩进。 |
+| `markdown-table-border-color` | `var(--divider-color)` | Markdown 中表格边框的颜色。 |
+| `markdown-table-border-width` | `1px` | Markdown 中表格边框的宽度。 |
+| `markdown-table-border-style` | `solid` | Markdown 中表格边框的样式。 |
+| `markdown-table-padding-inline` | `0.5em` | Markdown 表格单元格中左右的空间。 |
+| `markdown-table-padding-block` | `0.25em` | Markdown 表格单元格中上下的空间。 |
+| `markdown-table-text-align` | `start` | Markdown 中表格文本的对齐方式。 |
+
+### 代码编辑器
+
+| 变量 | 默认值 | 更改内容 |
+| --- | --- | --- |
+| `code-editor-background-color` | `var(--card-background-color)` | 代码编辑器的背景。 |
+| `code-editor-gutter-color` | `var(--secondary-background-color, whitesmoke)` | 代码编辑器的装订线，带有行号。 |
+
+## 经典变量
+
+较旧的变量，来自 [`src/resources/theme/color/color.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/color.globals.ts)。大多数主题仍然设置它们，许多组件仍然使用它们。
+
+同一文件中以 `mdc-` 开头的变量被省略：它们将这些变量传递给较旧的组件，并自行跟随它们。
+
+您不需要设置 `rgb-` 变量。当主题将变量设置为十六进制颜色（如 `primary-color: "#03a9f4"`）时，前端会从中设置 `rgb-primary-color`。仅当颜色不是十六进制值（如 `rgb()` 或 `var()`）时，才自行设置 `rgb-` 变量。
+
+### 主要颜色
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `primary-color` | `var(--ha-color-primary-40)` | 相同 |
+| `dark-primary-color` | `#0288d1` | 相同 |
+| `darker-primary-color` | `#016194` | 相同 |
+| `light-primary-color` | `#b3e5fc` | 相同 |
+| `accent-color` | `#ff9800` | 相同 |
+| `divider-color` | `rgba(0, 0, 0, 0.12)` | `rgba(225, 225, 225, 0.12)` |
+| `outline-color` | `rgba(0, 0, 0, 0.12)` | `rgba(225, 225, 225, 0.12)` |
+| `outline-hover-color` | `rgba(0, 0, 0, 0.24)` | `rgba(225, 225, 225, 0.24)` |
+| `shadow-color` | `rgba(0, 0, 0, 0.16)` | `rgba(0, 0, 0, 0.48)` |
+| `scrollbar-thumb-color` | `rgb(194, 194, 194)` | `rgb(110, 110, 110)` |
+| `error-color` | `#db4437` | 相同 |
+| `warning-color` | `#ffa600` | 相同 |
+| `success-color` | `#43a047` | 相同 |
+| `info-color` | `#039be5` | 相同 |
+| `disabled-color` | `#bdbdbd` | `#464646` |
+
+### 文本
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `primary-text-color` | `var(--ha-color-text-primary)` | `#e1e1e1` |
+| `secondary-text-color` | `var(--ha-color-text-secondary)` | `#9b9b9b` |
+| `text-primary-color` | `#ffffff` | 相同 |
+| `text-light-primary-color` | `#212121` | 相同 |
+| `disabled-text-color` | `#bdbdbd` | `#6f6f6f` |
+
+### 背景
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `card-background-color` | `#ffffff` | `#1c1c1c` |
+| `primary-background-color` | `#fafafa` | `#111111` |
+| `secondary-background-color` | `#e5e5e5` | `#282828` |
+| `clear-background-color` | `#ffffff` | `#111111` |
+
+### RGB 变体
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `rgb-primary-color` | `0, 154, 199` | 相同 |
+| `rgb-accent-color` | `255, 152, 0` | 相同 |
+| `rgb-primary-text-color` | `33, 33, 33` | `225, 225, 225` |
+| `rgb-secondary-text-color` | `114, 114, 114` | `155, 155, 155` |
+| `rgb-text-primary-color` | `255, 255, 255` | 相同 |
+| `rgb-card-background-color` | `255, 255, 255` | `28, 28, 28` |
+| `rgb-warning-color` | `255, 166, 0` | 相同 |
+| `rgb-error-color` | `219, 68, 55` | 相同 |
+| `rgb-success-color` | `67, 160, 71` | 相同 |
+| `rgb-info-color` | `3, 155, 229` | 相同 |
+
+### 侧边栏
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `sidebar-text-color` | `var(--primary-text-color)` | 相同 |
+| `sidebar-background-color` | `var(--card-background-color)` | 相同 |
+| `sidebar-selected-text-color` | `var(--primary-color)` | 相同 |
+| `sidebar-selected-icon-color` | `var(--primary-color)` | 相同 |
+| `sidebar-icon-color` | `rgba(var(--rgb-primary-text-color), 0.6)` | 相同 |
+
+### 页眉
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `app-header-text-color` | `var(--sidebar-text-color)` | 相同 |
+| `app-header-background-color` | `var(--sidebar-background-color)` | 相同 |
+| `app-header-border-bottom` | `1px solid var(--divider-color)` | 相同 |
+| `app-theme-color` | `var(--app-header-background-color)` | 相同 |
+
+### 实体状态
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `state-icon-color` | `#44739e` | 相同 |
+| `state-active-color` | `var(--amber-color)` | 相同 |
+| `state-inactive-color` | `var(--grey-color)` | 相同 |
+| `state-unavailable-color` | `var(--state-icon-unavailable-color, var(--disabled-text-color))` | 相同 |
+| `state-alarm_control_panel-armed_away-color` | `var(--green-color)` | 相同 |
+| `state-alarm_control_panel-armed_custom_bypass-color` | `var(--green-color)` | 相同 |
+| `state-alarm_control_panel-armed_home-color` | `var(--green-color)` | 相同 |
+| `state-alarm_control_panel-armed_night-color` | `var(--green-color)` | 相同 |
+| `state-alarm_control_panel-armed_vacation-color` | `var(--green-color)` | 相同 |
+| `state-alarm_control_panel-arming-color` | `var(--orange-color)` | 相同 |
+| `state-alarm_control_panel-disarming-color` | `var(--orange-color)` | 相同 |
+| `state-alarm_control_panel-pending-color` | `var(--orange-color)` | 相同 |
+| `state-alarm_control_panel-triggered-color` | `var(--red-color)` | 相同 |
+| `state-alert-off-color` | `var(--orange-color)` | 相同 |
+| `state-alert-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-active-color` | `var(--amber-color)` | 相同 |
+| `state-binary_sensor-battery-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-carbon_monoxide-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-gas-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-glass_break-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-heat-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-lock-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-moisture-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-problem-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-safety-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-smoke-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-sound-on-color` | `var(--red-color)` | 相同 |
+| `state-binary_sensor-tamper-on-color` | `var(--red-color)` | 相同 |
+| `state-climate-auto-color` | `var(--green-color)` | 相同 |
+| `state-climate-cool-color` | `var(--blue-color)` | 相同 |
+| `state-climate-dry-color` | `var(--orange-color)` | 相同 |
+| `state-climate-fan_only-color` | `var(--cyan-color)` | 相同 |
+| `state-climate-heat-color` | `var(--deep-orange-color)` | 相同 |
+| `state-climate-heat-cool-color` | `var(--amber-color)` | 相同 |
+| `state-cover-active-color` | `var(--purple-color)` | 相同 |
+| `state-device_tracker-active-color` | `var(--blue-color)` | 相同 |
+| `state-device_tracker-home-color` | `var(--green-color)` | 相同 |
+| `state-fan-active-color` | `var(--cyan-color)` | 相同 |
+| `state-humidifier-on-color` | `var(--blue-color)` | 相同 |
+| `state-lawn_mower-active-color` | `var(--teal-color)` | 相同 |
+| `state-lawn_mower-error-color` | `var(--red-color)` | 相同 |
+| `state-light-active-color` | `var(--amber-color)` | 相同 |
+| `state-lock-jammed-color` | `var(--red-color)` | 相同 |
+| `state-lock-locked-color` | `var(--green-color)` | 相同 |
+| `state-lock-locking-color` | `var(--orange-color)` | 相同 |
+| `state-lock-unlocked-color` | `var(--red-color)` | 相同 |
+| `state-lock-unlocking-color` | `var(--orange-color)` | 相同 |
+| `state-lock-open-color` | `var(--red-color)` | 相同 |
+| `state-lock-opening-color` | `var(--orange-color)` | 相同 |
+| `state-media_player-active-color` | `var(--light-blue-color)` | 相同 |
+| `state-person-active-color` | `var(--blue-color)` | 相同 |
+| `state-person-home-color` | `var(--green-color)` | 相同 |
+| `state-plant-active-color` | `var(--red-color)` | 相同 |
+| `state-siren-active-color` | `var(--red-color)` | 相同 |
+| `state-sun-above_horizon-color` | `var(--amber-color)` | 相同 |
+| `state-sun-below_horizon-color` | `var(--indigo-color)` | 相同 |
+| `state-switch-active-color` | `var(--amber-color)` | 相同 |
+| `state-update-active-color` | `var(--orange-color)` | 相同 |
+| `state-vacuum-active-color` | `var(--teal-color)` | 相同 |
+| `state-vacuum-error-color` | `var(--red-color)` | 相同 |
+| `state-valve-active-color` | `var(--blue-color)` | 相同 |
+| `state-sensor-battery-high-color` | `var(--green-color)` | 相同 |
+| `state-sensor-battery-low-color` | `var(--red-color)` | 相同 |
+| `state-sensor-battery-medium-color` | `var(--orange-color)` | 相同 |
+| `state-water_heater-eco-color` | `var(--green-color)` | 相同 |
+| `state-water_heater-electric-color` | `var(--orange-color)` | 相同 |
+| `state-water_heater-gas-color` | `var(--orange-color)` | 相同 |
+| `state-water_heater-heat_pump-color` | `var(--orange-color)` | 相同 |
+| `state-water_heater-high_demand-color` | `var(--deep-orange-color)` | 相同 |
+| `state-water_heater-performance-color` | `var(--deep-orange-color)` | 相同 |
+| `state-weather-clear_night-color` | `var(--deep-purple-color)` | 相同 |
+| `state-weather-cloudy-color` | `var(--light-grey-color)` | 相同 |
+| `state-weather-exceptional-color` | `var(--red-color)` | 相同 |
+| `state-weather-fog-color` | `var(--grey-color)` | 相同 |
+| `state-weather-hail-color` | `var(--cyan-color)` | 相同 |
+| `state-weather-lightning_rainy-color` | `var(--lime-color)` | 相同 |
+| `state-weather-lightning-color` | `var(--yellow-color)` | 相同 |
+| `state-weather-partlycloudy-color` | `var(--blue-grey-color)` | 相同 |
+| `state-weather-pouring-color` | `var(--indigo-color)` | 相同 |
+| `state-weather-rainy-color` | `var(--blue-color)` | 相同 |
+| `state-weather-snowy_rainy-color` | `var(--light-blue-color)` | 相同 |
+| `state-weather-snowy-color` | `#c0e0ff` | 相同 |
+| `state-weather-sunny-color` | `var(--amber-color)` | 相同 |
+| `state-weather-windy_variant-color` | `var(--green-color)` | 相同 |
+| `state-weather-windy-color` | `var(--green-color)` | 相同 |
+| `state-icon-error-color` | `var(--error-state-color, var(--error-color))` | 相同 |
+
+### 能源
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `energy-grid-consumption-color` | `#488fc2` | 相同 |
+| `energy-grid-return-color` | `#8353d1` | `#a280db` |
+| `energy-solar-color` | `#ff9800` | 相同 |
+| `energy-non-fossil-color` | `#0f9d58` | 相同 |
+| `energy-battery-out-color` | `#4db6ac` | 相同 |
+| `energy-battery-in-color` | `#f06292` | 相同 |
+| `energy-gas-color` | `#8e021b` | 相同 |
+| `energy-water-color` | `#00bcd4` | 相同 |
+
+### 历史记录
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `history-unavailable-color` | `transparent` | 相同 |
+| `history-unknown-color` | `var(--dark-grey-color)` | 相同 |
+
+### 输入
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `input-idle-line-color` | `rgba(0, 0, 0, 0.42)` | `rgba(255, 255, 255, 0.42)` |
+| `input-hover-line-color` | `rgba(0, 0, 0, 0.87)` | `rgba(255, 255, 255, 0.87)` |
+| `input-disabled-line-color` | `rgba(0, 0, 0, 0.06)` | `rgba(255, 255, 255, 0.06)` |
+| `input-outlined-idle-border-color` | `rgba(0, 0, 0, 0.38)` | `rgba(255, 255, 255, 0.38)` |
+| `input-outlined-hover-border-color` | `rgba(0, 0, 0, 0.87)` | `rgba(255, 255, 255, 0.87)` |
+| `input-outlined-disabled-border-color` | `rgba(0, 0, 0, 0.06)` | `rgba(255, 255, 255, 0.06)` |
+| `input-fill-color` | `rgb(245, 245, 245)` | `rgba(255, 255, 255, 0.05)` |
+| `input-disabled-fill-color` | `rgb(250, 250, 250)` | `rgba(255, 255, 255, 0.02)` |
+| `input-ink-color` | `rgba(0, 0, 0, 0.87)` | `rgba(255, 255, 255, 0.87)` |
+| `input-label-ink-color` | `rgba(0, 0, 0, 0.6)` | `rgba(255, 255, 255, 0.6)` |
+| `input-disabled-ink-color` | `rgba(0, 0, 0, 0.37)` | `rgba(255, 255, 255, 0.37)` |
+| `input-dropdown-icon-color` | `rgba(0, 0, 0, 0.54)` | `rgba(255, 255, 255, 0.54)` |
+
+### 滑块
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `slider-color` | `var(--primary-color)` | 相同 |
+| `slider-secondary-color` | `var(--light-primary-color)` | 相同 |
+| `slider-track-color` | `var(--scrollbar-thumb-color)` | 相同 |
+
+### 表格
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `table-header-background-color` | `var(--input-fill-color)` | 相同 |
+| `table-row-background-color` | `var(--primary-background-color)` | 相同 |
+| `table-row-alternative-background-color` | `var(--secondary-background-color)` | 相同 |
+| `data-table-background-color` | `var(--card-background-color)` | 相同 |
+
+### 标签徽章
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `label-badge-grey` | `#9e9e9e` | 相同 |
+| `label-badge-red` | `var(--error-color)` | 相同 |
+| `label-badge-blue` | `var(--info-color)` | 相同 |
+| `label-badge-green` | `var(--success-color)` | 相同 |
+| `label-badge-yellow` | `var(--warning-color)` | 相同 |
+| `label-badge-background-color` | `var(--card-background-color)` | 相同 |
+| `label-badge-text-color` | `rgba(var(--rgb-primary-text-color), 0.8)` | 相同 |
+
+### Markdown
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `markdown-code-background-color` | `var(--primary-background-color)` | 相同 |
+
+### 按钮和芯片
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `ha-assist-chip-filled-container-color` | `rgba(var(--rgb-primary-text-color), 0.15)` | 相同 |
+| `ha-assist-chip-active-container-color` | `rgba(var(--rgb-primary-color), 0.15)` | 相同 |
+| `chip-background-color` | `rgba(var(--rgb-primary-text-color), 0.15)` | 相同 |
+| `ha-button-primary-light-color` | 未设置 | `#4082a040` |
+| `ha-button-warning-light-color` | 未设置 | `#917b54c1` |
+| `ha-button-neutral-color` | 未设置 | `#d9dae0` |
+| `ha-button-neutral-light-color` | 未设置 | `#6a7081` |
+
+### 图表颜色
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `color-1` | `#4269d0` | 相同 |
+| `color-2` | `#f4bd4a` | 相同 |
+| `color-3` | `#ff725c` | 相同 |
+| `color-4` | `#6cc5b0` | 相同 |
+| `color-5` | `#a463f2` | 相同 |
+| `color-6` | `#ff8ab7` | 相同 |
+| `color-7` | `#9c6b4e` | 相同 |
+| `color-8` | `#97bbf5` | 相同 |
+| `color-9` | `#01ab63` | 相同 |
+| `color-10` | `#094bad` | 相同 |
+| `color-11` | `#c99000` | 相同 |
+| `color-12` | `#d84f3e` | 相同 |
+| `color-13` | `#49a28f` | 相同 |
+| `color-14` | `#048732` | 相同 |
+| `color-15` | `#d96895` | 相同 |
+| `color-16` | `#8043ce` | 相同 |
+| `color-17` | `#7599d1` | 相同 |
+| `color-18` | `#7a4c31` | 相同 |
+| `color-19` | `#6989f4` | 相同 |
+| `color-20` | `#ffd444` | 相同 |
+| `color-21` | `#ff957c` | 相同 |
+| `color-22` | `#8fe9d3` | 相同 |
+| `color-23` | `#62cc71` | 相同 |
+| `color-24` | `#ffadda` | 相同 |
+| `color-25` | `#c884ff` | 相同 |
+| `color-26` | `#badeff` | 相同 |
+| `color-27` | `#bf8b6d` | 相同 |
+| `color-28` | `#927acc` | 相同 |
+| `color-29` | `#97ee3f` | 相同 |
+| `color-30` | `#bf3947` | 相同 |
+| `color-31` | `#9f5b00` | 相同 |
+| `color-32` | `#f48758` | 相同 |
+| `color-33` | `#8caed6` | 相同 |
+| `color-34` | `#f2b94f` | 相同 |
+| `color-35` | `#eff26e` | 相同 |
+| `color-36` | `#e43872` | 相同 |
+| `color-37` | `#d9b100` | 相同 |
+| `color-38` | `#9d7a00` | 相同 |
+| `color-39` | `#698cff` | 相同 |
+| `color-40` | `#00d27e` | 相同 |
+| `color-41` | `#d06800` | 相同 |
+| `color-42` | `#009f82` | 相同 |
+| `color-43` | `#c49200` | 相同 |
+| `color-44` | `#cbe8ff` | 相同 |
+| `color-45` | `#fecddf` | 相同 |
+| `color-46` | `#c27eb6` | 相同 |
+| `color-47` | `#8cd2ce` | 相同 |
+| `color-48` | `#c4b8d9` | 相同 |
+| `color-49` | `#f883b0` | 相同 |
+| `color-50` | `#a49100` | 相同 |
+| `color-51` | `#f48800` | 相同 |
+| `color-52` | `#27d0df` | 相同 |
+| `color-53` | `#a04a9b` | 相同 |
+| `color-54` | `#4269d0` | 相同 |
+
+### 代码编辑器语法
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `codemirror-keyword` | 未设置 | `#c792ea` |
+| `codemirror-operator` | 未设置 | `#89ddff` |
+| `codemirror-variable` | 未设置 | `#f07178` |
+| `codemirror-variable-2` | 未设置 | `#eeffff` |
+| `codemirror-variable-3` | 未设置 | `#decb6b` |
+| `codemirror-builtin` | 未设置 | `#ffcb6b` |
+| `codemirror-atom` | 未设置 | `#f78c6c` |
+| `codemirror-number` | 未设置 | `#ff5370` |
+| `codemirror-def` | 未设置 | `#82aaff` |
+| `codemirror-string` | 未设置 | `#c3e88d` |
+| `codemirror-string-2` | 未设置 | `#f07178` |
+| `codemirror-comment` | 未设置 | `#545454` |
+| `codemirror-tag` | 未设置 | `#ff5370` |
+| `codemirror-meta` | 未设置 | `#ffcb6b` |
+| `codemirror-attribute` | 未设置 | `#c792ea` |
+| `codemirror-property` | 未设置 | `#c792ea` |
+| `codemirror-qualifier` | 未设置 | `#decb6b` |
+| `codemirror-type` | 未设置 | `#decb6b` |
+
+### 命名颜色
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `red-color` | `#f44336` | 相同 |
+| `pink-color` | `#e91e63` | 相同 |
+| `purple-color` | `#926bc7` | 相同 |
+| `deep-purple-color` | `#6e41ab` | 相同 |
+| `indigo-color` | `#3f51b5` | 相同 |
+| `blue-color` | `#2196f3` | 相同 |
+| `light-blue-color` | `#03a9f4` | 相同 |
+| `cyan-color` | `#00bcd4` | 相同 |
+| `teal-color` | `#009688` | 相同 |
+| `green-color` | `#4caf50` | 相同 |
+| `light-green-color` | `#8bc34a` | 相同 |
+| `lime-color` | `#cddc39` | 相同 |
+| `yellow-color` | `#ffeb3b` | 相同 |
+| `amber-color` | `#ffc107` | 相同 |
+| `orange-color` | `#ff9800` | 相同 |
+| `deep-orange-color` | `#ff6f22` | 相同 |
+| `brown-color` | `#795548` | 相同 |
+| `light-grey-color` | `#bdbdbd` | 相同 |
+| `grey-color` | `#9e9e9e` | 相同 |
+| `dark-grey-color` | `#606060` | 相同 |
+| `blue-grey-color` | `#607d8b` | 相同 |
+| `black-color` | `#000000` | 相同 |
+| `white-color` | `#ffffff` | 相同 |
+
+### 其他
+
+| 变量 | 浅色 | 深色 |
+| --- | --- | --- |
+| `bar-box-shadow` | `0 2px 12px var(--shadow-color)` | 相同 |
+| `map-filter` | 未设置 | `invert(0.9) hue-rotate(170deg) brightness(1.5) contrast(1.2) saturate(0.3)` |

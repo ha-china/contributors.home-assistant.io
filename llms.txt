@@ -1,0 +1,341 @@
+# Home Assistant 贡献者
+
+> 为 Home Assistant 做贡献所需的一切：代码、设计、文档、翻译与社区。 This is the contributor site of Home Assistant, the open source home automation platform, for everyone who contributes: developers, designers, documentation writers, translators, community moderators, and the people who run releases. It replaces developers.home-assistant.io, design.home-assistant.io, and data.home-assistant.io.
+
+Every page is also available as Markdown: add `index.md` to its URL, like https://www.hasscn.top/contributors/core/integrations/config-flow/index.md. The links below go to those Markdown versions. Each area has its own list of all its pages at `/<area>/llms.txt`, and the full text of its pages at `/<area>/llms-full.txt`. The full text of every page of the site is in https://www.hasscn.top/contributors/llms-full.txt. That file is large, so prefer the file of the area you need.
+
+## 快速上手
+
+了解项目如何运作，以及如何完成你的第一次贡献。
+
+- [快速上手](https://www.hasscn.top/contributors/start/index.md): Home Assistant 项目是如何运作的、大家在哪里交流，以及无论你的技能水平如何，如何做出你的第一次贡献。
+- [你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/index.md): 选择适合你技能的路径，迈出一小步作为开始。大多数路径不需要任何代码。
+- [使用 GitHub，无需成为开发者](https://www.hasscn.top/contributors/start/github/index.md): 什么是仓库、issue、fork、分支、commit 和 pull request，以及如何完全在浏览器中对 Home Assistant 做一个小改动。
+- [我们在哪里交流](https://www.hasscn.top/contributors/start/where-we-talk/index.md): Discord、社区论坛和 GitHub。哪个地方适合做什么，以及每个领域的人可以在哪里找到。
+- [报告缺陷（bug）](https://www.hasscn.top/contributors/start/report-a-bug/index.md): 应该在哪个仓库报告缺陷、缺陷报告表单会询问什么内容以及在哪里找到这些信息，以及报告之后会发生什么。
+- [拉取请求与评审](https://www.hasscn.top/contributors/start/pull-requests/index.md): 如何创建一个易于评审的拉取请求（pull request）、创建之后会发生什么，以及如何帮助它被合并。适用于所有仓库。
+- [作为贡献者成长](https://www.hasscn.top/contributors/start/grow/index.md): 第一次拉取请求之后是什么。审查、分类问题、负责一个集成、承担角色，以及这一切能通向哪里。
+- [项目是如何组织的](https://www.hasscn.top/contributors/start/organization/index.md): 谁拥有 Home Assistant，谁为它出资，工作在哪里进行，以及由谁决定合并哪些内容。
+- [我们的原则](https://www.hasscn.top/contributors/start/principles/index.md): Home Assistant 所坚持的理念，以及我们如何协作。这些价值观是你在评审和讨论中看到的各项决定背后的依据。
+- [使用 AI 工具参与贡献](https://www.hasscn.top/contributors/start/ai-tools/index.md): 在贡献时如何用好 AI 编程工具。AI 政策对你的要求、各仓库为智能体（agent）准备的指令和技能、常见任务的工作流程，以及每次都需要自己检查的内容。
+- [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/index.md): Open Home Foundation 的 AI 政策。你可以在贡献时使用 AI 工具，但你要对自己提交的每一处更改负责，且不允许使用自主智能体（autonomous agents）。
+- [许可与 CLA](https://www.hasscn.top/contributors/start/licensing/index.md): Home Assistant 使用哪些许可证，贡献者许可协议（Contributor License Agreement）的内容是什么，以及如何签署。
+- [行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/index.md): 我们在所有协作空间中如何彼此相待，以及遇到不妥之事时该如何处理。
+
+The pages of this area: [快速上手](https://www.hasscn.top/contributors/start/llms.txt). Their full text: [快速上手, full text](https://www.hasscn.top/contributors/start/llms-full.txt).
+
+## 核心与集成
+
+Python、核心与集成平台。
+
+This area has 191 pages. Below are its starting points. The pages of this area: [核心与集成](https://www.hasscn.top/contributors/core/llms.txt). Their full text: [核心与集成, full text](https://www.hasscn.top/contributors/core/llms-full.txt).
+
+- [核心与集成](https://www.hasscn.top/contributors/core/index.md): Python、核心与集成平台。构建和改进集成、参与 Home Assistant Core 本身开发所需的一切。
+- [你对 core 的首次贡献](https://www.hasscn.top/contributors/core/first-contribution/index.md): 搭建开发环境，找一些小的修复任务，然后向 Home Assistant Core 发起你的第一个拉取请求（pull request）。
+- [开发工作流](https://www.hasscn.top/contributors/core/development/index.md): 代码如何从你的机器进入 Home Assistant 发布版本。包括环境、工具、检查和评审流程。
+- [构建集成](https://www.hasscn.top/contributors/core/integrations/index.md): 关于集成组成的全部内容，从清单文件（manifest）和配置流程到数据获取、发现和诊断。
+- [实体](https://www.hasscn.top/contributors/core/entities/index.md): 实体在 Home Assistant Core 中的工作原理，以及每个实体平台（从传感器和灯光到语音和 AI）的参考。
+- [集成质量等级](https://www.hasscn.top/contributors/core/quality-scale/index.md): 描述集成好坏程度的等级与规则：集成如何获得某个等级，以及如何提升等级。
+- [核心的工作原理](https://www.hasscn.top/contributors/core/internals/index.md): Home Assistant Core 的内部构造。包括 hass 对象、事件、状态、asyncio、身份认证、各类 API，以及语音和 AI 构建模块。
+
+## Frontend
+
+仪表盘、面板与对话框。
+
+This area has 37 pages. Below are its starting points. The pages of this area: [Frontend](https://www.hasscn.top/contributors/frontend/llms.txt). Their full text: [Frontend, full text](https://www.hasscn.top/contributors/frontend/llms-full.txt).
+
+- [前端](https://www.hasscn.top/contributors/frontend/index.md): Home Assistant 的网页界面。它如何构建、如何参与开发，以及如何用你自己的卡片、面板和仪表盘来扩展它。
+- [你的第一次前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/index.md): 搭建前端环境，将其连接到 Home Assistant 实例运行，做一个小改动，然后提交你的第一个 pull request。
+- [开发](https://www.hasscn.top/contributors/frontend/development/index.md): 前端开发本身所需的一切内容：环境、运行方式、画廊与演示、编码指南、测试以及审查。
+- [前端架构](https://www.hasscn.top/contributors/frontend/architecture/index.md): 前端是如何组装起来的，从最先加载的脚本，到各个面板、对话框，以及在其中流转的数据。
+- [自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/index.md): 构建卡片、卡片功能、徽章、视图、仪表盘策略和面板，供用户加载到自己的 Home Assistant 中，而无需修改前端。
+- [扩展前端](https://www.hasscn.top/contributors/frontend/extending/index.md): 与 Core 中的更改相配套的前端更改，例如为新域（domain）提供更多信息视图，或为集成提供 WebSocket 命令。
+- [前端参考](https://www.hasscn.top/contributors/frontend/reference/index.md): 命令、hass 对象，以及前端与配套应用之间的桥梁。您需要查阅的详细信息。
+
+## Apps
+
+打包与 Home Assistant 协同运行的软件。
+
+This area has 42 pages. Below are its starting points. The pages of this area: [Apps](https://www.hasscn.top/contributors/apps/llms.txt). Their full text: [Apps, full text](https://www.hasscn.top/contributors/apps/llms-full.txt).
+
+- [应用（Apps）](https://www.hasscn.top/contributors/apps/index.md): 打包与 Home Assistant 并行运行的软件，由 Supervisor 管理。构建一个应用，测试它，并与所有人分享。
+- [为官方应用做贡献](https://www.hasscn.top/contributors/apps/first-contribution/index.md): 帮助改进官方应用、基础镜像以及每个应用都依赖的构建工具。构建你的第一个应用，然后选择你想出力的地方。
+- [你的第一个应用](https://www.hasscn.top/contributors/apps/first-app/index.md): 构建一个“Hello world”应用，安装到你自己的 Home Assistant 上，并逐步将其扩展为一个带选项的小型 Web 服务器。
+- [构建一个真实的应用](https://www.hasscn.top/contributors/apps/build-a-real-app/index.md): 完整地走一遍一个应用，看看有经验的应用开发者是如何搭建的。使用 S6 overlay 的服务、使用 Bashio 的选项、翻译、文档、CI 和发布。
+- [应用的工作原理](https://www.hasscn.top/contributors/apps/how-apps-work/index.md): Supervisor 如何处理你的应用，从仓库到运行中的容器，以及在此过程中你会遇到的各种名称和文件夹。
+- [应用指南](https://www.hasscn.top/contributors/apps/guides/index.md): 按任务逐一介绍如何使用应用。从容器镜像到发布你的仓库。
+- [应用参考](https://www.hasscn.top/contributors/apps/reference/index.md): 构建应用时需要查阅的详细信息。配置键、Bashio 函数、文件、运行时环境以及安全评级。
+- [Bashio](https://www.hasscn.top/contributors/apps/bashio/index.md): 应用基础镜像中的 shell 函数库。如何加载它、它会改变脚本中的什么，以及它拥有的每一个函数。
+- [Supervisor API](https://www.hasscn.top/contributors/apps/supervisor-api/index.md): Supervisor 提供给应用的 REST API，如何进行身份验证，你的应用可以调用哪些内容，以及响应的格式。
+
+## 应用市场
+
+发布集成、卡片、主题和蓝图，供他人安装。
+
+- [市场（Marketplace）](https://www.hasscn.top/contributors/marketplace/index.md): 与所有运行 Home Assistant 的用户分享你的作品。发布自定义集成、仪表盘卡片、主题、模板宏和蓝图，并保持它们及时更新。
+- [分享你的第一个蓝图](https://www.hasscn.top/contributors/marketplace/first-contribution/index.md): 把家里已经在正常运行的自动化改造成蓝图，自己导入测试，然后分享到 Blueprint Exchange。
+- [Marketplace 的工作原理](https://www.hasscn.top/contributors/marketplace/how-it-works/index.md): Marketplace 如何找到你的仓库、检查它、安装它并保持更新，以及蓝图（blueprint）如何在不经过 Marketplace 的情况下共享和更新。
+- [Marketplace 指南](https://www.hasscn.top/contributors/marketplace/guides/index.md): 如何发布各类作品、保持其更新，并将其收录到目录中。
+- [发布自定义集成](https://www.hasscn.top/contributors/marketplace/guides/integrations/index.md): 当你的集成位于独立仓库而不是 core 中时有什么不同，以及 Marketplace 对它的要求。
+- [发布仪表盘卡片或插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/index.md): 打包自定义卡片、卡片功能、徽章或其他 JavaScript 模块，让 Marketplace 能够安装它并在每个仪表盘上加载。
+- [发布主题](https://www.hasscn.top/contributors/marketplace/guides/themes/index.md): 编写主题文件、选择要设置的变量、支持浅色和深色模式、进行测试，并打包以供 Marketplace 使用。
+- [发布模板宏](https://www.hasscn.top/contributors/marketplace/guides/templates/index.md): 分享可供他人导入到自己模板中的 Jinja 宏，以单个模板文件的形式由 Marketplace 安装到 custom_templates 中。
+- [编写并分享蓝图](https://www.hasscn.top/contributors/marketplace/guides/blueprints/index.md): 编写一个带有良好输入项和选择器的蓝图，进行测试，在不破坏他人已有配置的前提下进行修改，并分享它。
+- [发布与更新](https://www.hasscn.top/contributors/marketplace/guides/releases/index.md): 用户如何通过 Marketplace 获取你的新版本、如何发布预发布版本，以及如何防止某个发布版本被推送到过旧的 Home Assistant 上。
+- [进入目录](https://www.hasscn.top/contributors/marketplace/guides/catalog/index.md): 将你的仓库添加到 Marketplace 和 HACS 向所有人展示的目录中，了解审查会检查什么，以及重命名和移除是如何运作的。
+- [Marketplace 参考](https://www.hasscn.top/contributors/marketplace/reference/index.md): 你需要查阅的细节。hacs.json 文件、文件存放位置，以及安装前的检查内容。
+- [hacs.json](https://www.hasscn.top/contributors/marketplace/reference/hacs-json/index.md): 仓库根目录下 hacs.json 文件中的每个键、HACS 对它的文档说明，以及 Marketplace 如何处理它。
+- [仓库结构](https://www.hasscn.top/contributors/marketplace/reference/repository-structure/index.md): 每种类型的文件应放在仓库中的什么位置，Marketplace 会从仓库安装什么，以及这些内容最终会出现在用户配置的哪里。
+- [校验检查](https://www.hasscn.top/contributors/marketplace/reference/validation/index.md): 每次推送时检查你的仓库的 HACS action，以及 Marketplace 在判定安装完成之前运行的检查。
+- [主题变量](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/index.md): 主题可以设置的每个变量，及其在浅色和深色模式下的默认值。
+
+The pages of this area: [应用市场](https://www.hasscn.top/contributors/marketplace/llms.txt). Their full text: [应用市场, full text](https://www.hasscn.top/contributors/marketplace/llms-full.txt).
+
+## 伴侣应用
+
+Android、iOS 与 macOS。
+
+This area has 37 pages. Below are its starting points. The pages of this area: [伴侣应用](https://www.hasscn.top/contributors/companion/llms.txt). Their full text: [伴侣应用, full text](https://www.hasscn.top/contributors/companion/llms-full.txt).
+
+- [伴侣应用（Companion apps）](https://www.hasscn.top/contributors/companion/index.md): 适用于 Android、iOS、iPadOS、macOS、watchOS、Wear OS 以及车载系统的官方 Home Assistant 应用。它们是如何构建的，以及如何参与构建。
+- [你的第一次伴侣应用贡献](https://www.hasscn.top/contributors/companion/first-contribution/index.md): 选择 Android 或 Apple，在你的机器上构建应用，并提交你的第一个 pull request。
+- [Android](https://www.hasscn.top/contributors/companion/android/index.md): 适用于 Android、Wear OS、Android Auto 和 Android Automotive 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+- [Apple](https://www.hasscn.top/contributors/companion/apple/index.md): 适用于 iPhone、iPad、Mac、Apple Watch 和 CarPlay 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+- [移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/index.md): 应用如何通过 mobile_app 集成连接到 Home Assistant。包括注册、webhook、传感器、位置、通知以及 web 视图。
+
+## 操作系统与 Supervisor
+
+操作系统、硬件板与更新。
+
+- [操作系统与 Supervisor](https://www.hasscn.top/contributors/os/index.md): 参与 Home Assistant OS 和 Supervisor 的开发工作，这两个组件将一块开发板或一台虚拟机变成一个能够运行、自我更新和自我修复的 Home Assistant 系统。
+- [你对 Supervisor 的首次贡献](https://www.hasscn.top/contributors/os/first-contribution/index.md): 在开发容器中运行 Supervisor，做一个小改动，运行测试，然后提交你的第一个 pull request。
+- [安装类型](https://www.hasscn.top/contributors/os/installation-types/index.md): Home Assistant OS 和 Supervisor 在哪些安装类型中使用，在哪些中不使用，以及这对你的代码意味着什么。
+- [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/index.md): Home Assistant OS 的组成、启动方式，以及其代码仓库的组织结构。
+- [构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/index.md): 设置构建容器并为开发板构建 Home Assistant OS。
+- [测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/index.md): 在 QEMU 中启动你的镜像、运行自动化测试，并将你的构建安装到真实设备上。
+- [配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/index.md): 使用 CONFIG USB 驱动器，或直接在主机的持久化文件夹中更改 Home Assistant OS 的主机设置。
+- [配置网络](https://www.hasscn.top/contributors/os/operating-system/networking/index.md): Home Assistant OS 如何通过 NetworkManager 管理网络，以及如何配置 UI 未覆盖的部分。
+- [调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/index.md): 通过 SSH 或控制台在 Home Assistant OS 上获取 root shell，并找到所需的日志。
+- [发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/index.md): Home Assistant OS 的更改如何从拉取请求（pull request）走到发布，包括涉及的分支、版本号和构建流水线。
+- [分区](https://www.hasscn.top/contributors/os/operating-system/partitions/index.md): Home Assistant OS 的磁盘布局、每个分区的内容，以及数据磁盘功能如何移动数据分区。
+- [更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/index.md): Home Assistant OS 如何通过 RAUC 和双启动槽位进行自我更新、更新包如何签名，以及如何安装自己构建的版本。
+- [板卡元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/index.md): 每块板卡的 meta 文件中的变量，以及所有板卡共享的版本文件。
+- [支持的开发板](https://www.hasscn.top/contributors/os/operating-system/boards/index.md): Home Assistant OS 构建所面向的每一块开发板，包括其构建目标、引导加载程序和机器类型。
+- [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/index.md): Home Assistant OS 在 Raspberry Pi 上的特定内容，例如串行控制台、I2C 以及从 USB 启动。
+- [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/index.md): Hardkernel ODROID 在 Home Assistant OS 下的 specifics，例如 eMMC 安装、M1 和 M1S 的启动流程以及控制台。
+- [通用系统](https://www.hasscn.top/contributors/os/operating-system/generic/index.md): 通用 x86-64 和 aarch64 目标，适用于通过 UEFI 启动的 PC 和其他系统。
+- [虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/index.md): ova 目标、它构建的虚拟磁盘格式，以及运行 Home Assistant OS 的虚拟机所需的条件。
+- [Supervisor](https://www.hasscn.top/contributors/os/supervisor/index.md): Supervisor 的作用、它运行的内容，以及它与应用和 Supervisor API 的关系。
+- [任务](https://www.hasscn.top/contributors/os/supervisor/jobs/index.md): Supervisor 如何以任务（job）的形式运行工作，包括条件、并发限制、节流，以及客户端可以跟踪的进度。
+- [解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/index.md): Supervisor 如何通过检查和评估发现问题、将其跟踪为议题，并通过建议进行修复。
+- [插件](https://www.hasscn.top/contributors/os/supervisor/plugins/index.md): Supervisor 在 Home Assistant Core 旁边运行的五个插件、每个插件的作用，以及它们的代码所在位置。
+- [调试 Supervisor](https://www.hasscn.top/contributors/os/supervisor/debugging/index.md): 将 Python 调试器附加到本地或远程设备上正在运行的 Supervisor，并查找其日志。
+- [将 Core 连接到 Supervisor](https://www.hasscn.top/contributors/os/supervisor/core-connection/index.md): 在你的开发环境中运行 Home Assistant Core，连接真实的 Supervisor，以便开发 hassio 集成。
+- [Supervisor 架构](https://www.hasscn.top/contributors/os/supervisor/architecture/index.md): Supervisor 代码是如何组织的、它如何启动，以及更新和备份在其中的工作方式。
+- [搭建开发环境](https://www.hasscn.top/contributors/os/supervisor/development/index.md): 在开发容器中从源码运行 Supervisor，运行测试和代码检查工具，并在真实系统上试用你的构建版本。
+
+The pages of this area: [操作系统与 Supervisor](https://www.hasscn.top/contributors/os/llms.txt). Their full text: [操作系统与 Supervisor, full text](https://www.hasscn.top/contributors/os/llms-full.txt).
+
+## 设计
+
+基础、组件、模式与界面文案。
+
+This area has 108 pages. Below are its starting points. The pages of this area: [设计](https://www.hasscn.top/contributors/design/llms.txt). Their full text: [设计, full text](https://www.hasscn.top/contributors/design/llms-full.txt).
+
+- [设计](https://www.hasscn.top/contributors/design/index.md): Home Assistant 的开放设计资源。为共同构建界面的设计师和开发者提供原则、基础、组件和模式。
+- [你的第一次设计贡献](https://www.hasscn.top/contributors/design/first-contribution/index.md): 找到可以改进的地方，设计更好的方案，并分享出来。以下是入门方法。
+- [我们如何进行设计](https://www.hasscn.top/contributors/design/how-we-design/index.md): 设计工作在哪里进行，一个想法如何成为 Home Assistant 的一部分，由谁决定，以及研究如何塑造设计。
+- [设计原则](https://www.hasscn.top/contributors/design/principles/index.md): 每一个设计决策背后的价值观。开放之家（Open Home）对界面意味着什么，以及 Home Assistant 的个性如何在其中体现。
+- [我们为谁设计](https://www.hasscn.top/contributors/design/users/index.md): 在做设计决策时我们时刻记挂的三类用户。
+- [基础](https://www.hasscn.top/contributors/design/foundations/index.md): 颜色、排版、间距、动效和无障碍。Home Assistant 中一切设计背后的设计令牌（design token）和规则。
+- [组件](https://www.hasscn.top/contributors/design/components/index.md): Home Assistant 界面的构建模块，每个组件一页，包含指南、规格、无障碍信息和代码。
+- [模式](https://www.hasscn.top/contributors/design/patterns/index.md): Home Assistant 界面中反复出现的情形，例如表单、等待、空列表或错误，以及前端如何处理它们。
+- [仪表盘](https://www.hasscn.top/contributors/design/dashboards/index.md): 什么是仪表盘和卡片，如何选择合适的卡片，以及每张卡片遵循的原则。
+- [更多信息](https://www.hasscn.top/contributors/design/more-info/index.md): 选择实体时打开的对话框，以及每种类型的实体在其中呈现的视图。
+- [UI 文本](https://www.hasscn.top/contributors/design/ui-text/index.md): 界面如何说话。Home Assistant 的语气、风格和用词，适用于每一位编写标签、按钮或错误信息的人。
+
+## 品牌
+
+Home Assistant 是谁、说话是什么腔调，以及如何使用它的名称和标志。
+
+- [品牌](https://www.hasscn.top/contributors/brand/index.md): Home Assistant 是谁、它听起来是什么样，以及如何使用它的名称和标志。面向每一位为项目写作、设计、翻译或代言的人。
+- [你的第一次品牌贡献](https://www.hasscn.top/contributors/brand/first-contribution/index.md): 选择一个页面或一段界面文本，对照 Home Assistant 的个性来阅读它，并加以改进。
+- [我们的故事与价值观](https://www.hasscn.top/contributors/brand/our-story/index.md): 开放之家（Open Home），Home Assistant 每一个决策背后的三大价值观，以及这个项目的由来。
+- [品牌个性](https://www.hasscn.top/contributors/brand/personality/index.md): 描述 Home Assistant 是什么的五个特质，每个特质的含义，以及每个特质不是什么。
+- [语气与风格](https://www.hasscn.top/contributors/brand/voice-and-tone/index.md): Home Assistant 的个性在文档、界面、错误消息、社区回复、发布说明和社交媒体中如何呈现。
+- [名称与标志](https://www.hasscn.top/contributors/brand/name-and-logo/index.md): 如何书写 Home Assistant 名称、如何使用标志，以及两者与 Open Home Foundation 的关系。
+
+The pages of this area: [品牌](https://www.hasscn.top/contributors/brand/llms.txt). Their full text: [品牌, full text](https://www.hasscn.top/contributors/brand/llms-full.txt).
+
+## 撰写文档
+
+home-assistant.io 上的用户文档。
+
+- [编写文档](https://www.hasscn.top/contributors/writing/index.md): 通过改进 home-assistant.io 上的文档，帮助数百万人更好地使用 Home Assistant。
+- [你的第一次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/index.md): 直接在浏览器中修复文档中的小问题。无需任何环境配置。
+- [文档是如何运作的](https://www.hasscn.top/contributors/writing/how-it-works/index.md): 页面存放在哪里、应使用哪个分支，以及一次更改如何从拉取请求（pull request）变为 home-assistant.io 上的内容。
+- [编写指南](https://www.hasscn.top/contributors/writing/guides/index.md): 如何逐项任务地编写和修改文档。从构建页面结构到移动页面。
+- [页面结构](https://www.hasscn.top/contributors/writing/guides/structure/index.md): 围绕读者想了解或想做的事情来组织文档，包括概念、任务、参考、教程和故障排除。
+- [在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/index.md): 在自己的电脑上运行 home-assistant.io，以便在分享之前查看较大的改动。
+- [编写集成文档](https://www.hasscn.top/contributors/writing/guides/integration/index.md): 面向为 Home Assistant 添加新集成的开发者。文档需要包含哪些内容，以及如何让文档与代码一起合并。
+- [移动、重命名或删除页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/index.md): 文档页面会被各种地方链接引用。这里介绍如何在不破坏这些链接的情况下进行修改。
+- [写作参考](https://www.hasscn.top/contributors/writing/reference/index.md): 写作时需要查阅的细节。风格、图片、Liquid、YAML、自动化检查以及集成页面。
+- [文档风格指南](https://www.hasscn.top/contributors/writing/reference/style/index.md): home-assistant.io 上每个页面的语言、语气和 Markdown 格式规则。
+- [图片和视频](https://www.hasscn.top/contributors/writing/reference/images/index.md): 如何在 home-assistant.io 的页面上添加截图、图表和 YouTube 视频，以及如何为每位读者描述它们。
+- [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/index.md): home-assistant.io 在 Markdown 之上添加的所有 Liquid 标签，从 My 链接和术语表提示框到文本框和可复用片段。
+- [YAML style](https://www.hasscn.top/contributors/writing/reference/yaml/index.md): 文档中的 YAML 示例应当是什么样子，让它们易于阅读、复制和改写。
+- [自动化文档检查](https://www.hasscn.top/contributors/writing/reference/checks/index.md): 文档拉取请求上的自动化检查会检查什么，如何自己运行这些检查，以及如何修改它们。
+- [集成页面的 front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/index.md): 集成页面顶部可用的每个键、其作用以及可接受的取值。
+- [集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/index.md): 集成页面的各个章节的顺序，以及用于填充它们的区块和可复用文本。
+- [改进本贡献者网站](https://www.hasscn.top/contributors/writing/this-site/index.md): 修复或添加 contributors.home-assistant.io 上的页面，在您自己的机器上预览，并保持链接和重定向正常工作。
+
+The pages of this area: [撰写文档](https://www.hasscn.top/contributors/writing/llms.txt). Their full text: [撰写文档, full text](https://www.hasscn.top/contributors/writing/llms-full.txt).
+
+## Translations
+
+把 Home Assistant 带到你的语言。
+
+- [翻译](https://www.hasscn.top/contributors/translate/index.md): 让 Home Assistant 支持你的语言。无需编程，只需对自己的语言有良好的感觉。
+- [你的第一次翻译](https://www.hasscn.top/contributors/translate/first-contribution/index.md): 加入一个翻译项目，找到你的语言，并翻译你的第一批字符串。大约需要十五分钟。
+- [翻译是如何工作的](https://www.hasscn.top/contributors/translate/how-it-works/index.md): 字符串从哪里来、在哪里被翻译，以及它们如何最终进入 Home Assistant。
+- [翻译指南](https://www.hasscn.top/contributors/translate/guides/index.md): 逐项讲解翻译中较难处理的部分。占位符、新语言以及可翻译的字符串。
+- [占位符和引用](https://www.hasscn.top/contributors/translate/guides/placeholders/index.md): 字符串中不应翻译的部分，以及如何处理它们。
+- [申请新语言](https://www.hasscn.top/contributors/translate/guides/new-language/index.md): 你的语言还没有被支持？这里介绍如何申请添加。
+- [让你的字符串可翻译](https://www.hasscn.top/contributors/translate/guides/developers/index.md): 面向向 Home Assistant 添加文本的开发者。如何编写便于翻译者处理的字符串。
+- [翻译参考](https://www.hasscn.top/contributors/translate/reference/index.md): 适用于所有语言的规则，以及针对每种语言达成的约定。
+- [翻译规则](https://www.hasscn.top/contributors/translate/reference/rules/index.md): 适用于所有语言的规则。内容简短，开始之前值得一读。
+- [语言规范](https://www.hasscn.top/contributors/translate/reference/languages/index.md): 各语言达成的约定，例如使用正式或非正式称呼。以该语言本身书写。
+- [语音](https://www.hasscn.top/contributors/translate/voice/index.md): 教 Assist 学会你的语言。编写它能理解的句子和它给出的回答，并帮助训练其背后的语音。
+- [Assist 如何理解语言](https://www.hasscn.top/contributors/translate/voice/how-assist-understands/index.md): 意图、句子、槽位、列表和响应。Assist 背后的理念，以及一句语音指令如何变成一个操作。
+- [贡献句子和回复](https://www.hasscn.top/contributors/translate/voice/contributing/index.md): 如何在 intents 仓库中修改您所用语言的句子、回复和测试，检查您的工作，并创建拉取请求（pull request）。
+- [语音风格指南](https://www.hasscn.top/contributors/translate/voice/style-guide/index.md): 如何编写符合人们说话方式的句子，以及简短清晰的回复。
+- [支持的语言](https://www.hasscn.top/contributors/translate/voice/languages/index.md): Assist 通过内置对话代理（conversation agent）所理解的语言、各语言的负责人，以及如何添加新语言。
+- [语言负责人](https://www.hasscn.top/contributors/translate/voice/language-leaders/index.md): intents 仓库中的每种语言都有负责人来审核其变更。这个角色需要做什么，以及如何成为其中一员。
+- [贡献你的声音](https://www.hasscn.top/contributors/translate/voice/contributing-your-voice/index.md): 通过录制或审听语音，帮助开放语音社区为你的语言构建语音识别和语音合成。
+- [模板句子语法](https://www.hasscn.top/contributors/translate/voice/template-syntax/index.md): 句子文件、模板语法、列表、展开规则、回复以及语言通用文件的完整参考。
+- [测试语法](https://www.hasscn.top/contributors/translate/voice/test-syntax/index.md): 如何编写测试，以证明你的句子匹配正确的意图、填充正确的槽位并给出正确的回复。
+- [内置意图（intent）](https://www.hasscn.top/contributors/translate/voice/intents/index.md): Home Assistant 开箱即用所能理解的每一个意图，包括其槽位（slot）、槽位组合以及处理它的集成。
+
+The pages of this area: [Translations](https://www.hasscn.top/contributors/translate/llms.txt). Their full text: [Translations, full text](https://www.hasscn.top/contributors/translate/llms-full.txt).
+
+## 社区
+
+内容审核、社交媒体与活动。
+
+- [社区](https://www.hasscn.top/contributors/community/index.md): 帮助他人，保持友好的交流氛围，让智能家居爱好者在线上和线下相聚。
+- [你的第一次社区贡献](https://www.hasscn.top/contributors/community/first-contribution/index.md): 在社区论坛回答一个问题。大约只需十五分钟，而且你懂的比你以为的要多。
+- [社区指南](https://www.hasscn.top/contributors/community/guides/index.md): 如何逐项帮助社区，从欢迎新用户到组织线下聚会。
+- [欢迎新成员](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/index.md): 如何帮助刚安装 Home Assistant 的人感到宾至如归，并找到属于自己的路。
+- [审核机制是如何运作的](https://www.hasscn.top/contributors/community/guides/moderation/index.md): 审核员做什么、他们遵循的准则，以及当有人违反规则时他们会采取的步骤。
+- [报告问题](https://www.hasscn.top/contributors/community/guides/reporting/index.md): 当有人违反行为准则，或者你或他人感到不安全时，该怎么做。
+- [举办线下聚会](https://www.hasscn.top/contributors/community/guides/meetups/index.md): 让你所在城市的智能家居爱好者聚在一起。创建活动、提交收录，并获得费用报销。
+- [在社交媒体上提供帮助](https://www.hasscn.top/contributors/community/guides/social-media/index.md): 你可以如何帮助 Home Assistant 在社交媒体上触达更多人，以及该联系谁。
+- [社区参考](https://www.hasscn.top/contributors/community/reference/index.md): 社区交流的场所，以及支持社区的各项计划。
+- [社区聚集地](https://www.hasscn.top/contributors/community/reference/channels/index.md): Home Assistant 社区的官方聚集场所，以及每个场所的用途。
+- [计划](https://www.hasscn.top/contributors/community/reference/programs/index.md): 面向内容创作者的创作者网络（Creator Network），以及面向设备制造商的 Works with Home Assistant 认证计划。
+- [活动与日历](https://www.hasscn.top/contributors/community/reference/events/index.md): 即将到来的发布日期、社区同步会议、聚会和社区日（Community Day），以及如何将它们添加到您自己的日历中。
+
+The pages of this area: [社区](https://www.hasscn.top/contributors/community/llms.txt). Their full text: [社区, full text](https://www.hasscn.top/contributors/community/llms-full.txt).
+
+## 版本发布
+
+试用 beta、报告问题，了解一个版本是如何发布的。
+
+- [版本发布](https://www.hasscn.top/contributors/releases/index.md): Home Assistant 每月的新版本是如何诞生的，以及你可以如何帮助测试、讲解和发布它。
+- [你的第一次 Beta 测试](https://www.hasscn.top/contributors/releases/first-contribution/index.md): 加入 Beta 渠道，比其他人提前一周运行下一个版本，并报告出现的问题。
+- [版本发布是如何运作的](https://www.hasscn.top/contributors/releases/how-it-works/index.md): Home Assistant 的月度发布周期，从第一行代码到最后一个补丁版本。
+- [发布指南](https://www.hasscn.top/contributors/releases/guides/index.md): 如何逐项任务协助一次发布的完成。从发布说明到将修复纳入补丁版本。
+- [发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/index.md): 每月发布说明是如何完成的，你可以如何帮助改进它们，以及发布派对是什么。
+- [记录不向后兼容的变更](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/index.md): 当你的变更意味着用户需要做某些操作时，告诉他们什么会失效、如何修复以及原因。这些文字会出现在发布说明中。
+- [弃用某些功能](https://www.hasscn.top/contributors/releases/guides/deprecations/index.md): Home Assistant 的弃用政策、它对使用者意味着什么，以及弃用如何在发布说明中呈现。
+- [如何让修复进入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/index.md): Bug 修复如何进入 beta 版和补丁版本，以及你可以做些什么来帮助它达成这一目标。
+- [发布参考](https://www.hasscn.top/contributors/releases/reference/index.md): 供您查阅的详细信息。版本号、发布渠道，以及发布过程中各角色的职责分工。
+- [版本与渠道](https://www.hasscn.top/contributors/releases/reference/versions/index.md): Home Assistant 版本号的含义，以及 stable、beta 和 dev 渠道。
+- [谁负责什么](https://www.hasscn.top/contributors/releases/reference/roles/index.md): 参与 Home Assistant 发布的人员，以及他们各自的工作。
+
+The pages of this area: [版本发布](https://www.hasscn.top/contributors/releases/llms.txt). Their full text: [版本发布, full text](https://www.hasscn.top/contributors/releases/llms-full.txt).
+
+## Roadmap
+
+想法如何变成计划中的工作，以及你在哪里能参与塑造接下来的一切。
+
+- [路线图](https://www.hasscn.top/contributors/roadmap/index.md): 在 Open Home Foundation，想法如何变成计划中的工作、目前正在推进的内容，以及你可以在哪里参与塑造未来的方向。
+- [你的第一次路线图贡献](https://www.hasscn.top/contributors/roadmap/first-contribution/index.md): 分享功能请求，或为现有的功能请求添加你的使用场景。想法就是这样进入路线图的。
+- [从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/index.md): Home Assistant 的较大工作如何在公开环境中规划：从功能请求到路线图机遇（opportunity）、史诗（epic）、任务和拉取请求，以及你在整个过程中可以在哪里参与。
+
+The pages of this area: [Roadmap](https://www.hasscn.top/contributors/roadmap/llms.txt). Their full text: [Roadmap, full text](https://www.hasscn.top/contributors/roadmap/llms-full.txt).
+
+## 架构
+
+各部分如何衔接，以及背后的决策。
+
+- [架构](https://www.hasscn.top/contributors/architecture/index.md): 各部分如何协同工作，以及背后的决策。
+- [全局概览](https://www.hasscn.top/contributors/architecture/big-picture/index.md): 在一页中展示 Home Assistant 的所有组成部分、各自的作用，以及它们之间如何通信。
+- [架构原则](https://www.hasscn.top/contributors/architecture/principles/index.md): Home Assistant 构建方式背后的理念。了解它们之后，代码评审中的许多规则就不再令人意外。
+- [架构决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/index.md): 架构在哪里讨论、决策如何记录，以及你如何参与其中。
+- [代码仓库](https://www.hasscn.top/contributors/architecture/repositories/index.md): Home Assistant 的代码在 GitHub 上的分布情况，以及针对不同需求应前往哪个仓库。
+- [深入了解 Home Assistant Core](https://www.hasscn.top/contributors/architecture/core/index.md): 一场关于 Home Assistant 核心所在 Python 应用的导览，并指引通往每个部分细节的路径。
+- [从启动到运行](https://www.hasscn.top/contributors/architecture/core/startup/index.md): Home Assistant Core 从启动那一刻到你的家准备就绪之间做了什么，以及它如何再次关闭。
+- [获取数据](https://www.hasscn.top/contributors/architecture/core/data-updates/index.md): 集成如何通过推送或轮询从设备和服务获取新数据，以及协调器（coordinator）如何让这一过程保持高效。
+- [注册表与存储](https://www.hasscn.top/contributors/architecture/core/registries/index.md): Home Assistant 将其对实体、设备和区域的了解保存在哪里，用户的更改如何与集成报告的内容分开保存，以及数据是如何存储的。
+- [历史与统计](https://www.hasscn.top/contributors/architecture/core/history/index.md): 记录器（recorder）如何将每次状态变更写入数据库，以及历史、日志簿和长期统计如何读取这些数据。
+- [各部分如何通信](https://www.hasscn.top/contributors/architecture/connections/index.md): Home Assistant Core 与其周围一切之间的 API，以及每个连接者如何证明自己的身份。
+- [前端](https://www.hasscn.top/contributors/architecture/frontend/index.md): Web 界面在整个 Home Assistant 中的位置，以及在哪里可以找到它的详细信息。
+- [仪表盘是如何工作的](https://www.hasscn.top/contributors/architecture/frontend/dashboards/index.md): 仪表盘如何由视图、分区、卡片和徽章组成，策略如何生成它们，以及自定义卡片如何融入其中。
+- [围绕 Core](https://www.hasscn.top/contributors/architecture/platform/index.md): 与 Home Assistant Core 一起运行、或从别处与之通信的软件，以及它们如何协同工作。
+- [Supervisor（管理程序）](https://www.hasscn.top/contributors/architecture/platform/supervisor/index.md): 在 Home Assistant OS 上运行 Home Assistant Core、应用、备份和更新的程序，各自运行在独立的容器中。
+- [伴侣应用（companion apps）如何融入](https://www.hasscn.top/contributors/architecture/platform/companion-apps/index.md): Android 和 Apple 设备上的 Home Assistant：应用中的前端，加上来自设备本身的传感器、通知、小组件等。
+- [Home Assistant Link](https://www.hasscn.top/contributors/architecture/platform/cloud/index.md): Home Assistant Link 如何让家庭从任何地方都能访问，并将其连接到语音助手，而无需向互联网开放。
+- [语音是如何工作的](https://www.hasscn.top/contributors/architecture/platform/voice/index.md): 一句话如何变成一个动作：唤醒词、语音转文本、对话代理和文本转语音，以及每一步在哪里运行。
+
+The pages of this area: [架构](https://www.hasscn.top/contributors/architecture/llms.txt). Their full text: [架构, full text](https://www.hasscn.top/contributors/architecture/llms-full.txt).
+
+## Security
+
+报告漏洞，并构建保护其所在家庭的软件。
+
+- [安全](https://www.hasscn.top/contributors/security/index.md): 报告漏洞，并构建能够保护其所运行家庭的软件。
+- [你的第一次安全贡献](https://www.hasscn.top/contributors/security/first-contribution/index.md): 检查你正在使用的某个集成的诊断信息，找出其中不应存在的数据，并修复发现的问题。
+- [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/index.md): Home Assistant 信任谁、它可能在哪里受到攻击，以及系统在运行你的代码之前已经做了哪些保护。
+- [报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/index.md): 如何私下报告 Home Assistant 的安全漏洞、哪些情况符合条件，以及报告之后会发生什么。
+- [安全指南](https://www.hasscn.top/contributors/security/guides/index.md): 针对不同类型的贡献，如何保证你编写或审查的代码安全。
+- [安全的集成](https://www.hasscn.top/contributors/security/guides/integrations/index.md): 凭据、证书、脱敏、仅管理员访问、webhook 和文件路径。让集成保持安全的模式和辅助工具。
+- [前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/index.md): 实体名称、属性、Markdown 和 URL 可能来自任何地方。前端如何对它们进行转义、清理和检查，以及你需要做什么。
+- [保护应用安全](https://www.hasscn.top/contributors/security/guides/apps/index.md): 在应用领域安全指南的基础上，关于应用和 Supervisor 的安全公告带给我们的经验教训。
+- [保护伴侣应用（companion apps）的安全](https://www.hasscn.top/contributors/security/guides/companion-apps/index.md): Android 和 iOS 应用的安全公告中关于链接、导出组件、WebView 和 JavaScript 桥接的教训。
+- [依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/index.md): Home Assistant 安装的每个库都在其中运行。Home Assistant 对依赖项有什么要求、会自动检查什么，以及它自身的工作流是如何受到保护的。
+- [以安全为重进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/index.md): 在拉取请求（pull request）中应关注什么，以避免安全问题进入用户的家中，以及发现问题后该怎么做。
+- [安全参考](https://www.hasscn.top/contributors/security/reference/index.md): 供您查阅的详细信息。安全辅助工具、自动化检查，以及所有过往的安全公告。
+- [安全辅助函数](https://www.hasscn.top/contributors/security/reference/helpers/index.md): Home Assistant Core 和前端中处理证书、脱敏、管理员访问、Webhook、路径和不可信内容的辅助函数。
+- [自动化安全检查](https://www.hasscn.top/contributors/security/reference/checks/index.md): 用于检查 Home Assistant 的代码、依赖项和工作流是否存在安全问题的工具，以及它们的运行位置。
+- [过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/index.md): Home Assistant 已发布的所有安全公告，按类型分组，说明出了什么问题以及对贡献者的教训。
+
+The pages of this area: [Security](https://www.hasscn.top/contributors/security/llms.txt). Their full text: [Security, full text](https://www.hasscn.top/contributors/security/llms-full.txt).
+
+## 数据
+
+统计分析和开放数据集。
+
+- [数据](https://www.hasscn.top/contributors/data/index.md): Home Assistant 从数据中学到什么，如何在此过程中尊重您的隐私，以及如何探索您自己家庭的数据。
+- [你的第一次数据贡献](https://www.hasscn.top/contributors/data/first-contribution/index.md): 从你的 Home Assistant 安装实例共享分析数据，准确查看它发送了什么，并看到你的安装实例被计入。只需几分钟和一次重启。
+- [分析数据的工作原理](https://www.hasscn.top/contributors/data/how-it-works/index.md): 您的分析数据从您的安装实例到公开分析网站的路径，以及设备数据库在其中的作用。
+- [隐私原则](https://www.hasscn.top/contributors/data/privacy/index.md): Home Assistant 对其收集的每一份数据所遵循的规则，以及原因。
+- [数据指南](https://www.hasscn.top/contributors/data/guides/index.md): 如何逐项处理 Home Assistant 数据。从公开数据集到集成中的分析。
+- [使用公开数据](https://www.hasscn.top/contributors/data/guides/public-data/index.md): 以 JSON 格式下载数据集，或使用 Prometheus 抓取它们，并构建你自己的图表。
+- [探索你自己的数据](https://www.hasscn.top/contributors/data/guides/explore-your-data/index.md): 设置 JupyterLab，将其连接到 Home Assistant 的数据库，并运行你的第一份报告。大约需要十五分钟。
+- [查询数据库](https://www.hasscn.top/contributors/data/guides/query-the-database/index.md): 用于从 Home Assistant 数据库读取状态、事件和上下文的 SQL 查询示例，适用于 SQLite、MariaDB 和 PostgreSQL。
+- [集成中的分析](https://www.hasscn.top/contributors/data/guides/integration-analytics/index.md): 面向开发者，介绍你的集成如何出现在分析中，以及如何将设备或实体排除在设备数据库之外。
+- [数据参考](https://www.hasscn.top/contributors/data/reference/index.md): 供您查阅的详细信息。分析功能共享的内容、数据模型、数据库架构以及统计数据。
+- [分析数据共享的内容](https://www.hasscn.top/contributors/data/reference/analytics-data/index.md): 开启分析（analytics）后，Home Assistant 按选项发送的每个字段，附示例数据。
+- [数据模型](https://www.hasscn.top/contributors/data/reference/data-model/index.md): 事件、状态、上下文和动作，是 Home Assistant 记录的一切的基础构件。
+- [数据库模式](https://www.hasscn.top/contributors/data/reference/database-schema/index.md): recorder 数据库中的各个表、表中的内容，以及它们之间的关联方式。
+- [统计数据](https://www.hasscn.top/contributors/data/reference/statistics/index.md): Home Assistant 如何将传感器数据汇总为 5 分钟和每小时的统计数据，以及这些数据是如何存储的。
+
+The pages of this area: [数据](https://www.hasscn.top/contributors/data/llms.txt). Their full text: [数据, full text](https://www.hasscn.top/contributors/data/llms-full.txt).
+
+## Optional
+
+- [Blog](https://www.hasscn.top/contributors/blog/): News for everyone who contributes to Home Assistant. The feed is at https://www.hasscn.top/contributors/blog/rss.xml.
+- [术语表](https://www.hasscn.top/contributors/glossary/index.md): 一个术语，一个含义。代码、界面文本和文档共用。
+- [Glossary, every page](https://www.hasscn.top/contributors/glossary/llms.txt): Every page of the glossary, with its description.
+- [Glossary, full text](https://www.hasscn.top/contributors/glossary/llms-full.txt): The full text of every page of the glossary.

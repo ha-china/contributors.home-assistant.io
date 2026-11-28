@@ -1,0 +1,1962 @@
+# 操作系统与 Supervisor: full text
+
+> Every page of the 操作系统与 Supervisor area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/os/llms.txt.
+
+# 操作系统与 Supervisor
+
+> 参与 Home Assistant OS 和 Supervisor 的开发工作，这两个组件将一块开发板或一台虚拟机变成一个能够运行、自我更新和自我修复的 Home Assistant 系统。
+
+Source: https://www.hasscn.top/contributors/os/
+
+大多数人将 Home Assistant 运行在 [Home Assistant OS](https://www.hasscn.top/contributors/glossary/home-assistant-os/) 上。他们烧录一个镜像，插上设备，之后就再也不用操心 Linux。这之所以可行，是因为有两个项目在协同工作：
+
+- **Home Assistant OS** 是一个小型的只读 Linux 系统，使用 Buildroot 构建——这是一个可以从源码构建完整嵌入式 Linux 系统的工具。它负责启动设备、运行 Docker，并通过 A/B 方案进行自我更新：系统有两份副本 A 和 B，更新会写入当前未运行的那一份，如果更新后无法启动，则回退到另一份。这项工作由 RAUC 完成，它是一个面向嵌入式 Linux 的更新系统。OS Agent 是主机上的一个小程序，为 Supervisor 执行主机任务，例如迁移数据磁盘。
+- **Supervisor** 是一个运行在其上层容器中的 Python 程序。它运行 Home Assistant Core、应用（apps）以及它自己的插件，负责创建备份、安装更新，并监控系统健康状况。
+
+本区域面向希望参与其中任一项目开发的开发者。对于 OS，你面对的是嵌入式 Linux：Buildroot、内核、引导加载程序和开发板支持。对于 Supervisor，你面对的是异步 Python、Docker 和 D-Bus——Linux 服务之间相互通信所使用的消息总线。两者互不依赖，无需同时掌握。
+
+## 各组件如何协作
+
+Diagram. 自上而下：什么运行在什么之上。点击方框可了解更多信息。
+
+- 由 Supervisor 运行，各自位于独立的容器中
+  - [Home Assistant Core](https://www.hasscn.top/contributors/core/): Home Assistant 本身
+  - [Apps](https://www.hasscn.top/contributors/apps/how-apps-work/): 与 Core 并列运行的软件
+  - [Plugins](https://www.hasscn.top/contributors/os/supervisor/plugins/): DNS、音频、CLI 等
+- 管理以上所有内容，运行在自己的容器中
+  - [Supervisor](https://www.hasscn.top/contributors/os/supervisor/architecture/): 运行、更新并备份这一切
+- [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/) (the subject of this page)
+  - Docker: 运行各个容器
+  - [NetworkManager](https://www.hasscn.top/contributors/os/operating-system/networking/): 网络
+  - [RAUC](https://www.hasscn.top/contributors/os/operating-system/update-system/): 更新，具有两个系统槽位
+  - OS Agent: 为 Supervisor 执行主机任务
+  - [Buildroot](https://www.hasscn.top/contributors/os/operating-system/build/): 从源码构建，只读
+- [开发板](https://www.hasscn.top/contributors/os/operating-system/boards/)
+  - [Green 和 Yellow](https://www.hasscn.top/contributors/os/operating-system/boards/): Home Assistant 硬件
+  - [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/): Pi 3、4 和 5
+  - [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/): Hardkernel 开发板
+  - [PC](https://www.hasscn.top/contributors/os/operating-system/generic/): 通用 x86-64 和 aarch64
+  - [虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/): OVA、QCOW2 等
+
+[架构](https://www.hasscn.top/contributors/architecture/platform/)区域介绍了整体概况。本区域则深入介绍你需要了解的改动细节。
+
+## 从这里开始
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/os/first-contribution/)：在开发容器中运行 Supervisor，进行修改，然后提交 pull request。
+- [安装类型](https://www.hasscn.top/contributors/os/installation-types/)：OS 和 Supervisor 分别在哪些场景下使用，哪些场景下不使用。
+
+## Home Assistant OS
+
+- [概览](https://www.hasscn.top/contributors/os/operating-system/)：OS 中包含什么、如何启动，以及代码仓库的组织方式。
+- [构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/)：搭建构建容器并为开发板进行构建。
+- [测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/)：在 QEMU 中启动、运行测试，并安装到设备上。
+- [配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/)：`CONFIG` USB 驱动器、内核模块、udev 规则和时间服务器。
+- [配置网络](https://www.hasscn.top/contributors/os/operating-system/networking/)：NetworkManager 连接、Wi-Fi 和静态地址。
+- [调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)：端口 22222 上的 SSH、串行控制台和日志。
+- [发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/)：分支、版本号和构建流水线。
+- 参考：[分区](https://www.hasscn.top/contributors/os/operating-system/partitions/)、[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)、[开发板元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/)和[支持的开发板](https://www.hasscn.top/contributors/os/operating-system/boards/)。
+
+## Supervisor
+
+- [概览](https://www.hasscn.top/contributors/os/supervisor/)：Supervisor 做什么，以及它运行什么。
+- [搭建开发环境](https://www.hasscn.top/contributors/os/supervisor/development/)：在开发容器中运行 Supervisor，并在真实系统上进行测试。
+- [调试 Supervisor](https://www.hasscn.top/contributors/os/supervisor/debugging/)：连接 Python 调试器并阅读日志。
+- [将 Core 连接到 Supervisor](https://www.hasscn.top/contributors/os/supervisor/core-connection/)：针对真实的 Supervisor 开发 `hassio` 集成（integration）。
+- 工作原理：[架构](https://www.hasscn.top/contributors/os/supervisor/architecture/)、[任务](https://www.hasscn.top/contributors/os/supervisor/jobs/)、[问题解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)和[插件](https://www.hasscn.top/contributors/os/supervisor/plugins/)。
+
+Supervisor 也是运行[应用（apps）](https://www.hasscn.top/contributors/glossary/app/)的组件。应用开发以及它们所使用的 Supervisor API 参考文档位于[应用（Apps）](https://www.hasscn.top/contributors/apps/)区域。
+
+## 与谁交流
+
+- [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 [**#operating-system**](https://discord.com/channels/330944238910963714/1475552965954900018) 频道是提问 Home Assistant OS 和 Supervisor 相关问题的地方。看不到该频道？在 **Channels & Roles** 下选择 **I want to contribute dev skills to Home Assistant**。
+- Issue 和 pull request 位于 [home-assistant/operating-system](https://github.com/home-assistant/operating-system) 和 [home-assistant/supervisor](https://github.com/home-assistant/supervisor)。每个插件都有各自的代码仓库，列在[插件](https://www.hasscn.top/contributors/os/supervisor/plugins/)页面上。
+- 为新开发板添加支持属于架构决策。请阅读 [ADR-0015](https://github.com/home-assistant/architecture/blob/master/adr/0015-home-assistant-os.md) 和 [ADR-0017](https://github.com/home-assistant/architecture/blob/master/adr/0017-hardware-screening-os.md)，并在编写代码之前先在[架构仓库](https://github.com/home-assistant/architecture)中发起讨论。
+
+---
+
+# 你对 Supervisor 的首次贡献
+
+> 在开发容器中运行 Supervisor，做一个小改动，运行测试，然后提交你的第一个 pull request。
+
+Source: https://www.hasscn.top/contributors/os/first-contribution/
+
+Supervisor 是进入这个领域最简单的途径。它使用 Python，有现成的开发容器，并且可以在你自己的机器上运行一套完整的 Home Assistant 系统。几分钟内你就能看到自己的改动生效，无需刷写任何东西。
+
+预留一个晚上的时间。容器的首次构建需要一段时间，但你只需要做一次。
+
+> [!TIP]
+> 更想开发操作系统本身？从[构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/)开始。首次构建预计需要一小时或更长时间，并且需要大量磁盘空间。
+
+## 1. 打个招呼
+
+加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 [**#operating-system**](https://discord.com/channels/330944238910963714/1475552965954900018) 频道。在 **Channels & Roles** 下选择 **I want to contribute dev skills to Home Assistant** 即可看到该频道。你不需要获得许可才能开始，但知道去哪里提问会很有帮助。
+
+## 2. 打开开发容器
+
+你需要 [Docker](https://docs.docker.com/get-docker/)、[Visual Studio Code](https://code.visualstudio.com/) 和 [Git](https://git-scm.com/)。在 Windows 上，请在 WSL2 中工作。
+
+1. 在 GitHub 上 [fork Supervisor 仓库](https://github.com/home-assistant/supervisor/fork)。
+2. 克隆你的 fork 并在 Visual Studio Code 中打开它：
+
+   ```shell
+   git clone https://github.com/YOUR_GITHUB_USERNAME/supervisor
+   cd supervisor
+   code .
+   ```
+
+3. 当 Visual Studio Code 询问时，选择 **Reopen in Container**。
+
+## 3. 运行 Supervisor
+
+打开命令面板，选择 **Tasks: Run Task**，然后选择 **Run Supervisor**。该任务会从你的工作副本构建一个 Supervisor 镜像并启动它。随后 Supervisor 会下载 Home Assistant Core 及其插件，因此首次启动需要几分钟。
+
+完成后，打开 `http://localhost:9123`。这就是由你自己的 Supervisor 运行的 Home Assistant Core。**Run Supervisor CLI** 任务会针对它打开 `ha` 命令行。
+
+## 4. 找点小事做
+
+- 浏览[开放的 issue](https://github.com/home-assistant/supervisor/issues)，找一些描述清晰且工作量小的。
+- 缺失的测试也是很好的首次改动。测试位于 `tests/` 中，其目录结构与 [`supervisor/`](https://github.com/home-assistant/supervisor/tree/main/supervisor) 一致。
+- 你自己遇到过的令人困惑的日志消息或错误也算数。你已经知道它为什么重要了。
+
+在着手更大的改动之前，先在 issue 中询问。对 Supervisor 的大型改动需要就方案达成一致。[Supervisor README](https://github.com/home-assistant/supervisor#development) 说得很清楚：小改动和 bug 修复可以直接提交 pull request，但对于重大改动，请先提交 RFC（request for comments，征求意见：一份供他人反馈的书面提案）。
+
+## 5. 做出改动并测试
+
+创建一个分支，做出你的改动，并针对你修改的部分运行测试：
+
+```shell
+git checkout -b fix-something
+pytest -qsx tests/backups/
+```
+
+提交前运行 linter：
+
+```shell
+ruff check --fix supervisor tests
+ruff format supervisor tests
+```
+
+要在运行中的系统中查看你的改动，请再次运行 **Run Supervisor** 任务。它会从你的代码重新构建镜像。
+
+## 6. 提交 pull request
+
+将你的分支推送到你的 fork，并针对 `main` 提交一个 pull request。填写 pull request 模板：描述拟议的改动，选择改动类型，并逐项完成检查清单。维护者会进行审查。预期会有提问，审查本来就是这样运作的。
+
+## 你的 pull request 之后
+
+在 Supervisor 仓库中：
+
+- **检查。** 每次推送时，CI 都会运行 Ruff、pylint、mypy、针对 `Dockerfile` 的 hadolint，以及测试。pull request 模板说得很明白：除非测试通过，否则你的 pull request 无法被合并。一个构建工作流还会从你的分支构建 Supervisor 镜像，并针对运行中的系统执行一些测试。
+- **标签。** 你的 pull request 需要一个表示其类型的标签。只要 `cla-signed` 是它唯一的标签，一项检查就会失败。发布说明是自动起草的，并且只列出带有类别标签的 pull request：`breaking-change`、`new-feature`、`bugfix`、`style`、`refactor`、`performance`、`test`、`build`、`ci`、`chore`、`revert` 或 `dependencies`。标签还决定了你的改动会出现在哪个章节。
+- **等待。** 30 天没有活动的 pull request 会被标记为过期（stale），并在 7 天后关闭。任何更新都会移除该标记。
+- **合并之后。** 你的改动会被构建并发布到 `dev` 频道。随后一次发布将其带到 `beta`，之后再进入 `stable`。参见 [Supervisor 的发布方式](https://www.hasscn.top/contributors/os/supervisor/development/#how-the-supervisor-is-released)。
+
+在操作系统仓库中，pull request 针对 `dev` 提交。每个 pull request 都会运行 hadolint、ShellCheck 和 Buildroot 包检查器。维护者可以添加 `run-ova-test` 标签来构建镜像并运行自动化测试。这只适用于主仓库中的分支，不适用于来自 fork 的 pull request。90 天没有活动的 pull request 会被标记为过期（stale），并在 7 天后关闭。[发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/)会追踪改动从那里到发布的过程。
+
+## 接下来做什么
+
+- 阅读 [Supervisor 架构](https://www.hasscn.top/contributors/os/supervisor/architecture/)，熟悉代码结构。
+- 了解 [jobs](https://www.hasscn.top/contributors/os/supervisor/jobs/) 和[问题解决中心（resolution center）](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)的工作方式。大多数改动都会涉及其中之一。
+- 使用[远程系统](https://www.hasscn.top/contributors/os/supervisor/development/#test-on-a-real-system)在真实硬件上进行测试。
+
+---
+
+# 安装类型
+
+> Home Assistant OS 和 Supervisor 在哪些安装类型中使用，在哪些中不使用，以及这对你的代码意味着什么。
+
+Source: https://www.hasscn.top/contributors/os/installation-types/
+
+Home Assistant 支持两种[安装类型](https://www.hasscn.top/contributors/glossary/installation-type/)。其中只有一种包含操作系统和 Supervisor。
+
+| | Home Assistant OS | Home Assistant Container |
+| --- | --- | --- |
+| 操作系统 | Home Assistant OS | 用户自行运行的系统 |
+| Supervisor | 有 | 无 |
+| 应用（Apps） | 有 | 无 |
+| 系统更新 | 通过 Supervisor | 由用户自行处理 |
+
+在 Home Assistant Container 上，Home Assistant Core 运行在用户自行管理的容器中。本区域的任何内容都不会在那里运行。架构区域中的 [Around Core](https://www.hasscn.top/contributors/architecture/platform/) 页面展示了各部分如何协同工作。
+
+## 不再受支持
+
+另外两种安装类型已于 2025 年 5 月被弃用，并随 Home Assistant 2025.12 结束支持：
+
+- **Home Assistant Supervised**：将 Supervisor 安装在用户自行维护的 Linux 系统上。
+- **Home Assistant Core**：将 Home Assistant 作为 Python 包安装在虚拟环境中。
+
+32 位架构 `i386`、`armhf` 和 `armv7` 也同时被移除。Home Assistant OS 17 移除了最后一批 32 位开发板。[公告](https://www.home-assistant.io/blog/2025/05/22/deprecating-core-and-supervised-installation-methods-and-32-bit-systems/)解释了原因。
+
+## 这对 Supervisor 意味着什么
+
+Supervisor 仍然可以在 Home Assistant OS 之外启动，但它会将此类系统标记为不受支持。该检查是[解决方案中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)中的一项评估：当操作系统不可用时，系统会得到 `os` 这一不受支持的原因。某些功能完全依赖 Home Assistant OS。这些任务使用 `haos` 任务条件，拒绝在其他任何地方运行。
+
+因此，在开发 Supervisor 时，请以 Home Assistant OS 为前提。只在其他主机上有意义的代码已不再是本项目维护的内容。
+
+---
+
+# Home Assistant OS
+
+> Home Assistant OS 的组成、启动方式，以及其代码仓库的组织结构。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/
+
+Home Assistant OS 是一个只做一件事的 Linux 系统：运行 Home Assistant。它不基于 Debian 或 Ubuntu 之类的发行版，而是使用 [Buildroot](https://buildroot.org/) 从源码构建，每种板子一个镜像，只包含 Home Assistant 所需的内容。
+
+Buildroot 是一个构建系统，而不是发行版。它交叉编译工具链、内核、引导加载程序以及每一个软件包，并将它们组装成一个磁盘镜像。这使它非常适合小型 Arm 板卡——在这类设备上直接构建会耗费极长时间。
+
+## 系统组成
+
+- **引导加载程序**：UEFI 系统（x86-64、通用 Arm 和虚拟机）上使用 [GRUB](https://www.gnu.org/software/grub/)，大多数单板计算机上使用 [U-Boot](https://docs.u-boot.org/)，Raspberry Pi 5 上则使用固件自带的 tryboot 机制。
+- **内核**：大多数板卡使用主线 Linux，Raspberry Pi 和 Home Assistant Yellow 使用 Raspberry Pi 的 Linux 分支。仓库中的 [`Documentation/kernel.md`](https://github.com/home-assistant/operating-system/blob/dev/Documentation/kernel.md) 列出了当前版本。
+- **根文件系统**：[EROFS](https://docs.kernel.org/filesystems/erofs.html)，经过压缩且为只读。
+- **Init 与服务**：systemd，配合 NetworkManager 管理网络、systemd-timesyncd 同步时间、BlueZ 支持 Bluetooth。
+- **容器**：Docker 引擎，用于运行 Supervisor 及其管理的一切。
+- **更新**：[RAUC](https://rauc.io/)，采用双系统槽位。参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)。
+- **安全**：[AppArmor](https://apparmor.net/) 内核安全模块，为 Supervisor 和应用提供配置文件。
+- **内存**：为 `/var` 和 `/tmp` 使用 ZRAM，并在数据分区上提供交换文件。
+- **OS Agent**：[os-agent](https://github.com/home-assistant/os-agent) 仓库中的一个小程序。Supervisor 通过 D-Bus 使用它执行主机任务，例如移动数据磁盘。
+
+## 启动流程
+
+1. 引导加载程序选择一个槽位（A 或 B），并引导其内核和根文件系统。
+2. systemd 挂载 overlay 和数据分区，并将持久化文件夹绑定到位。参见[分区](https://www.hasscn.top/contributors/os/operating-system/partitions/)。
+3. `haos-config.service` 导入 `CONFIG` USB 驱动器（如果插入了的话）。参见[配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/)。
+4. Docker 启动，`haos-supervisor.service` 启动 Supervisor 容器 `hassio_supervisor`。如果镜像缺失或损坏，该服务会先下载一个新的镜像。
+5. Supervisor 使用 RAUC 将该槽位标记为良好，然后启动其插件、Home Assistant Core 以及各个应用。
+
+全新镜像中已包含 Supervisor 及其插件，但不包含 Home Assistant Core。它改为提供一个简单的落地页。首次启动时，Supervisor 会下载最新的 Core，因此每个新安装都从当前版本开始。
+
+## 代码仓库
+
+[home-assistant/operating-system](https://github.com/home-assistant/operating-system) 使用了 Buildroot 的 [br2-external 机制](https://buildroot.org/downloads/manual/manual.html#outside-br-custom)：所有特定于 Home Assistant OS 的内容都存放在 Buildroot 之外的 [`buildroot-external/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external) 中。Buildroot 本身是 [`buildroot/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot) 中的一个 Git 子模块，指向 [home-assistant/buildroot](https://github.com/home-assistant/buildroot) 分支。该分支在 upstream 之上只保留了尽可能少的补丁。
+
+| 路径 | 内容 |
+| --- | --- |
+| [`buildroot-external/configs/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs) | 每个构建目标一个 `<target>_defconfig` |
+| [`buildroot-external/board/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board) | 每种板子的[元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/)、引导文件、内核配置和钩子 |
+| [`buildroot-external/kernel/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/kernel) | 所有板卡共享的内核配置片段 |
+| [`buildroot-external/package/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/package) | 额外的软件包，例如 `hassio`（预加载 Supervisor）和 `os-agent` |
+| [`buildroot-external/rootfs-overlay/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/rootfs-overlay) | 复制到每个镜像中的文件，例如 `haos-*` systemd 单元 |
+| [`buildroot-external/genimage/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/genimage) | 磁盘布局，参见[分区](https://www.hasscn.top/contributors/os/operating-system/partitions/) |
+| [`buildroot-external/ota/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/ota) | RAUC 配置、更新清单和证书 |
+| `buildroot-external/meta` | OS 版本和部署类型 |
+| [`scripts/`](https://github.com/home-assistant/operating-system/tree/dev/scripts) | 辅助脚本，例如用于构建容器的 `enter.sh` |
+| [`tests/`](https://github.com/home-assistant/operating-system/tree/dev/tests) | 在 QEMU 中启动镜像的自动化测试 |
+
+## 后续步骤
+
+- [构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/)以获得可用的环境。
+- [支持的板卡](https://www.hasscn.top/contributors/os/operating-system/boards/)列出了所有构建目标。
+- [发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/)解释了你的更改如何进入发布版本。
+
+## All pages in this section
+
+### Guides
+
+- [构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/): 设置构建容器并为开发板构建 Home Assistant OS。
+- [测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/): 在 QEMU 中启动你的镜像、运行自动化测试，并将你的构建安装到真实设备上。
+- [配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/): 使用 CONFIG USB 驱动器，或直接在主机的持久化文件夹中更改 Home Assistant OS 的主机设置。
+- [配置网络](https://www.hasscn.top/contributors/os/operating-system/networking/): Home Assistant OS 如何通过 NetworkManager 管理网络，以及如何配置 UI 未覆盖的部分。
+- [调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/): 通过 SSH 或控制台在 Home Assistant OS 上获取 root shell，并找到所需的日志。
+- [发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/): Home Assistant OS 的更改如何从拉取请求（pull request）走到发布，包括涉及的分支、版本号和构建流水线。
+
+### Reference
+
+- [分区](https://www.hasscn.top/contributors/os/operating-system/partitions/): Home Assistant OS 的磁盘布局、每个分区的内容，以及数据磁盘功能如何移动数据分区。
+- [更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/): Home Assistant OS 如何通过 RAUC 和双启动槽位进行自我更新、更新包如何签名，以及如何安装自己构建的版本。
+- [板卡元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/): 每块板卡的 meta 文件中的变量，以及所有板卡共享的版本文件。
+
+### Boards
+
+- [支持的开发板](https://www.hasscn.top/contributors/os/operating-system/boards/): Home Assistant OS 构建所面向的每一块开发板，包括其构建目标、引导加载程序和机器类型。
+- [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/): Home Assistant OS 在 Raspberry Pi 上的特定内容，例如串行控制台、I2C 以及从 USB 启动。
+- [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/): Hardkernel ODROID 在 Home Assistant OS 下的 specifics，例如 eMMC 安装、M1 和 M1S 的启动流程以及控制台。
+- [通用系统](https://www.hasscn.top/contributors/os/operating-system/generic/): 通用 x86-64 和 aarch64 目标，适用于通过 UEFI 启动的 PC 和其他系统。
+- [虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/): ova 目标、它构建的虚拟磁盘格式，以及运行 Home Assistant OS 的虚拟机所需的条件。
+
+---
+
+# 构建镜像
+
+> 设置构建容器并为开发板构建 Home Assistant OS。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/build/
+
+Home Assistant OS 在一个基于 Debian 的容器中构建，该容器包含 Buildroot 所需的所有工具。你无需在自己的机器上安装 Buildroot 的依赖，而且每位贡献者都在相同的环境中构建。
+
+刚接触嵌入式 Linux 和 Buildroot？[Bootlin](https://bootlin.com/docs/) 的免费培训资料是一个很好的起点。[Buildroot 手册](https://buildroot.org/downloads/manual/manual.html) 则是你需要经常查阅的参考文档。
+
+## 你需要什么
+
+- 一台装有 Docker 的 Linux 机器，并且有运行特权容器的权限。无根（rootless）Docker 无法工作：构建过程会在容器内的 loop 设备上挂载一个文件系统镜像。
+- 一个拥有 `sudo` 权限的普通用户账户。构建脚本拒绝以 root 身份运行，但某些步骤需要提升的权限。
+- 磁盘空间和时间。首次构建会下载并编译所有内容，需要一小时或更长时间，具体取决于你的机器。
+
+## 获取源码
+
+该仓库通过 Git 子模块（submodule）引入 Buildroot。克隆时请包含子模块：
+
+```shell
+git clone https://github.com/home-assistant/operating-system.git
+cd operating-system
+git submodule update --init
+```
+
+拉取新更改时，也要更新子模块。Buildroot 会定期更新，版本不匹配会导致令人困惑的构建错误：
+
+```shell
+git pull
+git submodule update
+```
+
+要丢弃所有本地更改并恢复到干净状态：
+
+```shell
+git reset --hard
+git submodule update --init --force
+```
+
+## 为开发板构建
+
+每个构建目标在 [`buildroot-external/configs/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs) 中都有一个配置文件，命名为 `<target>_defconfig`。将目标名称传给 `make`，不带 `_defconfig` 部分。[`scripts/enter.sh`](https://github.com/home-assistant/operating-system/blob/dev/scripts/enter.sh) 会构建构建容器并在其中运行命令：
+
+```shell
+scripts/enter.sh make rpi4_64
+```
+
+`make help` 列出了所有目标。[支持的开发板](https://www.hasscn.top/contributors/os/operating-system/boards/) 说明了哪个目标对应哪块开发板。
+
+构建输出位于 `output/`。完成的镜像在 `output/images/` 中，以开发板和版本命名，例如 `haos_rpi4-64-18.4.dev0.img.xz`。磁盘镜像旁边还有一个 RAUC 更新包（`.raucb`），可用于更新现有安装。参见[测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/)。
+
+下载文件和编译器缓存保存在仓库之外的 `~/hassos-cache` 中。可以设置 `CACHE_DIR` 将它们放到其他位置。得益于缓存，后续构建会快得多。
+
+## 构建多个目标
+
+一个输出文件夹只保存一个目标。要从同一份代码检出（checkout）构建多块开发板，请使用 `O=` 为每个目标指定各自的输出文件夹：
+
+```shell
+scripts/enter.sh make O=output_rpi4_64 rpi4_64
+scripts/enter.sh make O=output_ova ova
+```
+
+如果将一个输出文件夹复用于不同的目标，构建会发出警告并等待十秒。在这种情况下，请先运行 `make distclean`。
+
+## 重新构建软件包
+
+Buildroot 从源码构建软件包，并记住已构建的内容。第二次构建只会重新生成有变化的部分以及最终镜像。要强制重新构建某个软件包，请删除其构建文件夹：
+
+```shell
+rm -rf output/build/linux-custom/
+```
+
+不确定镜像中的某个文件来自哪个软件包？`output/build/packages-file-list.txt` 将每个文件映射到其所属的软件包。
+
+## 在构建容器内工作
+
+不带参数运行 [`scripts/enter.sh`](https://github.com/home-assistant/operating-system/blob/dev/scripts/enter.sh) 会在构建容器中打开一个 shell。从那里你可以运行相同的构建，以及其他 Buildroot 目标：
+
+```shell
+scripts/enter.sh
+make O=output_rpi4_64 rpi4_64
+```
+
+仓库的 `Makefile` 不认识的目标会被传递给 Buildroot。例如，以交互方式更改某个目标的配置，然后绘制软件包之间的依赖关系图：
+
+```shell
+make O=output_rpi4_64 menuconfig
+make O=output_rpi4_64 graph-depends
+```
+
+运行 `make buildroot-help` 可查看 Buildroot 提供的所有功能。
+
+## 签名
+
+每次构建都会为其更新包签名。首次构建时，会创建一个自签名证书和密钥，作为 `cert.pem` 和 `key.pem` 保存在仓库根目录下，并添加到镜像的密钥环中。之后的每次构建都使用同一对证书和密钥。这样，你自己构建的镜像就能接受来自你后续构建的更新包。详情见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/#security)。
+
+如果你想继续更新运行你构建的镜像的设备，请保留这对证书和密钥。删除它意味着会生成新的证书，而持有旧证书的设备将拒绝你的新更新包。
+
+---
+
+# 测试你的构建
+
+> 在 QEMU 中启动你的镜像、运行自动化测试，并将你的构建安装到真实设备上。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/test/
+
+构建完成并不代表构建可用。在提交拉取请求（pull request）之前，请先启动你的镜像。对于大多数更改，虚拟机就足够了；对于特定开发板的更改，则需要相应的开发板。
+
+## 在 QEMU 中启动
+
+`ova` 目标会为虚拟机构建镜像，其中包括一个压缩的 QCOW2 镜像，解压后即可在 QEMU 中运行。`--keep` 会保留压缩文件，因为下文的自动化测试会再次解压它。Home Assistant OS 需要 UEFI，因此 QEMU 也需要 UEFI 固件。在 Debian 和 Ubuntu 上，`ovmf` 软件包提供了该固件。
+
+```shell
+scripts/enter.sh make O=output_ova ova
+unxz --keep output_ova/images/haos_ova-*.qcow2.xz
+```
+
+然后启动它。固件文件的路径因发行版而异，请检查你的 `ovmf` 软件包将其放在了哪里：
+
+```shell
+IMAGE=output_ova/images/haos_ova-18.4.dev0.qcow2
+FIRMWARE=/usr/share/OVMF/OVMF_CODE.fd
+
+qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 2G \
+  -drive file="$IMAGE",if=virtio,format=qcow2 \
+  -drive file="$FIRMWARE",if=pflash,format=raw,readonly=on
+```
+
+启动结束后会停在 Home Assistant CLI 提示符 `ha >`。输入 `login` 即可在宿主机上获得 root shell。
+
+在 Arm 机器上，请使用 `generic_aarch64` 目标。除了磁盘镜像之外，它还会为 Arm 虚拟机构建 QCOW2、VMDK 和 VDI 镜像。
+
+## 运行自动化测试
+
+[`tests/`](https://github.com/home-assistant/operating-system/tree/dev/tests) 文件夹中包含一些测试，它们会在 QEMU 中启动 OVA 镜像，并检查系统和 Supervisor 是否正常启动。这些测试使用 [labgrid](https://labgrid.readthedocs.io/) 和 pytest。测试环境要求镜像位于 `tests/haos.qcow2`，OVMF 固件位于 `/usr/share/ovmf/OVMF.fd`：
+
+```shell
+unxz -c output_ova/images/haos_ova-*.qcow2.xz > tests/haos.qcow2
+tests/run_tests.sh
+```
+
+除非你已经在 Python 虚拟环境中工作，否则该脚本会在 `tests/venv` 中创建一个虚拟环境，并将测试依赖安装到其中。同样的测试也会在 CI 中运行，包括每次发布构建，以及带有 `run-ova-test` 标签的拉取请求。
+
+## 将你的构建安装到设备上
+
+你可以像刷写任何正式版本一样，将磁盘镜像刷写到 SD 卡或磁盘上。如果想保留现有安装中的数据，可以改为安装 RAUC 更新包（update bundle）。
+
+> [!IMPORTANT]
+> 官方发布版本只信任由发布证书签名的更新包。你的构建使用你自己的自签名证书签名，因此安装会因签名错误而失败。[安装自签名的构建](https://www.hasscn.top/contributors/os/operating-system/update-system/#install-a-self-signed-build)介绍了如何让设备接受它。
+
+一旦设备接受了你的证书，将 `.raucb` 文件复制到设备上，然后在宿主 shell 中运行以下命令（参见[调试宿主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)）：
+
+```shell
+cd /mnt/data
+rauc install haos_rpi4-64-18.4.dev0.raucb
+systemctl reboot
+```
+
+设备会重启进入刚刚写入的槽位（slot）。如果该槽位无法启动，则会回退到另一个槽位。参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)。
+
+## 使用开发版构建
+
+你并不总是需要自己构建。`dev` 分支的开发版构建发布在 [os-artifacts.home-assistant.io](https://os-artifacts.home-assistant.io/index.html) 上。它们由与正式版本相同的流水线构建和签名，因此你无需搭建构建环境即可试用最近合并的更改。[发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/#build-pipelines)解释了它们的制作方式。
+
+---
+
+# 配置主机
+
+> 使用 CONFIG USB 驱动器，或直接在主机的持久化文件夹中更改 Home Assistant OS 的主机设置。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/configuration/
+
+Home Assistant OS 的根文件系统是只读的。需要在重启或更新后保留的设置存放在 overlay 分区上，并以绑定挂载（bind mount）的方式挂载到位。你可以通过两种方式更改它们：使用 `CONFIG` USB 驱动器，或直接在主机 shell 中操作。
+
+大多数用户从不需要这些。Supervisor 通过 UI 和 `ha` 命令行管理网络、主机名、swap 和数据磁盘。本页面介绍的是它未涵盖的内容，以及用于开发和调试的内容。
+
+## CONFIG USB 驱动器
+
+将 USB 驱动器格式化为 FAT32、exFAT、ext4 或 NTFS，并将其卷标设置为 `CONFIG`（大写）。它必须是文件系统的卷标：Home Assistant OS 会忽略分区的名称。将你需要的文件放在其根目录中：
+
+```text
+network/
+modules/
+modprobe/
+udev/
+authorized_keys
+timesyncd.conf
+haos_<board>-<version>.raucb
+```
+
+| 条目 | 作用 |
+| --- | --- |
+| `network/` | NetworkManager 连接文件。会替换所有现有连接。参见[配置网络](https://www.hasscn.top/contributors/os/operating-system/networking/)。 |
+| `modules/` | 用于 `/etc/modules-load.d` 的文件，在启动时加载内核模块。会替换现有文件。 |
+| `modprobe/` | 用于 `/etc/modprobe.d` 的文件，用于设置内核模块选项。会替换现有文件。 |
+| `udev/` | 用于 `/etc/udev/rules.d` 的文件。会替换现有规则。 |
+| `authorized_keys` | root 的 SSH 公钥，并在端口 22222 上启动 SSH。参见[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)。 |
+| `timesyncd.conf` | 你自己的时间服务器设置。以 drop-in 形式存储在 `/etc/systemd/timesyncd.conf.d/` 中。 |
+| `*.raucb` | 要安装的更新包。仅能从 USB 驱动器安装，且仅在系统已运行 5 分钟后才会安装。 |
+
+每个文本文件都使用 Unix 换行符（LF）。Windows 换行符（CRLF）会破坏它们。大多数代码编辑器（如 Visual Studio Code）都可以切换文件的换行符。
+
+> [!WARNING]
+> 导入操作会镜像该驱动器。没有 `authorized_keys` 文件的驱动器会删除主机上的密钥，并停止端口 22222 上的 SSH。文件夹也是如此：`network/` 中的内容会替换主机上的所有连接。
+
+### 驱动器何时被读取
+
+`haos-config.service` 在每次启动时都会读取该驱动器。要在运行中的系统上导入它，请运行以下命令之一：
+
+```shell
+# From the Home Assistant CLI
+ha os import
+
+# From the host shell
+systemctl restart haos-config
+```
+
+你只需在导入期间插入驱动器，之后即可将其移除。
+
+由于 5 分钟规则，更新包绝不会在启动期间安装。请在系统运行后插入驱动器，并运行 `ha os import`。
+
+### 不使用 USB 驱动器
+
+你也可以在启动分区的根目录中创建一个 `CONFIG` 文件夹，内容相同。这对于虚拟机，或在全新烧录的 SD 卡首次启动之前非常方便。它只在没有卷标为 `CONFIG` 的 USB 驱动器时使用，并且导入后该文件夹会被删除。更新包不会从中安装。
+
+## 主机上的持久化文件夹
+
+在主机 shell 中，这些路径是从 overlay 分区绑定挂载的。你在其中所做的更改在重启和操作系统更新后仍然保留：
+
+| 路径 | 用途 |
+| --- | --- |
+| `/etc/NetworkManager/system-connections` | 网络连接 |
+| `/etc/modules-load.d` | 启动时加载的内核模块 |
+| `/etc/modprobe.d` | 内核模块选项 |
+| `/etc/udev/rules.d` | udev 规则 |
+| `/etc/sysctl.d` | 内核参数 |
+| `/etc/systemd/timesyncd.conf.d` | 时间服务器设置 |
+| `/etc/hostname`, `/etc/hosts` | 主机名和静态主机名 |
+| `/etc/default` | 主机服务的设置，例如 swap 文件 |
+| `/etc/usb_modeswitch.d` | 调制解调器的 USB 模式切换 |
+| `/root/.ssh` | root 的 SSH 密钥 |
+
+`/etc` 下的其他所有内容都来自只读镜像，在那里所做的更改会在下次重启时丢失。
+
+## 内核命令行
+
+将内核参数添加到启动分区上的 `cmdline.txt`。引导加载程序会读取它并将其附加到内核命令行。在主机上，启动分区挂载在 `/mnt/boot`。在大多数板子上，它也是你将 SD 卡或磁盘插入其他电脑时显示的第一个分区。
+
+默认值因板子而异。在许多板子上，`cmdline.txt` 设置了控制台，参见[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/#serial-console)。
+
+## 时间服务器
+
+Home Assistant OS 使用 systemd-timesyncd。它使用 DHCP 服务器通告的时间服务器，并回退到 `time.cloudflare.com`。要使用你自己的时间服务器，请将它们放在 `CONFIG` 驱动器上的 `timesyncd.conf` 中：
+
+```ini
+[Time]
+NTP=ntp.example.com
+```
+
+或者直接在主机的 `/etc/systemd/timesyncd.conf.d/` 中创建一个文件。
+
+## Swap
+
+Home Assistant OS 在数据分区上使用 swap 文件。默认情况下，它是内存的三分之一，至少 1 GiB，至多 4 GiB。使用 CLI 更改它：
+
+```shell
+ha os config swap options --swap-size=2G --swappiness=10
+```
+
+OS Agent 将大小存储在 `/etc/default/haos-swapfile` 中，作为 `SWAPSIZE`。大小为 0 会关闭 swap 文件。更改在重启后生效，并且 Supervisor 会为此提出一个修复问题。
+
+---
+
+# 配置网络
+
+> Home Assistant OS 如何通过 NetworkManager 管理网络，以及如何配置 UI 未覆盖的部分。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/networking/
+
+Home Assistant OS 使用 [NetworkManager](https://networkmanager.dev/) 管理主机网络。开箱即用时没有任何连接配置文件（connection profile）：NetworkManager 会自动连接有线接口，IPv4 使用 DHCP，IPv6 使用自动配置。
+
+## 三种配置方式
+
+1. **UI**：在 **设置** > **系统** > **网络** 下。大多数用户不需要其他方式。
+2. **CLI**：`ha network` 覆盖 UI 能做的所有操作，还支持更多功能，比如 VLAN。
+3. **直接使用 NetworkManager**：通过 `CONFIG` U 盘上的连接文件，或在主机上使用 `nmcli`。适用于前两种方式不支持的场景。
+
+当你通过 UI 或 CLI 更改设置时，Supervisor 会更新该接口的活动连接配置文件。如果不存在，它会创建一个名为 `Supervisor <interface>` 的配置文件，例如 `Supervisor eth0`。因此，你自己编写的配置文件之后可能会被用户在 UI 中修改。
+
+## 使用 CLI
+
+`ha network info` 列出所有接口。`default` 是主接口的快捷方式。要将其恢复为 DHCP：
+
+```shell
+ha network update default --ipv4-method auto
+```
+
+设置静态 IPv4 地址：
+
+```shell
+ha network update eth0 --ipv4-method static \
+  --ipv4-address 192.168.1.10/24 --ipv4-gateway 192.168.1.1 \
+  --ipv4-nameserver 192.168.1.1
+```
+
+在有 Wi-Fi 硬件的板子上也可以使用 Wi-Fi。有线连接更可靠，因此建议尽可能使用有线连接：
+
+```shell
+ha network update wlan0 --ipv4-method auto \
+  --wifi-mode infrastructure --wifi-ssid "My network" \
+  --wifi-auth wpa-psk --wifi-psk "My password"
+```
+
+运行 `ha network update --help` 查看所有选项。
+
+## 使用连接文件
+
+NetworkManager 从 `/etc/NetworkManager/system-connections` 读取 keyfile 格式的连接配置文件，该目录是持久化的。你可以在主机 shell 中将文件放到那里，或者将它们放在 [CONFIG U 盘](https://www.hasscn.top/contributors/os/operating-system/configuration/#the-config-usb-drive) 的 `network/` 文件夹中。U 盘会用它自己的连接替换所有现有连接。
+
+仅支持连接文件。不支持对 `NetworkManager.conf` 本身的修改，它是只读镜像的一部分。[NetworkManager 设置参考](https://networkmanager.dev/docs/api/latest/nm-settings-keyfile.html) 记录了所有选项。
+
+为每个连接分配一个只生成一次的 UUID，例如使用 `uuidgen`。如果没有固定的 UUID，连接的身份会发生变化，每次启动后可能会获得不同的地址。保存文件时请使用 Unix 换行符（LF）。
+
+### 有线连接，使用 DHCP
+
+```ini
+[connection]
+id=my-network
+uuid=d55162b4-6152-4310-9312-8f4c54d86afa
+type=ethernet
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
+```
+
+### 静态 IPv4 地址
+
+替换 `[ipv4]` 部分：
+
+```ini
+[ipv4]
+method=manual
+address1=192.168.1.111/24,192.168.1.1
+dns=192.168.1.1;
+```
+
+`address1` 是地址及其前缀长度，然后是网关。
+
+### 使用 WPA 的 Wi-Fi
+
+```ini
+[connection]
+id=my-wifi
+uuid=72111c67-4a5d-4d5c-925e-f8ee26efb3c3
+type=wifi
+
+[wifi]
+mode=infrastructure
+ssid=MY_SSID
+# 当网络不广播其名称时取消注释
+# hidden=true
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk=MY_PASSWORD
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+method=auto
+```
+
+Home Assistant OS 默认关闭 Wi-Fi 省电模式。要为某个连接开启它，请在其 `[wifi]` 部分中添加 `powersave=3`。
+
+## 在主机上使用 nmcli
+
+在主机 shell 中，`nmcli` 提供了 NetworkManager 的全部功能。`nmcli con show` 列出所有配置文件。例如，为名为 `Supervisor eth0` 的配置文件设置静态地址：
+
+```shell
+nmcli con mod "Supervisor eth0" ipv4.method manual \
+  ipv4.addresses 192.168.1.10/24 ipv4.gateway 192.168.1.1 \
+  ipv4.dns 192.168.1.1
+nmcli con up "Supervisor eth0"
+```
+
+如果还没有配置文件，请使用 `nmcli con add` 创建一个，或者先通过 CLI 设置一次该接口。
+
+## 重置网络
+
+要丢弃所有连接配置文件并恢复默认设置，请在主机 shell 中删除它们并重启：
+
+```shell
+rm -r /mnt/overlay/etc/NetworkManager/system-connections/*
+reboot
+```
+
+## 值得了解的默认设置
+
+其中大部分来自镜像中的 `NetworkManager.conf`：
+
+- 每个连接都启用了 mDNS 和 LLMNR，因此系统会响应 `homeassistant.local`。
+- NetworkManager 每 10 分钟检查一次连接性，检查对象是 `checkonline.home-assistant.io`。
+- Docker 的网桥和虚拟接口不由 NetworkManager 管理。
+- DHCP 服务器通告的时间服务器会通过 NetworkManager dispatcher 脚本 `10-ntp` 传递给 systemd-timesyncd。
+
+---
+
+# 调试主机
+
+> 通过 SSH 或控制台在 Home Assistant OS 上获取 root shell，并找到所需的日志。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/debugging/
+
+要调试操作系统，你需要主机本身的 shell，而不是容器内的 shell。本页介绍进入的途径，以及进入后到哪里查找信息。
+
+> [!IMPORTANT]
+> 这面向开发者。想要终端的用户应改用**Terminal & SSH**应用。该应用在权限受限的容器中运行。本页内容会给你对主机的完整 root 访问权限，没有人能为以这种方式修改过的系统提供支持。
+
+## 端口 22222 上的 SSH
+
+Home Assistant OS 在端口 22222 上为开发者提供了一个 SSH 服务器 [Dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html)。它与任何 SSH 应用相互独立，只有当 root 至少有一把授权密钥时才会运行。不支持密码登录。
+
+### 添加你的密钥
+
+1. 如果你还没有 SSH 密钥，请使用 `ssh-keygen -t ed25519` 创建一个。GitHub 的[生成新 SSH 密钥](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)指南涵盖了所有操作系统。
+2. 将一个 U 盘格式化，卷标设为 `CONFIG`，参见[CONFIG U 盘](https://www.hasscn.top/contributors/os/operating-system/configuration/#the-config-usb-drive)。
+3. 在该盘的根目录下创建一个名为 `authorized_keys` 的文件，不带扩展名。将你的*公钥*放入其中，即以 `.pub` 结尾的文件的内容，每行一把密钥。使用 Unix 换行符（LF）和纯 ASCII。
+4. 将 U 盘插入设备，然后运行 `ha os import`，或者保持 U 盘插入并重启设备。
+
+自 Supervisor 2026.09.0 起，Supervisor API 也可以通过 `/os/ssh/authorized_keys` 端点管理这些密钥。参见[应用（Apps）](https://www.hasscn.top/contributors/apps/)板块中的 Supervisor API 参考。
+
+### 连接
+
+```shell
+ssh root@homeassistant.local -p 22222
+```
+
+如果你改过主机名，或者你的网络不支持 mDNS，请改用设备的 IP 地址。
+
+### 再次关闭
+
+导入一个*不含* `authorized_keys` 文件的 `CONFIG` 盘。导入操作会移除所有密钥并停止 SSH 服务器。也可以通过 API 对 `/os/ssh/authorized_keys` 执行 `DELETE`，移除 root 的所有授权密钥。
+
+## 本地控制台
+
+在接有屏幕和键盘的设备上，或在虚拟机控制台中，设备会显示 Home Assistant CLI（`ha >`）。输入 `login` 即可在主机上获得 root shell。
+
+如果 CLI 在三分钟内没有启动，或者你在等待期间按下 <kbd>Ctrl</kbd>+<kbd>C</kbd>，你会得到一个紧急 shell。当 Supervisor 无法启动时，这就是进入系统的途径。
+
+## 串行控制台
+
+许多开发板还提供串行控制台。它会显示启动信息，并给出登录提示：以 `root` 登录，无需密码。
+
+控制台在启动分区的 `cmdline.txt` 中设置。各开发板的默认值：
+
+| 开发板 | 串行控制台 |
+| --- | --- |
+| Home Assistant Green | `ttyS2`，1500000 波特率 |
+| Home Assistant Yellow | `ttyAMA2`，115200 波特率 |
+| ODROID-C2、ODROID-C4、ODROID-N2、Khadas VIM3 | `ttyAML0`，115200 波特率 |
+| 通用 aarch64、虚拟机 | `ttyS0` |
+
+内核会将其消息写入 `cmdline.txt` 中的每一个控制台，但 systemd 的启动消息只会输出到列在最后的那一个。在所有带屏幕的开发板上，最后一个是 `console=tty0`，因此这些消息会显示在屏幕上。Home Assistant Yellow 没有 HDMI 端口，所以它把串行控制台列在最后。要在其他开发板的串行控制台上查看启动消息，请把它的 `console=` 条目移到行尾。对于不在本表中的开发板，请自行添加串行控制台，参见[开发板页面](https://www.hasscn.top/contributors/os/operating-system/boards/)。
+
+## 救援 shell
+
+在带有 GRUB 的开发板（通用 x86-64、通用 aarch64 和虚拟机）上，启动菜单中每个槽位都有一个救援 shell 条目。它会将系统启动到 systemd 的恢复目标，并输出调试信息。当系统无法启动到足以打开控制台的程度时，这很有用。
+
+## 日志
+
+日志（journal）存储在数据分区上，因此重启后仍然保留。在主机 shell 中：
+
+```shell
+# The service that starts the Supervisor
+journalctl -u haos-supervisor -f
+
+# The Supervisor itself
+docker logs -f hassio_supervisor
+
+# Home Assistant Core
+docker logs -f homeassistant
+
+# Everything, newest last
+journalctl -e
+```
+
+在没有主机访问权限的情况下，CLI 也能显示其中大部分内容：`ha supervisor logs`、`ha core logs` 和 `ha host logs`。添加 `--help` 可查看选项，例如选择某次启动。
+
+## 查看容器内部
+
+系统的每个部分都是一个 Docker 容器。要在某个容器中打开 shell：
+
+```shell
+docker ps
+docker exec -it homeassistant /bin/bash
+```
+
+[Supervisor 概览](https://www.hasscn.top/contributors/os/supervisor/#what-the-supervisor-runs)列出了这些容器及其名称。
+
+---
+
+# 发布与构建
+
+> Home Assistant OS 的更改如何从拉取请求（pull request）走到发布，包括涉及的分支、版本号和构建流水线。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/releases/
+
+Home Assistant OS 没有固定的发布时间表。维护者会在有值得发布的内容时发布，比如内核更新、修复或新功能。本页介绍你的更改所经历的流程。
+
+## 发起拉取请求
+
+Fork [home-assistant/operating-system](https://github.com/home-assistant/operating-system)，创建一个分支，然后针对 `dev` 发起你的拉取请求（pull request）。
+
+请解释这个更改*为什么*重要，而不仅仅是它做了什么。“更新内核”在 diff 中就能看到。“更新内核，因为它修复了 X 开发板上的以太网”才是审阅者需要知道的信息。简短的理由即可，只要有就行。
+
+更改构建或系统的拉取请求可以加上 `run-ova-test` 标签。这会构建 OVA 镜像并在其上运行自动化测试，参见[测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/#run-the-automated-tests)。只有维护者才能设置标签，而且构建只针对主仓库中的分支运行。
+
+## 分支
+
+- `dev` 承载开发期间的下一个版本。每个更改都先进入这里，包括面向当前发布的修复。
+- `rc` 承载发布候选版本。维护者将 `dev` 中已就绪的更改移入其中。
+- `main` 承载稳定发布。发布之后，`main` 会合并回 `dev`。
+
+较旧的大版本曾有各自的 `rel-<major>` 分支。这些分支不再用于新的发布。
+
+## 版本号
+
+版本号格式为 `MAJOR.MINOR`，例如 `18.3`。版本号位于 `buildroot-external/meta` 中，并带有一个可选的后缀：
+
+| 类型 | 示例 | 来源 |
+| --- | --- | --- |
+| 开发构建 | `18.4.dev20261006` | `dev`，后缀为构建日期 |
+| 发布候选版本 | `18.4.rc1` | `rc` |
+| 稳定发布 | `18.4` | `main`，无后缀 |
+
+本地构建会原样使用 `meta` 中的后缀，例如 `18.4.dev0`。CI 会将其替换为开发构建的日期。
+
+## 部署类型
+
+`buildroot-external/meta` 中的 `DEPLOYMENT` 值决定镜像信任哪些用于更新的证书，参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/#security)。
+
+| 部署类型 | 通道 | 用途 |
+| --- | --- | --- |
+| `development` | dev | 开发构建 |
+| `staging` | beta | 发布候选版本 |
+| `production` | stable | 发布 |
+
+当部署类型、版本号格式和通道不匹配时，构建流水线会拒绝发布该构建。
+
+## 构建流水线
+
+GitHub Actions 通过 [`.github/workflows/build.yaml`](https://github.com/home-assistant/operating-system/blob/dev/.github/workflows/build.yaml) 构建所有公开镜像。它在两种情况下运行：
+
+- **发布 GitHub release 时。** 它构建所有开发板、运行测试，并将镜像附加到该 release。预发布（pre-release）进入 beta 通道，正式发布进入 stable 通道。
+- **维护者手动启动时。** 它构建他们所选开发板（或全部开发板）的开发版本。镜像发布在 [os-artifacts.home-assistant.io](https://os-artifacts.home-assistant.io/index.html) 上。
+
+针对 fork 的构建不会发布任何内容，并且使用一次性的自签名证书而不是发布证书进行签名。
+
+## 发布之后
+
+发布说明会根据已合并拉取请求的标签自动生成，例如 `board/raspberrypi` 或 `build`。用户通过 Supervisor 获取新版本，Supervisor 会检查 [version.home-assistant.io](https://version.home-assistant.io/stable.json) 以获取其通道的最新 OS 版本。更新本身通过 RAUC 进行，参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)。
+
+---
+
+# 分区
+
+> Home Assistant OS 的磁盘布局、每个分区的内容，以及数据磁盘功能如何移动数据分区。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/partitions/
+
+Home Assistant OS 的磁盘布局与典型的 Linux 系统不同。系统本身存储了两份，以便安全更新，而所有会变化的内容都存放在单独的分区上。
+
+## 分区表
+
+Home Assistant OS 在可能的情况下使用 GPT 分区表。一些开发板的引导固件需要使用磁盘的第二个块，而 GPT 正是在那里存储其头部信息。这些开发板使用混合分区表，即 GPT 与 MBR 并存，或者使用纯 MBR 表。[开发板元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/)中的 `PARTITION_TABLE_TYPE` 决定使用哪一种。
+
+## 布局
+
+| 分区 | 标签 | 大小 | 内容 |
+| --- | --- | --- | --- |
+| 引导 | `hassos-boot` | 因开发板而异，16 到 64 MB | 引导加载程序文件、`cmdline.txt` 和引导配置 |
+| 内核 A | `hassos-kernel0` | 24 MB | 槽位 A 的内核 |
+| 系统 A | `hassos-system0` | 256 MB | 槽位 A 的根文件系统 |
+| 内核 B | `hassos-kernel1` | 24 MB | 槽位 B 的内核 |
+| 系统 B | `hassos-system1` | 256 MB | 槽位 B 的根文件系统 |
+| 引导状态 | `hassos-bootstate` | 8 MB | U-Boot 环境变量（在使用 U-Boot 的开发板上） |
+| Overlay | `hassos-overlay` | 96 MB | 持久化的主机设置 |
+| 数据 | `hassos-data` | 磁盘的剩余空间 | 容器、Home Assistant、应用和用户数据 |
+
+带有二级程序加载器（SPL）的开发板还会在磁盘起始处、引导分区之前为其预留空间。这些大小在 [`buildroot-external/scripts/hdd-image.sh`](https://github.com/home-assistant/operating-system/blob/dev/buildroot-external/scripts/hdd-image.sh) 和开发板元数据中设置。布局本身位于 [`buildroot-external/genimage/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/genimage) 中。
+
+分区名称保留了旧的 `hassos` 前缀。操作系统和 Supervisor（管理器）中的大量代码都是通过这些标签来查找分区的。
+
+## 引导分区
+
+一个 FAT 分区，挂载在 `/mnt/boot`。在 UEFI 系统上，它是 EFI 系统分区，包含 GRUB 及其环境文件。在其他开发板上，它存放 U-Boot 或 Raspberry Pi 的固件文件。它还存放 `cmdline.txt`，在 Raspberry Pi 上还有 `config.txt`。
+
+## 内核和系统分区
+
+每个槽位都有一个内核分区和一个系统分区。系统分区存放根文件系统，即一个只读的、压缩的 EROFS 镜像。在正常使用期间，两者都不会被写入。只有更新时才会写入它们，而且只写入未在运行的槽位。参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)。
+
+## Overlay 分区
+
+一个 ext4 文件系统，挂载在 `/mnt/overlay`。它存放需要持久化的主机设置，例如网络连接、主机名和 SSH 密钥。它们在启动时以绑定挂载（bind mount）的方式挂载到 `/etc` 及其他位置。[配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/#persistent-folders-on-the-host)列出了这些设置。
+
+## 数据分区
+
+一个 ext4 文件系统，挂载在 `/mnt/data`。它存放所有不属于操作系统的内容：Docker 存储（绑定到 `/var/lib/docker`）、位于 `/mnt/data/supervisor` 的 Supervisor 数据、系统日志以及交换文件。它的读写量远远超过其他分区，因此最能从高速存储中受益。
+
+镜像中的数据分区很小。在首次启动时，`haos-expand` 会将其扩展以填满磁盘的剩余空间。
+
+全新镜像在数据分区上已预装了 Supervisor 及其插件，但没有 Home Assistant Core。它只有一个简单的着陆页。Supervisor 会在首次启动时下载当前的 Core，因此新安装的系统总是从最新版本开始。
+
+## 数据磁盘
+
+用户可以将数据分区移动到另一个磁盘，例如在 SD 卡旁边使用 USB SSD。Supervisor 和 OS Agent 会准备目标磁盘（使用标签为 `hassos-data-external` 的分区）并重启。
+
+在下次启动期间，`haos-data.service` 会使用 `e2image` 将数据分区复制到新磁盘，并将旧分区的标签更改为 `hassos-data-old`。此后，新分区是唯一带有 `hassos-data` 标签的分区，因此它就是会被挂载的那个分区。如果复制失败，新分区会被标记为 `hassos-data-fail`，系统将继续使用旧分区。
+
+在全新安装的首次启动时，`haos-data-disk-detach.service` 会在其他磁盘上查找 `hassos-data` 分区，例如之前安装遗留的数据磁盘。它会将它们重命名为 `hassos-data-dis`，这样新安装的系统就不会挂载它们。Home Assistant Yellow 是个例外：其第一个 NVMe 磁盘上的数据分区会被保留，并优先于 eMMC 上的数据分区。
+
+---
+
+# 更新系统
+
+> Home Assistant OS 如何通过 RAUC 和双启动槽位进行自我更新、更新包如何签名，以及如何安装自己构建的版本。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/update-system/
+
+Home Assistant OS 使用 [RAUC](https://rauc.io/) 进行更新，这是一种面向嵌入式 Linux 的基于镜像的更新系统。更新不会改变正在运行的系统上的文件。它将一个完整的新内核和根文件系统写入当前未运行的槽位（slot），然后启动进入该槽位。如果启动失败，设备会回到原来的槽位。
+
+[RAUC 文档](https://rauc.readthedocs.io/)介绍 RAUC 本身。本页介绍 Home Assistant OS 如何使用它。
+
+## 更新包
+
+每次构建都会为新安装生成一个磁盘镜像，并为现有安装生成一个 RAUC 更新包（update bundle），即一个 `.raucb` 文件。两者都由相同的分区镜像制成。一个更新包包含：
+
+- 启动分区内容
+- 内核镜像
+- 根文件系统
+- 二级程序加载器（SPL），适用于带有该组件的板卡
+
+清单模板 [`buildroot-external/ota/manifest.raucm.gtpl`](https://github.com/home-assistant/operating-system/blob/dev/buildroot-external/ota/manifest.raucm.gtpl) 定义了更新包的内容。它对所有板卡都相同。更新包的 `compatible` 值为 `haos-<board id>`，例如 `haos-rpi4-64`，因此一个更新包只能安装在它所针对的板卡上。
+
+启动分区不属于 A/B 方案：更新会就地写入该分区。更新钩子 `buildroot-external/ota/rauc-hook` 会保留其上的 `.txt` 文件，例如 `cmdline.txt` 和 `config.txt`，因此用户对这些文件的修改在更新后仍然保留。
+
+## 更新的运行方式
+
+RAUC 作为系统服务运行，并提供 D-Bus API。在正常使用中，由 Supervisor 驱动它：
+
+1. Supervisor 下载新版本的更新包。
+2. 它通过 D-Bus 请求 RAUC 安装该更新包。对 RAUC 而言，这是从文件进行的本地安装。
+3. RAUC 写入非活动槽位，并告知引导加载程序下次尝试该槽位。
+4. 此时更新已安装，但尚未激活。Supervisor 将其报告为 `version_pending`，并产生一个需要重启的修复问题。它不会自行重启。
+5. 用户或发起更新的程序重启系统，系统启动进入新槽位。
+6. Supervisor 启动后，会将已启动的槽位标记为良好（good）。
+
+你也可以在主机 shell 中手动执行相同的操作。要安装更新包，请参阅[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)获取 shell：
+
+```shell
+cd /mnt/data
+REPO=https://github.com/home-assistant/operating-system
+curl -LO "$REPO/releases/download/18.3/haos_rpi4-64-18.3.raucb"
+rauc install haos_rpi4-64-18.3.raucb
+systemctl reboot
+```
+
+> [!NOTE]
+> 在 Raspberry Pi 5 上，请始终使用 `systemctl reboot` 重启。它通过固件的 tryboot 机制启动新槽位，该机制需要 `systemctl reboot` 传递的重启参数。直接使用 `reboot` 会再次启动旧槽位。
+
+## 启动槽位
+
+有两个槽位：A 和 B。新安装只有槽位 A 被填充。第一次更新写入 B，下一次更新又写入 A，依此类推。
+
+`ha os info` 显示当前正在运行的槽位。在主机 shell 中，`rauc status` 显示完整情况：
+
+```text
+=== System Info ===
+Compatible:  haos-rpi4-64
+Booted from: kernel.0 (A)
+
+=== Slot States ===
+x [kernel.0] (/dev/disk/by-partlabel/hassos-kernel0, raw, booted)
+        bootname: A
+        boot status: good
+    [rootfs.0] (/dev/disk/by-partlabel/hassos-system0, raw, active)
+
+o [kernel.1] (/dev/disk/by-partlabel/hassos-kernel1, raw, inactive)
+        bootname: B
+        boot status: good
+    [rootfs.1] (/dev/disk/by-partlabel/hassos-system1, raw, inactive)
+```
+
+更新后，引导加载程序会尝试新槽位有限的次数，在 GRUB 上为三次。如果该槽位从未被标记为良好，引导加载程序会回退到另一个槽位。其工作方式取决于引导加载程序：
+
+- **GRUB** 将槽位顺序保存在其环境文件（启动分区上的 `EFI/BOOT/grubenv`）中并进行尝试。其启动菜单还允许你手动选择槽位。
+- **U-Boot** 将它们保存在 `hassos-bootstate` 分区上的环境中。
+- **Raspberry Pi 5** 通过自定义的 RAUC 后端使用固件的 tryboot 机制。
+
+要自行切换槽位，请使用 `ha os boot-slot A` 或 `ha os boot-slot B`。所选槽位将保持为默认槽位，直到你再次更改它，或某次更新更改了它。
+
+## 安全性
+
+更新包是经过签名的，RAUC 在安装任何内容之前会根据 `/etc/rauc/keyring.pem` 中的密钥环检查签名。Home Assistant OS 拥有自己的公钥基础设施，包括一个开发证书颁发机构和一个发布证书颁发机构。所有公开构建都由发布链签名。
+
+镜像信任哪些证书取决于其[部署类型](https://www.hasscn.top/contributors/os/operating-system/releases/#deployment-types)：
+
+- **Production 和 staging** 镜像信任发布证书颁发机构。
+- **Development** 镜像信任开发证书颁发机构和发布证书颁发机构。
+
+除此之外，你自己构建的每个镜像都信任你自己的自签名证书，即仓库根目录中的 `cert.pem`。参见[构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/#signing)。因此，你构建的镜像会接受你后续构建的更新包，同时也接受官方发布版本。
+
+### 安装自签名的构建版本
+
+官方安装不信任你的证书。在其中安装你的更新包会失败：
+
+```text
+LastError: signature verification failed: Verify error:self signed certificate
+```
+
+不过，Home Assistant OS 并未锁定。拥有主机 root 权限后，你可以将证书添加到密钥环中，仅对当前启动有效。先将仓库根目录中的 `cert.pem` 复制到设备上的 `/mnt/data`：
+
+```shell
+cp -r /etc/rauc/ /tmp/rauc
+cat /mnt/data/cert.pem >> /tmp/rauc/keyring.pem
+mount -o bind /tmp/rauc/ /etc/rauc/
+systemctl restart rauc
+rauc install /mnt/data/haos_rpi4-64-18.4.dev0.raucb
+```
+
+重启后绑定挂载会消失，但你的构建版本在其自身的密钥环中包含你的证书。从那时起，设备会接受你后续的构建版本，也接受官方发布版本，因此你始终可以更新回某个发布版本。
+
+---
+
+# 板卡元数据
+
+> 每块板卡的 meta 文件中的变量，以及所有板卡共享的版本文件。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/board-metadata/
+
+[`buildroot-external/board/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board) 中的每个板卡文件夹都有一个名为 `meta` 的文件。它向构建脚本描述板卡：如何命名镜像、使用哪个引导加载程序和分区表，以及拉取哪些 Supervisor 镜像。构建脚本将其作为 shell 变量读取，同时还会读取共享的 `buildroot-external/meta`。
+
+下面是 Home Assistant Green 的文件：
+
+```shell
+BOARD_ID=green
+BOARD_NAME="Home Assistant Green"
+CHASSIS=embedded
+BOOTLOADER=uboot
+KERNEL_FILE=Image
+PARTITION_TABLE_TYPE=hybrid
+BOOT_SIZE=16M
+BOOT_SPL=true
+BOOT_SPL_SIZE=16M
+BOOT_ENV_SIZE=0x8000
+SUPERVISOR_MACHINE=green
+SUPERVISOR_ARCH=aarch64
+```
+
+## 板卡（Board）
+
+| 变量 | 含义 |
+| --- | --- |
+| `BOARD_ID` | 板卡标识符，小写。用于镜像文件名（如 `haos_green-18.3.img.xz`）、RAUC 的 `compatible` 值，以及 `/usr/lib/os-release` 中的 `VARIANT_ID`。 |
+| `BOARD_NAME` | 人类可读的名称。用于 `/usr/lib/os-release` 中的 `VERSION` 和 `VARIANT`。 |
+| `CHASSIS` | systemd 的机箱（chassis）类型，写入 `/etc/machine-info`。板卡使用 `embedded`，虚拟机镜像使用 `vm`。 |
+
+## 引导（Boot）
+
+| 变量 | 含义 |
+| --- | --- |
+| `BOOTLOADER` | `uboot`、`grub` 或 `tryboot`。GRUB 用于 UEFI 系统，tryboot 用于 Raspberry Pi 5，其他地方使用 U-Boot。它设置 RAUC 的引导加载程序后端，参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/#boot-slots)。 |
+| `KERNEL_FILE` | 内核二进制文件的文件名：aarch64 上为 `Image`，x86-64 上为 `bzImage`。 |
+| `PARTITION_TABLE_TYPE` | `gpt`、`hybrid` 或 `mbr`。Home Assistant OS 尽可能使用 GPT。GPT 需要磁盘的第二个块来存放其头部。某些引导 ROM 自身需要使用该块，此时板卡使用 `mbr`。`hybrid` 会同时写入两种分区表，适用于 GPT 可用但固件仍会读取 MBR 的板卡。参见[分区](https://www.hasscn.top/contributors/os/operating-system/partitions/)。 |
+| `BOOT_SIZE` | 引导分区的大小，如 `32M`。 |
+| `BOOT_SPL` | `true` 或 `false`。板卡是否具有二级程序加载器（SPL），即 U-Boot 为某些板卡构建的小型第一阶段加载器。设为 `true` 时，镜像会为其预留空间，更新包中也会包含它。 |
+| `BOOT_SPL_SIZE` | 为 SPL 预留的空间，如 `8M`。仅在 `BOOT_SPL=true` 时使用。 |
+| `BOOT_ENV_SIZE` | U-Boot 环境的大小，十六进制表示，如 `0x4000`。RAUC 需要它来在 `hassos-bootstate` 分区上读写环境。仅适用于 U-Boot 板卡。 |
+
+## Supervisor
+
+| 变量 | 含义 |
+| --- | --- |
+| `SUPERVISOR_MACHINE` | 机器类型。Supervisor 用它来选择正确的 Home Assistant Core 镜像，插件（app）也用它来限制所支持的机器。多块板卡可以共用一个值，例如 ODROID-M1 和 M1S 共用 `odroid-m1`。当前取值列在[支持的板卡](https://www.hasscn.top/contributors/os/operating-system/boards/)页面上。 |
+| `SUPERVISOR_ARCH` | 容器的 CPU 架构：`aarch64` 或 `amd64`。不再支持 32 位架构。 |
+
+这两个变量最终都会写入 `/usr/lib/os-release`。`haos-supervisor` 服务使用架构来选择 Supervisor 镜像，并将机器类型传递给 Supervisor 容器。
+
+## 共享的版本文件
+
+`buildroot-external/meta` 适用于所有板卡：
+
+```shell
+VERSION_MAJOR="18"
+VERSION_MINOR="4"
+VERSION_SUFFIX="dev0"
+
+HAOS_NAME="Home Assistant OS"
+HAOS_ID="haos"
+
+DEPLOYMENT="development"
+```
+
+| 变量 | 含义 |
+| --- | --- |
+| `VERSION_MAJOR`, `VERSION_MINOR`, `VERSION_SUFFIX` | 它们共同组成版本号，如 `18.4.dev0`，没有后缀时为 `18.4`。参见[发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/#version-numbers)。 |
+| `HAOS_NAME`, `HAOS_ID` | 操作系统的名称和标识符，用于 `/usr/lib/os-release` 和镜像文件名。 |
+| `DEPLOYMENT` | `development`、`staging` 或 `production`。设置镜像在更新时信任哪些证书，参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/#security)。 |
+
+---
+
+# 支持的开发板
+
+> Home Assistant OS 构建所面向的每一块开发板，包括其构建目标、引导加载程序和机器类型。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/boards/
+
+Home Assistant OS 为每个目标构建一个镜像。每个目标在 `buildroot-external/configs/<target>_defconfig` 中有一个配置，并在 [`buildroot-external/board/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board) 中有一个包含其[元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/)的开发板文件夹。自 Home Assistant OS 17 起，所有目标均为 64 位。
+
+## 所有目标
+
+| 开发板 | 构建目标 | 引导加载程序 | 分区表 | 机器 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| Home Assistant Green | `green` | U-Boot | 混合 | `green` | |
+| Home Assistant Yellow | `yellow` | U-Boot | 混合 | `yellow` | Raspberry Pi Compute Module 4 和 5 的载板 |
+| Raspberry Pi 3 | `rpi3_64` | U-Boot | 混合 | `raspberrypi3-64` | [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/) |
+| Raspberry Pi 4 | `rpi4_64` | U-Boot | 混合 | `raspberrypi4-64` | [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/) |
+| Raspberry Pi 5 | `rpi5_64` | Tryboot | GPT | `raspberrypi5-64` | [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/) |
+| ODROID-C2 | `odroid_c2` | U-Boot | MBR | `odroid-c2` | [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/) |
+| ODROID-C4 | `odroid_c4` | U-Boot | MBR | `odroid-c4` | [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/) |
+| ODROID-M1 | `odroid_m1` | U-Boot | 混合 | `odroid-m1` | [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/) |
+| ODROID-M1S | `odroid_m1s` | U-Boot | 混合 | `odroid-m1` | [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/) |
+| ODROID-N2 和 N2+ | `odroid_n2` | U-Boot | MBR | `odroid-n2` | [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/)，也是 Home Assistant Blue |
+| Khadas VIM3 | `khadas_vim3` | U-Boot | MBR | `khadas-vim3` | |
+| 通用 x86-64 | `generic_x86_64` | GRUB | GPT | `generic-x86-64` | [通用系统](https://www.hasscn.top/contributors/os/operating-system/generic/) |
+| 通用 aarch64 | `generic_aarch64` | GRUB | GPT | `qemuarm-64` | [通用系统](https://www.hasscn.top/contributors/os/operating-system/generic/)，也是虚拟机镜像 |
+| 虚拟机 | `ova` | GRUB | GPT | `qemux86-64` | [虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/) |
+
+构建目标是传递给 `make` 的参数，参见[构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/)。镜像文件名中的开发板标识符则使用连字符，例如 `haos_rpi4-64-18.3.img.xz`。
+
+## 内核
+
+大多数开发板运行主线 Linux 内核。Raspberry Pi 开发板和 Home Assistant Yellow 运行 [Raspberry Pi 分支（fork）](https://github.com/raspberrypi/linux)。当前版本见仓库中的 [`Documentation/kernel.md`](https://github.com/home-assistant/operating-system/blob/dev/Documentation/kernel.md)。
+
+## 已移除的开发板
+
+Home Assistant OS 17 移除了 32 位目标：Raspberry Pi 2、Raspberry Pi 3 和 4 的 32 位构建、ODROID-XU4 以及 ASUS Tinker Board。Raspberry Pi 1 和 Zero W 在此之前已被弃用。这些开发板上的现有安装不再获得更新。
+
+## 添加开发板
+
+支持哪些开发板是项目的决定，而不仅仅是代码问题。[ADR-0015](https://github.com/home-assistant/architecture/blob/master/adr/0015-home-assistant-os.md) 定义了支持的硬件，[ADR-0017](https://github.com/home-assistant/architecture/blob/master/adr/0017-hardware-screening-os.md) 列出了新开发板必须满足的条件，例如长期供货和上游内核支持。在开始之前，请先在[架构仓库](https://github.com/home-assistant/architecture)中提议新开发板。
+
+---
+
+# Raspberry Pi
+
+> Home Assistant OS 在 Raspberry Pi 上的特定内容，例如串行控制台、I2C 以及从 USB 启动。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/
+
+Home Assistant OS 支持 Raspberry Pi 3、4 和 5，均为 64 位。Home Assistant Yellow 基于相同的板卡支持构建，使用 Compute Module 4 或 5。
+
+| 板卡 | 构建目标 | 引导加载程序 |
+| --- | --- | --- |
+| Raspberry Pi 3 Model B 和 B+ | `rpi3_64` | U-Boot |
+| Raspberry Pi 4 Model B | `rpi4_64` | U-Boot |
+| Raspberry Pi 5 | `rpi5_64` | Firmware tryboot |
+| Home Assistant Yellow | `yellow` | U-Boot |
+
+它们都使用 [Raspberry Pi Linux 内核](https://github.com/raspberrypi/linux)，而非主线内核。板卡文件位于 [`buildroot-external/board/raspberrypi/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board/raspberrypi)。
+
+## 启动方式
+
+在 Raspberry Pi 3 和 4 上，Raspberry Pi 固件会加载 U-Boot（`config.txt` 中的 `kernel=u-boot.bin`），然后由 U-Boot 选择启动槽位。Raspberry Pi 5 无需 U-Boot 即可启动：固件直接加载活动槽位的内核，更新时则使用固件的 tryboot 机制来测试新槽位。手动更新后，请务必使用 `systemctl reboot` 重启 Raspberry Pi 5，参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/#how-an-update-runs)。
+
+`config.txt` 和 `cmdline.txt` 位于启动分区上。对它们的更改在操作系统更新后仍然保留。
+
+## 串行控制台
+
+在 Raspberry Pi 3 和 4 上，串行控制台默认未启用。要在 GPIO 排针上启用它（引脚 6 为地线，引脚 8 为 TX，引脚 10 为 RX）：
+
+1. 在 `config.txt` 中添加 `enable_uart=1` 和 `dtoverlay=disable-bt`。该 overlay 会将蓝牙从主 UART 上移开。
+2. 在 `cmdline.txt` 中添加 `console=ttyAMA0,115200`。
+
+Home Assistant Yellow 的串行控制台已启用，位于 `ttyAMA2`，波特率为 115200。
+
+## I2C
+
+1. 在 `config.txt` 中添加 `dtparam=i2c_arm=on`。
+2. 在启动时加载 `i2c-dev` 模块：在 [CONFIG USB 闪存盘](https://www.hasscn.top/contributors/os/operating-system/configuration/#the-config-usb-drive)的 `modules/` 文件夹中放置一个包含 `i2c-dev` 一行的文件，或在主机的 `/etc/modules-load.d/` 中放置。
+
+## 从 USB 启动
+
+Raspberry Pi 4 和 5 可以从 USB 驱动器启动，前提是它们 EEPROM 中的引导加载程序足够新。Home Assistant OS 包含 EEPROM 工具。`ha os boards raspberrypi firmware update` 可从 CLI 更新引导加载程序。
+
+需要了解的一些事项：
+
+- 移除所有可启动的 SD 卡。固件会首先尝试 SD 卡。
+- 启动速度较慢，因为固件在 USB 之前会先检查 SD 卡。
+- 并非所有 USB 转 SATA 适配器都能正常工作。在 Raspberry Pi 4 上，`cmdline.txt` 已包含针对已知需要它的适配器的 `usb-storage.quirks`。Raspberry Pi 5 镜像则没有。如果你的适配器表现异常，请找到它的 USB ID 并为其添加一个 quirk。
+- 在没有 SD 卡的情况下，在 `config.txt` 中添加 `dtparam=sd_poll_once=on`，以阻止内核轮询空槽位。
+
+Raspberry Pi 3 Model B 在 `config.txt` 中设置一次 `program_usb_boot_mode=1` 后即可从 USB 启动。该更改是永久性的：它会被写入一次性可编程存储器。
+
+## 蓝牙
+
+蓝牙默认开启。如果不需要，可在 `config.txt` 中使用 `dtoverlay=disable-bt` 将其关闭。
+
+---
+
+# ODROID
+
+> Hardkernel ODROID 在 Home Assistant OS 下的 specifics，例如 eMMC 安装、M1 和 M1S 的启动流程以及控制台。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/odroid/
+
+Home Assistant OS 支持五款 Hardkernel ODROID 开发板。它们的板级文件位于 [`buildroot-external/board/hardkernel/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board/hardkernel)。
+
+| 开发板 | 构建目标 | SoC 系列 | 备注 |
+| --- | --- | --- | --- |
+| ODROID-C2 | `odroid_c2` | Amlogic | 已被 Hardkernel 停产 |
+| ODROID-C4 | `odroid_c4` | Amlogic | |
+| ODROID-N2 和 N2+ | `odroid_n2` | Amlogic | Home Assistant Blue 就是一台 ODROID-N2+ |
+| ODROID-M1 | `odroid_m1` | Rockchip | 自 Home Assistant OS 10 起 |
+| ODROID-M1S | `odroid_m1s` | Rockchip | 自 Home Assistant OS 12 起 |
+
+它们都使用 U-Boot 启动，并运行主线（mainline）Linux 内核。
+
+## Wi-Fi 和蓝牙模块
+
+Hardkernel 的 [WiFi Module 3](https://www.hardkernel.com/shop/wifi-module-3/) 和 [Bluetooth Module 2](https://www.hardkernel.com/shop/bluetooth-module-2/) 曾在 Home Assistant OS 上测试过。WiFi Module 5A 没有上游驱动，不推荐使用。
+
+## ODROID-C2、C4 和 N2
+
+镜像在 eMMC 上的使用方式与 SD 卡相同：将其烧录到 eMMC 模块即可。
+
+串口控制台位于串口排针上，为 `ttyAML0`，波特率 115200，位于 HDMI 控制台旁边。内核会同时向两者发送消息，但 systemd 的启动消息只会输出到 `cmdline.txt` 中列在最后的控制台。默认情况下是 HDMI：
+
+```text
+console=ttyAML0,115200n8 console=tty0
+```
+
+如果想在串口控制台上查看启动消息，请将两者顺序对调。
+
+在 ODROID-N2 上，GPIO 引脚 11 可用作电源按键，低电平有效。关于 GPIO 排针，请参阅 ODROID wiki 中 [C2](https://wiki.odroid.com/odroid-c2/hardware/expansion_connectors)、[C4](https://wiki.odroid.com/odroid-c4/hardware/expansion_connectors) 和 [N2](https://wiki.odroid.com/odroid-n2/hardware/expansion_connectors) 的相关页面。
+
+## ODROID-M1
+
+镜像包含了直接启动 SoC 所需的一切，无需 Hardkernel 的 Petitboot。但 M1 会首先从其 SPI 闪存启动。要直接从 SD 卡或 eMMC 启动，请按住恢复（recovery）按钮。SPI 闪存中较新版本的 Petitboot 也能自行找到 Home Assistant OS 的 U-Boot，因此无需按按钮。
+
+要通过 SPI 闪存从 eMMC 启动，需要 Petitboot 版本 20230328 或更高。更新方法如下：
+
+1. 从 [Hardkernel 的 Petitboot 镜像](http://ppa.linuxfactory.or.kr/images/petitboot/odroidm1/) 下载 SPI 更新器和 SPI 启动镜像。
+2. 将更新器烧录到一张 SD 卡上。
+3. 将 SPI 启动镜像复制到该 SD 卡的 FAT 分区，命名为 `spiboot.img`。
+4. 从该 SD 卡启动 M1。HDMI 输出会显示进度，成功时左上角会显示新版本号。
+
+然后将 Home Assistant OS 烧录到 eMMC。NVMe 硬盘无法作为启动盘，但可以用作[数据盘（data disk）](https://www.hasscn.top/contributors/os/operating-system/partitions/#data-disk)。
+
+串口控制台位于 CON1 排针上，波特率为 1500000。`cmdline.txt` 中包含 `console=tty0`，因此 systemd 的启动消息会显示在 HDMI 上，而不是串口控制台上。
+
+## ODROID-M1S
+
+M1S 会先从 SD 卡启动，然后才是 eMMC，因此带有 Home Assistant OS 的 SD 卡可以直接使用。即使 eMMC 上仍是出厂加载器（loader），也能正常工作。
+
+要安装到 eMMC，请使用 Hardkernel 的 [UMS 工具镜像](https://wiki.odroid.com/odroid-m1s/getting_started/os_installation_guide#user_installer)。它会把 M1S 变成一个 USB 大容量存储设备，这样你就可以通过 Micro USB OTG 接口从电脑上烧录 eMMC。
+
+安装 Home Assistant OS 会将 eMMC 上的加载器替换为主线版本。此后，UMS 工具镜像将无法再从 SD 卡启动。要重新进入 UMS 模式，请在 Home Assistant OS 的主机 shell 中将 Hardkernel 的镜像写入 eMMC：
+
+```shell
+dd if=/tmp/ODROID-M1S_EMMC2UMS.img of=/dev/mmcblk0
+```
+
+设备下次启动时（无需 SD 卡）就会进入 UMS 模式。请在另一台电脑上下载该镜像：Hardkernel 的下载站点会阻止脚本化下载。然后将其复制到设备上，例如使用 `scp`。
+
+NVMe 硬盘无法作为启动盘，但可以用作数据盘。14 针扩展排针已部分获得主线内核支持，包括 UPS 和内部 USB。
+
+串口控制台的波特率为 1500000。与 M1 一样，systemd 的启动消息会显示在 HDMI 上。
+
+---
+
+# 通用系统
+
+> 通用 x86-64 和 aarch64 目标，适用于通过 UEFI 启动的 PC 和其他系统。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/generic/
+
+有两个目标并非针对某一块开发板，而是针对任何通过 UEFI 启动的系统。
+
+| 目标 | 构建目标 | 适用对象 |
+| --- | --- | --- |
+| 通用 x86-64 | `generic_x86_64` | 迷你 PC（如 Intel NUC）及其他 64 位 x86 计算机 |
+| 通用 aarch64 | `generic_aarch64` | 支持 UEFI 的 64 位 Arm 系统，以及 Arm 虚拟机 |
+
+两者都使用 GRUB、GPT 分区表和主线 Linux 内核。它们的开发板文件位于 [`buildroot-external/board/pc/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board/pc) 和 [`buildroot-external/board/arm-uefi/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board/arm-uefi)。
+
+## 要求
+
+- 正确架构的 64 位 CPU
+- UEFI 启动，且安全启动（secure boot）已关闭
+- 内核支持的磁盘，如 SATA、NVMe 或 eMMC
+- 受支持的网络卡
+
+x86-64 内核包含常见的 Intel 和 Realtek 以太网驱动，以及 Intel Wi-Fi 及其固件。Intel Wi-Fi 卡上的蓝牙可以工作。其他硬件取决于内核配置所包含的内容：[`buildroot-external/kernel/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/kernel) 以及开发板文件夹中的 `kernel.config`。
+
+## 安装
+
+没有安装程序。你需要将镜像写入内部磁盘：
+
+1. 通过 USB 或网络，将计算机启动到 live Linux 系统。
+2. 下载或复制镜像，并使用 `unxz` 解压。
+3. 使用 `dd` 或 balenaEtcher 之类的工具将其写入内部磁盘。
+4. 重启。
+
+首次启动时，数据分区会自动扩展以填满整个磁盘。
+
+## 控制台
+
+x86-64 镜像使用屏幕作为其控制台。如果系统没有显示任何控制台输出，在启动分区的 `cmdline.txt` 中添加 `nomodeset` 可能会有帮助。aarch64 镜像还在 `ttyS0` 上提供串行控制台。
+
+## 虚拟机中的通用 aarch64
+
+除磁盘镜像外，aarch64 目标还会构建虚拟磁盘镜像（VMDK、VDI 和 QCOW2），用于 Arm 主机上的虚拟机。[虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/)页面介绍了相关要求，两者是相同的。
+
+---
+
+# 虚拟机
+
+> ova 目标、它构建的虚拟磁盘格式，以及运行 Home Assistant OS 的虚拟机所需的条件。
+
+Source: https://www.hasscn.top/contributors/os/operating-system/virtual-machine/
+
+`ova` 目标为 x86-64 虚拟机构建 Home Assistant OS。其板级文件位于 [`buildroot-external/board/pc/ova/`](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/board/pc/ova)。它也是自动化测试所使用的目标，参见[测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/)。
+
+## 格式
+
+一次构建会以多种格式生成相同的系统。虚拟磁盘大小为 32 GB。
+
+| 格式 | 文件 | 用途 |
+| --- | --- | --- |
+| OVA | `.ova` | 作为完整的虚拟机导入，例如在 VMware 或 VirtualBox 中 |
+| VMDK | `.vmdk.zip` | VMware、VirtualBox |
+| VHDX | `.vhdx.zip` | Hyper-V |
+| VDI | `.vdi.zip` | VirtualBox |
+| QCOW2 | `.qcow2.xz` | QEMU、KVM、Proxmox |
+
+## 要求
+
+- UEFI 启动。传统的 BIOS 启动无法工作。
+- 64 位 Linux 客户机类型，内核 4.x 或更高版本。
+- 至少 2 个虚拟 CPU 和 2 GB 内存。配置越高越好。
+- 一个网络适配器。
+
+镜像中包含常见虚拟机管理程序的客户机工具，例如 QEMU guest agent 和 Hyper-V 守护进程。
+
+## 控制台
+
+控制台显示在虚拟屏幕以及第一个串行端口 `ttyS0` 上。GRUB 启动菜单允许你选择一个槽位或救援 shell，参见[调试宿主机](https://www.hasscn.top/contributors/os/operating-system/debugging/#rescue-shell)。
+
+---
+
+# Supervisor
+
+> Supervisor 的作用、它运行的内容，以及它与应用和 Supervisor API 的关系。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/
+
+[Supervisor](https://www.hasscn.top/contributors/glossary/supervisor/) 让用户能够从 Home Assistant 管理整个系统。它是一个 Python 程序，位于 [home-assistant/supervisor](https://github.com/home-assistant/supervisor) 仓库中，以容器的形式运行在 Home Assistant OS 上。它的职责包括：
+
+- 运行 Home Assistant Core 并对其进行更新。当更新启动失败时，它会进行回滚。
+- 安装、运行和更新[应用（app）](https://www.hasscn.top/contributors/glossary/app/)。
+- 创建和恢复备份。
+- 更新 Home Assistant OS 以及它自身。
+- 运行提供 DNS、音频、多播、命令行和状态页面的插件。
+- 通过 D-Bus 和 OS Agent 管理主机：网络、主机名、磁盘和时间。
+- 检查系统问题并提供修复方案。
+
+## Supervisor 运行的内容
+
+Supervisor 运行的一切都是 Docker 容器。它们大多位于一个名为 `hassio` 的私有桥接网络 `172.30.32.0/23` 上。Core 和多播插件使用主机网络，请求使用主机网络的应用也是如此：
+
+| 容器 | 是什么 | 地址 |
+| --- | --- | --- |
+| `hassio_supervisor` | Supervisor | `172.30.32.2` |
+| `homeassistant` | Home Assistant Core | 主机网络 |
+| `hassio_dns` | [DNS 插件](https://www.hasscn.top/contributors/os/supervisor/plugins/#dns) | `172.30.32.3` |
+| `hassio_audio` | [音频插件](https://www.hasscn.top/contributors/os/supervisor/plugins/#audio) | `172.30.32.4` |
+| `hassio_cli` | [CLI 插件](https://www.hasscn.top/contributors/os/supervisor/plugins/#cli) | `172.30.32.5` |
+| `hassio_observer` | [Observer 插件](https://www.hasscn.top/contributors/os/supervisor/plugins/#observer) | `172.30.32.6` |
+| `hassio_multicast` | [多播插件](https://www.hasscn.top/contributors/os/supervisor/plugins/#multicast) | 主机网络 |
+| `app_<slug>` | 一个应用 | 来自 `172.30.33.0/24`，或主机网络 |
+
+Supervisor 容器本身由主机上的 `haos-supervisor.service` 启动，参见 [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/#how-it-boots)。其余一切都由 Supervisor 启动。
+
+## 应用与 Supervisor API
+
+Supervisor 在 `hassio` 网络上的 `http://supervisor` 提供一个 REST API。Home Assistant Core 通过 `hassio` 集成（integration）使用它，`ha` 命令行通过 CLI 插件使用它，应用则在其配置中请求访问权限时使用它。每个调用者都会获得自己的令牌，以及一个限制其可执行操作的角色。
+
+大多数人是通过应用接触 Supervisor 的。Supervisor 从应用仓库安装应用，构建或拉取它们的镜像，并按照其配置所要求的选项、端口和访问权限来运行它们。构建应用以及完整的 Supervisor API 参考文档在[应用（Apps）](https://www.hasscn.top/contributors/apps/)区域中。
+
+## 后续步骤
+
+- [搭建开发环境](https://www.hasscn.top/contributors/os/supervisor/development/)，在你自己的机器上运行 Supervisor。
+- [架构](https://www.hasscn.top/contributors/os/supervisor/architecture/)介绍了代码的组织方式。
+- [任务（Jobs）](https://www.hasscn.top/contributors/os/supervisor/jobs/)和[问题解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)是大多数变更会涉及的两个机制。
+
+## All pages in this section
+
+### How it works
+
+- [任务](https://www.hasscn.top/contributors/os/supervisor/jobs/): Supervisor 如何以任务（job）的形式运行工作，包括条件、并发限制、节流，以及客户端可以跟踪的进度。
+- [解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/): Supervisor 如何通过检查和评估发现问题、将其跟踪为议题，并通过建议进行修复。
+- [插件](https://www.hasscn.top/contributors/os/supervisor/plugins/): Supervisor 在 Home Assistant Core 旁边运行的五个插件、每个插件的作用，以及它们的代码所在位置。
+
+### Guides
+
+- [调试 Supervisor](https://www.hasscn.top/contributors/os/supervisor/debugging/): 将 Python 调试器附加到本地或远程设备上正在运行的 Supervisor，并查找其日志。
+- [将 Core 连接到 Supervisor](https://www.hasscn.top/contributors/os/supervisor/core-connection/): 在你的开发环境中运行 Home Assistant Core，连接真实的 Supervisor，以便开发 hassio 集成。
+
+### 工作原理
+
+- [Supervisor 架构](https://www.hasscn.top/contributors/os/supervisor/architecture/): Supervisor 代码是如何组织的、它如何启动，以及更新和备份在其中的工作方式。
+
+### 指南
+
+- [搭建开发环境](https://www.hasscn.top/contributors/os/supervisor/development/): 在开发容器中从源码运行 Supervisor，运行测试和代码检查工具，并在真实系统上试用你的构建版本。
+
+---
+
+# 任务
+
+> Supervisor 如何以任务（job）的形式运行工作，包括条件、并发限制、节流，以及客户端可以跟踪的进度。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/jobs/
+
+Supervisor 所做的几乎所有耗时操作都是一个任务（job）：安装应用、更新 Core、创建备份。任务是一个带有 `@Job` 装饰器的异步方法。该装饰器处理了原本需要在各处重复编写的逻辑：检查系统是否处于允许该工作运行的状态、防止同时运行两次，以及报告进度。
+
+代码位于 [`supervisor/jobs/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/jobs)。
+
+## 一个任务
+
+```python
+from ..jobs.const import JobConcurrency, JobCondition
+from ..jobs.decorator import Job
+
+
+class HomeAssistantCore(JobGroup):
+    @Job(
+        name="home_assistant_core_update",
+        conditions=[
+            JobCondition.FREE_SPACE,
+            JobCondition.HEALTHY,
+            JobCondition.INTERNET_HOST,
+        ],
+        on_condition=HomeAssistantJobError,
+        concurrency=JobConcurrency.GROUP_REJECT,
+    )
+    async def update(self, version: AwesomeVersion | None = None) -> None:
+        """Update Home Assistant Core."""
+```
+
+这是从 [`supervisor/homeassistant/core.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/homeassistant/core.py) 精简而来的。各部分说明：
+
+- `name`：在整个 Supervisor 中唯一。它会出现在 API 和日志中。
+- `conditions`：任务运行前必须满足的条件。
+- `on_condition`：条件不满足时抛出的异常。如果没有指定，任务会记录失败并返回。
+- `concurrency`：当该任务（或其所在组）已经在运行时的处理方式。
+
+## 条件
+
+条件在 [`supervisor/jobs/const.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/jobs/const.py) 中定义为 `JobCondition`。一些常见的条件：
+
+| 条件 | 满足条件时通过 |
+| --- | --- |
+| `healthy` | 系统未被标记为不健康 |
+| `free_space` | 数据磁盘上有足够的可用空间 |
+| `internet_host`, `internet_system` | 主机或 Supervisor 本身可以访问互联网 |
+| `running` | Supervisor 处于运行状态 |
+| `haos` | 系统运行的是 Home Assistant OS |
+| `os_agent` | OS Agent 可用 |
+| `supervisor_updated` | Supervisor 运行的是最新版本 |
+| `plugins_updated` | 每个插件都运行其最新版本 |
+| `auto_update` | 自动更新已开启 |
+| `mount_available` | 主机支持网络存储挂载 |
+
+为了便于调试，可以使用 `ha jobs options --ignore-conditions <condition>` 忽略条件。执行此操作的系统会被标记为不受支持，原因为 `job_conditions`。可以使用 `ha jobs reset` 撤销。
+
+## 并发与节流
+
+`JobConcurrency` 控制当一个任务已在运行时再次被调用时的处理方式：
+
+- `REJECT`：立即失败。
+- `QUEUE`：等待正在运行的任务完成后再运行。
+- `GROUP_REJECT` 和 `GROUP_QUEUE`：相同，但适用于同一组中的任何任务。
+
+组（group）是继承自 `JobGroup` 的类，例如一个应用或 Home Assistant Core。同一实例上的所有任务共享一个锁，因此应用在被备份时无法被更新。任务可以调用其所在组内的其他任务而不会死锁。
+
+`JobThrottle` 限制任务的运行频率。`THROTTLE` 会跳过一个周期内的调用，`RATE_LIMIT` 允许每个周期内一定数量的调用，超过后则失败。两者都有组变体。它们需要 `throttle_period`，速率限制还需要 `throttle_max_calls`。
+
+## 进度与子任务
+
+每个任务都有一个 UUID、一个阶段、一个进度百分比以及它的错误信息。从任务内部启动的任务会成为它的子任务。通过 `child_job_syncs`，一个任务可以从子任务获取进度，例如更新任务从拉取镜像的过程中获取进度。
+
+客户端通过 API（使用 `/jobs/info` 和 `/jobs/<uuid>`）以及 Core 接收到的事件来跟踪任务。前端就是这样显示更新进度的。带有 `internal=True` 的任务不会对外暴露。带有 `cleanup=False` 的任务在完成后仍保持可读，以便客户端稍后获取结果。
+
+---
+
+# 解决中心
+
+> Supervisor 如何通过检查和评估发现问题、将其跟踪为议题，并通过建议进行修复。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/resolution-center/
+
+解决中心（resolution center）是 Supervisor 用来监控系统的方式。它会发现问题、记录问题，并在可能的情况下提供修复方案。用户在 Home Assistant 中以[修复](https://www.hasscn.top/contributors/glossary/repair/)的形式看到结果：Core 的 `hassio` 集成会将它们转换为修复议题。
+
+代码位于 [`supervisor/resolution/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/resolution)，管理器是 `sys_resolution`。
+
+## 核心概念
+
+| 概念 | 含义 | 定义为 |
+| --- | --- | --- |
+| 议题（Issue） | 发现的问题，例如磁盘空间不足 | `IssueType` |
+| 建议（Suggestion） | 针对一个或多个议题的修复方案，例如创建备份 | `SuggestionType` |
+| 上下文（Context） | 议题所在的位置：`system`、`core`、`addon`、`plugin`、`mount` 等 | `ContextType` |
+| 不受支持原因 | 系统不受支持的原因，例如修改过的 Docker 配置 | `UnsupportedReason` |
+| 不健康原因 | 系统无法被信任正常运行的原因，例如 Docker 损坏 | `UnhealthyReason` |
+
+它们都是 [`supervisor/resolution/const.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/resolution/const.py) 中的枚举。
+
+一个议题包含类型、上下文和可选的引用（例如应用的 slug）。建议包含相同的内容，并指向它所修复的议题。
+
+## 受支持与健康
+
+这是两个不同的概念：
+
+- **不受支持（Unsupported）** 意味着系统可以运行，但其配置方式不受本项目支持，例如主机不是 Home Assistant OS。用户会看到一条通知，但一切仍能正常工作。
+- **不健康（Unhealthy）** 意味着系统处于 Supervisor 无法安全开展工作的状态。带有 `healthy` 条件的任务将拒绝运行，这会阻止大多数更新。
+
+不受支持原因在 home-assistant.io 上有专门的页面向用户解释，地址为 `https://www.home-assistant.io/more-info/unsupported/<reason>`。Supervisor 会在警告中记录该链接。
+
+## 检查、评估和修复
+
+解决中心有三类插件，各自位于独立的文件夹中。这些文件夹中的每个模块都会通过其 `setup()` 函数自动加载。
+
+- **检查（Checks）**（`checks/`）查找问题并创建议题。每个检查还会重新验证它之前创建的议题，并在问题消失后将其关闭。
+- **评估（Evaluations）**（`evaluations/`）决定系统是否受支持。每个评估会添加或清除一个不受支持原因。
+- **修复（Fixups）**（`fixups/`）执行建议。有些会自动运行，有些则等待用户应用。
+
+每小时以及在应用建议之后，Supervisor 会运行所有检查，然后运行所有评估，最后运行可以自动执行的修复。
+
+## 编写检查
+
+一个检查需要继承 `CheckBase`。以下是来自 [`supervisor/resolution/checks/free_space.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/resolution/checks/free_space.py) 的可用空间检查，略有精简：
+
+```python
+class CheckFreeSpace(CheckBase):
+    """Check for low free space."""
+
+    async def run_check(self) -> None:
+        """Create the issue when the system is affected."""
+        if await self.approve_check(Issue(self.issue, self.context)):
+            self.sys_resolution.create_issue(
+                IssueType.FREE_SPACE, ContextType.SYSTEM
+            )
+
+    async def approve_check(self, issue: Issue) -> bool:
+        """Return True while the issue still exists."""
+        free_space = await self.sys_host.info.free_space()
+        return free_space <= MINIMUM_FREE_SPACE_THRESHOLD
+
+    @property
+    def issue(self) -> IssueType:
+        return IssueType.FREE_SPACE
+
+    @property
+    def context(self) -> ContextType:
+        return ContextType.SYSTEM
+
+    @property
+    def states(self) -> list[CoreState]:
+        return [CoreState.RUNNING, CoreState.STARTUP]
+```
+
+- `run_check` 查找问题并创建议题，通常会附带一个建议。
+- `approve_check` 回答现有议题是否仍然适用。基类使用它来关闭已经消失的议题。
+- `states` 限制检查运行的时间。
+
+该模块还需要一个返回检查实例的 `setup(coresys)` 函数。评估和修复遵循相同的模式，分别使用 `EvaluateBase` 和 `FixupBase`。
+
+当你添加新的议题或建议类型时，Core 需要为它提供翻译，以便前端能够显示有意义的修复。这需要向 Core 中的 `hassio` 集成提交一个单独的拉取请求。
+
+## 通过命令行
+
+`ha resolution info` 显示当前的议题、建议和原因。`ha resolution suggestion apply <uuid>` 应用一个修复，`ha resolution healthcheck` 立即运行检查。可以使用 `ha resolution check options <slug> --enabled=false` 关闭单个检查。
+
+---
+
+# 插件
+
+> Supervisor 在 Home Assistant Core 旁边运行的五个插件、每个插件的作用，以及它们的代码所在位置。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/plugins/
+
+插件（plugin）是 Supervisor 为系统本身（而非为用户）运行的容器。它们提供 Core 和应用共享的服务，例如 DNS 和音频。用户不能安装或移除它们，Supervisor 会自动更新它们。
+
+在 Supervisor 一侧，每个插件都是 [`supervisor/plugins/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/plugins) 中的一个类，基于 `PluginBase`。它负责安装、启动、更新和修复容器，并且有一个看门狗（watchdog）会在容器停止时重启它。每个插件的镜像为 `ghcr.io/home-assistant/<arch>-hassio-<plugin>`，版本与其他组件一样来自同一个版本文件。
+
+| 插件 | 容器 | 仓库 | 是什么 |
+| --- | --- | --- | --- |
+| DNS | `hassio_dns` | [plugin-dns](https://github.com/home-assistant/plugin-dns) | CoreDNS，用于容器内的名称解析 |
+| Audio | `hassio_audio` | [plugin-audio](https://github.com/home-assistant/plugin-audio) | PulseAudio，用于声音的输入和输出 |
+| CLI | `hassio_cli` | [plugin-cli](https://github.com/home-assistant/plugin-cli) | `ha` 命令行 |
+| Multicast | `hassio_multicast` | [plugin-multicast](https://github.com/home-assistant/plugin-multicast) | 一个 mDNS 中继器 |
+| Observer | `hassio_observer` | [plugin-observer](https://github.com/home-assistant/plugin-observer) | 一个在其他一切都失效时仍然可用的状态页面 |
+
+## DNS
+
+`hassio` 网络上的每个容器都使用 DNS 插件作为其名称服务器。它运行 [CoreDNS](https://coredns.io/)，并带有两个自己的插件：
+
+- **mdns** 通过 D-Bus 询问主机上的 systemd-resolved 来解析 `.local` 名称。
+- **fallback** 在启用回退时，通过 TLS 向 Cloudflare 的 DNS 重试失败的查询。
+
+Supervisor 会写入一个包含容器名称的 hosts 文件，例如 `supervisor` 和 `homeassistant`，这样它们就可以通过名称相互访问。其他查询会发送到主机的 DNS 服务器，或用户通过 `ha dns options` 设置的服务器。配置模板位于插件仓库中的 `rootfs/usr/share/tempio/corefile`。
+
+## Audio
+
+音频插件在 ALSA 之上运行 PulseAudio，因此 Core 和需要音频的应用共享同一个声音系统。当应用的配置请求音频时，它们会获得访问权限。所有音频配置都保存在这个容器中，这让用户无需接触主机即可调整 PulseAudio。`ha audio` 可以显示设备并设置默认值。
+
+## CLI
+
+CLI 插件是 `ha` 命令行，由 [home-assistant/cli](https://github.com/home-assistant/cli) 仓库构建。在 Home Assistant OS 上，它是控制台上的登录 shell：当你登录时，主机运行它，参见[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/#the-local-console)。插件仓库只负责打包 CLI。对命令本身的修改应提交到 cli 仓库。
+
+## Multicast
+
+多播插件在主机网络上运行 [mdns-repeater](https://github.com/pvizeli/mdns-repeater)。它在主机网络和 `hassio` 网络之间转发 mDNS 流量，使发现功能可以跨越该边界工作。可以通过 Supervisor API 将其关闭。
+
+## Observer
+
+观察器（observer）是一个用 Go 编写的小型 Web 服务器，运行在主机的 4357 端口上。它显示 Supervisor 是否正在运行且健康，以及它的日志。它特意与 Supervisor 分开运行：当 Supervisor 或 Core 宕机时，观察器是用户了解当前状况的方式。
+
+## 开发插件
+
+每个插件仓库都会构建一个容器镜像，主要基于一个 `Dockerfile` 和一个 `rootfs/` 文件夹，其中几个还有开发容器。大多数插件都有 `ha <plugin>` 命令来查看日志、重启或更新它们，例如 `ha dns logs` 或 `ha audio restart`。
+
+要在设备上尝试你自己的构建，请为设备的架构构建镜像，并使用该插件当前运行的镜像名称和版本打标签（主机上的 `docker ps` 会显示它）。然后重启该插件。其方法与[在真实系统上测试 Supervisor](https://www.hasscn.top/contributors/os/supervisor/development/#test-on-a-real-system) 相同。请记住，Supervisor 会自动更新插件，当新版本发布时会替换你的构建。
+
+---
+
+# 调试 Supervisor
+
+> 将 Python 调试器附加到本地或远程设备上正在运行的 Supervisor，并查找其日志。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/debugging/
+
+Supervisor 内置了 [debugpy](https://github.com/microsoft/debugpy)，因此你可以将 Visual Studio Code 调试器附加到它上面，设置断点并单步调试代码。这在开发容器和真实设备上都适用。
+
+## 开启调试模式
+
+调试器只有在调试模式开启时才会启动。调试模式在启动时读取，因此修改后需要重启 Supervisor：
+
+```shell
+ha supervisor options --debug=true
+ha supervisor restart
+```
+
+请完整写出 `=true`。CLI 会将单独的 `--debug` 读取为 `false`，因此这样会关闭调试模式。
+
+现在 Supervisor 会在端口 33333 上监听调试器。要调试启动过程中发生的事情，请同时添加 `--debug-block=true`。这样 Supervisor 会等待调试器附加后才继续运行。
+
+使用 `ha supervisor options --debug=false` 可以再次关闭调试模式。
+
+## 附加调试器
+
+仓库中为此提供了一个启动配置 **Supervisor remote debug**，位于 [`.vscode/launch.json`](https://github.com/home-assistant/supervisor/blob/main/.vscode/launch.json)：
+
+```json
+{
+  "name": "Supervisor remote debug",
+  "type": "python",
+  "request": "attach",
+  "port": 33333,
+  "host": "172.30.32.2",
+  "pathMappings": [
+    {
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/usr/src/supervisor"
+    }
+  ]
+}
+```
+
+`172.30.32.2` 是 Supervisor 在 `hassio` 网络上的地址，在开发容器内部可以访问。在 **Run and Debug** 视图中选择该配置并启动。
+
+## 调试远程设备
+
+在设备上，你的计算机无法直接访问 `hassio` 网络。**Remote ptvsd debugger** 应用会将主机的端口 33333 转发到 Supervisor：
+
+1. 将[开发应用仓库](https://github.com/home-assistant/apps-development)添加到设备的应用商店中。
+2. 安装并启动 **Remote ptvsd debugger** 应用。
+3. 按上文所述开启调试模式。
+4. 在你的启动配置中，将 `host` 设置为设备的 IP 地址。
+
+请确保你工作区中的代码与设备上的版本一致。否则，断点会落在错误的行上。
+
+## 日志
+
+可以通过以下任一方式查看 Supervisor 的日志：
+
+```shell
+# From the Home Assistant CLI
+ha supervisor logs
+
+# From the host shell
+docker logs -f hassio_supervisor
+```
+
+如需更详细的信息，可以使用 `ha supervisor options --logging debug` 提高日志级别。
+
+如果 Supervisor 完全无法启动，请查看启动它的服务：在主机 shell 中运行 `journalctl -u haos-supervisor`。[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)介绍了如何进入主机 shell。当 Supervisor 宕机时，端口 4357 上的观察者（observer）仍会显示其状态和日志。
+
+---
+
+# 将 Core 连接到 Supervisor
+
+> 在你的开发环境中运行 Home Assistant Core，连接真实的 Supervisor，以便开发 hassio 集成。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/core-connection/
+
+Home Assistant Core 通过 `hassio` 集成（位于 [`homeassistant/components/hassio/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/hassio)）与 Supervisor 通信。要开发该集成，你需要让开发环境中的 Core 连接到一个真实的 Supervisor。[Core 开发环境](https://www.hasscn.top/contributors/core/development/environment/)已经提供了前一半，本页面将添加 Supervisor。
+
+## 获取 Supervisor API 的访问权限
+
+Supervisor API 需要一个令牌（token）。**Remote API proxy** 应用可以提供一个，并使该 API 可以从设备外部访问：
+
+1. 将[开发应用仓库](https://github.com/home-assistant/apps-development)添加到运行 Supervisor 的设备的应用商店中。该设备可以是测试设备，也可以是 [Supervisor 开发容器](https://www.hasscn.top/contributors/os/supervisor/development/)。
+2. 安装 **Remote API proxy** 应用，并选择 **Start**。
+3. 令牌会显示在该应用的日志中。
+
+在你工作期间，该应用需要保持运行。它监听主机的 8880 端口。
+
+代理令牌的权限比 Core 在生产环境中获得的令牌略少。如果你需要真正的令牌，可以在主机 shell 中获取，参见[调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)：
+
+```shell
+docker inspect homeassistant | grep SUPERVISOR_TOKEN
+```
+
+两种令牌在重启或更新后都可能发生变化。
+
+## 让 Core 连接它启动
+
+`hassio` 集成通过两个环境变量找到 Supervisor。在启动 Core 时设置它们：
+
+```shell
+SUPERVISOR=192.168.1.100:8880 SUPERVISOR_TOKEN=abcdefgh1234 hass
+```
+
+- `SUPERVISOR` 是设备的地址，加上代理应用的端口。
+- `SUPERVISOR_TOKEN` 是来自应用日志的令牌。
+
+你的 Core 现在会加载 `hassio` 集成，并显示该设备的应用、备份和系统设置。
+
+## 前端
+
+前端通过 Core 访问 Supervisor，Core 会为管理员用户代理 Supervisor API。因此，以这种方式连接的 Core，指向它的[前端开发环境](https://www.hasscn.top/contributors/frontend/)也可以与 Supervisor 一起使用。
+
+---
+
+# Supervisor 架构
+
+> Supervisor 代码是如何组织的、它如何启动，以及更新和备份在其中的工作方式。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/architecture/
+
+Supervisor 是一个基于 asyncio 和 aiohttp 构建的异步 Python 进程。它通过 API 与 Docker 通信，通过 D-Bus 与主机通信，并通过 HTTP 与其他一切通信。本页是代码的导览图，让你知道该去哪里找。
+
+## CoreSys：一个可以访问一切的对象
+
+Supervisor 中的每个管理器都挂在一个对象上，即 [`supervisor/coresys.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/coresys.py) 中的 `CoreSys`。需要它的类继承自 `CoreSysAttributes`，并通过 `sys_*` 属性访问其他部分：
+
+```python
+from ..coresys import CoreSys, CoreSysAttributes
+
+
+class Example(CoreSysAttributes):
+    """Do something with the system."""
+
+    def __init__(self, coresys: CoreSys) -> None:
+        """Initialize the example."""
+        self.coresys = coresys
+
+    async def check(self) -> bool:
+        """Check if Core needs an update."""
+        return self.sys_homeassistant.need_update
+```
+
+你最常用到的一些管理器：
+
+| 属性 | 管理的内容 | 代码 |
+| --- | --- | --- |
+| `sys_homeassistant` | Home Assistant Core | [`supervisor/homeassistant/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/homeassistant) |
+| `sys_apps` | 已安装的应用 | [`supervisor/apps/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/apps) |
+| `sys_store` | 应用仓库 | [`supervisor/store/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/store) |
+| `sys_backups` | 备份与恢复 | [`supervisor/backups/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/backups) |
+| `sys_plugins` | 插件 | [`supervisor/plugins/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/plugins) |
+| `sys_os` | Home Assistant OS、其更新和数据磁盘 | [`supervisor/os/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/os) |
+| `sys_host` | 主机的网络、服务、日志和硬件信息 | [`supervisor/host/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/host) |
+| `sys_dbus` | systemd、NetworkManager、RAUC、OS Agent 的 D-Bus 客户端 | [`supervisor/dbus/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/dbus) |
+| `sys_docker` | Docker 容器、镜像和 `hassio` 网络 | [`supervisor/docker/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/docker) |
+| `sys_updater` | 可用版本 | [`supervisor/updater.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/updater.py) |
+| `sys_jobs` | 正在运行的任务 | [`supervisor/jobs/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/jobs) |
+| `sys_resolution` | 问题、建议和系统健康状况 | [`supervisor/resolution/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/resolution) |
+| `sys_api` | REST API | [`supervisor/api/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/api) |
+
+请使用这些管理器，而不是直接调用 Docker 或 D-Bus 库。所有 I/O 都是异步的：阻塞调用请使用 `self.sys_run_in_executor()` 运行。
+
+## 启动过程
+
+Supervisor 会在多个状态之间流转，这些状态在 [`supervisor/const.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/const.py) 中定义为 `CoreState`：
+
+1. **initialize**：创建 `CoreSys` 和每个管理器。
+2. **setup**：加载配置，连接 D-Bus 和 Docker，并评估系统。
+3. **startup**：如果有更新的版本且开启了自动更新，则更新自身；启动插件，然后按启动阶段依次启动 Core 和应用。
+4. **running**：一切已就绪。定时任务和健康检查开始运行。
+5. **freeze**、**shutdown**、**stopping**、**close**：在冻结系统的备份期间，以及关闭过程中。
+
+许多检查和任务只在特定状态下运行。这就是为什么存在像 `running` 这样的任务条件。
+
+在启动期间，Supervisor 还会将已启动的 OS 槽位标记为良好。在此之前，引导加载程序会认为 OS 更新尚未确认。参见[更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/)。
+
+## 定时任务
+
+[`supervisor/misc/tasks.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/misc/tasks.py) 注册了周期性工作：检查应用和插件的更新、重新加载应用商店和备份，以及在 Core、应用或观察者停止响应时重启它们的看门狗。问题解决中心会添加其每小时的健康检查。参见[问题解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)。
+
+## 更新
+
+Supervisor 从 `version.home-assistant.io/<channel>.json` 读取可用版本，该文件在 [home-assistant/version](https://github.com/home-assistant/version) 仓库中维护。频道（channel）为 `stable`、`beta` 或 `dev`，用户可以通过 `ha supervisor options --channel` 更改它。
+
+- **Supervisor** 默认自动更新自身。当其运行的版本低于最新版本时，它会拉取新镜像并重启。
+- **插件**自动更新。
+- **Home Assistant Core**、**应用**和 **Home Assistant OS** 在用户请求时更新，或者在用户为某个应用开启了自动更新时更新。
+
+Core 更新可以先进行部分备份。更新之后，Supervisor 会检查 Core 是否启动。如果没有启动，Supervisor 会回滚到之前的版本，将启动失败的日志写入配置文件夹中的 `home-assistant-rollback.log`，并抛出 `update_rollback` 问题。
+
+## 备份
+
+备份是一个未压缩的 tar 文件，其中包含描述它的 `backup.json`，以及每个部分一个内部归档：Home Assistant Core 及其配置、每个应用、每个文件夹（`share`、`ssl`、`media` 和本地应用），以及 Supervisor 自身的配置。如果设置了密码，内部归档会使用 [SecureTar](https://github.com/home-assistant-libs/securetar) 加密。
+
+完整备份包含所有部分，部分备份则只包含所选的部分。备份默认存储在数据分区的 `/backup` 中，也可以存储到网络存储挂载点。Home Assistant Core 的 `backup` 集成构建在此之上，负责将备份上传到其他地方。
+
+应用可以声明它们希望如何被备份：停止后备份，或运行中备份，并可使用前置和后置命令。在备份运行期间，Supervisor 可以冻结 Core，使其数据库处于一致状态。
+
+## API
+
+[`supervisor/api/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/api) 中每个区域一个模块，例如 `backups.py` 或 `network.py`。路由在 [`supervisor/api/__init__.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/api/__init__.py) 中注册。处理器使用 `@api_process` 装饰器，它将 Supervisor 错误转换为规范的错误响应，并使用 `api_validate()` 验证输入。[`supervisor/api/middleware/`](https://github.com/home-assistant/supervisor/tree/main/supervisor/api/middleware) 中的中间件会检查每个调用者的令牌和角色。每个端点及其请求负载和响应都记录在 [Supervisor API](https://www.hasscn.top/contributors/apps/supervisor-api/) 参考文档中。
+
+当你修改 API 时，[ha CLI](https://github.com/home-assistant/cli) 和 [Python 客户端库](https://github.com/home-assistant-libs/python-supervisor-client) 通常也需要相应的修改。Supervisor 的拉取请求模板会同时询问这两者。
+
+---
+
+# 搭建开发环境
+
+> 在开发容器中从源码运行 Supervisor，运行测试和代码检查工具，并在真实系统上试用你的构建版本。
+
+Source: https://www.hasscn.top/contributors/os/supervisor/development/
+
+Supervisor 提供了一个开发容器，可以运行一个完整的系统：你的 Supervisor、Home Assistant Core、插件和应用，全部运行在你机器上的一个 Docker 容器内。对于大多数改动，这就足够了。
+
+## 搭建开发容器
+
+你需要 [Docker](https://docs.docker.com/get-docker/)、安装了 Dev Containers 扩展的 [Visual Studio Code](https://code.visualstudio.com/)，以及 [Git](https://git-scm.com/)。[Core 开发环境](https://www.hasscn.top/contributors/core/development/environment/)指南介绍了如何在各个操作系统上安装它们。在 Windows 上，请在 WSL2 中工作。
+
+1. [Fork Supervisor 仓库](https://github.com/home-assistant/supervisor/fork)，并克隆你的 fork。
+2. 在 Visual Studio Code 中打开该文件夹，并在提示时选择 **Reopen in Container**。
+
+该容器以特权模式运行，内部带有自己的 Docker 引擎。这正是它能够运行整套 Supervisor 系统的原因。此设置会安装 Python 依赖项和 pre-commit 钩子。
+
+## 运行 Supervisor
+
+打开命令面板，选择 **Tasks: Run Task**，然后选择 **Run Supervisor**。该任务会从你的工作副本构建一个 Supervisor 镜像，并在容器内以 `hassio_supervisor` 的名称启动它。首次启动会下载 Home Assistant Core 和插件，这需要一些时间。
+
+| 地址 | 说明 |
+| --- | --- |
+| `http://localhost:9123` | Home Assistant Core |
+| `http://localhost:7357` | 观察器（observer） |
+
+**Run Supervisor CLI** 任务会针对你的 Supervisor 打开 `ha` 命令行。每次修改后再次运行 **Run Supervisor**：它会用你的代码的新镜像重启 Supervisor。
+
+开发容器遵循 `dev` 频道，因此 Core 和插件都是最新的开发版本。从源码构建的 Supervisor 版本号为 `9999.09.9.dev9999`，并且绝不会尝试自我更新。
+
+## 测试和代码检查
+
+测试会模拟 Docker、D-Bus 和网络，因此它们可以在任何地方运行，无需运行中的 Supervisor。它们位于 [`tests/`](https://github.com/home-assistant/supervisor/tree/main/tests) 中，布局与 [`supervisor/`](https://github.com/home-assistant/supervisor/tree/main/supervisor) 相同：
+
+```shell
+pytest -qsx tests/resolution/
+```
+
+编写新测试时，请使用带有 pytest fixture 的普通 `test_` 函数。[`tests/conftest.py`](https://github.com/home-assistant/supervisor/blob/main/tests/conftest.py) 提供了一个模拟的 `CoreSys`，以及更多其他内容。
+
+在提交之前，请运行代码检查工具和类型检查器：
+
+```shell
+ruff check --fix supervisor tests
+ruff format supervisor tests
+pylint supervisor tests
+mypy --ignore-missing-imports supervisor/
+```
+
+或者使用 `pre-commit run --all-files` 一次性运行所有已配置的钩子。
+
+## 代码规范
+
+该仓库在 [`.github/copilot-instructions.md`](https://github.com/home-assistant/supervisor/blob/main/.github/copilot-instructions.md) 中有自己的贡献者指南。其中最重要的几条：
+
+- 在 [`supervisor/`](https://github.com/home-assistant/supervisor/tree/main/supervisor) 内部使用相对导入。
+- 使用 [`supervisor/const.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/const.py) 中的常量，或模块自身的 `const.py`，而不是字面值。
+- 通过 `self.sys_*` 访问系统的其他部分，参见[架构](https://www.hasscn.top/contributors/os/supervisor/architecture/)。
+- 抛出 [`supervisor/exceptions.py`](https://github.com/home-assistant/supervisor/blob/main/supervisor/exceptions.py) 中的异常，并使用 `from` 进行异常链连接。
+- 在新代码和注释中使用 "app"，而不是 "add-on"。仅在现有 API 字段或类仍在使用 `addon` 的地方保留它。
+
+## 在真实系统上测试
+
+有些问题只会在真实硬件上显现：特定开发板的 D-Bus API、磁盘、USB 设备。要在 Home Assistant OS 设备上运行你的 Supervisor：
+
+1. 在设备上，使用 `ha info` 查看架构：`amd64` 或 `aarch64`。
+2. 在你的电脑上，为该架构构建一个镜像，并将其推送到你可以拉取的镜像仓库，例如 GitHub 容器镜像仓库：
+
+   ```shell
+   docker build --platform linux/arm64 --push \
+     --tag ghcr.io/YOUR_GITHUB_USERNAME/aarch64-hassio-supervisor:dev .
+   ```
+
+   Docker 将架构称为 `linux/amd64` 和 `linux/arm64`。镜像名称使用 Home Assistant 的命名，即 `amd64` 和 `aarch64`。
+
+3. 在设备上，切换到 `dev` 频道，这样 Supervisor 就不会用稳定版替换你的构建版本：
+
+   ```shell
+   ha supervisor options --channel dev
+   ```
+
+4. 在宿主机 shell 中（参见[调试宿主机](https://www.hasscn.top/contributors/os/operating-system/debugging/)），拉取你的镜像并将其标记为 OS 启动时使用的镜像：
+
+   ```shell
+   docker pull ghcr.io/YOUR_GITHUB_USERNAME/aarch64-hassio-supervisor:dev
+   docker tag ghcr.io/YOUR_GITHUB_USERNAME/aarch64-hassio-supervisor:dev \
+     ghcr.io/home-assistant/aarch64-hassio-supervisor:latest
+   ```
+
+5. 重启 Supervisor 服务，并跟踪其输出：
+
+   ```shell
+   systemctl restart haos-supervisor
+   journalctl -fu haos-supervisor
+   ```
+
+该服务会检测到镜像已更改，并基于它创建一个新的 Supervisor 容器。
+
+GitHub 容器镜像仓库中的镜像默认是私有的。你可以在设备上使用 `docker login ghcr.io` 登录，或者在 GitHub 上将该软件包在其设置中设为公开。
+
+## 提交拉取请求
+
+针对 [home-assistant/supervisor](https://github.com/home-assistant/supervisor) 的 `main` 分支提交你的拉取请求，并填写模板。对于较大的改动，请先在 issue 中讨论方案。
+
+如果你修改了 API，拉取请求模板还会要求：
+
+- 如果 `ha` 命令需要，向 [cli](https://github.com/home-assistant/cli) 仓库提交拉取请求。
+- 向 Core 所使用的 [Python 客户端库](https://github.com/home-assistant-libs/python-supervisor-client)提交拉取请求。
+- 在 Apps 区域中更新 [Supervisor API](https://www.hasscn.top/contributors/apps/supervisor-api/) 参考文档。
+
+## Supervisor 的发布方式
+
+1. 拉取请求被合并到 `main` 分支。
+2. 每次合并都会被构建并发布到 `dev` 频道。
+3. 一次发布将一个版本（如 `2026.10.1`）发布到 `beta` 频道。
+4. 一旦它被证明稳定，版本仓库中的 [stable.json](https://github.com/home-assistant/version/blob/master/stable.json) 就会更新，稳定版系统便会采用它。

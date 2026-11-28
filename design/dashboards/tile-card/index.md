@@ -1,0 +1,265 @@
+# 磁贴卡片（Tile card）
+
+> 磁贴卡片显示一个实体（entity）的图标、名称和状态，并可以为其添加控件。它几乎是所有内容的默认卡片。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/tile-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "light.living_room_lamp",
+        "features": [
+          {
+            "type": "light-brightness"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "climate.thermostat"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+磁贴卡片是你的起点。它显示一个实体：一个图标、一个名称和一个状态。选择该卡片会打开实体的更多信息对话框。选择图标会执行该实体最显而易见的操作：切换灯、开关或风扇，激活场景或按下按钮。对于没有快捷操作的实体（如传感器），图标不会执行任何操作。
+
+当 Home Assistant 为你构建仪表盘（dashboard），以及当你将实体添加到某个分区时，它都会成为磁贴卡片。只有当磁贴无法胜任时才选择其他卡片，例如需要随时间变化的图表时使用[历史图表卡片](https://www.hasscn.top/contributors/design/dashboards/history-graph-card/)，或者需要大控件时使用[温控器卡片](https://www.hasscn.top/contributors/design/dashboards/thermostat-card/)。
+
+磁贴卡片会跟随实体的状态。图标及其背景会采用状态的颜色，例如开启的灯显示为琥珀色，或者显示灯光本身的颜色。当实体处于关闭或不可用状态时，卡片显示为灰色。
+
+### 功能（Features）
+
+功能为磁贴添加控件：亮度滑块、打开和关闭窗帘的按钮、目标温度、一组模式。功能只会为支持它的实体显示。添加人们最常用的功能，而不是实体拥有的所有功能。对于大多数磁贴来说，一到两个就足够了。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "cover.bedroom_blinds",
+        "features": [
+          {
+            "type": "cover-open-close"
+          },
+          {
+            "type": "cover-position"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "climate.thermostat",
+        "features": [
+          {
+            "type": "target-temperature"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+相同的功能也适用于[区域卡片](https://www.hasscn.top/contributors/design/dashboards/area-card/)、[温控器卡片](https://www.hasscn.top/contributors/design/dashboards/thermostat-card/)和[加湿器卡片](https://www.hasscn.top/contributors/design/dashboards/humidifier-card/)。一个功能只需构建一次，每个支持功能的卡片都可以使用它。
+
+### 功能内联显示
+
+使用 `features_position: inline` 时，功能会显示在名称旁边而不是下方。磁贴保持单行的高度，但需要分区的完整宽度。它最适合单个紧凑的功能，例如滑块。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "fan.bedroom_fan",
+        "features": [
+          {
+            "type": "fan-speed"
+          }
+        ],
+        "features_position": "inline"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 垂直布局
+
+使用 `vertical: true` 时，图标会显示在名称和状态的上方。垂直磁贴可以更窄，最窄可达分区的四分之一。将其用于一排人们主要进行切换操作的小磁贴。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 3">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "light.living_room_lamp",
+        "vertical": true,
+        "grid_options": {
+          "columns": 3
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 3">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "light.hallway",
+        "vertical": true,
+        "grid_options": {
+          "columns": 3
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 3">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "light.kitchen_ceiling",
+        "vertical": true,
+        "grid_options": {
+          "columns": 3
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 状态内容
+
+默认情况下，磁贴显示实体的状态。使用 `state_content`，你可以选择它显示的其他内容，例如某个属性（attribute），或自上次更改以来的时间。列表会显示多项内容，用点分隔。使用 `hide_state` 可以只显示名称。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "climate.thermostat",
+        "state_content": [
+          "state",
+          "current_temperature"
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "lock.front_door",
+        "hide_state": true
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 内容
+
+- 保持名称简短。磁贴很窄，过长的名称会被截断。设备的名称通常就足够了，因为区域（area）已经提供了上下文。
+- 仅在能增加含义时才覆盖图标或颜色。默认的图标和颜色会跟随状态变化，人们已经学会解读它们。
+- 一个磁贴对应一个实体。对于一组实体，请为每个实体使用一个磁贴，或者使用[实体卡片](https://www.hasscn.top/contributors/design/dashboards/entities-card/)。
+
+## 配置
+
+- `entity`（字符串，必填）：要显示的实体。
+- `name`（字符串）：要显示的名称。默认为实体的名称。
+- `icon`（字符串）：要显示的图标。默认为实体的图标，该图标可能会随其状态而变化。
+- `color`（字符串）：实体处于活动状态时图标的颜色，例如 `amber` 或 `primary`。默认为 `state`，即状态的颜色。
+- `show_entity_picture`（布尔值）：显示实体的图片（例如正在播放媒体的封面）而不是图标。默认为 `false`。
+- `vertical`（布尔值）：将图标放在名称上方。默认为 `false`。
+- `hide_state`（布尔值）：隐藏状态。默认为 `false`。
+- `state_content`（字符串或列表）：作为状态显示的内容：`state`、`last_changed`、`last_updated` 或属性的名称。
+- `tap_action`（操作）：选择卡片时发生的事情。默认为 `more-info`。
+- `icon_tap_action`（操作）：选择图标时发生的事情。对于可切换的实体默认为 `toggle`，其余为 `none`。
+- `hold_action`、`double_tap_action`、`icon_hold_action`、`icon_double_tap_action`（操作）：长按或双击时发生的事情。默认为 `none`。
+- `features`（列表）：要显示的功能，每个功能都有一个 `type`。
+- `features_position`（字符串）：`bottom` 或 `inline`。默认为 `bottom`。
+
+```yaml
+type: tile
+entity: cover.bedroom_blinds
+features:
+  - type: cover-open-close
+  - type: cover-position
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-tile-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-tile-card.ts)，元素为 `<hui-tile-card>`。磁贴本身由 `<ha-tile-container>`、`<ha-tile-icon>` 和 `<ha-tile-info>` 构建，它们是 [`src/components/tile/`](https://github.com/home-assistant/frontend/tree/dev/src/components/tile) 中的共享组件。功能位于 [`src/panels/lovelace/card-features/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/card-features) 中，每种功能类型对应一个元素。
+
+在分区视图中，磁贴占 12 列中的 6 列和一行。每一行功能会增加一行。内联功能需要全部 12 列，垂直磁贴会增加一行并且可以缩小到 3 列。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-tile-card.ts)

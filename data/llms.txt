@@ -1,0 +1,28 @@
+# 数据
+
+> 统计分析和开放数据集。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/data/llms-full.txt.
+
+## 数据
+
+- [数据](https://www.hasscn.top/contributors/data/index.md): Home Assistant 从数据中学到什么，如何在此过程中尊重您的隐私，以及如何探索您自己家庭的数据。
+- [你的第一次数据贡献](https://www.hasscn.top/contributors/data/first-contribution/index.md): 从你的 Home Assistant 安装实例共享分析数据，准确查看它发送了什么，并看到你的安装实例被计入。只需几分钟和一次重启。
+- [分析数据的工作原理](https://www.hasscn.top/contributors/data/how-it-works/index.md): 您的分析数据从您的安装实例到公开分析网站的路径，以及设备数据库在其中的作用。
+- [隐私原则](https://www.hasscn.top/contributors/data/privacy/index.md): Home Assistant 对其收集的每一份数据所遵循的规则，以及原因。
+
+## 指南
+
+- [数据指南](https://www.hasscn.top/contributors/data/guides/index.md): 如何逐项处理 Home Assistant 数据。从公开数据集到集成中的分析。
+- [使用公开数据](https://www.hasscn.top/contributors/data/guides/public-data/index.md): 以 JSON 格式下载数据集，或使用 Prometheus 抓取它们，并构建你自己的图表。
+- [探索你自己的数据](https://www.hasscn.top/contributors/data/guides/explore-your-data/index.md): 设置 JupyterLab，将其连接到 Home Assistant 的数据库，并运行你的第一份报告。大约需要十五分钟。
+- [查询数据库](https://www.hasscn.top/contributors/data/guides/query-the-database/index.md): 用于从 Home Assistant 数据库读取状态、事件和上下文的 SQL 查询示例，适用于 SQLite、MariaDB 和 PostgreSQL。
+- [集成中的分析](https://www.hasscn.top/contributors/data/guides/integration-analytics/index.md): 面向开发者，介绍你的集成如何出现在分析中，以及如何将设备或实体排除在设备数据库之外。
+
+## 参考
+
+- [数据参考](https://www.hasscn.top/contributors/data/reference/index.md): 供您查阅的详细信息。分析功能共享的内容、数据模型、数据库架构以及统计数据。
+- [分析数据共享的内容](https://www.hasscn.top/contributors/data/reference/analytics-data/index.md): 开启分析（analytics）后，Home Assistant 按选项发送的每个字段，附示例数据。
+- [数据模型](https://www.hasscn.top/contributors/data/reference/data-model/index.md): 事件、状态、上下文和动作，是 Home Assistant 记录的一切的基础构件。
+- [数据库模式](https://www.hasscn.top/contributors/data/reference/database-schema/index.md): recorder 数据库中的各个表、表中的内容，以及它们之间的关联方式。
+- [统计数据](https://www.hasscn.top/contributors/data/reference/statistics/index.md): Home Assistant 如何将传感器数据汇总为 5 分钟和每小时的统计数据，以及这些数据是如何存储的。

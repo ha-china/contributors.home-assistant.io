@@ -1,0 +1,522 @@
+# 版本发布: full text
+
+> Every page of the 版本发布 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/releases/llms.txt.
+
+# 版本发布
+
+> Home Assistant 每月的新版本是如何诞生的，以及你可以如何帮助测试、讲解和发布它。
+
+Source: https://www.hasscn.top/contributors/releases/
+
+Home Assistant 的新版本在每个月的第一个星期三发布。在此之前，有一周的 Beta 测试期。之后，会有每周一次的补丁版本发布修复。这一节奏多年来一直保持不变，所有贡献者都遵循它。
+
+本部分介绍这个周期是如何运作的，以及你可以如何提供帮助。其中大部分工作并不需要你是开发者：测试 Beta 版本、报告出现的问题、让发布说明更加清晰，这些都是任何人都能做的最有价值的事情。
+
+## 从这里开始
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/releases/first-contribution/)：加入 Beta 测试，在你自己的家中测试下一个版本。
+- [版本发布如何运作](https://www.hasscn.top/contributors/releases/how-it-works/)：从开发到补丁版本的月度周期。
+
+## 指南
+
+面向所有人：
+
+- [发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/)：发布说明是如何编写的，以及如何提供帮助。
+
+面向开发者，当你的改动会影响用户时：
+
+- [记录不向后兼容的改动](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/)：向用户解释发生了什么变化，以及该如何应对。
+- [弃用某些内容](https://www.hasscn.top/contributors/releases/guides/deprecations/)：移除内容是如何进行的，以及需要多长时间。
+- [将修复纳入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/)：修复如何进入 Beta 版本和补丁版本。
+
+## 参考
+
+- [版本与渠道](https://www.hasscn.top/contributors/releases/reference/versions/)：版本号的含义，以及 stable、beta 和 dev 渠道。
+- [谁负责什么](https://www.hasscn.top/contributors/releases/reference/roles/)：参与版本发布的人员。
+
+## 联系谁
+
+- 想测试 Beta 版本？加入 [Home Assistant Discord 服务器](https://www.home-assistant.io/join-chat)上的 [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) 频道。
+- 在 Beta 版本中发现了 Bug？在出现问题的部分的[问题跟踪器](https://github.com/home-assistant/core/issues)中报告。参见[你的第一次贡献](https://www.hasscn.top/contributors/releases/first-contribution/#4-report-what-breaks)。
+- 发布和 Beta 测试的日期可以在[活动日历](https://www.hasscn.top/contributors/community/reference/events/)中查看。
+
+---
+
+# 你的第一次 Beta 测试
+
+> 加入 Beta 渠道，比其他人提前一周运行下一个版本，并报告出现的问题。
+
+Source: https://www.hasscn.top/contributors/releases/first-contribution/
+
+每个月，下一个版本的 Beta 版会在正式发布前一周推出。在这一周里发现的每一个 Bug，都不会影响到其他所有人的家庭。测试 Beta 版是你能做的最有价值的事情之一，而你只需要一个 Home Assistant 安装即可完成。
+
+## 1. 了解你要参与的事情
+
+Beta 版已接近完成，但还不算完全就绪。大多数时候它运行正常，但有时也会出问题。在加入之前：
+
+- 在一个出现问题只是小麻烦而非灾难的安装上进行测试。如果你的供暖或报警系统依赖 Home Assistant，请三思，或者在第二个安装上进行测试。
+- 确保你有最近的备份。如果你允许的话，Home Assistant OS 会在每次更新前自动创建备份。
+- 预计一周内会有多个 Beta 版本。修复会随着问题的发现陆续推出。
+
+## 2. 加入 Beta 渠道
+
+在 Home Assistant OS 上：
+
+1. 前往 **设置** > **系统** > **更新**。
+2. 在右上角，打开三个点的菜单。
+3. 选择 **加入 Beta 渠道**。
+4. 安装出现的更新。如果没有出现，请在同一菜单中选择 **检查更新**。
+
+你也可以通过命令行操作：
+
+```bash
+ha supervisor options --channel beta
+ha supervisor reload
+ha core update --backup
+```
+
+运行 Home Assistant Container？使用镜像的 `beta` 标签，并重新创建容器：
+
+```bash
+docker pull ghcr.io/home-assistant/home-assistant:beta
+```
+
+## 3. 阅读 Beta 版发布说明
+
+[Beta 版发布说明](https://rc.home-assistant.io/latest-release-notes/)介绍了新内容，并列出了不向后兼容的变更。请先阅读不向后兼容的变更：它们告诉你哪些地方可能需要你自己做出调整。然后试用你关心的新功能。
+
+## 4. 报告出现的问题
+
+发现了问题？在报告之前：
+
+- 确认这是新问题。它在当前稳定版中是否正常工作？
+- 搜索 Issue 跟踪器。可能已经有人报告过了。如果是这样，请把你所知的信息补充到那个 Issue 中，而不是新建一个。
+
+然后在正确的仓库中打开 Issue：
+
+- 集成（integration）、自动化和核心：[core issues](https://github.com/home-assistant/core/issues)。
+- 界面、仪表盘（dashboard）和卡片：[frontend issues](https://github.com/home-assistant/frontend/issues)。
+- 文档和发布说明：[home-assistant.io issues](https://github.com/home-assistant/home-assistant.io/issues)。
+
+你需要一个免费的 GitHub 账户才能打开 Issue。不熟悉 GitHub？请参阅[无需成为开发者也能使用 GitHub](https://www.hasscn.top/contributors/start/github/)。
+
+请完整填写 Issue 模板。注明你运行的 Beta 版本，例如 `2026.11.0b2`、你的预期、实际发生的情况，以及相关的日志信息。在 core 中，请链接该集成的文档页面，并附上其诊断文件（如果有的话）：模板会要求提供这两项。一份清晰的报告能更快得到修复。
+
+### 报告之后会发生什么
+
+- **标签和集成负责人。** 在 core 中，Home Assistant 机器人会根据你提到的集成添加 `integration:` 标签，并提及该集成的[集成负责人](https://www.hasscn.top/contributors/glossary/integration-owner/)，这样最了解它的人就会收到通知。
+- **重复检查。** 一旦 Issue 上有了集成标签，core 中的一个工作流会查找类似的未关闭 Issue。如果找到，它会在评论中链接它们，并添加 `potential-duplicate` 标签。请查看一下：如果其中一个是你的问题，请继续在那里跟进。
+- **提问。** 集成负责人或维护者可能会要求提供更多细节，例如日志或诊断信息，或者将 Issue 标记为 `needs-more-information`。在你能回答时请回复，并继续测试下一个 Beta 版本。
+- **修复。** 修复最初是一个普通的 Pull Request。在 Beta 周期间，它会进入后续的某个 Beta 版本。正式发布后，它会进入补丁版本。请参阅[让修复进入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/)。
+
+core 或 frontend 中连续 90 天没有任何活动的 Issue 会被标记为 `stale`，如果之后 7 天内仍无动静，则会被关闭。一条评论就足以让它保持打开状态。
+
+> [!TIP]
+> 不确定某个问题是否是 Bug，或者不知道如何报告？请在 [Home Assistant Discord 服务器](https://www.home-assistant.io/join-chat)的 [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) 频道提问。Beta 周期间，其他测试者和开发者都在那里。
+
+## 5. 留下或离开
+
+正式版发布时，你会像收到普通更新一样收到它。你可以继续留在 Beta 渠道等待下个月，也可以在同一菜单中选择 **离开 Beta 渠道** 离开。离开不会自动降级：当下一个稳定版比你当前运行的版本更新时，你才会收到它。
+
+## 接下来做什么
+
+- 阅读[版本发布是如何运作的](https://www.hasscn.top/contributors/releases/how-it-works/)，了解各阶段会发生什么。
+- 在 Beta 版发布说明中发现了错别字或不清楚的地方？这也值得修复。请参阅[发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/)。
+
+---
+
+# 版本发布是如何运作的
+
+> Home Assistant 的月度发布周期，从第一行代码到最后一个补丁版本。
+
+Source: https://www.hasscn.top/contributors/releases/how-it-works/
+
+Home Assistant 按照固定的时间表发布。新版本在每个月的第一个星期三发布。发布前一周会有一个 beta 版本。发布之后，通常每周会有一次包含修复的补丁版本。然后周期重新开始。
+
+[开放之家基金会（Open Home Foundation）](https://www.hasscn.top/contributors/glossary/open-home-foundation/)制定这一时间表。home-assistant.io 上的[发布常见问题](https://www.home-assistant.io/faq/release/)面向用户对此进行了说明。
+
+## 周期一览
+
+| 时间 | 发生什么 |
+| --- | --- |
+| 整个月 | 新功能和修复通过合并进入开发分支。每天都会基于它构建夜间构建版本。 |
+| 发布前一周的星期三 | beta 开始。开发分支被冻结为 beta，第一个 beta 以 `b0` 结尾。 |
+| beta 周期间 | 针对在 beta 中发现的问题的修复会进入新的 beta：`b1`、`b2`，依此类推。 |
+| 每月第一个星期三 | 正式发布，例如 `2026.11.0`。发布说明上线，并举行发布派对直播。 |
+| 发布后的几周 | 包含错误修复的补丁版本，例如 `2026.11.1` 和 `2026.11.2`。目标是每周一个，尽量在星期五发布。 |
+
+确切的日期见[活动日历](https://www.hasscn.top/contributors/community/reference/events/)。
+
+## 开发
+
+所有新工作都通过拉取请求（pull request）进入每个仓库的 `dev` 分支。该分支上的版本始终指向下一个发布版本，并带有开发标记，例如 `2026.11.0.dev0`。
+
+每天晚上，都会基于 `dev` 分支构建一个版本，版本号类似 `2026.11.0.dev202610100230`。喜欢尝鲜的人可以通过 dev 频道运行这些构建版本。这里是新代码第一次与真实家庭相遇的地方。
+
+新功能的文档会同时编写，位于 home-assistant.io 的 `next` 分支上。它会与发布版本一起上线。参见[编写文档](https://www.hasscn.top/contributors/writing/)。
+
+## Beta
+
+在发布前一周的星期三，发布团队会从 `dev` 分支创建第一个 beta。从那一刻起，该发布版本就功能完备了：新功能将进入下个月。
+
+beta 会发布在 [beta 频道](https://www.hasscn.top/contributors/releases/first-contribution/#2-join-the-beta-channel)上。加入该频道的所有人都会将其作为更新收到。[beta 发布说明](https://rc.home-assistant.io/latest-release-notes/)以及 beta 的文档位于 rc.home-assistant.io 上。
+
+在 beta 周期间，测试人员报告问题，开发人员进行修复。这些修复会先合并到 `dev`，然后发布团队将它们复制到 beta 中。这种复制称为 cherry-picking（摘取）。每一轮修复都会成为一个新的 beta。关于修复如何被摘取，参见[让修复进入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/)。
+
+## 正式发布
+
+在每月的第一个星期三，最后一个 beta 成为正式发布版本。发布团队将其发布，稳定频道上的 Home Assistant 安装实例会收到更新。
+
+与此同时，发布说明会发布在 [Home Assistant 博客](https://www.home-assistant.io/blog/categories/core/)上，新功能的文档也会在 home-assistant.io 上线。当天晚些时候，会举行发布派对：一场在 YouTube 上介绍新内容的直播。参见[发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/)。
+
+## 补丁版本
+
+有些错误只有在很多人运行某个发布版本后才会显现。补丁版本就是用来修复这些问题的。它们只包含错误修复，绝不包含新功能，目标是每周发布一个补丁版本，尽量在星期五发布，直到下一个发布版本推出。
+
+每个补丁版本都会有一个简短的更新日志，添加到当月发布说明的**补丁版本**部分下。
+
+## 前端和其他部分
+
+用户界面（即前端）有自己的仓库和版本号，但遵循同样的节奏。新的前端版本会作为发布工作的一部分被升级进 core，因此每个 Home Assistant 发布版本都附带与之匹配的前端。
+
+每次构建 Home Assistant 时都会从 Lokalise 拉取翻译，因此翻译人员不需要单独的发布步骤。参见[翻译是如何运作的](https://www.hasscn.top/contributors/translate/how-it-works/)。
+
+## 由发布团队完成的工作
+
+有些步骤只由发布团队完成，你无需操心：
+
+- 创建 beta、发布版本和补丁版本。
+- 选择并摘取哪些修复进入 beta 或补丁版本。
+- 发布构建版本，并更新安装实例检查更新时所用的版本信息。
+- 在其他人的协助下编写并发布发布说明。
+
+其他人能做的，就是让这些步骤变得容易：测试 beta、清晰地报告问题、写好向后不兼容变更部分，并按时准备好拉取请求及其文档。
+
+---
+
+# 发布指南
+
+> 如何逐项任务协助一次发布的完成。从发布说明到将修复纳入补丁版本。
+
+Source: https://www.hasscn.top/contributors/releases/guides/
+
+每篇指南围绕发布中的一个任务展开。其中大多数不仅对负责发布的人重要，对任何提交拉取请求（pull request）的人都很重要。
+
+- [发布说明与发布聚会](https://www.hasscn.top/contributors/releases/guides/release-notes/)：每月发布说明是如何完成的，以及你可以如何提供帮助。
+- [记录向后不兼容的更改](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/)：告诉用户哪些内容会受影响、如何修复以及原因。
+- [弃用某些内容](https://www.hasscn.top/contributors/releases/guides/deprecations/)：弃用政策，以及弃用信息如何进入发布说明。
+- [将修复纳入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/)：缺陷修复如何进入测试版和补丁版本。
+
+---
+
+# 发布说明与发布派对
+
+> 每月发布说明是如何完成的，你可以如何帮助改进它们，以及发布派对是什么。
+
+Source: https://www.hasscn.top/contributors/releases/guides/release-notes/
+
+每次发布都附带发布说明：这是 [home-assistant.io](https://www.home-assistant.io/) 上的一篇博客文章，解释了有哪些新内容、有哪些变化，以及人们需要做什么。对许多人来说，这是他们了解一次发布的唯一途径。把它做好非常重要。
+
+## 发布说明包含什么
+
+发布说明每个月都遵循相同的结构：
+
+- **引言**，包含亮点，顶部还有发布派对的录像。
+- **重大功能**，每个功能都有独立的章节、截图，通常还有一段短视频。
+- **集成（integration）**：新增的集成、值得关注的改进、达到[质量分级（quality scale）](https://www.hasscn.top/contributors/glossary/quality-scale/)新级别的集成、现在可以从 UI 设置的集成，以及被移除的集成。
+- **其他值得关注的变更**：值得了解的较小功能。
+- **补丁版本（patch release）**：在当月添加，包含每个补丁版本的修复。
+- **需要帮助？加入社区**：在哪里获取帮助，以及在哪里报告问题。
+- **向后不兼容的变更**：每一条[向后不兼容的变更（backward-incompatible change）](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/)，按集成分组，并列出对自定义集成开发者重要的开发者博客文章。
+- **所有变更**：指向完整变更日志的链接。
+
+完整变更日志列出了该版本中每一个已合并的拉取请求（pull request）及其作者。它由发布团队使用 [release helper scripts](https://github.com/home-assistant/hass-release) 生成。
+
+## 谁来撰写
+
+发布说明由发布团队撰写，并得到其他人的帮助。提供帮助的人会在每次发布文章的顶部被点名致谢。撰写发布说明并不是一个公开的全民参与活动，但你可以通过多种方式提供帮助。
+
+## 你可以如何帮助
+
+- **写好拉取请求描述。** 发布说明的作者会阅读拉取请求来理解一个功能。清晰的描述，加上展示变更内容的截图，可以为他们节省大量时间。
+- **写好向后不兼容的变更章节。** 它几乎会被原样复制到发布说明中。参见[记录向后不兼容的变更](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/)。
+- **按时提交你的文档。** 没有文档的功能很难撰写，也很难链接。请将文档拉取请求提交到 home-assistant.io 的 `next` 分支，与代码一起提交。参见[撰写文档](https://www.hasscn.top/contributors/writing/)。
+- **审阅 beta 版发布说明。** 在 beta 周期间，发布说明已经发布在 [rc.home-assistant.io](https://rc.home-assistant.io/latest-release-notes/) 上。发现错误、失效链接或不清楚的内容？请在 [Discord](https://www.home-assistant.io/join-chat/) 的 [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) 频道中报告，或在 [home-assistant.io](https://github.com/home-assistant/home-assistant.io) 上提交 issue 或拉取请求。
+
+## 发布派对
+
+在发布日，会有一场发布派对：在 [Home Assistant YouTube 频道](https://youtube.com/@home_assistant)上进行的直播。[Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/) 的 Home Assistant 团队和社区团队会共同筹备。他们会介绍新内容，并展示功能的实际运行。有时还会有嘉宾加入，谈论他们所做的工作。
+
+录像随后会嵌入到发布说明的顶部，方便你之后观看。
+
+## 补丁版本发布说明
+
+补丁版本没有自己的博客文章。它们的变更会被添加到当月的发布说明中，位于**补丁版本**部分之下，并附上日期和修复列表。
+
+---
+
+# 记录不向后兼容的变更
+
+> 当你的变更意味着用户需要做某些操作时，告诉他们什么会失效、如何修复以及原因。这些文字会出现在发布说明中。
+
+Source: https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/
+
+不向后兼容的变更（backward-incompatible change）是指要求人们在更新后在自己这边做某些操作的变更，比如修改他们的配置、自动化（automation）或仪表盘（dashboard）。Home Assistant 会尽力避免这类变更。当无法避免时，必须把它解释清楚，因为成千上万的人会在更新前阅读它。
+
+## 尽量避免它
+
+在编写不向后兼容的变更之前，先检查是否可以避免它：
+
+- 旧的方式能否在一段时间内与新方式并存继续工作？那么它是一个[弃用（deprecation）](https://www.hasscn.top/contributors/releases/guides/deprecations/)，还不是不向后兼容的变更。
+- Home Assistant 能否自动迁移旧配置？那么任何人都不需要做任何事。
+
+## 何时属于不向后兼容的变更
+
+要问的问题是：这个变更是否会在用户更新后立即影响到他们？当出现以下情况时，请将你的拉取请求标记为不向后兼容的变更，填写 **Breaking change** 部分并添加 `breaking-change` 标签：
+
+- 它立即破坏了某些功能，且没有事先[弃用（deprecation）](https://www.hasscn.top/contributors/releases/guides/deprecations/)。用户没有提前收到通知，也没有机会在更新前采取行动。
+- 它在弃用期结束后移除了集成中的某些内容。用户曾通过[修复（repair）](https://www.hasscn.top/contributors/glossary/repair/)收到警告，但有些人可能没有采取行动，移除仍然会影响他们。
+
+在以下情况下不要标记：
+
+- 没有任何功能被破坏。
+- 它在弃用期结束后移除了已弃用的[核心 API](https://www.hasscn.top/contributors/core/development/deprecating/#developer-facing-deprecations)，例如辅助元素或常量，并且 Home Assistant Core 中不再有任何集成或其他代码使用它。只有自定义集成可能仍然受到影响，而它们的开发者在弃用开始时已在[开发者博客](https://www.hasscn.top/contributors/blog/)上收到通知。
+
+最短弃用期——用户可见内容为 6 个月，核心 API 为 12 个月——请参阅[弃用某些内容](https://www.hasscn.top/contributors/releases/guides/deprecations/#how-long)。
+
+## 标记拉取请求
+
+[核心仓库](https://github.com/home-assistant/core)的拉取请求模板包含一个变更类型清单。当现有功能如上所述对用户造成破坏时，勾选 **Breaking change**；当破坏发生在未来版本时，勾选 **Deprecation**。拉取请求随后会获得 `breaking-change` 标签，这会使你的文字出现在发布说明中。
+
+## 编写不向后兼容的变更部分
+
+拉取请求模板以一个 **Breaking change** 部分开头。模板说得很直白：告诉用户什么会失效、如何让它重新工作，以及原因。这些文字会随发布说明一起发布，所以要为用户而写，而不是为开发者。
+
+一个好的不向后兼容的变更部分会回答三个问题：
+
+1. **什么变了？** 描述用户看到的东西，而不是代码。“`uptime` 传感器已被移除”是可以的。“重构了传感器平台”则不行。
+2. **我需要做什么？** 给出具体步骤。如果用户需要修改 YAML，请展示新的 YAML。
+3. **为什么？** 一两句话就够了。当人们理解了原因，就更容易接受变更。
+
+例如：
+
+```markdown
+The **Subscribed to Xbox Game Pass** binary sensor has been removed,
+because it never worked. The Xbox API always reported `false`, whether
+you were subscribed to Game Pass or not.
+
+If you use this binary sensor in an automation or a dashboard, remove it.
+```
+
+## 提示
+
+- 写作时要让不了解该集成（integration）的人也能看懂。很多人会阅读每一条不向后兼容的变更，只是为了确认它是否影响自己。
+- 使用用户在 UI 中看到的名称，指明发生变化的集成以及实体（entity）、操作（action）或选项。
+- 不要掩盖失效。如果有东西停止工作，请在第一句话中说明。
+- 当变更在审查过程中发生演变时，保持拉取请求中的该部分内容为最新。
+- 遵循[用户文档的写作风格](https://www.hasscn.top/contributors/writing/reference/style/)。发布说明也使用这种风格。
+
+## 你的文字会怎样处理
+
+在准备发布时，发布团队会收集所有带有 `breaking-change` 标签的已合并拉取请求中的不向后兼容的变更部分。它们会出现在发布说明的 **Backward-incompatible changes** 之下，按集成分组，并附上指向你的拉取请求和文档的链接。发布说明的作者可能会为了清晰和一致而编辑你的文字。
+
+只影响开发者的不向后兼容的变更，比如 Python API 的变更，会改为发布在开发者博客上。发布说明会链接到这些文章。
+
+---
+
+# 弃用某些功能
+
+> Home Assistant 的弃用政策、它对使用者意味着什么，以及弃用如何在发布说明中呈现。
+
+Source: https://www.hasscn.top/contributors/releases/guides/deprecations/
+
+[弃用](https://www.hasscn.top/contributors/glossary/deprecation/)（deprecation）是一种计划在未来进行的、不向后兼容的变更。旧方式在一段时间内仍然可用，所有使用它的人都会收到警告，只有在这段时间过后它才会被移除。这让人们可以按照自己的节奏进行迁移。
+
+本页面介绍的是这项政策，以及它对用户和发布说明意味着什么。关于如何在代码中弃用某些内容，包括修复问题（repair issues）、翻译字符串以及正确的严重级别，请参阅 Core 与集成部分：[弃用](https://www.hasscn.top/contributors/core/development/deprecating/)。
+
+## 规则
+
+任何要被移除的内容都必须先经过弃用。即使你认为只有少数人在使用它，这条规则依然适用，因为一个实体（entity）、动作（action）或选项可能被用于其他人无法看到的自动化、脚本和仪表盘中。
+
+## 时限
+
+| 受影响的对象 | 最短期限 |
+| --- | --- |
+| 用户：YAML 配置、动作、实体、属性、集成 | 6 个月 |
+| 开发者：自定义集成所使用的常量、辅助元素（helper）、实体属性和平台 API | 12 个月 |
+
+弃用公告中会指明旧方式将在哪个版本中被移除。当人们需要更多时间时，期限可以延长，但绝不会缩短。
+
+## 用户会看到什么
+
+需要用户采取行动的弃用会以[修复](https://www.hasscn.top/contributors/glossary/repair/)（repair）的形式出现在 **设置** > **系统** > **修复** 中，且只出现在受影响的安装实例上。该修复会说明什么内容将被移除、何时移除，以及应该怎么做。受影响的人会收到通知，而不受影响的人则不会被打扰。
+
+## 在发布说明中
+
+一项弃用会在发布说明中出现两次：
+
+1. **开始时。** 弃用某项内容的版本的发布说明可以将其列在 **向后不兼容的变更** 下，例如：“运行时间传感器已被弃用，并将在未来版本中移除。请改用新的上次重启传感器。”
+2. **结束时。** 在弃用期结束后移除旧方式的拉取请求，如果它仍可能影响未按弃用说明操作的用户，则属于向后不兼容的变更。该拉取请求中的文本会出现在该版本的同一部分中。请参阅[何时属于向后不兼容](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible)。
+
+影响自定义集成开发者的 Python API 弃用会在[开发者博客](https://www.hasscn.top/contributors/blog/)上公告。发布说明会链接该版本中最值得关注的文章，而旧代码在仍然可用期间会记录一条警告。
+
+## 在拉取请求中
+
+[核心仓库](https://github.com/home-assistant/core)的拉取请求模板为此提供了一种变更类型：当破坏发生在未来时，勾选 **弃用**；当破坏立即发生时，勾选 **破坏性变更**。启动弃用的拉取请求属于前者。结束弃用的拉取请求属于后者，除非它只是移除了 Home Assistant Core 中不再使用的核心 API。
+
+---
+
+# 如何让修复进入补丁版本
+
+> Bug 修复如何进入 beta 版和补丁版本，以及你可以做些什么来帮助它达成这一目标。
+
+Source: https://www.hasscn.top/contributors/releases/guides/patch-releases/
+
+一旦某个版本发布，新功能就要等到下个月。但 Bug 修复不必如此。在 beta 周期间，修复会进入下一个 beta 版。版本发布之后，修复会进入每周的补丁版本（patch release）。
+
+## 工作原理
+
+所有修复都从常规流程开始：针对 `dev` 分支提交一个 pull request。不需要指定其他分支，也不必再开第二个 pull request。
+
+当某个修复应该进入 beta 版或下一个补丁版本时，该 pull request 会被添加到 GitHub 上对应版本的里程碑（milestone）中，例如 `2026.11.1`。当发布团队准备 beta 版或补丁版本时，他们会取出该里程碑中每一个已合并的 pull request，并将其更改复制到发布分支中。这称为 cherry-picking（摘取）。该 pull request 随后会被打上 `cherry-picked` 标签，这样你就能看到它已被纳入。
+
+在发布说明中，beta 周期间摘取的修复会被标记为 beta 修复。
+
+## 哪些修复会被摘取
+
+补丁版本只包含 Bug 修复，绝不包含新功能。发布团队会逐个案例进行判断，以下情况会让修复更有可能被摘取：
+
+- 它修复了一个回归（regression）：即上一个版本中正常工作、而在本版本中出问题的功能。
+- 它修复了一个影响很多人、或破坏了重要功能的 Bug。
+- 它修复了本版本中某个新集成（integration）或新功能的问题。
+- 它改动小且安全。补丁版本绝不应破坏其他功能。
+
+修复 Bug 的依赖更新，或因某个服务更改了其 API 而需要的依赖更新，也可以被摘取。
+
+## 你可以做什么
+
+- **在 pull request 中说明。** 解释它修复了哪个 issue，并说明它是一个回归或影响当前版本。附上该 issue 的链接。
+- **保持修复精简。** 聚焦的修复易于审查，也易于摘取。与重构混在一起的修复则不然。
+- **主动提出。** 如果你认为某个已合并的修复应该进入下一个补丁版本，请在 pull request 中提及，并向该集成的维护者或发布团队提出。当得到的回答是“下个月”时，请不要往心里去：发布团队会权衡每一次摘取与破坏其他功能的风险。
+
+## 谁来决定
+
+维护者和发布团队决定哪些内容进入里程碑。发布团队负责 cherry-picking 并发布版本。参见[谁负责什么](https://www.hasscn.top/contributors/releases/reference/roles/)。
+
+---
+
+# 发布参考
+
+> 供您查阅的详细信息。版本号、发布渠道，以及发布过程中各角色的职责分工。
+
+Source: https://www.hasscn.top/contributors/releases/reference/
+
+本节中的页面用于查阅信息。如需了解完整的发布周期，请从[发布的工作原理](https://www.hasscn.top/contributors/releases/how-it-works/)开始。
+
+- [版本与渠道](https://www.hasscn.top/contributors/releases/reference/versions/)：版本号的含义，以及 stable、beta 和 dev 渠道。
+- [谁负责什么](https://www.hasscn.top/contributors/releases/reference/roles/)：参与发布的人员，以及他们各自的职责。
+
+---
+
+# 版本与渠道
+
+> Home Assistant 版本号的含义，以及 stable、beta 和 dev 渠道。
+
+Source: https://www.hasscn.top/contributors/releases/reference/versions/
+
+Home Assistant 采用日历版本号：版本号能告诉你发布的时间。
+
+## 版本号
+
+版本号由三部分组成：年份、月份和补丁号。`2026.11.0` 是 2026 年 11 月的发布版本，`2026.11.1` 是它的第一个补丁版本。测试版（beta）会加上 `b` 和一个数字，例如 `2026.11.0b0`。每夜构建版和开发版会加上 `.dev`。
+
+版本号格式由 Home Assistant Core 定义和维护。[版本号规范](https://www.hasscn.top/contributors/core/development/versioning/) 包含完整的格式说明、每种版本类型及示例，以及版本号在代码中是如何设置的。
+
+## 渠道
+
+带有 Supervisor 的安装方式（如 Home Assistant OS）通过渠道获取更新。每个渠道在新功能与稳定性之间有不同的平衡。
+
+| 渠道 | 你会获得 | 适合 |
+| --- | --- | --- |
+| Stable | 正式版本和补丁版本 | 所有人。这是默认渠道。 |
+| Beta | 测试周期间的测试版，以及所有正式版本 | 想帮助测试下一个版本的人。 |
+| Dev | 开发分支的每夜构建版 | 开发者以及测试最新代码、并能接受其可能出错的人。 |
+
+你可以在 **设置** > **系统** > **更新** 中在 stable 和 beta 之间切换。参见[你的第一次贡献](https://www.hasscn.top/contributors/releases/first-contribution/)。
+
+Home Assistant Container 则使用镜像标签：`stable`（也是 `latest`）、`beta` 和 `dev`，此外每个版本都有对应的标签。
+
+## 版本从哪里来
+
+安装实例通过 [version.home-assistant.io](https://version.home-assistant.io/stable.json) 获取新版本信息。它为每个渠道发布一个文件，包含 Home Assistant、Supervisor、Home Assistant OS 以及其他组件在每种硬件类型上的当前版本。这些文件在 [version 仓库](https://github.com/home-assistant/version) 中维护。
+
+你无需手动修改它们。当发布版本时，core 的构建工作流会构建镜像、运行端到端测试，然后更新对应渠道的版本文件。正式版本也会推送到 beta 渠道，因此 beta 测试者同样能获取到它。
+
+## 分支
+
+| 仓库 | 开发 | 测试版和补丁版本 | 已发布 |
+| --- | --- | --- | --- |
+| core | `dev` | `rc` | `master` |
+| frontend | `dev` | `rc` | `master` |
+| home-assistant.io | `next` | `rc` | `current` |
+
+贡献者向 core 和 frontend 的 `dev` 分支提交 pull request。在 home-assistant.io 中，对现有文档的修复提交到 `current`，而新功能的文档提交到 `next`。
+
+## 各渠道对应的网站
+
+- [www.home-assistant.io](https://www.home-assistant.io/)：当前版本的文档。
+- [rc.home-assistant.io](https://rc.home-assistant.io/)：测试版的文档和发布说明。
+- [next.home-assistant.io](https://next.home-assistant.io/)：为下一个版本正在构建的内容的文档。
+
+---
+
+# 谁负责什么
+
+> 参与 Home Assistant 发布的人员，以及他们各自的工作。
+
+Source: https://www.hasscn.top/contributors/releases/reference/roles/
+
+一次发布是数百人共同努力的成果。他们中的大多数人从未把自己当作发布工作的一部分。下面介绍谁负责什么。
+
+## 贡献者
+
+所有提交拉取请求（pull request）的人。对于发布而言，你的任务是：
+
+- 如果你希望自己的改动进入本月的发布版本，请在 beta 开始前让你的拉取请求被合并。
+- 当你的改动需要用户采取行动时，编写清晰的[不向后兼容的变更章节](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/)。
+- 与代码一起，在 [home-assistant.io](https://github.com/home-assistant/home-assistant.io) 的 `next` 分支上提交文档拉取请求。
+
+## 维护者和集成负责人
+
+[维护者](https://www.hasscn.top/contributors/glossary/maintainer/)（maintainer）负责审查并合并拉取请求。[集成负责人](https://www.hasscn.top/contributors/glossary/integration-owner/)（integration owner）负责照看特定的集成。对于发布而言，他们：
+
+- 决定在 beta 开始前合并哪些内容。
+- 修复 beta 中发现的问题，尤其是他们最熟悉的代码。
+- 标记应进入 beta 或下一个补丁版本的修复。参见[让修复进入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/)。
+
+## Beta 测试者
+
+[beta 频道](https://www.hasscn.top/contributors/releases/first-contribution/#2-join-the-beta-channel)上的所有人。他们提前一周在真实的家庭环境中运行下一个版本，并报告出现的问题。没有他们，这些 bug 就会影响所有人。你也可以成为其中一员：参见[你的第一次贡献](https://www.hasscn.top/contributors/releases/first-contribution/)。
+
+## 文档审查者
+
+他们审查并合并 `next` 分支上的文档拉取请求，确保新功能的文档在发布日已经就绪。参见[编写文档](https://www.hasscn.top/contributors/writing/)。
+
+## 翻译者
+
+他们在 Lokalise 上翻译新增的文本。翻译内容会随每次构建被拉取，因此他们的成果无需单独的步骤就能进入 beta 和正式发布版本。参见[翻译](https://www.hasscn.top/contributors/translate/)。
+
+## 发布团队
+
+发布团队负责发布工作本身。只有他们执行的步骤包括：
+
+- 创建 beta、正式版本和补丁版本。
+- 将里程碑中的修复挑选（cherry-pick）到发布分支。
+- 发布正式版本。
+- 在其他人的协助下编写并发布发布说明。
+
+发布团队使用[发布辅助脚本](https://github.com/home-assistant/hass-release)来生成更新日志、挑选里程碑中的修复，以及查找尚未合并的文档拉取请求。
+
+## 创作者
+
+[创作者网络](https://www.hasscn.top/contributors/community/reference/programs/#creator-network)（Creator Network）的成员会在 beta 日与团队会面，并可以在版本发布之前提供反馈。他们的视频和文章帮助许多人了解新功能。

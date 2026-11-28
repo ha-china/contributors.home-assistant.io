@@ -1,0 +1,29 @@
+# Security
+
+> 报告漏洞，并构建保护其所在家庭的软件。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/security/llms-full.txt.
+
+## Security
+
+- [安全](https://www.hasscn.top/contributors/security/index.md): 报告漏洞，并构建能够保护其所运行家庭的软件。
+- [你的第一次安全贡献](https://www.hasscn.top/contributors/security/first-contribution/index.md): 检查你正在使用的某个集成的诊断信息，找出其中不应存在的数据，并修复发现的问题。
+- [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/index.md): Home Assistant 信任谁、它可能在哪里受到攻击，以及系统在运行你的代码之前已经做了哪些保护。
+- [报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/index.md): 如何私下报告 Home Assistant 的安全漏洞、哪些情况符合条件，以及报告之后会发生什么。
+
+## 指南
+
+- [安全指南](https://www.hasscn.top/contributors/security/guides/index.md): 针对不同类型的贡献，如何保证你编写或审查的代码安全。
+- [安全的集成](https://www.hasscn.top/contributors/security/guides/integrations/index.md): 凭据、证书、脱敏、仅管理员访问、webhook 和文件路径。让集成保持安全的模式和辅助工具。
+- [前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/index.md): 实体名称、属性、Markdown 和 URL 可能来自任何地方。前端如何对它们进行转义、清理和检查，以及你需要做什么。
+- [保护应用安全](https://www.hasscn.top/contributors/security/guides/apps/index.md): 在应用领域安全指南的基础上，关于应用和 Supervisor 的安全公告带给我们的经验教训。
+- [保护伴侣应用（companion apps）的安全](https://www.hasscn.top/contributors/security/guides/companion-apps/index.md): Android 和 iOS 应用的安全公告中关于链接、导出组件、WebView 和 JavaScript 桥接的教训。
+- [依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/index.md): Home Assistant 安装的每个库都在其中运行。Home Assistant 对依赖项有什么要求、会自动检查什么，以及它自身的工作流是如何受到保护的。
+- [以安全为重进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/index.md): 在拉取请求（pull request）中应关注什么，以避免安全问题进入用户的家中，以及发现问题后该怎么做。
+
+## 参考
+
+- [安全参考](https://www.hasscn.top/contributors/security/reference/index.md): 供您查阅的详细信息。安全辅助工具、自动化检查，以及所有过往的安全公告。
+- [安全辅助函数](https://www.hasscn.top/contributors/security/reference/helpers/index.md): Home Assistant Core 和前端中处理证书、脱敏、管理员访问、Webhook、路径和不可信内容的辅助函数。
+- [自动化安全检查](https://www.hasscn.top/contributors/security/reference/checks/index.md): 用于检查 Home Assistant 的代码、依赖项和工作流是否存在安全问题的工具，以及它们的运行位置。
+- [过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/index.md): Home Assistant 已发布的所有安全公告，按类型分组，说明出了什么问题以及对贡献者的教训。

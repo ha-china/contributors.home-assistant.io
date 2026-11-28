@@ -1,0 +1,117 @@
+# 加载
+
+> Home Assistant 如何提示某项内容正在到来，从加载指示器到能报告操作结果的按钮。
+
+Source: https://www.hasscn.top/contributors/design/patterns/loading/
+
+你的家并不总是即时响应的。设备需要一点时间才能应答，历史记录需要获取，备份需要几分钟。良好的等待体验能告诉人们某件事正在发生，以及结果将出现在哪里。
+
+## 何时使用
+
+每当人们可能会面对一个看起来卡住或空白的屏幕时，就应显示加载状态。根据等待发生的位置选择指示方式：
+
+- **整个区域在加载，而你不知道需要多久**：使用[加载指示器（spinner）](https://www.hasscn.top/contributors/design/components/spinner/)。
+- **一个按钮启动了就地运行的操作**：按钮显示它正在忙碌。
+- **操作就地完成，结果没有其他地方可以显示**：使用[进度按钮（progress button）](https://www.hasscn.top/contributors/design/components/progress-button/)。
+- **内容加载到你已经了解的布局中**，比如表格的行或磁贴的文字：使用骨架屏（skeleton），即内容形状的灰色占位符。
+- **一个操作包含多个步骤**：显示各步骤的进度，让人们知道进行到了哪一步。
+
+## 工作原理
+
+### 加载指示器（Spinner）
+
+加载指示器有四种尺寸：`tiny`（16 像素）、`small`（28）、`medium`（48，默认值）和 `large`（68）。
+
+Live demo of `ha-spinner`.
+
+```html
+<ha-spinner size="tiny"></ha-spinner>
+<ha-spinner size="small"></ha-spinner>
+<ha-spinner size="medium"></ha-spinner>
+<ha-spinner size="large"></ha-spinner>
+```
+
+### 忙碌按钮
+
+带有 `loading` 的[按钮（button）](https://www.hasscn.top/contributors/design/components/button/)会用加载指示器替代其标签，并且无法再次点击，从而避免操作被重复启动。前端的确认对话框在操作运行期间会对其主按钮这样做。
+
+进度按钮则更进一步。当操作完成时，它会在绿色按钮上显示对勾图标，或在红色按钮上显示警告图标，持续两秒钟。它只说明*发生了*失败，而不说明*原因*。当人们需要知道原因时，还应显示[错误（error）](https://www.hasscn.top/contributors/design/patterns/errors/)。
+
+Live demo of `ha-button`, `ha-progress-button`.
+
+```html
+<ha-button loading>Save</ha-button>
+<ha-progress-button progress>Restart</ha-progress-button>
+```
+
+### 骨架屏（Skeleton）
+
+骨架屏在内容加载期间保持布局不变，这样内容到达时不会发生跳动。前端提供了 `ha-skeleton`，以及用于常见形状的 `ha-skeleton-text` 和 `ha-skeleton-icon`。数据表格、磁贴和设备仪表盘都使用了它们。
+
+默认情况下，一道柔和的波光会扫过页面上的 `effect="sheen"` 骨架屏。它是一道斜向的波光，从文本起始侧内容的顶角扫向相对的底角，每个骨架屏显示其中的一段。它从一个骨架屏流向下一个，到达末尾后重新开始，中途出现的骨架屏会加入其中，而不是重新开始。
+
+Live demo of `ha-skeleton-icon`, `ha-skeleton-text`. 数据表格的一行在加载时：ha-skeleton-icon 和 ha-skeleton-text。
+
+```html
+<div style="display: flex; align-items: center; gap: 16px">
+  <ha-skeleton-icon></ha-skeleton-icon>
+  <ha-skeleton-text></ha-skeleton-text>
+</div>
+<div style="display: flex; align-items: center; gap: 16px">
+  <ha-skeleton-icon></ha-skeleton-icon>
+  <ha-skeleton-text style="--ha-skeleton-text-width: 200px"></ha-skeleton-text>
+</div>
+```
+
+### 淡入
+
+加载指示器是淡入而不是突然弹出，但并非都以相同的速度出现：
+
+- **骨架屏**会立即淡入，大约 300 毫秒。它代表内容，因此等待会在布局应出现的位置留下空白。
+- **加载指示器或进度条**通常会等待半秒后才淡入。一些较慢的区域，例如备份和更新，会等待整整一秒。当加载在该时间内完成时，人们永远不会看到加载指示器闪烁出现又消失。
+- **内容本身**在到达时立即出现，没有淡入效果。
+
+### 加载结束的位置
+
+加载状态总是以下列三种结果之一结束：内容、[空状态（empty state）](https://www.hasscn.top/contributors/design/patterns/empty-states/)，或[错误（error）](https://www.hasscn.top/contributors/design/patterns/errors/)。当请求失败时，绝不要让加载指示器一直转下去；当数据仍在途中时，也绝不要显示“这里什么都没有”。
+
+仪表盘卡片遵循同样的规则。每张卡片都会处理加载、错误、不可用的实体（entity），以及不存在的实体。
+
+## 无障碍
+
+- 加载指示器具有进度条的角色，并带有翻译后的“加载”标签。给一组骨架屏赋予相同的角色和标签，而不是显示可见的“加载”文字。
+- 骨架屏和加载指示器在无动画的情况下也能保持其含义。当人们要求减少动态效果时，波光会停止。参见[动态效果（Motion）](https://www.hasscn.top/contributors/design/foundations/motion/)。
+- 当加载以错误结束时，应以人们可阅读的文字形式显示，而不仅仅是一个红色按钮。
+
+## 组件
+
+- [加载指示器（Spinner）](https://www.hasscn.top/contributors/design/components/spinner/)
+- [按钮（Button）](https://www.hasscn.top/contributors/design/components/button/)和[进度按钮（progress button）](https://www.hasscn.top/contributors/design/components/progress-button/)
+- [警告（Alert）](https://www.hasscn.top/contributors/design/components/alert/)，当加载失败时使用
+
+## 代码实现
+
+```ts
+html`
+  <ha-spinner size="small"></ha-spinner>
+  <ha-button .loading=${this._saving}>Save</ha-button>
+  <ha-progress-button .progress=${this._running}>
+    Restart
+  </ha-progress-button>
+`;
+```
+
+当进度按钮的操作完成时，在其上调用 `actionSuccess()` 或 `actionError()`。骨架屏 `ha-skeleton`、`ha-skeleton-text` 和 `ha-skeleton-icon` 位于 [`src/components/skeleton/`](https://github.com/home-assistant/frontend/tree/dev/src/components/skeleton) 中。
+
+将加载指示器包裹在来自 [`src/components/animation/`](https://github.com/home-assistant/frontend/tree/dev/src/components/animation) 的 `ha-fade-in` 中，以使其淡入：
+
+```ts
+html`
+  <ha-fade-in .duration=${300} easing="ease-in">
+    <div role="progressbar" aria-label=${localize("ui.common.loading")}>
+      <ha-skeleton-text></ha-skeleton-text>
+    </div>
+  </ha-fade-in>
+  <ha-fade-in .delay=${500}><ha-spinner></ha-spinner></ha-fade-in>
+`;
+```

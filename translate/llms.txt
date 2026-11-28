@@ -1,0 +1,37 @@
+# Translations
+
+> 把 Home Assistant 带到你的语言。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/translate/llms-full.txt.
+
+## Translations
+
+- [翻译](https://www.hasscn.top/contributors/translate/index.md): 让 Home Assistant 支持你的语言。无需编程，只需对自己的语言有良好的感觉。
+- [你的第一次翻译](https://www.hasscn.top/contributors/translate/first-contribution/index.md): 加入一个翻译项目，找到你的语言，并翻译你的第一批字符串。大约需要十五分钟。
+- [翻译是如何工作的](https://www.hasscn.top/contributors/translate/how-it-works/index.md): 字符串从哪里来、在哪里被翻译，以及它们如何最终进入 Home Assistant。
+
+## 指南
+
+- [翻译指南](https://www.hasscn.top/contributors/translate/guides/index.md): 逐项讲解翻译中较难处理的部分。占位符、新语言以及可翻译的字符串。
+- [占位符和引用](https://www.hasscn.top/contributors/translate/guides/placeholders/index.md): 字符串中不应翻译的部分，以及如何处理它们。
+- [申请新语言](https://www.hasscn.top/contributors/translate/guides/new-language/index.md): 你的语言还没有被支持？这里介绍如何申请添加。
+- [让你的字符串可翻译](https://www.hasscn.top/contributors/translate/guides/developers/index.md): 面向向 Home Assistant 添加文本的开发者。如何编写便于翻译者处理的字符串。
+
+## 参考
+
+- [翻译参考](https://www.hasscn.top/contributors/translate/reference/index.md): 适用于所有语言的规则，以及针对每种语言达成的约定。
+- [翻译规则](https://www.hasscn.top/contributors/translate/reference/rules/index.md): 适用于所有语言的规则。内容简短，开始之前值得一读。
+- [语言规范](https://www.hasscn.top/contributors/translate/reference/languages/index.md): 各语言达成的约定，例如使用正式或非正式称呼。以该语言本身书写。
+
+## 语音
+
+- [语音](https://www.hasscn.top/contributors/translate/voice/index.md): 教 Assist 学会你的语言。编写它能理解的句子和它给出的回答，并帮助训练其背后的语音。
+- [Assist 如何理解语言](https://www.hasscn.top/contributors/translate/voice/how-assist-understands/index.md): 意图、句子、槽位、列表和响应。Assist 背后的理念，以及一句语音指令如何变成一个操作。
+- [贡献句子和回复](https://www.hasscn.top/contributors/translate/voice/contributing/index.md): 如何在 intents 仓库中修改您所用语言的句子、回复和测试，检查您的工作，并创建拉取请求（pull request）。
+- [语音风格指南](https://www.hasscn.top/contributors/translate/voice/style-guide/index.md): 如何编写符合人们说话方式的句子，以及简短清晰的回复。
+- [支持的语言](https://www.hasscn.top/contributors/translate/voice/languages/index.md): Assist 通过内置对话代理（conversation agent）所理解的语言、各语言的负责人，以及如何添加新语言。
+- [语言负责人](https://www.hasscn.top/contributors/translate/voice/language-leaders/index.md): intents 仓库中的每种语言都有负责人来审核其变更。这个角色需要做什么，以及如何成为其中一员。
+- [贡献你的声音](https://www.hasscn.top/contributors/translate/voice/contributing-your-voice/index.md): 通过录制或审听语音，帮助开放语音社区为你的语言构建语音识别和语音合成。
+- [模板句子语法](https://www.hasscn.top/contributors/translate/voice/template-syntax/index.md): 句子文件、模板语法、列表、展开规则、回复以及语言通用文件的完整参考。
+- [测试语法](https://www.hasscn.top/contributors/translate/voice/test-syntax/index.md): 如何编写测试，以证明你的句子匹配正确的意图、填充正确的槽位并给出正确的回复。
+- [内置意图（intent）](https://www.hasscn.top/contributors/translate/voice/intents/index.md): Home Assistant 开箱即用所能理解的每一个意图，包括其槽位（slot）、槽位组合以及处理它的集成。

@@ -1,0 +1,140 @@
+# 术语表
+
+> 一个术语，一个含义。代码、界面文本和文档共用。
+
+Source: https://www.hasscn.top/contributors/glossary/
+
+Home Assistant 有自己的词汇，其中一些在代码中和在界面（UI）中的叫法不同。在这里，每个术语只有一个含义，并且有一个页面说明它在各处的叫法：在代码中、在界面中，以及它过去曾被叫作什么。
+
+请在代码、界面文本和文档中按照此处定义的方式使用这些术语。在本站的文档中，术语会在页面首次使用时自动链接到其定义：将鼠标指向带有虚线的单词，即可查看其含义。
+
+缺少某个术语，或者发现某个术语可以更清晰？每个术语都是 `src/content/docs/glossary/` 中的一个页面：编辑它，或者添加一个新页面。
+
+- [Assist](https://www.hasscn.top/contributors/glossary/assist/): Home Assistant 的语音助手。它将您说的话或输入的内容转化为操作。
+- [Assist 卫星](https://www.hasscn.top/contributors/glossary/assist-satellite/): 一种监听语音命令并将其发送到 Home Assistant 的设备，例如 Home Assistant Voice Preview Edition。
+- [Assist 管道](https://www.hasscn.top/contributors/glossary/assist-pipeline/): 语音命令所经过的步骤：唤醒词、语音转文本、对话代理以及文本转语音。
+- [Bashio](https://www.hasscn.top/contributors/glossary/bashio/): 一个面向应用的 Bash 函数库，提供读取应用选项、日志记录以及与 Supervisor API 通信的辅助功能。
+- [Beta](https://www.hasscn.top/contributors/glossary/beta/): 下一个发布版本的测试版本，在正式发布前一周发布，以便在所有人更新之前发现问题。
+- [Buildroot](https://www.hasscn.top/contributors/glossary/buildroot/): Home Assistant OS 的构建工具。它从源码构建一个完整的小型 Linux 系统，而不是基于 Ubuntu 之类的发行版。
+- [CI](https://www.hasscn.top/contributors/glossary/ci/): 持续集成（continuous integration）：在每次拉取请求（pull request）上运行的自动化检查，例如测试、代码风格检查和类型检查。
+- [CLA](https://www.hasscn.top/contributors/glossary/cla/): 贡献者许可协议（Contributor License Agreement）：确认您有权在项目许可下分享您的贡献。您只需签署一次。
+- [Dev 分支](https://www.hasscn.top/contributors/glossary/dev-branch/): 许多 Home Assistant 仓库（如 Home Assistant Core 和前端）中进行开发的分支。Pull request 会合并到该分支。
+- [Fork（分叉）](https://www.hasscn.top/contributors/glossary/fork/): 你自己在 GitHub 账户上的仓库副本，你在其中进行修改，然后再提交修改建议。
+- [HACS](https://www.hasscn.top/contributors/glossary/hacs/): Home Assistant 社区商店（Home Assistant Community Store）：在 2026.11 中 Marketplace 取代它之前，用于安装社区制作的集成、卡片和主题的自定义集成。它的目录和工具仍在使用。
+- [hass 对象](https://www.hasscn.top/contributors/glossary/hass/): 集成所获取的 `HomeAssistant` 实例，可访问状态机、事件总线、服务和配置。
+- [Hassfest](https://www.hasscn.top/contributors/glossary/hassfest/): Home Assistant Core 中用于验证每个集成的文件（如清单和翻译）并从中生成文件的工具。
+- [Home Assistant Core](https://www.hasscn.top/contributors/glossary/core/): Home Assistant 核心的 Python 应用程序，包含所有集成，位于 home-assistant/core 仓库中。
+- [Home Assistant Labs](https://www.hasscn.top/contributors/glossary/labs/): 用户可以在此开启预览功能：这些新功能可以使用，但其设计仍可能根据反馈进行调整。
+- [Home Assistant Link](https://www.hasscn.top/contributors/glossary/home-assistant-link/): Nabu Casa 提供的可选订阅服务，用于远程访问、Amazon Alexa 和 Google Assistant、在线语音处理以及在线备份。
+- [Home Assistant OS](https://www.hasscn.top/contributors/glossary/home-assistant-os/): 专为运行 Home Assistant 而打造的操作系统，包含 Supervisor、应用和备份。推荐的 Home Assistant 安装方式。
+- [Ingress](https://www.hasscn.top/contributors/glossary/ingress/): 一种让应用在 Home Assistant 内部、Home Assistant 登录之后展示其网页界面的方式，无需开放端口。
+- [IoT class](https://www.hasscn.top/contributors/glossary/iot-class/): 集成（integration）如何获取数据：本地还是云端，轮询还是推送。在 manifest 中设置。
+- [Issue（议题）](https://www.hasscn.top/contributors/glossary/issue/): GitHub 上关于仓库中某个问题（如 bug）的报告，人们可以对其进行讨论和跟踪。
+- [Lokalise](https://www.hasscn.top/contributors/glossary/lokalise/): 社区翻译 Home Assistant 的平台：包括前端、集成（integration）和配套应用。
+- [Markdown](https://www.hasscn.top/contributors/glossary/markdown/): 一种用于写作的纯文本格式，使用 # 和 * 等符号来标记标题、列表和强调。本文档就是用它编写的。
+- [Marketplace（市场）](https://www.hasscn.top/contributors/glossary/marketplace/): Home Assistant 中用户查找并安装社区自制自定义集成、仪表盘卡片、主题和模板宏的地方。自 2026.11 起内置。
+- [My 链接](https://www.hasscn.top/contributors/glossary/my-link/): 指向 my.home-assistant.io 的链接，可在读者自己的 Home Assistant 中打开相应页面，例如其集成页面或新建自动化。
+- [Nabu Casa](https://www.hasscn.top/contributors/glossary/nabu-casa/): Open Home Foundation 的商业合作伙伴，也是 Home Assistant 产品和服务（如 Home Assistant Link）的官方提供方。
+- [Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/): 拥有 Home Assistant 及许多相关项目的非营利组织，致力于智能家居中的隐私、选择权和可持续性。
+- [RAUC](https://www.hasscn.top/contributors/glossary/rauc/): Home Assistant OS 的更新系统。它将整个系统的新版本安装到正在运行的系统旁边，因此当更新失败时，设备可以回退。
+- [Recorder（记录器）](https://www.hasscn.top/contributors/glossary/recorder/): 将状态和事件的历史记录存储到数据库中的集成。
+- [S6 overlay](https://www.hasscn.top/contributors/glossary/s6-overlay/): Home Assistant 基础镜像中的 init 系统。它启动、监视并停止容器内应用的各个程序。
+- [Supervisor](https://www.hasscn.top/contributors/glossary/supervisor/): Home Assistant OS 中运行 Home Assistant Core 和应用（app）的部分，每个都在各自的容器中运行，并负责它们的更新和备份。
+- [Supervisor API](https://www.hasscn.top/contributors/glossary/supervisor-api/): Supervisor 的 REST API，Home Assistant Core、命令行和应用使用它来管理系统、应用、备份和更新。
+- [Supervisor 插件](https://www.hasscn.top/contributors/glossary/supervisor-plugin/): Supervisor 为系统自身运行的容器，例如 DNS 或音频，由 Home Assistant Core 和应用共享。
+- [WebSocket API](https://www.hasscn.top/contributors/glossary/websocket-api/): Home Assistant Core 的 API，前端和伴侣应用（companion apps）通过一个保持打开的连接使用它来读取状态、执行操作，并在事件发生时获取更新。
+- [Works with Home Assistant（与 Home Assistant 兼容）](https://www.hasscn.top/contributors/glossary/works-with-home-assistant/): 开放之家基金会（Open Home Foundation）的一项认证计划，认证那些在 Home Assistant 中运行良好且可本地运行的设备，以及承诺持续支持这些设备的制造商。
+- [YAML](https://www.hasscn.top/contributors/glossary/yaml/): 一种用于配置和数据的文本格式，通过缩进表示结构。Home Assistant 将其用于配置文件以及更多场景。
+- [不可用（Unavailable）](https://www.hasscn.top/contributors/glossary/unavailable/): 实体（entity）的一种特殊状态，表示 Home Assistant 目前无法访问它。与之相对的 unknown 状态表示可以访问但尚无值。
+- [主题](https://www.hasscn.top/contributors/glossary/theme/): 一组 CSS 变量，用于更改前端界面的颜色及部分尺寸。
+- [事件（Event）](https://www.hasscn.top/contributors/glossary/event/): 事件总线（event bus）上的一条消息，表示发生了某件事情，例如状态变化或按钮按下。任何代码都可以监听事件。
+- [事件循环（event loop）](https://www.hasscn.top/contributors/glossary/event-loop/): 运行 Home Assistant Core 的 asyncio 循环。阻塞它的代码，比如在没有 `await` 的情况下等待网络，会让其他所有任务都停止。
+- [人员](https://www.hasscn.top/contributors/glossary/person/): 家庭中的某个人，包含用于确定其所在位置的设备跟踪器（device tracker），以及可选的用于登录的用户账户。
+- [仓库](https://www.hasscn.top/contributors/glossary/repository/): GitHub 上的一个项目：包括其文件，以及对这些文件每一次更改的完整历史记录。
+- [仪表盘](https://www.hasscn.top/contributors/glossary/dashboard/): 一个由卡片组成的页面，用于显示和控制家庭。用户可以拥有任意数量的仪表盘。
+- [伴侣应用（Companion app）](https://www.hasscn.top/contributors/glossary/companion-app/): 适用于 Android、iOS 和 macOS 的 Home Assistant 应用。它显示前端（frontend），并从设备添加传感器、通知和小组件。
+- [依赖要求（Requirement）](https://www.hasscn.top/contributors/glossary/requirement/): 集成所需的来自 PyPI 的 Python 包，在其清单（manifest）中以固定版本列出。
+- [修复（Repair）](https://www.hasscn.top/contributors/glossary/repair/): Home Assistant 在“修复”（Repairs）中向用户显示的问题，以及相应的处理方法，例如即将失效的配置。
+- [分支（Branch）](https://www.hasscn.top/contributors/glossary/branch/): 仓库中一条独立的更改线，让你可以在不影响主版本的情况下进行开发。
+- [前端](https://www.hasscn.top/contributors/glossary/frontend/): Home Assistant 的网页界面，使用 Lit 和 TypeScript 构建，位于 home-assistant/frontend 仓库中。
+- [功能请求](https://www.hasscn.top/contributors/glossary/feature-request/): 关于 Home Assistant 新功能的想法，发布在 GitHub 的功能请求讨论区，其他人可以在那里评论和投票。
+- [动作（Action）](https://www.hasscn.top/contributors/glossary/action/): Home Assistant 可以执行的操作，例如打开灯或发送通知。自动化、脚本和仪表盘会执行动作。
+- [区域](https://www.hasscn.top/contributors/glossary/area/): 家中一个房间或空间，例如厨房，设备和实体归属于其中。
+- [协调器（Coordinator）](https://www.hasscn.top/contributors/glossary/coordinator/): 一种辅助元素（helper），按计划一次性为多个实体（entity）获取数据，从而只需向设备或 API 请求一次，而不是每个实体各请求一次。
+- [卡片（Card）](https://www.hasscn.top/contributors/glossary/card/): 仪表盘上的一个区块，用于显示或控制某些内容，例如实体（entity）、图表或天气预报。
+- [卡片功能（card feature）](https://www.hasscn.top/contributors/glossary/card-feature/): 卡片底部的额外控件，例如亮度滑块或吸尘器的按钮。
+- [发布（Release）](https://www.hasscn.top/contributors/glossary/release/): Home Assistant 的新版本。每月第一个星期三发布一个新版本，期间还会有补丁发布。
+- [发现（Discovery）](https://www.hasscn.top/contributors/glossary/discovery/): 查找设备和服务的位置，例如在网络中或通过蓝牙，以便 Home Assistant 可以提供设置它们的选项。
+- [发行说明](https://www.hasscn.top/contributors/glossary/release-notes/): home-assistant.io 上的博客文章，介绍某个版本中的新功能、变更内容，以及用户需要为此做些什么。
+- [史诗（Epic）](https://www.hasscn.top/contributors/glossary/epic/): home-assistant/epics 仓库中的一项较大规模工作，由可能跨越多个仓库的任务组成。
+- [合并（Merge）](https://www.hasscn.top/contributors/glossary/merge/): 将拉取请求（pull request）中的更改纳入其提交目标仓库。被合并（merged）意味着你的更改已被接受。
+- [向后不兼容的变更](https://www.hasscn.top/contributors/glossary/backward-incompatible-change/): 一种需要用户或开发者在他们那一侧做出更改的变更，例如修改他们的配置或自定义集成。
+- [唤醒词](https://www.hasscn.top/contributors/glossary/wake-word/): 让语音助手开始聆听的词语或短语，例如“Okay Nabu”。
+- [唯一 ID（Unique ID）](https://www.hasscn.top/contributors/glossary/unique-id/): 集成分配给实体（entity）或配置条目（config entry）的一个 ID，它永远不会改变，因此 Home Assistant 在重启后仍能识别它。
+- [地理位置区域（Zone）](https://www.hasscn.top/contributors/glossary/zone/): 地图上的一个地点，例如家、公司或学校，人们可以处于其中。
+- [场景](https://www.hasscn.top/contributors/glossary/scene/): 为实体（entity）保存的一组状态，例如观影时调暗的灯光和拉上的窗帘，可以一次性激活。
+- [域（Domain）](https://www.hasscn.top/contributors/glossary/domain/): 集成的简短唯一标识符，例如 `hue` 或 `light`。它也是每个实体 ID 的第一部分。
+- [安装类型](https://www.hasscn.top/contributors/glossary/installation-type/): Home Assistant 的安装方式：Home Assistant OS 或 Home Assistant Container。它们的区别在于哪些内容由系统代为管理。
+- [实体 ID（Entity ID）](https://www.hasscn.top/contributors/glossary/entity-id/): 实体的 ID：由域（domain）和对象 ID 组成，例如 `light.kitchen`。
+- [实体（Entity）](https://www.hasscn.top/contributors/glossary/entity/): Home Assistant 可以显示、测量或控制的一个事物，例如灯、温度传感器或开关。每个实体都有一个状态。
+- [实体描述（entity description）](https://www.hasscn.top/contributors/glossary/entity-description/): 一个包含实体（entity）固定属性的数据类（dataclass），例如其键、翻译键和设备类别（device class），这样许多相似的实体可以共用一个类。
+- [实体类别（entity category）](https://www.hasscn.top/contributors/glossary/entity-category/): 将实体标记为配置或诊断类别，使其不会显示在设备的主要控制项旁边。
+- [审查（Review）](https://www.hasscn.top/contributors/glossary/review/): 在合并拉取请求（pull request）之前，由维护者、集成所有者或其他任何愿意帮忙的人阅读并测试它。
+- [对话代理（conversation agent）](https://www.hasscn.top/contributors/glossary/conversation-agent/): 理解并回答命令的部分：可以是 Home Assistant 的内置代理，也可以是来自集成的代理，例如 AI 服务。
+- [属性（Attribute）](https://www.hasscn.top/contributors/glossary/attribute/): 随状态（state）一起提供的额外信息，例如灯的亮度或它支持的效果列表。
+- [平台（Platform）](https://www.hasscn.top/contributors/glossary/platform/): 集成如何提供一种类型的实体，例如 Hue 集成的 `light` 平台。也用于集成平台，即插入另一个集成的文件。
+- [应用（App）](https://www.hasscn.top/contributors/glossary/app/): 在 Home Assistant OS 上与 Home Assistant 一起运行的额外软件，例如 MQTT broker 或文件编辑器。
+- [弃用（Deprecation）](https://www.hasscn.top/contributors/glossary/deprecation/): 宣布某项内容将在后续版本中移除，在此之前它仍可正常工作，以便人们有时间进行迁移。
+- [徽章（Badge）](https://www.hasscn.top/contributors/glossary/badge/): 视图顶部的一个小胶囊，可一目了然地显示某个状态，例如室外温度。
+- [意图](https://www.hasscn.top/contributors/glossary/intent/): 语音指令的含义，例如打开某个区域的灯，以及执行该操作所需的详细信息。
+- [拉取请求（Pull request）](https://www.hasscn.top/contributors/glossary/pull-request/): 在 GitHub 上将更改合并到代码仓库的请求，合并前会先进行审查。
+- [提交（Commit）](https://www.hasscn.top/contributors/glossary/commit/): 对仓库中一个或多个文件的一次已保存的更改，并附带一条说明更改内容的消息。
+- [支持的功能](https://www.hasscn.top/contributors/glossary/supported-features/): 实体（entity）设置的一个数字，用于表明其类型支持哪些功能，例如可以设置位置的卷帘（cover）。
+- [更多信息对话框](https://www.hasscn.top/contributors/glossary/more-info-dialog/): 当你选择一个实体（entity）时打开的对话框，包含其控件、历史记录和设置。
+- [机会（Opportunity）](https://www.hasscn.top/contributors/glossary/opportunity/): 路线图仓库中的一种议题，描述一个值得解决的问题、其重要性，以及为其设想的解决方案。
+- [条件（Condition）](https://www.hasscn.top/contributors/glossary/condition/): 自动化或脚本在继续执行之前所做的检查，例如是否有人在家。
+- [架构决策](https://www.hasscn.top/contributors/glossary/architecture-decision/): 关于 Home Assistant 如何构建的决策，在 home-assistant/architecture 仓库中讨论并记录。
+- [标签](https://www.hasscn.top/contributors/glossary/label/): 用户放在实体（entity）、设备（device）、区域（area）、自动化（automation）等对象上的标记，用于按自己的方式对它们进行分组，例如所有耗电量大的设备。
+- [楼层](https://www.hasscn.top/contributors/glossary/floor/): 住宅的一个层级，例如一楼，其中包含多个区域。
+- [模板](https://www.hasscn.top/contributors/glossary/template/): 一段 Jinja2 代码片段，根据状态计算出某个值，例如几个传感器的平均温度。
+- [注册表](https://www.hasscn.top/contributors/glossary/registry/): Home Assistant 存储其对实体、设备、区域、楼层和标签所知信息的地方，以及用户对这些内容所做的更改。
+- [清单文件（Manifest）](https://www.hasscn.top/contributors/glossary/manifest/): 集成的 `manifest.json` 文件：其域名、名称、集成负责人、依赖要求，以及如何被发现。
+- [状态](https://www.hasscn.top/contributors/glossary/state/): 实体（entity）的当前值，例如 `on`、`21.5` 或 `playing`，连同其属性一起。
+- [状态机（state machine）](https://www.hasscn.top/contributors/glossary/state-machine/): Home Assistant Core 中保存每个实体（entity）当前状态的部分。
+- [状态类（state class）](https://www.hasscn.top/contributors/glossary/state-class/): 传感器的值如何表现，例如 `measurement` 或 `total_increasing`，以便 Home Assistant 能为其保留长期统计信息。
+- [目标](https://www.hasscn.top/contributors/glossary/target/): 操作所作用的对象：实体、设备、区域、楼层或标签。
+- [视图（View）](https://www.hasscn.top/contributors/glossary/view/): 仪表盘中的一个页面。其类型（如 sections、masonry 或 panel）决定了卡片的布局方式。
+- [策略（Strategy）](https://www.hasscn.top/contributors/glossary/strategy/): 一种代码，用于根据家庭本身、其区域、设备和实体来构建仪表盘、视图或部分，而不是使用固定配置。
+- [管理员（Moderator）](https://www.hasscn.top/contributors/glossary/moderator/): 通过执行行为准则，维护论坛或 Discord 服务器等社区空间的友好与安全的社区成员。
+- [维护者（Maintainer）](https://www.hasscn.top/contributors/glossary/maintainer/): 能够批准并合并仓库中拉取请求（pull request）的贡献者。
+- [翻译键（translation key）](https://www.hasscn.top/contributors/glossary/translation-key/): 指向集成（integration）的 `strings.json` 中某段文本的键，以便该文本可以被翻译。集成使用键，而不是代码中的英文文本。
+- [脚本](https://www.hasscn.top/contributors/glossary/script/): 一组命名的动作序列，可以从自动化、仪表盘或通过语音运行。
+- [自动化](https://www.hasscn.top/contributors/glossary/automation/): 一种规则，当触发器发生且条件满足时执行操作，例如在日落时且家中有人时打开灯光。
+- [自定义卡片（Custom card）](https://www.hasscn.top/contributors/glossary/custom-card/): 不属于前端、由用户从 JavaScript 文件加载的卡片。
+- [自定义集成（custom integration）](https://www.hasscn.top/contributors/glossary/custom-integration/): 不属于 Home Assistant Core 的集成，由用户安装到 `custom_components` 文件夹中。
+- [蓝图（Blueprint）](https://www.hasscn.top/contributors/glossary/blueprint/): 一种自动化、脚本或模板实体，其中留有需要填写的空白，方便他人复用，例如一个运动感应灯，只需填入运动传感器和灯具即可。
+- [补丁版本（patch release）](https://www.hasscn.top/contributors/glossary/patch-release/): 在每月版本之间发布的小型修复版本，例如 2026.10.1。
+- [解决方案中心](https://www.hasscn.top/contributors/glossary/resolution-center/): Supervisor 中查找系统问题（如磁盘空间不足）并建议修复方法的部分。
+- [触发器（Trigger）](https://www.hasscn.top/contributors/glossary/trigger/): 启动自动化的条件，例如状态变化、时间或事件。
+- [设备](https://www.hasscn.top/contributors/glossary/device/): 一个物理设备或一项服务，一个或多个实体（entity）归属于它，例如带有温度传感器和湿度传感器的恒温器。
+- [设备类别](https://www.hasscn.top/contributors/glossary/device-class/): 实体（entity）测量什么或是什么，例如 `temperature` 或 `door`。它决定了图标、单位，以及前端如何显示该实体。
+- [设计令牌（Design token）](https://www.hasscn.top/contributors/glossary/design-token/): 设计中一个有名称的值，例如颜色、间距或圆角，用来代替硬编码的值。
+- [诊断](https://www.hasscn.top/contributors/glossary/diagnostics/): 包含配置条目或设备的数据和状态的下载文件，用户将其附加到 issue 中以帮助调试。
+- [语言负责人](https://www.hasscn.top/contributors/glossary/language-leader/): 负责 intents 仓库中某一语言的母语使用者，并审核该语言的每一项更改。
+- [路线图](https://www.hasscn.top/contributors/glossary/roadmap/): Open Home Foundation 希望接下来在 Home Assistant 及其其他项目中解决的问题，以机会（opportunity）的形式在 OpenHomeFoundation/roadmap 仓库中跟踪。
+- [轮询（Polling）](https://www.hasscn.top/contributors/glossary/polling/): 按固定时间间隔向设备或服务请求新数据。与之相反的是推送（push），即设备在发生变化时主动发送更新。
+- [辅助元素（Helper）](https://www.hasscn.top/contributors/glossary/helper/): 用户在 UI 中创建的一种实体（entity），用于保存某个值或组合其他实体，例如开关、数字、计时器或分组。
+- [选择器（Selector）](https://www.hasscn.top/contributors/glossary/selector/): 描述字段取什么类型的值，例如实体、数字或时间，以便 UI 为其显示正确的控件。
+- [选项流程（Options flow）](https://www.hasscn.top/contributors/glossary/options-flow/): 在用户界面中更改现有配置条目选项的步骤，例如轮询频率。
+- [部署预览（Deploy Preview）](https://www.hasscn.top/contributors/glossary/deploy-preview/): 一个包含拉取请求（pull request）更改内容的网站临时副本，由 Netlify 构建，用于在合并之前进行检查。
+- [配置子条目](https://www.hasscn.top/contributors/glossary/config-subentry/): 配置条目（config entry）的一部分，由用户自行添加和管理，例如连接到 AI 服务的某个集成中的单个 AI 代理。
+- [配置条目（config entry）](https://www.hasscn.top/contributors/glossary/config-entry/): 一个集成（integration）的一次设置实例，例如一个 Hue 网桥，以及 Home Assistant 为其存储的配置。
+- [配置流程（config flow）](https://www.hasscn.top/contributors/glossary/config-flow/): 在用户界面中设置集成并创建配置条目的步骤。
+- [重新认证（Reauthentication）](https://www.hasscn.top/contributors/glossary/reauthentication/): 当配置项（config entry）无法再登录时，要求用户提供新凭据的流程，无需重新设置。
+- [重新配置流程](https://www.hasscn.top/contributors/glossary/reconfigure-flow/): 一种在不删除并重新添加配置条目的情况下更改其设置（例如主机地址）的流程。
+- [长期统计](https://www.hasscn.top/contributors/glossary/statistics/): 记录器永久保存的传感器数值每小时汇总，例如平均值、最小值和最大值，或累计总量，用于长时间跨度的图表和能源仪表盘。
+- [集成（Integration）](https://www.hasscn.top/contributors/glossary/integration/): 一段代码包，用于将 Home Assistant 连接到设备、服务或协议，或添加自动化等功能。
+- [集成所有者](https://www.hasscn.top/contributors/glossary/integration-owner/): 负责某个集成（integration）的个人或团队，列在该集成的清单（manifest）中，会收到其相关问题的通知，并被请求审查其拉取请求（pull request）。
+- [集成类别](https://www.hasscn.top/contributors/glossary/integration-category/): 集成所属的类别，例如照明（Lighting）或能源（Energy），以便人们能根据其功能找到它，例如在网站的集成页面上。
+- [集成质量等级](https://www.hasscn.top/contributors/glossary/quality-scale/): 集成通过遵循代码质量和用户体验规则而获得的等级：铜牌、银牌、金牌和白金。
+- [面板（Panel）](https://www.hasscn.top/contributors/glossary/panel/): Home Assistant 中一个独立的页面，通常显示在侧边栏中，例如仪表盘、地图或设置。

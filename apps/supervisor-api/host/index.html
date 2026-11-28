@@ -1,0 +1,1410 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-hkbrpulz><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/contributors/favicon.ico" sizes="32x32"><link rel="icon" href="/contributors/favicon.svg" type="image/svg+xml" sizes="any"><link rel="icon" href="/contributors/favicon-192x192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/contributors/favicon-192x192.png" sizes="192x192"><title>Host and OS endpoints | Home Assistant 贡献者</title><meta name="description" content="Supervisor API 中面向主机系统、Home Assistant OS、硬件、网络、时间、挂载和 Docker 的端点。"><link rel="canonical" href="https://www.hasscn.top/contributors/apps/supervisor-api/host/"><link rel="alternate" type="application/rss+xml" title="Home Assistant 贡献者 blog" href="/contributors/blog/rss.xml"><link rel="alternate" type="text/markdown" href="/contributors/apps/supervisor-api/host/index.md"><!--
+      The browser only asks for a font once a styled text needs it, after the
+      first paint. Until it arrives, text shows in the fallback font, which
+      runs taller, and swapping fonts moves everything. Going back to a page
+      that is no longer in the back/forward cache restores the scroll position
+      against that taller page, so you land above where you left. Fetching the
+      font right away has it ready before the first paint.
+    --><link rel="preload" href="/contributors/_astro/figtree-latin-wght-normal.D_ZTVpCC.woff2" as="font" type="font/woff2" crossorigin><!-- Link previews in chat apps, the forum, and social networks. --><meta property="og:site_name" content="Home Assistant 贡献者"><meta property="og:title" content="Host and OS endpoints"><meta property="og:description" content="Supervisor API 中面向主机系统、Home Assistant OS、硬件、网络、时间、挂载和 Docker 的端点。"><meta property="og:url" content="https://www.hasscn.top/contributors/apps/supervisor-api/host/"><meta property="og:type" content="website"><meta property="og:image" content="https://www.hasscn.top/contributors/og/apps/supervisor-api/host.png"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Host and OS endpoints, on Home Assistant 贡献者"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Host and OS endpoints"><meta name="twitter:description" content="Supervisor API 中面向主机系统、Home Assistant OS、硬件、网络、时间、挂载和 Docker 的端点。"><meta name="twitter:image" content="https://www.hasscn.top/contributors/og/apps/supervisor-api/host.png"><meta name="twitter:image:alt" content="Host and OS endpoints, on Home Assistant 贡献者"><!-- Apply the stored color scheme and sidebar state before the first paint. --><script>
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+        }
+        if (localStorage.getItem("sidebar") === "collapsed") {
+          document.documentElement.dataset.sidebar = "collapsed";
+        }
+      } catch {}
+    </script><script>
+      window.plausible = window.plausible || function () {
+        (window.plausible.q = window.plausible.q || []).push(arguments);
+      };
+    </script><script async src="https://www.openhomefoundation.org/plausible.js?site=contributors.home-assistant.io"></script><script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js?id=3MhQABjxy4RZQ6Ig&ck=3MhQABjxy4RZQ6Ig"></script><link rel="stylesheet" href="/contributors/_astro/_..BdIiLw-D.css"><link rel="stylesheet" href="/contributors/_astro/Base.FSDn43YB.css"><script type="module" src="/contributors/_astro/page.C_n2D7Z2.js"></script></head><body data-astro-cid-hkbrpulz><a class="skip-link" href="#main-content" data-astro-cid-hkbrpulz>Skip to content</a><header data-pagefind-ignore data-site-header class="wide" data-astro-cid-nen7h5rs><div class="inner" data-astro-cid-nen7h5rs><a href="/contributors/" class="home" aria-label="Home Assistant 贡献者，首页" data-astro-cid-nen7h5rs><span class="lockup lockup--responsive" data-astro-cid-f7espo7c><picture class="logo on-light" data-astro-cid-f7espo7c><source media="(max-width: 440px)" srcset="/contributors/images/contributors-logo-stacked-on-light.svg" width="1768" height="438" data-astro-cid-f7espo7c><img src="/contributors/images/contributors-logo-inline-on-light.svg" alt="Home Assistant Contributors" width="2924" height="240" data-astro-cid-f7espo7c></picture><picture class="logo on-dark" data-astro-cid-f7espo7c><source media="(max-width: 440px)" srcset="/contributors/images/contributors-logo-stacked-on-dark.svg" width="1768" height="438" data-astro-cid-f7espo7c><img src="/contributors/images/contributors-logo-inline-on-dark.svg" alt="Home Assistant Contributors" width="2924" height="240" data-astro-cid-f7espo7c></picture></span></a><button class="trigger" type="button" popovertarget="area-switcher" data-astro-cid-5kbukjek>Apps<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><nav id="area-switcher" class="menu" popover aria-label="All areas" data-astro-cid-5kbukjek><div class="group" data-astro-cid-5kbukjek><p class="group-label" data-astro-cid-5kbukjek>Start here</p><ul data-astro-cid-5kbukjek><li data-astro-cid-5kbukjek><a href="/contributors/start/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>快速上手</a></li></ul></div><div class="group" data-astro-cid-5kbukjek><p class="group-label" data-astro-cid-5kbukjek>Build the software</p><ul data-astro-cid-5kbukjek><li data-astro-cid-5kbukjek><a href="/contributors/core/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>核心与集成</a></li><li data-astro-cid-5kbukjek><a href="/contributors/frontend/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>Frontend</a></li><li data-astro-cid-5kbukjek><a href="/contributors/apps/" aria-current="page" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Apps</a></li><li data-astro-cid-5kbukjek><a href="/contributors/marketplace/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>应用市场</a></li><li data-astro-cid-5kbukjek><a href="/contributors/companion/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>伴侣应用</a></li><li data-astro-cid-5kbukjek><a href="/contributors/os/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>操作系统与 Supervisor</a></li></ul></div><div class="group" data-astro-cid-5kbukjek><p class="group-label" data-astro-cid-5kbukjek>Design, write, translate</p><ul data-astro-cid-5kbukjek><li data-astro-cid-5kbukjek><a href="/contributors/design/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>设计</a></li><li data-astro-cid-5kbukjek><a href="/contributors/brand/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>品牌</a></li><li data-astro-cid-5kbukjek><a href="/contributors/writing/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>撰写文档</a></li><li data-astro-cid-5kbukjek><a href="/contributors/translate/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Translations</a></li></ul></div><div class="group" data-astro-cid-5kbukjek><p class="group-label" data-astro-cid-5kbukjek>Run the project</p><ul data-astro-cid-5kbukjek><li data-astro-cid-5kbukjek><a href="/contributors/community/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>社区</a></li><li data-astro-cid-5kbukjek><a href="/contributors/releases/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>版本发布</a></li><li data-astro-cid-5kbukjek><a href="/contributors/roadmap/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Roadmap</a></li><li data-astro-cid-5kbukjek><a href="/contributors/community/reference/events/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>活动与日历</a></li></ul></div><div class="group" data-astro-cid-5kbukjek><p class="group-label" data-astro-cid-5kbukjek>Understand how it works</p><ul data-astro-cid-5kbukjek><li data-astro-cid-5kbukjek><a href="/contributors/architecture/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>架构</a></li><li data-astro-cid-5kbukjek><a href="/contributors/security/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security</a></li><li data-astro-cid-5kbukjek><a href="/contributors/data/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>数据</a></li><li data-astro-cid-5kbukjek><a href="/contributors/glossary/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Glossary</a></li></ul></div><div class="menu-footer" data-astro-cid-5kbukjek><a href="/contributors/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</a><a href="/contributors/blog/" data-astro-cid-5kbukjek><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>Blog</a></div></nav><nav aria-label="主导航" class="nav--area" data-astro-cid-nen7h5rs><a href="/contributors/blog/" data-astro-cid-nen7h5rs>博客</a></nav><div class="tools" data-astro-cid-nen7h5rs><div class="search" data-astro-cid-nen7h5rs><site-search data-area="apps" data-areas="{&quot;start&quot;:&quot;快速上手&quot;,&quot;core&quot;:&quot;核心与集成&quot;,&quot;frontend&quot;:&quot;Frontend&quot;,&quot;apps&quot;:&quot;Apps&quot;,&quot;marketplace&quot;:&quot;应用市场&quot;,&quot;companion&quot;:&quot;伴侣应用&quot;,&quot;os&quot;:&quot;操作系统与 Supervisor&quot;,&quot;design&quot;:&quot;设计&quot;,&quot;brand&quot;:&quot;品牌&quot;,&quot;writing&quot;:&quot;撰写文档&quot;,&quot;translate&quot;:&quot;Translations&quot;,&quot;community&quot;:&quot;社区&quot;,&quot;releases&quot;:&quot;版本发布&quot;,&quot;roadmap&quot;:&quot;Roadmap&quot;,&quot;architecture&quot;:&quot;架构&quot;,&quot;security&quot;:&quot;Security&quot;,&quot;data&quot;:&quot;数据&quot;,&quot;glossary&quot;:&quot;Glossary&quot;,&quot;blog&quot;:&quot;Blog&quot;}" data-start="[{&quot;label&quot;:&quot;Your first contribution to Apps&quot;,&quot;description&quot;:&quot;帮助改进官方应用、基础镜像以及每个应用都依赖的构建工具。构建你的第一个应用，然后选择你想出力的地方。&quot;,&quot;href&quot;:&quot;/apps/first-contribution/&quot;},{&quot;label&quot;:&quot;Apps overview&quot;,&quot;description&quot;:&quot;打包与 Home Assistant 协同运行的软件。&quot;,&quot;href&quot;:&quot;/apps/&quot;},{&quot;label&quot;:&quot;Get started&quot;,&quot;description&quot;:&quot;How the project works, and how to make your first contribution.&quot;,&quot;href&quot;:&quot;/contributors/start/&quot;},{&quot;label&quot;:&quot;Glossary&quot;,&quot;description&quot;:&quot;One term, one meaning. Look up what a word means here.&quot;,&quot;href&quot;:&quot;/contributors/glossary/&quot;}]" data-astro-cid-ac66eqjo="true"><button class="trigger" type="button" data-open aria-haspopup="dialog" aria-label="Search Apps" data-astro-cid-ac66eqjo><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="trigger-label" data-astro-cid-ac66eqjo>Search Apps</span><kbd aria-hidden="true" data-astro-cid-ac66eqjo>/</kbd></button><dialog aria-label="Search" data-astro-cid-ac66eqjo><form class="search-form" role="search" data-astro-cid-ac66eqjo><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><label for="search-input" class="sr-only" data-astro-cid-ac66eqjo>Search</label><input id="search-input" type="search" role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="Search Apps" data-astro-cid-ac66eqjo><button type="button" class="close" data-close aria-label="Close search" data-astro-cid-ac66eqjo><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></form><div class="filters" role="group" aria-label="Search in" data-filters data-astro-cid-ac66eqjo></div><div class="body" data-body data-astro-cid-ac66eqjo><div class="status" data-status data-astro-cid-ac66eqjo></div><ul id="search-results" class="results" role="listbox" aria-label="Search results" data-results data-astro-cid-ac66eqjo></ul><button type="button" class="more" data-more hidden data-astro-cid-ac66eqjo>Show more results</button></div><p class="sr-only" role="status" data-announce data-astro-cid-ac66eqjo></p><footer class="hints" aria-hidden="true" data-astro-cid-ac66eqjo><span data-astro-cid-ac66eqjo><kbd data-astro-cid-ac66eqjo>↑</kbd><kbd data-astro-cid-ac66eqjo>↓</kbd> to move</span><span data-astro-cid-ac66eqjo><kbd data-astro-cid-ac66eqjo>Enter</kbd> to open</span><span data-astro-cid-ac66eqjo><kbd data-astro-cid-ac66eqjo>Esc</kbd> to close</span></footer></dialog></site-search><script type="module" src="/contributors/_astro/Search.astro_astro_type_script_index_0_lang.BT3imwUv.js"></script></div><theme-toggle data-astro-cid-l6lhmie6="true"><button type="button" aria-label="Color scheme: system" data-astro-cid-l6lhmie6><span data-icon="system" data-astro-cid-l6lhmie6><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span><span data-icon="light" hidden data-astro-cid-l6lhmie6><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span><span data-icon="dark" hidden data-astro-cid-l6lhmie6><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span></button></theme-toggle><script type="module">var e={system:`light`,light:`dark`,dark:`system`};function t(){try{let e=localStorage.getItem(`theme`);return e===`light`||e===`dark`?e:`system`}catch{return`system`}}function n(e){try{e===`system`?localStorage.removeItem(`theme`):localStorage.setItem(`theme`,e)}catch{}}var r=class extends HTMLElement{theme=`system`;connectedCallback(){let r=this.querySelector(`button`);this.theme=t(),this.render(this.theme),r.addEventListener(`click`,()=>{let t=e[this.theme];this.theme=t,n(t),t===`system`?delete document.documentElement.dataset.theme:document.documentElement.dataset.theme=t,this.render(t)})}render(e){this.querySelector(`button`).setAttribute(`aria-label`,`Color scheme: ${e}`);for(let t of this.querySelectorAll(`[data-icon]`))t.hidden=t.dataset.icon!==e}};customElements.define(`theme-toggle`,r);</script></div></div></header><script type="module">var e=document.querySelector(`[data-site-header]`);e&&new ResizeObserver(()=>{document.documentElement.style.setProperty(`--site-header-height`,`${Math.ceil(e.getBoundingClientRect().height)}px`)}).observe(e);</script><div class="crumb-bar" data-astro-cid-lpetmyok><button type="button" class="sidebar-toggle" aria-controls="sidebar" aria-expanded="true" aria-label="Hide sidebar" data-sidebar-toggle data-astro-cid-lpetmyok><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></button><!-- On small screens the sidebar and "On this page" open as panels from this bar. --><button type="button" class="panel-toggle" popovertarget="docs-menu" aria-label="Menu: Apps" data-astro-cid-lpetmyok><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><div id="docs-menu" class="panel" popover data-docs-panel data-astro-cid-lpetmyok><nav aria-label="Apps (menu)" class="sidebar" data-astro-cid-wv7whodv><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/first-contribution/" data-astro-cid-wv7whodv>你的第一次贡献</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/first-app/" data-astro-cid-wv7whodv>你的第一个应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/build-a-real-app/" data-astro-cid-wv7whodv>构建一个真实的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/how-apps-work/" data-astro-cid-wv7whodv>应用的工作原理</a></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>指南</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/dockerfile/" data-astro-cid-wv7whodv>构建容器镜像</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/s6-overlay/" data-astro-cid-wv7whodv>使用 S6 overlay 运行服务</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/options/" data-astro-cid-wv7whodv>添加选项</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/hardware/" data-astro-cid-wv7whodv>访问硬件和宿主机</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/communication/" data-astro-cid-wv7whodv>与 Home Assistant 和 Supervisor 通信</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/ingress/" data-astro-cid-wv7whodv>使用 Ingress 添加网页界面</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/services-discovery/" data-astro-cid-wv7whodv>共享服务并发现集成</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/testing/" data-astro-cid-wv7whodv>测试你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/security/" data-astro-cid-wv7whodv>保护你的应用安全</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/presentation/" data-astro-cid-wv7whodv>展示你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/publishing/" data-astro-cid-wv7whodv>发布你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/repository/" data-astro-cid-wv7whodv>创建并分享一个存储库</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>参考</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/configuration/" data-astro-cid-wv7whodv>应用（App）配置</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/files/" data-astro-cid-wv7whodv>应用（App）文件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/environment/" data-astro-cid-wv7whodv>运行环境</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/security-rating/" data-astro-cid-wv7whodv>安全评级</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>Bashio</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/config/" data-astro-cid-wv7whodv>选项</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/logging/" data-astro-cid-wv7whodv>日志、退出与错误</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/apps/" data-astro-cid-wv7whodv>应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/supervisor/" data-astro-cid-wv7whodv>Supervisor 与系统</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/core-host-os/" data-astro-cid-wv7whodv>Core、主机和操作系统</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/plugins/" data-astro-cid-wv7whodv>插件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/services/" data-astro-cid-wv7whodv>服务、发现、认证和 ingress</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/helpers/" data-astro-cid-wv7whodv>变量、字符串、文件和 JSON</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>Supervisor API</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/apps/" data-astro-cid-wv7whodv>Apps</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/store/" data-astro-cid-wv7whodv>商店</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/backups/" data-astro-cid-wv7whodv>Backups</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/core/" data-astro-cid-wv7whodv>Home Assistant Core</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/host/" data-astro-cid-wv7whodv>Host and OS</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/plugins/" data-astro-cid-wv7whodv>插件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/supervisor/" data-astro-cid-wv7whodv>Supervisor</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/services/" data-astro-cid-wv7whodv>服务、发现、认证和 Ingress</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/models/" data-astro-cid-wv7whodv>Models</a></li></ul></details></li></ul></nav></div><nav aria-label="Breadcrumb" class="breadcrumbs" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/contributors/" data-astro-cid-vx4iavld>贡献者</a></li><li data-astro-cid-vx4iavld><a href="/contributors/apps/" data-astro-cid-vx4iavld>Apps</a></li><li data-astro-cid-vx4iavld><a href="/contributors/apps/supervisor-api/" data-astro-cid-vx4iavld>Supervisor API</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>Host and OS endpoints</span></li></ol></nav><script type="module">for(let e of document.querySelectorAll(`.breadcrumbs`))e.scrollLeft=e.scrollWidth;</script><button type="button" class="panel-toggle panel-toggle--toc" popovertarget="docs-toc" aria-label="On this page" data-astro-cid-lpetmyok><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button><div id="docs-toc" class="panel panel--toc" popover data-docs-panel data-astro-cid-lpetmyok><nav class="toc" aria-label="On this page" data-astro-cid-p33bl5ka><p class="title" aria-hidden="true" data-astro-cid-p33bl5ka>On this page</p><ul data-astro-cid-p33bl5ka><li data-astro-cid-p33bl5ka><a href="#_top" data-depth="2" data-astro-cid-p33bl5ka>Overview</a></li><li data-astro-cid-p33bl5ka><a href="#主机host" data-depth="2" data-astro-cid-p33bl5ka>主机（Host）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /host/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /host/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreboot" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reboot</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostshutdown" data-depth="3" data-astro-cid-p33bl5ka>POST /host/shutdown</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreload" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostservices" data-depth="3" data-astro-cid-p33bl5ka>GET /host/services</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisks" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisksdiskusage" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks/&lt;disk&gt;/usage</a></li><li data-astro-cid-p33bl5ka><a href="#主机日志" data-depth="3" data-astro-cid-p33bl5ka>主机日志</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsboots" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/boots</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsidentifiers" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/identifiers</a></li><li data-astro-cid-p33bl5ka><a href="#home-assistant-os" data-depth="2" data-astro-cid-p33bl5ka>Home Assistant OS</a></li><li data-astro-cid-p33bl5ka><a href="#get-osinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /os/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-osupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/update</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigsync" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/sync</a></li><li data-astro-cid-p33bl5ka><a href="#get-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>GET /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboot-slot" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boot-slot</a></li><li data-astro-cid-p33bl5ka><a href="#get-osdatadisklist" data-depth="3" data-astro-cid-p33bl5ka>GET /os/datadisk/list</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskmove" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/move</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskwipe" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/wipe</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsboard" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/&lt;board&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsyellow" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/yellow</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsgreen" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/green</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsraspberrypifirmware" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/raspberrypi/firmware</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboardsraspberrypifirmwareupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boards/raspberrypi/firmware/update</a></li><li data-astro-cid-p33bl5ka><a href="#主机的-ssh-密钥" data-depth="3" data-astro-cid-p33bl5ka>主机的 SSH 密钥</a></li><li data-astro-cid-p33bl5ka><a href="#硬件hardware" data-depth="2" data-astro-cid-p33bl5ka>硬件（Hardware）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/info</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareaudio" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/audio</a></li><li data-astro-cid-p33bl5ka><a href="#网络network" data-depth="2" data-astro-cid-p33bl5ka>网络（Network）</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkreload" data-depth="3" data-astro-cid-p33bl5ka>POST /network/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfaceupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/update</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceaccesspoints" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/accesspoints</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfacevlanid" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/vlan/&lt;id&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#时间time" data-depth="2" data-astro-cid-p33bl5ka>时间（Time）</a></li><li data-astro-cid-p33bl5ka><a href="#get-timeinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /time/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-timeoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /time/options</a></li><li data-astro-cid-p33bl5ka><a href="#挂载mounts" data-depth="2" data-astro-cid-p33bl5ka>挂载（Mounts）</a></li><li data-astro-cid-p33bl5ka><a href="#get-mounts" data-depth="3" data-astro-cid-p33bl5ka>GET /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-mounts" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#put-mountsname" data-depth="3" data-astro-cid-p33bl5ka>PUT /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#delete-mountsname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsnamereload" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/&lt;name&gt;/reload</a></li><li data-astro-cid-p33bl5ka><a href="#docker" data-depth="2" data-astro-cid-p33bl5ka>Docker</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockeroptions" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/options</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#delete-dockerregistrieshostname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /docker/registries/&lt;hostname&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockermigrate-storage-driver" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/migrate-storage-driver</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerreset-storage" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/reset-storage</a></li></ul></nav><script type="module">var e=[...document.querySelectorAll(`.toc a`)],t=[...new Set(e.map(e=>e.hash.slice(1)))],n=t.map(e=>document.getElementById(e)).filter(e=>e!==null),r,i;function a(){i=void 0;let a=(parseFloat(getComputedStyle(document.documentElement).getPropertyValue(`--site-header-height`))||72)+48,o=t[0];for(let e of n){if(e.getBoundingClientRect().top>a)break;o=e.id}if(o!==r){r=o;for(let t of e)t.hash===`#${r}`?t.setAttribute(`aria-current`,`true`):t.removeAttribute(`aria-current`)}}n.length>0&&(a(),document.addEventListener(`scroll`,()=>{i??=requestAnimationFrame(a)},{passive:!0}));</script></div></div><div class="layout has-toc" data-astro-cid-lpetmyok><aside class="sidebar-wide" id="sidebar" data-astro-cid-lpetmyok><a class="area area--build" href="/contributors/apps/" data-astro-cid-lpetmyok><span class="badge" data-astro-cid-lpetmyok><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>Apps</a><nav aria-label="Apps" class="sidebar" data-astro-cid-wv7whodv><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/first-contribution/" data-astro-cid-wv7whodv>你的第一次贡献</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/first-app/" data-astro-cid-wv7whodv>你的第一个应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/build-a-real-app/" data-astro-cid-wv7whodv>构建一个真实的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/how-apps-work/" data-astro-cid-wv7whodv>应用的工作原理</a></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>指南</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/dockerfile/" data-astro-cid-wv7whodv>构建容器镜像</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/s6-overlay/" data-astro-cid-wv7whodv>使用 S6 overlay 运行服务</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/options/" data-astro-cid-wv7whodv>添加选项</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/hardware/" data-astro-cid-wv7whodv>访问硬件和宿主机</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/communication/" data-astro-cid-wv7whodv>与 Home Assistant 和 Supervisor 通信</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/ingress/" data-astro-cid-wv7whodv>使用 Ingress 添加网页界面</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/services-discovery/" data-astro-cid-wv7whodv>共享服务并发现集成</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/testing/" data-astro-cid-wv7whodv>测试你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/security/" data-astro-cid-wv7whodv>保护你的应用安全</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/presentation/" data-astro-cid-wv7whodv>展示你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/publishing/" data-astro-cid-wv7whodv>发布你的应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/guides/repository/" data-astro-cid-wv7whodv>创建并分享一个存储库</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>参考</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/configuration/" data-astro-cid-wv7whodv>应用（App）配置</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/files/" data-astro-cid-wv7whodv>应用（App）文件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/environment/" data-astro-cid-wv7whodv>运行环境</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/reference/security-rating/" data-astro-cid-wv7whodv>安全评级</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>Bashio</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/config/" data-astro-cid-wv7whodv>选项</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/logging/" data-astro-cid-wv7whodv>日志、退出与错误</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/apps/" data-astro-cid-wv7whodv>应用</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/supervisor/" data-astro-cid-wv7whodv>Supervisor 与系统</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/core-host-os/" data-astro-cid-wv7whodv>Core、主机和操作系统</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/plugins/" data-astro-cid-wv7whodv>插件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/services/" data-astro-cid-wv7whodv>服务、发现、认证和 ingress</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/bashio/helpers/" data-astro-cid-wv7whodv>变量、字符串、文件和 JSON</a></li></ul></details></li><li data-astro-cid-wv7whodv><details data-astro-cid-wv7whodv><summary data-astro-cid-wv7whodv><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span data-astro-cid-wv7whodv>Supervisor API</span></summary><ul class="list" data-astro-cid-wv7whodv><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/" data-astro-cid-wv7whodv>Overview</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/apps/" data-astro-cid-wv7whodv>Apps</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/store/" data-astro-cid-wv7whodv>商店</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/backups/" data-astro-cid-wv7whodv>Backups</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/core/" data-astro-cid-wv7whodv>Home Assistant Core</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/host/" data-astro-cid-wv7whodv>Host and OS</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/plugins/" data-astro-cid-wv7whodv>插件</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/supervisor/" data-astro-cid-wv7whodv>Supervisor</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/services/" data-astro-cid-wv7whodv>服务、发现、认证和 Ingress</a></li><li data-astro-cid-wv7whodv><a href="/contributors/apps/supervisor-api/models/" data-astro-cid-wv7whodv>Models</a></li></ul></details></li></ul></nav></aside><main id="_top" data-astro-cid-lpetmyok><!-- Between the two breakpoints "On this page" folds into a menu above the page. --><details class="toc-narrow" data-astro-cid-lpetmyok><summary data-astro-cid-lpetmyok>On this page<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><nav class="toc" aria-label="On this page" data-astro-cid-p33bl5ka><p class="title" aria-hidden="true" data-astro-cid-p33bl5ka>On this page</p><ul data-astro-cid-p33bl5ka><li data-astro-cid-p33bl5ka><a href="#_top" data-depth="2" data-astro-cid-p33bl5ka>Overview</a></li><li data-astro-cid-p33bl5ka><a href="#主机host" data-depth="2" data-astro-cid-p33bl5ka>主机（Host）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /host/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /host/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreboot" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reboot</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostshutdown" data-depth="3" data-astro-cid-p33bl5ka>POST /host/shutdown</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreload" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostservices" data-depth="3" data-astro-cid-p33bl5ka>GET /host/services</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisks" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisksdiskusage" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks/&lt;disk&gt;/usage</a></li><li data-astro-cid-p33bl5ka><a href="#主机日志" data-depth="3" data-astro-cid-p33bl5ka>主机日志</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsboots" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/boots</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsidentifiers" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/identifiers</a></li><li data-astro-cid-p33bl5ka><a href="#home-assistant-os" data-depth="2" data-astro-cid-p33bl5ka>Home Assistant OS</a></li><li data-astro-cid-p33bl5ka><a href="#get-osinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /os/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-osupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/update</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigsync" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/sync</a></li><li data-astro-cid-p33bl5ka><a href="#get-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>GET /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboot-slot" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boot-slot</a></li><li data-astro-cid-p33bl5ka><a href="#get-osdatadisklist" data-depth="3" data-astro-cid-p33bl5ka>GET /os/datadisk/list</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskmove" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/move</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskwipe" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/wipe</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsboard" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/&lt;board&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsyellow" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/yellow</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsgreen" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/green</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsraspberrypifirmware" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/raspberrypi/firmware</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboardsraspberrypifirmwareupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boards/raspberrypi/firmware/update</a></li><li data-astro-cid-p33bl5ka><a href="#主机的-ssh-密钥" data-depth="3" data-astro-cid-p33bl5ka>主机的 SSH 密钥</a></li><li data-astro-cid-p33bl5ka><a href="#硬件hardware" data-depth="2" data-astro-cid-p33bl5ka>硬件（Hardware）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/info</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareaudio" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/audio</a></li><li data-astro-cid-p33bl5ka><a href="#网络network" data-depth="2" data-astro-cid-p33bl5ka>网络（Network）</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkreload" data-depth="3" data-astro-cid-p33bl5ka>POST /network/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfaceupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/update</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceaccesspoints" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/accesspoints</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfacevlanid" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/vlan/&lt;id&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#时间time" data-depth="2" data-astro-cid-p33bl5ka>时间（Time）</a></li><li data-astro-cid-p33bl5ka><a href="#get-timeinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /time/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-timeoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /time/options</a></li><li data-astro-cid-p33bl5ka><a href="#挂载mounts" data-depth="2" data-astro-cid-p33bl5ka>挂载（Mounts）</a></li><li data-astro-cid-p33bl5ka><a href="#get-mounts" data-depth="3" data-astro-cid-p33bl5ka>GET /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-mounts" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#put-mountsname" data-depth="3" data-astro-cid-p33bl5ka>PUT /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#delete-mountsname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsnamereload" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/&lt;name&gt;/reload</a></li><li data-astro-cid-p33bl5ka><a href="#docker" data-depth="2" data-astro-cid-p33bl5ka>Docker</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockeroptions" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/options</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#delete-dockerregistrieshostname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /docker/registries/&lt;hostname&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockermigrate-storage-driver" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/migrate-storage-driver</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerreset-storage" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/reset-storage</a></li></ul></nav></details><article id="main-content" tabindex="-1" data-pagefind-body data-astro-cid-lpetmyok><meta data-pagefind-filter="area[content]" content="apps"><meta data-pagefind-meta="trail[content]" content="Apps › Supervisor API"><header class="page-header" data-astro-cid-lpetmyok><h1 data-pagefind-meta="title" data-pagefind-weight="10" data-astro-cid-lpetmyok>Host and OS endpoints</h1><p class="lede" data-pagefind-weight="2" data-astro-cid-lpetmyok>Supervisor API 中面向主机系统、Home Assistant OS、硬件、网络、时间、挂载和 Docker 的端点。</p></header><div class="prose" data-astro-cid-lpetmyok><p>这些端点触及容器之下的部分：主机系统及其操作系统。其中大多数需要带 <code>manager</code> 或 <code>admin</code> 角色的 <code>hassio_api: true</code>。<code>/info</code> 类端点（如 <code>GET /host/info</code>）对任意角色开放。</p>
+<p>某些端点只存在于 <a href="/contributors/glossary/home-assistant-os/" class="glossary-term">Home Assistant OS</a> 上，或需要较新的版本。它们在不可用时会返回 <code>404</code>。</p>
+<div class="heading-wrapper level-h2"><h2 id="主机host">主机（Host）</h2><a href="#主机host" class="heading-anchor" aria-label="Link to section: 主机（Host）" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/info</code></td>
+<td>主机信息</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/host/options</code></td>
+<td>更改主机设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/host/reboot</code></td>
+<td>重启主机</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/host/shutdown</code></td>
+<td>关闭主机</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/host/reload</code></td>
+<td>重新读取主机信息</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/services</code></td>
+<td>列出 systemd 服务</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/disks</code></td>
+<td>列出可挂载的磁盘</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/disks/&lt;disk&gt;/usage</code></td>
+<td>磁盘用量</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/logs</code></td>
+<td>主机日志</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/logs/boots</code></td>
+<td>列出 journal 中的启动记录</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/host/logs/identifiers</code></td>
+<td>列出 journal 中的 syslog 标识符</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-hostinfo"><code>GET /host/info</code></h3><a href="#get-hostinfo" class="heading-anchor" aria-label="Link to section: GET /host/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent_version</code></td>
+<td>string or null</td>
+<td>OS Agent 的版本</td>
+</tr>
+<tr>
+<td><code>apparmor_version</code></td>
+<td>string or null</td>
+<td>AppArmor 的版本</td>
+</tr>
+<tr>
+<td><code>chassis</code></td>
+<td>string or null</td>
+<td>机箱类型，例如 <code>embedded</code> 或 <code>vm</code></td>
+</tr>
+<tr>
+<td><code>virtualization</code></td>
+<td>string or null</td>
+<td>虚拟化类型，没有则为空</td>
+</tr>
+<tr>
+<td><code>cpe</code></td>
+<td>string or null</td>
+<td>操作系统的 CPE 名称</td>
+</tr>
+<tr>
+<td><code>deployment</code></td>
+<td>string or null</td>
+<td>部署类型，例如 <code>production</code> 或 <code>development</code></td>
+</tr>
+<tr>
+<td><code>disk_free</code></td>
+<td>float</td>
+<td>剩余磁盘空间，单位 GiB</td>
+</tr>
+<tr>
+<td><code>disk_total</code></td>
+<td>float</td>
+<td>磁盘总空间，单位 GiB</td>
+</tr>
+<tr>
+<td><code>disk_used</code></td>
+<td>float</td>
+<td>已用磁盘空间，单位 GiB</td>
+</tr>
+<tr>
+<td><code>disk_life_time</code></td>
+<td>float or null</td>
+<td>数据盘已使用的寿命百分比，磁盘上报时才有</td>
+</tr>
+<tr>
+<td><code>features</code></td>
+<td>list</td>
+<td>主机支持的特性，例如 <code>reboot</code>、<code>network</code> 或 <code>haos</code></td>
+</tr>
+<tr>
+<td><code>all_features</code></td>
+<td>list</td>
+<td>全部特性。<code>features</code> 会略去旧客户端的 <code>ntp</code></td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td>string or null</td>
+<td>主机名</td>
+</tr>
+<tr>
+<td><code>llmnr_hostname</code></td>
+<td>string or null</td>
+<td>LLMNR 使用的主机名</td>
+</tr>
+<tr>
+<td><code>kernel</code></td>
+<td>string or null</td>
+<td>内核版本</td>
+</tr>
+<tr>
+<td><code>operating_system</code></td>
+<td>string or null</td>
+<td>操作系统名称</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>string or null</td>
+<td>主机的时区</td>
+</tr>
+<tr>
+<td><code>dt_utc</code></td>
+<td>string</td>
+<td>UTC 当前时间，ISO 8601 格式</td>
+</tr>
+<tr>
+<td><code>dt_synchronized</code></td>
+<td>boolean or null</td>
+<td>时钟已同步则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>use_ntp</code></td>
+<td>boolean or null</td>
+<td>主机使用 NTP 则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>startup_time</code></td>
+<td>float or null</td>
+<td>上次启动所花的秒数</td>
+</tr>
+<tr>
+<td><code>boot_timestamp</code></td>
+<td>integer or null</td>
+<td>上次启动的时间戳，单位微秒，由 systemd 上报</td>
+</tr>
+<tr>
+<td><code>broadcast_llmnr</code></td>
+<td>boolean or null</td>
+<td>主机通过 LLMNR 宣告自己则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>broadcast_mdns</code></td>
+<td>boolean or null</td>
+<td>主机通过 mDNS 宣告自己则为 <code>true</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-hostoptions"><code>POST /host/options</code></h3><a href="#post-hostoptions" class="heading-anchor" aria-label="Link to section: POST /host/options" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hostname</code></td>
+<td>string</td>
+<td>否</td>
+<td>新主机名</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-hostreboot"><code>POST /host/reboot</code></h3><a href="#post-hostreboot" class="heading-anchor" aria-label="Link to section: POST /host/reboot" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>重启主机。Home Assistant 正在执行数据库迁移时会失败，除非强制执行。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>force</code></td>
+<td>boolean</td>
+<td>否</td>
+<td>即使正在数据库迁移也重启。默认 <code>false</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-hostshutdown"><code>POST /host/shutdown</code></h3><a href="#post-hostshutdown" class="heading-anchor" aria-label="Link to section: POST /host/shutdown" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>关闭主机。接受与 <code>POST /host/reboot</code> 相同的 <code>force</code> 键。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-hostreload"><code>POST /host/reload</code></h3><a href="#post-hostreload" class="heading-anchor" aria-label="Link to section: POST /host/reload" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>重新读取主机信息。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-hostservices"><code>GET /host/services</code></h3><a href="#get-hostservices" class="heading-anchor" aria-label="Link to section: GET /host/services" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>services</code></td>
+<td>list</td>
+<td>一个 <a href="/contributors/apps/supervisor-api/models/#host-service">主机服务模型</a> 列表</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-hostdisks"><code>GET /host/disks</code></h3><a href="#get-hostdisks" class="heading-anchor" aria-label="Link to section: GET /host/disks" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>返回可用于<a href="#mounts">磁盘挂载</a>的带分区磁盘。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disks</code></td>
+<td>list</td>
+<td>磁盘列表，每个磁盘包含 <code>name</code>、<code>vendor</code>、<code>model</code>、<code>serial</code>、<code>size</code>、<code>id</code>、<code>dev_path</code>、<code>connection_bus</code>、<code>removable</code>、<code>ejectable</code> 和 <code>partitions</code></td>
+</tr>
+</tbody>
+</table>
+<p>每个分区包含 <code>device</code>、<code>uuid</code>、<code>label</code>、<code>filesystem</code>、<code>size</code>、<code>read_only</code> 和 <code>mountable</code>。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-hostdisksdiskusage"><code>GET /host/disks/&lt;disk&gt;/usage</code></h3><a href="#get-hostdisksdiskusage" class="heading-anchor" aria-label="Link to section: GET /host/disks/<disk>/usage" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>返回磁盘空间的占用情况，单位字节。<code>&lt;disk&gt;</code> 使用 <code>default</code> 表示系统盘，或某个挂载的名称。<code>default</code> 始终指系统盘，因此名为 <code>default</code> 的挂载无法在此测量。</p>
+<table>
+<thead>
+<tr>
+<th>查询参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_depth</code></td>
+<td>文件夹要向下展开多少层。系统盘默认为 1，挂载默认为 0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>条目的 ID</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>string</td>
+<td>条目的名称</td>
+</tr>
+<tr>
+<td><code>total_bytes</code></td>
+<td>integer</td>
+<td>磁盘大小。只在最顶层条目上出现</td>
+</tr>
+<tr>
+<td><code>used_bytes</code></td>
+<td>integer</td>
+<td>已用空间</td>
+</tr>
+<tr>
+<td><code>children</code></td>
+<td>list</td>
+<td>每个部分的相同结构。没有更细的展开时省略</td>
+</tr>
+</tbody>
+</table>
+<p>对系统盘而言，children 是 <code>system</code>、<code>addons_data</code>、<code>addons_config</code>、<code>media</code>、<code>share</code>、<code>backup</code>、<code>ssl</code> 和 <code>homeassistant</code>，<code>max_depth</code> 决定在它们内部展开多少层。</p>
+<p>挂载没有这样的固定部分，因此 <a href="/contributors/glossary/supervisor/" class="glossary-term">Supervisor</a> 会遍历它的文件夹。<code>max_depth</code> 为 0 或 1 时只返回总量，2 会加上第一层文件夹，再往下每层加 1。一个 <code>other</code> 子项存放不属于任何文件夹的内容，例如挂载顶层的文件。如果遍历期间文件发生了变化、文件夹合计超过 <code>used_bytes</code>，则省略展开。</p>
+<p>Supervisor 通过实际访问挂载来测量，如果尚未挂载会先挂载。不存在的挂载返回 <code>404</code>。无法读取或已不再挂载的挂载返回错误。测量超过 60 秒时请求返回错误，但测量会继续进行。测量期间，对同一挂载和 <code>max_depth</code> 的新请求会等待它完成，而不是再启动一次。<code>max_depth</code> 小于 2 时视为同一深度。</p>
+<div class="heading-wrapper level-h3"><h3 id="主机日志">主机日志</h3><a href="#主机日志" class="heading-anchor" aria-label="Link to section: 主机日志" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p><code>GET /host/logs</code> 返回主机日志，工作方式与其他<a href="/contributors/apps/supervisor-api/#log-endpoints">日志端点</a>相同。默认显示最重要的服务，每行都带时间戳和进程名，与 <code>verbose</code> 一样。以下端点可以进一步缩小范围：</p>
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>返回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/host/logs/follow</code></td>
+<td>日志，随后持续输出新行</td>
+</tr>
+<tr>
+<td><code>/host/logs/boots/&lt;bootid&gt;</code></td>
+<td>某一次启动的日志</td>
+</tr>
+<tr>
+<td><code>/host/logs/boots/&lt;bootid&gt;/follow</code></td>
+<td>某一次启动的日志，随后持续输出新行</td>
+</tr>
+<tr>
+<td><code>/host/logs/identifiers/&lt;identifier&gt;</code></td>
+<td>某个 syslog 标识符的日志</td>
+</tr>
+<tr>
+<td><code>/host/logs/identifiers/&lt;identifier&gt;/follow</code></td>
+<td>某个标识符的日志，随后持续输出新行</td>
+</tr>
+<tr>
+<td><code>/host/logs/boots/&lt;bootid&gt;/identifiers/&lt;identifier&gt;</code></td>
+<td>某次启动中某个标识符的日志</td>
+</tr>
+<tr>
+<td><code>/host/logs/boots/&lt;bootid&gt;/identifiers/&lt;identifier&gt;/follow</code></td>
+<td>同上，随后持续输出新行</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-hostlogsboots"><code>GET /host/logs/boots</code></h3><a href="#get-hostlogsboots" class="heading-anchor" aria-label="Link to section: GET /host/logs/boots" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>按偏移量返回 journal 中的启动记录。<code>0</code> 是当前启动。</p>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "boots"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "0"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"b1c386a144fd44db8f855d7e907256f8"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "-1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"a3b0e6b2f2cf4e1d9d1e1c8b9a7f6e5d"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="get-hostlogsidentifiers"><code>GET /host/logs/identifiers</code></h3><a href="#get-hostlogsidentifiers" class="heading-anchor" aria-label="Link to section: GET /host/logs/identifiers" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>以 <code>identifiers</code> 返回 journal 中的 syslog 标识符。常用的有：排查网络问题的 <code>NetworkManager</code>、蓝牙相关的 <code>bluetoothd</code>，以及编辑 AppArmor 配置时用到的 <code>audit</code>。</p>
+<div class="heading-wrapper level-h2"><h2 id="home-assistant-os">Home Assistant OS</h2><a href="#home-assistant-os" class="heading-anchor" aria-label="Link to section: Home Assistant OS" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>以下端点只在 Home Assistant OS 上可用。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/info</code></td>
+<td>操作系统信息</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/update</code></td>
+<td>更新操作系统</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/config/sync</code></td>
+<td>从 U 盘加载配置</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/config/swap</code></td>
+<td>swap 设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/config/swap</code></td>
+<td>更改 swap 设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/boot-slot</code></td>
+<td>切换启动槽并重启</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/datadisk/list</code></td>
+<td>数据可以迁移到的磁盘</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/datadisk/move</code></td>
+<td>把数据迁移到另一块磁盘</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/datadisk/wipe</code></td>
+<td>抹除数据盘</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/boards/&lt;board&gt;</code></td>
+<td>检查板型</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/boards/yellow</code></td>
+<td>Home Assistant Yellow 的设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/boards/yellow</code></td>
+<td>更改 Home Assistant Yellow 的设置</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/boards/green</code></td>
+<td>Home Assistant Green 的设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/boards/green</code></td>
+<td>更改 Home Assistant Green 的设置</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/boards/raspberrypi/firmware</code></td>
+<td>Raspberry Pi 固件状态</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/boards/raspberrypi/firmware/update</code></td>
+<td>更新 Raspberry Pi 固件</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/os/ssh/authorized_keys</code></td>
+<td>列出主机的 SSH 密钥</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/os/ssh/authorized_keys</code></td>
+<td>为主机添加 SSH 密钥</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/os/ssh/authorized_keys</code></td>
+<td>移除主机的全部 SSH 密钥</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-osinfo"><code>GET /os/info</code></h3><a href="#get-osinfo" class="heading-anchor" aria-label="Link to section: GET /os/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>已安装的版本</td>
+</tr>
+<tr>
+<td><code>version_latest</code></td>
+<td>string</td>
+<td>可用的最新版本</td>
+</tr>
+<tr>
+<td><code>version_pending</code></td>
+<td>string or null</td>
+<td>已安装但等待重启的版本</td>
+</tr>
+<tr>
+<td><code>update_available</code></td>
+<td>boolean</td>
+<td>有可用更新则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>board</code></td>
+<td>string</td>
+<td>板型名称，例如 <code>generic-x86-64</code> 或 <code>yellow</code></td>
+</tr>
+<tr>
+<td><code>boot</code></td>
+<td>string</td>
+<td>当前的启动槽</td>
+</tr>
+<tr>
+<td><code>data_disk</code></td>
+<td>string</td>
+<td>数据盘的 ID</td>
+</tr>
+<tr>
+<td><code>boot_slots</code></td>
+<td>dictionary</td>
+<td>每个启动槽（<code>A</code> 和 <code>B</code>）一个<a href="/contributors/apps/supervisor-api/models/#boot-slot">启动槽模型</a>。调用 <code>POST /os/boot-slot</code> 时使用这些名称</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-osupdate"><code>POST /os/update</code></h3><a href="#post-osupdate" class="heading-anchor" aria-label="Link to section: POST /os/update" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>否</td>
+<td>要安装的版本。默认为最新版本</td>
+</tr>
+</tbody>
+</table>
+<p>把更新安装到非活动槽，然后返回。它不会重启：新版本在 <code>GET /os/info</code> 的 <code>version_pending</code> 中等待，直到系统重启，例如通过 <code>POST /host/reboot</code>。在那之前，<code>version</code> 仍是正在运行的版本。对 2026.8 之前的 <a href="/contributors/glossary/core/" class="glossary-term">Home Assistant Core</a> 版本，<code>version</code> 会改报 pending 版本，以避免再次提供同一个更新。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-osconfigsync"><code>POST /os/config/sync</code></h3><a href="#post-osconfigsync" class="heading-anchor" aria-label="Link to section: POST /os/config/sync" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>从 U 盘加载配置，例如网络设置。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-osconfigswap"><code>GET /os/config/swap</code></h3><a href="#get-osconfigswap" class="heading-anchor" aria-label="Link to section: GET /os/config/swap" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>需要 Home Assistant OS 15.0 或更新版本。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>swap_size</code></td>
+<td>string</td>
+<td>swap 文件的大小，例如 <code>1G</code></td>
+</tr>
+<tr>
+<td><code>swappiness</code></td>
+<td>integer</td>
+<td>内核 swappiness，取值 0 到 200</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-osconfigswap"><code>POST /os/config/swap</code></h3><a href="#post-osconfigswap" class="heading-anchor" aria-label="Link to section: POST /os/config/swap" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>接受相同的键。<code>swap_size</code> 是一个数字加可选单位：<code>B</code>、<code>K</code>、<code>M</code> 或 <code>G</code>，可选地后跟 <code>B</code> 或 <code>iB</code>。小于 40 kB 会关闭 swap。更改会创建一个「需要重启」事项（reboot required issue）。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-osboot-slot"><code>POST /os/boot-slot</code></h3><a href="#post-osboot-slot" class="heading-anchor" aria-label="Link to section: POST /os/boot-slot" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>切换到另一个启动槽并重启进入。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boot_slot</code></td>
+<td>string</td>
+<td>是</td>
+<td><code>A</code> 或 <code>B</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-osdatadisklist"><code>GET /os/datadisk/list</code></h3><a href="#get-osdatadisklist" class="heading-anchor" aria-label="Link to section: GET /os/datadisk/list" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>devices</code></td>
+<td>list</td>
+<td>数据可以迁移到的磁盘 ID</td>
+</tr>
+<tr>
+<td><code>disks</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#disk">磁盘模型</a>列表</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-osdatadiskmove"><code>POST /os/datadisk/move</code></h3><a href="#post-osdatadiskmove" class="heading-anchor" aria-label="Link to section: POST /os/datadisk/move" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>把数据分区迁移到另一块磁盘，并重启系统。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>device</code></td>
+<td>string</td>
+<td>是</td>
+<td>目标磁盘的 ID 或设备路径</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-osdatadiskwipe"><code>POST /os/datadisk/wipe</code></h3><a href="#post-osdatadiskwipe" class="heading-anchor" aria-label="Link to section: POST /os/datadisk/wipe" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>抹除数据盘并重启。只有具有 <code>admin</code> 角色的应用才能调用。</p>
+<p>抹除会格式化数据分区和 overlay 分区。这会删除数据盘上的 Home Assistant、所有应用、备份和媒体，以及主机设置（如网络连接）。操作系统及其启动槽保留。重启后，系统会重新下载 Home Assistant 并进入 onboarding，如同全新安装。你可能需要重新配置网络才能访问它。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-osboardsboard"><code>GET /os/boards/&lt;board&gt;</code></h3><a href="#get-osboardsboard" class="heading-anchor" aria-label="Link to section: GET /os/boards/<board>" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>当 <code>&lt;board&gt;</code> 是当前使用的板型时返回成功（空数据），否则返回错误。<code>&lt;board&gt;</code> 是 <code>GET /os/info</code> 中 <code>board</code> 的值。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-osboardsyellow"><code>GET /os/boards/yellow</code></h3><a href="#get-osboardsyellow" class="heading-anchor" aria-label="Link to section: GET /os/boards/yellow" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disk_led</code></td>
+<td>boolean</td>
+<td>磁盘活动 LED 亮起</td>
+</tr>
+<tr>
+<td><code>heartbeat_led</code></td>
+<td>boolean</td>
+<td>心跳 LED 亮起</td>
+</tr>
+<tr>
+<td><code>power_led</code></td>
+<td>boolean</td>
+<td>电源 LED 亮起</td>
+</tr>
+</tbody>
+</table>
+<p><code>POST /os/boards/yellow</code> 接受相同的键，全部可选。更改会创建一个「需要重启」事项。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-osboardsgreen"><code>GET /os/boards/green</code></h3><a href="#get-osboardsgreen" class="heading-anchor" aria-label="Link to section: GET /os/boards/green" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>activity_led</code></td>
+<td>boolean</td>
+<td>活动 LED 亮起</td>
+</tr>
+<tr>
+<td><code>power_led</code></td>
+<td>boolean</td>
+<td>电源 LED 亮起</td>
+</tr>
+<tr>
+<td><code>system_health_led</code></td>
+<td>boolean</td>
+<td>系统健康 LED 亮起</td>
+</tr>
+</tbody>
+</table>
+<p><code>POST /os/boards/green</code> 接受相同的键，全部可选。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-osboardsraspberrypifirmware"><code>GET /os/boards/raspberrypi/firmware</code></h3><a href="#get-osboardsraspberrypifirmware" class="heading-anchor" aria-label="Link to section: GET /os/boards/raspberrypi/firmware" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>返回 Raspberry Pi 引导加载固件的状态，以及板载 VL805 USB 控制器固件（如有）的状态。当板型没有可管理的固件，或 OS Agent 低于 1.9.0 时返回 <code>404</code>。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>current_version</code></td>
+<td>string or null</td>
+<td>已安装的固件版本</td>
+</tr>
+<tr>
+<td><code>latest_version</code></td>
+<td>string or null</td>
+<td>操作系统附带的最新固件版本</td>
+</tr>
+<tr>
+<td><code>update_available</code></td>
+<td>boolean</td>
+<td>有可用更新则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>update_blocked</code></td>
+<td>boolean</td>
+<td>启动设备不允许更新则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>update_pending</code></td>
+<td>boolean</td>
+<td>有更新等待重启则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>blocked_reason</code></td>
+<td>string or null</td>
+<td>更新被阻止的原因，没有则为 <code>null</code>。目前无论原因如何都是 <code>unsupported_boot_device</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-osboardsraspberrypifirmwareupdate"><code>POST /os/boards/raspberrypi/firmware/update</code></h3><a href="#post-osboardsraspberrypifirmwareupdate" class="heading-anchor" aria-label="Link to section: POST /os/boards/raspberrypi/firmware/update" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>把 Raspberry Pi 固件更新到操作系统附带的版本。<code>update_blocked</code> 为 <code>true</code> 时返回错误。新固件在重启后生效，因此成功的更新会创建一个「需要重启」事项。</p>
+<div class="heading-wrapper level-h3"><h3 id="主机的-ssh-密钥">主机的 SSH 密钥</h3><a href="#主机的-ssh-密钥" class="heading-anchor" aria-label="Link to section: 主机的 SSH 密钥" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p><code>/os/ssh/authorized_keys</code> 管理主机 <code>root</code> 用户的 SSH 密钥，用于<a href="/contributors/os/operating-system/debugging/">端口 22222 上的 SSH 服务器</a>。只有 Home Assistant Core 可以调用这些端点，应用不可以。</p>
+<ul>
+<li><code>GET</code> 以 <code>keys</code> 返回密钥，文件中每个非空、非注释行一条。需要 OS Agent 1.11.0 或更新版本，否则返回 <code>404</code>。</li>
+<li><code>POST</code> 把你以 <code>key</code> 发送的密钥（如 <code>ssh-ed25519 AAAA...</code>）追加到现有密钥之后。密钥不得超过 3000 字节，且不能包含控制字符。自 OS Agent 1.10.0 起，密钥还必须是 OpenSSH <code>authorized_keys</code> 文件的一行有效内容，包括选项部分。添加密钥也会启动主机的 SSH 服务器。</li>
+<li><code>DELETE</code> 移除全部密钥。它同时停止 SSH 服务器，这会终止已打开的会话。</li>
+</ul>
+<div class="heading-wrapper level-h2"><h2 id="硬件hardware">硬件（Hardware）</h2><a href="#硬件hardware" class="heading-anchor" aria-label="Link to section: 硬件（Hardware）" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/hardware/info</code></td>
+<td>设备和驱动器</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/hardware/audio</code></td>
+<td>音频设备</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-hardwareinfo"><code>GET /hardware/info</code></h3><a href="#get-hardwareinfo" class="heading-anchor" aria-label="Link to section: GET /hardware/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>devices</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#device">设备模型</a>列表</td>
+</tr>
+<tr>
+<td><code>drives</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#drive">驱动器模型</a>列表</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-hardwareaudio"><code>GET /hardware/audio</code></h3><a href="#get-hardwareaudio" class="heading-anchor" aria-label="Link to section: GET /hardware/audio" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>按名称和描述返回主机的音频设备。</p>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "audio"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "input"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "0,0"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Mic"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "output"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "1,0"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"Jack"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "0,1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"HDMI"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h2"><h2 id="网络network">网络（Network）</h2><a href="#网络network" class="heading-anchor" aria-label="Link to section: 网络（Network）" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/network/info</code></td>
+<td>所有接口和内部网络</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/network/reload</code></td>
+<td>重新读取网络状态</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/network/interface/&lt;interface&gt;/info</code></td>
+<td>单个接口</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/network/interface/&lt;interface&gt;/update</code></td>
+<td>更改接口</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/network/interface/&lt;interface&gt;/accesspoints</code></td>
+<td>扫描 Wi-Fi 网络</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/network/interface/&lt;interface&gt;/vlan/&lt;id&gt;</code></td>
+<td>创建 VLAN</td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;interface&gt;</code> 是接口名称，例如 <code>eth0</code>，主接口可用 <code>default</code>。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-networkinfo"><code>GET /network/info</code></h3><a href="#get-networkinfo" class="heading-anchor" aria-label="Link to section: GET /network/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>interfaces</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#network-interface">网络接口模型</a>列表</td>
+</tr>
+<tr>
+<td><code>docker</code></td>
+<td>dictionary</td>
+<td>内部网络：<code>interface</code>、<code>address</code>、<code>gateway</code> 和 <code>dns</code></td>
+</tr>
+<tr>
+<td><code>host_internet</code></td>
+<td>boolean or null</td>
+<td>主机能访问互联网则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>supervisor_internet</code></td>
+<td>boolean</td>
+<td>Supervisor 能访问互联网则为 <code>true</code></td>
+</tr>
+</tbody>
+</table>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "interfaces"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "interface"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"eth0"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "type"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"ethernet"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "enabled"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "connected"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "primary"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "mac"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"52:54:00:12:34:56"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "ipv4"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "method"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"auto"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "address"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.100/24"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "nameservers"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "gateway"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "route_metric"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">null</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">        "ready"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "ipv6"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">null</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "wifi"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">null</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "vlan"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">null</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "mdns"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"default"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "llmnr"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"default"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  ],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "docker"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "interface"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"hassio"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "address"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"172.30.32.0/23"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "gateway"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"172.30.32.1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "dns"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"172.30.32.3"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "host_internet"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "supervisor_internet"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">true</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="post-networkreload"><code>POST /network/reload</code></h3><a href="#post-networkreload" class="heading-anchor" aria-label="Link to section: POST /network/reload" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>重新读取网络状态，并检查互联网连接。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-networkinterfaceinterfaceinfo"><code>GET /network/interface/&lt;interface&gt;/info</code></h3><a href="#get-networkinterfaceinterfaceinfo" class="heading-anchor" aria-label="Link to section: GET /network/interface/<interface>/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>返回一个<a href="/contributors/apps/supervisor-api/models/#network-interface">网络接口模型</a>。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-networkinterfaceinterfaceupdate"><code>POST /network/interface/&lt;interface&gt;/update</code></h3><a href="#post-networkinterfaceinterfaceupdate" class="heading-anchor" aria-label="Link to section: POST /network/interface/<interface>/update" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>更改接口的配置。至少发送一个键。你发送的某个块会替换该块的全部配置，因此要发送该块的所有键。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>boolean</td>
+<td>否</td>
+<td>启用或禁用接口</td>
+</tr>
+<tr>
+<td><code>ipv4</code></td>
+<td>dictionary</td>
+<td>否</td>
+<td>IPv4 设置，见下文</td>
+</tr>
+<tr>
+<td><code>ipv6</code></td>
+<td>dictionary</td>
+<td>否</td>
+<td>IPv6 设置，见下文</td>
+</tr>
+<tr>
+<td><code>wifi</code></td>
+<td>dictionary</td>
+<td>否</td>
+<td>Wi-Fi 设置，见下文</td>
+</tr>
+<tr>
+<td><code>mdns</code></td>
+<td>string</td>
+<td>否</td>
+<td><code>default</code>、<code>off</code>、<code>resolve</code> 或 <code>announce</code></td>
+</tr>
+<tr>
+<td><code>llmnr</code></td>
+<td>string</td>
+<td>否</td>
+<td><code>default</code>、<code>off</code>、<code>resolve</code> 或 <code>announce</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>ipv4</code> 和 <code>ipv6</code> 块接受：</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td>string</td>
+<td><code>auto</code>、<code>static</code> 或 <code>disabled</code>。默认 <code>static</code></td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>list</td>
+<td>带前缀的地址，例如 <code>192.168.1.100/24</code></td>
+</tr>
+<tr>
+<td><code>gateway</code></td>
+<td>string</td>
+<td>网关</td>
+</tr>
+<tr>
+<td><code>nameservers</code></td>
+<td>list</td>
+<td>DNS 服务器</td>
+</tr>
+<tr>
+<td><code>route_metric</code></td>
+<td>integer</td>
+<td>路由度量，数值越小越优先</td>
+</tr>
+<tr>
+<td><code>addr_gen_mode</code></td>
+<td>string</td>
+<td>仅限 IPv6：<code>eui64</code>、<code>stable-privacy</code>、<code>default-or-eui64</code> 或 <code>default</code></td>
+</tr>
+<tr>
+<td><code>ip6_privacy</code></td>
+<td>string</td>
+<td>仅限 IPv6：<code>disabled</code>、<code>enabled-prefer-public</code>、<code>enabled</code> 或 <code>default</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>wifi</code> 块接受：</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td>string</td>
+<td><code>infrastructure</code>、<code>mesh</code>、<code>adhoc</code> 或 <code>ap</code>。默认 <code>infrastructure</code></td>
+</tr>
+<tr>
+<td><code>auth</code></td>
+<td>string</td>
+<td><code>open</code>、<code>wep</code> 或 <code>wpa-psk</code>。默认 <code>open</code></td>
+</tr>
+<tr>
+<td><code>ssid</code></td>
+<td>string</td>
+<td>网络名称</td>
+</tr>
+<tr>
+<td><code>psk</code></td>
+<td>string</td>
+<td>网络密码</td>
+</tr>
+</tbody>
+</table>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "ipv4"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "method"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"static"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "address"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.100/24"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "gateway"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "nameservers"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"192.168.1.1"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="get-networkinterfaceinterfaceaccesspoints"><code>GET /network/interface/&lt;interface&gt;/accesspoints</code></h3><a href="#get-networkinterfaceinterfaceaccesspoints" class="heading-anchor" aria-label="Link to section: GET /network/interface/<interface>/accesspoints" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>扫描 Wi-Fi 网络。只在无线接口上可用。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accesspoints</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#access-point">接入点模型</a>列表</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-networkinterfaceinterfacevlanid"><code>POST /network/interface/&lt;interface&gt;/vlan/&lt;id&gt;</code></h3><a href="#post-networkinterfaceinterfacevlanid" class="heading-anchor" aria-label="Link to section: POST /network/interface/<interface>/vlan/<id>" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>在以太网接口上创建 VLAN。<code>&lt;id&gt;</code> 是 VLAN ID，取值 0 到 4094。接受更新端点的 <code>ipv4</code>、<code>ipv6</code>、<code>mdns</code> 和 <code>llmnr</code> 键。这里 <code>method</code> 默认为 <code>auto</code> 而不是 <code>static</code>。</p>
+<div class="heading-wrapper level-h2"><h2 id="时间time">时间（Time）</h2><a href="#时间time" class="heading-anchor" aria-label="Link to section: 时间（Time）" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>这些端点设置主机用于同步时钟的 NTP 服务器。它们需要 Home Assistant OS 18.3 或更新版本，否则返回 <code>404</code>。可用时，<code>GET /host/info</code> 的 <code>all_features</code> 会列出 <code>ntp</code>。</p>
+<div class="heading-wrapper level-h3"><h3 id="get-timeinfo"><code>GET /time/info</code></h3><a href="#get-timeinfo" class="heading-anchor" aria-label="Link to section: GET /time/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>以 <code>config</code> 返回 Supervisor 配置的服务器。主机也可能从其他途径（如 DHCP）获得服务器，因此实际使用的服务器可能不同。</p>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "config"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "servers"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"time.cloudflare.com"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "fallback_servers"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: []</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="post-timeoptions"><code>POST /time/options</code></h3><a href="#post-timeoptions" class="heading-anchor" aria-label="Link to section: POST /time/options" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>servers</code></td>
+<td>list</td>
+<td>否</td>
+<td>要使用的 NTP 服务器</td>
+</tr>
+<tr>
+<td><code>fallback_servers</code></td>
+<td>list</td>
+<td>否</td>
+<td>其他服务器不可达时使用的 NTP 服务器</td>
+</tr>
+</tbody>
+</table>
+<p>省略的键保持原值。空列表会清空已配置的服务器。每个服务器是主机名或 IP 地址。更改之后，主机的时间同步服务会重启。</p>
+<div class="heading-wrapper level-h2"><h2 id="挂载mounts">挂载（Mounts）</h2><a href="#挂载mounts" class="heading-anchor" aria-label="Link to section: 挂载（Mounts）" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>挂载把网络共享和本地磁盘加入系统，用于备份、媒体或 share 文件夹。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/mounts</code></td>
+<td>列出挂载</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/mounts/options</code></td>
+<td>更改挂载设置</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/mounts</code></td>
+<td>添加挂载</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><code>/mounts/&lt;name&gt;</code></td>
+<td>更改挂载</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/mounts/&lt;name&gt;</code></td>
+<td>移除挂载</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/mounts/&lt;name&gt;/reload</code></td>
+<td>重新挂载</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-mounts"><code>GET /mounts</code></h3><a href="#get-mounts" class="heading-anchor" aria-label="Link to section: GET /mounts" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default_backup_mount</code></td>
+<td>string or null</td>
+<td>备份默认写入的挂载名称，本地备份为 <code>null</code></td>
+</tr>
+<tr>
+<td><code>mounts</code></td>
+<td>list</td>
+<td>一个<a href="/contributors/apps/supervisor-api/models/#mount">挂载模型</a>列表</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-mountsoptions"><code>POST /mounts/options</code></h3><a href="#post-mountsoptions" class="heading-anchor" aria-label="Link to section: POST /mounts/options" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default_backup_mount</code></td>
+<td>string or null</td>
+<td>否</td>
+<td>备份挂载的名称，本地备份为 <code>null</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-mounts"><code>POST /mounts</code></h3><a href="#post-mounts" class="heading-anchor" aria-label="Link to section: POST /mounts" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>添加一个挂载。请求体是一个<a href="/contributors/apps/supervisor-api/models/#mount">挂载模型</a>。</p>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "name"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"nas_backups"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "usage"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"backup"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "type"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"cifs"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "server"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"nas.local"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "share"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"backups"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "username"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"homeassistant"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "password"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"secret"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<p>你添加的第一个备份挂载会成为默认备份位置。</p>
+<div class="heading-wrapper level-h3"><h3 id="put-mountsname"><code>PUT /mounts/&lt;name&gt;</code></h3><a href="#put-mountsname" class="heading-anchor" aria-label="Link to section: PUT /mounts/<name>" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>替换一个挂载的配置。请求体与 <code>POST /mounts</code> 相同。名称不可更改。</p>
+<div class="heading-wrapper level-h3"><h3 id="delete-mountsname"><code>DELETE /mounts/&lt;name&gt;</code></h3><a href="#delete-mountsname" class="heading-anchor" aria-label="Link to section: DELETE /mounts/<name>" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>移除一个挂载。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-mountsnamereload"><code>POST /mounts/&lt;name&gt;/reload</code></h3><a href="#post-mountsnamereload" class="heading-anchor" aria-label="Link to section: POST /mounts/<name>/reload" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>检查挂载是否有响应。有响应的挂载保持原样；否则 Supervisor 以相同配置重新挂载，仍然无法访问时返回错误。适用于共享一度不可达的情况。</p>
+<div class="heading-wrapper level-h2"><h2 id="docker">Docker</h2><a href="#docker" class="heading-anchor" aria-label="Link to section: Docker" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/docker/info</code></td>
+<td>Docker 信息</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/docker/options</code></td>
+<td>更改 Docker 设置</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/docker/registries</code></td>
+<td>列出带凭据的容器镜像仓库</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/docker/registries</code></td>
+<td>为镜像仓库添加凭据</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/docker/registries/&lt;hostname&gt;</code></td>
+<td>移除镜像仓库的凭据</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/docker/migrate-storage-driver</code></td>
+<td>切换存储驱动</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/docker/reset-storage</code></td>
+<td>在下次重启时重置 Docker 存储</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-dockerinfo"><code>GET /docker/info</code></h3><a href="#get-dockerinfo" class="heading-anchor" aria-label="Link to section: GET /docker/info" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>Docker 版本</td>
+</tr>
+<tr>
+<td><code>enable_ipv6</code></td>
+<td>boolean or null</td>
+<td>内部网络启用 IPv6 则为 <code>true</code></td>
+</tr>
+<tr>
+<td><code>mtu</code></td>
+<td>integer or null</td>
+<td>内部网络的 MTU</td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td>string</td>
+<td>存储驱动</td>
+</tr>
+<tr>
+<td><code>logging</code></td>
+<td>string</td>
+<td>日志驱动</td>
+</tr>
+<tr>
+<td><code>registries</code></td>
+<td>dictionary</td>
+<td>带凭据的镜像仓库，按主机名索引，含 <code>username</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-dockeroptions"><code>POST /docker/options</code></h3><a href="#post-dockeroptions" class="heading-anchor" aria-label="Link to section: POST /docker/options" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>更改需要重启才能生效，并创建一个「需要重启」事项。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enable_ipv6</code></td>
+<td>boolean or null</td>
+<td>否</td>
+<td>为内部网络启用 IPv6</td>
+</tr>
+<tr>
+<td><code>mtu</code></td>
+<td>integer or null</td>
+<td>否</td>
+<td>内部网络的 MTU，取值 68 到 65535</td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="get-dockerregistries"><code>GET /docker/registries</code></h3><a href="#get-dockerregistries" class="heading-anchor" aria-label="Link to section: GET /docker/registries" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "registries"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "ghcr.io"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">      "username"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"octocat"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="post-dockerregistries"><code>POST /docker/registries</code></h3><a href="#post-dockerregistries" class="heading-anchor" aria-label="Link to section: POST /docker/registries" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>为一个容器镜像仓库添加凭据。Supervisor 用它们拉取镜像。Docker Hub 的主机名请使用 <code>docker.io</code>。</p>
+<figure class="code-block"><div class="code-block-header" data-pagefind-ignore=""><span class="code-block-language">JSON</span><span class="code-block-status" role="status"></span><button type="button" class="code-block-copy" aria-label="Copy code" data-copy-code=""><svg class="code-block-icon code-block-icon--copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="code-block-icon code-block-icon--check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"></polyline></svg></button></div><pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">  "ghcr.io"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "username"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"octocat"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">    "password"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">"ghp_secret"</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre></figure>
+<div class="heading-wrapper level-h3"><h3 id="delete-dockerregistrieshostname"><code>DELETE /docker/registries/&lt;hostname&gt;</code></h3><a href="#delete-dockerregistrieshostname" class="heading-anchor" aria-label="Link to section: DELETE /docker/registries/<hostname>" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>移除一个镜像仓库的凭据。</p>
+<div class="heading-wrapper level-h3"><h3 id="post-dockermigrate-storage-driver"><code>POST /docker/migrate-storage-driver</code></h3><a href="#post-dockermigrate-storage-driver" class="heading-anchor" aria-label="Link to section: POST /docker/migrate-storage-driver" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>在下次重启时切换 Docker 存储驱动，并创建一个「需要重启」事项。需要 Home Assistant OS 17.0 或更新版本，否则返回 <code>404</code>。</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>类型</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage_driver</code></td>
+<td>string</td>
+<td>是</td>
+<td><code>overlayfs</code></td>
+</tr>
+</tbody>
+</table>
+<div class="heading-wrapper level-h3"><h3 id="post-dockerreset-storage"><code>POST /docker/reset-storage</code></h3><a href="#post-dockerreset-storage" class="heading-anchor" aria-label="Link to section: POST /docker/reset-storage" data-pagefind-ignore=""><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></div>
+<p>在下次重启时丢弃全部镜像和容器，并创建一个「需要重启」事项。重启后，系统会重新下载 Supervisor、Home Assistant Core、插件和应用的镜像，因此需要互联网访问。需要 Home Assistant OS 18.3 或更新版本，否则返回 <code>404</code>。</p>
+</div></article><footer class="page-footer" data-pagefind-ignore data-astro-cid-lpetmyok><page-feedback class="page-feedback" data-pagefind-ignore="all" data-astro-cid-2y3ygwhl="true"><div class="vote" data-astro-cid-2y3ygwhl><div class="ask" role="group" aria-labelledby="page-feedback-question" data-ask data-astro-cid-2y3ygwhl><span id="page-feedback-question" class="question" data-astro-cid-2y3ygwhl>Was this page helpful?</span><span class="buttons" data-astro-cid-2y3ygwhl><button type="button" data-vote="helpful" data-astro-cid-2y3ygwhl><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>Yes</button><button type="button" data-vote="not-helpful" data-astro-cid-2y3ygwhl><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>No</button></span></div><p class="thanks" role="status" tabindex="-1" data-thanks data-astro-cid-2y3ygwhl></p></div><ul class="links" aria-label="Feedback on this page" data-astro-cid-2y3ygwhl><li data-astro-cid-2y3ygwhl><a href="https://github.com/home-assistant/contributors.home-assistant.io/issues/new?template=feedback.yml&amp;url=https%3A%2F%2Fwww.hasscn.top%2Fcontributors%2Fapps%2Fsupervisor-api%2Fhost%2F&amp;labels=feedback%2Carea%3A+apps" target="_blank" rel="noopener" data-give-feedback data-astro-cid-2y3ygwhl>Give feedback<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="sr-only" data-astro-cid-2y3ygwhl>(opens in a new tab)</span></a></li><li data-astro-cid-2y3ygwhl><a href="https://github.com/home-assistant/contributors.home-assistant.io/issues?q=is%3Aissue+is%3Aopen+%22https%3A%2F%2Fwww.hasscn.top%2Fcontributors%2Fapps%2Fsupervisor-api%2Fhost%2F%22+in%3Abody" target="_blank" rel="noopener" data-astro-cid-2y3ygwhl>View feedback<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="sr-only" data-astro-cid-2y3ygwhl>(opens in a new tab)</span></a></li></ul></page-feedback><script type="module">var e={helpful:`Thanks for letting us know!`,"not-helpful":`Thanks. Tell us what was missing or unclear with Give feedback, and we'll improve the page.`},t={helpful:`Page helpful`,"not-helpful":`Page not helpful`};function n(e){return e===`helpful`||e===`not-helpful`}var r=class extends HTMLElement{connectedCallback(){let e=`page-feedback:${location.pathname}`,r=null;try{r=localStorage.getItem(e)}catch{}n(r)?this.showThanks(r):this.querySelector(`[data-ask]`)?.addEventListener(`click`,r=>{let i=r.target.closest(`[data-vote]`)?.dataset.vote;if(!n(i))return;let a=window.plausible;typeof a==`function`&&a(t[i]);try{localStorage.setItem(e,i)}catch{}this.showThanks(i)})}showThanks(t){let n=this.querySelector(`[data-ask]`),r=this.querySelector(`[data-thanks]`);if(!n||!r)return;let i=n.contains(document.activeElement);n.hidden=!0,r.textContent=e[t],this.dataset.voted=t,i&&(t===`not-helpful`?this.querySelector(`[data-give-feedback]`):r)?.focus()}};customElements.define(`page-feedback`,r);</script><div class="page-links" data-astro-cid-lpetmyok><a class="edit" href="https://github.com/home-assistant/contributors.home-assistant.io/edit/main/src/content/docs/apps/supervisor-api/host.md" data-astro-cid-lpetmyok><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit this page</a><a class="edit" href="https://github.com/home-assistant/contributors.home-assistant.io/commits/main/src/content/docs/apps/supervisor-api/host.md" data-astro-cid-lpetmyok><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>View history</a></div><p class="verified" data-astro-cid-lpetmyok>Last updated on <time datetime="2026-10-21T15:11:02.000Z" data-astro-cid-lpetmyok>October 21, 2026</time>.</p></footer></main><aside class="toc-wide" data-astro-cid-lpetmyok><nav class="toc" aria-label="On this page" data-astro-cid-p33bl5ka><p class="title" aria-hidden="true" data-astro-cid-p33bl5ka>On this page</p><ul data-astro-cid-p33bl5ka><li data-astro-cid-p33bl5ka><a href="#_top" data-depth="2" data-astro-cid-p33bl5ka>Overview</a></li><li data-astro-cid-p33bl5ka><a href="#主机host" data-depth="2" data-astro-cid-p33bl5ka>主机（Host）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /host/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /host/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreboot" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reboot</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostshutdown" data-depth="3" data-astro-cid-p33bl5ka>POST /host/shutdown</a></li><li data-astro-cid-p33bl5ka><a href="#post-hostreload" data-depth="3" data-astro-cid-p33bl5ka>POST /host/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostservices" data-depth="3" data-astro-cid-p33bl5ka>GET /host/services</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisks" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostdisksdiskusage" data-depth="3" data-astro-cid-p33bl5ka>GET /host/disks/&lt;disk&gt;/usage</a></li><li data-astro-cid-p33bl5ka><a href="#主机日志" data-depth="3" data-astro-cid-p33bl5ka>主机日志</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsboots" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/boots</a></li><li data-astro-cid-p33bl5ka><a href="#get-hostlogsidentifiers" data-depth="3" data-astro-cid-p33bl5ka>GET /host/logs/identifiers</a></li><li data-astro-cid-p33bl5ka><a href="#home-assistant-os" data-depth="2" data-astro-cid-p33bl5ka>Home Assistant OS</a></li><li data-astro-cid-p33bl5ka><a href="#get-osinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /os/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-osupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/update</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigsync" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/sync</a></li><li data-astro-cid-p33bl5ka><a href="#get-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>GET /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osconfigswap" data-depth="3" data-astro-cid-p33bl5ka>POST /os/config/swap</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboot-slot" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boot-slot</a></li><li data-astro-cid-p33bl5ka><a href="#get-osdatadisklist" data-depth="3" data-astro-cid-p33bl5ka>GET /os/datadisk/list</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskmove" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/move</a></li><li data-astro-cid-p33bl5ka><a href="#post-osdatadiskwipe" data-depth="3" data-astro-cid-p33bl5ka>POST /os/datadisk/wipe</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsboard" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/&lt;board&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsyellow" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/yellow</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsgreen" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/green</a></li><li data-astro-cid-p33bl5ka><a href="#get-osboardsraspberrypifirmware" data-depth="3" data-astro-cid-p33bl5ka>GET /os/boards/raspberrypi/firmware</a></li><li data-astro-cid-p33bl5ka><a href="#post-osboardsraspberrypifirmwareupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /os/boards/raspberrypi/firmware/update</a></li><li data-astro-cid-p33bl5ka><a href="#主机的-ssh-密钥" data-depth="3" data-astro-cid-p33bl5ka>主机的 SSH 密钥</a></li><li data-astro-cid-p33bl5ka><a href="#硬件hardware" data-depth="2" data-astro-cid-p33bl5ka>硬件（Hardware）</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/info</a></li><li data-astro-cid-p33bl5ka><a href="#get-hardwareaudio" data-depth="3" data-astro-cid-p33bl5ka>GET /hardware/audio</a></li><li data-astro-cid-p33bl5ka><a href="#网络network" data-depth="2" data-astro-cid-p33bl5ka>网络（Network）</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkreload" data-depth="3" data-astro-cid-p33bl5ka>POST /network/reload</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfaceupdate" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/update</a></li><li data-astro-cid-p33bl5ka><a href="#get-networkinterfaceinterfaceaccesspoints" data-depth="3" data-astro-cid-p33bl5ka>GET /network/interface/&lt;interface&gt;/accesspoints</a></li><li data-astro-cid-p33bl5ka><a href="#post-networkinterfaceinterfacevlanid" data-depth="3" data-astro-cid-p33bl5ka>POST /network/interface/&lt;interface&gt;/vlan/&lt;id&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#时间time" data-depth="2" data-astro-cid-p33bl5ka>时间（Time）</a></li><li data-astro-cid-p33bl5ka><a href="#get-timeinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /time/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-timeoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /time/options</a></li><li data-astro-cid-p33bl5ka><a href="#挂载mounts" data-depth="2" data-astro-cid-p33bl5ka>挂载（Mounts）</a></li><li data-astro-cid-p33bl5ka><a href="#get-mounts" data-depth="3" data-astro-cid-p33bl5ka>GET /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsoptions" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/options</a></li><li data-astro-cid-p33bl5ka><a href="#post-mounts" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts</a></li><li data-astro-cid-p33bl5ka><a href="#put-mountsname" data-depth="3" data-astro-cid-p33bl5ka>PUT /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#delete-mountsname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /mounts/&lt;name&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-mountsnamereload" data-depth="3" data-astro-cid-p33bl5ka>POST /mounts/&lt;name&gt;/reload</a></li><li data-astro-cid-p33bl5ka><a href="#docker" data-depth="2" data-astro-cid-p33bl5ka>Docker</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerinfo" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/info</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockeroptions" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/options</a></li><li data-astro-cid-p33bl5ka><a href="#get-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>GET /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerregistries" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/registries</a></li><li data-astro-cid-p33bl5ka><a href="#delete-dockerregistrieshostname" data-depth="3" data-astro-cid-p33bl5ka>DELETE /docker/registries/&lt;hostname&gt;</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockermigrate-storage-driver" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/migrate-storage-driver</a></li><li data-astro-cid-p33bl5ka><a href="#post-dockerreset-storage" data-depth="3" data-astro-cid-p33bl5ka>POST /docker/reset-storage</a></li></ul></nav></aside></div><footer data-pagefind-ignore class="flush" data-astro-cid-jo6i4kqk><div class="inner" data-astro-cid-jo6i4kqk><div class="brand" data-astro-cid-jo6i4kqk><a class="home" href="/contributors/" aria-label="Home Assistant Contributors, homepage" data-astro-cid-jo6i4kqk><span class="lockup lockup--responsive" data-astro-cid-f7espo7c><picture class="logo" data-astro-cid-f7espo7c><source media="(max-width: 440px)" srcset="/contributors/images/contributors-logo-stacked-on-dark.svg" width="1768" height="438" data-astro-cid-f7espo7c><img src="/contributors/images/contributors-logo-inline-on-dark.svg" alt="Home Assistant Contributors" width="2924" height="240" data-astro-cid-f7espo7c></picture></span></a><p data-astro-cid-jo6i4kqk>Home Assistant is a project of the <a href="https://www.openhomefoundation.org/" data-astro-cid-jo6i4kqk>Open Home Foundation</a>.</p><ul class="social" data-astro-cid-jo6i4kqk><li data-astro-cid-jo6i4kqk><a href="https://github.com/home-assistant" rel="me noopener noreferrer" aria-label="GitHub" title="GitHub" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://www.home-assistant.io/join-chat" rel="me noopener noreferrer" aria-label="Discord" title="Discord" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://youtube.com/@home_assistant" rel="me noopener noreferrer" aria-label="YouTube" title="YouTube" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://reddit.com/r/homeassistant" rel="me noopener noreferrer" aria-label="Reddit" title="Reddit" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://fosstodon.org/@homeassistant" rel="me noopener noreferrer" aria-label="Mastodon" title="Mastodon" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://bsky.app/profile/home-assistant.io" rel="me noopener noreferrer" aria-label="Bluesky" title="Bluesky" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://x.com/home_assistant" rel="me noopener noreferrer" aria-label="X" title="X" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://www.facebook.com/homeassistantio" rel="me noopener noreferrer" aria-label="Facebook" title="Facebook" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li><li data-astro-cid-jo6i4kqk><a href="https://www.instagram.com/homeassistant/" rel="me noopener noreferrer" aria-label="Instagram" title="Instagram" data-astro-cid-jo6i4kqk><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" data-astro-cid-jo6i4kqk><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077" fill="currentColor" data-astro-cid-jo6i4kqk></path></svg></a></li></ul></div><nav aria-label="参与贡献" data-astro-cid-jo6i4kqk><h2 data-astro-cid-jo6i4kqk>参与贡献</h2><ul data-astro-cid-jo6i4kqk><li data-astro-cid-jo6i4kqk><a href="/contributors/start/" data-astro-cid-jo6i4kqk>快速上手</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/#areas" data-astro-cid-jo6i4kqk>全部领域</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/glossary/" data-astro-cid-jo6i4kqk>术语表</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/data/" data-astro-cid-jo6i4kqk>数据与分析</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/start/code-of-conduct/" data-astro-cid-jo6i4kqk>行为准则</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/start/licensing/" data-astro-cid-jo6i4kqk>贡献者许可协议</a></li></ul></nav><nav aria-label="保持关注" data-astro-cid-jo6i4kqk><h2 data-astro-cid-jo6i4kqk>保持关注</h2><ul data-astro-cid-jo6i4kqk><li data-astro-cid-jo6i4kqk><a href="/contributors/blog/" data-astro-cid-jo6i4kqk>博客</a></li><li data-astro-cid-jo6i4kqk><a href="/contributors/blog/rss.xml" data-astro-cid-jo6i4kqk>博客 RSS 订阅</a></li><li data-astro-cid-jo6i4kqk><a href="https://newsletter.openhomefoundation.org/" data-astro-cid-jo6i4kqk>通讯邮件</a></li><li data-astro-cid-jo6i4kqk><a href="https://alerts.home-assistant.io/" data-astro-cid-jo6i4kqk>集成状态提醒</a></li><li data-astro-cid-jo6i4kqk><a href="https://status.home-assistant.io/" data-astro-cid-jo6i4kqk>系统状态</a></li></ul></nav><nav aria-label="更多 Home Assistant" data-astro-cid-jo6i4kqk><h2 data-astro-cid-jo6i4kqk>更多 Home Assistant</h2><ul data-astro-cid-jo6i4kqk><li data-astro-cid-jo6i4kqk><a href="https://www.home-assistant.io/" data-astro-cid-jo6i4kqk>Home Assistant</a></li><li data-astro-cid-jo6i4kqk><a href="https://community.home-assistant.io/" data-astro-cid-jo6i4kqk>社区论坛</a></li><li data-astro-cid-jo6i4kqk><a href="https://creators.home-assistant.io/" data-astro-cid-jo6i4kqk>创作者网络</a></li><li data-astro-cid-jo6i4kqk><a href="https://works-with.home-assistant.io/" data-astro-cid-jo6i4kqk>支持 Home Assistant 的产品</a></li></ul></nav></div><div class="bottom" data-astro-cid-jo6i4kqk><div class="bottom-inner" data-astro-cid-jo6i4kqk><p class="analytics" data-astro-cid-jo6i4kqk>This website uses <a href="https://www.openhomefoundation.org/blog/making-our-web-analytics-open-source-with-plausible/" data-astro-cid-jo6i4kqk>privacy-first analytics</a> to help us improve the site. You can view all data in our <a href="https://plausible.openhomefoundation.org/contributors.home-assistant.io" data-astro-cid-jo6i4kqk>public dashboard</a>.</p><ul class="legal" data-astro-cid-jo6i4kqk><li data-astro-cid-jo6i4kqk><a href="https://www.home-assistant.io/privacy/" data-astro-cid-jo6i4kqk>Privacy</a></li><li data-astro-cid-jo6i4kqk><a href="https://www.home-assistant.io/security/" data-astro-cid-jo6i4kqk>Security</a></li><li data-astro-cid-jo6i4kqk><a href="https://github.com/home-assistant/contributors.home-assistant.io" data-astro-cid-jo6i4kqk>Source on GitHub</a></li></ul><a class="netlify" href="https://www.netlify.com" data-astro-cid-jo6i4kqk><img src="/contributors/images/netlify-badge.svg" alt="Deploys by Netlify" width="114" height="51" data-astro-cid-jo6i4kqk></a></div></div></footer><div class="hover-card" role="tooltip" id="hover-card" hidden data-astro-cid-k55xxdvq><div class="term" hidden data-astro-cid-k55xxdvq><strong data-astro-cid-k55xxdvq></strong><span data-astro-cid-k55xxdvq></span></div><div class="symbol" hidden data-astro-cid-k55xxdvq><div class="meta" data-astro-cid-k55xxdvq><span class="kind" data-astro-cid-k55xxdvq></span><code class="module" data-astro-cid-k55xxdvq></code></div><pre class="signature astro-code" data-astro-cid-k55xxdvq><code data-astro-cid-k55xxdvq></code></pre><p class="doc" data-astro-cid-k55xxdvq></p><!-- The link in the text goes to the same place, so this one stays out
+         of the tab order and out of what a screen reader reads. --><a class="source" tabindex="-1" aria-hidden="true" data-astro-cid-k55xxdvq></a></div></div><script type="module">var e=document.getElementById(`hover-card`),t=e.querySelector(`.term`),n=e.querySelector(`.symbol`),r,i=new Map,a,o=300,s={class:`Class`,context:`Context`,enum:`Enum`,exception:`Exception`,function:`Function`,hook:`Integration hook`,interface:`Interface`,method:`Method`,mixin:`Mixin`,module:`Module`,property:`Property`,type:`Type`};function c(e){let t=e?.closest?.(`.prose a[href]`);if(!t)return;if(t.matches(`.code-symbol[data-symbol]`))return t;if(t.closest(`.glossary, .related-terms`))return;let n=new URL(t.href,location.href);return n.origin===location.origin&&/^\/glossary\/[^/]+\/$/.test(n.pathname)&&!n.hash?t:void 0}function l(e){let t=document.createElement(`style`);return t.textContent=Object.entries(e.styles).map(([e,t])=>`#hover-card .signature .${e} { ${t} }`).join(`
+`),document.head.append(t),e}async function u(o){if(o.dataset.symbol){let r=o.dataset.symbolIndex??`core`;i.has(r)||i.set(r,fetch(`/symbols/${r}.json`).then(e=>e.json()).then(l));let c=(await i.get(r)).symbols[o.dataset.symbol];if(!c||a!==o)return!1;let u=n.querySelector(`.signature`),d=n.querySelector(`.source`);return n.querySelector(`.kind`).textContent=s[c.kind]??c.kind,n.querySelector(`.module`).textContent=c.where,u.querySelector(`code`).innerHTML=c.html,u.hidden=!c.html,u.scrollTo(0,0),n.querySelector(`.doc`).textContent=c.doc??``,d.href=c.source,d.textContent=c.kind===`hook`?`Read how it works`:`View source on GitHub`,n.hidden=!1,t.hidden=!0,e.classList.add(`is-symbol`),!0}r??=fetch(`/glossary/terms.json`).then(e=>e.json());let c=(await r)[new URL(o.href).pathname];return!c||a!==o?!1:(t.querySelector(`strong`).textContent=c.title,t.querySelector(`span`).textContent=c.description,t.hidden=!1,n.hidden=!0,e.classList.remove(`is-symbol`),!0)}function d(t,n){let r=(t.getAttribute(`aria-describedby`)??``).split(/\s+/).filter(t=>t&&t!==e.id);n&&r.push(e.id),r.length>0?t.setAttribute(`aria-describedby`,r.join(` `)):t.removeAttribute(`aria-describedby`)}async function f(t){if(a&&a!==t&&d(a,!1),a=t,!await u(t))return;d(t,!0),e.hidden=!1;let n=t.getBoundingClientRect(),r=e.offsetWidth,i=e.offsetHeight,o=Math.min(Math.max(8,n.left),window.innerWidth-r-8),s=n.bottom+8+i<window.innerHeight;e.style.left=`${o+window.scrollX}px`,e.style.top=`${(s?n.bottom+8:n.top-i-8)+window.scrollY}px`}function p(){window.clearTimeout(m),a&&d(a,!1),a=void 0,e.hidden=!0}var m;function h(){window.clearTimeout(m),m=window.setTimeout(()=>{e.matches(`:hover`)||a?.matches(`:hover`)||a===document.activeElement||p()},o)}var g;document.addEventListener(`pointerover`,t=>{if(e.contains(t.target)){window.clearTimeout(m);return}let n=c(t.target);n&&n===g||(g=void 0,n?(window.clearTimeout(m),n!==a&&f(n)):a&&h())}),document.addEventListener(`focusin`,e=>{let t=c(e.target);t&&(window.clearTimeout(m),g=void 0,f(t))}),document.addEventListener(`focusout`,e=>{e.target===a&&h()}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&a&&(g=a,p())});</script><script type="module">var e=new WeakMap;async function t(e){if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(e);return}let t=document.createElement(`textarea`);t.value=e,t.setAttribute(`readonly`,``),t.style.position=`fixed`,t.style.opacity=`0`,document.body.append(t),t.select();let n=document.execCommand(`copy`);if(t.remove(),!n)throw Error(`Copy was refused`)}document.addEventListener(`click`,async n=>{let r=n.target?.closest?.(`[data-copy-code]`),i=r?.closest(`.code-block`),a=i?.querySelector(`pre code`);if(!r||!i||!a)return;let o=i.querySelector(`.code-block-status`),s=`Copied`;try{await t(a.textContent??``),i.dataset.copied=``}catch{s=`Copy failed`}o&&(o.textContent=s),clearTimeout(e.get(i)),e.set(i,window.setTimeout(()=>{delete i.dataset.copied,o&&(o.textContent=``)},2e3))});</script><div class="sr-only" role="status" aria-live="polite" data-heading-anchor-status></div><script type="module">var e=document.querySelector(`[data-heading-anchor-status]`),t,n;document.addEventListener(`click`,async r=>{let i=r.target?.closest?.(`.heading-anchor`);if(i&&navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(i.href)}catch{return}n&&delete n.dataset.copied,n=i,i.dataset.copied=``,e&&(e.textContent=``,requestAnimationFrame(()=>{e.textContent=`Link copied`})),clearTimeout(t),t=window.setTimeout(()=>{delete i.dataset.copied,e&&(e.textContent=``)},2e3)}});</script><dialog class="image-zoom" aria-label="Zoomed image"><button type="button" class="image-zoom-close" aria-label="Close image"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button><img alt=""></dialog><script type="module">var e=`image-zoom`,t=document.querySelector(`dialog.image-zoom`),n=t?.querySelector(`img`),r=document.querySelectorAll(`.prose img:not(a img)`),i;function a(e){return!(`startViewTransition`in document)||matchMedia(`(prefers-reduced-motion: reduce)`).matches?(e(),Promise.resolve()):document.startViewTransition(e).finished}function o(r){t&&n&&(i=r,r.style.viewTransitionName=e,a(()=>{r.style.viewTransitionName=``,n.src=r.currentSrc||r.src,n.alt=r.alt,n.style.viewTransitionName=e,t.showModal()}))}async function s(){if(!t?.open||!n)return;let r=i;await a(()=>{n.style.viewTransitionName=``,r&&(r.style.viewTransitionName=e),t.close()}),r&&(r.style.viewTransitionName=``)}for(let e of r)e.tabIndex=0,e.setAttribute(`role`,`button`),e.setAttribute(`aria-haspopup`,`dialog`),e.setAttribute(`aria-label`,e.alt?`Zoom into image: ${e.alt}`:`Zoom into image`),e.classList.add(`image-zoom-source`),e.addEventListener(`click`,()=>o(e)),e.addEventListener(`keydown`,t=>{(t.key===`Enter`||t.key===` `)&&(t.preventDefault(),o(e))});t?.addEventListener(`click`,s),t?.addEventListener(`cancel`,e=>{e.preventDefault(),s()});</script><script type="module" src="/contributors/_astro/MermaidDiagrams.astro_astro_type_script_index_0_lang.Xyc03ty5.js"></script></body></html><script type="module">var e=document.querySelector(`[data-sidebar-toggle]`);function t(t){e?.setAttribute(`aria-expanded`,String(!t)),e?.setAttribute(`aria-label`,t?`Show sidebar`:`Hide sidebar`)}t(document.documentElement.dataset.sidebar===`collapsed`),e?.addEventListener(`click`,()=>{let e=document.documentElement.dataset.sidebar!==`collapsed`;e?document.documentElement.dataset.sidebar=`collapsed`:delete document.documentElement.dataset.sidebar;try{localStorage.setItem(`sidebar`,e?`collapsed`:`open`)}catch{}t(e)});var n=document.querySelector(`.crumb-bar`),r=[...document.querySelectorAll(`[data-docs-panel]`)];for(let e of r){let t=document.querySelector(`[popovertarget="${e.id}"]`);e.addEventListener(`beforetoggle`,t=>{if(t.newState===`open`&&n){n.removeAttribute(`data-hidden`);let t=new DOMMatrixReadOnly(getComputedStyle(n).transform).m42,r=n.getBoundingClientRect().bottom-t;e.style.setProperty(`--panel-top`,`${Math.round(r)}px`)}}),e.addEventListener(`toggle`,n=>{let r=n.newState===`open`;if(t?.setAttribute(`aria-expanded`,String(r)),!r)return;let i=e.querySelector(`a[aria-current]`)??e.querySelector(`a`);if(i){let t=i.getBoundingClientRect().top-e.getBoundingClientRect().top;e.scrollTop+=t-(e.clientHeight-i.offsetHeight)/2,i.focus({preventScroll:!0})}}),e.addEventListener(`click`,t=>{t.target instanceof Element&&t.target.closest(`a`)&&(document.activeElement instanceof HTMLElement&&document.activeElement.blur(),e.hidePopover())})}var i=matchMedia(`(max-width: 860px)`),a=8,o=window.scrollY,s=0,c=!1;function l(){return r.some(e=>e.matches(`:popover-open`))}function u(){if(c=!1,!n)return;let e=document.documentElement.scrollHeight-window.innerHeight,t=Math.min(Math.max(window.scrollY,0),Math.max(e,0)),r=t-o;o=t,s=Math.sign(r)===Math.sign(s)?s+r:r;let u=t<=n.offsetHeight,d=n.querySelector(`:focus-visible`)!==null;!i.matches||u||l()||d||s<=-24?n.removeAttribute(`data-hidden`):s>=a&&n.setAttribute(`data-hidden`,``)}window.addEventListener(`scroll`,()=>{c||(c=!0,requestAnimationFrame(u))},{passive:!0}),n?.addEventListener(`focusin`,()=>n.removeAttribute(`data-hidden`)),n&&new ResizeObserver(()=>{document.documentElement.style.setProperty(`--crumb-bar-height`,`${Math.ceil(n.offsetHeight)}px`)}).observe(n),i.addEventListener(`change`,e=>{if(!e.matches)for(let e of r)e.matches(`:popover-open`)&&e.hidePopover()});</script>

@@ -1,0 +1,180 @@
+# 恒温器卡片
+
+> 恒温器卡片将气候或热水器实体显示为一个旋钮，用于读取温度并设置目标温度。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/thermostat-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.thermostat"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+恒温器卡片是一个针对单个气候或热水器实体（entity）的大旋钮。圆环显示目标温度，你可以拖动它，或使用减号和加号按钮来更改温度。中间的大数字是目标温度，周围显示当前温度以及设备正在执行的操作，例如**预热中**。角落的菜单按钮会打开更多信息对话框，其中包含所有模式和设置。
+
+旋钮会根据设备的运行状态显示颜色：制热时为橙色，制冷时为蓝色。当设备关闭时，旋钮为灰色，控件也会退隐。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.bedroom_air_conditioner"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "water_heater.water_heater"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+当调整温度是人们打开仪表盘（dashboard）的主要原因时，可以使用恒温器卡片，例如在气候视图中，或放在走廊的平板电脑上。该卡片较高：在分区（sections）视图中它占据五行。当温度只是房间中众多信息之一时，带有目标温度功能的[磁贴卡片](https://www.hasscn.top/contributors/design/dashboards/tile-card/)只占一行，也能完成同样的工作。
+
+### 当前温度优先
+
+设置 `show_current_as_primary: true` 后，大数字显示当前温度，目标温度则移到较小的那一行。当人们主要想了解现在有多暖和，只是偶尔更改目标温度时，可以使用此选项。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.thermostat",
+        "show_current_as_primary": true
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 功能
+
+与磁贴卡片一样，恒温器卡片可以在旋钮下方添加功能（feature）。设备的各种模式非常适合：HVAC 模式、预设模式或风扇模式。每个功能都会在分区视图中为卡片增加行数，因此只添加人们经常更改的功能即可。其余功能只需在更多信息对话框中轻点一下即可访问。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.thermostat",
+        "features": [
+          {
+            "type": "climate-hvac-modes",
+            "hvac_modes": [
+              "off",
+              "heat",
+              "cool",
+              "auto"
+            ]
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.bedroom_air_conditioner",
+        "features": [
+          {
+            "type": "climate-fan-modes",
+            "style": "icons"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 内容
+
+- 名称显示在卡片顶部。请保持简短，如果所在分区已经说明了是哪个房间，则可以省略。
+- 选择与设备匹配的功能。空调和暖气片阀门的模式差异很大。
+
+## 配置
+
+- `entity`（字符串，必填）：要显示的实体。仅支持 `climate` 或 `water_heater` 域的实体。
+- `name`（字符串）：要显示的名称。默认为实体的名称。
+- `show_current_as_primary`（布尔值）：将当前温度显示为大数字，目标温度显示在其下方。默认为 `false`。
+- `theme`（字符串）：仅应用于此卡片的主题。
+- `features`（列表）：在旋钮下方显示的功能，每个功能都有一个 `type`。
+
+```yaml
+type: thermostat
+entity: climate.thermostat
+features:
+  - type: climate-hvac-modes
+    hvac_modes:
+      - "off"
+      - "heat"
+      - "cool"
+      - "auto"
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-thermostat-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-thermostat-card.ts)，元素为 `<hui-thermostat-card>`。它本身并不绘制旋钮，而是复用更多信息对话框中的控件：气候实体使用 `<ha-state-control-climate-temperature>`，热水器使用 `<ha-state-control-water_heater-temperature>`。两者都基于 [`<ha-control-circular-slider>`](https://www.hasscn.top/contributors/design/components/controls/) 构建。修复旋钮中的问题后，卡片和对话框都会同步受益。
+
+这些功能通过 `<hui-card-features>` 渲染，与磁贴卡片使用的元素相同。在分区视图中，该卡片占据 12 列 5 行，并可缩小为 6 列 2 行。功能会在此基础上增加行数。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-thermostat-card.ts)

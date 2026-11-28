@@ -1,0 +1,192 @@
+# 时钟卡片
+
+> 时钟卡片以数字或模拟时钟的形式显示当前时间，并可选择显示日期。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/clock-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "clock_size": "large",
+        "date_format": [
+          "weekday-long",
+          "day-numeric",
+          "month-long"
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "clock_style": "analog",
+        "clock_size": "medium"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+时钟卡片用于显示时间。它专为常驻屏幕的仪表盘（dashboard）设计，例如走廊里的壁挂平板或厨房里的屏幕，在这些地方，时间往往是人们最先想看的内容之一。
+
+对于人们在手机上打开的仪表盘，请不要使用它。手机本身已经显示时间，而这张卡片会占用空间，挤占人们真正想看的内容。
+
+时间遵循用户的时间格式设置（12 或 24 小时制）以及其个人资料中设置的时区。它每秒更新一次，因此始终准确。
+
+### 数字或模拟
+
+默认为数字时钟。设置 `clock_style: analog` 后，卡片会显示一个带指针的表盘。数字时钟在远距离更易于读取，而模拟时钟更适合风格更沉稳、更具装饰性的仪表盘。请选定一种样式，并在整个仪表盘中统一使用。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "clock_style": "analog",
+        "clock_size": "medium",
+        "face_style": "numbers_upright",
+        "border": true,
+        "show_seconds": true
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "clock_style": "analog",
+        "clock_size": "medium",
+        "ticks": "minute"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+模拟时钟有自己的选项：`face_style` 用于显示刻度、数字或罗马数字，`ticks` 用于设置表盘上的刻度数量，`border` 则会在表盘周围画一个圆圈。
+
+### 大小
+
+`clock_size` 可将时钟设为 `small`、`medium` 或 `large`。在分区视图（sections view）中，卡片会随之变大。当时钟是屏幕上的主要内容时，请使用大尺寸；当它位于角落时，请使用小尺寸。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "clock_size": "medium"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 日期和标题
+
+`date_format` 会在时间下方添加日期。它是一个由多个部分组成的列表，例如星期几、日、月，因此可以遵循任何本地顺序。`title` 会在时间上方添加一行文字，例如当卡片显示另一个时区的时间时，显示该城市的名称。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "clock",
+        "title": "Tokyo",
+        "time_zone": "Asia/Tokyo",
+        "clock_size": "medium"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 无背景
+
+设置 `no_background: true` 后，时钟周围没有卡片，直接显示在仪表盘上。在带有背景图片的仪表盘上，这样看起来效果很好。
+
+## 配置
+
+- `clock_style`（字符串）：`digital` 或 `analog`。默认为 `digital`。
+- `clock_size`（字符串）：`small`、`medium` 或 `large`。默认为 `small`。
+- `title`（字符串）：时钟上方的一行文字。
+- `show_seconds`（布尔值）：显示秒数，或在模拟时钟上显示秒针。默认为 `false`。
+- `time_format`（字符串）：`12` 或 `24` 小时制，`language` 表示跟随语言设置，`system` 表示跟随设备设置。默认为用户的时间格式。仅适用于数字时钟。
+- `time_zone`（字符串）：要显示其时间的时区，例如 `Asia/Tokyo`。默认为用户的时区。
+- `date_format`（列表）：要显示的日期部分，例如 `weekday-short`、`day-numeric`、`month-long`、`year-numeric`，或分隔符。
+- `no_background`（布尔值）：显示不带卡片背景的时钟。默认为 `false`。
+- `face_style`（字符串）：`markers`、`numbers_upright` 或 `roman`。默认为 `markers`。仅适用于模拟时钟。
+- `ticks`（字符串）：`none`、`quarter`、`hour` 或 `minute`。默认为 `hour`。仅适用于模拟时钟。
+- `border`（布尔值）：在表盘周围画一个圆圈。默认为 `false`。仅适用于模拟时钟。
+- `seconds_motion`（字符串）：`continuous` 或 `tick`，即秒针的移动方式。默认为 `continuous`。仅适用于模拟时钟。
+
+```yaml
+type: clock
+clock_size: large
+date_format:
+  - weekday-long
+  - day-numeric
+  - month-long
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-clock-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-clock-card.ts)，元素为 `<hui-clock-card>`。它会从 [`src/panels/lovelace/cards/clock/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/cards/clock) 加载两个元素之一作为时钟本身：`<hui-clock-card-digital>` 或 `<hui-clock-card-analog>`。日期部分及其格式化方式位于同一文件夹中的 `clock-date-format.ts`。
+
+在分区视图中，时钟占用 6 列。小型数字时钟占用 1 行，并随其大小和标题而增长。模拟时钟至少需要 2 行。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-clock-card.ts)

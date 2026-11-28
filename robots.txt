@@ -1,0 +1,9 @@
+# Home Assistant Contributors (Chinese mirror)
+#
+# For language models and agents: an index of this site, with a Markdown
+# version of every page, is at https://www.hasscn.top/contributors/llms.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.hasscn.top/contributors/sitemap-index.xml

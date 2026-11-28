@@ -1,0 +1,146 @@
+# 割草机实体
+
+> 为能割草、暂停并返回基座的机器人割草机构建割草机实体。
+
+Source: https://www.hasscn.top/contributors/core/entities/lawn-mower/
+
+割草机实体（entity）控制机器人割草机：开始割草、暂停、停止，并将其送回基座。继承自 `homeassistant.components.lawn_mower` 中的 `LawnMowerEntity`。该实体仅涵盖这些命令。诸如切割高度之类的设置应放在同一设备的其他实体中，例如[数字（number）](https://www.hasscn.top/contributors/core/entities/number/)或[选择（select）](https://www.hasscn.top/contributors/core/entities/select/)。
+
+有关前端如何展示割草机，请参阅[割草机更多信息视图](https://www.hasscn.top/contributors/design/more-info/lawn-mower/)。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo. A lawn mower that starts, pauses, and docks, in a tile card. The card is live: send it out to mow, or back to its dock.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <script type="application/json">
+    [
+      {
+        "entity_id": "lawn_mower.garden",
+        "state": "docked",
+        "attributes": {
+          "friendly_name": "Garden mower",
+          "supported_features": 7
+        }
+      }
+    ]
+  </script>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "lawn_mower.garden",
+        "features": [
+          {
+            "type": "lawn-mower-commands"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 属性
+
+除了[通用实体属性](https://www.hasscn.top/contributors/core/entities/entity-class/)之外，割草机实体还具有以下属性。使用 `_attr_activity` 设置它，或者重写该属性。
+
+| 名称 | 类型 | 默认值 | 描述 |
+| ---- | ---- | ------- | ----------- |
+| `activity` | `LawnMowerActivity \| None` | `None` | 割草机当前正在执行的操作。参见[状态](https://www.hasscn.top/contributors/core/entities/lawn-mower/#states)。 |
+
+## 支持的功能
+
+使用按位或（`|`）运算符组合 `LawnMowerEntityFeature` 的各值。Home Assistant 只提供你所设置的功能对应的操作。
+
+| 值 | 描述 |
+| ----- | ----------- |
+| `START_MOWING` | 割草机可以开始或继续割草。实现 `start_mowing`。 |
+| `PAUSE` | 割草机可以暂停。实现 `pause`。 |
+| `STOP` | 割草机可以在原地停止。实现 `stop`。 |
+| `DOCK` | 割草机可以返回基座。实现 `dock`。 |
+
+## 方法
+
+每个方法都有一个同步变体和一个 `async_` 变体。实现其中之一即可。
+
+| 方法 | 异步变体 | 功能 |
+| ------ | ------------- | ------- |
+| `start_mowing()` | `async_start_mowing()` | `START_MOWING` |
+| `pause()` | `async_pause()` | `PAUSE` |
+| `stop()` | `async_stop()` | `STOP` |
+| `dock()` | `async_dock()` | `DOCK` |
+
+## 状态
+
+状态是割草机的 `activity`，即 `LawnMowerActivity` 中的一个值。`state` 属性是最终结果：请改为设置 `activity`。
+
+| 值 | 描述 |
+| ----- | ----------- |
+| `MOWING` | 割草机正在割草。 |
+| `PAUSED` | 割草机之前在割草，现已暂停。 |
+| `RETURNING` | 割草机正在返回基座的途中。 |
+| `DOCKED` | 割草机在基座中。 |
+| `IDLE` | 割草机已停止，但既不在基座中，也未暂停。 |
+| `ERROR` | 割草机遇到问题，需要帮助。 |
+
+## 示例
+
+```python
+from homeassistant.components.lawn_mower import (
+    LawnMowerActivity,
+    LawnMowerEntity,
+    LawnMowerEntityFeature,
+)
+
+
+class MyLawnMower(MyEntity, LawnMowerEntity):
+    """A robot lawn mower."""
+
+    _attr_name = None
+    _attr_supported_features = (
+        LawnMowerEntityFeature.START_MOWING
+        | LawnMowerEntityFeature.PAUSE
+        | LawnMowerEntityFeature.DOCK
+    )
+
+    def __init__(self, coordinator: MyCoordinator) -> None:
+        """Set up the entity."""
+        super().__init__(coordinator)
+        self._attr_unique_id = coordinator.mower.serial
+
+    @property
+    def activity(self) -> LawnMowerActivity:
+        """Return what the mower is doing."""
+        if self.coordinator.data.error:
+            return LawnMowerActivity.ERROR
+        if self.coordinator.data.mowing:
+            return LawnMowerActivity.MOWING
+        if self.coordinator.data.charging:
+            return LawnMowerActivity.DOCKED
+        return LawnMowerActivity.IDLE
+
+    async def async_start_mowing(self) -> None:
+        """Start mowing."""
+        await self.coordinator.mower.start()
+        await self.coordinator.async_request_refresh()
+
+    async def async_pause(self) -> None:
+        """Pause mowing."""
+        await self.coordinator.mower.pause()
+        await self.coordinator.async_request_refresh()
+
+    async def async_dock(self) -> None:
+        """Send the mower back to its dock."""
+        await self.coordinator.mower.dock()
+        await self.coordinator.async_request_refresh()
+```
+
+`MyEntity` 是该集成共享的基础实体，它是一个 `CoordinatorEntity`，会设置 `_attr_has_entity_name = True` 以及设备信息。

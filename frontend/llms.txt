@@ -1,0 +1,60 @@
+# Frontend
+
+> 仪表盘、面板与对话框。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/frontend/llms-full.txt.
+
+## Frontend
+
+- [前端](https://www.hasscn.top/contributors/frontend/index.md): Home Assistant 的网页界面。它如何构建、如何参与开发，以及如何用你自己的卡片、面板和仪表盘来扩展它。
+- [你的第一次前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/index.md): 搭建前端环境，将其连接到 Home Assistant 实例运行，做一个小改动，然后提交你的第一个 pull request。
+
+## 开发
+
+- [开发](https://www.hasscn.top/contributors/frontend/development/index.md): 前端开发本身所需的一切内容：环境、运行方式、画廊与演示、编码指南、测试以及审查。
+- [搭建环境](https://www.hasscn.top/contributors/frontend/development/environment/index.md): 获取前端代码及其依赖，使用 devcontainer 或在自己的机器上进行。
+- [运行前端](https://www.hasscn.top/contributors/frontend/development/run/index.md): 将开发中的前端连接到开发版 Home Assistant，或连接到你已有的 Home Assistant。
+- [画廊与演示](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/index.md): 在没有 Home Assistant 的情况下运行真实前端的两种方式。画廊用于组件和卡片，演示用于整个应用。
+- [编码规范](https://www.hasscn.top/contributors/frontend/development/guidelines/index.md): 前端代码的编写方式，从 TypeScript 和 Lit 到事件、对话框、样式和文本。审阅者在每个 pull request 中关注的内容。
+- [Lint 和测试](https://www.hasscn.top/contributors/frontend/development/testing/index.md): 前端的 linter、类型检查、单元测试和端到端测试，以及何时编写测试。
+- [构建](https://www.hasscn.top/contributors/frontend/development/builds/index.md): 制作前端的正式构建，或在没有开发环境的情况下，在真实的 Home Assistant 上运行拉取请求的构建。
+- [打开拉取请求](https://www.hasscn.top/contributors/frontend/development/pull-requests/index.md): 如何打开一个可供维护者审查的前端拉取请求。
+- [审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/index.md): 打开前端拉取请求后会发生什么，以及合并的更改如何到达使用 Home Assistant 的用户手中。
+
+## 架构
+
+- [前端架构](https://www.hasscn.top/contributors/frontend/architecture/index.md): 前端是如何组装起来的，从最先加载的脚本，到各个面板、对话框，以及在其中流转的数据。
+- [组件与 Lit](https://www.hasscn.top/contributors/frontend/architecture/components/index.md): Web components、Lit 以及封装 Web Awesome 的共享 ha-* 组件。每个界面的构建基石。
+- [hass 对象与上下文（contexts）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/index.md): 组件如何获取数据。承载一切的 hass 对象，以及只向组件提供其所需部分的 Lit 上下文。
+- [数据层](https://www.hasscn.top/contributors/frontend/architecture/data/index.md): 前端如何与 Core 通信。src/data 中的 WebSocket 命令、订阅和集合，以及组件如何使用它们。
+- [前端中的翻译](https://www.hasscn.top/contributors/frontend/architecture/translations/index.md): 前端文本存放的位置、如何在代码中使用它，以及 Core 和集成的文本如何进入界面。
+- [主题与设计令牌](https://www.hasscn.top/contributors/frontend/architecture/theming/index.md): 前端中每种颜色、尺寸和间距背后的 CSS 变量，以及用户主题如何改变它们。
+- [路由与面板](https://www.hasscn.top/contributors/frontend/architecture/routing-and-panels/index.md): URL 如何变成一个页面。Core 注册的面板、面板解析器，以及每个面板内部的路由器。
+
+## 自定义卡片及更多
+
+- [自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/index.md): 构建卡片、卡片功能、徽章、视图、仪表盘策略和面板，供用户加载到自己的 Home Assistant 中，而无需修改前端。
+- [注册资源](https://www.hasscn.top/contributors/frontend/custom-ui/resources/index.md): 让你的 JavaScript 文件可供 Home Assistant 使用，并加载到每个仪表盘中。
+- [自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card/index.md): 构建你自己的仪表盘卡片。包括元素、其配置、在分区视图和瀑布流视图中的尺寸，以及前端提供的辅助工具。
+- [卡片编辑器与卡片选择器](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/index.md): 为你的自定义卡片提供可视化编辑器、合理的默认配置，并在卡片选择器及其建议中占有一席之地。
+- [自定义卡片功能](https://www.hasscn.top/contributors/frontend/custom-ui/card-feature/index.md): 为磁贴卡片及其他支持功能的卡片添加你自己的快捷控制。
+- [自定义徽章（badge）](https://www.hasscn.top/contributors/frontend/custom-ui/badge/index.md): 为仪表盘视图顶部构建你自己的徽章。
+- [自定义策略](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/index.md): 从代码生成整个仪表盘、视图或分区，并在仪表盘编辑器中提供它。
+- [自定义视图](https://www.hasscn.top/contributors/frontend/custom-ui/view/index.md): 编写自己的视图布局，以内置视图无法实现的方式排列仪表盘视图中的卡片。
+- [自定义面板](https://www.hasscn.top/contributors/frontend/custom-ui/panel/index.md): 在 Home Assistant 中添加一个属于你自己的整页内容，并在侧边栏中提供链接，可实时访问家庭状态。
+- [展示你的卡片的实时演示](https://www.hasscn.top/contributors/frontend/custom-ui/demo/index.md): 在任意网页上嵌入可操作的仪表盘卡片，包括你自己的自定义卡片，并使用 Home Assistant 演示的模拟后端。
+
+## 扩展前端
+
+- [扩展前端](https://www.hasscn.top/contributors/frontend/extending/index.md): 与 Core 中的更改相配套的前端更改，例如为新域（domain）提供更多信息视图，或为集成提供 WebSocket 命令。
+- [添加更多信息视图](https://www.hasscn.top/contributors/frontend/extending/more-info/index.md): 让某个域的实体在更多信息对话框中拥有自己的控件。
+- [添加状态卡片](https://www.hasscn.top/contributors/frontend/extending/state-card/index.md): 显示实体及其图标、名称和状态或控件的行，以及如何为某个集成域添加一个。
+- [添加 WebSocket 命令](https://www.hasscn.top/contributors/frontend/extending/websocket-api/index.md): 在 Core 中通过 WebSocket 命令将集成（integration）的数据提供给前端，并从前端调用它。
+
+## 参考
+
+- [前端参考](https://www.hasscn.top/contributors/frontend/reference/index.md): 命令、hass 对象，以及前端与配套应用之间的桥梁。您需要查阅的详细信息。
+- [命令](https://www.hasscn.top/contributors/frontend/reference/commands/index.md): 前端仓库的每一个命令、其作用以及所使用的端口。
+- [前端中的 hass 对象](https://www.hasscn.top/contributors/frontend/reference/hass-object/index.md): 每个卡片、面板和组件都会获取的 hass 对象的属性、方法和格式化工具。
+- [外部认证](https://www.hasscn.top/contributors/frontend/reference/external-auth/index.md): 嵌入前端的 应用（如伴侣应用）如何自行保留登录，并将访问令牌交给前端。
+- [外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/index.md): 前端与嵌入它的应用（如伴侣应用）之间的消息总线。消息如何发送，以及所有消息的完整列表。

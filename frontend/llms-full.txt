@@ -1,0 +1,4158 @@
+# Frontend: full text
+
+> Every page of the Frontend area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/frontend/llms.txt.
+
+# 前端
+
+> Home Assistant 的网页界面。它如何构建、如何参与开发，以及如何用你自己的卡片、面板和仪表盘来扩展它。
+
+Source: https://www.hasscn.top/contributors/frontend/
+
+前端（frontend）是人们在 Home Assistant 中看到和触摸到的一切：仪表盘、设置页面、自动化编辑器、更多信息对话框，以及所有其他界面。同一套代码可以运行在浏览器中、[伴侣应用（companion apps）](https://www.hasscn.top/contributors/glossary/companion-app/)中，以及某人走廊里的壁挂平板上。它位于自己的代码仓库中：[home-assistant/frontend](https://github.com/home-assistant/frontend)。
+
+它是一个 TypeScript 应用，使用 [Lit](https://lit.dev/) 基于 Web 组件构建。它通过 WebSocket 连接与 [Home Assistant Core](https://www.hasscn.top/contributors/glossary/core/) 通信，并在家中的状态发生变化时保持自身同步。
+
+## 这个领域适合谁
+
+- **前端贡献者**：想修复 bug、打磨界面，或在前端本身构建新功能的人。
+- **集成开发者**：其后端改动需要在界面中新增内容，例如更多信息视图或 WebSocket 命令。
+- **第三方开发者**：构建[自定义卡片（custom cards）](https://www.hasscn.top/contributors/glossary/custom-card/)、卡片特性、徽章、仪表盘策略或面板，供人们自行安装。
+- **伴侣应用开发者**：将前端嵌入原生应用中。
+
+你需要熟悉 TypeScript 或 JavaScript、HTML 和 CSS。Lit 和 Web 组件可以在实践中轻松上手。
+
+## 快速，且无处不在
+
+前端是一个渐进式 Web 应用（progressive web app），采用移动优先的设计。它必须在内存有限的低端 Android 手机上保持快速，也必须能在多年前就停止更新的旧平板上继续工作。为了兼顾两者，每个版本都会发布两个构建：
+
+- **现代版（Modern）**：面向最近两年发布的浏览器。几乎无需转译，polyfill 很少，速度最快。
+- **旧版（Legacy）**：面向较旧的浏览器，最低支持 [`.browserslistrc`](https://github.com/home-assistant/frontend/blob/dev/.browserslistrc) 中锁定的版本，例如旧 iPad 上的 Safari 12 和旧 Fire 平板上的 Chrome 59。
+
+Home Assistant 会为每个浏览器提供它能运行的构建。在添加依赖或使用新的浏览器 API 时，请同时考虑这两个版本。
+
+## 从这里开始
+
+- [你的第一个前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/)：设置环境、挑选一个问题，并提交一个 pull request。
+- [自定义卡片等](https://www.hasscn.top/contributors/frontend/custom-ui/)：为你的仪表盘构建自己的卡片。无需开发环境：Home Assistant 中的一个 JavaScript 文件就足以开始。
+- [提交 pull request](https://www.hasscn.top/contributors/frontend/development/pull-requests/)：你的 pull request 在审核前需要满足哪些要求。
+- [审核与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/)：你的 pull request 会发生什么，以及它如何到达用户手中。
+
+## 指南与参考
+
+- [开发](https://www.hasscn.top/contributors/frontend/development/)：开发环境、运行前端、gallery 和 demo、编码规范以及测试。
+- [架构](https://www.hasscn.top/contributors/frontend/architecture/)：前端是如何组装起来的。Lit 和 `ha-*` 组件、`hass` 对象与上下文、数据层、翻译、主题、路由以及面板。
+- [自定义卡片等](https://www.hasscn.top/contributors/frontend/custom-ui/)：构建卡片、卡片特性、徽章、视图、策略和面板，供人们加载到自己的 Home Assistant 中。
+- [扩展前端](https://www.hasscn.top/contributors/frontend/extending/)：为某个域（domain）添加更多信息视图或状态卡片，或为你的集成添加 WebSocket 命令。
+- [参考](https://www.hasscn.top/contributors/frontend/reference/)：命令、`hass` 对象、外部认证，以及伴侣应用使用的外部总线。
+
+## 相关领域
+
+- [设计](https://www.hasscn.top/contributors/design/)：界面背后的原则与基础。其中的[组件](https://www.hasscn.top/contributors/design/components/)、[仪表盘卡片](https://www.hasscn.top/contributors/design/dashboards/)和[更多信息视图](https://www.hasscn.top/contributors/design/more-info/)各自都有独立页面，面向设计师和开发者，配有实时示例和对应的代码。
+- [翻译](https://www.hasscn.top/contributors/translate/)：前端的英文文本由社区翻译。[让你的字符串可翻译](https://www.hasscn.top/contributors/translate/guides/developers/)介绍了如何编写便于译者处理的字符串。
+- [Core 与集成](https://www.hasscn.top/contributors/core/)：前端所通信的后端。
+- [伴侣应用](https://www.hasscn.top/contributors/companion/)：封装前端的 Android 和 iOS 应用。
+
+## 找谁交流
+
+- [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 [**#frontend**](https://discord.com/channels/330944238910963714/1475552784278360176) 频道是提问前端相关问题的地方。看不到该频道？在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant**。
+- 界面中的 bug 和 pull request 都在[前端仓库](https://github.com/home-assistant/frontend)中处理。新功能的想法请提交到 [GitHub discussions](https://github.com/orgs/home-assistant/discussions)。
+- 设计和 UX 问题请前往 [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions)，或 Discord 上的 [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) 频道。产品和 UX 讨论在 [**#product-and-ux**](https://discord.com/channels/330944238910963714/1475553148847526123) 中进行。
+
+当你寻求帮助时，请把你的工作推送到一个分支并分享链接。当别人能看到代码时，会更快地帮到你。
+
+---
+
+# 你的第一次前端贡献
+
+> 搭建前端环境，将其连接到 Home Assistant 实例运行，做一个小改动，然后提交你的第一个 pull request。
+
+Source: https://www.hasscn.top/contributors/frontend/first-contribution/
+
+进入前端开发最快的方式是做一个小而可见的修复：一个错位的图标、一段被截断的标签、一个在移动端上毫无反应的按钮。保存的瞬间你就能在浏览器中看到结果，审查者也只需一张截图就能做出判断。
+
+## 1. 找一个可以着手的问题
+
+浏览前端仓库中的 [`good first issue` 标签](https://github.com/home-assistant/frontend/labels/good%20first%20issue)，或者[未修复的 bug](https://github.com/home-assistant/frontend/issues)。你自己遇到过的 bug 是绝佳的入门题材，因为你已经知道如何复现它。
+
+留一条评论说明你正在处理这个问题，以免别人同时认领。
+
+> [!TIP]
+> 想构建一张新卡片？那不需要下面任何步骤。从[自定义卡片等](https://www.hasscn.top/contributors/frontend/custom-ui/)开始，然后发布到 [Marketplace](https://www.hasscn.top/contributors/marketplace/)：项目建议新卡片从这里起步。
+
+## 2. 搭建环境
+
+最简单的搭建方式是使用 Visual Studio Code 和前端仓库的 devcontainer。它会为你安装合适的 Node.js 和 pnpm。
+
+1. 在 GitHub 上[fork 前端仓库](https://github.com/home-assistant/frontend/fork)。
+2. 克隆你的 fork，并在 Visual Studio Code 中打开。
+3. 当 Visual Studio Code 询问时，选择 **Reopen in Container**。首次启动需要几分钟，因为要安装依赖。
+
+不想使用容器？[搭建环境](https://www.hasscn.top/contributors/frontend/development/environment/)介绍了两种方式。
+
+## 3. 运行起来
+
+你需要一个 Home Assistant 实例来连接。在 devcontainer 中，你可以在前端旁边运行一个：
+
+1. 打开一个终端并启动 Home Assistant Core。首次运行会安装 Core 的 `dev` 分支，并创建一个带有演示实体（entity）的配置：
+
+   ```shell
+   script/core
+   ```
+
+2. 打开第二个终端并启动前端开发服务器：
+
+   ```shell
+   pnpm dev
+   ```
+
+3. 等待 `Build done`，然后在你的电脑上打开 `http://localhost:8124` 并创建一个用户。
+
+家里已经有 Home Assistant 了？你也可以把开发前端指向它。[运行前端](https://www.hasscn.top/contributors/frontend/development/run/)介绍了这两种方式。
+
+## 4. 进行修改
+
+创建一个分支，进行修改并保存。开发服务器会重新构建，刷新浏览器即可看到结果。
+
+即使是小修复，审查者也会关注以下几点：
+
+- 用户看到的所有文本都来自 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json)，绝不能硬编码在代码中。
+- 使用现有的 `ha-*` 组件和主题变量，不要引入新的颜色或一次性的控件。
+- 在窄屏和深色主题下检查你的修改。
+
+[coding guidelines](https://www.hasscn.top/contributors/frontend/development/guidelines/) 中有详细说明。
+
+## 5. 检查你的工作
+
+在推送之前运行代码检查工具和单元测试：
+
+```shell
+pnpm lint
+pnpm test
+```
+
+pre-commit 钩子会自动格式化你提交的文件，因此大多数样式问题会自动修复。
+
+## 6. 提交 pull request
+
+将你的分支推送到你的 fork，并针对 `dev` 分支打开一个 pull request。完整填写 pull request 模板：从使用者的角度描述更改，勾选恰好一个**更改类型**，并为任何视觉更改添加前后截图。如果模板缺失或不完整，检查将导致 pull request 失败。[打开 pull request](https://www.hasscn.top/contributors/frontend/development/pull-requests/) 中有详细说明。
+
+然后就要准备回答问题了。审查者可能会要求你修改一些内容，这是正常的。[审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/)解释了接下来会发生什么。
+
+## 接下来做什么
+
+- 阅读[架构概览](https://www.hasscn.top/contributors/frontend/architecture/)，了解各个部分如何协同工作。
+- 在构建新东西之前，先看看[组件](https://www.hasscn.top/contributors/design/components/)。复用现有组件几乎总是更好的选择。
+- 帮忙审查：测试别人的 pull request 并留下你的发现。这能让所有人的进度更快，包括你自己。
+
+---
+
+# 开发
+
+> 前端开发本身所需的一切内容：环境、运行方式、画廊与演示、编码指南、测试以及审查。
+
+Source: https://www.hasscn.top/contributors/frontend/development/
+
+这些页面用于参与 [frontend 仓库](https://github.com/home-assistant/frontend) 的开发：修复 bug、改进界面以及添加新功能。而构建供他人自行安装的卡片或面板则无需这些内容。相关内容请参阅[自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/)。
+
+## 工具
+
+前端使用 TypeScript 编写，基于 [Lit](https://lit.dev/)，并使用 [Rspack](https://rspack.dev/) 进行打包。依赖由 [pnpm](https://pnpm.io/) 管理。测试通过 [Vitest](https://vitest.dev/) 和 [Playwright](https://playwright.dev/) 运行。所有需要的命令都是 `package.json` 中的脚本，因此你可以使用 `pnpm` 来运行它们。
+
+## 页面
+
+- [设置环境](https://www.hasscn.top/contributors/frontend/development/environment/)：使用 devcontainer，或在你自己的机器上。
+- [运行前端](https://www.hasscn.top/contributors/frontend/development/run/)：针对开发版 Home Assistant，或针对你已有的 Home Assistant。
+- [画廊与演示](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/)：在完全没有 Home Assistant 的情况下处理组件和仪表盘。
+- [编码指南](https://www.hasscn.top/contributors/frontend/development/guidelines/)：前端代码的编写方式，以及审查者关注的内容。
+- [Linting 与测试](https://www.hasscn.top/contributors/frontend/development/testing/)：在打开拉取请求之前需要运行的检查。
+- [构建](https://www.hasscn.top/contributors/frontend/development/builds/)：进行生产构建，并在真实的 Home Assistant 上尝试他人的拉取请求。
+- [打开拉取请求](https://www.hasscn.top/contributors/frontend/development/pull-requests/)：你的拉取请求在审查前需要满足的条件。
+- [审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/)：你的拉取请求会发生什么，以及它如何到达用户手中。
+
+所有命令和端口汇总：[命令](https://www.hasscn.top/contributors/frontend/reference/commands/)。
+
+---
+
+# 搭建环境
+
+> 获取前端代码及其依赖，使用 devcontainer 或在自己的机器上进行。
+
+Source: https://www.hasscn.top/contributors/frontend/development/environment/
+
+你可以在 devcontainer 中进行前端开发，也可以直接在自己的机器上进行。devcontainer 是更简单的入门方式：它自带合适的 Node.js、pnpm 和 Python，并且可以在前端旁边运行 Home Assistant Core。
+
+## 获取代码
+
+在 GitHub 上 fork [前端仓库](https://github.com/home-assistant/frontend)，然后克隆你的 fork，并将主仓库添加为 `upstream`：
+
+```shell
+git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
+cd frontend
+git remote add upstream https://github.com/home-assistant/frontend.git
+```
+
+每次修改都应从 `dev` 分支切出新分支。拉取请求（pull request）都是提交到 `dev` 分支的。
+
+## 使用 devcontainer
+
+你需要安装了 Dev Containers 扩展的 Visual Studio Code，以及 Docker 或兼容的容器运行时。
+
+1. 在 Visual Studio Code 中打开克隆的仓库。
+2. 在提示时选择 **Reopen in Container**。或者打开命令面板并运行 **Dev Containers: Reopen in Container**。
+3. 等待容器构建完成。容器每次启动时都会运行 `script/bootstrap`，它会安装 `.nvmrc` 中指定的 Node.js 版本以及依赖项。
+
+容器中预装了 ESLint、Prettier 和 Lit 的推荐扩展，并在你保存文件时自动格式化。
+
+容器中的 8123 端口会映射为你电脑上的 **8124** 端口。无论容器内 8123 端口上运行着什么，你都可以通过 `http://localhost:8124` 访问。
+
+## 在自己的机器上
+
+你需要：
+
+- **Node.js**，版本以 [`.nvmrc`](https://github.com/home-assistant/frontend/blob/dev/.nvmrc) 文件中指定的为准。如果使用 [nvm](https://github.com/nvm-sh/nvm)，只需在仓库中运行 `nvm install`，它会自动选择正确的版本。
+- **pnpm**，版本以 `package.json` 中 `packageManager` 字段锁定的版本为准。如果使用 Corepack，该版本会被自动使用：
+
+  ```shell
+  corepack enable pnpm
+  ```
+
+  如果你的 Node.js 不包含 Corepack，可以用 `npm install -g corepack` 安装它，或者[直接安装 pnpm](https://pnpm.io/installation)。
+
+然后安装依赖项：
+
+```shell
+nvm use
+script/setup
+```
+
+`script/setup` 会运行 `script/bootstrap`，后者会运行 `pnpm install`。当你拉取的更改涉及 `package.json` 或 `pnpm-lock.yaml` 时，请重新运行它。
+
+## 翻译
+
+默认情况下，前端仅以英文运行。要获取所有语言的最新翻译，请使用 `--fetch-translations` 参数启动开发服务器，例如 `pnpm dev --fetch-translations`。首次运行时，它会要求你通过 GitHub 进行授权，并将令牌保存在 `translations/token.json` 中。如果该授权失效，例如出现 "Bad credentials" 错误，请删除该文件并重新运行命令。
+
+## AI 工具
+
+仓库在 `AGENTS.md` 中提供了面向 AI 编程工具的说明，并在 [`.agents/skills/`](https://github.com/home-assistant/frontend/tree/dev/.agents/skills) 中提供了关于组件、样式、面向用户的文本、测试和审查的技能（skills）。Claude Code、GitHub Copilot 和 Codex 会自动识别它们。[使用 AI 工具贡献](https://www.hasscn.top/contributors/start/ai-tools/)列出了这些工具，并提供了添加卡片的流程，还解释了 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)对你的要求。
+
+## 下一步
+
+[运行前端](https://www.hasscn.top/contributors/frontend/development/run/)，连接到一个 Home Assistant 实例。
+
+---
+
+# 运行前端
+
+> 将开发中的前端连接到开发版 Home Assistant，或连接到你已有的 Home Assistant。
+
+Source: https://www.hasscn.top/contributors/frontend/development/run/
+
+前端需要一个 Home Assistant Core 来与之通信。有两种连接方式：
+
+- **Core 提供你的前端。** 你运行一个开发版 Core，并告诉它使用你的[前端仓库](https://github.com/home-assistant/frontend)而不是内置的前端。这与生产环境的工作方式相同，因此一切功能都正常，包括登录页面和引导流程。
+- **你的前端连接到一个 Core。** 你自己提供前端服务，并将其指向任何 Home Assistant，甚至是正在为你家中服务的那一台。设置快速，且不会影响那个 Home Assistant。缺点是：某些部分（如登录页面）始终来自你所连接的 Core。
+
+> [!CAUTION]
+> 切勿在生产环境中使用开发模式。Home Assistant 会积极缓存前端以使其在移动设备上运行更快。开发模式会关闭该缓存，这样你就无需在每次更改之间重启。
+
+## Core 提供你的前端
+
+开发服务器会将前端构建到仓库的 `hass_frontend` 文件夹中，并在你保存时重新构建。当 `frontend` 集成的 `development_repo` 选项指向你的仓库时，Core 就会提供它。
+
+### 在前端 devcontainer 中
+
+devcontainer 可以为你运行 Core：
+
+1. 在终端中运行 `script/core`。第一次运行时，它会安装 Core 的 `dev` 分支，并创建一个已设置 `development_repo` 的 `config` 文件夹，以及用于提供一些可操作实体的 `demo` 集成。使用 `script/core -r <ref>` 安装其他分支或标签，或使用 `script/core -s` 跳过安装。
+2. 在第二个终端中，启动开发服务器：
+
+   ```shell
+   pnpm dev
+   ```
+
+3. 当日志显示 `Build done` 时，打开 `http://localhost:8124`。
+
+### 使用你自己的 Core 开发环境
+
+如果你已经在开发 Core，请将其配置指向你的前端克隆。在你开发版 Core 的 `configuration.yaml` 中：
+
+```yaml
+frontend:
+  development_repo: /path/to/frontend
+```
+
+如果路径错误或无法访问，前端将无法加载。然后启动 Core，在前端仓库中运行 `pnpm dev`，并像往常一样在 8123 端口打开 Home Assistant。
+
+当你使用 Core devcontainer 时，前端仓库必须在该容器内可见。在 [Core 仓库](https://github.com/home-assistant/core)的 [`.devcontainer/devcontainer.json`](https://github.com/home-assistant/frontend/blob/dev/.devcontainer/devcontainer.json) 中添加以下内容来挂载它，然后使用 **Dev Containers: Rebuild Container** 重建容器：
+
+```json
+"mounts": [
+  "source=/path/to/frontend,target=/workspaces/frontend,type=bind"
+]
+```
+
+然后在 `development_repo` 中使用容器内的路径 `/workspaces/frontend`。
+
+> [!WARNING]
+> 不要将 `mounts` 的更改提交到 Core：其中包含你机器上的路径。该设置仅在容器构建时读取，因此重建完成后你可以撤销它。
+
+[Core 开发环境](https://www.hasscn.top/contributors/core/development/environment/)介绍了如何设置 Core 本身。
+
+## 你的前端连接到一个 Core
+
+`pnpm dev:serve` 会构建前端并在 8124 端口提供服务，连接到 `http://localhost:8123` 上的 Core：
+
+```shell
+pnpm dev:serve
+```
+
+要连接到另一个 Home Assistant，请使用 `-c` 传入其 URL。它不必是开发版本：
+
+```shell
+pnpm dev:serve -c http://homeassistant.local:8123
+```
+
+该 Home Assistant 必须接受来自你开发前端的请求。将其地址添加到你所连接的 Home Assistant 的 `configuration.yaml` 的 `http` 部分中，然后重启它：
+
+```yaml
+http:
+  cors_allowed_origins:
+    - http://localhost:8124
+```
+
+一些需要了解的事项：
+
+- 使用 `-p` 在其他端口上提供服务，例如 `pnpm dev:serve -p 8654`。此时应将该地址添加到 `cors_allowed_origins` 中。
+- 在 devcontainer 内，前端在容器的 8123 端口上提供服务，该端口对应你计算机上的 8124 端口。你通过 `-c` 传入的 URL 是由你的浏览器打开的，而不是由容器打开，因此 `localhost` 指的是你的计算机。
+- 前端会记住你登录的是哪个 Home Assistant。当你更改 `-c` 时，请先登出，否则它会继续使用旧的那个。
+
+## 在后台保持服务器运行
+
+所有开发服务器都接受相同的标志，用于在无需保持终端打开的情况下管理它们：
+
+| 标志 | 作用 |
+| --- | --- |
+| `--background` | 以分离模式启动服务器，等待其就绪，打印其 URL 和进程 ID，然后退出。 |
+| `--status` | 报告服务器是否正在运行。 |
+| `--logs` | 打印服务器的日志。添加 `--follow` 可持续查看。 |
+| `--stop` | 停止在后台运行的服务器。 |
+
+例如：
+
+```shell
+pnpm dev:serve --background
+pnpm dev:serve --logs --follow
+pnpm dev:serve --stop
+```
+
+由于它们共享构建输出，因此一次只能运行一个开发服务器或生产构建。启动第二个时会告诉你当前哪个正在运行，以及如何停止它。冷构建最多需要等待 180 秒才能就绪。设置 `HA_DEV_SERVER_TIMEOUT` 为一个秒数可以更改此时间。
+
+当服务器在后台运行时，其日志会写入 `node_modules/.cache/ha-dev-server/`。当脚本检测到它是由编码智能体（coding agent）启动的，普通的 `pnpm dev` 或 `pnpm dev:*` 会自动转入后台，从而不会阻塞智能体。设置 `HA_DEV_BACKGROUND=0` 可使其保持在前台运行。
+
+## 浏览器设置
+
+前端使用了 service worker 和缓存，这可能会在更改后向你显示旧的构建版本。在浏览器的开发者工具中：
+
+1. 在 **Network** 标签页中，启用 **Disable cache**。
+2. 在 **Application** > **Service workers** 下，启用 **Bypass for network**。
+
+这些是 Chrome 及其他 Chromium 浏览器中的名称。其他浏览器也有类似的设置。
+
+## 查看 hass 对象
+
+前端的每个部分都从一个对象 `hass` 获取数据。要查看其中的内容，请打开开发者工具，在 **Elements** 标签页中选择 `<home-assistant>` 元素，然后在控制台中运行：
+
+```js
+$0.hass
+```
+
+这仅用于探索。在代码中，请使用传递给你的组件的数据。[hass 对象与上下文](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)解释了具体方法。
+
+---
+
+# 画廊与演示
+
+> 在没有 Home Assistant 的情况下运行真实前端的两种方式。画廊用于组件和卡片，演示用于整个应用。
+
+Source: https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/
+
+并非每次修改都需要运行中的 Home Assistant。[前端仓库](https://github.com/home-assistant/frontend) 包含两个应用，它们使用假数据运行真实的前端代码：画廊（gallery）和演示（demo）。
+
+## 画廊
+
+画廊单独展示组件、仪表盘卡片和更多信息（more-info）视图，并覆盖所有重要的状态：开启、关闭、不可用、加载中、浅色与深色模式，以及从右到左布局。它是一个开发工具：在本地运行它，即可在没有 Home Assistant 的情况下构建和检查组件。
+
+在本地 8100 端口运行：
+
+```shell
+pnpm dev:gallery
+```
+
+画廊位于 [`gallery/`](https://github.com/home-assistant/frontend/tree/dev/gallery) 文件夹中：
+
+- `gallery/src/pages/<category>/<page>.markdown`：页面的描述，带有可选的 front matter，用于 `title` 和 `subtitle`。
+- `gallery/src/pages/<category>/<page>.ts`：同一页面的实时演示。它定义了一个以页面命名的自定义元素，例如 `components/ha-button` 对应的 `demo-components-ha-button`。
+- [`gallery/sidebar.js`](https://github.com/home-assistant/frontend/blob/dev/gallery/sidebar.js)：侧边栏的各个分区以及页面在其中的顺序。
+- [`gallery/src/data/`](https://github.com/home-assistant/frontend/tree/dev/gallery/src/data) 和 [`gallery/src/components/`](https://github.com/home-assistant/frontend/tree/dev/gallery/src/components)：假的 `hass` 对象、示例状态，以及像 `demo-cards` 和 `demo-more-infos` 这样的辅助元素，用于渲染卡片配置或实体（entity）列表。
+
+画廊页面使用来自 [`src/`](https://github.com/home-assistant/frontend/tree/dev/src) 的真实组件，而不是副本。当你的修改改变了某个已记录组件的行为时，请在同一个拉取请求（pull request）中更新它的画廊页面。维护者可以添加 `needs design preview` 标签，为你的拉取请求部署画廊预览。
+
+> [!NOTE]
+> 已发布的设计指南位于本网站的 [Design](https://www.hasscn.top/contributors/design/) 区域，而不是画廊中。它取代了 design.home-assistant.io。[组件](https://www.hasscn.top/contributors/design/components/)、[仪表盘卡片](https://www.hasscn.top/contributors/design/dashboards/) 和 [更多信息视图](https://www.hasscn.top/contributors/design/more-info/) 在那里各有一个页面，包含用法、规格、无障碍性和实时示例。当你的修改改变了组件的外观或行为时，也请通过向[本网站](https://github.com/home-assistant/contributors.home-assistant.io)提交拉取请求来更新其对应页面。
+
+## 演示
+
+演示是完整的 Home Assistant 前端，在浏览器中针对模拟的后端运行。它发布于 [demo.home-assistant.io](https://demo.home-assistant.io/)。这是在没有服务器的情况下加载完整应用的最简单方式，例如检查仪表盘或截取屏幕截图。
+
+在本地 8090 端口运行：
+
+```shell
+pnpm dev:demo
+```
+
+演示有多个可选的主界面。使用 `demo` 查询参数选择一个，并用 `#` 之后的部分指定页面：
+
+```text
+http://localhost:8090/?demo=<slug>#/energy
+```
+
+这些 slug 位于 [`demo/src/configs/demo-configs.ts`](https://github.com/home-assistant/frontend/blob/dev/demo/src/configs/demo-configs.ts) 中。每个主界面在 [`demo/src/configs/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/configs) 中都有自己的文件夹，包含其实体、仪表盘和主题。模拟的 WebSocket 和 REST API 位于 [`demo/src/stubs/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/stubs) 中。
+
+画廊也导入了其中一些 stub。当你修改某个 stub 时，请同时检查使用它的演示和画廊页面。
+
+一些演示数据由 Core 生成：[`src/fake_data/demo_services.ts`](https://github.com/home-assistant/frontend/blob/dev/src/fake_data/demo_services.ts) 中的动作描述，以及 [`demo/src/stubs/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/stubs) 中的触发器和条件描述。不要手动编辑它们。运行 `script/gen_demo_core_data` 可以从 Core 的 `dev` 分支重新生成它们。
+
+## 在其他网站上嵌入卡片
+
+演示还构建了 `embed.js`，它通过 `<ha-embed-provider>` 和 `<ha-embed-card>` 元素将仪表盘卡片放到任何网页上。卡片作者使用它来[实时演示他们的卡片](https://www.hasscn.top/contributors/frontend/custom-ui/demo/)。其代码位于 [`demo/src/embed/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/embed)，而 [`demo/src/html/components.html.template`](https://github.com/home-assistant/frontend/blob/dev/demo/src/html/components.html.template) 是记录该功能的页面，位于演示的 `/components.html`。
+
+提供者注册了自己的一组模拟数据。大多数来自 [`demo/src/stubs/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/stubs) 中的 stub，少数（如能源）在 `ha-embed-provider.ts` 中定义。对某个 stub 的修复会影响到导入该 stub 的演示、嵌入和画廊页面，而它们并不都导入相同的 stub。例如，日历 stub 被嵌入和画廊使用，但演示不使用。对于新的 stub，请在 `ha-embed-provider.ts` 中导入它，并在构造函数中调用它。
+
+脚本的生产构建会从其来源网站加载其他文件，因此它也能在其他网站上运行。开发和旧版构建则改为从页面所在网站加载这些文件，因此请尝试使用生产构建来测试需要在其他网站上运行的更改。
+
+## 画廊和演示中的翻译
+
+两者默认以英文启动。添加 `--fetch-translations` 可以加载最新翻译，例如 `pnpm dev:demo --fetch-translations`。两者也接受[后台运行标志](https://www.hasscn.top/contributors/frontend/development/run/#keep-a-server-running-in-the-background)。
+
+---
+
+# 编码规范
+
+> 前端代码的编写方式，从 TypeScript 和 Lit 到事件、对话框、样式和文本。审阅者在每个 pull request 中关注的内容。
+
+Source: https://www.hasscn.top/contributors/frontend/development/guidelines/
+
+这些是[前端仓库](https://github.com/home-assistant/frontend)的约定。其中一部分由 linter 强制执行，其余则是审阅者会要求的内容，因此遵循这些约定可以为你省去一轮审阅。
+
+## TypeScript
+
+- TypeScript 以严格模式运行。避免使用 `any`：使用现有的 Home Assistant 类型，或者编写一个窄化的类型。
+- 对于仅包含类型的导入，使用 `import type`。ESLint 会强制执行这一点。
+- 类型应根据拥有数据的源头来定义，例如 Core 中的 WebSocket 命令，而不是根据某个组件碰巧的使用方式。
+- 将共享类型放在拥有它的数据模块中，位于 [`src/data/`](https://github.com/home-assistant/frontend/tree/dev/src/data) 下，并从那里导入。
+- 不要在生产代码中使用 `console`。向用户显示错误，或使用现有的日志记录。
+
+## Lit 组件
+
+- 元素使用前缀命名：`ha-` 用于共享的 Home Assistant 组件，`hui-` 用于仪表盘（"Lovelace"）组件，`dialog-` 用于对话框。
+- 使用 `@property()` 定义组件的公共 API，使用 `@state()` 定义其内部状态。
+- 项目使用 Lit 的 TypeScript 装饰器，并设置 `useDefineForClassFields: false`。请与现有的声明保持一致。不要使用 `accessor` 关键字。
+- 对于自己模板中的元素，使用 `@query()`，而不是手动查询 DOM。
+- 在 `render()` 中计算开销较小的值。对于其他生命周期步骤需要的值，使用 `willUpdate()`，只有当 `memoizeOne` 能真正节省工作时才使用它。
+- 在生命周期方法中，将变更的属性类型标注为 `PropertyValues<this>`，或者在读取私有属性时使用普通的 `PropertyValues`。
+
+## 数据访问
+
+叶子组件应使用能覆盖其所需数据的最窄的 [Lit context](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)，而不是获取整个 `hass` 对象。读取 `hass` 的组件会在家中的每次状态（state）变化时重新渲染，即使它显示的内容没有任何变化。拥有 `hass` 并将其传递下去的容器可以保留它。
+
+从 `src/common/decorators/consume` 导入 `consume`，而不是从 `@lit/context`。ESLint 同样会强制执行这一点。
+
+## 事件
+
+- 使用 [`src/common/dom/fire_event.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/dom/fire_event.ts) 中的 `fireEvent()` 触发事件。事件默认会冒泡并跨越 shadow root。
+- 通过扩展 `HASSDomEvents` 接口来声明每个自定义事件及其 detail 类型，这样 `fireEvent()` 就能检查载荷。
+- 使用同一文件中的辅助类型为事件处理器标注类型：`HASSDomEvent<T>` 用于 `detail`，`HASSDomCurrentTargetEvent<T>` 用于读取监听器所在的元素，`HASSDomTargetEvent<T>` 用于触发事件的元素。对于 `value-changed`，使用 [`src/types.ts`](https://github.com/home-assistant/frontend/blob/dev/src/types.ts) 中的 `ValueChangedEvent<T>`。
+
+```ts
+fireEvent(this, "item-selected", { id: item.id });
+
+declare global {
+  interface HASSDomEvents {
+    "item-selected": { id: string };
+  }
+}
+```
+
+## 应使用的组件
+
+在编写自己的组件之前，请先使用 [`src/components/`](https://github.com/home-assistant/frontend/tree/dev/src/components) 中的共享组件。其中许多组件（如 `ha-button`、`ha-dialog`、`ha-switch` 和 `ha-tooltip`）包装了 [Web Awesome](https://webawesome.com/) 组件。不要添加 `mwc-*` Material 组件：前端已不再使用它们。
+
+- **对话框**：使用 `ha-dialog` 以及 [`src/dialogs/dialog-mixin.ts`](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/dialog-mixin.ts) 中的 `DialogMixin`。通过触发 `show-dialog` 事件并传入标签、导入函数和参数来打开对话框。将操作按钮放在 `ha-dialog-footer` 的 `primaryAction` 和 `secondaryAction` 插槽中。
+- **按钮**：`ha-button` 有 `variant`（`brand`、`neutral`、`danger`、`warning`、`success`）、`appearance`（`accent`、`filled`、`outlined`、`plain`）和 `size`。取消操作使用 `appearance="plain"`，破坏性操作使用 `variant="danger"`。
+- **表单**：`ha-form` 根据[选择器（selector）](https://www.hasscn.top/contributors/glossary/selector/)的模式渲染表单。使用 `computeLabel`、`computeHelper` 和 `computeError` 为其提供翻译后的文本。
+- **消息**：使用 `ha-alert`，`alert-type` 可选 `error`、`warning`、`info` 或 `success`。
+- **键盘快捷键**：[`src/common/keyboard/shortcuts.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/keyboard/shortcuts.ts) 中的 `ShortcutManager`。
+
+每个组件在[设计区域](https://www.hasscn.top/contributors/design/components/)中都有一个页面，说明何时使用它以及如何使用。
+
+## 样式
+
+- 使用主题变量和[设计令牌（design token）](https://www.hasscn.top/contributors/frontend/architecture/theming/)，绝不硬编码颜色。间距使用 `--ha-space-*` 令牌。
+- 将样式限定在组件范围内。不要依赖全局样式来处理组件内部。
+- 优先为移动端设计，然后再添加宽屏所需的内容。
+- 保持布局对从右到左（RTL）语言安全。优先使用逻辑属性，例如用 `margin-inline-start` 代替 `margin-left`。
+- 确保触摸目标足够大，并为每个控件提供清晰的悬停、聚焦、激活和禁用状态。
+- 保持动效克制，并使用 `--ha-animation-duration-*` 令牌。它们会遵循减少动效的设置。
+
+## 面向用户的文本
+
+- 用户看到的每个字符串都要经过翻译系统。将其添加到 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json) 中，并在代码中使用 `localize`。[前端的翻译](https://www.hasscn.top/contributors/frontend/architecture/translations/)介绍了具体方法。
+- 使用带占位符的完整句子。绝不要将翻译后的片段拼接在一起。
+- 使用美式英语、句首大写和主动语态。完整写出 "Home Assistant"。
+- 对于可以重新添加的内容使用 "Remove"，对于永久删除的内容使用 "Delete"。对于已存在的内容使用 "Add"，对于新创建的内容使用 "Create"。
+
+设计区域的 [UI 文本](https://www.hasscn.top/contributors/design/ui-text/)部分提供了完整的指南。
+
+## 状态与清理
+
+- 处理加载、错误、不可用和缺失实体（entity）的情况。在读取实体之前，先检查该实体是否存在。
+- 在组件断开连接时，移除事件监听器、定时器、观察者和订阅。
+- 确保每个控件都可以通过键盘和屏幕阅读器使用。
+
+## 提交与依赖
+
+pre-commit 钩子会对你提交的文件运行 ESLint、Prettier 和 Lit 分析器，并尽可能自动修复。只编辑英文文本，即 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json)。其他语言在 [Lokalise](https://www.hasscn.top/contributors/glossary/lokalise/) 中翻译，并在构建时下载，该钩子会拒绝修改这些已下载文件的提交。
+
+将依赖更新放在单独的 pull request 中。
+
+---
+
+# Lint 和测试
+
+> 前端的 linter、类型检查、单元测试和端到端测试，以及何时编写测试。
+
+Source: https://www.hasscn.top/contributors/frontend/development/testing/
+
+CI 会在你的 pull request 上运行所有这些检查。自己先运行一遍，比等 CI 来告诉你更快。
+
+## Lint 和格式化
+
+```shell
+pnpm lint
+pnpm format
+```
+
+`pnpm lint` 会运行 ESLint、Prettier、TypeScript 编译器以及 Lit 分析器，后者会根据模板中元素的属性来检查你的模板。`pnpm format` 会修复 ESLint 和 Prettier 能自行修复的问题。
+
+只运行类型检查：
+
+```shell
+pnpm lint:types
+```
+
+> [!WARNING]
+> 永远不要向 `pnpm lint:types` 或 `tsc` 传递文件参数。传入文件参数时，编译器会忽略 `tsconfig.json`，并可能把 `.js` 文件写入 [`src/`](https://github.com/home-assistant/frontend/tree/dev/src)。如果发生这种情况，请在提交前删除这些生成的文件。要快速获得单个文件的反馈，请使用编辑器中的诊断功能。
+
+## 单元测试
+
+单元测试使用 [Vitest](https://vitest.dev/) 运行。它们位于 [`test/`](https://github.com/home-assistant/frontend/tree/dev/test) 中，其文件夹结构与 [`src/`](https://github.com/home-assistant/frontend/tree/dev/src) 一一对应：
+
+```shell
+pnpm test
+pnpm test:coverage
+```
+
+一个测试文件大致如下：
+
+```ts
+import { describe, expect, it } from "vitest";
+import { ensureArray } from "../../../src/common/array/ensure-array";
+
+describe("ensureArray", () => {
+  it("wraps a single value in an array", () => {
+    expect(ensureArray("light.kitchen")).toEqual(["light.kitchen"]);
+  });
+});
+```
+
+### 何时编写测试
+
+对于会进行计算的代码，即错误可能悄无声息地溜过去的地方，应编写测试：数据处理、工具函数、配置校验以及仪表盘（dashboard）策略。
+
+不要编写检查渲染效果的测试：比如组件的文本、样式或插槽，或者面板是否显示了它收到的数据。这类测试会随着每次设计改动而失效，却几乎保护不了什么。如果视觉效果发生了变化，请在你的 pull request 中附上截图。
+
+测试永远不会与真实的 Home Assistant 通信。请用假实现替换 `callWS`、`callApi` 和连接。在编写新的 fixture 或辅助函数之前，先看看测试套件中已有的那些。
+
+## 端到端测试
+
+端到端测试使用 [Playwright](https://playwright.dev/) 运行，分为三个套件。每个套件都有自己的开发服务器：
+
+| 套件 | 开发服务器 | 端口 | 测试命令 |
+| --- | --- | --- | --- |
+| App | `pnpm test:e2e:app:dev` | 8095 | `pnpm test:e2e:app` |
+| Demo | `pnpm dev:demo` | 8090 | `pnpm test:e2e:demo` |
+| Gallery | `pnpm dev:gallery` | 8100 | `pnpm test:e2e:gallery` |
+
+App 套件针对一个为这些测试专门精简的测试环境来测试应用。Demo 和 Gallery 套件则使用它们正常的开发服务器。
+
+在后台启动某个套件的开发服务器，然后运行该套件。Playwright 会复用已经在运行的服务器，而不是进行缓慢的完整构建，而且服务器会在你保存时重新构建，因此无需重启任何东西即可再次运行测试：
+
+```shell
+pnpm test:e2e:app:dev --background
+pnpm test:e2e:app
+```
+
+可以用 `-g` 按测试名称缩小运行范围，用 `--project` 指定浏览器。可用的 project 为 `chromium` 和 `mobile-chrome`：
+
+```shell
+pnpm test:e2e:app -g "more-info" --project=chromium
+```
+
+`pnpm test:e2e` 会运行全部三个套件，`pnpm test:e2e:show-report` 会打开合并后的报告。
+
+针对开发服务器的本地运行与 CI 使用的干净构建并不相同。请用它来快速迭代，同时也要确保你 pull request 上的端到端任务通过。
+
+## 基准测试
+
+图表背后的数据转换（如历史记录、统计和能源）都有基准测试。在优化其中某项之前，请先阅读 [`test/benchmarks/README.md`](https://github.com/home-assistant/frontend/blob/dev/test/benchmarks/README.md) 中的工作流程。优化必须保证输出完全一致：绝不要为了让测试通过而更新快照或 fixture。
+
+## 何时运行什么
+
+- **工具函数或数据变更**：相关的单元测试，然后运行 `pnpm lint:types`。
+- **组件变更**：`pnpm lint`，以及覆盖其中逻辑的单元测试。
+- **有端到端测试覆盖的流程变更**：相关的套件，并缩小到受影响的测试。
+- **大范围重构**：`pnpm lint` 和 `pnpm test`。
+
+---
+
+# 构建
+
+> 制作前端的正式构建，或在没有开发环境的情况下，在真实的 Home Assistant 上运行拉取请求的构建。
+
+Source: https://www.hasscn.top/contributors/frontend/development/builds/
+
+大多数情况下，开发服务器就足够了。这些内容适用于其他情况：当你处理前端的打包方式时，或者当你想在真实的 Home Assistant 上测试拉取请求时。
+
+## 制作正式构建
+
+```shell
+pnpm build
+```
+
+这会在 `hass_frontend/` 中生成完整的正式构建：包括现代版和旧版构建，经过压缩和打包，并带有 service worker。这需要一些时间。
+
+当你只需要现代版构建时，例如比较打包体积或测量性能，可以跳过旧版构建：
+
+```shell
+pnpm build --modern
+```
+
+正式构建接受与[开发服务器](https://www.hasscn.top/contributors/frontend/development/run/#keep-a-server-running-in-the-background)相同的 `--background`、`--status`、`--logs` 和 `--stop` 标志。构建和开发服务器不能同时运行，因为它们写入同一个文件夹。
+
+### 在 Home Assistant 中使用你的构建
+
+要让 Core 使用你的构建而不是它通常安装的前端，请将[前端仓库](https://github.com/home-assistant/frontend)作为 Python 包安装到你的开发 Core 的环境中，并告诉 Home Assistant 不要替换它：
+
+```shell
+pip3 install -e /path/to/frontend --config-settings editable_mode=compat
+hass --skip-pip-packages home-assistant-frontend
+```
+
+## 试用拉取请求
+
+你可以在自己的 Home Assistant 上运行任何打开的前端拉取请求的构建，无需克隆或构建任何东西。这适用于所有安装类型，包括 Home Assistant OS。这对于检查某个修复在你的硬件、浏览器或环境上是否有效非常有用。
+
+### 创建 GitHub 令牌
+
+Home Assistant 会从 GitHub 下载构建，这需要一个令牌（token）：
+
+1. 在 GitHub 中，前往 [**Settings** > **Developer settings** > **Personal access tokens** > **Fine-grained tokens**](https://github.com/settings/personal-access-tokens)。
+2. 选择 **Generate new token**，并给它起一个你能认出的名字，比如 "Home Assistant frontend testing"。
+3. 选择一个较短的过期时间，比如 90 天。
+4. 在 **Repository access** 下，选择 **Public repositories**。权限留空即可。
+5. 选择 **Generate token**，并复制它。你将不会再看到它。
+
+### 配置 Home Assistant
+
+将拉取请求的编号和你的令牌添加到 Home Assistant 的 `configuration.yaml` 中，然后重启：
+
+```yaml
+frontend:
+  development_pr: 12345
+  github_token: !secret github_token
+```
+
+令牌本身请保存在 `secrets.yaml` 中，切勿放在你会分享的文件里。
+
+启动时，Home Assistant 会下载该拉取请求的构建并使用它，而不是内置的前端。它会保留一份副本，并在之后的重启时检查该拉取请求是否有新的提交，如果有则下载新的构建。如果下载失败，Home Assistant 会回退到内置的前端，并记录失败原因。
+
+如果同时设置了 `development_repo`，则它优先，拉取请求会被忽略。
+
+要恢复原状，请删除这两行并重启。Home Assistant 会移除下载的构建。
+
+### 限制
+
+- 拉取请求需要在 CI 中有成功的构建。
+- GitHub 会将这些构建保留 7 天。之后，必须重新构建。作者可以通过更新分支来做到这一点，例如将 `dev` 合并进去。如果你不是作者，请向他们提出请求。
+- 这仅用于测试。不要一直开启。
+
+---
+
+# 打开拉取请求
+
+> 如何打开一个可供维护者审查的前端拉取请求。
+
+Source: https://www.hasscn.top/contributors/frontend/development/pull-requests/
+
+你的更改已生效，并且[检查](https://www.hasscn.top/contributors/frontend/development/testing/)已通过。以下是维护者查看你的拉取请求之前需要满足的条件。每个仓库的通用步骤见[拉取请求与审查](https://www.hasscn.top/contributors/start/pull-requests/)。
+
+## 在准备好审查时打开
+
+当你的更改完成并希望获得审查时，再打开拉取请求，而不是为了尝试某些内容。
+
+每个拉取请求都会占用分类、标记和审查人员的时间，即使是草稿也是如此。若要试验，请推送到你的[复刻（fork）](https://www.hasscn.top/contributors/glossary/fork/)中的分支。你可以在那里查看结果，而无需打开任何内容。
+
+如果打开后 CI 失败，请修复它。[通用指南](https://www.hasscn.top/contributors/start/pull-requests/#the-bots-go-first)说明了在此期间何时将其标记为草稿。
+
+## 写一个简短的标题
+
+标题用几个词告诉维护者更改了什么。它也会出现在发布说明中。请使其简短而有意义：
+
+- 好：“修复不可用实体的磁贴卡片图标颜色”
+- 好：“为标签选择器添加搜索功能”
+- 不推荐：“修复错误”、“更新 hui-tile-card.ts”或“更改”
+
+## 填写模板
+
+使用[拉取请求模板](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)。逐节填写，并且只删除模板指示在不适用时删除的部分。如果模板缺失或不完整，检查将失败，如[审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/#before-review)所述。
+
+- **Breaking change**：如果你的更改对现有用户造成了破坏，请告诉他们破坏了什么、如何使其恢复工作以及原因。请面向用户而非维护者撰写。如果没有破坏任何内容，请删除该部分。[何时属于向后不兼容](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible)可帮助你判断。
+- **Proposed change**：描述更改了什么以及原因，以便审查者获得概览。几句话就足够了。不要描述每一行代码：差异（diff）已经显示了这些内容。如果你使用 AI 工具，不要让其为你撰写冗长的描述。请用自己的话撰写。
+- **Screenshots**：对于任何可见的更改，请添加前后截图或短视频。如果没有可见更改，请删除该部分。
+- **Type of change**：只勾选一个框。如果需要两个，请拆分拉取请求。
+- **Additional information**：链接其修复的问题，以及任何相关的后端或文档拉取请求。
+- **Checklist**：勾选属实的框。只有你才能说明你理解代码并已进行测试。
+
+## 处理 Copilot 审查
+
+打开拉取请求后，GitHub Copilot 会进行首次审查并留下评论。审查以摘要开头，例如这个拉取请求的示例，其中它没有发现需要修复的问题：
+
+![一个拉取请求上的 Copilot 审查，标题为“建议批准”，一句话总结更改，以及一行“没有问题”](https://www.hasscn.top/contributors/_astro/copilot-review.BBnvbTIO_Z2w2bpP.webp)
+
+- 如果评论有道理，请修复并推送。
+- 如果没有，请回复评论并解释原因。这样，维护者会看到你已经查看过，并知道你为何保留它。
+
+不要留下未回复的 Copilot 评论。维护者在审查时会阅读这些回复。
+
+---
+
+# 审查与发布
+
+> 打开前端拉取请求后会发生什么，以及合并的更改如何到达使用 Home Assistant 的用户手中。
+
+Source: https://www.hasscn.top/contributors/frontend/development/review-and-release/
+
+打开拉取请求（pull request）只是对话的开始，而不是你工作的结束。本页介绍审查者会关注什么、会运行哪些检查，以及你的更改如何进入一个发布版本。
+
+## 审查之前
+
+当你针对 `dev` 打开一个拉取请求时，有几件事会自动发生：
+
+- **模板检查。** 拉取请求必须使用[模板](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)，并保留其 **Proposed change**、**Type of change** 和 **Checklist** 部分，且只能勾选一个 **Type of change**，并在 **Proposed change** 下描述更改。如果不符合要求，拉取请求会被打上 `Needs Template` 标签并收到一条评论，检查会失败，直到你修复为止。草稿会被跳过，因此当你将拉取请求标记为准备审查时，检查才会运行。
+- **标签。** 机器人会根据拉取请求更改的文件为其打上标签，例如 `Dashboards`、`Automations` 或 `Tests: Unit`。第二个脚本会在更改触及这些代码部分时添加 `Companion App`、`Home Assistant Link`、`Labs` 和 `Supervisor` 标签，即使更改来自这些文件夹之外。当标签不再匹配时，两者都会再次移除标签，包括手动添加的标签。规则位于 [`.github/labeler.yml`](https://github.com/home-assistant/frontend/blob/dev/.github/labeler.yml) 和 [`.github/scripts/label-content.mts`](https://github.com/home-assistant/frontend/blob/dev/.github/scripts/label-content.mts) 中。
+- **CLA。** 你第一次贡献时，机器人会要求你签署贡献者许可协议。
+- **CI。** 每次推送都会运行代码检查器、类型检查、单元测试、生产构建和端到端测试。它们必须通过，你的拉取请求才能被合并。
+
+保持一个拉取请求只包含一个更改。如果你发现自己勾选了两个 **Type of change** 复选框，请将其拆分。小的拉取请求能更快得到审查。
+
+## 审查者关注什么
+
+前端维护者会审查每一个拉取请求。除了“它是否能工作”之外，他们还会检查：
+
+- **各种状态下的行为。** 加载中、错误、不可用、实体（entity）缺失，以及双向的状态转换。而不仅仅是正常路径。
+- **现有模式。** 使用共享的 `ha-*` 组件、现有的辅助元素（helper）和主题变量，而不是另起炉灶的并行实现。
+- **文本。** 所有面向用户的文本都必须可翻译、使用句首大写，并使用正确的术语。
+- **无障碍性。** 键盘导航、焦点、标签和触摸目标。
+- **窄屏和从右到左的语言。** 前端运行在手机上，也运行在从右到左书写的语言中。
+- **清理。** 当组件被移除时，事件监听器、定时器和订阅也要一并移除。
+
+[编码指南](https://www.hasscn.top/contributors/frontend/development/guidelines/)更详细地介绍了这些内容。
+
+### 截图与设计画廊
+
+对于任何可见的更改，请在拉取请求中添加前后对比截图或短视频。审查者会根据这些内容做出很多判断。
+
+如果更改的组件在画廊中有页面，也应该更新该页面。维护者可以添加 `needs design preview` 标签，这会为你的拉取请求部署一个画廊预览。已发布的设计指南位于本站的 [Design](https://www.hasscn.top/contributors/design/components/) 区域：当组件在那里有页面时，请通过向[本站](https://github.com/home-assistant/contributors.home-assistant.io)提交拉取请求来更新它。
+
+### 需要设计意见的更改
+
+新的卡片、徽章、屏幕和交互模式既是代码问题，也是设计决策。当方向尚未确定时，审查者会添加 `Needs UX` 标签并向设计团队征求意见。这可能需要一段时间。在编写代码之前，先在 [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) 中讨论较大的想法，可以避免你重写代码。[Design](https://www.hasscn.top/contributors/design/how-we-design/) 区域解释了其工作方式。
+
+### 需要后端的更改
+
+当你的更改依赖于 Core 中的某个拉取请求时，请在模板中链接它。前端更改会等待后端更改合并。标签 `wait for backend` 和 `backend merged` 用于跟踪这一过程。
+
+### 长期无动静的拉取请求
+
+一个 90 天没有任何活动的拉取请求会被打上 `stale` 标签并收到一条评论。如果在那之后的 7 天内仍没有任何动静，它将被关闭。任何更新都会再次移除该标签。维护者可以使用 `no-stale` 标签豁免某个拉取请求。议题（issue）遵循相同的时限，但被标记为功能请求或求助（help wanted）的除外。
+
+## AI 工具
+
+你可以使用 AI 工具来帮助你编写代码。但你要对结果负责：你必须理解你提交的每一处更改，并能自己解释它。看起来像未经审查的 AI 输出的拉取请求或评论会被关闭。详情请参阅 [Open Home Foundation AI policy](https://github.com/home-assistant/frontend/blob/dev/AI_POLICY.md)。
+
+## 帮助审查
+
+拉取请求模板会要求你审查另外两个拉取请求。这不是走过场。每一次审查，哪怕是“我在手机上测试过，它能用”，都能减轻维护者的负担，并缩短你自己的拉取请求所在的队列。
+
+## 从合并到发布
+
+前端作为一个 Python 包 `home-assistant-frontend` 发布，Home Assistant Core 将其作为 `frontend` 集成（integration）的依赖进行安装。版本号是日期，例如 `20260930.0`。
+
+1. **合并到 `dev`。** 你的更改将进入下一个发布版本。每晚都会从 `dev` 构建一个开发版本。
+2. **Beta。** 当新的 Home Assistant 发布版本的 beta 开始时，`dev` 中的更改会进入 `rc` 分支，即候选发布版本（release candidate）。在那里会切出并标记一个新的前端版本，Core 会将其依赖提升到该版本。
+3. **修复。** beta 期间或之后的补丁版本中所需的错误修复，会由维护者 cherry-pick 到 `rc` 上，并在那里发布和标记为 `.1`、`.2` 等等。这些拉取请求会被打上 `cherry-picked` 标签。
+4. **发布。** 在发布日，`rc` 会被合并到 `master`，你的更改将随下一个 Home Assistant 发布版本一起发布。
+
+[Releases](https://www.hasscn.top/contributors/releases/) 区域解释了 Home Assistant 整体的发布周期。
+
+### 文档与向后不兼容的更改
+
+如果你的更改添加或修改了用户需要配置的内容，请更新 [home-assistant.io](https://github.com/home-assistant/home-assistant.io) 上的用户文档，并在模板中链接该拉取请求。[Writing docs](https://www.hasscn.top/contributors/writing/) 介绍了具体方法。
+
+如果你的更改给现有用户带来了破坏，例如移除了某个卡片选项，请填写模板中的 **Breaking change** 部分。这段文字会进入发布说明，所以要为用户而写：什么会被破坏、如何修复，以及为什么。
+
+---
+
+# 前端架构
+
+> 前端是如何组装起来的，从最先加载的脚本，到各个面板、对话框，以及在其中流转的数据。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/
+
+前端是一个由 web components 组成的单页应用。每个组件都将其模板、样式和逻辑打包在一起，并在浏览器中以 HTML 标签的形式呈现，例如 `<ha-button>` 或 `<hui-tile-card>`。组件可以组合成更大的组件，层层向上，直到应用本身。
+
+## 组成部分
+
+前端分四层加载。
+
+### 引导（Bootstrap）
+
+[`src/entrypoints/core.ts`](https://github.com/home-assistant/frontend/blob/dev/src/entrypoints/core.ts) 是一个最先加载的小脚本。它检查登录凭据，并打开与 Home Assistant Core 的 WebSocket 连接。由于它非常小，在界面的其余部分还在下载时，数据就已经开始流动了。
+
+### 应用外壳（App shell）
+
+[`src/entrypoints/app.ts`](https://github.com/home-assistant/frontend/blob/dev/src/entrypoints/app.ts) 加载根元素 `<home-assistant>`（位于 [`src/layouts/home-assistant.ts`](https://github.com/home-assistant/frontend/blob/dev/src/layouts/home-assistant.ts)）以及全局样式。根元素通过 [`src/state/`](https://github.com/home-assistant/frontend/tree/dev/src/state) 中的一系列 mixin 来设置应用的状态：连接、翻译、主题、对话框、侧边栏等等。然后它渲染 [`src/layouts/home-assistant-main.ts`](https://github.com/home-assistant/frontend/blob/dev/src/layouts/home-assistant-main.ts)，由后者绘制侧边栏，并将当前 URL 交给面板解析器。
+
+### 面板（Panels）
+
+Home Assistant 中的每个页面都是一个[面板（panel）](https://www.hasscn.top/contributors/glossary/panel/)：仪表盘、地图、历史记录、设置。面板位于 [`src/panels/`](https://github.com/home-assistant/frontend/tree/dev/src/panels) 中，只有在有人打开它们时才会加载。Core 决定存在哪些面板，集成也可以添加自己的面板。[路由与面板](https://www.hasscn.top/contributors/frontend/architecture/routing-and-panels/)解释了其工作原理。
+
+### 对话框（Dialogs）
+
+对话框位于 [`src/dialogs/`](https://github.com/home-assistant/frontend/tree/dev/src/dialogs) 中，可以在任何页面之上打开。最著名的是[更多信息对话框（more-info dialog）](https://www.hasscn.top/contributors/glossary/more-info-dialog/)，它显示一个实体（entity）的状态、历史记录和设置。
+
+## 文件位置
+
+| 文件夹 | 内容 |
+| --- | --- |
+| [`src/components/`](https://github.com/home-assistant/frontend/tree/dev/src/components) | 共享的 `ha-*` 组件，随处使用。 |
+| [`src/panels/`](https://github.com/home-assistant/frontend/tree/dev/src/panels) | 每个面板一个文件夹。仪表盘位于 [`src/panels/lovelace/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace)。 |
+| [`src/dialogs/`](https://github.com/home-assistant/frontend/tree/dev/src/dialogs) | 对话框，包括更多信息对话框。 |
+| [`src/data/`](https://github.com/home-assistant/frontend/tree/dev/src/data) | 与 Core 通信的类型和函数：WebSocket 命令、订阅和上下文。 |
+| [`src/common/`](https://github.com/home-assistant/frontend/tree/dev/src/common) | 不含 UI 的小型辅助工具：格式化、实体辅助函数、装饰器和 DOM 工具。 |
+| [`src/state/`](https://github.com/home-assistant/frontend/tree/dev/src/state) | 构成根元素应用状态的 mixin。 |
+| [`src/layouts/`](https://github.com/home-assistant/frontend/tree/dev/src/layouts) | 根元素、主布局、面板解析器和页面布局。 |
+| [`src/resources/`](https://github.com/home-assistant/frontend/tree/dev/src/resources) | 全局样式和主题定义。 |
+| [`src/translations/`](https://github.com/home-assistant/frontend/tree/dev/src/translations) | `en.json`，所有前端文本的英文源文件。 |
+| [`src/external_app/`](https://github.com/home-assistant/frontend/tree/dev/src/external_app) | 与配套应用（companion apps）之间的桥接。 |
+
+## 数据如何流动
+
+前端主要通过 [WebSocket API](https://github.com/home-assistant/home-assistant-js-websocket) 与 Core 通信，少数地方使用 REST API。
+
+数据单向流动。当 Core 中发生某些变化时，比如一盏灯被打开，根元素会收到更新并创建一个新的 `hass` 对象，这个变化沿着组件树向下传递到每个需要它的组件。当某个组件想要改变一些东西时，它会调用 Core，并等待变化从上方传下来。
+
+只需要部分数据的组件会使用 [Lit 上下文（context）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)，而不是整个 `hass` 对象。不属于 `hass` 的数据，比如标签注册表或备份列表，则通过[订阅和命令](https://www.hasscn.top/contributors/frontend/architecture/data/)加载，以保持与 Core 的同步。
+
+## 相关页面
+
+- [组件与 Lit](https://www.hasscn.top/contributors/frontend/architecture/components/)：web components、Lit，以及基于 Web Awesome 构建的 `ha-*` 组件。
+- [hass 对象与上下文](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)：组件如何获取数据。
+- [数据层](https://www.hasscn.top/contributors/frontend/architecture/data/)：WebSocket 命令、订阅和集合。
+- [前端中的翻译](https://www.hasscn.top/contributors/frontend/architecture/translations/)：文本如何被翻译。
+- [主题与设计令牌](https://www.hasscn.top/contributors/frontend/architecture/theming/)：主题变量和令牌，以及主题如何应用。
+- [路由与面板](https://www.hasscn.top/contributors/frontend/architecture/routing-and-panels/)：URL 如何变成一个页面。
+
+---
+
+# 组件与 Lit
+
+> Web components、Lit 以及封装 Web Awesome 的共享 ha-* 组件。每个界面的构建基石。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/components/
+
+界面的每一部分都是一个自定义元素（custom element）：一个以标签名注册的类，在 shadow root 中拥有自己的模板和样式。前端使用 [Lit](https://lit.dev/) 编写它们，这是一个小型库，为标准 web components 添加了响应式属性和高效模板。
+
+## 一个组件
+
+一个典型的组件如下所示：
+
+```ts
+import { css, html, LitElement, nothing } from "lit";
+import { customElement, property, state } from "lit/decorators";
+
+@customElement("ha-example-row")
+export class HaExampleRow extends LitElement {
+  @property() public label?: string;
+
+  @state() private _expanded = false;
+
+  protected render() {
+    if (!this.label) {
+      return nothing;
+    }
+
+    return html`
+      <button @click=${this._toggle}>${this.label}</button>
+      ${this._expanded ? html`<slot></slot>` : nothing}
+    `;
+  }
+
+  private _toggle() {
+    this._expanded = !this._expanded;
+  }
+
+  static styles = css`
+    :host {
+      display: block;
+      padding: var(--ha-space-2);
+    }
+  `;
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "ha-example-row": HaExampleRow;
+  }
+}
+```
+
+- `@property()` 是公开 API，由使用该元素的代码设置。`@state()` 是内部状态。改变其中任何一个都会调度一次渲染。
+- `render()` 返回一个模板。Lit 只更新 DOM 中发生变化的部分。
+- 样式通过 shadow root 限定在组件内部。
+- `HTMLElementTagNameMap` 声明为其他代码提供了该元素的类型。
+
+[Lit 文档](https://lit.dev/docs/)涵盖了其余内容：生命周期、指令和响应式控制器。
+
+## 命名
+
+标签名能告诉你组件属于哪里：
+
+- `ha-*`：位于 [`src/components/`](https://github.com/home-assistant/frontend/tree/dev/src/components) 的共享 Home Assistant 组件，例如 `ha-button` 或 `ha-entity-picker`。
+- `hui-*`：位于 [`src/panels/lovelace/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace) 的仪表盘（dashboard）组件，例如 `hui-tile-card`。这个前缀来自仪表盘的旧名称 Lovelace，它仍然出现在代码中。
+- `dialog-*`：对话框。
+- `more-info-*` 和 `state-card-*`：更多信息对话框的视图和状态卡片，每个域（domain）各有一个。
+
+## 共享组件与 Web Awesome
+
+[`src/components/`](https://github.com/home-assistant/frontend/tree/dev/src/components) 中的共享组件是每个界面的构建基石：按钮、输入框、对话框、选择器和控件。其中许多组件，例如 `ha-button`、`ha-dialog`、`ha-dropdown`、`ha-switch`、`ha-slider` 和 `ha-tooltip`，封装了 [Web Awesome](https://webawesome.com/) 中的组件。前端使用的是自己的 Web Awesome 构建，即 `@home-assistant/webawesome`。
+
+封装器继承 Web Awesome 的类，并添加 Home Assistant 所需的主题和行为：
+
+```ts
+import Button from "@home-assistant/webawesome/dist/components/button/button";
+
+@customElement("ha-button")
+export class HaButton extends Button {
+  // Home Assistant variants, styles, and theme variables
+}
+```
+
+请始终使用 `ha-*` 元素，绝不要直接使用 Web Awesome 元素。封装器是主题、翻译以及针对 Home Assistant 的修复所在之处，它也是保持每个界面一致性的关键。
+
+前端不再使用 Material Web Components（`mwc-*`）。不要将它们添加回来。某些 `--mdc-*` CSS 属性仍被用于主题化，但新代码使用 `--ha-*` 属性。
+
+每个共享组件在[设计区域](https://www.hasscn.top/contributors/design/components/)中都有一个页面，包含使用指南、实时示例及其属性。在构建新东西之前，请先查看那里。
+
+## Mixin 与控制器
+
+某些行为通过 mixin 和响应式控制器而不是基类来共享：
+
+- [`src/mixins/subscribe-mixin.ts`](https://github.com/home-assistant/frontend/blob/dev/src/mixins/subscribe-mixin.ts) 中的 `SubscribeMixin` 为组件管理 WebSocket 订阅。参见[数据层](https://www.hasscn.top/contributors/frontend/architecture/data/)。
+- [`src/dialogs/dialog-mixin.ts`](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/dialog-mixin.ts) 中的 `DialogMixin` 处理新对话框的打开和关闭。
+- [`src/common/decorators/`](https://github.com/home-assistant/frontend/tree/dev/src/common/decorators) 包含用于消费上下文（context）的装饰器，例如 `@consume` 和 `@consumeEntityState`，以及用于转换它们的装饰器，例如 `@transform`。参见 [hass 对象与上下文](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)。
+
+---
+
+# hass 对象与上下文（contexts）
+
+> 组件如何获取数据。承载一切的 hass 对象，以及只向组件提供其所需部分的 Lit 上下文。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/
+
+前端将 Home Assistant 的状态保存在一个对象中，即 `hass`。它包含所有实体的状态、各个注册表、配置、用户、翻译，以及调用 Core 的函数。每当有变化时，前端会创建一个新的 `hass` 对象，其中只有发生变化的部分会得到新版本。
+
+这使得检查变化非常廉价：通过引用进行比较。
+
+```ts
+const changed = newHass.states !== oldHass.states;
+```
+
+## 获取数据的两种方式
+
+**`hass` 属性。** 面板、卡片和许多组件将 `hass` 作为属性接收，并将其传递给子组件。这种方式简单，并且是[自定义卡片和面板](https://www.hasscn.top/contributors/frontend/custom-ui/)的公开 API。缺点是：家中每次变化都会带来新的 `hass`，因此接收 `hass` 的组件检查或重新渲染的频率远超实际需要，而且它掩盖了组件真正依赖哪些数据。
+
+**上下文（contexts）。** 根元素以一组 [Lit 上下文](https://lit.dev/docs/data/context/)的形式提供相同的数据，并按主题拆分。组件只消费它读取的上下文，并且只在这些上下文变化时更新。
+
+对于前端中的新代码：叶子组件应消费覆盖其读取内容的最窄上下文。拥有 `hass` 并将其向下传递的容器可以继续保留该属性。
+
+## 上下文列表
+
+这些上下文定义在 [`src/data/context/index.ts`](https://github.com/home-assistant/frontend/blob/dev/src/data/context/index.ts) 中。
+
+| 上下文 | 包含内容 | 替代 |
+| --- | --- | --- |
+| `statesContext` | 所有实体的状态 | `hass.states` |
+| `entitiesContext` | 实体注册表，用于显示 | `hass.entities` |
+| `devicesContext` | 设备注册表 | `hass.devices` |
+| `areasContext` | 区域注册表 | `hass.areas` |
+| `floorsContext` | 楼层注册表 | `hass.floors` |
+| `registriesContext` | 以上四个注册表的合集 | |
+| `servicesContext` | 可用的动作 | `hass.services` |
+| `internationalizationContext` | 语言、区域设置、`localize` 以及翻译加载器 | `hass.localize`、`hass.locale`、`hass.language` |
+| `formattersContext` | 实体格式化器 | `hass.formatEntityState` 及其他 |
+| `configContext` | Core 配置、用户和认证 | `hass.config`、`hass.user`、`hass.auth`、`hass.userData` |
+| `connectionContext` | WebSocket 连接及其状态 | `hass.connection`、`hass.connected` |
+| `apiContext` | 调用 Core 的函数 | `hass.callService`、`hass.callWS`、`hass.callApi` 等 |
+| `uiContext` | 主题、面板、侧边栏及其他 UI 状态 | `hass.themes`、`hass.panels` 等 |
+| `narrowViewportContext` | 主视图是否使用窄屏布局 | |
+| `reducedMotionContext` | 用户是否偏好减少动态效果 | |
+
+有些上下文是惰性的：只有当第一个组件消费它们时才会订阅 Core，并在最后一个组件离开后取消订阅。这些包括 `labelsContext`、`fullEntitiesContext`、`configEntriesContext`、`manifestsContext`、`triggerDescriptionsContext` 和 `conditionDescriptionsContext`。
+
+较旧的单值上下文，如 `localizeContext`、`themesContext` 和 `userContext`，已被弃用。请使用分组后的上下文。
+
+## 消费上下文
+
+请从 `src/common/decorators/consume` 导入 `consume`，而不是从 `@lit/context`。`@lit/context` 的版本会在每个被消费的上下文每次变化时都重新渲染组件。前端的版本将这一决定留给字段本身，并且 ESLint 会阻止使用另一个版本。
+
+```ts
+@state()
+@consume({ context: labelsContext, subscribe: true })
+private _labels?: LabelRegistryEntry[];
+```
+
+如何组合这些装饰器决定了组件何时渲染：
+
+- `@state()` 搭配 `@consume`：上下文变化时组件重新渲染。
+- `@state()` 搭配 `@consume` 和 `@transform`：仅当转换后的值变化时组件才重新渲染。
+- 仅使用 `@consume`：字段保持最新，但从不触发渲染。适用于只在事件处理器中读取的值，例如 `apiContext`。
+
+要从分组上下文中取出单个值，请添加来自 `src/common/decorators/transform` 的 `@transform`：
+
+```ts
+@state()
+@consume({ context: uiContext, subscribe: true })
+@transform<HomeAssistantUI, Themes>({
+  transformer: ({ themes }) => themes,
+})
+private _themes!: Themes;
+```
+
+### 单个实体
+
+对于显示单个实体的组件，[`src/common/decorators/consume-context-entry.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/decorators/consume-context-entry.ts) 提供了一些辅助函数，可以跟踪组件上持有的实体 ID（entity ID）：
+
+```ts
+@state()
+@consumeEntityState({ entityIdPath: ["_config", "entity"] })
+private _stateObj?: HassEntity;
+
+@state()
+@consumeEntityRegistryEntry({ entityIdPath: ["_config", "entity"] })
+private _entity?: EntityRegistryDisplayEntry;
+
+@state() @consumeLocalize()
+private _localize!: LocalizeFunc;
+```
+
+`consumeEntityStates` 对一组实体 ID 执行相同的操作，并且当这些实体都没有变化时保留之前的记录。
+
+[`src/panels/lovelace/cards/hui-button-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-button-card.ts) 中的按钮卡片是使用上下文而非 `hass` 的组件的参考示例。
+
+### 在响应式控制器中
+
+响应式控制器（reactive controller）继承 `ContextController` 并使用 `consumeContext()` 声明其字段，两者均来自 [`src/common/decorators/consume.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/decorators/consume.ts)。`@state()` 和 `@transform` 在控制器上不起作用：当宿主需要渲染时，请调用 `host.requestUpdate()`。[`src/data/service-info-controller.ts`](https://github.com/home-assistant/frontend/blob/dev/src/data/service-info-controller.ts) 是一个示例。
+
+## 前端之外
+
+自定义卡片和面板也可以请求上下文，无需从前端导入任何内容，只需触发一个 `context-request` 事件即可。[自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card/#get-only-the-data-you-need)展示了具体做法。
+
+`hass` 本身的方法和属性列在 [hass 对象参考](https://www.hasscn.top/contributors/frontend/reference/hass-object/)中。
+
+---
+
+# 数据层
+
+> 前端如何与 Core 通信。src/data 中的 WebSocket 命令、订阅和集合，以及组件如何使用它们。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/data/
+
+前端所了解的关于 Home Assistant 的一切都通过一条 WebSocket 连接传输，由 [`home-assistant-js-websocket`](https://github.com/home-assistant/home-assistant-js-websocket) 库管理。状态的核心部分，比如实体（entity）和注册表，通过 `hass` 和[上下文（contexts）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)获取。其余内容则由组件自行请求。
+
+## src/data
+
+与 Core 的所有通信都通过 [`src/data/`](https://github.com/home-assistant/frontend/tree/dev/src/data) 进行。每个文件或文件夹负责一个主题：它的类型，以及为它调用 Core 的函数。组件导入这些函数，而不是自己发送消息。这样就把每条消息的结构保存在一处，与它的类型放在一起。
+
+一个典型的数据模块包含一个与 Core 发送内容相匹配的类型，以及每个命令对应的函数：
+
+```ts
+export interface LabelRegistryEntry extends RegistryEntry {
+  label_id: string;
+  name: string;
+  icon: string | null;
+  color: string | null;
+  description: string | null;
+}
+
+export const createLabelRegistryEntry = (
+  hass: HomeAssistant,
+  values: LabelRegistryEntryMutableParams
+) =>
+  hass.callWS<LabelRegistryEntry>({
+    type: "config/label_registry/create",
+    ...values,
+  });
+```
+
+类型遵循拥有该数据的源头，即 Core 中的 WebSocket 命令，而不是某个组件恰好需要的内容。类型中的可选和可空字段与 Core 实际发送的内容保持一致。
+
+## 命令
+
+对于单次请求和应答，使用 `hass.callWS()`。它发送一条消息并返回结果的 promise。当 Core 报告失败时，它会以错误对象拒绝。
+
+```ts
+const labels = await hass.callWS<LabelRegistryEntry[]>({
+  type: "config/label_registry/list",
+});
+```
+
+`hass.callService()` 调用[动作（action）](https://www.hasscn.top/contributors/glossary/action/)，`hass.callApi()` 调用 REST API。新功能使用 WebSocket 命令，而不是 REST。
+
+## 订阅
+
+要与发生变化的内容保持同步，请使用订阅。之后 Core 会将每次变更推送到前端，直到你取消订阅。
+
+```ts
+export const subscribeFrontendUserData = (
+  conn: Connection,
+  key: string,
+  onChange: (data: { value: unknown }) => void
+) =>
+  conn.subscribeMessage(onChange, {
+    type: "frontend/subscribe_user_data",
+    key,
+  });
+```
+
+`subscribeMessage` 返回一个取消订阅函数的 promise。当数据不再需要时，务必调用它，否则 Core 会继续向已经不存在的组件发送更新。
+
+## 集合
+
+当多个组件需要相同的数据时，集合（collection）会在它们之间共享一个订阅。`home-assistant-js-websocket` 中的 `createCollection` 接受一个键、一个获取数据的函数，以及一个订阅更新的函数。每个订阅者都获得相同的数据。当最后一个订阅者离开后，与 Core 的订阅会在 5 秒的宽限期后关闭，这样马上返回的组件就不会重新建立新的订阅。
+
+```ts
+export const subscribeLabelRegistry = (
+  conn: Connection,
+  onChange: (labels: LabelRegistryEntry[]) => void
+) =>
+  createCollection<LabelRegistryEntry[]>(
+    "_labelRegistry",
+    fetchLabelRegistry,
+    subscribeLabelRegistryUpdates,
+    conn,
+    onChange
+  );
+```
+
+在这里，`subscribeLabelRegistryUpdates` 监听 `label_registry_updated` 事件，并在事件触发时重新获取列表。
+
+## 从组件中订阅
+
+[`src/mixins/subscribe-mixin.ts`](https://github.com/home-assistant/frontend/blob/dev/src/mixins/subscribe-mixin.ts) 中的 `SubscribeMixin` 会为你处理生命周期。从 `hassSubscribe()` 返回你的订阅。该 mixin 在组件已连接并拥有 `hass` 时进行订阅，在组件断开连接时取消订阅。
+
+```ts
+@customElement("ha-config-repairs-dashboard")
+class HaConfigRepairsDashboard extends SubscribeMixin(LitElement) {
+  @state() private _issues: RepairsIssue[] = [];
+
+  public hassSubscribe(): UnsubscribeFunc[] {
+    return [
+      subscribeRepairsIssueRegistry(this.hass.connection!, (repairs) => {
+        this._issues = repairs.issues;
+      }),
+    ];
+  }
+}
+```
+
+当订阅依赖于另一个属性时，请将该属性列在 `hassSubscribeRequiredHostProps` 中。mixin 会等到它被设置后再订阅。
+
+对于许多组件共享的数据，比如标签，建议使用[惰性上下文（lazy context）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/#the-contexts)，而不是每个组件各建一个订阅。
+
+## Core 中的新功能
+
+当你需要的数据尚不可用时，Core 需要一个新的 WebSocket 命令。[添加 WebSocket 命令](https://www.hasscn.top/contributors/frontend/extending/websocket-api/)展示了两侧的实现。
+
+---
+
+# 前端中的翻译
+
+> 前端文本存放的位置、如何在代码中使用它，以及 Core 和集成的文本如何进入界面。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/translations/
+
+前端被用于数十种语言，因此人们看到的任何文本都不会直接写在代码中。英文源文本存放在一个文件中，由社区将其翻译成其他所有语言。
+
+## 文本存放的位置
+
+- **前端文本**位于 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json)。它是仓库中唯一的翻译文件。当它在 `dev` 分支上发生变更时，会被上传到 [Lokalise](https://www.hasscn.top/contributors/glossary/lokalise/)，翻译人员在那里进行翻译工作。翻译结果会以每夜构建的形式返回。
+- **来自 Core 和集成的文本**，比如实体（entity）名称、状态（state）以及配置流程的各个步骤，来自每个集成的 `strings.json`。前端在运行时从 Core 加载它。
+
+翻译人员永远不会看到你的代码，只会看到字符串及其键。[让你的字符串可翻译](https://www.hasscn.top/contributors/translate/guides/developers/)介绍了如何编写便于他们处理的字符串。
+
+## 使用字符串
+
+将英文文本添加到 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json) 中，放在一个标明其用途的键下面。下面这个是维修卡片上维修问题的数量，位于 `ui` > `card` > `repairs` 下：
+
+```json
+"count_issues": "{count} {count, plural, one {issue} other {issues}}"
+```
+
+然后通过 `localize` 使用它，传入完整的键和占位符的值：
+
+```ts
+this._localize("ui.card.repairs.count_issues", { count: 3 });
+```
+
+键会根据 `en.json` 进行类型检查，因此键中的拼写错误会导致类型检查失败。
+
+通过 `@consumeLocalize()` 从国际化上下文中获取 `localize`，或者在已经拥有 `hass` 的组件中从 `hass.localize` 获取。参见 [hass 对象与上下文](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)。
+
+### 占位符与复数
+
+字符串使用 [ICU 消息格式](https://formatjs.github.io/docs/core-concepts/icu-syntax/)。占位符放在花括号中，比如 `{count}`。上面示例中的 `plural` 形式会根据数字选择正确的词语。每种语言都有自己的复数规则，翻译人员会填写其语言所需的形式。
+
+始终翻译完整的句子，并为变化的部分使用占位符。绝不要用单独翻译的片段拼凑句子：其他语言中的语序是不同的。
+
+### 复用字符串
+
+当相同的文本已经存在时，指向它而不是重新编写。引用使用另一个键的路径，各部分之间用 `::` 分隔：
+
+```json
+{
+  "armed_home": "[%key:state_badge::alarm_control_panel::armed%]"
+}
+```
+
+每复用一个字符串，就意味着每种语言都少一个需要翻译的字符串。
+
+## 来自 Core 的文本
+
+来自集成的文本按类别按需加载。在使用某个类别的键之前，先加载该类别：
+
+```ts
+const localize = await hass.loadBackendTranslation("title");
+localize(`component.${domain}.title`);
+```
+
+后端键以 `component.<domain>.` 开头，后面是该集成的 `strings.json` 中的路径。
+
+前端文本的很大一部分，比如设置或仪表盘（dashboard）编辑器，被拆分成随其面板一起加载的片段。`hass.loadFragmentTranslation()` 会加载其中一个片段，例如当一个面板的对话框在另一个面板中打开时。
+
+## 在翻译环境下运行
+
+在开发过程中，除非你获取翻译，否则前端只有英文。在任何开发服务器上添加 `--fetch-translations`，例如 `pnpm dev --fetch-translations`。参见[设置环境](https://www.hasscn.top/contributors/frontend/development/environment/#translations)。
+
+要检查从右到左的布局，请将你的个人资料切换到从右到左的语言，如希伯来语或阿拉伯语，或者使用[画廊](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/)中的从右到左切换开关。
+
+---
+
+# 主题与设计令牌
+
+> 前端中每种颜色、尺寸和间距背后的 CSS 变量，以及用户主题如何改变它们。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/theming/
+
+前端中的每种颜色、间距、圆角和字体都来自 CSS 自定义属性（CSS custom property）。这正是主题得以实现的原因：主题改变这些变量，整个界面随之改变。这也是组件从不硬编码颜色的原因。
+
+## 设计令牌
+
+基础变量是[设计令牌](https://www.hasscn.top/contributors/glossary/design-token/)，全部以 `--ha-` 开头。它们定义在 [`src/resources/theme/`](https://github.com/home-assistant/frontend/tree/dev/src/resources/theme) 中：
+
+| 文件 | 令牌 |
+| --- | --- |
+| `core.globals.ts` | 间距（`--ha-space-1` 到 `--ha-space-20`，以 4 像素为步长）、圆角（`--ha-border-radius-*`）、边框宽度和动画时长（`--ha-animation-duration-*`） |
+| `typography.globals.ts` | 字体族、字号、字重和行高（`--ha-font-*`） |
+| `color/core.globals.ts` | 调色板，如 `--ha-color-primary-40` |
+| `color/semantic.globals.ts` | 按用途划分的颜色，如 `--ha-color-text-primary`、`--ha-color-fill-danger-loud-resting` 或 `--ha-color-border-neutral-quiet` |
+
+在组件中请使用语义颜色令牌，而不是调色板。语义令牌说明了颜色的用途，因此它可以随主题和深色模式变化，而你的组件无需感知。
+
+设计（Design）区域的[基础（Foundations）](https://www.hasscn.top/contributors/design/foundations/)部分展示了每个令牌及其在浅色和深色主题中的值：[颜色](https://www.hasscn.top/contributors/design/foundations/color/)、[排版](https://www.hasscn.top/contributors/design/foundations/typography/)和[间距](https://www.hasscn.top/contributors/design/foundations/spacing/)。
+
+## 主题变量
+
+没有 `--ha-` 前缀的旧变量，如 `--primary-color`、`--primary-text-color` 和 `--card-background-color`，仍然随处可见。它们定义在 [`src/resources/theme/color/color.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/color.globals.ts) 中，大多基于令牌之上，并且是大多数用户主题所设置的。当你更改使用这些变量的组件时，请保持它们正常工作。市场（Marketplace）区域中的[主题变量](https://www.hasscn.top/contributors/marketplace/reference/theme-variables/)为主题作者列出了这些变量，以及面向主题的组件变量。
+
+Web Awesome 组件有自己的变量，如 `--wa-color-brand-fill-loud`。[`src/resources/theme/color/wa.globals.ts`](https://github.com/home-assistant/frontend/blob/dev/src/resources/theme/color/wa.globals.ts) 将它们映射到 Home Assistant 令牌，因此 `ha-*` 包装组件也能跟随主题。
+
+## 在组件中使用它们
+
+```ts
+static styles = css`
+  :host {
+    display: block;
+    padding: var(--ha-space-4);
+    gap: var(--ha-space-2);
+    color: var(--primary-text-color);
+    background-color: var(--card-background-color);
+    border-radius: var(--ha-border-radius-lg);
+  }
+`;
+```
+
+## 主题如何应用
+
+[主题](https://www.hasscn.top/contributors/glossary/theme/)是一组带有值的变量。用户通过 Core 中的 `frontend` 集成以 YAML 定义主题，或者安装主题，并在个人资料中选择一个。主题可以在 `modes` 下为浅色和深色模式设置不同的值。
+
+[`src/common/dom/apply_themes_on_element.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/dom/apply_themes_on_element.ts) 中的 `applyThemesOnElement()` 将主题的变量设置到元素上。根元素将所选主题应用到整个应用。卡片将来自其自身 `theme` 选项的主题仅应用到该卡片。当主题包含深色模式的值时，在深色模式开启时这些值会叠加应用。
+
+对于默认主题，用户可以在个人资料中选择自己的主色和强调色。前端随后会根据这一种颜色计算出主色调色板以及匹配的文本颜色。
+
+## 从右到左
+
+有些语言是从右向左书写的。前端会为它们翻转布局。请使用逻辑 CSS 属性，如 `margin-inline-start` 和 `padding-inline-end`，这样你的组件也会随之翻转。请使用从右到左的语言，或[画廊](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/)中的从右到左切换开关来检查你的更改。
+
+---
+
+# 路由与面板
+
+> URL 如何变成一个页面。Core 注册的面板、面板解析器，以及每个面板内部的路由器。
+
+Source: https://www.hasscn.top/contributors/frontend/architecture/routing-and-panels/
+
+Home Assistant 中的每个页面都是一个[面板（panel）](https://www.hasscn.top/contributors/glossary/panel/)：仪表盘、地图、日志簿、设置，或者由某个集成添加的面板。侧边栏列出这些面板，URL 的第一部分决定选择哪一个。
+
+## 面板来自 Core
+
+Core 决定存在哪些面板。集成通过 `frontend` 集成的 `async_register_built_in_panel()` 注册面板，该函数接受渲染面板的前端组件名称、URL 路径、侧边栏标题和图标，以及是否仅管理员可见：
+
+```python
+from homeassistant.components import frontend
+
+frontend.async_register_built_in_panel(
+    hass,
+    component_name="logbook",
+    sidebar_title="logbook",
+    sidebar_icon="mdi:format-list-bulleted-type",
+)
+```
+
+如果没有指定 `frontend_url_path`，URL 路径就是组件名称，因此该面板会在 `/logbook` 打开。内置面板的侧边栏标题是一个翻译键。
+
+前端在启动时获取面板列表，它可以通过 `hass.panels` 或 `uiContext` 访问。
+
+`component_name` 指的是前端内置的面板。要在不修改前端的情况下添加面板，集成和用户可以注册自定义面板。参见[自定义面板](https://www.hasscn.top/contributors/frontend/custom-ui/panel/)。
+
+## 从 URL 到面板
+
+前端中的路由是分散式的。每一层只知道自己负责的 URL 部分，并将其余部分向下传递。
+
+1. [`src/layouts/partial-panel-resolver.ts`](https://github.com/home-assistant/frontend/blob/dev/src/layouts/partial-panel-resolver.ts) 查看 URL 的第一部分，找到为其注册的面板，并加载其组件的代码。组件名称到代码的映射位于该文件的顶部，因此添加内置面板意味着在那里添加它。
+2. 面板会获得一个 `route` 属性：一个包含 `prefix`（已经处理过的 URL 部分）和 `path`（剩余部分）的对象。
+3. 拥有自己页面的面板会将路由的剩余部分传递给它们，依此类推。
+
+面板只有在有人打开它们时才会被加载。
+
+## 面板内部的路由器
+
+拥有多个页面的面板会继承 [`src/layouts/hass-router-page.ts`](https://github.com/home-assistant/frontend/blob/dev/src/layouts/hass-router-page.ts) 中的 `HassRouterPage`。它将 URL 的下一部分映射到一个元素，并在首次需要时加载该元素的代码：
+
+```ts
+@customElement("ha-panel-profile")
+class HaPanelProfile extends HassRouterPage {
+  @property({ attribute: false }) public hass!: HomeAssistant;
+
+  @property({ type: Boolean }) public narrow = false;
+
+  protected routerOptions: RouterOptions = {
+    defaultPage: "dashboard",
+    routes: {
+      dashboard: {
+        tag: "ha-profile-dashboard",
+        load: () => import("./ha-profile-dashboard"),
+      },
+      security: {
+        tag: "ha-profile-section-security",
+        load: () => import("./ha-profile-section-security"),
+      },
+    },
+  };
+
+  protected updatePageEl(el) {
+    el.route = this.routeTail;
+    el.hass = this.hass;
+    el.narrow = this.narrow;
+  }
+}
+```
+
+`updatePageEl()` 传递页面所需的数据，包括 `routeTail`，即留给页面的路由剩余部分。`RouterOptions` 还有更多选项，比如用于将页面保留在内存中的 `cacheAll`，以及用于重定向的 `beforeRender`。
+
+## 导航
+
+要跳转到另一个页面，请使用 [`src/common/navigate.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/navigate.ts) 中的 `navigate()`，切勿直接使用 `history.pushState`：
+
+```ts
+navigate("/config/areas/dashboard");
+navigate("/config/areas/dashboard", { replace: true });
+```
+
+`navigate()` 会更新历史记录，通知应用位置已更改，并遵守未保存更改的守卫（guard）。
+
+---
+
+# 自定义卡片及更多
+
+> 构建卡片、卡片功能、徽章、视图、仪表盘策略和面板，供用户加载到自己的 Home Assistant 中，而无需修改前端。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/
+
+内置卡片已经覆盖了很多场景，但并非全部。你无需改动[前端仓库](https://github.com/home-assistant/frontend)，就可以向界面添加自己的构建模块：编写一个 JavaScript 文件，将其加载到 Home Assistant 中，然后像使用内置卡片一样使用它。成千上万的社区卡片就是这样制作的。
+
+## 你可以构建什么
+
+| 内容 | 显示位置 | 页面 |
+| --- | --- | --- |
+| [卡片（Card）](https://www.hasscn.top/contributors/glossary/card/) | 在仪表盘上，与内置卡片并列 | [自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card/) |
+| [卡片功能（Card feature）](https://www.hasscn.top/contributors/glossary/card-feature/) | 在磁贴卡片或其他支持功能的卡片内部 | [自定义卡片功能](https://www.hasscn.top/contributors/frontend/custom-ui/card-feature/) |
+| [徽章（Badge）](https://www.hasscn.top/contributors/glossary/badge/) | 在视图顶部 | [自定义徽章](https://www.hasscn.top/contributors/frontend/custom-ui/badge/) |
+| [策略（Strategy）](https://www.hasscn.top/contributors/glossary/strategy/) | 通过代码生成整个仪表盘、视图或区块 | [自定义策略](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/) |
+| [视图（View）](https://www.hasscn.top/contributors/glossary/view/)布局 | 以你自己的方式排列视图中的卡片 | [自定义视图](https://www.hasscn.top/contributors/frontend/custom-ui/view/) |
+| [面板（Panel）](https://www.hasscn.top/contributors/glossary/panel/) | 一个独立的全页面，并在侧边栏中有链接 | [自定义面板](https://www.hasscn.top/contributors/frontend/custom-ui/panel/) |
+
+## 工作原理
+
+它们中的每一个都是一个[自定义元素（custom element）](https://developer.mozilla.org/docs/Web/API/Web_components/Using_custom_elements)：一个以标签名注册的 JavaScript 类。Home Assistant 创建该元素，在其上设置属性，例如 `hass` 和配置，然后将其放到页面上。元素渲染什么内容完全由你决定。
+
+1. 在 JavaScript 模块中**编写元素**，并使用 `customElements.define()` 注册它。
+2. 将该模块作为[仪表盘资源](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)**加载**到 Home Assistant 中。面板则通过其自身的配置加载。
+3. 在仪表盘中使用 `custom:` 前缀来**使用它**，例如 `type: custom:my-card`。
+
+为了便于查找，你还可以注册你的元素，使其显示在卡片选择器、功能选择器或新建仪表盘对话框中，并为其选项提供可视化编辑器。
+
+## 使用哪些工具
+
+你可以使用任何能生成标准自定义元素的库，也可以完全不使用。这些页面上的示例使用纯 JavaScript，因此你可以直接复制并运行它们，无需构建步骤。
+
+对于更大的项目，[Lit](https://lit.dev/) 是一个不错的选择：前端本身就在使用它，因此[架构](https://www.hasscn.top/contributors/frontend/architecture/)页面上的模式可以直接套用。请将你自己的 Lit 副本或任何其他库打包进你的模块中。
+
+前端没有面向自定义卡片的公开组件库。前端仓库中没有任何内容将 `ha-*` 元素列为受支持，也没有承诺它们保持不变。它们只在前端需要时才会被加载，并且可能在任何版本中发生变化。如果你的卡片依赖其中某个元素，它可能会毫无预警地失效。
+
+`ha-card` 是实践中（而非纸面上）唯一的例外。它是内置卡片的容器，接受 `--ha-card-background` 和 `--ha-card-border-radius` 等卡片主题变量，并且大多数自定义卡片都会将其内容包裹在其中，正如[自定义卡片示例](https://www.hasscn.top/contributors/frontend/custom-ui/card/)所做的那样。使用它可以让你的卡片融入整体风格，但要知道它同样不提供任何保证。对于其他任何内容，例如选择器或表单字段，请自行构建或打包。要在你的卡片内显示内置卡片或某个标准对话框，请使用[卡片辅助工具（card helpers）](https://www.hasscn.top/contributors/frontend/custom-ui/card/#card-helpers)，前端会特意为自定义卡片加载它们。
+
+## 共享概念
+
+- **`hass`**：包含 Home Assistant 完整状态的对象。每次变化时，你的元素都会收到一个新的对象。[hass 对象参考](https://www.hasscn.top/contributors/frontend/reference/hass-object/)列出了其中的内容。
+- **`setConfig(config)`**：以你的卡片、徽章或功能的 YAML 配置被调用。当配置无效时抛出错误，Home Assistant 会将其显示给用户。
+- **`custom:` 前缀**：将你的元素与内置元素区分开。你的元素 `my-card` 以 `type: custom:my-card` 的形式使用。
+
+## 设计
+
+自定义卡片与内置卡片风格一致时效果最佳。使用[主题变量](https://www.hasscn.top/contributors/frontend/architecture/theming/)，例如 `--card-background-color` 和 `--primary-text-color`，使你的卡片遵循用户的主题和深色模式。设计板块的[仪表盘](https://www.hasscn.top/contributors/design/dashboards/)页面解释了内置卡片是如何设计的，以及为什么这样设计。
+
+## 分享你的作品
+
+要发布你所构建的内容，以便他人可以从 Marketplace 安装，请参阅[仪表盘卡片和插件](https://www.hasscn.top/contributors/marketplace/guides/dashboard/)。要让他人先在网页上试用你的卡片，请参阅[实时演示](https://www.hasscn.top/contributors/frontend/custom-ui/demo/)。
+
+你认为你的卡片应该进入前端本身吗？项目建议你先在 [Marketplace](https://www.hasscn.top/contributors/marketplace/) 上发布新卡片。你可以积累经验，并且能够更快地迭代。一旦它成熟并拥有用户群，请联系维护者，例如在 [Discord](https://www.home-assistant.io/join-chat/) 上的 [**#frontend**](https://discord.com/channels/330944238910963714/1475552784278360176) 频道，探讨它是否应该作为内置功能发布。
+
+---
+
+# 注册资源
+
+> 让你的 JavaScript 文件可供 Home Assistant 使用，并加载到每个仪表盘中。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/resources/
+
+在仪表盘可以使用你的卡片（card）、徽章（badge）、功能（feature）、视图（view）或策略（strategy）之前，Home Assistant 必须先加载它的 JavaScript。这需要两个步骤：提供文件，然后将其注册为资源。
+
+## 提供文件
+
+在 Home Assistant 配置文件夹中、`configuration.yaml` 旁边，创建一个名为 `www` 的文件夹。其中的文件会通过 `/local/` 路径提供，因此 `www/my-card.js` 会变成 `/local/my-card.js`。
+
+Home Assistant 只在启动时读取 `www` 文件夹。如果你刚刚创建了它，请重启一次 Home Assistant。
+
+> [!WARNING]
+> `www` 中的文件在提供时不需要身份验证。任何能访问你的 Home Assistant 的人都可以下载它们。不要把机密信息放在那里。
+
+你也可以从任何其他 URL 加载资源，比如你的项目发布的文件。
+
+## 注册资源
+
+默认情况下，资源在 UI 中管理：
+
+1. 前往 **设置** > **仪表盘**。
+2. 在右上角菜单中，选择 **资源**。
+3. 选择 **添加资源**，输入 URL，例如 `/local/my-card.js`，并选择 **JavaScript 模块**。
+
+资源会为所有仪表盘加载。更改资源后，请在浏览器中重新加载页面。你的浏览器可能会缓存旧文件：在 URL 中添加版本号，例如 `/local/my-card.js?v=2`，可以强制获取新副本。
+
+### 在 YAML 中
+
+要改为在 YAML 中管理资源，请在 `configuration.yaml` 的 `lovelace` 部分将 `resource_mode` 设置为 `yaml`，并在那里列出它们：
+
+```yaml
+lovelace:
+  resource_mode: yaml
+  resources:
+    - url: /local/my-card.js
+      type: module
+```
+
+使用 `resource_mode: yaml` 后，UI 中的 **资源** 页面将不再管理它们。更改后，请运行 `lovelace.reload_resources` [动作](https://www.hasscn.top/contributors/glossary/action/)，或重启 Home Assistant，然后在浏览器中重新加载页面。
+
+## 资源类型
+
+| 类型 | 用途 |
+| --- | --- |
+| `module` | JavaScript 模块。所有新内容都使用此类型。 |
+| `css` | 样式表。 |
+| `js` | 经典 JavaScript 文件，不使用 `import` 和 `export`。已弃用。 |
+| `html` | HTML 导入。已弃用，前端不再加载。 |
+
+对于新资源，UI 只提供 `module` 和 `css`。只有当现有资源已经具有该类型时，才会显示 `js` 和 `html`。
+
+在安全模式下，Home Assistant 不会加载任何资源，因此自定义卡片不会在那里显示。
+
+## 注册选择器
+
+某些注册只有在资源加载后才会生效：卡片选择器中的卡片、功能选择器中的功能，或新建仪表盘对话框中的仪表盘。如果你的没有显示，请检查资源是否已加载（在浏览器控制台中查找错误），然后重新加载页面并再次打开对话框。
+
+---
+
+# 自定义卡片
+
+> 构建你自己的仪表盘卡片。包括元素、其配置、在分区视图和瀑布流视图中的尺寸，以及前端提供的辅助工具。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/card/
+
+自定义卡片（custom card）是一个自定义元素，Home Assistant 会像内置卡片一样把它放在仪表盘上。它接收自己的配置和 Home Assistant 的状态，并渲染你想要的任何内容。
+
+## 第一个卡片
+
+在你的配置文件夹中创建 `www/state-card-example.js`：
+
+```js
+class StateCardExample extends HTMLElement {
+  // Called with the YAML configuration of the card. Throw an
+  // error and Home Assistant shows it instead of the card.
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error("You need to define an entity");
+    }
+    this._config = config;
+    this._render();
+  }
+
+  // Called with a new hass object on every change in the home.
+  set hass(hass) {
+    this._hass = hass;
+    this._render();
+  }
+
+  _render() {
+    if (!this._config || !this._hass) {
+      return;
+    }
+
+    const stateObj = this._hass.states[this._config.entity];
+    const state = stateObj
+      ? this._hass.formatEntityState(stateObj)
+      : "not found";
+
+    if (!this._content) {
+      this.innerHTML = `<ha-card><div class="content"></div></ha-card>`;
+      this._content = this.querySelector(".content");
+      this._content.style.padding = "16px";
+    }
+    this._content.textContent = `${this._config.entity} is ${state}`;
+  }
+
+  // Height in the masonry view, in units of 50 pixels.
+  getCardSize() {
+    return 1;
+  }
+
+  // Size in the grid of the sections view.
+  getGridOptions() {
+    return { columns: 6, rows: 1, min_rows: 1 };
+  }
+}
+
+customElements.define("state-card-example", StateCardExample);
+```
+
+[将其注册为资源](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)，URL 为 `/local/state-card-example.js`，类型为 **JavaScript module**。然后在 YAML 中把它添加到仪表盘：
+
+```yaml
+type: custom:state-card-example
+entity: light.living_room
+```
+
+你注册的标签名 `state-card-example` 会成为类型 `custom:state-card-example`。
+
+`ha-card` 是内置卡片用于背景、边框和阴影的元素。请使用它，这样你的卡片看起来与其他卡片一致，并遵循主题。与所有 `ha-*` 元素一样，它不是承诺的 API，请参阅[应使用哪些工具](https://www.hasscn.top/contributors/frontend/custom-ui/#which-tools-to-use)。
+
+## 卡片 API
+
+| 成员 | 必需 | 作用 |
+| --- | --- | --- |
+| `setConfig(config)` | 是 | 接收配置。调用频率低：在卡片创建时以及配置更改时调用。配置无效时抛出 `Error`。 |
+| `hass` | | 每当 Home Assistant 的状态变化时，都会设置一个新的 `hass` 对象。这很频繁。只更新发生变化的部分。 |
+| `getCardSize()` | | 卡片在瀑布流视图中的高度，可以是数字或数字的 Promise。1 代表 50 像素。默认为 1。 |
+| `getGridOptions()` | | 卡片在分区视图中的尺寸。 |
+| `preview` | | 当卡片显示在卡片编辑器中时，设置为 `true`。 |
+
+`hass` 对象在 [hass 对象参考](https://www.hasscn.top/contributors/frontend/reference/hass-object/)中有描述。它的格式化工具，如 `hass.formatEntityState()` 和 `hass.formatEntityName()`，会把状态和名称转换为用户语言和单位的文本。请使用它们，而不是直接显示原始状态。
+
+## 分区视图中的尺寸
+
+分区（section）是一个 12 列的网格。行高为 56 像素，行间距为 8 像素。`getGridOptions()` 告诉网格你的卡片默认多大，以及用户可以把它调整到多大：
+
+| 选项 | 默认值 | 含义 |
+| --- | --- | --- |
+| `columns` | `12` | 列数，或 `"full"` 表示全宽。 |
+| `rows` | `"auto"` | 行数。使用 `"auto"` 时，卡片与其内容一样高，且无法调整高度。 |
+| `min_columns`, `max_columns` | | 宽度限制。 |
+| `min_rows`, `max_rows` | | 高度限制。 |
+
+如果没有 `getGridOptions()`，卡片会占据分区的全部宽度，其高度随内容而定。
+
+`columns` 请使用 3 的倍数，例如 3、6、9 或 12。这样能与其他卡片对齐。`rows: 2` 的卡片高 120 像素：两行各 56 像素，加一个 8 像素的间距。
+
+```js
+getGridOptions() {
+  return { columns: 6, rows: 2, min_rows: 2 };
+}
+```
+
+## 瀑布流视图中的尺寸
+
+瀑布流（masonry）视图将卡片排列在列中，并使用 `getCardSize()` 来均匀分布它们。当你向另一个元素询问其尺寸时，请等待它被定义，因为卡片是懒加载的：
+
+```js
+await customElements.whenDefined(element.localName);
+return element.getCardSize();
+```
+
+## 只获取你需要的数据
+
+`hass` 在家中的每次状态变化时都会更新，即使你的卡片显示的内容没有变化。卡片可以改为只请求部分数据，方法是请求一个[上下文（context）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)。在卡片被添加到页面时触发 `context-request` 事件：
+
+```js
+connectedCallback() {
+  const event = new CustomEvent("context-request", {
+    bubbles: true,
+    composed: true,
+  });
+  event.context = "states";
+  event.subscribe = true;
+  event.callback = (states, unsubscribe) => {
+    this._unsubscribe = unsubscribe;
+    this._states = states;
+    this._render();
+  };
+  this.dispatchEvent(event);
+}
+
+disconnectedCallback() {
+  this._unsubscribe?.();
+  this._unsubscribe = undefined;
+}
+```
+
+回调会收到上下文的值，并且设置了 `subscribe` 后，每次变化时都会再次调用。卡片被移除时务必取消订阅。上下文的键，如 `states`、`entities`、`hassApi` 和 `hassInternationalization`，定义在 [`src/data/context/index.ts`](https://github.com/home-assistant/frontend/blob/dev/src/data/context/index.ts) 中。
+
+## 卡片辅助工具
+
+前端为自定义卡片提供了一些辅助工具，例如在你的卡片内创建一个内置卡片：
+
+```js
+const helpers = await window.loadCardHelpers();
+const card = helpers.createCardElement({
+  type: "tile",
+  entity: "light.living_room",
+});
+card.hass = this._hass;
+```
+
+`loadCardHelpers()` 在仪表盘面板加载后可用。它返回 `createCardElement`、`createBadgeElement`、`createRowElement`、`createHeaderFooterElement` 和 `createHuiElement`，对话框 `showAlertDialog`、`showConfirmationDialog`、`showPromptDialog` 和 `showEnterCodeDialog`，以及 `importMoreInfoControl`。以这种方式创建的卡片需要设置 `hass`，就像你自己的卡片一样。
+
+## 后续步骤
+
+- 添加可视化编辑器，并把你的卡片放入卡片选择器：[卡片编辑器和选择器](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/)。
+- 为平铺卡片添加快捷控制：[自定义卡片功能](https://www.hasscn.top/contributors/frontend/custom-ui/card-feature/)。
+
+---
+
+# 卡片编辑器与卡片选择器
+
+> 为你的自定义卡片提供可视化编辑器、合理的默认配置，并在卡片选择器及其建议中占有一席之地。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/
+
+人们期望无需编写 YAML 就能添加和设置卡片。你的自定义卡片也可以参与其中：它可以出现在卡片选择器中、以一个可用的配置起步，并拥有可视化编辑器。
+
+## 出现在卡片选择器中
+
+在你的模块中向 `window.customCards` 添加一个条目：
+
+```js
+window.customCards = window.customCards || [];
+window.customCards.push({
+  type: "state-card-example",
+  name: "State card",
+  description: "Shows the state of one entity.",
+  preview: true,
+  documentationURL: "https://example.com/state-card",
+});
+```
+
+| 键 | 必需 | 含义 |
+| --- | --- | --- |
+| `type` | 是 | 你的卡片的标签名，不带 `custom:`。 |
+| `name` | | 在选择器中显示的名称。 |
+| `description` | | 名称下方的一段简短描述。 |
+| `preview` | | 在选择器中显示卡片的实时预览。默认为 `false`。 |
+| `documentationURL` | | 在卡片编辑器中添加一个帮助链接。 |
+| `getEntitySuggestion` | | 为某个实体（entity）建议你的卡片。见下文。 |
+
+你的卡片会出现在选择器中一个专门展示社区卡片的区域。
+
+## 默认配置
+
+当有人选择了你的卡片时，Home Assistant 会向静态方法 `getStubConfig()` 请求一个起始配置。返回时不带 `type`：
+
+```js
+static getStubConfig(hass, entities, entitiesFallback) {
+  const light = entities.find((id) => id.startsWith("light."));
+  return { entity: light ?? "sun.sun" };
+}
+```
+
+`entities` 包含尚未添加到仪表盘（dashboard）的实体，`entitiesFallback` 则包含已添加的实体。两者都会排除不可用或未知的实体，因此任一列表都可能为空：请保留一个后备选项，例如示例中的 `sun.sun`。如果没有 `getStubConfig()`，卡片将仅以其类型启动。
+
+## 为实体建议你的卡片
+
+当有人在卡片选择器中选择一个实体时，Home Assistant 会为该实体建议一些卡片。你的卡片可以加入这些建议，在内置卡片下方的一个社区卡片区域中展示，方法是在其 `window.customCards` 条目上提供 `getEntitySuggestion`：
+
+```js
+getEntitySuggestion: (hass, entityId) => {
+  if (!entityId.startsWith("light.")) {
+    return null;
+  }
+  return {
+    config: { type: "custom:state-card-example", entity: entityId },
+  };
+},
+```
+
+当你的卡片不适合该实体时返回 `null`，否则返回一条建议，或针对多个变体返回一个建议列表。一条建议包含：
+
+- `config`（必需）：卡片的配置，包括带 `custom:` 的类型。
+- `label`：该变体的简短名称，显示在卡片名称之后。仅在返回多条建议时才设置它。
+
+只在有意义的地方建议你的卡片。请检查实体的域名（domain）、设备类（device class）或支持的功能特性。为每个实体都建议的卡片会让选择器对所有人来说都很嘈杂。
+
+## 基于表单的可视化编辑器
+
+对于大多数卡片，一个表单就足够了。从静态方法 `getConfigForm()` 返回一个 schema，Home Assistant 就会使用与内置卡片相同的控件来渲染表单：
+
+```js
+static getConfigForm() {
+  return {
+    schema: [
+      { name: "entity", required: true, selector: { entity: {} } },
+      {
+        type: "grid",
+        name: "",
+        schema: [
+          {
+            name: "name",
+            selector: { entity_name: {} },
+            context: { entity: "entity" },
+          },
+          {
+            name: "icon",
+            selector: { icon: {} },
+            context: { icon_entity: "entity" },
+          },
+        ],
+      },
+      { name: "theme", selector: { theme: {} } },
+    ],
+    computeLabel: (schema) =>
+      schema.name === "icon" ? "Special icon" : undefined,
+    computeHelper: (schema) =>
+      schema.name === "entity" ? "The entity to show" : undefined,
+    assertConfig: (config) => {
+      if (config.other_option) {
+        throw new Error("'other_option' is not supported.");
+      }
+    },
+  };
+}
+```
+
+| 键 | 必需 | 含义 |
+| --- | --- | --- |
+| `schema` | 是 | 表单的字段。 |
+| `computeLabel(schema, localize)` | | 返回字段的标签。返回 `undefined` 则使用默认值：Home Assistant 知道诸如 `entity` 等常见名称的标签。 |
+| `computeHelper(schema, localize)` | | 返回一段较长的帮助文本，显示在字段下方。 |
+| `assertConfig(config)` | | 在每次更改时调用。抛出错误即可关闭可视化编辑器，例如当有人编写了表单无法显示的 YAML 时。一旦错误消失，可视化编辑器会重新可用。 |
+
+### Schema 字段
+
+一个字段有一个 `name`（即配置中的键），并且通常有一个 `selector`（选择器）。[选择器（selector）](https://www.hasscn.top/contributors/glossary/selector/)与蓝图（blueprint）和自动化（automation）编辑器使用的相同，例如 `entity`、`number`、`boolean`、`select`、`icon` 和 `theme`。[选择器文档](https://www.home-assistant.io/docs/blueprint/selectors/)列出了所有选择器。字段的其他选项：
+
+- `required`：该字段必须有一个值。
+- `default`：字段留空时使用的值。
+- `context`：将该字段链接到另一个字段。在示例中，图标选择器会显示在 `entity` 字段中所选实体的图标。
+- `visible`：仅在满足某个条件时才显示该字段，例如 `{ field: "mode", value: "advanced" }`。
+
+字段可以分组：
+
+- `type: "grid"` 将其 `schema` 并排排列。可以设置 `column_min_width`（例如 `"200px"`）来控制何时换行。
+- `type: "expandable"` 将其 `schema` 放入一个可展开和收起的区域中，并带有一个 `title`。
+
+两者都有一个 `name` 和一个 `flatten` 选项。当设置 `flatten: true` 或 `name` 为空时，该组的值会进入主配置；否则它们会进入该名称下的一个子对象。完整的选项集见 [`src/components/ha-form/types.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/ha-form/types.ts)。
+
+### 实体名称
+
+示例中的 `entity_name` 选择器让人们可以选择实体的命名方式：使用实体自身的名称、其设备、区域（area）或楼层，或者使用他们自己输入的文本。它的值正是 `hass.formatEntityName()` 所接受的格式，因此可以直接传递：
+
+```js
+const name = this._hass.formatEntityName(stateObj, this._config.name);
+```
+
+该选择器有两个自己的选项：
+
+- `entity_id`：用于预览名称的固定实体，而不是来自 `context.entity` 的实体。
+- `default_name`：在字段尚无已配置的值（`undefined`）时显示的值。它接受与值相同的形态：一个字符串、一个名称项，或它们的列表。
+
+关于它能做什么，请参阅 [hass 对象参考](https://www.hasscn.top/contributors/frontend/reference/hass-object/#formatentityname)。
+
+## 自定义可视化编辑器
+
+当表单不够用时，可以编写你自己的编辑器元素，并从静态方法 `getConfigElement()` 中返回它：
+
+```js
+static getConfigElement() {
+  return document.createElement("state-card-example-editor");
+}
+```
+
+Home Assistant 会以配置调用编辑器上的 `setConfig()`，并在其上设置 `hass`，就像对卡片一样。如果你的编辑器有一个 `lovelace` 属性，Home Assistant 也会设置它，其中包含关于仪表盘的信息。没有该属性的普通元素则不会获得它。当用户更改了某些内容时，触发一个带有完整新配置的 `config-changed` 事件：
+
+```js
+class StateCardExampleEditor extends HTMLElement {
+  setConfig(config) {
+    this._config = config;
+  }
+
+  set hass(hass) {
+    this._hass = hass;
+  }
+
+  _changed(newConfig) {
+    this.dispatchEvent(
+      new CustomEvent("config-changed", {
+        detail: { config: newConfig },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+}
+
+customElements.define(
+  "state-card-example-editor",
+  StateCardExampleEditor
+);
+```
+
+当卡片两者兼有时，会使用 `getConfigElement()`。
+
+---
+
+# 自定义卡片功能
+
+> 为磁贴卡片及其他支持功能的卡片添加你自己的快捷控制。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/card-feature/
+
+[卡片功能（card feature）](https://www.hasscn.top/contributors/glossary/card-feature/)是磁贴卡片底部的小型控件：亮度滑块、一排风扇速度、启动扫地机器人的按钮。内置功能覆盖了许多实体（entity），你也可以添加自己的功能。功能是一种自定义元素，与[自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card/)类似，但更小。
+
+## 一个示例
+
+以下功能为[按钮实体（button entity）](https://www.hasscn.top/contributors/core/entities/button/)添加一个 **Press** 按钮：
+
+```js
+const supportsButtonPress = (hass, context) => {
+  const entityId = context.entity_id;
+  return Boolean(entityId?.startsWith("button.") && hass.states[entityId]);
+};
+
+class ButtonPressCardFeature extends HTMLElement {
+  setConfig(config) {
+    if (!config) {
+      throw new Error("Invalid configuration");
+    }
+    this._config = config;
+    this._render();
+  }
+
+  set hass(hass) {
+    this._hass = hass;
+    this._render();
+  }
+
+  set context(context) {
+    this._context = context;
+    this._render();
+  }
+
+  static getStubConfig() {
+    return { type: "custom:button-press-card-feature", label: "Press" };
+  }
+
+  _render() {
+    if (!this._config || !this._hass || !this._context) {
+      return;
+    }
+    if (!supportsButtonPress(this._hass, this._context)) {
+      // Forget the button, so it is created again when the entity is back
+      this.replaceChildren();
+      this._button = undefined;
+      return;
+    }
+    if (!this._button) {
+      this._button = document.createElement("button");
+      this._button.style.cssText =
+        "width: 100%; height: var(--feature-height, 42px);" +
+        "border: none; border-radius: var(--feature-border-radius, 12px);";
+      this._button.addEventListener("click", (ev) => this._press(ev));
+      this.replaceChildren(this._button);
+    }
+    this._button.textContent = this._config.label || "Press";
+  }
+
+  _press(ev) {
+    ev.stopPropagation();
+    this._hass.callService("button", "press", {
+      entity_id: this._context.entity_id,
+    });
+  }
+}
+
+customElements.define(
+  "button-press-card-feature",
+  ButtonPressCardFeature
+);
+
+window.customCardFeatures = window.customCardFeatures || [];
+window.customCardFeatures.push({
+  type: "button-press-card-feature",
+  name: "Button press",
+  isSupported: supportsButtonPress,
+  configurable: true,
+});
+```
+
+将该文件作为[资源（resource）](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)加载，并将该功能添加到磁贴卡片中：
+
+```yaml
+type: tile
+entity: button.restart_router
+features:
+  - type: custom:button-press-card-feature
+    label: Restart
+```
+
+要像 `_press()` 那样阻止事件向上冒泡，否则下层的卡片也会处理该事件并打开更多信息对话框。
+
+## 功能会接收到什么
+
+- `setConfig(config)`：该功能的配置，包含其 `type`。
+- `hass`：Home Assistant 的完整状态，每次变化时都会设置。
+- `context`：功能所在的卡片所针对的对象。当卡片显示实体时，它包含 `entity_id`；当卡片显示区域（area）时，它包含 `area_id`。
+
+## 注册功能
+
+要让你的功能出现在卡片编辑器的功能选择器中，需向 `window.customCardFeatures` 推送一个条目：
+
+| 键 | 必需 | 含义 |
+| --- | --- | --- |
+| `type` | 是 | 你的功能的标签名，不含 `custom:`。 |
+| `name` | | 在选择器中显示的名称。 |
+| `isSupported(hass, context)` | | 返回该功能是否适用于它将被放入的卡片。只有当此方法返回 `true` 时，选择器才会提供该功能。 |
+| `configurable` | | 当该功能有可编辑的选项时，设置为 `true`。默认为 `false`。 |
+
+务必定义 `isSupported`。否则，该功能会为每个实体提供，包括那些它对其毫无作用的实体。
+
+功能可以拥有可视化编辑器，就像卡片一样：静态方法 `getConfigElement()` 和 `getConfigForm()` 的用法与[自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/)相同。`getStubConfig(hass, context)` 返回新功能的初始配置，包括其 `type`。
+
+## 融入界面
+
+功能所处的空间很紧凑。请使用与内置功能相同的变量，这样你的功能才能与它们对齐：
+
+| 变量 | 默认值 | 用途 |
+| --- | --- | --- |
+| `--feature-height` | `42px` | 控件的高度。 |
+| `--feature-border-radius` | `12px` | 按钮和滑块的圆角。 |
+| `--feature-button-spacing` | `12px` | 按钮之间的间距。 |
+
+---
+
+# 自定义徽章（badge）
+
+> 为仪表盘视图顶部构建你自己的徽章。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/badge/
+
+[徽章（badge）](https://www.hasscn.top/contributors/glossary/badge/)是视图顶部、卡片上方的小胶囊。它们可以一目了然地显示某个状态，比如室外温度或亮着的灯的数量。自定义徽章的构建方式与[自定义卡片（card）](https://www.hasscn.top/contributors/frontend/custom-ui/card/)相同，只是更小。
+
+## 示例
+
+```js
+class TextBadge extends HTMLElement {
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error("You need to define an entity");
+    }
+    this._config = config;
+    this._render();
+  }
+
+  set hass(hass) {
+    this._hass = hass;
+    this._render();
+  }
+
+  _render() {
+    if (!this._config || !this._hass) {
+      return;
+    }
+    const stateObj = this._hass.states[this._config.entity];
+    this.textContent = stateObj
+      ? this._hass.formatEntityState(stateObj)
+      : "Unavailable";
+  }
+}
+
+customElements.define("text-badge", TextBadge);
+```
+
+将其作为[资源（resource）](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)加载，并添加到视图中：
+
+```yaml
+views:
+  - title: Home
+    badges:
+      - type: custom:text-badge
+        entity: sensor.outside_temperature
+```
+
+## 徽章会获得什么
+
+- `setConfig(config)`：徽章的配置。如果配置无效，请抛出错误，Home Assistant 将显示一个错误徽章。
+- `hass`：Home Assistant 的完整状态，每次变化时都会更新。
+- `preview`：当徽章显示在徽章编辑器中时为 `true`。
+
+## 徽章选择器和编辑器
+
+要在徽章选择器中显示你的徽章，请向 `window.customBadges` 推送一个条目：
+
+```js
+window.customBadges = window.customBadges || [];
+window.customBadges.push({
+  type: "text-badge",
+  name: "Text badge",
+  description: "Shows the state of an entity as text.",
+  preview: true,
+  documentationURL: "https://example.com/text-badge",
+});
+```
+
+这些键与[卡片选择器中的卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/#show-up-in-the-card-picker)相同，并且徽章还可以通过 `getEntitySuggestion` 为实体（entity）推荐自己。
+
+徽章也可以拥有可视化编辑器和默认配置。静态方法 `getStubConfig()`、`getConfigForm()` 和 `getConfigElement()` 的工作方式与[自定义卡片](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/)完全相同。
+
+---
+
+# 自定义策略
+
+> 从代码生成整个仪表盘、视图或分区，并在仪表盘编辑器中提供它。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/strategy/
+
+[策略（strategy）](https://www.hasscn.top/contributors/glossary/strategy/)是一段用于生成仪表盘配置的代码。仪表盘不再是一列卡片，而是声明“使用这个策略”，策略会在每次仪表盘加载时根据家中的内容生成卡片。Home Assistant 为你构建的**概览**仪表盘、区域仪表盘、地图和能源仪表盘都是策略。
+
+共有三种类型：
+
+- **仪表盘策略（dashboard strategy）**生成整个仪表盘及其所有视图。
+- **视图策略（view strategy）**生成一个视图。
+- **分区策略（section strategy）**在分区视图中生成一个分区。
+
+它们协同工作。仪表盘策略通常会生成一个视图列表，每个视图都使用一个视图策略，这样每个视图只有在有人打开时才会被构建。
+
+## 策略的工作原理
+
+策略是一个带有静态 `generate()` 方法的自定义元素。它接收策略配置和 `hass`，并返回它所生成内容的配置：仪表盘、视图或分区。
+
+标签名决定了类型：`ll-strategy-dashboard-<name>`、`ll-strategy-view-<name>` 或 `ll-strategy-section-<name>`。`<name>` 是配置中 `custom:` 后面的部分。`strategy` 部分中的所有内容，包括你自己的选项，都会作为 `config` 传递给 `generate()`。
+
+像自定义卡片一样，将你的策略作为[资源](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)加载。
+
+[内置策略](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies)是很好的示例。[地图仪表盘策略](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts)是一个较小的示例。
+
+## 仪表盘策略
+
+仪表盘策略返回整个仪表盘的配置：
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static async generate(config, hass) {
+    const name = hass.config.location_name || "Home Assistant";
+
+    return {
+      title: config.title || "My demo dashboard",
+      views: [
+        {
+          title: "Home",
+          path: "home",
+          cards: [
+            { type: "markdown", content: `# Welcome to ${name}` },
+            { type: "entities", entities: ["sun.sun"] },
+          ],
+        },
+      ],
+    };
+  }
+}
+
+customElements.define(
+  "ll-strategy-dashboard-my-demo",
+  MyDemoDashboardStrategy
+);
+```
+
+将其用作仪表盘的配置：
+
+```yaml
+strategy:
+  type: custom:my-demo
+  title: Generated dashboard
+```
+
+使用 `strategyType: "dashboard"` [注册它](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#register-your-strategy)，用户就可以在添加仪表盘的对话框中的**社区仪表盘**下选择它。
+
+### 建议标题和图标
+
+仪表盘策略可以通过静态的 `getCreateSuggestions(hass)` 为新仪表盘建议标题和图标。用户仍然可以在创建之前更改这两项。
+
+```js
+static getCreateSuggestions(hass) {
+  return { title: "My demo dashboard", icon: "mdi:view-dashboard" };
+}
+```
+
+## 视图策略
+
+视图策略返回一个视图的配置。可以在任何仪表盘的视图中使用它：
+
+```yaml
+views:
+  - strategy:
+      type: custom:my-area
+      area: living_room
+```
+
+下面的视图策略显示一个区域（area）的实体（entity）。它上面的仪表盘策略为每个区域创建一个使用该视图策略的视图。`hass.areas`、`hass.devices` 和 `hass.entities` 中保存着注册表，因此两者都不需要获取任何数据。
+
+```js
+class MyAreaDashboardStrategy extends HTMLElement {
+  static async generate(config, hass) {
+    return {
+      title: config.title || "Areas",
+      views: Object.values(hass.areas).map((area) => ({
+        title: area.name,
+        path: area.area_id,
+        strategy: { type: "custom:my-area", area: area.area_id },
+      })),
+    };
+  }
+}
+
+class MyAreaViewStrategy extends HTMLElement {
+  static async generate(config, hass) {
+    const areaId = config.area;
+    const areaDevices = new Set(
+      Object.values(hass.devices)
+        .filter((device) => device.area_id === areaId)
+        .map((device) => device.id)
+    );
+
+    const cards = Object.values(hass.entities)
+      .filter(
+        (entity) =>
+          entity.area_id === areaId ||
+          (!entity.area_id && areaDevices.has(entity.device_id))
+      )
+      .map((entity) => ({ type: "tile", entity: entity.entity_id }));
+
+    return { cards: [{ type: "grid", cards }] };
+  }
+}
+
+customElements.define(
+  "ll-strategy-dashboard-my-area",
+  MyAreaDashboardStrategy
+);
+customElements.define("ll-strategy-view-my-area", MyAreaViewStrategy);
+```
+
+两者都使用名称 `my-area`：一个作为仪表盘策略，一个作为视图策略。这是允许的，因为类型是标签名的一部分。
+
+## 分区策略
+
+分区策略返回一个分区及其卡片的配置。在分区视图中使用它，与常规分区并列：
+
+```yaml
+views:
+  - type: sections
+    sections:
+      - strategy:
+          type: custom:my-domain
+          domain: light
+```
+
+下面的分区策略为某个域（domain）的每个已注册实体显示一个磁贴，例如所有灯：
+
+```js
+class MyDomainSectionStrategy extends HTMLElement {
+  static async generate(config, hass) {
+    const cards = Object.keys(hass.entities)
+      .filter((entityId) => entityId.startsWith(`${config.domain}.`))
+      .map((entityId) => ({ type: "tile", entity: entityId }));
+
+    return { type: "grid", cards };
+  }
+}
+
+customElements.define(
+  "ll-strategy-section-my-domain",
+  MyDomainSectionStrategy
+);
+```
+
+使用 `strategyType: "section"` [注册它](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#register-your-strategy)，用户就可以在创建分区并选择**自动分区**时，在**社区分区**下选择它。选择后，分区编辑器会打开你的[设置](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#settings)。
+
+### 显示预览
+
+对话框将每个分区策略显示为带有实时预览的磁贴。要获得预览，请添加一个静态的 `getStubConfig(hass)`，返回一个带有良好默认值的策略配置。它可以是异步的。对话框将其传递给 `generate()` 以渲染预览，新分区也以该配置开始。
+
+```js
+static getStubConfig(hass) {
+  return { type: "custom:my-domain", domain: "light" };
+}
+```
+
+在 `type` 中包含 `custom:`，就像在配置中一样。如果没有 `getStubConfig()`，或者它抛出异常，磁贴将不显示预览。选择在大多数家庭中都能显示内容的默认值。
+
+## 注册你的策略
+
+在 `window.customStrategies` 中注册你的策略，用户就可以在仪表盘编辑器中无需编写任何 YAML 即可选择它：
+
+```js
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+});
+```
+
+| 键 | 必需 | 含义 |
+| --- | --- | --- |
+| `type` | 是 | 策略的名称，不含 `custom:`。 |
+| `strategyType` | 是 | `"dashboard"` 或 `"section"`。 |
+| `name` | | 对话框中的名称。 |
+| `description` | | 名称下方的简短描述。 |
+| `documentationURL` | | 指向你的文档的链接。前端目前尚未在任何地方显示它。 |
+
+视图策略目前还不能在编辑器中选择，因此无需注册它们。
+
+对话框必须加载资源才能看到它。添加或更新后，重新加载页面并再次打开对话框。
+
+## 何时再次生成
+
+策略在仪表盘加载时运行。默认情况下，当实体、设备、区域或楼层注册表发生变化时，它会再次运行，因此新设备无需重新加载页面即可显示。状态（state）变化不会触发它。
+
+要改变这一行为，可以添加一个静态的 `registryDependencies`，列出你的策略所依赖的注册表：可以是 `entities`、`devices`、`areas`、`floors`、`labels` 和 `panels` 中的任意组合。对于永远不需要再次运行的策略，使用空列表。若要完全控制，可以添加一个静态的 `shouldRegenerate(config, oldHass, newHass)`，当策略应该再次运行时返回 `true`。
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static registryDependencies = ["areas"];
+
+  static async generate(config, hass) {
+    // ...
+  }
+}
+```
+
+## 设置
+
+策略可以为其选项提供一个可视化编辑器。从静态的 `getConfigElement()` 返回一个编辑器元素。它的工作方式类似于[卡片编辑器](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/#a-visual-editor-of-your-own)：Home Assistant 会使用策略配置调用 `setConfig()` 并设置 `hass`，编辑器则通过 `config-changed` 事件发出新的配置。
+
+为每个分区策略提供一个编辑器：这是用户在你的对话框中选择分区后首先看到的内容。如果没有编辑器，他们只能看到 YAML 编辑器。
+
+```js
+class MyDomainSectionStrategy extends HTMLElement {
+  static getConfigElement() {
+    return document.createElement("my-domain-strategy-editor");
+  }
+
+  static async generate(config, hass) {
+    // ...
+  }
+}
+```
+
+仪表盘策略还有两个静态选项：
+
+- `configRequired = true`：策略在没有设置的情况下无法工作。Home Assistant 会在创建仪表盘之前显示编辑器。
+- `noEditor = true`：策略没有需要编辑的设置。
+
+## 提示
+
+- 保持 `generate()` 的速度。它在每次加载时都会运行，仪表盘会等待它完成。
+- `hass` 中已经以简短形式包含了区域、设备和实体。对于它没有的数据，例如完整的实体注册表条目，请使用 `hass.callWS()`。在仪表盘策略中只调用一次，并通过配置将结果传递给你的视图策略。
+- 策略可以使用任何卡片，包括你自己的自定义卡片。
+- 为策略编写测试。它们是从数据到配置的纯函数，因此很容易测试。
+
+---
+
+# 自定义视图
+
+> 编写自己的视图布局，以内置视图无法实现的方式排列仪表盘视图中的卡片。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/view/
+
+[视图](https://www.hasscn.top/contributors/glossary/view/)决定其卡片的排列方式。内置的视图类型包括 sections、masonry、sidebar 和 panel。自定义视图类型让你可以编写自己的布局，例如自由画布或固定网格。
+
+Home Assistant 仍会创建卡片和徽章（badge），并保持它们处于最新状态。你的视图只负责放置它们。
+
+> [!NOTE]
+> 想通过代码生成视图中的卡片？那是[视图策略（view strategy）](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#a-view-strategy)，而不是自定义视图。
+
+## 一个示例
+
+```js
+class MyNewView extends HTMLElement {
+  setConfig(config) {
+    this._config = config;
+  }
+
+  set cards(cards) {
+    this._cards = cards;
+    this._render();
+  }
+
+  _render() {
+    this.style.display = "grid";
+    this.style.gridTemplateColumns = "repeat(auto-fill, minmax(300px, 1fr))";
+    this.style.gap = "8px";
+    this.replaceChildren(...this._cards);
+  }
+}
+
+customElements.define("my-new-view", MyNewView);
+```
+
+将其作为[资源（resource）](https://www.hasscn.top/contributors/frontend/custom-ui/resources/)加载，并将其设置为某个视图的类型：
+
+```yaml
+views:
+  - title: Home
+    type: custom:my-new-view
+    cards:
+      - type: tile
+        entity: light.living_room
+```
+
+## 视图会获得什么
+
+| 属性 | 说明 |
+| --- | --- |
+| `setConfig(config)` | 视图的配置。 |
+| `hass` | Home Assistant 的完整状态。 |
+| `lovelace` | 仪表盘：其配置、是否处于编辑模式，以及保存配置的函数。 |
+| `narrow` | 在窄屏上为 `true`。 |
+| `path` | 视图在仪表盘配置中的位置，例如 `["views", 0]`。 |
+| `cards` | 卡片元素，已准备好放置。 |
+| `badges` | 徽章元素。 |
+
+[masonry 视图](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/views/hui-masonry-view.ts)是内置的视图元素示例。
+
+## 为每张卡片存储布局数据
+
+如果你的视图需要记住每张卡片的某些信息，例如位置或大小，可以将其存储在卡片的 `view_layout` 选项中。Home Assistant 会将其与卡片配置一起保存，其他情况下会忽略它：
+
+```yaml
+- type: tile
+  entity: light.living_room
+  view_layout:
+    column: 2
+    row: 1
+```
+
+## 编辑、删除和添加卡片
+
+在编辑模式下，你的视图可以通过触发事件来打开仪表盘编辑器的对话框。每个事件都带有卡片在仪表盘配置中的 `path`：即你视图的 `path`，后跟 `"cards"` 和卡片的索引。
+
+| 事件 | Detail | 作用 |
+| --- | --- | --- |
+| `ll-create-card` | `{ path: [...path, "cards"] }` | 卡片选择器，用于向视图添加卡片。 |
+| `ll-edit-card` | `{ path: [...path, "cards", index] }` | 卡片的编辑器。 |
+| `ll-delete-card` | `{ path: [...path, "cards", index], silent: false }` | 删除卡片。设置 `silent: false` 后，随后会显示一条带有撤销按钮的消息。 |
+
+触发事件时，要让它们能够冒泡并穿越 shadow root：
+
+```js
+this.dispatchEvent(
+  new CustomEvent("ll-edit-card", {
+    detail: { path: [...this.path, "cards", 3] },
+    bubbles: true,
+    composed: true,
+  })
+);
+```
+
+较旧的视图只发送由数字组成的路径，例如第一个视图的第四张卡片为 `[0, 3]`。目前这种方式仍然有效。
+
+---
+
+# 自定义面板
+
+> 在 Home Assistant 中添加一个属于你自己的整页内容，并在侧边栏中提供链接，可实时访问家庭状态。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/panel/
+
+[面板（panel）](https://www.hasscn.top/contributors/glossary/panel/)是 Home Assistant 中的一个整页内容，例如仪表盘、地图或设置。自定义面板是你自己的页面：一个自定义元素，它接收与其他部分相同的 `hass` 对象，并填满侧边栏旁边的整个屏幕。集成（integration）使用它们来展示自己的界面，用户也可以通过 YAML 添加它们。
+
+## 一个示例
+
+在你的配置文件夹中创建 `www/example-panel.js`：
+
+```js
+class ExamplePanel extends HTMLElement {
+  set hass(hass) {
+    this._hass = hass;
+    this._render();
+  }
+
+  set narrow(narrow) {
+    this._narrow = narrow;
+    this._render();
+  }
+
+  set panel(panel) {
+    this._panel = panel;
+    this._render();
+  }
+
+  _render() {
+    if (!this._hass || !this._panel) {
+      return;
+    }
+    const count = Object.keys(this._hass.states).length;
+    this.innerHTML = `
+      <p>There are ${count} entities.</p>
+      <p>The screen is ${this._narrow ? "" : "not "}narrow.</p>
+      <pre>${JSON.stringify(this._panel.config, null, 2)}</pre>
+    `;
+  }
+}
+
+customElements.define("example-panel", ExamplePanel);
+```
+
+然后在 `configuration.yaml` 中注册该面板，并重启 Home Assistant：
+
+```yaml
+panel_custom:
+  - name: example-panel
+    url_path: example
+    sidebar_title: Example panel
+    sidebar_icon: mdi:server
+    module_url: /local/example-panel.js
+    config:
+      hello: world
+```
+
+该面板将在 `/example` 打开，并在侧边栏中显示一个链接。
+
+## 配置选项
+
+| 选项 | 含义 |
+| --- | --- |
+| `name` | 你的元素的标签名称。必填。 |
+| `url_path` | 面板的 URL。默认为 `name`。必须唯一。 |
+| `sidebar_title` | 侧边栏中显示的文字。如果没有设置，面板将不会出现在侧边栏中。 |
+| `sidebar_icon` | 侧边栏中的图标。默认为 `mdi:bookmark`。 |
+| `module_url` | 你的 JavaScript 模块的 URL。设置此项、`js_url`，或两者都设置：如果都不设置，面板将不会被注册。 |
+| `js_url` | 传统 JavaScript 文件的 URL。当两者都设置时，前端的旧版构建使用此项，现代构建使用 `module_url`。 |
+| `config` | 你想传递给面板的任何内容。它会以 `panel.config` 的形式出现，旁边还有一个由 Home Assistant 添加的、包含面板设置的 `_panel_custom` 键。 |
+| `require_admin` | 仅向管理员显示该面板。默认为 `false`。 |
+| `embed_iframe` | 在 iframe 中渲染面板，使其与前端的其余部分隔离。默认为 `false`。 |
+| `trust_external_script` | 未经询问就从其他主机加载脚本。默认为 `false`，此时会要求用户确认，因为该脚本将获得对 Home Assistant 的完全访问权限。 |
+| `handle_safe_area` | 当你的面板自行处理手机屏幕的安全区域（如刘海）时，设置为 `true`。这样 Home Assistant 就不会在面板周围添加自己的内边距。默认为 `false`。 |
+
+集成可以通过 `panel_custom` 集成中的 `async_register_panel()` 从 Python 注册自定义面板。它接受相同的选项，但其中几个选项的名称不同：`name` 对应 `webcomponent_name`，`url_path` 对应 `frontend_url_path`，`trust_external_script` 对应 `trust_external`。
+
+## 面板会收到什么
+
+Home Assistant 会在你的元素上设置以下属性：
+
+| 属性 | 说明 |
+| --- | --- |
+| `hass` | Home Assistant 的完整状态。每次变化时都会重新设置。参见 [hass 对象参考](https://www.hasscn.top/contributors/frontend/reference/hass-object/)。 |
+| `narrow` | 当面板应使用适合窄屏的布局时为 `true`。 |
+| `route` | 当前路由：`prefix` 是面板的 URL，`path` 是 URL 的其余部分。用它来实现面板内部的页面。 |
+| `panel` | 面板信息。`config` 选项位于 `panel.config` 中，与 `_panel_custom` 键在一起。 |
+
+你的面板需要负责整个页面，包括页眉以及在窄屏上打开侧边栏的方式。
+
+## 编写标准类
+
+前端会在其现代构建和旧版构建中加载自定义面板。请使用标准 JavaScript 类来定义你的元素。不支持转译为 ES5 函数的元素。
+
+---
+
+# 展示你的卡片的实时演示
+
+> 在任意网页上嵌入可操作的仪表盘卡片，包括你自己的自定义卡片，并使用 Home Assistant 演示的模拟后端。
+
+Source: https://www.hasscn.top/contributors/frontend/custom-ui/demo/
+
+Last verified on 2026-11-05, against https://github.com/home-assistant/frontend/tree/dev/demo/src/embed.
+
+截图展示卡片的外观。实时演示展示其工作方式：人们可以打开灯、移动滑块，并看到其他卡片随之变化。[Home Assistant 演示](https://demo.home-assistant.io/) 发布了一些元素，可以将真实的仪表盘卡片放到任意网页上，比如你的 README 站点或博客。它们在浏览器中针对模拟后端运行，因此不需要 Home Assistant 服务器。
+
+- `<ha-embed-provider>` 持有模拟后端及其实体。
+- `<ha-embed-card>` 渲染一张卡片，并使用某个 provider 的后端。
+- `<ha-embed-section>` 渲染一个分区，或一个[分区策略](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#a-section-strategy)，方式相同。
+- `<ha-embed-view>` 渲染一个视图、一个[视图策略](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#a-view-strategy)，或仪表盘中的一个视图。
+- `<ha-embed-dashboard>` 渲染一个仪表盘，或一个[仪表盘策略](https://www.hasscn.top/contributors/frontend/custom-ui/strategy/#a-dashboard-strategy)，并带有其标签页。
+
+同一 provider 中的所有卡片共享其实体。当你在一张卡片中更改某个实体时，其他卡片会显示该更改。
+
+在这里试试：走廊磁贴及其下方的恒温器卡片共享一个走廊恒温器。更改磁贴中的目标温度或恒温器卡片中的模式，另一张卡片会随之变化。每张卡片都有一个卡片功能。室外温度的趋势图由演示根据其当前状态生成。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <script type="application/json">
+    [
+      {
+        "entity_id": "climate.hallway",
+        "state": "heat",
+        "attributes": {
+          "friendly_name": "Hallway",
+          "current_temperature": 19.5,
+          "temperature": 21,
+          "min_temp": 7,
+          "max_temp": 30,
+          "target_temp_step": 0.5,
+          "hvac_modes": [
+            "heat",
+            "cool",
+            "off"
+          ],
+          "supported_features": 1
+        }
+      },
+      {
+        "entity_id": "sensor.outside_temperature",
+        "state": "12.3",
+        "attributes": {
+          "friendly_name": "Outside",
+          "device_class": "temperature",
+          "state_class": "measurement",
+          "unit_of_measurement": "°C"
+        }
+      }
+    ]
+  </script>
+  <ha-embed-card style="grid-column: span 6">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "sensor.outside_temperature",
+        "features": [
+          {
+            "type": "trend-graph"
+          }
+        ],
+        "grid_options": {
+          "columns": 6
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 6">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "climate.hallway",
+        "features": [
+          {
+            "type": "target-temperature"
+          }
+        ],
+        "grid_options": {
+          "columns": 6
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "thermostat",
+        "entity": "climate.hallway",
+        "features": [
+          {
+            "type": "climate-hvac-modes",
+            "hvac_modes": [
+              "heat",
+              "cool",
+              "off"
+            ]
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+演示的[组件页面](https://demo.home-assistant.io/components.html)展示了所有这些功能，并带有每个选项。
+
+## 加载脚本
+
+将演示的脚本添加到你的页面。它也会从演示站点加载其所有其他文件：
+
+```html
+<script
+  type="module"
+  src="https://demo.home-assistant.io/embed.js"
+></script>
+```
+
+## 添加一张卡片
+
+将实体放在 provider 内部的 script 标签中，将卡片配置放在卡片内部的 script 标签中。两者都接受带有 `type="application/json"` 的 JSON，或带有 `type="text/yaml"` 的 YAML。卡片配置与仪表盘中的相同。
+
+```html
+<ha-embed-provider>
+  <script type="text/yaml">
+    - entity_id: light.kitchen
+      state: "on"
+      attributes:
+        friendly_name: Kitchen
+        supported_color_modes:
+          - brightness
+        color_mode: brightness
+        brightness: 180
+  </script>
+  <ha-embed-card>
+    <script type="text/yaml">
+      type: tile
+      entity: light.kitchen
+      features:
+        - type: light-brightness
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+每个实体都有一个 `entity_id`、一个 `state` 和 `attributes`。可选的键 `area_id`、`device_id` 和 `platform` 设置其在实体注册表中的条目。如果没有 `last_changed`，实体会在一个随机的近期时间发生变化。
+
+实体保留其所有属性，就像在 Home Assistant 中一样，因此只有你的集成设置的属性也会存在。具有专门模拟的实体，包括灯、气候、遮帘、人员、设备跟踪器等，会自行处理一些属性，这些属性优先于你设置的内容：例如，关闭的灯没有亮度。
+
+YAML 需要其缩进。如果你的站点压缩 HTML，请确保压缩器保留 script 标签中的空白，或使用 JSON。provider 的 `entities` 属性和卡片的 `config` 属性也接受 JSON。
+
+## 展示你的自定义卡片
+
+在演示脚本之后加载你的卡片脚本到页面上，并使用其 `custom:` 类型，与仪表盘中的方式相同：
+
+```html
+<script
+  type="module"
+  src="https://demo.home-assistant.io/embed.js"
+></script>
+<script
+  type="module"
+  src="https://example.com/my-card.js"
+></script>
+
+<ha-embed-card>
+  <script type="text/yaml">
+    type: custom:my-card
+    entity: light.kitchen
+  </script>
+</ha-embed-card>
+```
+
+你的卡片会获得与内置卡片相同的模拟 `hass` 对象，并且 `window.loadCardHelpers()` 可用于[卡片辅助工具](https://www.hasscn.top/contributors/frontend/custom-ui/card/#card-helpers)。卡片辅助工具仅在演示脚本运行后才存在。模块脚本按页面上的顺序运行，因此请将你的卡片脚本放在其后，以防你的卡片在其脚本加载时立即使用它们。许多内置卡片（如地图卡片）仅在卡片首次需要时才加载，因此请通过卡片辅助工具创建内置卡片，而不是通过其元素名称。当你的卡片脚本位于与页面不同的站点时，该站点需要为其发送 CORS 头。
+
+自定义策略以相同方式加载。在演示脚本之后加载其脚本，并在分区、视图或仪表盘的 `strategy` 中使用其 `custom:` 类型。
+
+## 展示一个分区
+
+`<ha-embed-section>` 以与分区视图相同的方式渲染一个分区。其配置与仪表盘中的相同：当没有 `strategy` 时，`title` 会变成标题卡片，标题跨越顶部，`strategy` 会生成分区。分区采用元素的宽度。此示例使用[添加一张卡片](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#add-a-card)中的 provider，并添加了一个 `switch.kettle`：
+
+```html
+<ha-embed-section>
+  <script type="text/yaml">
+    cards:
+      - type: heading
+        heading: Kitchen
+      - type: tile
+        entity: light.kitchen
+      - type: tile
+        entity: switch.kettle
+  </script>
+</ha-embed-section>
+```
+
+在这里试试：一个带有标题的分区、两个可以打开和关闭的磁贴，以及它们下方的一个宽磁贴。天花板灯属于 `devices` 中的一个设备。
+
+Live demo of a dashboard section, from the embed of the Home Assistant demo.
+
+```html
+<ha-embed-provider>
+  <script type="application/json">
+    {
+      "entities": [
+        {
+          "entity_id": "light.kitchen_ceiling",
+          "state": "on",
+          "device_id": "kitchen_ceiling",
+          "attributes": {
+            "friendly_name": "Ceiling",
+            "supported_color_modes": [
+              "brightness"
+            ],
+            "color_mode": "brightness",
+            "brightness": 200
+          }
+        },
+        {
+          "entity_id": "switch.kettle",
+          "state": "off",
+          "area_id": "kitchen",
+          "attributes": {
+            "friendly_name": "Kettle",
+            "device_class": "outlet"
+          }
+        },
+        {
+          "entity_id": "sensor.kitchen_temperature",
+          "state": "21.4",
+          "area_id": "kitchen",
+          "attributes": {
+            "friendly_name": "Kitchen temperature",
+            "device_class": "temperature",
+            "state_class": "measurement",
+            "unit_of_measurement": "°C"
+          }
+        }
+      ],
+      "areas": [
+        {
+          "area_id": "kitchen",
+          "name": "Kitchen"
+        }
+      ],
+      "devices": [
+        {
+          "id": "kitchen_ceiling",
+          "name": "Kitchen ceiling light",
+          "area_id": "kitchen"
+        }
+      ]
+    }
+  </script>
+  <ha-embed-section>
+    <script type="application/json">
+      {
+        "cards": [
+          {
+            "type": "heading",
+            "heading": "Kitchen"
+          },
+          {
+            "type": "tile",
+            "entity": "light.kitchen_ceiling",
+            "tap_action": {
+              "action": "toggle"
+            }
+          },
+          {
+            "type": "tile",
+            "entity": "switch.kettle",
+            "tap_action": {
+              "action": "toggle"
+            }
+          },
+          {
+            "type": "tile",
+            "entity": "sensor.kitchen_temperature",
+            "grid_options": {
+              "columns": 12
+            }
+          }
+        ]
+      }
+    </script>
+  </ha-embed-section>
+</ha-embed-provider>
+```
+
+按设备或区域对实体进行分组的分区策略需要 provider 中有这些数据。请参阅[区域、设备、日历和能源](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#areas-devices-calendars-and-energy)。
+
+## 展示一个视图
+
+`<ha-embed-view>` 渲染一个视图，包括其徽章和布局，`strategy` 会生成视图。为元素提供视图所需的宽度：masonry 和 sidebar 视图根据页面宽度（而非元素宽度）选择列数。此示例使用[添加一张卡片](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#add-a-card)中的 provider：
+
+```html
+<ha-embed-view>
+  <script type="text/yaml">
+    type: sections
+    badges:
+      - entity: light.kitchen
+    sections:
+      - cards:
+          - type: tile
+            entity: light.kitchen
+  </script>
+</ha-embed-view>
+```
+
+在这里试试：一个带有室外温度徽章的分区视图，以及在有空间时并排的两个分区。
+
+Live demo of a dashboard view, from the embed of the Home Assistant demo.
+
+```html
+<ha-embed-provider>
+  <script type="application/json">
+    [
+      {
+        "entity_id": "light.living_room",
+        "state": "off",
+        "attributes": {
+          "friendly_name": "Living room",
+          "supported_color_modes": [
+            "brightness"
+          ],
+          "color_mode": "brightness",
+          "brightness": 255
+        }
+      },
+      {
+        "entity_id": "switch.coffee_maker",
+        "state": "on",
+        "attributes": {
+          "friendly_name": "Coffee maker",
+          "device_class": "outlet"
+        }
+      },
+      {
+        "entity_id": "climate.hallway",
+        "state": "heat",
+        "attributes": {
+          "friendly_name": "Hallway",
+          "current_temperature": 19.5,
+          "temperature": 21,
+          "min_temp": 7,
+          "max_temp": 30,
+          "target_temp_step": 0.5,
+          "hvac_modes": [
+            "heat",
+            "off"
+          ],
+          "supported_features": 1
+        }
+      },
+      {
+        "entity_id": "sensor.outside_temperature",
+        "state": "12.3",
+        "attributes": {
+          "friendly_name": "Outside",
+          "device_class": "temperature",
+          "state_class": "measurement",
+          "unit_of_measurement": "°C"
+        }
+      }
+    ]
+  </script>
+  <ha-embed-view>
+    <script type="application/json">
+      {
+        "type": "sections",
+        "max_columns": 2,
+        "badges": [
+          {
+            "entity": "sensor.outside_temperature"
+          }
+        ],
+        "sections": [
+          {
+            "cards": [
+              {
+                "type": "heading",
+                "heading": "Living room"
+              },
+              {
+                "type": "tile",
+                "entity": "light.living_room",
+                "tap_action": {
+                  "action": "toggle"
+                }
+              },
+              {
+                "type": "tile",
+                "entity": "switch.coffee_maker",
+                "tap_action": {
+                  "action": "toggle"
+                }
+              }
+            ]
+          },
+          {
+            "cards": [
+              {
+                "type": "heading",
+                "heading": "Hallway"
+              },
+              {
+                "type": "thermostat",
+                "entity": "climate.hallway"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </ha-embed-view>
+</ha-embed-provider>
+```
+
+视图策略和仪表盘策略都使用 `strategy` 键。要展示仪表盘的一个视图，或仪表盘策略的一个视图，请将仪表盘放在 `dashboard` 中，并将视图的路径或索引放在 `view` 中。如果没有 `view`，则显示第一个视图。
+
+```yaml
+dashboard:
+  strategy:
+    type: custom:my-dashboard
+view: overview
+```
+
+## 展示一个仪表盘
+
+`<ha-embed-dashboard>` 渲染整个仪表盘及其标签页，`strategy` 会生成仪表盘。仪表盘在元素内部滚动，位于其工具栏下方。元素高度为 600 像素；设置其 `height` 以更改该值。要从第一个视图以外的视图开始，请将其 `view` 属性设置为该视图的路径或索引。此示例使用[添加一张卡片](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#add-a-card)中的 provider：
+
+```html
+<ha-embed-dashboard style="height: 480px">
+  <script type="text/yaml">
+    views:
+      - title: Home
+        path: home
+        cards:
+          - type: tile
+            entity: light.kitchen
+      - title: Kitchen
+        path: kitchen
+        cards:
+          - type: light
+            entity: light.kitchen
+  </script>
+</ha-embed-dashboard>
+```
+
+在这里试试：一个带有两个标签页的仪表盘。在它们之间切换，或选择第一个标签页上的走廊磁贴以转到第二个标签页。
+
+Live demo of a dashboard with its tabs, from the embed of the Home Assistant demo.
+
+```html
+<ha-embed-provider>
+  <script type="application/json">
+    [
+      {
+        "entity_id": "light.living_room",
+        "state": "off",
+        "attributes": {
+          "friendly_name": "Living room",
+          "supported_color_modes": [
+            "brightness"
+          ],
+          "color_mode": "brightness",
+          "brightness": 255
+        }
+      },
+      {
+        "entity_id": "switch.coffee_maker",
+        "state": "on",
+        "attributes": {
+          "friendly_name": "Coffee maker",
+          "device_class": "outlet"
+        }
+      },
+      {
+        "entity_id": "climate.hallway",
+        "state": "heat",
+        "attributes": {
+          "friendly_name": "Hallway",
+          "current_temperature": 19.5,
+          "temperature": 21,
+          "min_temp": 7,
+          "max_temp": 30,
+          "target_temp_step": 0.5,
+          "hvac_modes": [
+            "heat",
+            "off"
+          ],
+          "supported_features": 1
+        }
+      }
+    ]
+  </script>
+  <ha-embed-dashboard>
+    <script type="application/json">
+      {
+        "views": [
+          {
+            "title": "Home",
+            "path": "home",
+            "type": "sections",
+            "max_columns": 2,
+            "sections": [
+              {
+                "cards": [
+                  {
+                    "type": "heading",
+                    "heading": "Living room"
+                  },
+                  {
+                    "type": "tile",
+                    "entity": "light.living_room",
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  },
+                  {
+                    "type": "tile",
+                    "entity": "switch.coffee_maker",
+                    "tap_action": {
+                      "action": "toggle"
+                    }
+                  }
+                ]
+              },
+              {
+                "cards": [
+                  {
+                    "type": "heading",
+                    "heading": "Hallway"
+                  },
+                  {
+                    "type": "tile",
+                    "entity": "climate.hallway",
+                    "tap_action": {
+                      "action": "navigate",
+                      "navigation_path": "climate"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Climate",
+            "path": "climate",
+            "type": "sections",
+            "sections": [
+              {
+                "cards": [
+                  {
+                    "type": "thermostat",
+                    "entity": "climate.hallway"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </ha-embed-dashboard>
+</ha-embed-provider>
+```
+
+工具栏仅显示标签页、视图标题以及子视图的返回按钮。没有编辑模式。每个仪表盘保持自己的视图，因此你页面的地址保持不变，并且一个页面上的两个仪表盘不会相互跟随。
+
+仪表盘中的链接工作方式如下：
+
+- 指向仪表盘某个视图的链接，如 `navigation_path: climate` 或 `/my-dashboard/climate`，会显示该视图。
+- 子视图的返回按钮在其 `back_path` 是此仪表盘的视图时转到该路径。否则，它会转到之前的视图，如果没有则转到第一个视图，因此指向其他页面的 `back_path` 不会离开演示。
+- 指向你页面上锚点的链接，如 `#setup`，会滚动页面到该位置。
+- 其他 `navigate` 操作不执行任何操作。`url` 操作会打开其页面，与仪表盘中的方式相同。
+
+## 在视图进入视野时加载演示
+
+在包含多个演示或演示位于页面较下方的页面上，你可以等到演示接近视野时再加载演示脚本，以便页面的其余部分先加载。元素在设置时读取其 script 标签，因此当脚本稍后加载时，卡片仍能找到其实体和配置。观察页面上的每张卡片、分区、视图和仪表盘，然后先导入演示脚本，再导入你的卡片脚本：
+
+```js
+const loadDemo = async () => {
+  await import("https://demo.home-assistant.io/embed.js");
+  await import("https://example.com/my-card.js");
+};
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      observer.disconnect();
+      loadDemo();
+    }
+  },
+  { rootMargin: "400px 0px" },
+);
+for (const demo of document.querySelectorAll(
+  "ha-embed-card, ha-embed-section, ha-embed-view, ha-embed-dashboard",
+)) {
+  observer.observe(demo);
+}
+```
+
+provider 内部的卡片、分区、视图和仪表盘也算在内。`querySelectorAll` 不会查看 shadow root 内部，因此对于你自己组件内部的演示，请改为观察这些组件。它不观察 provider：页面顶部的 provider 会立即加载演示，即使其卡片位于较下方。从模块脚本运行它，以便页面元素在查找时已存在。以这种方式加载时，请省略演示和你的卡片的 script 标签。
+
+## 将卡片放在页面上的任意位置
+
+卡片不必位于 provider 内部。provider 外部的卡片使用页面上的第一个 provider。位于你自己组件内部的卡片使用该组件周围的 provider，即使通过其 shadow root 也是如此。将包含所有实体的一个 provider 放在页面顶部，并将卡片放在其下方的任意位置，穿插在你的文本之间。如果页面没有 provider，卡片会添加一个空的 provider。分区、视图和仪表盘以相同方式找到其 provider，并接受相同的 `provider` 属性。
+
+要使用另一个 provider，请将卡片的 `provider` 属性设置为该 provider 的 ID：
+
+```html
+<ha-embed-provider id="living-room">…</ha-embed-provider>
+
+<ha-embed-card provider="living-room">…</ha-embed-card>
+```
+
+在卡片添加到页面之前设置 `provider`。卡片在添加时选择其 provider，并且不会跟随后续更改。
+
+## 在一个站点上展示多个项目
+
+如果你维护多个卡片或策略，则不需要为每个项目都建一个演示站点。为每个项目提供一个演示配置，将实体放在 `entities` 中，将要展示的内容放在 `cards`、`sections`、`views` 或 `dashboard` 中。配置可以全部放在宿主站点中，也可以由每个项目自行维护，例如在其代码旁边放一个 `demo.yml`：
+
+```yaml
+entities:
+  - entity_id: light.kitchen
+    state: "on"
+    attributes:
+      friendly_name: Kitchen
+cards:
+  - type: custom:my-card
+    entity: light.kitchen
+```
+
+然后站点渲染每个配置：实体进入 provider，每张卡片、分区、视图或仪表盘进入其元素，作为其 script 标签中的 YAML。为每个项目提供自己的 provider，以便其实体保持分离，并在演示脚本之后加载每个卡片的脚本。
+
+## 亮色和暗色
+
+卡片跟随浏览器的亮色或暗色模式。当你的站点有自己的暗色模式开关时，请将 provider 的 `color-scheme` 属性设置为 `light` 或 `dark`。卡片在内部保留其样式，不会更改你页面的样式。唯一的例外是 Roboto 字体：脚本会将其字体面添加到页面，因此使用 Roboto 的页面文本在脚本加载后可能会看起来不同。
+
+## 区域、设备、日历和能源
+
+某些卡片需要非实体的数据。要设置这些数据，请在 provider 的 script 标签中放置一个对象，而不是列表。该对象在 `entities` 中包含列表，并可以包含以下任何键：
+
+- `areas`：区域列表，每个区域包含 `area_id` 和 `name`。如果没有此键，实体的每个 `area_id` 和设备都会成为一个区域。
+- `devices`：设备列表，每个设备包含 `id` 和 `name`，并可选择包含 `manufacturer`、`model` 和 `area_id`。实体通过其 `device_id` 属于某个设备，因此卡片和策略可以找到该设备及其名称。
+- `calendars`：按实体 ID 列出的日历实体的事件。每个事件包含 `summary`、`start` 和 `end`。未列出的日历会获得今天附近的示例事件。列表为空的日历没有事件。
+- `energy`：能源设置，即 `energy/get_prefs` 响应中需要的键。如果没有此键，则未设置能源。
+
+```yaml
+entities:
+  - entity_id: calendar.family
+    state: "off"
+    attributes:
+      friendly_name: Family
+  - entity_id: light.kitchen_ceiling
+    state: "on"
+    device_id: kitchen_ceiling
+    attributes:
+      friendly_name: Ceiling
+areas:
+  - area_id: kitchen
+    name: Kitchen
+devices:
+  - id: kitchen_ceiling
+    name: Kitchen ceiling light
+    manufacturer: Acme
+    model: Smart bulb
+    area_id: kitchen
+calendars:
+  calendar.family:
+    - summary: Dentist
+      start: "2026-11-02T15:30:00+00:00"
+      end: "2026-11-02T16:15:00+00:00"
+```
+
+日历卡片仅显示其显示日期内的事件，因此请将这些日期更改为接近你演示日期的日期。要始终有事件，请将日历从 `calendars` 中省略，并使用示例事件。它们设置在演示脚本加载日期的附近，并且再次加载页面时会再次设置它们。
+
+天气实体根据其条件和温度，或在其具有 `forecast` 属性时根据该属性，获得生成的预报。设置 `supported_features` 以显示预报。
+
+## 从你的页面更改和观察实体
+
+要更改一个实体，请在 `provider.hass.mockEntities` 中更新它。其他实体保持不变，实体记住的内容（如关闭灯的亮度）也保持不变。从模块脚本运行它，在 provider 设置其实体之后。这会关闭[添加一张卡片](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#add-a-card)中的厨房灯：
+
+```js
+await customElements.whenDefined("ha-embed-provider");
+const provider = document.querySelector("ha-embed-provider");
+await provider.updateComplete;
+
+provider.hass.mockEntities["light.kitchen"].update({ state: "off" });
+```
+
+要使用实体的操作，请在同一个模块脚本中调用它。provider 会更新状态和卡片：
+
+```js
+provider.hass.callService(
+  "light",
+  "turn_on",
+  { brightness_pct: 50 },
+  { entity_id: "light.kitchen" },
+);
+```
+
+设置 provider 的 `entities` 属性会替换所有实体，它们会从你设置的内容重新开始。
+
+当其中一个或多个实体的状态发生变化时，provider 会触发 `states-changed` 事件。其 detail 包含 `states`，即按实体 ID 列出的所有实体的状态。
+
+## 模拟后端可以做什么
+
+模拟后端只知道 Home Assistant API 的一部分。在选择展示内容时，请记住这些限制：
+
+- 灯、开关、气候、遮帘、风扇、锁、媒体播放器等操作会更改实体的状态。
+- 操作只能到达按实体 ID 定位的实体。针对区域或设备的操作不执行任何操作。
+- 历史和统计信息是根据每个实体的当前状态生成的。演示中的一些能源传感器（如 `sensor.solar_production`）会获得自己生成的统计信息，因此其状态不会改变其图表。
+- 模板不会渲染。模板订阅会从你传递的变量中填充简单的 `{{ variable }}` 引用，并原样返回其余内容。REST `template` 端点返回错误。
+- 日志簿为空。
+- 卡片的 `toggle`、`perform-action` 和 `url` 操作有效。打开对话框的操作（如 `more-info`）不执行任何操作。带有 `confirmation` 的操作不执行任何操作，因为它会等待不会打开的对话框，除非确认豁免了演示用户。
+- 指向你页面上锚点的 `navigate` 操作（如 `#setup`）会滚动到该位置。仪表盘也会跟随指向其自身视图的链接，如[展示一个仪表盘](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#show-a-dashboard)所述，给定 `dashboard` 的视图也是如此，如[展示一个视图](https://www.hasscn.top/contributors/frontend/custom-ui/demo/#show-a-view)所述。其他 `navigate` 操作不执行任何操作。
+- 后端不处理的操作，或针对其没有的实体的操作，不执行任何操作。它们不会返回错误。
+- 其他等待答案的请求（通过 WebSocket 或 REST）会收到错误。
+
+模拟代码位于[前端仓库](https://github.com/home-assistant/frontend)的 [`demo/src/stubs/`](https://github.com/home-assistant/frontend/tree/dev/demo/src/stubs) 中。如果你的卡片需要它们不知道的请求，请参阅[画廊和演示](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/#embed-cards-on-other-sites)了解在哪里添加。
+
+---
+
+# 扩展前端
+
+> 与 Core 中的更改相配套的前端更改，例如为新域（domain）提供更多信息视图，或为集成提供 WebSocket 命令。
+
+Source: https://www.hasscn.top/contributors/frontend/extending/
+
+有时 Core 中的更改需要前端提供一些新功能：新的实体（entity）域需要控件，或者集成需要发送界面尚不支持的数据。这些页面介绍了这方面的前端部分。
+
+每一项都是向[前端仓库](https://github.com/home-assistant/frontend)提交的拉取请求（pull request），通常还会同时向 Core 提交一个。请在拉取请求模板中将两者相互链接，以便审查者看到完整的上下文。[审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/#changes-that-need-the-backend)解释了这两者是如何合并的。
+
+- [添加更多信息视图](https://www.hasscn.top/contributors/frontend/extending/more-info/)：某个域在更多信息对话框中的控件。
+- [添加状态卡片](https://www.hasscn.top/contributors/frontend/extending/state-card/)：显示实体及其状态的那一行。
+- [添加 WebSocket 命令](https://www.hasscn.top/contributors/frontend/extending/websocket-api/)：将数据从你的集成发送到前端。
+
+大多数集成都不需要这些。现有域的实体已经拥有各自的控件、卡片和更多信息视图。请查看设计区域中的[更多信息视图](https://www.hasscn.top/contributors/design/more-info/)和[仪表盘卡片](https://www.hasscn.top/contributors/design/dashboards/)，了解已有的内容。
+
+---
+
+# 添加更多信息视图
+
+> 让某个域的实体在更多信息对话框中拥有自己的控件。
+
+Source: https://www.hasscn.top/contributors/frontend/extending/more-info/
+
+当你选择一个实体（entity）时，会打开[更多信息对话框](https://www.hasscn.top/contributors/glossary/more-info-dialog/)。它显示的内容取决于实体所属的域（domain）：灯会有亮度滑块，锁会有一个大的锁定按钮。没有自己视图的域会显示默认内容：一行状态、历史记录，以及（对大多数域而言）日志簿。实体的属性不属于视图的一部分：对话框会通过其三点菜单，在单独的详情视图中显示它们。
+
+在构建之前，请先查看设计区域中的[更多信息视图](https://www.hasscn.top/contributors/design/more-info/)。它们展示了所有现有的视图，以及新视图应遵循的原则：一个大的主控件，其下方是次要控件，并且只显示设备支持的控件。
+
+## 为一个域添加视图
+
+本示例为一个名为 `example` 的域添加视图。
+
+1. 创建 `src/dialogs/more-info/controls/more-info-example.ts`，其中包含一个名为 `more-info-example` 的元素。对话框会在其上设置 `hass`、`stateObj` 和 `entry`（实体注册表条目）。
+
+   ```ts
+   @customElement("more-info-example")
+   class MoreInfoExample extends LitElement {
+     @property({ attribute: false }) public hass!: HomeAssistant;
+
+     @property({ attribute: false }) public stateObj?: HassEntity;
+
+     protected render() {
+       if (!this.stateObj) {
+         return nothing;
+       }
+       return html`<!-- the controls of the domain -->`;
+     }
+   }
+   ```
+
+2. 在 [`src/dialogs/more-info/const.ts`](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/const.ts) 中，将 `"example"` 添加到 `DOMAINS_WITH_MORE_INFO`。
+3. 在 [`src/dialogs/more-info/state_more_info_control.ts`](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/state_more_info_control.ts) 中，向 `LAZY_LOADED_MORE_INFO_CONTROL` 添加一个懒加载导入：
+
+   ```ts
+   example: () => import("./controls/more-info-example"),
+   ```
+
+4. 对于遵循较新设计的视图（以大号状态显示代替状态行），还需在同一 `const.ts` 中将该域添加到 `DOMAINS_WITH_NEW_MORE_INFO`。
+
+`const.ts` 中的其他列表用于微调对话框。`DOMAINS_HIDE_DEFAULT_MORE_INFO` 列出了没有自己视图、会跳过默认视图元素的域，而 `DOMAINS_MORE_INFO_NO_HISTORY` 则隐藏历史记录和日志簿。
+
+## 复用控件
+
+不要从零开始构建控件。更多信息视图共享来自 [`src/dialogs/more-info/components/`](https://github.com/home-assistant/frontend/tree/dev/src/dialogs/more-info/components) 的组件，以及来自 [`src/components/`](https://github.com/home-assistant/frontend/tree/dev/src/components) 的大型触控控件，例如 `ha-control-slider` 和 `ha-control-switch`。现有的视图，例如 `more-info-lock.ts` 或 `more-info-fan.ts`，都是很好的起点。
+
+只显示实体支持的内容：在渲染控件之前，先检查其 `supported_features` 和属性。
+
+## 将其添加到画廊
+
+将新视图添加到[画廊](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/)的更多信息部分，并附带几个处于不同状态的实体，以便审核者无需设备即可查看它。
+
+---
+
+# 添加状态卡片
+
+> 显示实体及其图标、名称和状态或控件的行，以及如何为某个集成域添加一个。
+
+Source: https://www.hasscn.top/contributors/frontend/extending/state-card/
+
+状态卡片（state card）是针对单个实体的紧凑行：包含它的图标、名称、上次变更时间，以及它的状态，或者一个用于更改它的小控件。你可以在使用旧版设计的域的更多信息对话框顶部，以及示例库中找到它们。
+
+大多数域并不需要自己的状态卡片。如果没有，实体在可以开关时会显示一个开关（toggle），否则以文本形式显示其状态。只有当某个域需要在该行中使用不同的控件（如数字输入框或下拉选择）时，才添加状态卡片。
+
+状态卡片位于 [`src/state-summary/`](https://github.com/home-assistant/frontend/tree/dev/src/state-summary) 中，每个域对应一个元素。
+
+## 为某个域添加状态卡片
+
+此示例为一个名为 `example` 的域添加状态卡片。
+
+1. 在 [`src/common/const.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/const.ts) 中，将 `"example"` 添加到 `DOMAINS_WITH_CARD`。
+2. 创建 `src/state-summary/state-card-example.ts`，其中包含一个名为 `state-card-example` 的元素。它会接收 `hass`、`stateObj` 和 `inDialog`，当卡片显示在更多信息对话框中时，`inDialog` 为 `true`。
+3. 在 [`src/state-summary/state-card-content.ts`](https://github.com/home-assistant/frontend/blob/dev/src/state-summary/state-card-content.ts) 中导入它：
+
+   ```ts
+   import "./state-card-example";
+   ```
+
+`state-card-content` 会根据域来选择元素：列表中的域使用 `state-card-<domain>`，其他可切换的实体使用 `state-card-toggle`，其余的则使用 `state-card-display`。不可用的实体使用 `state-card-display`。带有 `custom_ui_state_card` 属性的实体会跳过所有这些逻辑：该属性指定了要使用的元素。
+
+请参考现有的状态卡片，例如 `state-card-number.ts` 或 `state-card-select.ts`，了解其结构以及它们所共用的 `state-info` 元素。
+
+---
+
+# 添加 WebSocket 命令
+
+> 在 Core 中通过 WebSocket 命令将集成（integration）的数据提供给前端，并从前端调用它。
+
+Source: https://www.hasscn.top/contributors/frontend/extending/websocket-api/
+
+前端通过 WebSocket 连接与 Core 通信。当你的集成拥有前端需要的数据，而这些数据既不是实体（entity）状态也不是属性（attribute）时，可以添加一个 WebSocket 命令。命令可以只应答一次，也可以作为订阅持续发送更新。
+
+## 在 Core 中
+
+命令是一个带有装饰器的函数，装饰器用于设置其消息类型和数据模式（schema）。类型以你的集成的域（domain）作为前缀。
+
+```python
+from typing import Any
+
+import probatio
+
+from homeassistant.components import websocket_api
+from homeassistant.core import HomeAssistant, callback
+
+
+@websocket_api.websocket_command(
+    {
+        probatio.Required("type"): "example/get_status",
+        probatio.Required("device_id"): str,
+    }
+)
+@callback
+def ws_get_status(
+    hass: HomeAssistant,
+    connection: websocket_api.ActiveConnection,
+    msg: dict[str, Any],
+) -> None:
+    """Return the status of a device."""
+    status = hass.data[DOMAIN].get(msg["device_id"])
+    if status is None:
+        connection.send_error(msg["id"], "not_found", "Device not found")
+        return
+
+    connection.send_result(msg["id"], {"status": status})
+```
+
+在集成被设置时注册该命令：
+
+```python
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the example integration."""
+    websocket_api.async_register_command(hass, ws_get_status)
+    return True
+```
+
+你的集成不需要在 manifest 中将 `websocket_api` 声明为依赖项。无论哪种方式，命令都会被注册，并且只要 WebSocket API 运行即可使用。
+
+用 `@callback` 装饰的函数在[事件循环（event loop）](https://www.hasscn.top/contributors/glossary/event-loop/)中运行，因此它不能执行任何 I/O 操作。当你的命令需要等待设备或网络时，请将其设为 `async`，并在 `websocket_command` 下方添加 `@websocket_api.async_response`：
+
+```python
+@websocket_api.websocket_command(
+    {probatio.Required("type"): "example/refresh"}
+)
+@websocket_api.async_response
+async def ws_refresh(
+    hass: HomeAssistant,
+    connection: websocket_api.ActiveConnection,
+    msg: dict[str, Any],
+) -> None:
+    """Refresh all devices."""
+    await hass.data[DOMAIN].async_refresh()
+    connection.send_result(msg["id"])
+```
+
+对于仅限管理员使用的命令，请添加 `@websocket_api.require_admin`。
+
+### 订阅
+
+对于会变化的数据，先发送第一个结果，然后在每次变化时发送带有相同消息 ID 的事件。将一个用于停止更新的函数存储在 `connection.subscriptions` 中，当前端取消订阅或断开连接时，Core 会调用它：
+
+```python
+@websocket_api.websocket_command(
+    {probatio.Required("type"): "example/subscribe_status"}
+)
+@callback
+def ws_subscribe_status(
+    hass: HomeAssistant,
+    connection: websocket_api.ActiveConnection,
+    msg: dict[str, Any],
+) -> None:
+    """Send status updates to the frontend."""
+
+    @callback
+    def on_update(status: dict[str, Any]) -> None:
+        connection.send_event(msg["id"], status)
+
+    connection.subscriptions[msg["id"]] = hass.data[DOMAIN].subscribe(
+        on_update
+    )
+    connection.send_result(msg["id"])
+```
+
+[WebSocket API 参考](https://www.hasscn.top/contributors/core/internals/websocket-api/)更深入地介绍了 Core 的 WebSocket API。
+
+## 在前端中
+
+将你的命令的类型和函数添加到 [`src/data/`](https://github.com/home-assistant/frontend/tree/dev/src/data) 中以你的集成命名的模块里。组件调用该函数，而不是直接发送原始消息：
+
+```ts
+export interface ExampleStatus {
+  status: string;
+}
+
+export const fetchExampleStatus = (
+  hass: HomeAssistant,
+  deviceId: string
+) =>
+  hass.callWS<ExampleStatus>({
+    type: "example/get_status",
+    device_id: deviceId,
+  });
+
+export const subscribeExampleStatus = (
+  conn: Connection,
+  onChange: (status: ExampleStatus) => void
+) =>
+  conn.subscribeMessage<ExampleStatus>(onChange, {
+    type: "example/subscribe_status",
+  });
+```
+
+`hass.callWS()` 返回一个 promise，当 Core 发送错误时该 promise 会以该错误拒绝。`subscribeMessage()` 返回一个 promise，其结果是一个用于取消订阅的函数。在组件中，从 `hassSubscribe()` 返回它，`SubscribeMixin` 会自动清理它。[数据层](https://www.hasscn.top/contributors/frontend/architecture/data/)解释了这些模式。
+
+自定义卡片和面板可以用同样的方式调用你的命令，使用 `hass.callWS()` 或 `hass.connection.subscribeMessage()`。
+
+---
+
+# 前端参考
+
+> 命令、hass 对象，以及前端与配套应用之间的桥梁。您需要查阅的详细信息。
+
+Source: https://www.hasscn.top/contributors/frontend/reference/
+
+- [命令](https://www.hasscn.top/contributors/frontend/reference/commands/)：前端仓库的每个 `pnpm` 命令及其端口。
+- [hass 对象](https://www.hasscn.top/contributors/frontend/reference/hass-object/)：其属性、方法和格式化工具。
+- [外部身份验证](https://www.hasscn.top/contributors/frontend/reference/external-auth/)：嵌入前端的应用如何提供访问令牌。
+- [外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)：前端与配套应用之间的消息。
+
+---
+
+# 命令
+
+> 前端仓库的每一个命令、其作用以及所使用的端口。
+
+Source: https://www.hasscn.top/contributors/frontend/reference/commands/
+
+请在[前端仓库](https://github.com/home-assistant/frontend)的根目录下运行这些命令。
+
+## 设置
+
+| 命令 | 作用 |
+| --- | --- |
+| `script/setup` | 安装依赖。在 devcontainer 中，还会安装合适的 Node.js。 |
+| `script/core` | 仅限 devcontainer：从其 `dev` 分支安装并启动 Home Assistant Core，配置为使用你的前端。`-r <ref>` 可选择其他分支或标签，`-s` 跳过安装。 |
+| `script/setup_translations` | 获取最新翻译，首次运行时会请求 GitHub 授权。 |
+
+## 开发服务器
+
+| 命令 | 端口 | 提供的内容 |
+| --- | --- | --- |
+| `pnpm dev` | | 将应用构建到 `hass_frontend/` 中，供设置了 `development_repo` 的 Core 使用。在该 Core 的端口上打开它。 |
+| `pnpm dev:serve` | 8124 | 构建并提供应用服务，连接到一个 Core。`-c <url>` 设置 Core（默认 `http://localhost:8123`），`-p <port>` 设置端口。在 devcontainer 中默认端口是 8123，对应你电脑上的 8124。 |
+| `pnpm dev:demo` | 8090 | [演示](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/#the-demo)。 |
+| `pnpm dev:gallery` | 8100 | [画廊](https://www.hasscn.top/contributors/frontend/development/gallery-and-demo/#the-gallery)。 |
+| `pnpm test:e2e:app:dev` | 8095 | 用于端到端测试的应用测试环境。 |
+
+所有开发服务器都支持 `--background`、`--status`、`--logs [--follow]` 和 `--stop`。除端到端测试环境外，其余都支持 `--fetch-translations`。参见[运行前端](https://www.hasscn.top/contributors/frontend/development/run/#keep-a-server-running-in-the-background)。
+
+## 检查与测试
+
+| 命令 | 作用 |
+| --- | --- |
+| `pnpm lint` | ESLint、Prettier、TypeScript 编译器以及 Lit 分析器。 |
+| `pnpm format` | 修复 ESLint 和 Prettier 能修复的问题。 |
+| `pnpm lint:types` | 仅运行 TypeScript 编译器。切勿向其传递文件参数。 |
+| `pnpm lint:lit` | 仅运行 Lit 分析器。 |
+| `pnpm test` | 使用 Vitest 运行单元测试。 |
+| `pnpm test:coverage` | 运行单元测试，并生成覆盖率报告。 |
+| `pnpm test:e2e:app` | 应用的端到端测试。 |
+| `pnpm test:e2e:demo` | 演示的端到端测试。 |
+| `pnpm test:e2e:gallery` | 画廊的端到端测试。 |
+| `pnpm test:e2e` | 全部三个端到端测试套件。 |
+| `pnpm test:e2e:show-report` | 打开合并后的端到端测试报告。 |
+
+## 构建
+
+| 命令 | 作用 |
+| --- | --- |
+| `pnpm build` | 完整的生产构建，输出到 `hass_frontend/`。支持后台运行标志。 |
+| `pnpm build --modern` | 仅进行现代构建，用于体积和性能对比。 |
+| `script/gen_demo_core_data` | 重新生成来自 Core 的演示数据。 |
+
+---
+
+# 前端中的 hass 对象
+
+> 每个卡片、面板和组件都会获取的 hass 对象的属性、方法和格式化工具。
+
+Source: https://www.hasscn.top/contributors/frontend/reference/hass-object/
+
+`hass` 对象保存着 Home Assistant 在前端中的状态，以及与 Core 通信的函数。自定义卡片、徽章、特性、视图、策略和面板都会获取它。完整类型定义在 [`src/types.ts`](https://github.com/home-assistant/frontend/blob/dev/src/types.ts) 中的 `HomeAssistant`。
+
+每次变化都会生成一个新的 `hass` 对象，但未发生变化的部分会保持其引用不变。使用 `!==` 进行比较以判断某项是否发生了变化：
+
+```js
+if (newHass.states[entityId] !== oldHass.states[entityId]) {
+  // This entity changed
+}
+```
+
+要查看实时 `hass` 对象中的内容，请在浏览器的开发者工具中打开它，如[运行前端](https://www.hasscn.top/contributors/frontend/development/run/#look-at-the-hass-object)所示。
+
+在前端内部，叶子组件使用[上下文（contexts）](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)而不是 `hass`。
+
+## 属性
+
+| 属性 | 说明 |
+| --- | --- |
+| `states` | 所有实体的状态，以实体 ID 为键。 |
+| `entities` | 实体注册表，以实体 ID 为键，包含界面所需的字段，如名称、图标、区域和设备。 |
+| `devices` | 设备注册表，以设备 ID 为键。 |
+| `areas` | 区域注册表，以区域 ID 为键。 |
+| `floors` | 楼层注册表，以楼层 ID 为键。 |
+| `services` | 按域分类的可用[动作（action）](https://www.hasscn.top/contributors/glossary/action/)。 |
+| `config` | Core 的配置：位置、单位、时区、版本和已加载的组件。 |
+| `user` | 当前登录的用户，包含 `name`、`is_admin` 和 `is_owner`。 |
+| `language` | 界面的语言。 |
+| `locale` | 用户的数字、日期和时间格式设置。 |
+| `themes` 和 `selectedTheme` | 可用的主题，以及当前使用的主题。 |
+| `panels` | 已注册的面板。 |
+| `connection` | 来自 `home-assistant-js-websocket` 的 WebSocket 连接。 |
+| `connected` | 连接是否已建立。 |
+
+状态对象如下所示：
+
+```json
+{
+  "entity_id": "light.ceiling",
+  "state": "on",
+  "attributes": {
+    "brightness": 180,
+    "friendly_name": "Ceiling",
+    "supported_features": 32
+  },
+  "last_changed": "2026-10-10T13:46:59.129248+00:00",
+  "last_updated": "2026-10-10T13:46:59.129248+00:00",
+  "context": {
+    "id": "01J9Z4V8M0R3XGQ2W4E5T6Y7U8",
+    "parent_id": null,
+    "user_id": null
+  }
+}
+```
+
+## 调用 Core
+
+以下所有方法都返回一个 promise。
+
+### callService
+
+```js
+hass.callService("light", "turn_on", { brightness_pct: 50 }, {
+  entity_id: "light.kitchen",
+});
+```
+
+执行一个[动作（action）](https://www.hasscn.top/contributors/glossary/action/)。参数依次为域、动作、其数据，以及可选的[目标（target）](https://www.hasscn.top/contributors/glossary/target/)。另外两个可选参数：`notifyOnError`（默认为 `true`）在动作失败时显示消息，`returnResponse` 用于请求返回数据的动作的响应。
+
+### callWS
+
+```js
+const areas = await hass.callWS({ type: "config/area_registry/list" });
+```
+
+发送一条 WebSocket 命令，并以结果完成（resolve）。当 Core 返回错误时则以该错误拒绝（reject）。要持续接收更新，请改用 `hass.connection.subscribeMessage()`。参见[数据层](https://www.hasscn.top/contributors/frontend/architecture/data/)。
+
+### callApi
+
+```js
+const result = await hass.callApi("GET", "history/period");
+```
+
+使用用户的身份验证信息调用 `/api/` 下的 REST API。参数为方法、路径和可选数据。新功能应使用 WebSocket 命令。`callApiRaw()` 功能相同，但返回原始的 `Response`。
+
+### fetchWithAuth
+
+使用用户的访问令牌获取 Home Assistant 的任意 URL，并返回 `Response`。
+
+### hassUrl
+
+`hass.hassUrl("/api/camera_proxy/camera.front")` 返回 Home Assistant 上某个路径的完整 URL。
+
+## 文本
+
+### localize
+
+`hass.localize(key, values)` 返回前端的翻译字符串，或已加载翻译的集成的翻译字符串。参见[前端中的翻译](https://www.hasscn.top/contributors/frontend/architecture/translations/)。
+
+### loadBackendTranslation
+
+`hass.loadBackendTranslation(category, integrations)` 从 Core 加载翻译，例如 `"title"` 或 `"entity"`，并以一个能识别这些翻译的 `localize` 函数完成。
+
+## 格式化工具
+
+这些格式化工具会根据用户的语言、数字格式、日期格式、时区和单位，将状态、属性和名称转换为文本。请使用它们，而不是直接显示原始值。每个工具都接受一个状态对象，例如 `hass.states["light.kitchen"]`。
+
+### formatEntityState
+
+```js
+hass.formatEntityState(stateObj); // "On"
+hass.formatEntityState(stateObj, "off"); // "Off"
+```
+
+格式化实体的状态，或你作为第二个参数传入的其他状态。
+
+### formatEntityAttributeValue
+
+```js
+hass.formatEntityAttributeValue(stateObj, "current_temperature");
+// "20.5 °C"
+hass.formatEntityAttributeValue(stateObj, "current_temperature", 18);
+// "18 °C"
+```
+
+格式化某个属性的值，或你作为第三个参数传入的其他值。
+
+### formatEntityAttributeName
+
+```js
+hass.formatEntityAttributeName(stateObj, "current_temperature");
+// "Current temperature"
+```
+
+格式化某个属性的名称。
+
+### Parts
+
+`formatEntityStateToParts()` 和 `formatEntityAttributeValueToParts()` 接受相同的参数，并以分段形式返回结果，每段都有一个 `type`，取值为 `value`、`unit` 或 `literal`。使用它们可以对数字和单位应用不同的样式。
+
+### formatEntityName
+
+```js
+hass.formatEntityName(stateObj, name, options);
+```
+
+根据实体的注册表上下文格式化实体名称：实体本身、其设备、父设备、区域和楼层。内置卡片使用它，因此同样使用它的自定义卡片会以相同的方式命名实体。`name` 可以是：
+
+- 省略：使用实体的友好名称。
+- 一个字符串：原样返回。用于用户输入的名称。
+- 单个名称项，如 `{ type: "entity" }`，或由它们组成的列表，以空格或 `options` 中的 `separator` 连接。
+
+项的类型有 `entity`、`device`、`parent_device`、`area`、`floor`，以及带有自定义 `text` 的 `text`。无法解析出内容的项会被省略。
+
+以一个名为 **Thermostat** 的温控器的温度传感器为例，它位于**一楼**的**客厅**：
+
+```js
+hass.formatEntityName(stateObj);
+// "Thermostat Temperature"
+hass.formatEntityName(stateObj, { type: "area" });
+// "Living room"
+hass.formatEntityName(
+  stateObj,
+  [{ type: "device" }, { type: "entity" }],
+  { separator: " · " }
+);
+// "Thermostat · Temperature"
+hass.formatEntityName(stateObj, [
+  { type: "text", text: "Floor:" },
+  { type: "floor" },
+]);
+// "Floor: Ground floor"
+```
+
+`parent_device` 仅为子设备的实体填充，例如插线板上的其中一个插座。这使得 `[{ type: "parent_device" }, { type: "device" }, { type: "entity" }]` 成为生成完整名称的安全选择：对于插座，它会生成 "Power strip Outlet 1 Switch"，而对于其他实体，父设备部分会被省略。这个列表也是前端组合名称时的默认值。
+
+要让用户在卡片编辑器中选择名称，请使用 `entity_name` 选择器。它的值就是 `hass.formatEntityName()` 所接受的内容，因此可以直接传递配置。参见[卡片编辑器和选择器](https://www.hasscn.top/contributors/frontend/custom-ui/card-editor/#entity-names)。
+
+---
+
+# 外部认证
+
+> 嵌入前端的 应用（如伴侣应用）如何自行保留登录，并将访问令牌交给前端。
+
+Source: https://www.hasscn.top/contributors/frontend/reference/external-auth/
+
+通常前端会自行处理登录：它显示登录页面、存储令牌并刷新它们。而在 Web 视图中嵌入前端的应用，比如[伴侣应用](https://www.hasscn.top/contributors/companion/)，则希望自行保留登录，只在需要时才向前端提供访问令牌（access token）。这就是外部认证的用途。
+
+## 开启外部认证
+
+在 URL 中使用 `?external_auth=1` 加载前端。随后前端会期望在 `window` 上定义以下桥接之一：
+
+- `window.externalAppV2`：Android，推荐的桥接。它需要一个支持 [`WebViewFeature.WEB_MESSAGE_LISTENER`](https://developer.android.com/reference/androidx/webkit/WebViewCompat.WebMessageListener) 的 Web 视图。
+- `window.externalApp`：Android，用于不支持该功能的 Web 视图的回退方案。
+- `window.webkit.messageHandlers`：iOS 和 macOS。
+
+当存在多个时，前端会按此顺序使用它们。如果都不存在，前端将无法启动。
+
+## 获取访问令牌
+
+前端在加载时会请求令牌，并在其令牌过期时再次请求。它会发送一个包含回调名称的载荷（payload），并在即使旧令牌尚未过期也需要新令牌时附带 `force: true`：
+
+```js
+// Android, V2
+window.externalAppV2.postMessage(
+  JSON.stringify({
+    type: "getExternalAuth",
+    payload: { callback: "externalAuthSetToken", force: true },
+  })
+);
+
+// Android, V1
+window.externalApp.getExternalAuth(
+  JSON.stringify({ callback: "externalAuthSetToken", force: true })
+);
+
+// iOS and macOS
+window.webkit.messageHandlers.getExternalAuth.postMessage({
+  callback: "externalAuthSetToken",
+  force: true,
+});
+```
+
+在 Android 上载荷是 JSON 字符串，在 iOS 和 macOS 上则是对象。
+
+应用通过调用回调来应答，传入是否成功，以及令牌及其有效秒数：
+
+```js
+window.externalAuthSetToken(true, {
+  access_token: "ABCDEFGH",
+  expires_in: 1800,
+});
+
+// 当应用无法获取令牌时
+window.externalAuthSetToken(false);
+```
+
+## 撤销令牌
+
+当用户在其个人资料中退出登录时，前端会请求应用执行退出登录。应用必须通过 Core 的[认证 API](https://www.hasscn.top/contributors/core/internals/auth-api/) 撤销其刷新令牌（refresh token），并让用户退出登录：
+
+```js
+// Android, V2
+window.externalAppV2.postMessage(
+  JSON.stringify({
+    type: "revokeExternalAuth",
+    payload: { callback: "externalAuthRevokeToken" },
+  })
+);
+
+// Android, V1
+window.externalApp.revokeExternalAuth(
+  JSON.stringify({ callback: "externalAuthRevokeToken" })
+);
+
+// iOS and macOS
+window.webkit.messageHandlers.revokeExternalAuth.postMessage({
+  callback: "externalAuthRevokeToken",
+});
+```
+
+完成后，应用会调用回调：
+
+```js
+window.externalAuthRevokeToken(true);
+
+// 当应用无法退出登录时
+window.externalAuthRevokeToken(false);
+```
+
+## 回调名称
+
+回调名称 `externalAuthSetToken` 和 `externalAuthRevokeToken` 永远不会改变。应用应检查请求中的回调是否是它所期望的那个，这样伪造的请求就无法让它调用其他内容。
+
+应用和前端之间传递的其他所有内容都通过[外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)进行。
+
+---
+
+# 外部总线
+
+> 前端与嵌入它的应用（如伴侣应用）之间的消息总线。消息如何发送，以及所有消息的完整列表。
+
+Source: https://www.hasscn.top/contributors/frontend/reference/external-bus/
+
+嵌入前端的应用，例如[伴侣应用](https://www.hasscn.top/contributors/companion/)，可以做一些浏览器做不到的事情：扫描条形码、写入 NFC 标签、调试（commission）Matter 设备，或显示原生界面。外部总线就是前端与应用之间沟通这些事情的途径。它与[外部认证](https://www.hasscn.top/contributors/frontend/reference/external-auth/)协同工作，并使用相同的桥接机制。代码位于 [`src/external_app/`](https://github.com/home-assistant/frontend/tree/dev/src/external_app)。
+
+## 发送消息
+
+消息是 JSON 对象。
+
+**从前端到应用**，前端使用可用的桥接：
+
+```js
+// Android, V2: the message is wrapped and serialized
+window.externalAppV2.postMessage(
+  JSON.stringify({ type: "externalBus", payload: message })
+);
+
+// Android, V1: the message is serialized
+window.externalApp.externalBus(JSON.stringify(message));
+
+// iOS and macOS: the message is passed as an object
+window.webkit.messageHandlers.externalBus.postMessage(message);
+```
+
+**从应用到前端**，应用调用前端定义的函数：
+
+```js
+window.externalBus(message);
+```
+
+## 消息格式
+
+每条消息都有一个 `id` 和一个 `type`，当该类型需要时还会有一个 `payload`：
+
+```ts
+interface Message {
+  id: number;
+  type: string;
+  payload?: unknown;
+}
+```
+
+有些消息需要应答。应答是一条具有相同 `id` 的 `result` 消息：
+
+```ts
+interface SuccessResult {
+  id: number;
+  type: "result";
+  success: true;
+  result: unknown;
+}
+
+interface ErrorResult {
+  id: number;
+  type: "result";
+  success: false;
+  error: { code: string; message: string };
+}
+```
+
+从应用发送到前端的消息是命令，带有 `type: "command"`，命令名称放在 `command` 中：
+
+```json
+{
+  "id": 5,
+  "type": "command",
+  "command": "navigate",
+  "payload": { "path": "/config/areas/dashboard" }
+}
+```
+
+前端会用结果应答每条命令。请根据两个通用错误代码的发送时机来判断，而不要仅凭名称：
+
+- `unknown_command`：前端还没有命令处理器，因为它仍在启动中。命令本身很可能是已知的。
+- `not_ready`：命令处理器已就位，但它不处理这条命令。
+
+两者都由 [`src/external_app/external_messaging.ts`](https://github.com/home-assistant/frontend/blob/dev/src/external_app/external_messaging.ts) 中的 `receiveMessage` 发送。
+
+## 从前端到应用
+
+### 需要应答的消息
+
+#### config/get
+
+前端在连接后立即询问应用能做什么。载荷（payload）：无。应用以一个对象应答。所有键都是可选的：
+
+| 键 | 类型 | 含义 |
+| --- | --- | --- |
+| `hasSettingsScreen` | boolean | 应用在 `config_screen/show` 时显示自己的设置。 |
+| `hasSidebar` | boolean | 应用有自己的侧边栏。 |
+| `canWriteTag` | boolean | 设备可以写入 NFC 标签。 |
+| `hasExoPlayer` | boolean | 应用可以使用 ExoPlayer 原生播放 HLS 视频。 |
+| `canCommissionMatter` | boolean | 应用可以调试（commission）Matter 设备。 |
+| `hasMatterStatusReport` | boolean | 应用通过 `matter/commission/finish` 报告 Matter 调试结束。 |
+| `canShareMatterDeviceToAppleHome` | boolean | 应用可以通过 `matter/share_device` 将 Home Assistant 已有的 Matter 设备添加到 Apple Home。 |
+| `canShareMatterDeviceToOtherApps` | boolean | 应用可以通过 `matter/share_device` 将 Home Assistant 已有的 Matter 设备分享给用户在平台 Matter 分享面板中选择的应用。 |
+| `canImportThreadCredentials` | boolean | 应用可以导入 Thread 凭证。 |
+| `canTransferThreadCredentialsToKeychain` | boolean | 应用可以将 Thread 凭证存储在平台的钥匙串中。仅限 Apple。 |
+| `hasAssist` | boolean | 应用有原生的 Assist 界面，用于替代前端的界面。 |
+| `hasAssistSettings` | boolean | 应用有针对设备的 Assist 设置，显示在语音助手设置中。 |
+| `hasBarCodeScanner` | number | 当应用可以扫描条形码时为 `1`，否则为 `0`。 |
+| `canSetupImprov` | boolean | 应用可以设置 Improv Wi-Fi 设备。 |
+| `hasEntityAddTo` | boolean | 应用可以从更多信息对话框将实体添加到自己的位置，例如小组件。 |
+| `hasSplashscreen` | boolean | 应用用自己的加载屏幕覆盖前端，直到 `frontend/loaded`。 |
+| `appVersion` | string | 应用的版本。 |
+| `webrtc` | object | 应用的 WebRTC 功能。请参阅下面的键。 |
+
+`webrtc` 的键，全部可选：
+
+| 键 | 类型 | 含义 |
+| --- | --- | --- |
+| `hasCameraMicrophoneStream` | boolean | 应用可以通过 `webrtc/stream/start` 将麦克风流式传输到摄像头实体。 |
+
+#### entity/add_to/get_actions
+
+前端询问一个实体可以添加到哪里，例如主屏幕小组件或表盘。
+
+载荷：
+
+```ts
+{ entity_id: string }
+```
+
+应答：
+
+```ts
+{
+  actions: Array<{
+    enabled: boolean;
+    name: string;
+    details?: string;
+    mdi_icon: string;
+    app_payload: string;
+  }>;
+}
+```
+
+`name` 和 `details` 会按原样显示，因此请在应用中翻译它们。`mdi_icon` 是类似 `mdi:car` 的图标名称。`app_payload` 是任意字符串，当用户选择该操作时，前端会通过 `entity/add_to` 将其传回。
+
+#### matter/share_device
+
+前端要求应用将 Matter 设备分享到另一个平台，例如 Apple Home。该设备已在 Home Assistant 中设置好，并且 Home Assistant 已为其打开了调试窗口：在这段短时间内，另一个平台也可以添加该设备。前端在打开该窗口的对话框中提供此选项。
+
+前端仅在应用支持时发送此消息：
+
+- 使用 `canShareMatterDeviceToAppleHome` 时，它始终提供将设备添加到 Apple Home 的选项。当应用同时设置两个键时，此键优先。
+- 使用 `canShareMatterDeviceToOtherApps` 时，仅当 Matter 服务器报告了 `discriminator` 和窗口超时时间时，它才提供分享面板。分享面板会打开自己的窗口，并且需要这两项。
+
+载荷：
+
+```ts
+{
+  setup_qr_code: string;
+  setup_pin_code: number;
+  discriminator?: number;
+  vendor_id?: number;
+  product_id?: number;
+  device_name?: string;
+  remaining_seconds?: number;
+}
+```
+
+| 键 | 含义 |
+| --- | --- |
+| `setup_qr_code` | 调试窗口的二维码载荷，以 `MT:` 开头。始终发送。 |
+| `setup_pin_code` | 调试窗口的设置密码。始终发送。 |
+| `discriminator` | 窗口打开时设备广播的 discriminator，当 Matter 服务器报告时。 |
+| `vendor_id` | 设备的供应商 ID，当 Matter 服务器报告时。 |
+| `product_id` | 设备的产品 ID，当 Matter 服务器报告时。 |
+| `device_name` | 设备在 Home Assistant 中的名称，用于向其他平台建议。 |
+| `remaining_seconds` | 窗口关闭前的估计秒数，当 Matter 服务器报告其超时时。当剩余 30 秒或更少时，前端将代码视为已过期，不发送消息，并要求您获取新代码。发送时，此值大于 30。 |
+
+应答：平台流程完成后返回一个空对象。如果未成功，请以错误结果应答：
+
+- `canceled`：用户关闭了平台的分享面板。前端将其视为选择，而非错误。
+- 任何其他代码，例如 `failed`：前端显示分享失败，并使用自己的文本。它不会显示您的 `message`。
+
+#### webrtc/stream/start
+
+前端要求应用将麦克风流式传输到摄像头实体，以便用户可以通过它说话。应用自行捕获麦克风，并在自己的 WebRTC 会话中发送。这使得当 Home Assistant 未通过 HTTPS 打开时，双向音频能够工作，因为浏览器在这种情况下不会给前端麦克风访问权限。
+
+前端仅在以下两个条件都满足时，才从摄像头更多信息对话框中的麦克风按钮发送此消息：
+
+- 页面不是安全上下文。在安全上下文中，前端自行捕获麦克风。
+- 应用在其对 `config/get` 的应答中设置了 `webrtc.hasCameraMicrophoneStream`。
+
+载荷：
+
+```ts
+{
+  stream_type: "microphone";
+  entity_id: string;
+}
+```
+
+| 键 | 含义 |
+| --- | --- |
+| `stream_type` | 要流式传输的内容。`"microphone"`。使用 `unsupported_stream_type` 拒绝您不知道的类型。 |
+| `entity_id` | 要流式传输到的摄像头实体。 |
+
+应答，一旦流连接：
+
+```ts
+{ session_id: string }
+```
+
+应用自行生成 `session_id`。前端通过 `webrtc/stream/stop` 将其发送回来，应用通过 `webrtc/stream/stopped` 发送它。
+
+前端对应答不设置超时，并显示麦克风正在连接，直到应答到来。因此请始终应答：使用会话 ID，或在流无法启动时使用错误结果。错误代码是 [`src/external_app/external_messaging.ts`](https://github.com/home-assistant/frontend/blob/dev/src/external_app/external_messaging.ts) 中的 `WEBRTC_STREAM_ERROR_CODES`：
+
+| 代码 | 含义 |
+| --- | --- |
+| `microphone_denied` | 用户拒绝了麦克风权限。 |
+| `server_unavailable` | 应用没有服务器的 API，或其连接从未就绪。 |
+| `signaling_failed` | `camera/webrtc/offer` 失败，或 Home Assistant 发送了错误事件。 |
+| `connection_failed` | WebRTC 连接丢失，应用无法恢复。 |
+| `timeout` | 流未及时连接。应用决定等待多长时间。 |
+| `interrupted` | 应用自行停止了流，例如因为它进入后台。 |
+| `unsupported_stream_type` | 应用不知道请求的流类型。 |
+| `unknown` | 意外错误。`message` 包含应用的错误。 |
+
+前端为每个代码显示自己的文本。它仅在 `unknown` 或代码不在列表中时显示 `message`。
+
+当用户在应用仍在连接时关闭麦克风，前端不会发送任何内容，因为它还没有会话 ID。它会等待应答，然后为该会话发送 `webrtc/stream/stop`。
+
+### 无需应答的消息
+
+| 类型 | 载荷 | 含义 |
+| --- | --- | --- |
+| `assist/settings` | | 打开应用的 Assist 设置。 |
+| `assist/show` | `{ pipeline_id, start_listening }`, 可选 | 显示原生 Assist 界面。`pipeline_id` 是 ID、`"preferred"` 或 `"last_used"`。 |
+| `bar_code/scan` | `{ title, description, alternative_option_label? }` | 打开条形码扫描器。没有 `alternative_option_label` 时，隐藏替代选项的按钮。 |
+| `bar_code/notify` | `{ message }` | 在条形码扫描器中显示消息。 |
+| `bar_code/close` | | 关闭条形码扫描器。 |
+| `config_screen/show` | | 打开应用的设置。 |
+| `connection-status` | `{ event }` | 与 Home Assistant 的连接已更改。`event` 为 `"connected"`、`"disconnected"` 或 `"auth-invalid"`。 |
+| `entity/add_to` | `{ entity_id, app_payload }` | 添加实体，使用来自 `entity/add_to/get_actions` 的 `app_payload`。 |
+| `entity/controlled` | `{ entity_ids, domain, service }` | 用户在前端对这些实体执行了操作。 |
+| `exoplayer/play_hls` | `{ url, muted }` | 原生播放 HLS 流。 |
+| `exoplayer/resize` | `{ left, top, right, bottom }` | 将原生播放器移动到这些坐标。 |
+| `exoplayer/stop` | | 停止原生播放器。 |
+| `focus_element` | `{ element_id }` | 聚焦一个元素。 |
+| `frontend/loaded` | | 前端已移除其启动屏幕。使用 `hasSplashscreen` 时，这是在第一个页面渲染之后。 |
+| `frontend/reload_and_clear_cache` | | 清除 Web 视图的缓存并重新加载。仅发送给 iOS 和 macOS，当前端检测到过时的构建时。 |
+| `haptic` | `{ hapticType }` | 提供触觉反馈：`"success"`、`"warning"`、`"failure"`、`"light"`、`"medium"`、`"heavy"` 或 `"selection"`。 |
+| `improv/scan` | | 扫描 Improv Wi-Fi 设备。 |
+| `improv/configure_device` | `{ name }` | 使用此名称设置 Improv Wi-Fi 设备。 |
+| `matter/commission` | `{ mac_extended_address, extended_pan_id, border_agent_id, active_operational_dataset }`, 可选 | 开始调试 Matter 设备。载荷描述了首选的 Thread 网络。每个值都可以是 `null`。 |
+| `more_info/opened` | `{ entity_id }` | 此实体的更多信息对话框已打开。 |
+| `more_info/closed` | `{ entity_id }` | 更多信息对话框已关闭。 |
+| `sidebar/show` | | 显示应用的侧边栏。 |
+| `tag/write` | `{ tag, name }` | 打开写入 NFC 标签的屏幕。当用户未命名标签时，`name` 为 `null`。 |
+| `theme-update` | | 主题已更改。更新状态栏和导航栏的颜色。 |
+| `thread/import_credentials` | | 从设备导入 Thread 凭证，并通过 WebSocket API 发送到 Home Assistant。 |
+| `thread/store_in_platform_keychain` | `{ mac_extended_address, border_agent_id, active_operational_dataset, extended_pan_id }` | 将 Thread 凭证存储在平台的钥匙串中。 |
+| `webrtc/stream/stop` | `{ session_id }` | 停止 `webrtc/stream/start` 以该 `session_id` 应答的流。不要为此发送 `webrtc/stream/stopped`。 |
+
+## 从应用到前端
+
+所有命令都会收到一个结果。成功时，`result` 为 `null`。
+
+| 命令 | 载荷 | 含义 |
+| --- | --- | --- |
+| `automation/editor/show` | `{ config? }`, 可选 | 为新的自动化打开自动化编辑器。`config` 可以填写 `alias`、`description`、`triggers`、`conditions`、`actions`、`mode` 和 `max`。 |
+| `bar_code/scan_result` | `{ rawValue, format }` | 扫描到的条形码。`format` 是 [Barcode Detection API 格式](https://developer.mozilla.org/docs/Web/API/Barcode_Detection_API#supported_barcode_formats)之一，或 `"unknown"`。 |
+| `bar_code/aborted` | `{ reason }` | 扫描停止。`reason` 为 `"canceled"` 或 `"alternative_options"`。 |
+| `improv/discovered_device` | `{ name }` | 发现了一个 Improv Wi-Fi 设备。 |
+| `improv/device_setup_done` | | 设置 Improv Wi-Fi 设备已完成。 |
+| `kiosk_mode/set` | `{ enable }` | 打开或关闭信息亭模式。 |
+| `matter/commission/finish` | `{ name, success }` | Matter 设备调试结束。当 `name` 不为 `null` 时，它被提议作为新设备的名称。当 `success: false` 时，前端关闭其对话框并显示添加设备失败，除非设备已经出现。 |
+| `navigate` | `{ path, options? }` | 转到页面。`path` 以 `/` 开头，例如 `/config/voice-assistants/assistants`。`options.replace` 替换当前历史记录条目，`options.data` 存储在历史记录状态中。 |
+| `notifications/show` | | 打开通知。 |
+| `restart` | | 将前端重新连接到 Home Assistant。 |
+| `sidebar/show` | | 打开侧边栏。当对话框打开时，以 `not_allowed` 失败。 |
+| `sidebar/toggle` | | 打开或关闭侧边栏。当对话框打开时，以 `not_allowed` 失败。 |
+| `webrtc/stream/stopped` | `{ session_id, code, message }` | 已连接的流在未被前端停止的情况下结束。`code` 是 [`webrtc/stream/start`](https://www.hasscn.top/contributors/frontend/reference/external-bus/#webrtcstreamstart) 的错误代码之一，`message` 是后备文本。使用 `interrupted` 时，前端关闭麦克风而不显示消息。使用任何其他代码时，它也会显示错误。在连接之前失败的流不会通过此命令报告，而是通过 `webrtc/stream/start` 的错误结果报告。 |

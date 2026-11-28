@@ -1,0 +1,197 @@
+# 设计
+
+> 基础、组件、模式与界面文案。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/design/llms-full.txt.
+
+## 设计
+
+- [设计](https://www.hasscn.top/contributors/design/index.md): Home Assistant 的开放设计资源。为共同构建界面的设计师和开发者提供原则、基础、组件和模式。
+- [你的第一次设计贡献](https://www.hasscn.top/contributors/design/first-contribution/index.md): 找到可以改进的地方，设计更好的方案，并分享出来。以下是入门方法。
+- [我们如何进行设计](https://www.hasscn.top/contributors/design/how-we-design/index.md): 设计工作在哪里进行，一个想法如何成为 Home Assistant 的一部分，由谁决定，以及研究如何塑造设计。
+- [设计原则](https://www.hasscn.top/contributors/design/principles/index.md): 每一个设计决策背后的价值观。开放之家（Open Home）对界面意味着什么，以及 Home Assistant 的个性如何在其中体现。
+- [我们为谁设计](https://www.hasscn.top/contributors/design/users/index.md): 在做设计决策时我们时刻记挂的三类用户。
+
+## 基础
+
+- [基础](https://www.hasscn.top/contributors/design/foundations/index.md): 颜色、排版、间距、动效和无障碍。Home Assistant 中一切设计背后的设计令牌（design token）和规则。
+- [颜色](https://www.hasscn.top/contributors/design/foundations/color/index.md): Home Assistant 的调色板，以及构建在其之上的语义化令牌（semantic tokens）。
+- [排版](https://www.hasscn.top/contributors/design/foundations/typography/index.md): Home Assistant 界面的字号比例和字重。
+- [间距](https://www.hasscn.top/contributors/design/foundations/spacing/index.md): Home Assistant 界面的间距比例和圆角半径。
+- [布局](https://www.hasscn.top/contributors/design/foundations/layout/index.md): 页面内容的最大宽度，以及内容与屏幕边缘之间保留的空间。
+- [无障碍](https://www.hasscn.top/contributors/design/foundations/accessibility/index.md): 如何设计并构建一个人人都能使用的界面。适用的 WCAG 要求，以及 Home Assistant 前端在实践中如何满足这些要求。
+- [动效](https://www.hasscn.top/contributors/design/foundations/motion/index.md): Home Assistant 界面的动画时长令牌（token），以及动效如何尊重那些要求减少动效的用户。
+
+## 组件
+
+- [组件](https://www.hasscn.top/contributors/design/components/index.md): Home Assistant 界面的构建模块，每个组件一页，包含指南、规格、无障碍信息和代码。
+
+### Actions
+
+- [下拉菜单](https://www.hasscn.top/contributors/design/components/dropdown/index.md): 下拉菜单将一组操作或选项收纳在按钮之后，以菜单形式展示。
+- [按钮](https://www.hasscn.top/contributors/design/components/button/index.md): 按钮用于启动一个操作，例如保存表单或打开对话框。
+- [进度按钮](https://www.hasscn.top/contributors/design/components/progress-button/index.md): 一种按钮，能显示其操作正在运行，以及运行是否成功。
+
+### Input
+
+- [开关](https://www.hasscn.top/contributors/design/components/switch/index.md): 开关用于将单个设置打开或关闭。
+- [文本域（Textarea）](https://www.hasscn.top/contributors/design/components/textarea/index.md): 文本域（textarea）让人们输入可以跨越多行的文本，例如描述或消息。
+- [文本输入框](https://www.hasscn.top/contributors/design/components/input/index.md): 文本输入框让人们输入单行文本，例如名称、数字或密码。
+- [滑块](https://www.hasscn.top/contributors/design/components/slider/index.md): 滑块让人们通过拖动，从一段范围中选取一个数值。
+- [选择框](https://www.hasscn.top/contributors/design/components/select-box/index.md): 选择框让人们从几个选项中挑选一个，选项以卡片形式并排显示，可容纳描述或图片。
+- [颜色选择器](https://www.hasscn.top/contributors/design/components/color-picker/index.md): 色轮用于选择色相和饱和度，例如灯光的颜色。
+
+### Pickers
+
+- [区域选择器](https://www.hasscn.top/contributors/design/components/area-picker/index.md): 区域选择器让用户选择家中的一个区域（area），或当场创建一个新区域。
+- [实体选择器](https://www.hasscn.top/contributors/design/components/entity-picker/index.md): 实体选择器让人们可以通过搜索，从家中的所有实体中选择一个实体。
+- [设备选择器](https://www.hasscn.top/contributors/design/components/device-picker/index.md): 设备选择器让人们可以从家中的所有设备中搜索并选择一个设备。
+
+### Forms
+
+- [表单](https://www.hasscn.top/contributors/design/components/form/index.md): ha-form 根据模式（schema）渲染一个完整的表单，为每个值选择合适的字段，并返回数据。
+- [选择器](https://www.hasscn.top/contributors/design/components/selector/index.md): ha-selector 为选择器（selector）渲染合适的控件。选择器是对一个值的简短描述，集成、蓝图和表单在 Home Assistant 的各处都会用到它。
+
+### Feedback and status
+
+- [加载指示器（Spinner）](https://www.hasscn.top/contributors/design/components/spinner/index.md): 加载指示器（Spinner）用于显示某项内容正在加载或进行中，适用于你不知道需要多长时间的情况。
+- [对话框](https://www.hasscn.top/contributors/design/components/dialog/index.md): 对话框在您正在进行的操作之上，请求做出决定或输入内容。
+- [工具提示（Tooltip）](https://www.hasscn.top/contributors/design/components/tooltip/index.md): 工具提示（tooltip）在您悬停或聚焦某个元素时显示关于该元素的简短提示。
+- [徽章（Badge）](https://www.hasscn.top/contributors/design/components/badge/index.md): 徽章以紧凑的胶囊形显示一小段状态信息，例如温度或灯的状态。
+- [提示](https://www.hasscn.top/contributors/design/components/tip/index.md): 提示（tip）是一条简短的、可选的提示信息，比如键盘快捷键或指向更多帮助的指引，居中显示在其所属内容的下方。
+- [标签徽章（label badge）](https://www.hasscn.top/contributors/design/components/label-badge/index.md): 经典的圆形状态徽章，圆圈内显示数值，边缘显示简短标签。
+- [状态图标](https://www.hasscn.top/contributors/design/components/state-icon/index.md): Home Assistant 如何根据实体的状态选择图标和颜色。
+- [自适应对话框](https://www.hasscn.top/contributors/design/components/adaptive-dialog/index.md): 在大屏幕上是对话框，在手机上是底部抽屉。它会自动选择合适的形式。
+- [警告（Alert）](https://www.hasscn.top/contributors/design/components/alert/index.md): 警告用于显示简短的重要信息，且不会打断用户正在进行的操作。
+
+### Showing values
+
+- [仪表盘（Gauge）](https://www.hasscn.top/contributors/design/components/gauge/index.md): 仪表盘在半圆形刻度盘上显示单个数值，并可通过可选的颜色表示该数值的好坏程度。
+- [控件](https://www.hasscn.top/contributors/design/components/controls/index.md): 用于操作设备的大型、触控友好的控件，例如更多信息对话框中的开关和滑块。
+- [控制滚动条](https://www.hasscn.top/contributors/design/components/control-scrubber/index.md): 一种水平控件，数值位于固定窗口下方，你拖动其后的条带。专为循环范围设计，例如灯光的色相。
+- [条形图（Bar）](https://www.hasscn.top/contributors/design/components/bar/index.md): 条形图显示某物的使用量，以水平轨道上填充部分的比例表示。
+- [选择菜单](https://www.hasscn.top/contributors/design/components/select-menu/index.md): 一种紧凑的下拉菜单，用于选择一个选项，例如风扇的预设模式或恒温器的模式。
+
+### Layout and content
+
+- [展开面板（Expansion panel）](https://www.hasscn.top/contributors/design/components/expansion-panel/index.md): 展开面板将一个区域隐藏在标题之后，人们可以在需要时将其展开。
+- [渐隐（Faded）](https://www.hasscn.top/contributors/design/components/faded/index.md): 渐隐内容显示长文本的开头，其余部分淡出，直到用户选择它为止。
+- [跑马灯文本](https://www.hasscn.top/contributors/design/components/marquee-text/index.md): 当单行文本过长无法完整显示时，跑马灯文本（Marquee text）会将其缓慢地来回滚动。
+
+### 布局和内容
+
+- [列表](https://www.hasscn.top/contributors/design/components/list/index.md): 列表显示一组行，每行包含一行文本，并可选地带一个图标、第二行文本以及末尾的内容。
+
+## 模式
+
+- [模式](https://www.hasscn.top/contributors/design/patterns/index.md): Home Assistant 界面中反复出现的情形，例如表单、等待、空列表或错误，以及前端如何处理它们。
+- [表单与校验](https://www.hasscn.top/contributors/design/patterns/forms/index.md): Home Assistant 如何收集输入、标明必填项并显示错误，以便用户进行修正。
+- [加载](https://www.hasscn.top/contributors/design/patterns/loading/index.md): Home Assistant 如何提示某项内容正在到来，从加载指示器到能报告操作结果的按钮。
+- [空状态](https://www.hasscn.top/contributors/design/patterns/empty-states/index.md): 当屏幕或列表中没有任何内容时应该显示什么，以及如何帮助用户继续操作。
+- [错误与消息](https://www.hasscn.top/contributors/design/patterns/errors/index.md): Home Assistant 如何告知用户发生了问题或一切正常。警报（alert）、Toast 提示和修复（repair），以及何时使用哪一种。
+- [确认与撤销](https://www.hasscn.top/contributors/design/patterns/confirmations/index.md): 什么时候在执行操作前先询问，什么时候改为提供撤销，以及 Home Assistant 如何防止用户丢失未保存的更改。
+
+## 仪表盘
+
+- [仪表盘](https://www.hasscn.top/contributors/design/dashboards/index.md): 什么是仪表盘和卡片，如何选择合适的卡片，以及每张卡片遵循的原则。
+
+### Entity cards
+
+- [实体卡片](https://www.hasscn.top/contributors/design/dashboards/entities-card/index.md): 实体卡片以列表形式显示实体，每行一个，每行都带有适合该实体的控件。它是在一张卡片中紧凑地显示多个实体的方式。
+- [实体卡片（entity card）](https://www.hasscn.top/contributors/design/dashboards/entity-card/index.md): 实体卡片以大号数值显示一个实体的状态，并附带其名称和图标。它专为希望一目了然读取的数字而设计。
+- [实体筛选卡片](https://www.hasscn.top/contributors/design/dashboards/entity-filter-card/index.md): 实体筛选卡片只显示列表中符合筛选条件的实体，例如已打开的灯。它会包装另一张卡片，默认为实体卡片。
+- [按钮卡片](https://www.hasscn.top/contributors/design/dashboards/button-card/index.md): 按钮卡片是一个带有图标和名称的大方形按钮。它执行一个操作，例如切换灯的开关或激活一个场景。
+- [概览卡片（Glance card）](https://www.hasscn.top/contributors/design/dashboards/glance-card/index.md): 概览卡片并排显示多个实体的状态，每个实体包括名称、图标和状态。它是一眼就能读完的概览。
+- [磁贴卡片（Tile card）](https://www.hasscn.top/contributors/design/dashboards/tile-card/index.md): 磁贴卡片显示一个实体（entity）的图标、名称和状态，并可以为其添加控件。它几乎是所有内容的默认卡片。
+
+### Controls
+
+- [加湿器卡片](https://www.hasscn.top/contributors/design/dashboards/humidifier-card/index.md): 加湿器卡片以表盘形式显示加湿器或除湿器，用于查看湿度并设置目标湿度。
+- [媒体控制卡片](https://www.hasscn.top/contributors/design/dashboards/media-control-card/index.md): 媒体控制卡片显示媒体播放器正在播放的内容，包括封面图片、控制按钮和播放进度。
+- [待办事项列表卡片](https://www.hasscn.top/contributors/design/dashboards/todo-list-card/index.md): 待办事项列表卡片显示待办事项列表中的条目，可以勾选完成、添加新条目以及重新排序。
+- [恒温器卡片](https://www.hasscn.top/contributors/design/dashboards/thermostat-card/index.md): 恒温器卡片将气候或热水器实体显示为一个旋钮，用于读取温度并设置目标温度。
+- [报警面板卡片](https://www.hasscn.top/contributors/design/dashboards/alarm-panel-card/index.md): 报警面板卡片可布防和撤防报警系统，并提供用于输入密码的数字键盘。
+- [灯光卡片](https://www.hasscn.top/contributors/design/dashboards/light-card/index.md): 灯光卡片将一盏灯显示为一个大的圆形按钮，周围有一个用于设置亮度的圆环。
+
+### Information
+
+- [Markdown 卡片](https://www.hasscn.top/contributors/design/dashboards/markdown-card/index.md): Markdown 卡片显示用 Markdown 编写的文本，并作为模板渲染，因此可以将固定文本与实时状态混合在一起。
+- [仪表盘卡片（Gauge card）](https://www.hasscn.top/contributors/design/dashboards/gauge-card/index.md): 仪表盘卡片在一个表盘上显示一个数值，并用颜色标示良好、需要注意或糟糕的范围。
+- [传感器卡片](https://www.hasscn.top/contributors/design/dashboards/sensor-card/index.md): 传感器卡片以大号字体显示一个数值传感器的值，并在下方可选显示其近期历史的折线图。
+- [历史图表卡片](https://www.hasscn.top/contributors/design/dashboards/history-graph-card/index.md): 历史图表卡片显示一个或多个实体（entity）的状态在过去几小时内的变化情况，数值以折线图呈现，其他内容则以时间线呈现。
+- [地图卡片](https://www.hasscn.top/contributors/design/dashboards/map-card/index.md): 地图卡片在交互式地图上显示人员、设备和地理位置区域（zone）的位置，并可选显示它们曾经到过的轨迹。
+- [天气预报卡片](https://www.hasscn.top/contributors/design/dashboards/weather-forecast-card/index.md): 天气预报卡片显示当前天气以及来自天气实体（entity）的未来几天或几小时的预报。
+- [时钟卡片](https://www.hasscn.top/contributors/design/dashboards/clock-card/index.md): 时钟卡片以数字或模拟时钟的形式显示当前时间，并可选择显示日期。
+- [植物状态卡片](https://www.hasscn.top/contributors/design/dashboards/plant-status-card/index.md): 植物状态卡片显示植物的读数，例如湿度和光照，并指出需要关注的那一项。
+
+### Grouping and layout
+
+- [区域卡片](https://www.hasscn.top/contributors/design/dashboards/area-card/index.md): 区域卡片汇总家中的一个区域，包括其图片、传感器和警报，并可为其中的一切添加控制。
+- [条件卡片](https://www.hasscn.top/contributors/design/dashboards/conditional-card/index.md): 条件卡片（conditional card）仅在其条件满足时显示另一张卡片，例如灯处于开启状态，或屏幕足够宽。
+- [标题卡片](https://www.hasscn.top/contributors/design/dashboards/heading-card/index.md): 标题卡片在一组卡片上方显示标题，并可通过可选的徽章显示该组的状态。
+- [网格卡片和堆叠卡片](https://www.hasscn.top/contributors/design/dashboards/grid-card/index.md): 网格卡片、水平堆叠卡片和垂直堆叠卡片用于容纳其他卡片，将它们并排或上下排列为一张卡片。
+
+### Media and pictures
+
+- [图片元素卡片](https://www.hasscn.top/contributors/design/dashboards/picture-elements-card/index.md): 图片元素卡片可将图标、标签、徽章和按钮放置在图片上的任意位置，例如平面图上的灯具。
+- [图片卡片](https://www.hasscn.top/contributors/design/dashboards/picture-card/index.md): 图片卡片显示一张图片，并且可以在你选中它时执行操作，比如打开另一个视图。
+- [图片概览卡片](https://www.hasscn.top/contributors/design/dashboards/picture-glance-card/index.md): 图片概览卡片显示一张图片，底部有一排实体图标，可一目了然地查看和控制一个房间或摄像头画面。
+- [实体图片卡片](https://www.hasscn.top/contributors/design/dashboards/picture-entity-card/index.md): 实体图片卡片将一个实体显示为图片，并在底部的栏上显示其名称和状态。它是适用于摄像头的卡片。
+- [网页卡片](https://www.hasscn.top/contributors/design/dashboards/iframe-card/index.md): 网页卡片通过 iframe 在仪表盘中嵌入另一个网页。
+
+## 更多信息
+
+- [更多信息](https://www.hasscn.top/contributors/design/more-info/index.md): 选择实体时打开的对话框，以及每种类型的实体在其中呈现的视图。
+
+### Lights and climate
+
+- [加湿器](https://www.hasscn.top/contributors/design/more-info/humidifier/index.md): 加湿器或除湿器的更多信息视图，带有一个用于设定目标湿度的圆形转盘。
+- [温控](https://www.hasscn.top/contributors/design/more-info/climate/index.md): 恒温器或空调的更多信息视图，围绕圆形温度转盘构建。
+- [灯](https://www.hasscn.top/contributors/design/more-info/light/index.md): 灯的更多信息视图，带有一个大亮度滑块以及颜色和色温开关。
+- [热水器](https://www.hasscn.top/contributors/design/more-info/water-heater/index.md): 热水器的更多信息视图，带有一个用于目标温度的圆形表盘，以及用于运行模式和离家模式的菜单。
+- [风扇](https://www.hasscn.top/contributors/design/more-info/fan/index.md): 风扇的更多信息视图，包含速度控制以及用于预设、风向和摆头的菜单。
+
+### Openings and security
+
+- [窗帘（Cover）](https://www.hasscn.top/contributors/design/more-info/cover/index.md): 百叶窗、卷帘、车库门及其他窗帘类设备的更多信息视图，带有位置滑块或打开和关闭按钮。
+- [防盗报警控制面板](https://www.hasscn.top/contributors/design/more-info/alarm-control-panel/index.md): 报警系统的更多信息视图，带有用于选择布防模式的垂直选择器。
+
+### Media
+
+- [媒体播放器](https://www.hasscn.top/contributors/design/more-info/media-player/index.md): 扬声器、电视或其他媒体播放器的更多信息视图，布局类似音乐应用。
+
+### Appliances
+
+- [割草机](https://www.hasscn.top/contributors/design/more-info/lawn-mower/index.md): 机器人割草机的更多信息视图，带有动画状态图片以及启动、停止和回充电座的按钮。
+- [吸尘器](https://www.hasscn.top/contributors/design/more-info/vacuum/index.md): 扫地机器人的更多信息视图，带有动态状态图片和一排命令按钮。
+- [开关](https://www.hasscn.top/contributors/design/more-info/switch/index.md): 开关（switch）、切换辅助元素（toggle helper）或警报器（siren）的更多信息视图，围绕一个大的开/关切换开关构建。
+- [更新](https://www.hasscn.top/contributors/design/more-info/update/index.md): 更新实体（entity）的更多信息视图，包含版本、发行说明以及跳过或安装按钮。
+
+### Helpers
+
+- [场景（Scene）](https://www.hasscn.top/contributors/design/more-info/scene/index.md): 场景的更多信息视图，包含一个“激活”按钮以及场景所控制的实体。
+- [定时器](https://www.hasscn.top/contributors/design/more-info/timer/index.md): 定时器辅助元素（helper）的更多信息视图，包含实时倒计时、时长输入框，以及启动、暂停和取消按钮。
+- [数字（Number）](https://www.hasscn.top/contributors/design/more-info/number/index.md): 设备的数字（number）实体的更多信息视图，即状态行中的滑块或数字输入框。
+- [数字输入辅助元素](https://www.hasscn.top/contributors/design/more-info/input-number/index.md): 数字辅助元素（number helper）、滑块或数字输入框在状态行中的更多信息视图。
+- [文本输入辅助元素](https://www.hasscn.top/contributors/design/more-info/input-text/index.md): 文本辅助元素（text helper）的更多信息视图，即状态行中的一个文本输入框。
+
+### Information
+
+- [人员](https://www.hasscn.top/contributors/design/more-info/person/index.md): 人员的更多信息视图，在地图上显示其所在位置。
+- [天气](https://www.hasscn.top/contributors/design/more-info/weather/index.md): 天气实体的更多信息视图，包含当前状况、详细信息和预报。
+- [太阳](https://www.hasscn.top/contributors/design/more-info/sun/index.md): 太阳的更多信息视图，包含下一次日出和日落、高度角和方位角。
+
+### 开口与安全
+
+- [阀门](https://www.hasscn.top/contributors/design/more-info/valve/index.md): 水阀或气阀的更多信息视图，包含开和关的开关、按钮或位置滑块。
+
+### 门窗与安防
+
+- [锁](https://www.hasscn.top/contributors/design/more-info/lock/index.md): 锁的更多信息视图，带有一个大的锁开关和一个单独的、需确认的开门按钮。
+
+## UI 文本
+
+- [UI 文本](https://www.hasscn.top/contributors/design/ui-text/index.md): 界面如何说话。Home Assistant 的语气、风格和用词，适用于每一位编写标签、按钮或错误信息的人。
+- [按钮和标签](https://www.hasscn.top/contributors/design/ui-text/buttons-and-labels/index.md): 按钮上、对话框标题中以及字段旁边的文字。简短、使用句首大写，并说明会发生什么。
+- [消息](https://www.hasscn.top/contributors/design/ui-text/messages/index.md): 如何撰写错误、警告、空状态、确认和成功消息的措辞，让人们知道发生了什么以及接下来该怎么做。
+- [移除、删除、添加或创建](https://www.hasscn.top/contributors/design/ui-text/remove-delete/index.md): 四个容易混淆的词。一致地使用它们能让用户明白将会发生什么。

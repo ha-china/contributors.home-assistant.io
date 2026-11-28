@@ -1,0 +1,219 @@
+# 仪表盘卡片（Gauge card）
+
+> 仪表盘卡片在一个表盘上显示一个数值，并用颜色标示良好、需要注意或糟糕的范围。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/gauge-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.living_room_humidity"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.monstera_battery",
+        "name": "Monstera sensor battery",
+        "severity": {
+          "red": 0,
+          "yellow": 20,
+          "green": 40
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+仪表盘卡片在一个已知范围内显示一个数值，例如湿度、电池电量或服务器负载。表盘让人一眼看出该数值在范围中的位置，而中间的数字则给出精确值。
+
+当数值在范围中的位置很重要时，可以使用它。对于没有自然最小值和最大值的数值，例如设备的用电量，表盘提供的信息有限，此时[传感器卡片（sensor card）](https://www.hasscn.top/contributors/design/dashboards/sensor-card/)或[磁贴卡片（tile card）](https://www.hasscn.top/contributors/design/dashboards/tile-card/)更合适。若要查看随时间变化的趋势，请使用[历史图表卡片（history graph card）](https://www.hasscn.top/contributors/design/dashboards/history-graph-card/)。
+
+表盘本身是[仪表盘组件（gauge component）](https://www.hasscn.top/contributors/design/components/gauge/)，界面的其他地方也会使用它。
+
+### 范围
+
+刻度从 `min` 到 `max`，默认为 0 到 100。这适合百分比。对于其他情况，请设置一个符合人们预期的范围，例如室内温度可设为 10 到 30。超出范围的数值仍会以数字显示，表盘则停留在其末端。
+
+### 严重程度
+
+表盘的颜色可以表示数值是好是坏。通过 `severity`，你可以设置绿色、黄色和红色的起始位置。每种颜色从其起始值延伸到下一个起始值。未设置 severity 时，表盘使用不带任何含义的信息色（info color）。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.living_room_humidity",
+        "severity": {
+          "green": 30,
+          "yellow": 60,
+          "red": 70
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.outdoor_humidity",
+        "severity": {
+          "green": 30,
+          "yellow": 60,
+          "red": 70
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.monstera_moisture",
+        "severity": {
+          "red": 0,
+          "yellow": 15,
+          "green": 25
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+绿色不一定在低端。对于电池或植物的土壤湿度，低是不好的，因此红色排在最前面。
+
+如果需要三个以上的范围，或使用其他颜色，请改用 `segments`：一个范围列表，每个范围包含一个 `from` 值和一个 `color`。当两者同时设置时，`segments` 优先。
+
+### 指针
+
+设置 `needle: true` 后，表盘会同时显示所有范围，并由一根指针指向该数值。人们可以看到数值所在的位置，以及它距离下一个范围有多近。请与 severity 或 segments 配合使用；不使用它们时，整个表盘只有单一颜色。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.living_room_humidity",
+        "needle": true,
+        "severity": {
+          "green": 30,
+          "yellow": 60,
+          "red": 70
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "gauge",
+        "entity": "sensor.living_room_temperature",
+        "needle": true,
+        "min": 10,
+        "max": 30,
+        "segments": [
+          {
+            "from": 10,
+            "color": "var(--info-color)"
+          },
+          {
+            "from": 18,
+            "color": "var(--success-color)"
+          },
+          {
+            "from": 24,
+            "color": "var(--warning-color)"
+          },
+          {
+            "from": 27,
+            "color": "var(--error-color)"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+每个分段（segment）可以有一个 `label`。使用指针时，当数值位于该分段内，标签会替换中间的数字，例如**舒适**或**过热**。
+
+### 内容
+
+- 根据数值对人们的含义来选择颜色，而不是根据数值的高低。
+- 在 segments 中使用主题颜色，例如 `var(--success-color)`。它们在浅色和深色主题下都能正常工作。
+- 名称显示在表盘下方。请保持简短，因为该卡片通常与其他卡片并排放置。
+
+## 配置
+
+- `entity`（字符串，必填）：要显示的实体（entity）。其状态（state）或属性必须是数值。
+- `attribute`（字符串）：显示实体的该属性，而不是其状态。
+- `name`（字符串）：要显示的名称。默认为实体的名称。
+- `unit`（字符串）：要显示的单位。默认为实体的单位。
+- `min`（数字）：刻度的起点。默认为 `0`。
+- `max`（数字）：刻度的终点。默认为 `100`。
+- `severity`（映射）：`green`、`yellow` 和 `red` 的起始位置。
+- `segments`（列表）：范围列表，每个范围包含 `from`、`color` 和可选的 `label`。设置后将取代 `severity`。
+- `needle`（布尔值）：在显示所有范围的表盘上显示指针。默认为 `false`。
+- `theme`（字符串）：仅用于此卡片的主题。
+- `tap_action`、`hold_action`、`double_tap_action`（动作）：选择、长按或双击卡片时发生的事情。默认情况下，选择卡片会打开更多信息对话框。
+
+```yaml
+type: gauge
+entity: sensor.monstera_moisture
+severity:
+  red: 0
+  yellow: 15
+  green: 25
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-gauge-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-gauge-card.ts)，元素为 `<hui-gauge-card>`。它封装了来自 [`src/components/ha-gauge.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/ha-gauge.ts) 的 `<ha-gauge>`。卡片根据 severity 或 segments 计算表盘颜色，并将其作为 `--gauge-color` 传递。使用指针时，则改为以 `levels` 传递。
+
+数值由 Home Assistant 格式化，与其他地方的方式相同，因此会获得正确的精度和单位。非数值会在卡片上显示警告，而不是表盘。
+
+在分区（sections）视图中，该卡片默认占据分区的全部宽度。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-gauge-card.ts)

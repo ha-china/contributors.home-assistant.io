@@ -1,0 +1,1107 @@
+# 架构: full text
+
+> Every page of the 架构 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/architecture/llms.txt.
+
+# 架构
+
+> 各部分如何协同工作，以及背后的决策。
+
+Source: https://www.hasscn.top/contributors/architecture/
+
+Home Assistant 运行在数百万个家庭中，硬件从小型 Raspberry Pi 到壁橱里的服务器都有。在底层，它是一组协同工作的组件，由数千人在十多年间共同构建。本区域将解释它是如何做到的。
+
+你不需要理解全部内容才能参与贡献。先从整体概览开始，当你的工作需要时再深入了解。每个页面都以简短版本开头，之后才展开细节，供有需要的人阅读。
+
+## 从这里开始
+
+- [整体概览](https://www.hasscn.top/contributors/architecture/big-picture/)：一页展示所有组件，以及它们如何连接。
+- [原则](https://www.hasscn.top/contributors/architecture/principles/)：Home Assistant 构建方式背后的理念。
+- [架构决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/)：架构在哪里讨论，以及如何参与。
+- [代码仓库](https://www.hasscn.top/contributors/architecture/repositories/)：代码存放的位置。
+
+## 深入了解
+
+- [Home Assistant Core 内部](https://www.hasscn.top/contributors/architecture/core/)：从启动到实体（entity），位于核心的 Python 应用程序。
+- [各组件如何通信](https://www.hasscn.top/contributors/architecture/connections/)：API 以及登录机制。
+- [前端](https://www.hasscn.top/contributors/architecture/frontend/)：网页界面，以及仪表盘（dashboard）的工作原理。
+- [Core 周边组件](https://www.hasscn.top/contributors/architecture/platform/)：Supervisor、Home Assistant OS、应用（apps）、伴侣应用（companion apps）、云服务以及语音。
+- [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)，位于安全（Security）区域：Home Assistant 信任谁，以及哪里可能受到攻击。
+
+## 准备好贡献了吗？
+
+本区域解释事物的工作原理。实际的工作则在本网站的其他区域进行。每个区域都从一个小型的首次贡献开始：
+
+| 你想参与的工作 | 前往 | 第一步 |
+| --- | --- | --- |
+| Home Assistant Core 和集成（integration） | [Core 和集成](https://www.hasscn.top/contributors/core/) | [你对 Core 的首次贡献](https://www.hasscn.top/contributors/core/first-contribution/) |
+| 网页界面和仪表盘 | [前端](https://www.hasscn.top/contributors/frontend/) | [你的首次前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/) |
+| 界面的外观、交互和文案 | [设计](https://www.hasscn.top/contributors/design/) | [你的首次设计贡献](https://www.hasscn.top/contributors/design/first-contribution/) |
+| Android 和 Apple 应用 | [伴侣应用](https://www.hasscn.top/contributors/companion/) | [你的首次伴侣应用贡献](https://www.hasscn.top/contributors/companion/first-contribution/) |
+| Supervisor 和 Home Assistant OS | [OS 和 Supervisor](https://www.hasscn.top/contributors/os/) | [你对 Supervisor 的首次贡献](https://www.hasscn.top/contributors/os/first-contribution/) |
+| 与 Home Assistant 一起运行的软件 | [应用](https://www.hasscn.top/contributors/apps/) | [你的第一个应用](https://www.hasscn.top/contributors/apps/first-app/) |
+| Assist 能理解的语句 | [语音翻译](https://www.hasscn.top/contributors/translate/voice/) | [贡献语句和回复](https://www.hasscn.top/contributors/translate/voice/contributing/) |
+| 母语版本的 Home Assistant | [翻译](https://www.hasscn.top/contributors/translate/) | [你的首次翻译](https://www.hasscn.top/contributors/translate/first-contribution/) |
+| 用户文档 | [撰写文档](https://www.hasscn.top/contributors/writing/) | [你的首次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/) |
+| 保障家庭安全 | [安全](https://www.hasscn.top/contributors/security/) | [你的首次安全贡献](https://www.hasscn.top/contributors/security/first-contribution/) |
+| 测试和发布版本 | [发布](https://www.hasscn.top/contributors/releases/) | [你的首次 Beta 测试](https://www.hasscn.top/contributors/releases/first-contribution/) |
+
+还不确定？[入门](https://www.hasscn.top/contributors/start/first-contribution/)中的[你的首次贡献](https://www.hasscn.top/contributors/start/first-contribution/)可以帮你做出选择。
+
+## 本内容适合谁
+
+所有想了解 Home Assistant 底层工作原理的人。这些页面假设你已经作为用户了解 Home Assistant。涉及代码的地方，Core 使用 Python，前端使用 TypeScript，但围绕代码的解释并不要求你读懂代码本身。
+
+代码是唯一的事实来源。页面会指出所描述代码的存放位置，方便你查阅并继续深入阅读。每个页面都以 _参与本页工作_ 结尾：当你想修改页面所描述的内容时，该去哪里。
+
+## 与谁交流
+
+- **架构讨论**在[架构代码仓库](https://github.com/home-assistant/architecture/discussions)中进行。
+- **工作中的问题**请前往 [Discord](https://www.home-assistant.io/join-chat) 上的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道。看不到它？在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant**。
+- 发现这些页面中有错误或过时的内容？请使用页面底部的编辑链接。
+
+---
+
+# 全局概览
+
+> 在一页中展示 Home Assistant 的所有组成部分、各自的作用，以及它们之间如何通信。
+
+Source: https://www.hasscn.top/contributors/architecture/big-picture/
+
+Home Assistant 并不是一个单一的程序。它是由多个协同工作的部分组成的：位于核心的 Python 应用程序、一个网页界面、手机上的应用，以及在大多数安装中运行这一切的操作系统。本页展示每个组成部分及其连接方式，让本区域的其他内容有一个依托之处。
+
+Diagram. All the pieces of Home Assistant, from top to bottom.
+
+- Where people use it
+  - [Frontend](https://www.hasscn.top/contributors/architecture/frontend/): In the browser and the apps
+  - [Companion apps](https://www.hasscn.top/contributors/architecture/platform/companion-apps/): Android and Apple devices
+  - [Voice](https://www.hasscn.top/contributors/architecture/platform/voice/): Satellites and Assist
+  - [Other software](https://www.hasscn.top/contributors/architecture/connections/): Scripts, Alexa, Google
+- They talk to Core through: [WebSocket API, REST API, webhooks](https://www.hasscn.top/contributors/architecture/connections/)
+- [Home Assistant Core](https://www.hasscn.top/contributors/architecture/core/)
+  - [Event loop](https://www.hasscn.top/contributors/core/internals/asyncio/): Runs everything
+  - [States and events](https://www.hasscn.top/contributors/core/internals/states/): What is true, what happened
+  - [Actions](https://www.hasscn.top/contributors/core/internals/actions/): What can be done
+  - [Registries](https://www.hasscn.top/contributors/architecture/core/registries/): What it remembers
+  - Automations: Triggers, conditions, actions
+  - [Recorder](https://www.hasscn.top/contributors/architecture/core/history/): History and statistics
+  - [Integrations](https://www.hasscn.top/contributors/core/integrations/): with entities, through Python libraries
+- Core reaches what it connects to through: Local network, the internet, radios
+- What it connects to
+  - Devices: On the network, Bluetooth, USB
+  - Protocols: Zigbee, Z-Wave, Matter, MQTT
+  - Services: Weather, energy, AI
+- On Home Assistant OS, it all runs on
+  - [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/): The operating system
+  - [Supervisor](https://www.hasscn.top/contributors/architecture/platform/supervisor/): Runs and updates it all
+  - [Apps](https://www.hasscn.top/contributors/apps/how-apps-work/): Software next to Core
+
+## 核心：Home Assistant Core
+
+[Home Assistant Core](https://www.hasscn.top/contributors/architecture/core/) 是一个 Python 应用程序，每种安装方式都会运行它。它了解家中每个设备的状态，运行自动化（automation），并保存历史记录。集成（integration）将它连接到设备和服务。
+
+最重要的理念是：一切皆实体（entity）。一个集成将飞利浦 Hue 灯泡变成一个 light 实体，将温控器变成一个 climate 实体和几个传感器。从那时起，Home Assistant 的其余部分只与实体打交道，无论它们来自哪个品牌。
+
+## 人们在哪里使用它
+
+- **[前端（frontend）](https://www.hasscn.top/contributors/frontend/)** 是网页界面：仪表盘（dashboard）、设置、自动化编辑器。它在浏览器中运行，其文件由 Core 提供。[它在整体中的位置](https://www.hasscn.top/contributors/architecture/frontend/)解释了它与 Core 的关系。
+- **[伴侣应用（companion apps）](https://www.hasscn.top/contributors/companion/)** 在手机、平板电脑和 Mac 上显示相同的前端，并从设备添加传感器、通知和小组件。请参阅[它们如何连接](https://www.hasscn.top/contributors/architecture/platform/companion-apps/)。
+- **[语音（Voice）](https://www.hasscn.top/contributors/architecture/platform/voice/)** 将一句话转化为一个操作，可以来自厨房里的卫星设备，也可以来自手机。
+- **其他软件**，如脚本、Amazon Alexa 和 Google Assistant，通过 Home Assistant 的 API 或 Home Assistant Link 与其通信。
+
+它们都通过相同的 [API](https://www.hasscn.top/contributors/architecture/connections/) 与 Core 通信，并以相同的方式登录。
+
+## 它连接什么
+
+集成与外部世界通信：本地网络上的设备、Zigbee、Z-Wave、Thread 和 Bluetooth 等无线电，以及互联网上的服务。知道如何与特定设备通信的代码位于一个 Python 库中，集成会使用该库。更多信息请参阅[原则](https://www.hasscn.top/contributors/architecture/principles/)。
+
+一些协议作为独立程序在 Core 旁边运行：用于 Z-Wave 的 Z-Wave JS、一个 MQTT broker，以及用于 Matter 的 Matter 服务器。集成与该程序通信。
+
+## 什么在运行它
+
+在推荐的安装方式 [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/) 上，[Supervisor](https://www.hasscn.top/contributors/architecture/platform/supervisor/) 在容器中运行 Home Assistant Core，旁边是[应用（apps）](https://www.hasscn.top/contributors/apps/how-apps-work/)，例如 MQTT broker 或 Z-Wave JS。它会进行备份，并安装包括操作系统在内的一切更新。
+
+使用 [Home Assistant Container](https://www.hasscn.top/contributors/os/installation-types/) 时，用户自己在容器中运行 Core，没有 Supervisor 和应用。
+
+## 家门之外
+
+来自 Nabu Casa 的 [Home Assistant Link](https://www.hasscn.top/contributors/architecture/platform/cloud/) 是可选的。它通过加密隧道让 Home Assistant 可以从任何地方访问，将其连接到 Alexa 和 Google Assistant，并为语音提供语音服务。
+
+## 一个流程，从头到尾
+
+你从仪表盘打开一盏灯：
+
+1. 你选择了灯的卡片。前端通过 [WebSocket API](https://www.hasscn.top/contributors/core/internals/websocket-api/) 为 `light.turn_on` 发送 `call_service`。
+2. Core 检查你是否可以这样做，然后执行[操作（action）](https://www.hasscn.top/contributors/core/internals/actions/)：它在 light 实体上调用 `async_turn_on`。
+3. 该实体（属于某个集成的一部分）通过其库告诉灯打开。
+4. 灯报告它已打开。实体将其新状态写入[状态机（state machine）](https://www.hasscn.top/contributors/core/internals/states/)。
+5. 状态机触发 `state_changed`。前端收到它，并在每个屏幕上将灯显示为已打开。记录器将其写入历史记录，任何等待它的自动化都会运行。
+
+同样的路径也适用于自动化、语音命令或应用：只有第 1 步不同。
+
+## 准备好贡献了吗？
+
+本页上的每个部分在本站都有一个对应的区域，并有一个入门贡献供你开始：
+
+- **Home Assistant Core 和集成**：[你对 Core 的第一个贡献](https://www.hasscn.top/contributors/core/first-contribution/)。
+- **前端**：[你对前端的第一个贡献](https://www.hasscn.top/contributors/frontend/first-contribution/)。
+- **伴侣应用**：[你对伴侣应用的第一个贡献](https://www.hasscn.top/contributors/companion/first-contribution/)。
+- **语音**：[语音翻译](https://www.hasscn.top/contributors/translate/voice/)，用于 Assist 在你的语言中理解的句子。
+- **Supervisor 和 Home Assistant OS**：[你对 Supervisor 的第一个贡献](https://www.hasscn.top/contributors/os/first-contribution/)。
+- **应用**：在应用区域中的[你的第一个贡献](https://www.hasscn.top/contributors/apps/first-contribution/)。
+- **Home Assistant Link**：`cloud` 集成是 Core 的一部分。
+
+[架构概览](https://www.hasscn.top/contributors/architecture/#ready-to-contribute)包含完整的地图，包括设计、文档和翻译。
+
+---
+
+# 架构原则
+
+> Home Assistant 构建方式背后的理念。了解它们之后，代码评审中的许多规则就不再令人意外。
+
+Source: https://www.hasscn.top/contributors/architecture/principles/
+
+Home Assistant 已经发展了十多年，拥有数千名贡献者。让它凝聚在一起的是一小组随处可见的理念：体现在代码中、评审中，以及记录在[架构仓库](https://www.hasscn.top/contributors/architecture/decisions/)中的决策里。
+
+你不需要把它们背下来。但当评审者要求你修改某些东西而你不知道为什么时，答案几乎总是其中之一。
+
+本页讲的是这些价值观对代码及其构建方式意味着什么。[我们的原则](https://www.hasscn.top/contributors/start/principles/)介绍整个项目的价值观以及我们如何协作。[设计原则](https://www.hasscn.top/contributors/design/principles/)介绍它们对界面的意义。
+
+## 你的家，你的数据
+
+Home Assistant 在你的家中运行，并且只要可能就可以在没有互联网的情况下工作。关于你家的数据会留在那里，除非你选择将其发送到别处。这也是 [Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/) 所代表的：隐私、选择和可持续性。
+
+这对你的构建意味着：
+
+- 优先通过本地网络与设备通信，而不是通过制造商的云。[集成的 IoT class](https://www.hasscn.top/contributors/glossary/iot-class/) 告诉用户他们会得到哪一种。
+- 在用户不知情且未选择的情况下，不向任何人发送任何东西。分析功能是可选加入的。
+- 基础功能不依赖项目自身的服务。Home Assistant Link 是一个选项，绝不是必需品。
+
+## 一个进程，一个事件循环
+
+Home Assistant Core 是单个 Python 进程。几乎所有东西都运行在一个[事件循环](https://www.hasscn.top/contributors/core/internals/asyncio/)（event loop）上：每个集成、每个自动化、每个 API 请求。这使它足够轻量，可以在小型计算机上运行，而且速度快——但前提是每个人都遵守规则。
+
+这对你的构建意味着：
+
+- 绝不阻塞事件循环。在没有 `await` 的情况下等待网络或磁盘会冻结整个家，而不仅仅是你的集成。
+- 只能阻塞的代码，比如不支持 async 的库，应在工作线程中运行。
+
+## 设备逻辑放在库中
+
+集成在 Home Assistant 与设备或服务之间进行转换。知道如何与该设备通信的代码，即其协议和 API，放在 PyPI 上一个独立的 Python 库中。集成将该库作为[依赖](https://www.hasscn.top/contributors/glossary/requirement/)（requirement）使用。
+
+这让 Home Assistant Core 专注于 Home Assistant 本身。该库可以独立地测试、发布并被其他项目使用，而集成也保持得足够小，便于评审。
+
+## 在 UI 中设置
+
+用户在 UI 中向他们的家添加[集成](https://www.hasscn.top/contributors/glossary/integration/)，而不是通过编辑 YAML。连接到设备或服务的集成通过[配置流程](https://www.hasscn.top/contributors/glossary/config-flow/)（config flow）进行设置。这是在 [ADR-0010](https://github.com/home-assistant/architecture/blob/master/adr/0010-integration-configuration.md) 中决定的。
+
+YAML 仍然存在，用于自动化、模板以及一些不连接任何东西的集成。但对于设备来说，UI 是入口。
+
+## 一切都变成实体和操作
+
+Philips Hue 的灯和 IKEA 的灯在 Home Assistant 中的外观和行为是一样的。集成将设备的任何功能转换为带有状态的[实体](https://www.hasscn.top/contributors/glossary/entity/)（entity），以及控制它们的操作。
+
+正是这个共享模型让其余一切成为可能。仪表盘、自动化、语音和历史记录都能与任何集成协同工作，因为它们只看到实体。当你构建集成时，你的任务是把设备适配到这个模型中，而不是创建一个新模型。
+
+## 用户的选择优先
+
+用户重命名实体、把设备放入区域（area）、隐藏他们不需要的东西。这些更改保存在[注册表](https://www.hasscn.top/contributors/architecture/core/registries/)中，而不是集成中，并且它们能在重启和更新后保留。
+
+这就是为什么实体需要一个[唯一 ID](https://www.hasscn.top/contributors/glossary/unique-id/)，也是为什么集成绝不决定用户可以更改的东西，比如实体 ID。
+
+## 谨慎变更
+
+数百万个家庭运行着 Home Assistant，人们依靠它来控制灯光、供暖和警报。一个破坏他们配置的变更就是破坏了他们的家。
+
+- 旧的东西不会立即移除。它首先被弃用（deprecation），并附带警告和日期。参见[弃用](https://www.hasscn.top/contributors/glossary/deprecation/)。
+- 向后不兼容的变更很少见，会有说明，并列入发布说明中。
+- [集成质量标准](https://www.hasscn.top/contributors/glossary/quality-scale/)设定了“好”的标准。
+
+## 支持得少，支持得好
+
+项目限制其支持的范围，以便能把这些支持做好。以下是一些来自架构决策的例子：
+
+- **安装方式**：Home Assistant OS 和 Home Assistant Container。自行安装 Core，或在自己的操作系统上安装 Supervisor，已不再受支持。
+- **Python**：一次只支持一个 Python 次要版本，目标是支持最新版本（[ADR-0020](https://github.com/home-assistant/architecture/blob/master/adr/0020-minimum-supported-python-version.md)）。
+- **数据库**：SQLite、尚未到达生命周期终点的 PostgreSQL 版本，以及同样尚未到达生命周期终点的 MariaDB 和 MySQL 的 LTS 版本（[ADR-0018](https://github.com/home-assistant/architecture/blob/master/adr/0018-supported-databases.md)）。
+- **不再新增**抓取网站（[ADR-0004](https://github.com/home-assistant/architecture/blob/master/adr/0004-webscraping.md)）或直接与 GPIO 引脚通信（[ADR-0019](https://github.com/home-assistant/architecture/blob/master/adr/0019-GPIO.md)）的集成。它们太容易损坏，或者无法为所有人提供支持。它们仍然可以作为自定义集成存在。
+
+## 参与其中
+
+- 在[集成质量标准](https://www.hasscn.top/contributors/core/quality-scale/)中逐条查看这些原则如何应用于集成。
+- 不确定从哪里开始贡献？[你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/)帮助你选择一个领域。
+
+---
+
+# 架构决策是如何做出的
+
+> 架构在哪里讨论、决策如何记录，以及你如何参与其中。
+
+Source: https://www.hasscn.top/contributors/architecture/decisions/
+
+架构会议守护着 Home Assistant 的技术架构。任何对 Home Assistant 构建方式的更改都需要经过它的批准。
+
+会议做出决策，但并不是关起门来决定的。每个提案都始于 GitHub 上[架构仓库](https://github.com/home-assistant/architecture)中的讨论，讨论结果也会发布在那里。任何人都可以阅读，任何人都可以发起讨论。
+
+## 什么属于架构问题
+
+大多数更改不需要事先讨论：修复 bug、在集成（integration）中添加新功能，或者一个[已达到进入核心（core）标准](https://www.hasscn.top/contributors/core/integrations/create/#does-it-belong-in-core)的新集成。直接提交 pull request 即可。
+
+当更改会影响所有人基于 Home Assistant 进行开发的方式时，请发起讨论，例如：
+
+- 一种新的实体（entity）类型，或对现有实体类型的重大更改
+- 一条针对集成的新规则，或对某条规则的例外
+- 项目支持范围的更改，例如安装方式或 Python 版本
+- Home Assistant 其他部分将基于其构建的新概念
+
+如果你不确定，请在 [Discord](https://www.home-assistant.io/join-chat) 的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道中询问。这能避免你写出不得不中途返工的代码。
+
+## 从讨论到决策
+
+1. **讨论。** 有人发起一个[讨论](https://github.com/home-assistant/architecture/discussions)，说明问题并提出提案。其他人提问、挑毛病并提出替代方案。一个讨论只围绕一个主题。
+2. **决策。** 当讨论尘埃落定后，提案会在架构会议上做出决定。结果会发布在讨论中并标记为该讨论的答案：批准或拒绝，附上会议日期，以及备注或理由。
+3. **记录。** 为整个项目设定长期规则的决策，还会以架构决策记录（Architecture Decision Record，ADR）的形式写入 [`adr` 文件夹](https://github.com/home-assistant/architecture/tree/master/adr)。
+
+## 决策与路线图
+
+架构会议不属于路线图流程的一部分，而是与之并行：任何对 Home Assistant 构建方式的更改都需要经过它的批准，无论该更改来自路线图还是贡献者自己的想法。
+
+更大的工作会作为机会规划在 Open Home Foundation 的[路线图](https://www.hasscn.top/contributors/roadmap/)上，并通过[史诗（epic）](https://github.com/home-assistant/epics)交付。当一个机会改变了 Home Assistant 的构建方式，例如为实体组件添加新的触发器和条件，那么在工作合入之前需要先做出架构决策。
+
+这个过程也可以双向进行。以[太阳触发器](https://github.com/home-assistant/architecture/discussions/1394)为例，机会先出现：讨论将其链接为推理所在之处，架构会议批准了修订后的提案，机会再链接回该批准，工作则在一个史诗中规划。另一些机会则建立在先存在的架构讨论之上。[从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/)从头到尾遵循的就是后一种模式。
+
+## 架构决策记录（ADR）
+
+ADR 是一份格式固定的简短文档：背景、决策及其后果。它有编号，且永远不会被删除。当决策发生变化时，其状态会说明这一点，并链接到取代它的内容。
+
+这使得 ADR 成为项目的一部历史。一些值得了解的 ADR：
+
+| ADR | 决策 |
+| --- | --- |
+| [0007](https://github.com/home-assistant/architecture/blob/master/adr/0007-integration-config-yaml-structure.md) | 集成的 YAML 配置存放在其自身的域名（domain）之下。 |
+| [0008](https://github.com/home-assistant/architecture/blob/master/adr/0008-code-owners.md) | 成为集成负责人意味着什么。 |
+| [0010](https://github.com/home-assistant/architecture/blob/master/adr/0010-integration-configuration.md) | 连接设备或服务的集成在 UI 中设置。 |
+| [0011](https://github.com/home-assistant/architecture/blob/master/adr/0011-discovery-requires-unique-id.md) | 可被发现的集成会设置唯一 ID，以便用户可以忽略某次发现。 |
+| [0012](https://github.com/home-assistant/architecture/blob/master/adr/0012-define-supported-installation-method.md) | 什么是受支持的安装方式。 |
+| [0018](https://github.com/home-assistant/architecture/blob/master/adr/0018-supported-databases.md) | 记录器（recorder）支持哪些数据库。 |
+| [0019](https://github.com/home-assistant/architecture/blob/master/adr/0019-GPIO.md) | 不再接受直接使用 GPIO 引脚的新集成。 |
+| [0020](https://github.com/home-assistant/architecture/blob/master/adr/0020-minimum-supported-python-version.md) | 一次只支持一个 Python 次要版本。 |
+| [0021](https://github.com/home-assistant/architecture/blob/master/adr/0021-YAML-integration-configuration-deprecation-policy.md) | YAML 配置在移除前至少弃用六个月。 |
+| [0022](https://github.com/home-assistant/architecture/blob/master/adr/0022-integration-quality-scale.md) | 集成质量等级及其四个级别。 |
+
+一些 ADR 后来已被撤销：例如关于 Home Assistant Core 和 Supervised 安装方式的那些。它们的状态在文档顶部有说明。
+
+## 在讨论中使用 AI
+
+架构仓库中还包含 Open Home Foundation 的 [AI 政策](https://github.com/home-assistant/architecture/blob/master/AI_POLICY.md)。它适用于所有项目中的讨论、issue 和 pull request。简而言之：你可以将 AI 作为工具使用，但你必须理解并能够解释你发布的所有内容，且不允许自主代理（autonomous agent）进行贡献。
+
+## 参与其中
+
+- 有提案？先阅读[开放的讨论](https://github.com/home-assistant/architecture/discussions)：你的提案可能已经在那里了。
+- 想知道某项决策如何融入整体规划？请参阅[从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/)。
+- 完全不知道从哪里开始贡献？[你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/)可以帮你做出选择。
+
+---
+
+# 代码仓库
+
+> Home Assistant 的代码在 GitHub 上的分布情况，以及针对不同需求应前往哪个仓库。
+
+Source: https://www.hasscn.top/contributors/architecture/repositories/
+
+Home Assistant 的代码分布在许多仓库中，其中大部分位于 GitHub 上的 [home-assistant](https://github.com/home-assistant) 组织中。你通常只需要在其中一两个仓库中工作。本页将告诉你应该去哪个仓库。
+
+## 主要仓库
+
+| 仓库 | 内容 | 语言 |
+| --- | --- | --- |
+| [core](https://github.com/home-assistant/core) | Home Assistant Core 以及每个内置集成（integration） | Python |
+| [frontend](https://github.com/home-assistant/frontend) | 网页界面、组件展示库和演示页面 | TypeScript |
+| [android](https://github.com/home-assistant/android) | Android 应用，适用于手机、Wear OS 和车载系统 | Kotlin |
+| [iOS](https://github.com/home-assistant/iOS) | 适用于 iPhone、iPad、Mac、Apple Watch 和 CarPlay 的应用 | Swift |
+| [supervisor](https://github.com/home-assistant/supervisor) | Supervisor | Python |
+| [operating-system](https://github.com/home-assistant/operating-system) | Home Assistant OS | Buildroot、shell |
+
+## 文档与设计
+
+| 仓库 | 内容 |
+| --- | --- |
+| [home-assistant.io](https://github.com/home-assistant/home-assistant.io) | 用户文档，包括每个集成的专属页面 |
+| [companion.home-assistant](https://github.com/home-assistant/companion.home-assistant) | 伴侣应用（companion apps）的文档 |
+| [brands](https://github.com/home-assistant/brands) | 集成的标志和图标 |
+| [architecture](https://github.com/home-assistant/architecture) | 架构讨论与决策，参见[决策是如何制定的](https://www.hasscn.top/contributors/architecture/decisions/) |
+
+## Supervisor 相关
+
+| 仓库 | 内容 |
+| --- | --- |
+| [addons](https://github.com/home-assistant/addons) | 官方应用 |
+| [apps-example](https://github.com/home-assistant/apps-example) | 用于起步的应用示例 |
+| [cli](https://github.com/home-assistant/cli) | `ha` 命令行工具 |
+| [os-agent](https://github.com/home-assistant/os-agent) | Home Assistant OS 宿主机上的辅助程序 |
+| [docker-base](https://github.com/home-assistant/docker-base) | Home Assistant 和应用的基础镜像 |
+| `plugin-dns`, `plugin-audio`, `plugin-cli`, `plugin-multicast`, `plugin-observer` | Supervisor 的插件 |
+
+## 库
+
+| 仓库 | 内容 |
+| --- | --- |
+| [home-assistant-js-websocket](https://github.com/home-assistant/home-assistant-js-websocket) | WebSocket API 的 JavaScript 客户端 |
+| [home-assistant-libs](https://github.com/home-assistant-libs) | 一个由本项目维护的 Python 库组织，例如 Supervisor 客户端 |
+| [OHF-Voice](https://github.com/OHF-Voice) | Open Home Foundation 的语音项目，例如 Assist 能理解的语句 |
+
+## 按需求选择仓库
+
+| 你想要 | 前往 |
+| --- | --- |
+| 修复某个集成中的缺陷 | core |
+| 添加新的集成 | core，然后到 home-assistant.io 编写其文档，到 brands 添加其标志 |
+| 修改界面中的内容 | frontend，如果是集成的文本则到 core |
+| 修复文档 | home-assistant.io |
+| 报告缺陷 | 存在缺陷的那部分代码所在的仓库。不确定？请在 [Discord](https://www.home-assistant.io/join-chat) 上询问。 |
+| 建议新功能 | [功能请求](https://github.com/home-assistant/feature-requests/discussions)讨论区 |
+
+## 参与贡献
+
+上面列出的每个仓库都对应本网站的一个板块，其中说明了如何在那里进行你的第一次修改。请查看[准备好贡献了吗？](https://www.hasscn.top/contributors/architecture/#ready-to-contribute)以了解全貌。
+
+---
+
+# 深入了解 Home Assistant Core
+
+> 一场关于 Home Assistant 核心所在 Python 应用的导览，并指引通往每个部分细节的路径。
+
+Source: https://www.hasscn.top/contributors/architecture/core/
+
+[Home Assistant Core](https://www.hasscn.top/contributors/glossary/core/) 是一个单一的 Python 应用程序。无论周围运行着什么，每种安装方式都会运行它。它保存着家庭的状态，运行各个集成（integration），并响应前端、应用程序和语音助手。
+
+本页就是这场导览：各个部分是什么，以及它们如何协同工作。每个部分的细节位于 [Core 与集成](https://www.hasscn.top/contributors/core/) 区域，链接见下文。
+
+## 各个部分
+
+| 部分 | 一句话概括 | 详细内容 |
+| --- | --- | --- |
+| 事件循环 | 在单一线程上逐个运行所有任务 | [Home Assistant 中的异步](https://www.hasscn.top/contributors/core/internals/asyncio/)、[阻塞操作](https://www.hasscn.top/contributors/core/internals/blocking-operations/) |
+| `hass` 对象 | 所有其他东西都挂载其上的唯一对象 | [hass 对象](https://www.hasscn.top/contributors/core/internals/hass/) |
+| 状态机 | 保存每个实体（entity）的当前状态 | [状态](https://www.hasscn.top/contributors/core/internals/states/) |
+| 事件总线 | 告诉所有人刚刚发生了什么 | [事件](https://www.hasscn.top/contributors/core/internals/events/) |
+| 动作注册表 | 知道 Home Assistant 能做的一切 | [动作](https://www.hasscn.top/contributors/core/internals/actions/) |
+| 各类注册表 | 记住实体、设备和区域（area），以及用户所做的更改 | [注册表与存储](https://www.hasscn.top/contributors/architecture/core/registries/) |
+| 集成 | 将这一切连接到外部世界 | [构建集成](https://www.hasscn.top/contributors/core/integrations/) |
+| 实体 | 集成与 Home Assistant 其余部分交汇之处 | [实体](https://www.hasscn.top/contributors/core/entities/) |
+| 记录器 | 保存历史记录 | [历史与统计](https://www.hasscn.top/contributors/architecture/core/history/) |
+
+## 它们如何协同工作
+
+以一盏通过自身开关点亮的灯为例：
+
+1. 灯的集成从网络得知这一变化。
+2. 灯的[实体](https://www.hasscn.top/contributors/glossary/entity/)将其新状态写入状态机。
+3. 状态机在事件总线上触发一个 `state_changed` 事件。
+4. 所有监听者做出反应：前端显示灯已打开，记录器将其写入历史，等待此事件的自动化（automation）执行一个动作。
+5. 该动作经由动作注册表返回到某个集成，由它告诉另一台设备该做什么。
+
+这些部分彼此互不相识。它们在状态机和事件总线上相遇。这就是为什么新集成从第一天起就能与每个仪表盘（dashboard）、自动化和语音助手协同工作。
+
+## 集成的类型
+
+集成承担不同的工作，大多数属于以下几类之一：
+
+- **定义一种设备类型**：像 `light` 这样的实体集成决定了在 Home Assistant 中什么是灯、它拥有哪些数据及何种格式，以及哪些动作可以控制它。新的设备类型以提案形式在[架构讨论](https://github.com/home-assistant/architecture/discussions)中启动，包含其保存的数据、控制方式，以及来自多个品牌的示例。
+- **连接设备与服务**：像 `hue` 这样的集成与 Philips Hue 通信，并将其灯具作为 `light` 实体提供。这类集成通常不使用来自其他集成的实体状态。例外是带有位置的实体，例如 `zone` 和 `device_tracker` 的实体。
+- **提供虚拟或计算的数据**：`input_boolean` 是一个只存在于 Home Assistant 中的开关。`template` 和 `utility_meter` 根据 Home Assistant 中的其他数据计算其实体。
+- **自动化**：`automation` 运行用户的自动化，而更具体的集成（如 `flux`）会根据太阳的位置调整灯光。
+
+## Home Assistant 自身的生命周期
+
+- [从启动到运行](https://www.hasscn.top/contributors/architecture/core/startup/)：Home Assistant 如何分阶段启动，使一个损坏的集成无法让整个家停摆，以及它如何关闭。
+- [获取数据](https://www.hasscn.top/contributors/architecture/core/data-updates/)：集成如何通过推送或轮询得知变化，以及协调器（coordinator）的作用。
+- [注册表与存储](https://www.hasscn.top/contributors/architecture/core/registries/)：Home Assistant 在重启之间记住什么。
+- [历史与统计](https://www.hasscn.top/contributors/architecture/core/history/)：过去的数据如何保存，保存多久。
+
+## 代码仓库
+
+Home Assistant Core 位于 [home-assistant/core](https://github.com/home-assistant/core) 仓库中：
+
+| 文件夹 | 内容 |
+| --- | --- |
+| [`homeassistant/`](https://github.com/home-assistant/core/tree/dev/homeassistant) | 核心本身：`core.py`、`bootstrap.py`、`config_entries.py`、`loader.py` |
+| [`homeassistant/components/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components) | 每个内置集成，各占一个文件夹 |
+| [`homeassistant/helpers/`](https://github.com/home-assistant/core/tree/dev/homeassistant/helpers) | 共享的构建模块：实体、注册表、协调器、存储 |
+| [`homeassistant/util/`](https://github.com/home-assistant/core/tree/dev/homeassistant/util) | 不包含 Home Assistant 的小型工具：日期、单位、颜色 |
+| [`tests/`](https://github.com/home-assistant/core/tree/dev/tests) | 测试，采用相同的目录结构 |
+| [`script/`](https://github.com/home-assistant/core/tree/dev/script) | 工具，例如检查每个集成的 hassfest |
+
+它要求 Python 3.14 或更新版本，带有类型标注，并在每次拉取请求（pull request）时使用 Ruff、mypy 和 pylint 等工具进行检查。用于配置和动作的模式（schema）使用 [probatio](https://pypi.org/project/probatio/) 编写。
+
+## 参与其中
+
+- 刚接触 Core？从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- [构建集成](https://www.hasscn.top/contributors/core/integrations/)：连接设备或服务。
+- [Core 的工作原理](https://www.hasscn.top/contributors/core/internals/)：本页各部分的详细内容。
+
+---
+
+# 从启动到运行
+
+> Home Assistant Core 从启动那一刻到你的家准备就绪之间做了什么，以及它如何再次关闭。
+
+Source: https://www.hasscn.top/contributors/architecture/core/startup/
+
+Home Assistant 启动时，并不会一次性加载所有内容。它分阶段加载，因此最重要的部分会先就绪，而一个损坏的集成（integration）也不会阻止家中其余部分的启动。
+
+当你想知道为什么你的集成必须等待某些东西，或者为什么启动需要那么长时间时，了解这些阶段会很有帮助。
+
+## 简而言之
+
+1. Python 启动，Home Assistant 创建其[事件循环（event loop）](https://www.hasscn.top/contributors/core/internals/asyncio/)。
+2. 日志、配置和注册表（registry）加载。
+3. 集成分阶段设置：先是日志、前端和数据库等基础部分，然后是发现和云，最后是其余所有内容。
+4. Home Assistant 触发 `homeassistant_start`，运行启动任务，并进入运行状态。它触发 `homeassistant_started`。
+
+关闭过程以相反的方式运行，同样是分阶段并带有时间限制，因此它总能完成。
+
+## 详细步骤
+
+### 在任何内容加载之前
+
+`hass` 命令运行 [`homeassistant/__main__.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/__main__.py)。它检查 Python 版本和操作系统，确保配置文件夹存在，并获取一个锁文件 `.ha_run.lock`，这样两份副本就无法在同一配置上运行。
+
+然后 `runner.py` 创建 asyncio 事件循环，带有一个最多 64 个工作线程的线程池用于处理阻塞工作，并交由 `bootstrap.py` 接管。
+
+### 引导（Bootstrap）
+
+`bootstrap.py` 设置其他所有部分都需要的组件：
+
+1. **日志**，写入配置文件夹中的 `home-assistant.log`。
+2. **配置**：读取 `configuration.yaml`，包括其密钥（secrets）和包（packages）。
+3. **基础部分**：注册表（区域、设备、实体、楼层、标签、类别和问题）、恢复的状态（state）以及配置条目（config entry）并行加载。
+4. **核心集成**：`homeassistant` 本身和 `persistent_notification`。
+
+从这里开始，Home Assistant 还会监视阻塞事件循环的代码。
+
+### 集成，分阶段加载
+
+哪些集成会加载，取决于三方面的总和：`configuration.yaml` 中的所有内容、每个带有[配置条目（config entry）](https://www.hasscn.top/contributors/glossary/config-entry/)的集成，以及一组默认集成，如前端、自动化（automation）、脚本和辅助元素（helper）。在 Home Assistant OS 上，`hassio` 集成也会加入。
+
+它们分三个阶段加载：
+
+| 阶段 | 加载内容 | 时间限制 |
+| --- | --- | --- |
+| 0 | 日志、前端、记录器（recorder）和 zeroconf，按此顺序 | 基本没有：数据库迁移不能被中断 |
+| 1 | 发现（Bluetooth、DHCP、SSDP、USB）、云和 Supervisor | 120 秒 |
+| 2 | 其余所有内容 | 300 秒 |
+
+在一个阶段内，集成在它们所依赖的集成之后并行设置。当一个阶段超时后，Home Assistant 会记录哪些集成仍在忙碌，然后继续进行。一个缓慢的集成会让启动变慢，但不会阻止启动。
+
+### 运行
+
+当各阶段完成后，Home Assistant：
+
+1. 将其状态更改为 starting，并触发 `homeassistant_start`。
+2. 运行集成注册的启动任务。
+3. 将其状态更改为 running，并触发 `homeassistant_started`。
+
+需要其他所有内容都就绪的集成，比如需要查看所有实体的集成，会等待 `homeassistant_started`。辅助函数 `async_at_start` 和 `async_at_started` 会在正确的时刻运行代码，即使集成是在启动之后才加载也是如此。
+
+### 恢复模式
+
+当配置无法读取、核心集成无法设置，或前端无法加载时，Home Assistant 会以恢复模式启动。只有前端、备份和云会加载，这样用户仍然可以进入并修复问题。
+
+## 关闭
+
+关闭分四个阶段运行，每个阶段都有时间限制，因此一个卡住的集成无法阻止家重新启动：
+
+| 阶段 | 发生什么 | 时间限制 |
+| --- | --- | --- |
+| 1 | 集成注册的关闭任务 | 20 秒 |
+| 2 | 后台任务被取消，`homeassistant_stop` 触发，集成关闭它们的连接 | 100 秒 |
+| 3 | `homeassistant_final_write` 触发：保存数据的最后机会，就像记录器所做的那样 | 60 秒 |
+| 4 | `homeassistant_close` 触发，剩余的内容被取消 | 30 秒 |
+
+## Home Assistant 的状态
+
+`hass.state` 表示 Home Assistant 所处的状态：`not_running`、`starting`、`running`、`stopping`、`final_write` 或 `stopped`。代码还可以检查 `hass.is_running` 和 `hass.is_stopping`。
+
+## 在代码中
+
+| 内容 | 位置 |
+| --- | --- |
+| 命令及其选项 | [`homeassistant/__main__.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/__main__.py) |
+| 事件循环和工作线程 | [`homeassistant/runner.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/runner.py) |
+| 阶段、默认集成、时间限制 | [`homeassistant/bootstrap.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/bootstrap.py) |
+| 启动和停止、`CoreState` | [`homeassistant/core.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/core.py) |
+| `async_at_start`、`async_at_started` | [`homeassistant/helpers/start.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/start.py) |
+
+## 参与这项工作
+
+- 刚接触 Core？从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- [设置失败和异常](https://www.hasscn.top/contributors/core/integrations/setup-failures/)：当你的集成暂时无法设置时它会怎么做。
+- [阻塞操作](https://www.hasscn.top/contributors/core/internals/blocking-operations/)：事件循环看门狗会查找什么。
+
+---
+
+# 获取数据
+
+> 集成如何通过推送或轮询从设备和服务获取新数据，以及协调器（coordinator）如何让这一过程保持高效。
+
+Source: https://www.hasscn.top/contributors/architecture/core/data-updates/
+
+集成必须知道设备上何时发生了变化：一盏灯被它自己的开关打开了，温度升高了。有两种方法可以获知这些变化，而两者的差异对集成的响应速度和资源占用影响很大。
+
+本页是概览。如何通过代码实现，请参阅核心与集成部分的[获取数据](https://www.hasscn.top/contributors/core/integrations/fetching-data/)。
+
+## 简而言之
+
+- **推送（push）**：设备或服务在发生变化时主动告知 Home Assistant。速度快，而且在没有变化时不产生任何开销。只要设备支持，就应使用它。
+- **轮询（polling）**：Home Assistant 按固定间隔请求新数据。简单，但速度较慢，并且会给设备和网络带来负担。
+- **协调器（coordinator）**为设备的所有实体（entity）只获取一次数据，然后分发给它们。大多数轮询集成都使用它。
+- 当获取数据失败时，实体会变为[不可用（unavailable）](https://www.hasscn.top/contributors/glossary/unavailable/)。它们绝不会显示编造的或过期的值。
+
+## 推送还是轮询
+
+使用推送时，集成会保持一个连接打开，或监听消息，并在有数据到达时写入实体的新状态。推送集成的 [IoT 类别](https://www.hasscn.top/contributors/glossary/iot-class/)为 `local_push` 或 `cloud_push`。
+
+当设备只能被询问时，Home Assistant 会按计划进行询问。如果所有实体都来自同一台设备，那么逐个轮询每个实体就很浪费：一台有十个传感器的设备会被就同样的数据询问十次。
+
+## 协调器
+
+`DataUpdateCoordinator` 为整台设备或整个账户获取数据，每个间隔只获取一次，并在新数据到达时通知其实体。实体从协调器读取数据，它们自己不获取任何东西。它还将错误处理集中在一处：当获取失败时，其所有实体都会变为不可用，直到下一次成功；而登录问题则会启动[重新认证（reauthentication）](https://www.hasscn.top/contributors/glossary/reauthentication/)流程。
+
+协调器也适用于推送：接收数据的集成可以将数据交给协调器，实体会以同样的方式更新。
+
+## 做一个好邻居
+
+尽可能少地轮询、限制同时运行的请求数量、在服务中断时只记录一次日志而不是每次尝试都记录，这些都是[集成质量标准（integration quality scale）](https://www.hasscn.top/contributors/glossary/quality-scale/)的规则。请参阅[合理的轮询](https://www.hasscn.top/contributors/core/quality-scale/appropriate-polling/)、[并行更新](https://www.hasscn.top/contributors/core/quality-scale/parallel-updates/)和[不可用时只记录一次日志](https://www.hasscn.top/contributors/core/quality-scale/log-when-unavailable/)。
+
+## 代码位置
+
+| 内容 | 位置 |
+| --- | --- |
+| `DataUpdateCoordinator`、`CoordinatorEntity`、`UpdateFailed` | [`homeassistant/helpers/update_coordinator.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/update_coordinator.py) |
+| 轮询、`SCAN_INTERVAL`、`PARALLEL_UPDATES` | [`homeassistant/helpers/entity_platform.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/entity_platform.py) |
+
+## 参与贡献
+
+- 刚接触 Core？从[你的第一次 Core 贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- [获取数据](https://www.hasscn.top/contributors/core/integrations/fetching-data/)：推送、轮询和协调器，附代码。
+- [更新状态](https://www.hasscn.top/contributors/core/entities/state-updates/)：实体如何写入其新状态。
+
+---
+
+# 注册表与存储
+
+> Home Assistant 将其对实体、设备和区域的了解保存在哪里，用户的更改如何与集成报告的内容分开保存，以及数据是如何存储的。
+
+Source: https://www.hasscn.top/contributors/architecture/core/registries/
+
+[状态机（state machine）](https://www.hasscn.top/contributors/core/internals/states/)知道当前真实的情况，并在重启后将其遗忘。[注册表（registry）](https://www.hasscn.top/contributors/glossary/registry/)则记住其余的内容：哪些实体和设备存在、它们在哪里、叫什么名字，以及用户对它们做了哪些更改。
+
+本页是概览。集成如何与每个注册表协作，请参见下方链接的 Core 与集成部分。
+
+## 简而言之
+
+- 有一个注册表用于实体、设备、区域（area）、楼层、标签和分类，还有一个用于“修复”（Repairs）下显示的问题。
+- 集成通过其实体的唯一 ID 和提供的设备信息来填充这些注册表。
+- 用户在 UI 中更改它们：名称、区域、图标。这些更改与集成报告的内容分开保存，并且以用户的更改为准。
+- 注册表、配置条目以及大多数其他数据都以 JSON 文件的形式存放在 `.storage` 文件夹中。
+
+## 两个来源，一个结果
+
+以一个实体为例。集成说它叫 "Temperature"，是一个温度传感器。用户将其重命名为 "Outside"，并放到花园区域。两者都会被保存，存放在不同的字段中：
+
+| 来自集成的字段 | 来自用户的字段 |
+| --- | --- |
+| `original_name` | `name` |
+| `original_icon` | `icon` |
+| `original_device_class` | `device_class` |
+
+当实体写入其状态时，如果用户设置了值，则以用户的值为准。集成可以随时更新自己的字段，而不会覆盖用户的选择。这就是[用户的选择优先](https://www.hasscn.top/contributors/architecture/principles/#the-users-choices-win)这一原则。
+
+## 各类注册表
+
+| 注册表 | 保存的内容 | 详细信息 |
+| --- | --- | --- |
+| 实体 | 每个具有[唯一 ID](https://www.hasscn.top/contributors/glossary/unique-id/) 的实体，以及用户对它的更改 | [实体注册表](https://www.hasscn.top/contributors/core/entities/registry/)（面向实体作者），以及[实体注册表](https://www.hasscn.top/contributors/core/integrations/entity-registry/)（用于查找和迁移条目） |
+| 设备 | 每个设备，来自集成实体的设备信息 | [设备注册表](https://www.hasscn.top/contributors/core/integrations/device-registry/) |
+| 区域和楼层 | 用户如何描述自己的家 | [区域注册表](https://www.hasscn.top/contributors/core/integrations/area-registry/) |
+| 标签和分类 | 用户如何对事物分组，以及如何整理自动化和脚本 | 代码，见下方链接 |
+| 问题 | 用户需要处理的事项，显示在 **设置** > **修复** 下 | [修复](https://www.hasscn.top/contributors/core/integrations/repairs/) |
+
+没有唯一 ID 的实体仍然可以工作，但用户无法在 UI 中对它们进行任何更改。
+
+注册表遵循配置条目、设备和实体的层级关系。禁用一个配置条目，其设备和实体也会被禁用。禁用一个设备，其实体也会随之禁用。移除一个设备或配置条目，属于它的实体也会从注册表中移除。
+
+注册表中处于启用状态、但当前没有集成提供的实体（例如其集成设置失败时），仍会显示在状态机中：状态为 `unavailable`，并带有属性 `restored: true`。
+
+## 存储
+
+Home Assistant 将自己的数据以 JSON 文件的形式存储在配置文件夹的 `.storage` 中：注册表、配置条目、用户、仪表盘等等。集成也可以使用 `Store` 做同样的事情，它会对数据进行版本控制，在版本变化时迁移数据，将时间上接近的多次写入合并为一次，并且默认拒绝读取主版本号高于其已知版本的数据，例如在降级之后。
+
+`.storage` 中的文件是内部文件。它们会随版本变化而改变，用户不应手动编辑它们。`configuration.yaml` 是配置的另一个存放之处。它由用户编写，Home Assistant 只读取它。
+
+## 代码中的位置
+
+| 内容 | 位置 |
+| --- | --- |
+| 实体注册表 | [`homeassistant/helpers/entity_registry.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/entity_registry.py) |
+| 设备注册表、`DeviceInfo` | [`homeassistant/helpers/device_registry.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/device_registry.py) |
+| 区域、楼层、标签和分类注册表 | [`homeassistant/helpers/`](https://github.com/home-assistant/core/tree/dev/homeassistant/helpers) 中的 `area_registry.py`、`floor_registry.py`、`label_registry.py`、`category_registry.py` |
+| 问题注册表 | [`homeassistant/helpers/issue_registry.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/issue_registry.py) |
+| `Store` | [`homeassistant/helpers/storage.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/storage.py) |
+
+## 参与贡献
+
+- 刚接触 Core？从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- 为你的实体提供唯一 ID 和设备：参见质量标准中的[实体唯一 ID](https://www.hasscn.top/contributors/core/quality-scale/entity-unique-id/) 和[设备](https://www.hasscn.top/contributors/core/quality-scale/devices/)规则。
+
+---
+
+# 历史与统计
+
+> 记录器（recorder）如何将每次状态变更写入数据库，以及历史、日志簿和长期统计如何读取这些数据。
+
+Source: https://www.hasscn.top/contributors/architecture/core/history/
+
+Home Assistant 中发生的一切都可以回溯查看：门是什么时候打开的、昨天有多暖和、上个月家里用了多少电。[记录器（recorder）](https://www.hasscn.top/contributors/glossary/recorder/)让这一切成为可能。它将状态和事件写入数据库，其他集成再从中读取。
+
+## 简而言之
+
+- 记录器运行在自己的线程中，因此写入数据库不会阻塞[事件循环（event loop）](https://www.hasscn.top/contributors/core/internals/asyncio/)。
+- 它存储每一次状态变更和事件，默认保留 10 天。
+- 对于具有[状态类（state class）](https://www.hasscn.top/contributors/glossary/state-class/)的传感器，它还会保存统计数据：五分钟汇总与历史数据保留同样长的时间，小时汇总则永久保留。
+- 历史图表、日志簿和能源仪表盘都从记录器的数据库中读取数据。
+
+## 记录器
+
+记录器监听事件总线上的每一个事件，并每 5 秒批量写入数据库。它的数据库默认为 SQLite，即配置文件夹中名为 `home-assistant_v2.db` 的文件。同时也支持 MariaDB、MySQL 和 PostgreSQL，参见 [ADR-0018](https://github.com/home-assistant/architecture/blob/master/adr/0018-supported-databases.md)。
+
+状态及其属性分开存储，相同的属性只存储一次。这样即使同一盏灯一天内多次上报相同的属性，数据库也能保持较小。
+
+每天晚上，记录器会删除早于 `purge_keep_days` 的数据，默认为 10 天。
+
+## 统计
+
+10 天的历史数据不足以比较今年冬天和去年冬天，而永久保留每一次状态变更又会填满磁盘。统计解决了这个问题。对于每个具有状态类的传感器，记录器会汇总：
+
+- **短期统计**，每五分钟一次：平均值、最小值和最大值，对于计量表则是总和。它们随历史数据一起清理。
+- **长期统计**，每小时一次，永久保留。
+
+没有状态类的传感器不会生成任何统计。这就是状态类对传感器如此重要，也是能源仪表盘只支持具有状态类的传感器的原因。
+
+## 谁在读取它
+
+| 集成 | 显示内容 |
+| --- | --- |
+| `history` | 随时间变化的状态，用于图表 |
+| `logbook` | 用文字描述发生的事情：“前门已打开” |
+| `energy` | 能源使用和生产情况，来自长期统计 |
+
+## 不应记录的内容
+
+并非所有内容都适合存入数据库。频繁变化或体积较大的属性（例如所有支持的效果的列表）会让数据库快速增长。实体（entity）可以通过 `_unrecorded_attributes` 排除某些属性，各类实体类型也会对从不变化的属性做同样处理。
+
+用户可以在其配置中排除整个实体。
+
+## 代码位置
+
+| 内容 | 位置 |
+| --- | --- |
+| 记录器 | [`homeassistant/components/recorder/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/recorder) |
+| 数据库表 | 记录器中的 `db_schema.py` |
+| 统计汇总 | 记录器中的 `statistics.py` |
+| 历史与日志簿 | [`homeassistant/components/history/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/history)、[`homeassistant/components/logbook/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/logbook) |
+
+## 参与开发
+
+- 刚接触 Core？从[你的第一个 Core 贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- [传感器实体（sensor entity）](https://www.hasscn.top/contributors/core/entities/sensor/)：状态类决定了传感器是否能生成统计。
+- 想查看自己家庭的数据？请在数据区域[探索你自己的数据](https://www.hasscn.top/contributors/data/guides/explore-your-data/)。
+
+---
+
+# 各部分如何通信
+
+> Home Assistant Core 与其周围一切之间的 API，以及每个连接者如何证明自己的身份。
+
+Source: https://www.hasscn.top/contributors/architecture/connections/
+
+Home Assistant Core 从不孤单。前端、伴侣应用（companion apps）、语音卫星设备、Supervisor 以及 Home Assistant Link 都会与它通信。它们通过少数几个 API 来实现，这些 API 全部由 Core 自带的 Web 服务器提供服务，默认端口为 8123。
+
+## 连接一览
+
+| 谁 | 通过什么与 Core 通信 | 做什么 |
+| --- | --- | --- |
+| 浏览器或应用中的前端 | [WebSocket API](https://www.hasscn.top/contributors/core/internals/websocket-api/) | 一切：状态、操作、设置、实时更新 |
+| 伴侣应用 | WebSocket API，以及一个 webhook | 展示前端，并发送传感器数据和位置信息 |
+| 脚本和其他软件 | [REST API](https://www.hasscn.top/contributors/core/internals/rest-api/)，或 WebSocket API | 读取状态、执行操作 |
+| 互联网上的设备和服务 | Webhooks | 向集成（integration）推送数据 |
+| Supervisor | 它自己的 API，以及 Core 的 API | 管理 Core、应用和备份，参见 [the Supervisor](https://www.hasscn.top/contributors/architecture/platform/supervisor/) |
+
+## WebSocket API
+
+WebSocket API 是主要的入口。与 REST API 不同，连接会保持打开，因此 Home Assistant 可以在变化发生的瞬间推送每一次变化：一盏灯打开后，所有屏幕上都会立即显示为开。前端几乎所有的功能都通过 [home-assistant-js-websocket](https://github.com/home-assistant/home-assistant-js-websocket) 库使用它。集成也可以添加自己的命令。
+
+REST API 覆盖了基本功能，比如读取状态和执行操作，适合想要简单方式的软件。
+
+## 登录
+
+除了 webhook 之外，每个连接都从证明你的身份开始。用户通过 OAuth 2 流程登录，并获得令牌（token）：一个长期保留的刷新令牌（refresh token），以及有效期 30 分钟的访问令牌（access token）。脚本使用长期访问令牌（long-lived access token），由用户在其个人资料中创建。参见[身份验证的工作原理](https://www.hasscn.top/contributors/core/internals/auth/)和[权限](https://www.hasscn.top/contributors/core/internals/permissions/)。
+
+最重要的界限在于管理员与其他所有人之间：更改设置、添加集成，以及任何会泄露敏感信息的操作，都仅限管理员。参见 [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)。
+
+## Webhooks
+
+Webhook 是唯一无需登录的入口：一个 URL，`/api/webhook/<webhook_id>`，任何人都可以向它发送数据。这是安全的，因为该 ID 是一个随机的 64 字符值：知道它就等于拥有权限。未知 ID 会得到与已知 ID 相同的响应，因此没有人能探测某个 ID 是否存在，而且集成可以让 webhook 只接受来自家庭网络的请求。
+
+Webhook 为那些无法登录的东西而存在，比如发送更新的服务，或者在后台发送位置信息的手机。借助 Home Assistant Link，webhook 还可以通过云获得一个公共 URL，因此在外出时也能使用，而无需将 Home Assistant 暴露到互联网上。
+
+## 位于代理之后
+
+Core 可以自己提供 HTTPS，但很多人会在前面放置反向代理，或者使用 Home Assistant Link。在代理之后，Core 只信任来自用户所配置代理的转发地址，因此没有人能伪装成位于家庭网络中。
+
+## 参与开发
+
+- 刚接触 Core？从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。这些 API 是 Core 的一部分。
+- [WebSocket API](https://www.hasscn.top/contributors/core/internals/websocket-api/) 和 [REST API](https://www.hasscn.top/contributors/core/internals/rest-api/)：每一条消息和每一个端点。
+- [添加 WebSocket 命令](https://www.hasscn.top/contributors/frontend/extending/websocket-api/)：当前端需要从 Core 获取新功能时。
+- [身份验证的工作原理](https://www.hasscn.top/contributors/core/internals/auth/)：令牌、用户和权限。
+
+---
+
+# 前端
+
+> Web 界面在整个 Home Assistant 中的位置，以及在哪里可以找到它的详细信息。
+
+Source: https://www.hasscn.top/contributors/architecture/frontend/
+
+[前端](https://www.hasscn.top/contributors/glossary/frontend/)（frontend）是用户看到的一切：仪表盘、设置、自动化编辑器，以及每一个对话框。它是一个 Web 应用程序，使用 Lit 和 TypeScript 构建，位于 [home-assistant/frontend](https://github.com/home-assistant/frontend) 仓库中。Core 提供其文件，它在浏览器中运行，[伴侣应用](https://www.hasscn.top/contributors/architecture/platform/companion-apps/)（companion apps）也会显示它。
+
+## 它在整体中的位置
+
+- **它自身不保存任何状态。** 它显示的一切都来自 Core，通过 [WebSocket API](https://www.hasscn.top/contributors/core/internals/websocket-api/) 传输，并且每次更改都会推送给它。关闭浏览器，什么都不会丢失。
+- **它从不直接与设备通信。** 选择一盏灯会在 Core 中执行一个操作，由 Core 的集成与该灯通信。前端只看到实体（entity）。
+- **文本来自两个地方。** 前端自身的文本来自它的翻译文件。集成的文本，比如实体名称和设置步骤，来自 Core，来自每个集成的 `strings.json`。
+- **它分部分加载。** 称为面板（panel）的页面和仪表盘卡片只在需要时才加载，因此第一页速度很快。
+
+## 详细信息
+
+[前端](https://www.hasscn.top/contributors/frontend/)（Frontend）区域解释了它是如何构建的：
+
+- [架构](https://www.hasscn.top/contributors/frontend/architecture/)：应用程序的各个部分，以及代码在仓库中的位置。
+- [hass 对象与上下文](https://www.hasscn.top/contributors/frontend/architecture/hass-and-contexts/)：组件如何获取所需的数据。
+- [数据层](https://www.hasscn.top/contributors/frontend/architecture/data/)：前端如何与 Core 通信。
+- [路由与面板](https://www.hasscn.top/contributors/frontend/architecture/routing-and-panels/)：页面，以及它们如何加载。
+
+以及本区域中的：[仪表盘](https://www.hasscn.top/contributors/architecture/frontend/dashboards/)，视图、卡片和策略（strategy）如何协同工作。
+
+组件及其设计记录在[设计](https://www.hasscn.top/contributors/design/components/)（Design）区域中。
+
+## 参与这方面的工作
+
+- 前端新手？从[你的第一个前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/)开始。
+- 前端区域中的[架构](https://www.hasscn.top/contributors/frontend/architecture/)：应用程序是如何构建的。
+- 想改进它的外观？[设计](https://www.hasscn.top/contributors/design/first-contribution/)区域是起点。
+
+---
+
+# 仪表盘是如何工作的
+
+> 仪表盘如何由视图、分区、卡片和徽章组成，策略如何生成它们，以及自定义卡片如何融入其中。
+
+Source: https://www.hasscn.top/contributors/architecture/frontend/dashboards/
+
+[仪表盘](https://www.hasscn.top/contributors/glossary/dashboard/)是一个由[卡片](https://www.hasscn.top/contributors/glossary/card/)组成的页面，也是大多数人最常看到的前端部分。在底层，它是一个配置，由视图、分区、卡片和徽章组成，前端会将其转换为元素。
+
+> [!NOTE]
+> 仪表盘过去被称为 Lovelace，代码中仍然使用这个名称：面板是 `lovelace`，仪表盘元素以 `hui-` 开头。在文字中，请使用“仪表盘”。
+
+## 简而言之
+
+- 一个仪表盘包含视图。一个视图包含分区，分区包含卡片，或者根据视图类型直接包含卡片。
+- 每种卡片类型都是一个 Web 组件，例如 `hui-tile-card`，在仪表盘使用它时加载。
+- 仪表盘存储在 Home Assistant 中，或者用 YAML 编写。
+- 策略（strategy）可以根据家庭本身生成仪表盘或视图。
+- 自定义卡片是从 JavaScript 文件加载的 Web 组件。
+
+## 从配置到元素
+
+仪表盘是一个配置，如下所示：
+
+```yaml
+views:
+  - title: Home
+    type: sections
+    sections:
+      - type: grid
+        cards:
+          - type: tile
+            entity: light.kitchen
+```
+
+前端读取它，并为每个部分创建一个元素：一个视图、一个分区、一个带有其配置的 `hui-tile-card`。卡片类型在仪表盘首次使用时加载。
+
+## 视图
+
+| 视图类型 | 布局方式 |
+| --- | --- |
+| `sections` | 分区排列在网格上，每个分区有自己的卡片。新仪表盘的默认类型。 |
+| `masonry` | 卡片按列排列，根据高度放置 |
+| `sidebar` | 一列宽的卡片和一列窄的卡片 |
+| `panel` | 一张卡片，覆盖整个页面 |
+
+## 卡片、徽章和功能
+
+- **卡片**显示和控制事物。它们的配置说明了具体内容。许多卡片都有可视化编辑器。
+- **徽章**是视图顶部的小药丸形元素。
+- **[卡片功能](https://www.hasscn.top/contributors/glossary/card-feature/)**为卡片添加控件，例如亮度滑块。
+
+卡片及其配置选项在[仪表盘卡片](https://www.hasscn.top/contributors/design/dashboards/)中，附有实时示例。
+
+## 仪表盘存储在哪里
+
+- **存储中**：默认方式。用户在 UI 中编辑它，Home Assistant 通过 WebSocket API 保存它。
+- **YAML 中**：用户在文件中编写它。UI 无法编辑它。
+
+## 策略和自定义元素
+
+[策略](https://www.hasscn.top/contributors/glossary/strategy/)是生成仪表盘、视图或分区的代码，而不是固定的配置。用户首次打开 Home Assistant 时看到的仪表盘就是一个策略：它根据区域（area）和设备（device）自动构建，并在添加新内容时保持更新。用户可以接管生成的仪表盘，并从那里编辑其配置。
+
+卡片、徽章、视图和策略也可以来自前端之外，作为从 JavaScript 文件加载的 Web 组件，并使用 `custom:` 类型，例如 `custom:my-card`。它们获得与内置组件相同的 `hass` 对象和配置。如何构建它们请参阅[自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/)。
+
+## 在代码中
+
+| 内容 | 位置 |
+| --- | --- |
+| 仪表盘面板 | [`src/panels/lovelace/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace) |
+| 视图、分区、卡片、徽章、功能 | 仪表盘面板中的 `views/`、`sections/`、`cards/`、`badges/`、`card-features/` |
+| 策略 | 仪表盘面板中的 `strategies/` |
+| 从配置创建元素 | 仪表盘面板中的 `create-element/` |
+| 编辑器 | 仪表盘面板中的 `editor/` |
+
+## 参与这项工作
+
+- 从[你的第一个前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/)开始。
+- 构建你自己的卡片、徽章或策略：[自定义卡片及更多](https://www.hasscn.top/contributors/frontend/custom-ui/)。
+- 内置卡片及其应有的外观和行为：设计区域中的[仪表盘卡片](https://www.hasscn.top/contributors/design/dashboards/)。
+
+---
+
+# 围绕 Core
+
+> 与 Home Assistant Core 一起运行、或从别处与之通信的软件，以及它们如何协同工作。
+
+Source: https://www.hasscn.top/contributors/architecture/platform/
+
+Home Assistant Core 是核心，但它并非独自完成所有事情。在 Home Assistant OS 上，Supervisor 负责运行、更新和备份 Core，同时管理提供更多软件的应用（app）。伴侣应用（companion app）将 Home Assistant 带到手机、手表和汽车上。Home Assistant Link 让你可以从任何地方访问它，而语音功能则从厨房里的卫星设备延伸到别处的语音引擎。
+
+## Home Assistant 的运行方式
+
+有两种受支持的 Home Assistant 运行方式，参见[安装类型](https://www.hasscn.top/contributors/os/installation-types/)：
+
+- **Home Assistant OS**：专为 Home Assistant 打造的操作系统。[Supervisor](https://www.hasscn.top/contributors/architecture/platform/supervisor/) 运行 Core 和[应用](https://www.hasscn.top/contributors/apps/how-apps-work/)，各自运行在独立的容器中，并安装所有组件的更新，包括操作系统本身。推荐绝大多数用户使用。
+- **Home Assistant Container**：运行在用户自行管理的系统上的容器化 Core。没有 Supervisor，也没有应用。
+
+两者运行的是相同的 Core：Home Assistant OS 使用的镜像构建在 Home Assistant Container 所运行的同一容器镜像之上。你构建的几乎所有内容在两者中的工作方式都相同。
+
+## 组成部分
+
+- [Supervisor](https://www.hasscn.top/contributors/architecture/platform/supervisor/)：在 Home Assistant OS 上运行 Core、应用、备份和更新的组件。
+- [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/)：操作系统本身，它的构建方式，以及它如何安全地更新。
+- [应用](https://www.hasscn.top/contributors/apps/how-apps-work/)：以容器形式运行在 Home Assistant 旁边的额外软件。
+- [伴侣应用](https://www.hasscn.top/contributors/architecture/platform/companion-apps/)：Android 和 Apple 设备上的 Home Assistant。
+- [Home Assistant Link](https://www.hasscn.top/contributors/architecture/platform/cloud/)：远程访问、语音助手等，无需开放你的家庭网络。
+- [语音](https://www.hasscn.top/contributors/architecture/platform/voice/)：一句话如何变成一个动作。
+
+## 参与贡献
+
+- [你对 Supervisor 的首次贡献](https://www.hasscn.top/contributors/os/first-contribution/)，或对操作系统的贡献。
+- 在应用（Apps）领域的[首次贡献](https://www.hasscn.top/contributors/apps/first-contribution/)：构建一个应用，或帮助完善官方应用。
+- [你对伴侣应用的首次贡献](https://www.hasscn.top/contributors/companion/first-contribution/)：Android 或 Apple。
+- 语音：在[语音翻译](https://www.hasscn.top/contributors/translate/voice/)中为你的语言编写句子，或在 Core 中参与 [Assist 管道](https://www.hasscn.top/contributors/core/internals/assist-pipelines/)的开发。
+
+---
+
+# Supervisor（管理程序）
+
+> 在 Home Assistant OS 上运行 Home Assistant Core、应用、备份和更新的程序，各自运行在独立的容器中。
+
+Source: https://www.hasscn.top/contributors/architecture/platform/supervisor/
+
+在 Home Assistant OS 上，Home Assistant Core 并不是独立运行的。是 Supervisor（管理程序）在运行它。Supervisor 启动 Core、更新它、备份它并恢复它。它还运行[应用（apps）](https://www.hasscn.top/contributors/apps/how-apps-work/)，以及一些自己的辅助程序。
+
+Core、每个应用、每个辅助程序以及 Supervisor 本身都以 Docker 容器的形式运行。
+
+## 简而言之
+
+- Supervisor 是一个 Python 程序，位于 [home-assistant/supervisor](https://github.com/home-assistant/supervisor) 仓库中。
+- 它以容器的形式运行 Core、应用和插件。它们的网络连接方式见 [Supervisor 运行的内容](https://www.hasscn.top/contributors/os/supervisor/#what-the-supervisor-runs)。
+- 它有一个 REST API，地址为 `http://supervisor`。Core、应用和命令行都使用它。
+- 它负责创建备份、安装更新，并检查系统是否存在问题。
+
+## Home Assistant OS 上运行着什么
+
+除了 Core 和应用之外，Supervisor 还运行一些自己的插件：用于 DNS、音频、`ha` 命令行、多播发现，以及一个在其他一切都宕机时仍能正常工作的状态页面。[Supervisor 运行的内容](https://www.hasscn.top/contributors/os/supervisor/#what-the-supervisor-runs)列出了每个容器的名称和网络。
+
+## 它做什么
+
+- **Supervisor API**：Core、应用和 `ha` 命令行通过位于 `http://supervisor` 的 REST API 与 Supervisor 通信。调用者可以执行什么操作取决于其角色。参见 [Supervisor API](https://www.hasscn.top/contributors/apps/supervisor-api/)，以及 Core 如何使用它见[与 Core 的连接](https://www.hasscn.top/contributors/os/supervisor/core-connection/)。
+- **Ingress（入口）**：在 Home Assistant 内部、其登录验证之后显示应用的 Web 界面，而无需开放端口。参见 [ingress](https://www.hasscn.top/contributors/apps/guides/ingress/)。
+- **备份和更新**：Supervisor 备份 Core、应用和文件夹，并从 `version.home-assistant.io` 安装新版本。参见 [Supervisor 的工作方式](https://www.hasscn.top/contributors/os/supervisor/architecture/)。
+- **保持系统健康**：它持续检查系统，发现的问题会显示为修复事项。参见[问题解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/)。
+
+## 深入了解
+
+- [Supervisor 的工作方式](https://www.hasscn.top/contributors/os/supervisor/architecture/)：它如何启动、任务机制以及代码结构
+- [插件](https://www.hasscn.top/contributors/os/supervisor/plugins/)：DNS、音频、CLI、多播和 observer 容器
+- [开发 Supervisor](https://www.hasscn.top/contributors/os/supervisor/development/)：运行和测试你的更改
+- [应用的工作方式](https://www.hasscn.top/contributors/apps/how-apps-work/)：从应用的角度看 Supervisor
+
+## 参与其中
+
+- 从[你对 Supervisor 的第一次贡献](https://www.hasscn.top/contributors/os/first-contribution/)开始。它会在你自己的机器上运行一个完整的系统。
+- 想构建应用？前往应用区域的[你的第一个应用](https://www.hasscn.top/contributors/apps/first-app/)。
+
+---
+
+# 伴侣应用（companion apps）如何融入
+
+> Android 和 Apple 设备上的 Home Assistant：应用中的前端，加上来自设备本身的传感器、通知、小组件等。
+
+Source: https://www.hasscn.top/contributors/architecture/platform/companion-apps/
+
+[伴侣应用（companion apps）](https://www.hasscn.top/contributors/glossary/companion-app/)将 Home Assistant 带到手机、平板、手表、汽车和 Mac 上。它们显示与浏览器相同的[前端（frontend）](https://www.hasscn.top/contributors/architecture/frontend/)，并添加只有设备上的应用才能做到的事情：传感器、位置、通知、小组件和快捷控制。
+
+## 简而言之
+
+- Android 应用使用 Kotlin 编写，Apple 应用使用 Swift 编写。两者各有自己的代码仓库。
+- 主屏幕是前端，运行在 web 视图中。原生部分围绕在它周围。
+- 应用通过 `mobile_app` 集成（integration）注册自己，从而将手机变成一个带有实体（entity）的设备（device）。
+- 应用通过 webhook 发送传感器数据和位置。通知则通过推送服务返回。
+
+## 两个部分
+
+| 部分 | 作用 |
+| --- | --- |
+| web 视图中的前端 | 仪表盘（dashboard）、设置，以及你在浏览器中看到的一切 |
+| 原生代码 | 登录、传感器、位置、通知、小组件、手表应用、车载应用，以及应用自身的设置 |
+
+前端知道自己运行在应用中，并通过一个桥接器与应用通信：例如扫描二维码、显示原生设置，或使用手机的麦克风进行语音操作。
+
+## 注册
+
+当用户登录应用时，应用会通过 `mobile_app` 集成注册自己。这会创建一个[配置条目（config entry）](https://www.hasscn.top/contributors/core/integrations/config-entries/)和一个代表手机的设备，并为应用分配一个 [webhook](https://www.hasscn.top/contributors/architecture/connections/)。该 webhook 可以加密，因此即使通过未加密的连接，其数据也是安全的。
+
+从那时起，应用会通过该 webhook 发送传感器数据（如电池电量）及其位置。每个传感器都会成为手机设备的一个实体。借助 Home Assistant Link，该 webhook 在家庭网络之外也能工作。
+
+## 通知
+
+Home Assistant 无法直接联系到手机。通知通过项目的推送服务发送，该服务将通知交给 Google 和 Apple 的服务，再由它们送达手机。应用在注册时会告诉 `mobile_app` 将通知发送到哪里。
+
+## 代码位置
+
+| 内容 | 位置 |
+| --- | --- |
+| Android，包括 Wear OS 和 Android Auto | [home-assistant/android](https://github.com/home-assistant/android) |
+| iOS、iPadOS、macOS、watchOS 和 CarPlay | [home-assistant/iOS](https://github.com/home-assistant/iOS) |
+| Core 侧 | [`homeassistant/components/mobile_app/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/mobile_app) |
+| 前端中的桥接器 | [home-assistant/frontend](https://github.com/home-assistant/frontend) 中的 [`src/external_app/`](https://github.com/home-assistant/frontend/tree/dev/src/external_app) |
+
+## 参与贡献
+
+- 从[你的第一次伴侣应用贡献](https://www.hasscn.top/contributors/companion/first-contribution/)开始。
+- 各应用的构建方式：[Android 架构](https://www.hasscn.top/contributors/companion/android/architecture/)和 [Apple 架构](https://www.hasscn.top/contributors/companion/apple/architecture/)。
+- [移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/)：注册、传感器和通知，适用于官方应用和你自己的应用。
+
+---
+
+# Home Assistant Link
+
+> Home Assistant Link 如何让家庭从任何地方都能访问，并将其连接到语音助手，而无需向互联网开放。
+
+Source: https://www.hasscn.top/contributors/architecture/platform/cloud/
+
+Home Assistant Link 是 [Nabu Casa](https://www.hasscn.top/contributors/glossary/nabu-casa/) 提供的一项订阅服务。它解决了从家庭内部难以做到的事情：从任何地方都能访问、与 Amazon Alexa 和 Google Assistant 配合使用，以及为语音提供语音服务。在 [2026 年 10 月](https://www.home-assistant.io/blog/2026/10/02/big-tech-ruined-the-cloud-so-were-renaming-ours/)之前，它被称为 Home Assistant Cloud。在代码中，它仍然是 `cloud` 集成（integration）。
+
+它始终是可选的。它所做的每一件事都可以在没有它的情况下完成，只是需要更多的工作。
+
+## 简而言之
+
+- Core 中的 `cloud` 集成通过 hass-nabucasa 库连接到 Nabu Casa。
+- **远程访问**通过 Home Assistant 自行建立的加密隧道进行。家中不开放任何端口。
+- **Alexa 和 Google Assistant** 通过云端将它们的命令发送到 Home Assistant。
+- **Cloudhooks** 为 [webhooks](https://www.hasscn.top/contributors/architecture/connections/) 提供一个公共 URL，因此伴侣应用（companion apps）可以在离家时正常工作。
+- 为[语音](https://www.hasscn.top/contributors/architecture/platform/voice/)提供语音转文字和文字转语音服务，以及异地备份。
+
+## 远程访问，无需敞开大门
+
+通常，从外部访问 Home Assistant 意味着要在路由器上开放端口并管理证书。Home Assistant Link 反其道而行之：Home Assistant 主动连接到云端，并保持该连接打开。来自外部的请求通过它返回。
+
+从用户的浏览器到 Home Assistant 的整个连接都是加密的，使用的是属于该家庭的证书。云端只负责传递流量，但无法读取它。
+
+## 语音助手
+
+Amazon Alexa 和 Google Assistant 需要一个互联网上的服务来进行通信。云端就是那个服务：它接收它们的命令，并通过同一连接将它们传递给 Home Assistant 中的 `alexa` 和 `google_assistant` 集成。用户可以选择将哪些实体（entity）暴露给它们。
+
+## 在代码中
+
+| 内容 | 位置 |
+| --- | --- |
+| Core 侧 | [`homeassistant/components/cloud/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/cloud) |
+| 库 | [hass-nabucasa](https://pypi.org/project/hass-nabucasa/) |
+
+## 参与贡献
+
+- `cloud` 集成是 Core 的一部分：从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始。
+- 云端使 webhooks 可以从外部访问，请参阅[各部分如何通信](https://www.hasscn.top/contributors/architecture/connections/)。
+
+---
+
+# 语音是如何工作的
+
+> 一句话如何变成一个动作：唤醒词、语音转文本、对话代理和文本转语音，以及每一步在哪里运行。
+
+Source: https://www.hasscn.top/contributors/architecture/platform/voice/
+
+[Assist](https://www.hasscn.top/contributors/glossary/assist/) 是 Home Assistant 的语音助手。你说“打开厨房的灯”，灯就亮了。这句话背后是一连串步骤，每一步都可以在不同的地方运行：在你说话的设备上、在你的 Home Assistant 上，或在云端。
+
+## 简而言之
+
+- [Assist 流水线（pipeline）](https://www.hasscn.top/contributors/glossary/assist-pipeline/)运行四个步骤：唤醒词、语音转文本、对话代理和文本转语音。
+- 每个步骤都是一个独立的引擎，用户为每个步骤选择一个引擎：本地的、来自集成的，或来自 Home Assistant Link 的。
+- 对话代理将文本转换为动作。内置的对话代理将句子匹配到[意图（intent）](https://www.hasscn.top/contributors/glossary/intent/)。AI 代理则使用大语言模型。
+- 语音卫星设备（voice satellite），如 Home Assistant Voice Preview Edition，是分布在家中各处的麦克风和扬声器。
+
+## 流水线
+
+| 步骤 | 将 | 转换为 | 引擎 |
+| --- | --- | --- | --- |
+| 唤醒词 | 声音 | “有人说出了唤醒词” | 在卫星设备上，或在 Home Assistant 中 |
+| 语音转文本 | 声音 | 文本 | 本地，如 Whisper 或 Speech-to-Phrase，或在云端 |
+| 对话代理 | 文本 | 一个动作和一个回答 | 内置代理，或 AI 代理 |
+| 文本转语音 | 回答 | 声音 | 本地，如 Piper，或在云端 |
+
+用户在**设置** > **语音助手**中配置流水线，每个卫星设备使用一个。在 Assist 对话框中输入文字也会运行相同的流水线，从对话代理这一步开始。
+
+## 对话代理
+
+**内置代理**完全在本地运行。它使用 hassil 库，根据[Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/) 的[intents 仓库](https://github.com/OHF-Voice/intents)中按语言提供的句子，将句子与模板进行匹配。匹配成功会得到一个意图，例如 `HassTurnOn`，附带区域为厨房、域为 light，然后由 Home Assistant 处理。
+
+**AI 代理**来自连接到大语言模型的集成。Home Assistant 通过其 LLM API 为模型提供工具，使其能够查看和控制用户暴露给 Assist 的实体（entity）。用户可以让内置代理先尝试，只有当它无法理解时才转给 AI。
+
+## 卫星设备
+
+卫星设备是一种带有麦克风和扬声器的设备。它监听唤醒词，将音频流式传输到 Home Assistant，并播放回答。ESPHome 设备（如 Home Assistant Voice Preview Edition）和支持 Wyoming 协议的设备都可以作为卫星设备。每个卫星设备都是一个 `assist_satellite` 实体。
+
+## 深入了解
+
+- [Assist 流水线](https://www.hasscn.top/contributors/core/internals/assist-pipelines/)：运行流水线、其事件，以及音频如何发送
+- [意图](https://www.hasscn.top/contributors/core/internals/intents/)和[内置意图](https://www.hasscn.top/contributors/core/internals/built-in-intents/)：一句话如何变成一个动作
+- [对话 API](https://www.hasscn.top/contributors/core/internals/conversation-api/) 和 [LLM API](https://www.hasscn.top/contributors/core/internals/llm-api/)：面向代理和 AI 集成
+- 每个步骤背后的实体：[唤醒词](https://www.hasscn.top/contributors/core/entities/wake-word/)、[语音转文本](https://www.hasscn.top/contributors/core/entities/stt/)、[对话](https://www.hasscn.top/contributors/core/entities/conversation/)、[文本转语音](https://www.hasscn.top/contributors/core/entities/tts/)和 [Assist 卫星设备](https://www.hasscn.top/contributors/core/entities/assist-satellite/)
+- [语音翻译](https://www.hasscn.top/contributors/translate/voice/)：Assist 按语言所能理解的句子
+
+## 参与其中
+
+- 会说一种 Assist 还不能很好理解的语言？[语音翻译](https://www.hasscn.top/contributors/translate/voice/)是你的起点，无需编程。
+- 正在开发语音引擎、AI 代理或卫星设备？从[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)开始，然后阅读“深入了解”下的页面。

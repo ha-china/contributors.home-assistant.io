@@ -1,0 +1,94 @@
+# 历史图表卡片
+
+> 历史图表卡片显示一个或多个实体（entity）的状态在过去几小时内的变化情况，数值以折线图呈现，其他内容则以时间线呈现。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/history-graph-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "history-graph",
+        "entities": [
+          "sensor.living_room_temperature",
+          "sensor.outdoor_temperature"
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+历史图表卡片回答的是“发生了什么？”这个问题。它显示实体（entity）在一段时间内的状态，默认为 24 小时。与[传感器卡片](https://www.hasscn.top/contributors/design/dashboards/sensor-card/)的小型图表不同，它带有坐标轴、图例，以及可在任意时刻显示精确数值的工具提示。
+
+可以用它来比较实体，例如室内和室外温度，或者查看某件事发生的时间，例如前门何时打开。对于只关心趋势的单个数值，[传感器卡片](https://www.hasscn.top/contributors/design/dashboards/sensor-card/)占用的空间更少。对于较长的时间段，例如一个月或一年，统计图表卡片更合适：它基于每小时长期统计数据，而不是每一条状态记录。
+
+### 折线图和时间线
+
+卡片如何绘制实体取决于其状态。
+
+- 具有数值状态和单位（unit）的实体（例如温度）会显示为折线图。共享同一单位的实体会共用一个图表，因此相关联的数值会显示在同一坐标轴上。气候（climate）、加湿器（humidifier）和热水器（water heater）实体也会显示为折线图，包含其当前值和目标值。
+- 其他所有实体，例如门、灯和锁，则显示为时间线：每个实体一条横条，按状态着色。
+
+当两种类型混合使用时，卡片会将时间线和折线图上下排列显示。这样可以工作，但卡片会很快变得很高。建议将人们需要比较的实体放在一张卡片中，其余的拆分到更多卡片中。
+
+设置 `split_device_classes: true` 时，折线图还会按设备类别（device class）拆分，因此共享同一单位的温度和露点会各自拥有一个图表。
+
+### 时间范围
+
+`hours_to_show` 设置卡片回溯的时间长度。数值过大会使卡片变慢，对于变化频繁的实体尤其如此。当时间范围超过 Home Assistant 保留的历史记录长度时，卡片会用长期统计数据（即每小时平均值）填充较早的部分。
+
+### 坐标轴
+
+默认情况下，纵轴会随数值自动调整。可设置 `min_y_axis` 和 `max_y_axis` 来使用固定刻度，例如百分比设为 0 到 100，这样微小的变化就不会显得过于夸张。`fit_y_data` 允许坐标轴在数据需要时超出这些边界。当数值覆盖的范围非常大时，`logarithmic_scale` 会很有帮助。
+
+### 内容
+
+- 当卡片包含多个实体时，请为其设置 `title`。标题会链接到包含相同实体的历史面板。
+- 名称默认为设备和实体，例如 **Thermostat** ▸ **Living room temperature**。当上下文已经清晰时，可以为实体设置一个更短的 `name`。
+- 仅在默认颜色难以区分实体，或某种颜色具有特定含义时，才为实体设置 `color`。
+
+## 配置
+
+- `entities`（列表，必填）：要显示的实体。每项为一个实体 ID，或一个包含 `entity` 以及可选 `name` 和 `color` 的映射。
+- `hours_to_show`（数字）：卡片显示的小时数。默认为 `24`。
+- `title`（字符串）：卡片的标题。
+- `show_names`（布尔值）：显示实体的名称。默认为 `true`。
+- `logarithmic_scale`（布尔值）：使用对数纵轴。默认为 `false`。
+- `min_y_axis`（数字）：纵轴的下界。
+- `max_y_axis`（数字）：纵轴的上界。
+- `fit_y_data`（布尔值）：允许坐标轴超出边界以适应数据。默认为 `false`。
+- `split_device_classes`（布尔值）：按设备类别拆分折线图，而不仅按单位拆分。默认为 `false`。
+- `expand_legend`（布尔值）：从一开始就显示图例中的所有条目。默认为 `false`。
+
+```yaml
+type: history-graph
+title: "Temperature"
+hours_to_show: 12
+entities:
+  - entity: sensor.living_room_temperature
+    name: "Inside"
+  - entity: sensor.outdoor_temperature
+    name: "Outside"
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-history-graph-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-history-graph-card.ts)，元素为 `<hui-history-graph-card>`。它订阅其各实体的历史记录，为超出已记录历史范围的部分添加长期统计数据，并将结果传递给 [`src/components/chart/`](https://github.com/home-assistant/frontend/tree/dev/src/components/chart) 中的 `<state-history-charts>`。该组件与历史面板共用，因此卡片和面板的外观一致。
+
+在分区（sections）视图中，卡片会占据分区的全部宽度，并可缩小至其一半。其高度随内容而定，除非网格选项设置了行数。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-history-graph-card.ts)

@@ -1,0 +1,130 @@
+# 加湿器卡片
+
+> 加湿器卡片以表盘形式显示加湿器或除湿器，用于查看湿度并设置目标湿度。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/humidifier-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "humidifier",
+        "entity": "humidifier.bedroom_humidifier"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+加湿器卡片是[温控器卡片](https://www.hasscn.top/contributors/design/dashboards/thermostat-card/)的姊妹卡片，用于湿度。圆环显示目标湿度，你可以拖动它，或使用减号和加号按钮来更改。中间的大数字是目标值，周围显示当前湿度以及设备正在执行的操作，例如**加湿中**。角落的菜单按钮会打开更多信息对话框。
+
+表盘会采用设备当前操作对应的颜色，例如加湿时为蓝色。当设备关闭时，表盘为灰色。
+
+当湿度是某个区域的主要内容时，例如在卧室或地下室，可以使用加湿器卡片。当它只是房间中众多内容之一时，带有目标湿度功能的[瓷砖卡片](https://www.hasscn.top/contributors/design/dashboards/tile-card/)只需一行而不是五行。
+
+### 当前湿度优先
+
+设置 `show_current_as_primary: true` 后，大数字显示当前湿度，目标湿度移到较小的那一行。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "humidifier",
+        "entity": "humidifier.bedroom_humidifier",
+        "show_current_as_primary": true
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 功能
+
+加湿器卡片可以在表盘下方添加功能（feature）。表盘本身没有打开或关闭设备的按钮，因此在仪表盘编辑器中添加此卡片时，会自带开关功能。模式功能是另一个合适的选择。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "humidifier",
+        "entity": "humidifier.bedroom_humidifier",
+        "features": [
+          {
+            "type": "humidifier-toggle"
+          },
+          {
+            "type": "humidifier-modes",
+            "style": "icons"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 内容
+
+- 名称保持简短，如果所在区域已经说明了是哪个房间，可以省略名称。
+- 添加开关功能。否则，关闭设备需要前往更多信息对话框。
+
+## 配置
+
+- `entity`（字符串，必填）：要显示的实体（entity）。仅支持 `humidifier` 域的实体。
+- `name`（字符串）：要显示的名称。默认为实体的名称。
+- `show_current_as_primary`（布尔值）：将当前湿度显示为大数字，目标湿度显示在其下方。默认为 `false`。
+- `theme`（字符串）：仅应用于此卡片的主题。
+- `features`（列表）：在表盘下方显示的功能，每个功能都有一个 `type`。
+
+```yaml
+type: humidifier
+entity: humidifier.bedroom_humidifier
+features:
+  - type: humidifier-toggle
+  - type: humidifier-modes
+    style: "icons"
+```
+
+## 代码位置
+
+该卡片位于 [`src/panels/lovelace/cards/hui-humidifier-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-humidifier-card.ts)，元素为 `<hui-humidifier-card>`。与温控器卡片一样，它复用了更多信息对话框的控件 `<ha-state-control-humidifier-humidity>`，该控件基于 [`<ha-control-circular-slider>`](https://www.hasscn.top/contributors/design/components/controls/) 构建。
+
+这些功能通过 `<hui-card-features>` 渲染。在区域视图中，该卡片占 12 列 5 行，并且可以缩小到 6 列 2 行。功能会在此基础上增加行数。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-humidifier-card.ts)

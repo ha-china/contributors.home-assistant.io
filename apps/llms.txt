@@ -1,0 +1,62 @@
+# Apps
+
+> 打包与 Home Assistant 协同运行的软件。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/apps/llms-full.txt.
+
+## Apps
+
+- [应用（Apps）](https://www.hasscn.top/contributors/apps/index.md): 打包与 Home Assistant 并行运行的软件，由 Supervisor 管理。构建一个应用，测试它，并与所有人分享。
+- [为官方应用做贡献](https://www.hasscn.top/contributors/apps/first-contribution/index.md): 帮助改进官方应用、基础镜像以及每个应用都依赖的构建工具。构建你的第一个应用，然后选择你想出力的地方。
+- [你的第一个应用](https://www.hasscn.top/contributors/apps/first-app/index.md): 构建一个“Hello world”应用，安装到你自己的 Home Assistant 上，并逐步将其扩展为一个带选项的小型 Web 服务器。
+- [构建一个真实的应用](https://www.hasscn.top/contributors/apps/build-a-real-app/index.md): 完整地走一遍一个应用，看看有经验的应用开发者是如何搭建的。使用 S6 overlay 的服务、使用 Bashio 的选项、翻译、文档、CI 和发布。
+- [应用的工作原理](https://www.hasscn.top/contributors/apps/how-apps-work/index.md): Supervisor 如何处理你的应用，从仓库到运行中的容器，以及在此过程中你会遇到的各种名称和文件夹。
+
+## 指南
+
+- [应用指南](https://www.hasscn.top/contributors/apps/guides/index.md): 按任务逐一介绍如何使用应用。从容器镜像到发布你的仓库。
+- [构建容器镜像](https://www.hasscn.top/contributors/apps/guides/dockerfile/index.md): 编写应用的 Dockerfile。选择基础镜像，添加你的服务和脚本，并设置构建参数和标签。
+- [使用 S6 overlay 运行服务](https://www.hasscn.top/contributors/apps/guides/s6-overlay/index.md): 基础镜像如何使用 S6 overlay 启动你的应用。Oneshot 和 longrun 服务、依赖关系、停止容器的 finish 脚本，以及环境变量。
+- [添加选项](https://www.hasscn.top/contributors/apps/guides/options/index.md): 让用户配置您的应用。定义选项及其类型，在脚本中读取它们，并为它们提供翻译后的标签。
+- [访问硬件和宿主机](https://www.hasscn.top/contributors/apps/guides/hardware/index.md): 让你的应用访问串口、USB 设备、GPIO、音频以及宿主机的部分内容，并且只授予它真正需要的最小权限。
+- [与 Home Assistant 和 Supervisor 通信](https://www.hasscn.top/contributors/apps/guides/communication/index.md): 通过内部网络和 API 代理，从你的应用访问 Home Assistant Core、Supervisor 以及其他应用。
+- [使用 Ingress 添加网页界面](https://www.hasscn.top/contributors/apps/guides/ingress/index.md): 在 Home Assistant 中展示你的应用的网页界面，由 Home Assistant 负责身份验证。
+- [共享服务并发现集成](https://www.hasscn.top/contributors/apps/guides/services-discovery/index.md): 向其他应用提供 MQTT 代理或 MySQL 数据库，无需询问用户即可使用它们，并让 Home Assistant 为你的应用设置相应的集成。
+- [测试你的应用](https://www.hasscn.top/contributors/apps/guides/testing/index.md): 在你自己的电脑上、真实设备上，或使用纯 Docker，以完整的 Supervisor 和 Home Assistant 运行你的应用。
+- [保护你的应用安全](https://www.hasscn.top/contributors/apps/guides/security/index.md): 保证你的应用及其运行系统的安全。尽量少申请权限，添加 AppArmor 配置文件，选择合适的 API 角色，并使用 Home Assistant 进行登录。
+- [展示你的应用](https://www.hasscn.top/contributors/apps/guides/presentation/index.md): 用户在安装你的应用之前和之后所看到的内容。包括简介、文档、更新日志、图标、标志和翻译。
+- [发布你的应用](https://www.hasscn.top/contributors/apps/guides/publishing/index.md): 使用 builder actions 为每种架构构建镜像，发布到容器镜像仓库，并为你的发布进行版本管理。
+- [创建并分享一个存储库](https://www.hasscn.top/contributors/apps/guides/repository/index.md): 将你的应用放入一个 Git 存储库中，让用户添加到他们的应用商店，并让添加过程只需一步。
+
+## 参考
+
+- [应用参考](https://www.hasscn.top/contributors/apps/reference/index.md): 构建应用时需要查阅的详细信息。配置键、Bashio 函数、文件、运行时环境以及安全评级。
+- [应用（App）配置](https://www.hasscn.top/contributors/apps/reference/configuration/index.md): 应用 config.yaml 中的每个键、其作用，以及 Supervisor 接受的取值。
+- [应用（App）文件](https://www.hasscn.top/contributors/apps/reference/files/index.md): Supervisor 从应用文件夹和仓库中读取的文件，以及每个文件的用途。
+- [运行环境](https://www.hasscn.top/contributors/apps/reference/environment/index.md): 应用容器从 Supervisor 获得的内容。环境变量、文件夹、主机名和网络地址。
+- [安全评级](https://www.hasscn.top/contributors/apps/reference/security-rating/index.md): Supervisor 如何计算应用的安全评级（1 到 8），以及哪些选择会使其升高或降低。
+
+## Bashio
+
+- [Bashio](https://www.hasscn.top/contributors/apps/bashio/index.md): 应用基础镜像中的 shell 函数库。如何加载它、它会改变脚本中的什么，以及它拥有的每一个函数。
+- [Bashio：选项](https://www.hasscn.top/contributors/apps/bashio/config/index.md): Bashio 函数用于读取应用（app）的选项、检查它们，并在缺少必需选项时以清晰的提示信息停止运行。
+- [Bashio：日志、退出与错误](https://www.hasscn.top/contributors/apps/bashio/logging/index.md): Bashio 函数用于按级别写入日志消息、以错误停止脚本，以及运行命令时不在首次失败时停止。
+- [Bashio：应用（apps）](https://www.hasscn.top/contributors/apps/bashio/apps/index.md): Bashio 函数，用于通过 Supervisor API 读取和更改您自己的应用及其他应用的设置。
+- [Bashio：Supervisor 与系统](https://www.hasscn.top/contributors/apps/bashio/supervisor/index.md): Bashio 函数，封装了 Supervisor API，用于 Supervisor 本身、系统信息、更新、任务、备份、仓库、挂载、Docker 以及安全设置。
+- [Bashio：Core、主机和操作系统](https://www.hasscn.top/contributors/apps/bashio/core-host-os/index.md): 用于包装 Supervisor API 中与 Home Assistant Core、主机、Home Assistant OS、硬件和网络相关功能的 Bashio 函数。
+- [Bashio：插件（plugins）](https://www.hasscn.top/contributors/apps/bashio/plugins/index.md): Bashio 函数，用于封装 Supervisor API 中 Home Assistant 旁边的插件（plugins）的接口，包括音频服务器、CLI、DNS、多播（multicast）和观察者（observer）。
+- [Bashio：服务、发现、认证和 ingress](https://www.hasscn.top/contributors/apps/bashio/services/index.md): Bashio 函数，用于使用和提供服务（如 MQTT）、向 Home Assistant 发送发现消息、检查用户凭据以及使用 ingress。
+- [Bashio：变量、字符串、文件和 JSON](https://www.hasscn.top/contributors/apps/bashio/helpers/index.md): Bashio 辅助函数，用于处理值、字符串、文件、使用 jq 的 JSON、缓存、网络端口以及 Have I Been Pwned。
+
+## Supervisor API
+
+- [Supervisor API](https://www.hasscn.top/contributors/apps/supervisor-api/index.md): Supervisor 提供给应用的 REST API，如何进行身份验证，你的应用可以调用哪些内容，以及响应的格式。
+- [应用（Apps）端点](https://www.hasscn.top/contributors/apps/supervisor-api/apps/index.md): 用于已安装应用、其选项、状态和日志的 Supervisor API 端点。
+- [商店端点](https://www.hasscn.top/contributors/apps/supervisor-api/store/index.md): 用于应用商店的 Supervisor API 端点，可浏览、安装和更新应用，并管理应用仓库。
+- [备份端点](https://www.hasscn.top/contributors/apps/supervisor-api/backups/index.md): 用于创建、恢复、上传、下载和管理备份的 Supervisor API 端点。
+- [Home Assistant Core 端点](https://www.hasscn.top/contributors/apps/supervisor-api/core/index.md): 用于控制 Home Assistant Core 的 Supervisor API 端点，以及您的应用访问 Core REST 和 WebSocket API 所使用的代理。
+- [Host and OS endpoints](https://www.hasscn.top/contributors/apps/supervisor-api/host/index.md): Supervisor API 中面向主机系统、Home Assistant OS、硬件、网络、时间、挂载和 Docker 的端点。
+- [插件端点](https://www.hasscn.top/contributors/apps/supervisor-api/plugins/index.md): Supervisor API 端点，用于运行在 Home Assistant 旁边的插件：音频服务器、CLI、DNS、多播和观察者。
+- [Supervisor 端点](https://www.hasscn.top/contributors/apps/supervisor-api/supervisor/index.md): Supervisor API 端点，涵盖 Supervisor 本身、系统信息、更新、任务、问题解决中心和安全设置。
+- [服务、发现、认证和 Ingress 端点](https://www.hasscn.top/contributors/apps/supervisor-api/services/index.md): Supervisor API 端点，供应用共享 MQTT 等服务、向 Home Assistant 宣告自身、校验用户凭据以及使用 ingress。
+- [Supervisor API 模型](https://www.hasscn.top/contributors/apps/supervisor-api/models/index.md): 多个 Supervisor API 端点返回的对象，例如应用、备份、任务、网络接口和挂载。

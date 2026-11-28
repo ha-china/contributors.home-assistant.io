@@ -1,0 +1,34 @@
+# 撰写文档
+
+> home-assistant.io 上的用户文档。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/writing/llms-full.txt.
+
+## 撰写文档
+
+- [编写文档](https://www.hasscn.top/contributors/writing/index.md): 通过改进 home-assistant.io 上的文档，帮助数百万人更好地使用 Home Assistant。
+- [你的第一次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/index.md): 直接在浏览器中修复文档中的小问题。无需任何环境配置。
+- [文档是如何运作的](https://www.hasscn.top/contributors/writing/how-it-works/index.md): 页面存放在哪里、应使用哪个分支，以及一次更改如何从拉取请求（pull request）变为 home-assistant.io 上的内容。
+
+## 指南
+
+- [编写指南](https://www.hasscn.top/contributors/writing/guides/index.md): 如何逐项任务地编写和修改文档。从构建页面结构到移动页面。
+- [页面结构](https://www.hasscn.top/contributors/writing/guides/structure/index.md): 围绕读者想了解或想做的事情来组织文档，包括概念、任务、参考、教程和故障排除。
+- [在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/index.md): 在自己的电脑上运行 home-assistant.io，以便在分享之前查看较大的改动。
+- [编写集成文档](https://www.hasscn.top/contributors/writing/guides/integration/index.md): 面向为 Home Assistant 添加新集成的开发者。文档需要包含哪些内容，以及如何让文档与代码一起合并。
+- [移动、重命名或删除页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/index.md): 文档页面会被各种地方链接引用。这里介绍如何在不破坏这些链接的情况下进行修改。
+
+## 参考
+
+- [写作参考](https://www.hasscn.top/contributors/writing/reference/index.md): 写作时需要查阅的细节。风格、图片、Liquid、YAML、自动化检查以及集成页面。
+- [文档风格指南](https://www.hasscn.top/contributors/writing/reference/style/index.md): home-assistant.io 上每个页面的语言、语气和 Markdown 格式规则。
+- [图片和视频](https://www.hasscn.top/contributors/writing/reference/images/index.md): 如何在 home-assistant.io 的页面上添加截图、图表和 YouTube 视频，以及如何为每位读者描述它们。
+- [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/index.md): home-assistant.io 在 Markdown 之上添加的所有 Liquid 标签，从 My 链接和术语表提示框到文本框和可复用片段。
+- [YAML style](https://www.hasscn.top/contributors/writing/reference/yaml/index.md): 文档中的 YAML 示例应当是什么样子，让它们易于阅读、复制和改写。
+- [自动化文档检查](https://www.hasscn.top/contributors/writing/reference/checks/index.md): 文档拉取请求上的自动化检查会检查什么，如何自己运行这些检查，以及如何修改它们。
+- [集成页面的 front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/index.md): 集成页面顶部可用的每个键、其作用以及可接受的取值。
+- [集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/index.md): 集成页面的各个章节的顺序，以及用于填充它们的区块和可复用文本。
+
+## 撰写文档, continued
+
+- [改进本贡献者网站](https://www.hasscn.top/contributors/writing/this-site/index.md): 修复或添加 contributors.home-assistant.io 上的页面，在您自己的机器上预览，并保持链接和重定向正常工作。

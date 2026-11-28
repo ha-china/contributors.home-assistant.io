@@ -1,0 +1,3591 @@
+# 伴侣应用: full text
+
+> Every page of the 伴侣应用 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/companion/llms.txt.
+
+# 伴侣应用（Companion apps）
+
+> 适用于 Android、iOS、iPadOS、macOS、watchOS、Wear OS 以及车载系统的官方 Home Assistant 应用。它们是如何构建的，以及如何参与构建。
+
+Source: https://www.hasscn.top/contributors/companion/
+
+伴侣应用（companion apps）让你把 Home Assistant 装进口袋、戴在手腕上、带进汽车里。它们显示与你在浏览器中看到的相同的前端，并增加了只有设备上的应用才能实现的功能：传感器、位置、通知、小组件、手表应用以及车载屏幕。
+
+共有两个应用，各自位于独立的仓库中，由各自的贡献者团队构建：
+
+| 应用 | 运行平台 | 语言 | 仓库 |
+| --- | --- | --- | --- |
+| Android | Android 手机和平板、Wear OS、Android Auto、Android Automotive、Meta Quest | Kotlin | [home-assistant/android](https://github.com/home-assistant/android) |
+| Apple | iPhone、iPad、Mac、Apple Watch、CarPlay | Swift | [home-assistant/iOS](https://github.com/home-assistant/iOS) |
+
+两者都通过 Core 中同一个集成（integration）`mobile_app` 与 Home Assistant 通信。该集成是一个公开的 API，因此其他应用也可以使用它。
+
+本板块面向希望参与这两个应用开发的开发者，以及任何想要构建自己的、与 Home Assistant 通信的应用的人。你需要熟悉 Kotlin 和 Android Studio，或者熟悉 Swift 和 Xcode。如果你不想写代码也想帮忙，同样有很多事情可做：参见[参与方式](https://www.hasscn.top/contributors/companion/#ways-to-help)。
+
+## 参与方式
+
+- **修复缺陷或开发功能**：在 Android 或 iOS 仓库中挑选一个 issue。
+- **测试测试版**：加入 [Google Play 上的 Android 测试版](https://play.google.com/apps/testing/io.homeassistant.companion.android)或 [TestFlight 上的 iOS 测试版](https://www.home-assistant.io/ios/beta/)，并报告出现的问题。
+- **测试拉取请求（pull request）**：安装某个拉取请求的构建版本，并告诉作者它是否正常工作。参见[测试拉取请求构建](https://www.hasscn.top/contributors/companion/android/get-started/#test-a-pull-request-build)。
+- **审查（review）**：任何人都可以对拉取请求发表评论。即使是一段简短的审查也有帮助。
+- **翻译**：两个应用都在 Lokalise 上进行翻译。参见[翻译](https://www.hasscn.top/contributors/translate/)。
+- **编写文档**：用户文档位于 [companion.home-assistant.io](https://companion.home-assistant.io/)，存放在 [companion.home-assistant](https://github.com/home-assistant/companion.home-assistant) 仓库中。
+
+## 从这里开始
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/companion/first-contribution/)：选择你的平台，构建应用，并提交你的第一个拉取请求。
+- [应用如何融入整体](https://www.hasscn.top/contributors/architecture/platform/companion-apps/)：从网页视图到推送服务的整体概览。
+
+## Android
+
+- [Android 概览](https://www.hasscn.top/contributors/companion/android/)：仓库、模块，以及在哪里找到所需内容。
+- [入门](https://www.hasscn.top/contributors/companion/android/get-started/)：设置 Android Studio 并构建应用。
+- [架构](https://www.hasscn.top/contributors/companion/android/architecture/)和 [UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)：应用及其界面是如何组织的。
+- [测试](https://www.hasscn.top/contributors/companion/android/testing/)：单元测试、截图测试、插桩测试和端到端测试。
+- [提交拉取请求](https://www.hasscn.top/contributors/companion/android/submitting/)：检查清单和审查流程。
+
+## Apple
+
+- [Apple 概览](https://www.hasscn.top/contributors/companion/apple/)：仓库、target，以及在哪里找到所需内容。
+- [入门](https://www.hasscn.top/contributors/companion/apple/get-started/)：设置 Xcode、签名，并构建应用。
+- [架构](https://www.hasscn.top/contributors/companion/apple/architecture/)和 [target](https://www.hasscn.top/contributors/companion/apple/targets/)：代码如何在 iPhone、Watch、CarPlay、小组件和 Mac 之间共享。
+- [提交拉取请求](https://www.hasscn.top/contributors/companion/apple/submitting/)：检查清单和审查流程。
+
+## 移动应用 API
+
+- [移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/)：应用如何连接到 Home Assistant、注册自身、发送传感器数据和位置信息，以及接收通知。适用于两个官方应用，也适用于你自己的应用。
+
+## 联系谁
+
+- 加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat)，并在 **Channels & Roles** 下选择开发者角色。然后前往 [Android 项目讨论帖](https://discord.com/channels/330944238910963714/1346948551892009101)，或 [**#apple-apps**](https://discord.com/channels/330944238910963714/1481713628553019392) 频道。超出单个应用范围的问题，例如 `mobile_app` 集成，适合在 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道讨论。
+- 缺陷和功能请求请提交到 [Android](https://github.com/home-assistant/android/issues) 或 [iOS](https://github.com/home-assistant/iOS/issues) 仓库的 issues。
+- 关于 Core 中 `mobile_app` 集成的问题请前往 [core 仓库](https://github.com/home-assistant/core)。
+
+---
+
+# 你的第一次伴侣应用贡献
+
+> 选择 Android 或 Apple，在你的机器上构建应用，并提交你的第一个 pull request。
+
+Source: https://www.hasscn.top/contributors/companion/first-contribution/
+
+你对伴侣应用（companion app）的第一次贡献不一定非得是一个功能。一个小 bug 修复、一个没人处理的 lint 警告，或者一个缺失的测试，都是很好的起点。它能让你完整地走一遍整个流程：构建、修改、测试、pull request、评审。
+
+## 1. 选择你的平台
+
+这两个应用除了它们所通信的 API 之外没有任何共享内容。选择与你的技能以及你每天使用的设备相匹配的那一个：
+
+| | Android | Apple |
+| --- | --- | --- |
+| 语言 | Kotlin | Swift |
+| IDE | Android Studio | Xcode（需要 Mac） |
+| 构建系统 | Gradle | Xcode 与 Swift Package Manager，工具链使用 Fastlane |
+| UI | Jetpack Compose（旧版 XML 正在迁移中） | SwiftUI 和 UIKit |
+| 仓库 | [home-assistant/android](https://github.com/home-assistant/android) | [home-assistant/iOS](https://github.com/home-assistant/iOS) |
+
+开发 Apple 应用需要一台 Mac。对于 Android，任何能运行 Android Studio 的机器都可以。
+
+## 2. 打个招呼
+
+加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat)，在 **Channels & Roles** 下选择开发者角色，然后前往 [Android 项目讨论帖](https://discord.com/channels/330944238910963714/1346948551892009101)或 [**#apple-apps**](https://discord.com/channels/330944238910963714/1481713628553019392) 频道。告诉大家你想做什么。这能避免你去做别人已经在做的东西。
+
+## 3. 构建应用
+
+按照你所在平台的设置指南操作：
+
+- [Android 入门](https://www.hasscn.top/contributors/companion/android/get-started/)
+- [Apple 入门](https://www.hasscn.top/contributors/companion/apple/get-started/)
+
+在模拟器、仿真器或你自己的设备上运行应用，并将其连接到一个 Home Assistant 实例。最好使用测试实例：应用在每次连接到服务器时，都会将自己注册为一台新设备（device）。
+
+## 4. 找点事情做
+
+适合新手的切入点：
+
+- **一个开放的 issue**：浏览 [Android issues](https://github.com/home-assistant/android/issues) 或 [iOS issues](https://github.com/home-assistant/iOS/issues)。一个你能复现的小问题是最理想的。
+- **Lint 基线**（Android）：app、wear、automotive、common 和 microwakeword 模块各自都有一个 `lint-baseline.xml`，其中记录了从未修复的已知问题。修复一个，然后把它从基线中移除，就完成了。参见[代码风格与 lint 检查](https://www.hasscn.top/contributors/companion/android/code-style/#baselines)。
+- **缺失的测试**：为没有测试的代码添加一个测试。两个仓库都非常重视测试，Apple 仓库甚至要求你修改的大部分代码行都必须有测试覆盖。
+- **让你烦恼的东西**：你自己遇到的 bug 是最好的第一个课题，因为你已经知道它为什么重要。
+
+## 5. 提交 pull request
+
+Fork 仓库，创建分支，进行修改，然后针对 `main` 提交一个 pull request。完整填写 pull request 模板；其中包含一个清单，并会询问你如何使用 AI 工具。在开始之前，请阅读 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)。
+
+提交指南中有详细说明：
+
+- [提交 Android pull request](https://www.hasscn.top/contributors/companion/android/submitting/)
+- [提交 Apple pull request](https://www.hasscn.top/contributors/companion/apple/submitting/)
+
+如果你的修改对用户可见，还需要在[用户文档](https://github.com/home-assistant/companion.home-assistant)中提交一个 pull request。
+
+> [!NOTE]
+> 评审可能需要一段时间。请保持耐心，同时确保 CI 保持绿色（通过）。
+
+## 接下来做什么
+
+- 阅读你所在平台的架构：[Android](https://www.hasscn.top/contributors/companion/android/architecture/) 或 [Apple](https://www.hasscn.top/contributors/companion/apple/architecture/)。
+- 好奇应用是如何与 Home Assistant 通信的？阅读[移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/)。
+
+---
+
+# Android
+
+> 适用于 Android、Wear OS、Android Auto 和 Android Automotive 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+
+Source: https://www.hasscn.top/contributors/companion/android/
+
+Android 应用始于 2019 年，如今已有数百万人使用。它的核心是一个显示 Home Assistant 前端的 web view。围绕它的是各种原生功能：从手机上报的传感器、通知、小组件、磁贴、NFC 标签、Assist、Wear OS 应用，以及用于 Android Auto 和 Android Automotive 的车机屏幕。
+
+该项目完全使用 Kotlin 编写。新的 UI 使用 Jetpack Compose。你仍会找到早于现行规范的老代码，例如 XML 布局和 view binding。这些代码会随时间逐步迁移，这里的页面描述的是新代码应有的样子。
+
+## 仓库
+
+所有内容都在 [home-assistant/android](https://github.com/home-assistant/android) 中。它是一个包含多个模块的 Gradle 项目：
+
+| 模块 | 说明 |
+| --- | --- |
+| `:app` | 手机和平板应用 |
+| `:automotive` | Android Automotive 应用。复用 `:app` 的源代码 |
+| `:wear` | Wear OS 应用 |
+| `:common` | 所有应用共享的代码：数据层、传感器、WebSocket 和 REST 客户端、设计系统，以及所有字符串 |
+| `:testing-unit` | 各模块单元测试共享的辅助工具 |
+| `:lint` | 项目的自定义 lint 规则 |
+| `:microwakeword` | 设备端唤醒词检测 |
+| `:provides-sensor-processor` | 用于传感器注册的代码生成器 |
+| `build-logic` | 以相同方式配置每个模块的约定插件 |
+
+最低和目标 SDK 版本位于 [`gradle/libs.versions.toml`](https://github.com/home-assistant/android/blob/main/gradle/libs.versions.toml) 中的 `androidSdk-*` 键下。
+
+## 环境搭建
+
+- [入门](https://www.hasscn.top/contributors/companion/android/get-started/)：安装 Android Studio、构建应用并运行它。
+- [推送通知](https://www.hasscn.top/contributors/companion/android/push-notifications/)：如果你从事通知相关工作，请设置你自己的 Firebase 项目。
+
+## 架构
+
+- [架构](https://www.hasscn.top/contributors/companion/android/architecture/)：原则、技术栈，以及各模块如何组合在一起。
+- [UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)：一个屏幕是如何构建的，从视图到仓库层。
+- [前端屏幕](https://www.hasscn.top/contributors/companion/android/frontend-screen/)：承载 web view 的屏幕，也是 UI 架构的参考实现。
+- [变体与目标](https://www.hasscn.top/contributors/companion/android/flavors-and-targets/)：`full` 和 `minimal`，以及手机、车机、手表和电视构建。
+
+## 编写代码
+
+- [Compose 与设计系统](https://www.hasscn.top/contributors/companion/android/compose/)：使用 `HATheme` 和 `HA*` 组件构建 UI。
+- [最佳实践](https://www.hasscn.top/contributors/companion/android/best-practices/)：强类型、并发、依赖注入，以及快速失败。
+- [代码风格与 lint](https://www.hasscn.top/contributors/companion/android/code-style/)：KTLint、Detekt 和 Android linter。
+- [依赖](https://www.hasscn.top/contributors/companion/android/dependencies/)：版本目录、lockfile 和 Renovate。
+- [调试工具](https://www.hasscn.top/contributors/companion/android/debugging/)：开发者 playground、StrictMode 和 LeakCanary。
+
+## 测试
+
+- [测试](https://www.hasscn.top/contributors/companion/android/testing/)：如何编写测试，以及使用 JUnit、MockK、Robolectric 和 Turbine 进行单元测试。
+- [截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/)
+- [插桩测试](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/)
+- [端到端测试](https://www.hasscn.top/contributors/companion/android/e2e-testing/)
+
+## 发布
+
+- [提交 pull request](https://www.hasscn.top/contributors/companion/android/submitting/)：检查清单、模板和审查流程。
+- [持续集成](https://www.hasscn.top/contributors/companion/android/ci/)：你的 pull request 上会运行什么，以及合并之后会发生什么。
+- [发布](https://www.hasscn.top/contributors/companion/android/releases/)：从合并的 pull request 到 Play Store，以及自行构建签名发布版本。
+
+## 联系谁
+
+- [Home Assistant Discord](https://www.home-assistant.io/join-chat) 上的 [Android 项目讨论串](https://discord.com/channels/330944238910963714/1346948551892009101)。请先在 **Channels & Roles** 下选择开发者角色。
+- Android 仓库中的 [Issues](https://github.com/home-assistant/android/issues)，用于提交缺陷和功能请求。
+- 有关应用在用户端的工作方式，请参阅[伴侣应用文档](https://companion.home-assistant.io/)。
+
+## All pages in this section
+
+### Architecture
+
+- [Android 架构](https://www.hasscn.top/contributors/companion/android/architecture/): Android 应用背后的原则、模块、技术栈，以及手机、汽车和手表应用如何协同工作。
+- [前端屏幕](https://www.hasscn.top/contributors/companion/android/frontend-screen/): 在 Web 视图中显示 Home Assistant 前端的 Android 屏幕，包括其状态、JavaScript 桥接和外部总线。
+- [Android 版本类型与目标平台](https://www.hasscn.top/contributors/companion/android/flavors-and-targets/): Android 应用的 full 和 minimal 版本类型，以及手机、Android Automotive、Wear OS 和 TV 构建。
+
+### Write code
+
+- [Compose 与设计系统](https://www.hasscn.top/contributors/companion/android/compose/): 使用 Jetpack Compose、HATheme 和 `HA*` 组件构建 Android UI。预览、Compose 目录、小组件和导航。
+- [Android 调试工具](https://www.hasscn.top/contributors/companion/android/debugging/): Android 应用调试构建中的开发者游乐场、Compose 目录、StrictMode 和 LeakCanary。
+
+### Test
+
+- [测试 Android 应用](https://www.hasscn.top/contributors/companion/android/testing/): 如何为 Android 应用编写测试，以及如何使用 JUnit、MockK、Robolectric 和 Turbine 编写单元测试。
+- [Android 截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/): 使用 Compose Preview Screenshot Testing，确保 Android 应用中的 Compose UI 只在有意的更改时才发生变化。
+- [Android 插桩测试（instrumentation tests）](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/): 在真实的 Android 运行时上测试 Android 应用，覆盖每个受支持 API 级别的模拟器。
+
+### Ship
+
+- [提交 Android 拉取请求](https://www.hasscn.top/contributors/companion/android/submitting/): 检查清单、拉取请求模板、应用内更新日志，以及 Android 仓库中评审的流程。
+- [Android 持续集成](https://www.hasscn.top/contributors/companion/android/ci/): Android 应用的 GitHub Actions 工作流。哪些会在你的拉取请求上运行、合并后运行，以及定时运行。
+- [Android 版本发布](https://www.hasscn.top/contributors/companion/android/releases/): 对 Android 应用的更改如何从合并的拉取请求（pull request）流转到内部测试人员、Beta 版和生产环境，以及如何自行构建签名的发布版本。
+
+### 设置
+
+- [Android 入门](https://www.hasscn.top/contributors/companion/android/get-started/): 安装 Android Studio，fork 并克隆仓库，构建应用，并在模拟器或手机上运行。
+- [Android 上的推送通知](https://www.hasscn.top/contributors/companion/android/push-notifications/): 设置你自己的 Firebase 项目和推送服务，适用于开发通过 Firebase Cloud Messaging 传递的通知时。
+
+---
+
+# Android 架构
+
+> Android 应用背后的原则、模块、技术栈，以及手机、汽车和手表应用如何协同工作。
+
+Source: https://www.hasscn.top/contributors/companion/android/architecture/
+
+该应用遵循 Google 的[推荐应用架构](https://developer.android.com/topic/architecture)，并从 [Now in Android](https://github.com/android/nowinandroid) 中汲取灵感。这个项目历史悠久，因此你会发现一些尚未遵循这些规则的代码。本页描述的是项目的发展方向。如有疑问，请遵循本页，而不是你旁边的代码。
+
+## 带有原生功能的 Web 视图
+
+Home Assistant 一直是一个强大的渐进式 Web 应用（progressive web app），Android 应用正是建立在这一基础之上。它的主屏幕是一个显示 Home Assistant 前端的 [WebView](https://developer.android.com/reference/android/webkit/WebView)。应用与前端之间通过 JavaScript 桥接进行通信：前端通过[外部认证（external authentication）](https://www.hasscn.top/contributors/frontend/reference/external-auth/)向应用请求访问令牌，并通过[外部总线（external bus）](https://www.hasscn.top/contributors/frontend/reference/external-bus/)交换消息。具体工作原理请参阅[前端屏幕](https://www.hasscn.top/contributors/companion/android/frontend-screen/)。
+
+其余一切都是原生的：入门引导、设置、传感器、通知、小组件、磁贴、Assist，以及汽车和手表应用。
+
+## 原则
+
+- **仅使用 Kotlin。** 整个代码库都是 Kotlin，并将保持不变。
+- **所有新 UI 都使用 Compose。** 不再使用新的 XML 布局、数据绑定或视图绑定。新小组件使用 Jetpack Glance。新屏幕使用 `HATheme` 主题。较旧的 `HomeAssistantAppTheme` 是 Material 2，已弃用。请参阅 [Compose 与设计系统](https://www.hasscn.top/contributors/companion/android/compose/)。
+- **所有并发都使用协程（coroutines）和 Flow。**
+- **依赖注入使用 Hilt。** 切勿手动创建需要注入的类。
+- **保持代码与产品变体（flavor）无关。** 将代码放在 `main` 源集中，让两个[变体](https://www.hasscn.top/contributors/companion/android/flavors-and-targets/)都能使用。只有需要 Google Play Services 的代码才放入 `full`。
+- **紧跟 Android 的发展。** 目标 SDK 跟随最新的 Android 版本，新版本发布时会进行测试。
+- **根据服务器版本控制功能**，当功能需要较旧版本 Home Assistant 所不具备的能力时，例如 `server.version?.isAtLeast(2025, 6, 0)`。
+
+## 模块
+
+模块列表见 [Android 概览](https://www.hasscn.top/contributors/companion/android/#the-repository)。以下几点值得了解：
+
+- 共享的 Gradle 配置位于 `build-logic`（一个包含的构建）中的约定插件里。如果你需要在多个模块中使用相同的设置，就应该放在那里。
+- `:common` 存放手机、汽车和手表应用共享的所有内容，包括 [`common/src/main/res/values/strings.xml`](https://github.com/home-assistant/android/blob/main/common/src/main/res/values/strings.xml) 中的所有面向用户的字符串。只编辑英文文件：翻译来自 Lokalise。请参阅[翻译](https://www.hasscn.top/contributors/translate/)。
+- `:automotive` 没有自己的源代码。它使用不同的清单文件和更高的最低 SDK 来编译 `:app` 的源代码。
+
+在模块内部，代码按功能打包：`sensors/`、`notifications/`、`settings/`、`onboarding/`、`widgets/`、`frontend/` 等等。
+
+## 技术栈
+
+| 关注点 | 应用使用的技术 |
+| --- | --- |
+| UI | [Jetpack Compose](https://developer.android.com/compose)，小组件使用 [Glance](https://developer.android.com/develop/ui/compose/glance) |
+| 导航 | Navigation Compose，使用类型安全的路由 |
+| 依赖注入 | [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) |
+| 并发 | [Kotlin 协程](https://kotlinlang.org/docs/coroutines-overview.html)和 Flow |
+| WebSocket API | [OkHttp](https://square.github.io/okhttp/) |
+| REST API | [Retrofit](https://square.github.io/retrofit/) |
+| 序列化 | Kotlinx.serialization |
+| 数据库 | [Room](https://developer.android.com/training/data-storage/room)，用于用户数据 |
+| 应用设置 | SharedPreferences，封装在 `LocalStorage` 抽象之后 |
+| 日志 | [Timber](https://github.com/JakeWharton/timber) |
+
+## 选择流类型
+
+当你暴露一个流时，根据在无人收集时值必须发生什么来选择其类型：
+
+| 它承载的内容 | 使用 |
+| --- | --- |
+| 状态：只有最新值重要，重新渲染也没问题，比如屏幕状态或模式 | `StateFlow` |
+| 每个收集器都必须收到的事件，或者一旦其上下文消失就毫无意义、无人监听时必须丢弃的事件，比如绑定到已加载页面的 WebView 操作 | `SharedFlow` |
+| 一个消费者必须恰好处理一次、绝不丢失也绝不重复的事件，比如导航、snackbar 或打开链接 | `Channel(Channel.BUFFERED)` 通过 `receiveAsFlow()` 暴露 |
+
+`Channel` 会保留值直到有消费者出现，并将每个值交给单个收集器。在屏幕开始收集之前发送的事件仍然会到达。没有重放的 `SharedFlow` 会将其丢弃。在协程中使用 `send`，仅在无法挂起的回调中使用 `trySend`。
+
+## 与 Home Assistant 通信
+
+该应用使用三个通道：
+
+- [`mobile_app` 集成](https://www.hasscn.top/contributors/companion/mobile-app-api/)的 **Webhook**，用于传感器更新、位置信息和注册更新。
+- **WebSocket API**，保持开启以支持实时功能，如 Assist、小组件中的实体状态，以及不依赖 Firebase 的通知。
+- **REST API**，用于其余部分。
+
+传感器在后台收集，并通过前台服务和工作器（worker）发送到 Home Assistant。
+
+## Wear OS
+
+Wear OS 应用是 `:wear` 中的一个独立应用。它无法自行完成入门引导：它通过 [Wearable Data Layer](https://developer.android.com/training/wearables/data/data-layer) 从手机应用获取服务器 URL 和凭据。这需要 Google Play Services，因此只能与手机应用的 `full` 变体配合使用。设置完成后，手表通过 WebSocket API 和自己的 webhook 直接与 Home Assistant 通信。
+
+## Android Automotive 和 Android Auto
+
+Android Auto 从手机应用运行：它将 `:app` 中的汽车屏幕投射到车载显示屏上。Android Automotive 是一个独立的构建版本 `:automotive`，直接在汽车上运行。两者使用相同的源代码。
+
+## 深层链接（Deep link）
+
+该应用处理 `homeassistant://` 链接以打开应用的特定部分。面向用户的说明见 [URL 处理器文档](https://companion.home-assistant.io/docs/integrations/url-handler/)。
+
+## 下一步
+
+- [UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)：单个屏幕是如何构建的。
+- [最佳实践](https://www.hasscn.top/contributors/companion/android/best-practices/)：每次代码审查中都会出现的编码规则。
+
+---
+
+# 前端屏幕
+
+> 在 Web 视图中显示 Home Assistant 前端的 Android 屏幕，包括其状态、JavaScript 桥接和外部总线。
+
+Source: https://www.hasscn.top/contributors/companion/android/frontend-screen/
+
+前端屏幕在一个 [WebView](https://developer.android.com/reference/android/webkit/WebView) 中显示 Home Assistant 前端，并包裹着原生功能：身份验证、手势、下载、NFC、Matter 和 Thread，以及媒体播放。它是应用中最复杂的屏幕，也是[UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)的参考实现。它的输入同时来自四面八方：用户、Web 视图、外部总线、系统回调和超时。这正是该模式所应对的场景。代码位于 [`frontend/`](https://github.com/home-assistant/android/tree/main/app/src/main/kotlin/io/homeassistant/companion/android/frontend) 包中。较旧的 `webview/` 包是正在被移除的旧版实现。
+
+## 组成部分
+
+| 在模式中的角色 | 前端实现 |
+| --- | --- |
+| 导航和事件 | `frontendScreen()`、`FrontendEventHandler` |
+| 视图 | `FrontendScreen`、`FrontendScreenContent` |
+| ViewModel | `FrontendViewModel` |
+| 状态 | `FrontendViewState` |
+| 事件 | `FrontendEvent` |
+| 操作 | `WebViewAction` |
+| 提示 | `SingleSlotQueue`，配合 `FrontendDialog`、`PermissionRequest`、`FileChooserRequest` |
+| 处理器 | `FrontendMessageHandler`、`FrontendMatterThreadHandler`、`FrontendHttpAuthHandler`、`FrontendFileChooserHandler` 等 |
+| 管理器 | `PermissionManager`、`FrontendDialogManager`、`FrontendUrlManager`、`FrontendDownloadManager`、`FrontendGestureManager`、`FrontendExoPlayerManager` 等 |
+| 仓库 | `FrontendExternalBusRepository`、`ServerSessionManager` |
+
+它们的依赖关系遵循该模式的分层，并且只向下指向：
+
+```mermaid
+flowchart TB
+    Nav["frontendScreen()"]
+    EventHandler["FrontendEventHandler"]
+    Screen["FrontendScreen<br/>holds the WebView"]
+    VM["FrontendViewModel"]
+    Handlers["<b>Handlers</b><br/>FrontendMessageHandler<br/>FrontendHttpAuthHandler<br/>FrontendMatterThreadHandler, ..."]
+    Managers["<b>Managers</b><br/>PermissionManager<br/>FrontendDialogManager<br/>FrontendUrlManager, ..."]
+    UseCases["<b>Use cases</b><br/>CheckLocalNetworkPermissionUseCase"]
+    Repos["<b>Repositories</b><br/>FrontendExternalBusRepository<br/>ServerSessionManager<br/>PrefsRepository, ..."]
+
+    Nav --> Screen & EventHandler
+    EventHandler -->|"collects events"| VM
+    Screen --> VM
+    VM --> Handlers & Managers & Repos
+    Handlers --> Managers & Repos
+    Managers --> UseCases & Repos
+```
+
+在运行时，结果通过各层暴露的流（flow）向上回流。管理器推送屏幕渲染的待处理状态，处理器推送 ViewModel 归约（reduce）的结果，仓库发出供处理器消费的类型化消息。
+
+## 状态和覆盖层
+
+`FrontendScreen` 始终在底层渲染 Web 视图，并根据状态在其上绘制一个覆盖层。Web 视图保持挂载在下方，因此当覆盖层变化时它会保留其页面。
+
+| 状态 | 覆盖层 |
+| --- | --- |
+| `LoadServer`、`Loading` | 加载指示器 |
+| `Content` | 无，直接显示前端 |
+| `SecurityLevelRequired` | 连接安全级别设置 |
+| `Insecure` | 不安全连接屏幕 |
+| `Error` | 连接错误屏幕 |
+
+`LoadServer` 是入口点。在 ViewModel 解析要加载的 URL 的同时，它还会通过加载 `about:blank` 清空 Web 视图。之后它会转入 `Loading`、`Insecure`、`SecurityLevelRequired` 或 `Error`。一旦前端通过外部总线连接，`Loading` 就会转入 `Content`。2026.8 及以后版本的服务器还会报告前端何时完成渲染，加载指示器会一直显示到那时。超时或加载错误会转入 `Error`，重试则回到 `LoadServer`。切换服务器也会重新进入 `LoadServer`。有一种错误无法重试：`FrontendConnectionError.Unrecoverable`，例如系统 WebView 启动失败。ViewModel 会忽略从该 `Error` 状态出发的任何转换。
+
+状态之间的主要转换：
+
+```mermaid
+stateDiagram-v2
+    [*] --> LoadServer
+    LoadServer --> Loading: URL resolved
+    LoadServer --> Insecure: insecure URL<br/>blocked
+    LoadServer --> SecurityLevelRequired: security level<br/>not set
+    LoadServer --> Error: no server,<br/>session, or URL
+    Loading --> Content: frontend connected
+    Loading --> Error: timeout,<br/>load error
+    Content --> Loading: URL changed
+    Content --> Error: load error
+    Error --> Content: connected<br/>after a timeout
+    Error --> Loading: wait
+    Error --> LoadServer: retry
+    Insecure --> LoadServer: retry
+    Insecure --> SecurityLevelRequired: change<br/>security level
+    SecurityLevelRequired --> LoadServer: done
+```
+
+### 复用错误屏幕
+
+连接错误屏幕与引导流程（onboarding）共用，因此它不能依赖 `FrontendViewModel`。它依赖一个只包含其所需内容的小接口 `FrontendConnectionErrorStateProvider`：
+
+```kotlin
+interface FrontendConnectionErrorStateProvider {
+    val urlFlow: StateFlow<String?>
+    val errorFlow: StateFlow<FrontendConnectionError?>
+    val connectivityCheckState: StateFlow<ConnectivityCheckState>
+    fun runConnectivityChecks()
+}
+```
+
+`FrontendConnectionErrorScreen` 是针对这个接口编写的。`FrontendViewModel` 实现了它，因此错误覆盖层直接以该 ViewModel 本身作为其提供者。预览和测试使用 `FrontendConnectionErrorStateProvider.noOp`。
+
+这就是跨屏幕复用 UI 或逻辑的通用技巧：为可复用部分所需的内容精确定义一个接口，并让每个 ViewModel 实现它。这样依赖就指向接口，而不是某个特定的 ViewModel。
+
+## Web 视图
+
+`FrontendScreen` 通过 `HAWebView`（一个可复用的组合项）创建 Web 视图。它在 `AndroidView` 中创建平台 `WebView`，应用基础设置，在导航宿主之前将返回按钮发送给 Web 视图历史记录，并在预览和截图测试中显示占位符。当创建 Web 视图失败时，它会报告该情况，ViewModel 会将其转换为不可恢复的 `Error` 状态。
+
+在此基础上，`FrontendScreen` 添加了仅前端需要的内容：挂载下面提到的两个客户端，启用 Cookie（包括某些集成所依赖的第三方 Cookie），并连接下载和手势监听器。
+
+ViewModel 创建 Web 视图的两个客户端：
+
+- `HAWebViewClient` 来自 `HAWebViewClientFactory`。它处理 TLS 客户端证书、映射加载和 TLS 错误、报告页面加载完成、呈现 HTTP 基本认证质询，并在渲染器崩溃时恢复。
+- `HAWebChromeClient` 来自 `viewModel.createWebChromeClient()`。它处理摄像头和麦克风权限请求、JavaScript `confirm()` 对话框、文件选择器和全屏视频。
+
+> [!NOTE]
+> ViewModel 通常不持有平台 UI 类型。这两个客户端是唯一被接受的例外，因为它们与 ViewModel 逻辑绑定：错误映射、页面加载回调、HTTP 认证和权限。这不会损害可测试性：Web 视图客户端来自一个测试可以伪造（fake）的工厂，而 chrome 客户端只在屏幕请求时才构建。ViewModel 的归约逻辑仍然可以作为普通的 JVM 单元测试运行。
+
+## 与前端通信
+
+前端和应用通过一个 JavaScript 桥接进行通信。它承载两件事：
+
+- **外部身份验证**：前端向应用请求访问令牌（access token），而不是显示登录页面。
+- **外部总线**：双向消息，例如打开原生设置、扫描二维码或启动 Assist。
+
+前端一侧的文档见[外部身份验证](https://www.hasscn.top/contributors/frontend/reference/external-auth/)和[外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)。
+
+`FrontendJsBridge` 是注册在 Web 视图中的 JavaScript 接口。它将来自前端的调用解析为类型化消息，并交给 `FrontendMessageHandler`。`FrontendExternalBusRepository` 拥有总线本身：它反序列化传入的 JSON（容忍它不认识的消息类型），并将传出消息转换为脚本。
+
+`FrontendScreen` 之下的任何内容都不直接接触 Web 视图。其他一切都通过流进行通信：
+
+```mermaid
+flowchart TB
+    JS["Home Assistant frontend<br/>in the WebView"]
+    Screen["FrontendScreen"]
+    VM["FrontendViewModel"]
+    Bridge["FrontendJsBridge"]
+    Handler["FrontendMessageHandler"]
+    Bus["FrontendExternalBusRepository"]
+    Session["ServerSessionManager"]
+
+    Screen -->|"loadUrl(),<br/>runs WebViewAction"| JS
+    Screen -->|"attachToWebView()"| Bridge
+    VM -->|"webViewActions"| Screen
+    VM -->|"creates"| Bridge
+    JS -->|"getExternalAuth,<br/>revokeExternalAuth,<br/>externalBus"| Bridge
+    Bridge -->|"FrontendJsHandler"| Handler
+    Handler -->|"messageResults(),<br/>webViewActions()"| VM
+    Handler -->|"getExternalAuth(),<br/>revokeExternalAuth()"| Session
+    Handler -->|"onMessageReceived(),<br/>send(), evaluateScript()"| Bus
+    Bus -->|"incomingMessages(),<br/>webViewActions()"| Handler
+```
+
+用文字描述：
+
+- **前端到应用**：前端调用桥接，处理器将消息传递给仓库，结果作为类型化事件流回 ViewModel。
+- **应用到前端**：某个组件向仓库发送一条类型化消息，仓库将其包装在 `WebViewAction.EvaluateScript` 中。`FrontendScreen` 在 Web 视图中执行它。
+- **身份验证**：前端调用 `getExternalAuth` 或 `revokeExternalAuth`，处理器询问 `ServerSessionManager`，回调脚本在 Web 视图中运行。桥接在传递调用之前会检查回调名称。
+
+操作和事件流是带有小额外缓冲区的 `SharedFlow`，因此当 Web 视图仍在处理较早的命令时，发送方不必等待。但它们不会重放：在没有任何收集者收集流时发送的命令会被丢弃。
+
+### 两个桥接版本
+
+桥接存在两个版本：
+
+- **V1**（`window.externalApp`）使用 `addJavascriptInterface`。前端直接调用命名方法。
+- **V2**（`window.externalAppV2`）使用 `WebViewCompat.addWebMessageListener`，适用于 Home Assistant 2026.4.2 及更高版本。所有消息都通过 `postMessage` 以带有 `type` 的 JSON 形式传输，并出于安全考虑对来源（origin）和框架（frame）进行过滤。
+
+当服务器足够新且设备的 WebView 支持 `WEB_MESSAGE_LISTENER` 特性时，应用使用 V2。否则，它会回退到 V1。
+
+## 作用域
+
+一次屏幕会话中的各个块都是 `@ViewModelScoped` 的。这包括 `FrontendExternalBusRepository`：总线只为一个 Web 视图存在，因此一次访问中缓冲的消息不会泄漏到下一次。`FrontendHandlerModule` 在 `ViewModelComponent` 中将 `FrontendMessageHandler` 同时绑定为 `FrontendJsHandler` 和 `FrontendBusObserver`，因此两个角色共享同一个实例。
+
+## 测试
+
+| 内容 | 测试类型 |
+| --- | --- |
+| `FrontendViewModel` | 使用 JUnit 和 Turbine 的单元测试 |
+| 管理器和处理器 | 单元测试，每次关注一个问题 |
+| `FrontendScreenContent` | Compose UI 测试，按状态进行 |
+| `FrontendEventHandler` | Compose UI 测试，每个事件一个 |
+| `FrontendScreen` | 截图测试，仅针对外观，不含逻辑 |
+
+---
+
+# Android 版本类型与目标平台
+
+> Android 应用的 full 和 minimal 版本类型，以及手机、Android Automotive、Wear OS 和 TV 构建。
+
+Source: https://www.hasscn.top/contributors/companion/android/flavors-and-targets/
+
+Android 应用面向多种设备构建，并有两种版本类型（flavor）。对共享代码的修改可能会影响到所有这些构建，因此了解每种构建是什么会很有帮助。
+
+## 版本类型
+
+`:app` 和 `:automotive` 模块有两种版本类型。`:wear` 模块没有版本类型之分。
+
+| | `full` | `minimal` |
+| --- | --- | --- |
+| Google Play Services | 有 | 无 |
+| 应用程序 ID | `io.homeassistant.companion.android` | `io.homeassistant.companion.android.minimal` |
+| 用于[在线检测](https://www.home-assistant.io/getting-started/presence-detection/)的位置跟踪 | 有 | 无 |
+| 推送通知 | 通过 Firebase，以及通过 WebSocket | 仅通过 WebSocket，参见[本地推送](https://companion.home-assistant.io/docs/notifications/notification-local) |
+| Wear OS 应用 | 有 | 无 |
+| 崩溃报告 | 有 | 无 |
+| 分发渠道 | Google Play | F-Droid、GitHub 上的 APK、Meta Quest，以及面向汽车厂商的 Android Automotive 构建 |
+
+调试构建会在应用程序 ID 后添加 `.debug`，因此它们可以与正式版应用并存安装。
+
+`minimal` 版本类型是为那些偏好或需要不含 Google Play Services 的应用的用户而存在的，例如设备本身没有这些服务的用户。
+
+请尽量将代码保留在 `main` 源集中，这样两种版本类型的用户都能获得该功能。当有选择时，项目更倾向于开源解决方案。只有需要 Google Play Services 的代码才会放入 `full` 源集，并提供对应的 `minimal` 实现。如果某个 Play Services 功能的开源替代方案变得可行，它也可以移到 `minimal` 中。
+
+## 目标平台
+
+| 目标平台 | 模块 | 最低 SDK |
+| --- | --- | --- |
+| 手机和平板 | `:app` | `androidSdk-min` |
+| Android Automotive | `:automotive` | `androidSdk-automotive-min` |
+| Wear OS | `:wear` | `androidSdk-wear-min` |
+
+版本号位于 [`gradle/libs.versions.toml`](https://github.com/home-assistant/android/blob/main/gradle/libs.versions.toml) 中。
+
+### 手机和平板
+
+大多数用户使用的主应用。Android Auto 是其中的一部分：手机将车机屏幕投射到汽车显示屏上。
+
+### Android Automotive
+
+直接运行在汽车上的应用。它使用自己的清单文件编译 `:app` 的源代码。汽车相关的 API 仅从 API 29 开始提供，因此其最低 SDK 更高。
+
+### Wear OS
+
+一个独立的应用，但并非完全独立：它需要手机应用来完成初始设置并获取服务器凭据。之后，它可以直接与 Home Assistant 通信。
+
+### Android TV
+
+手机应用可以安装在 Android TV 上，但没有专门的模块，使用遥控器导航的体验也不太好。更好的电视体验需要拥有自己的模块和导航支持。
+
+---
+
+# Compose 与设计系统
+
+> 使用 Jetpack Compose、HATheme 和 `HA*` 组件构建 Android UI。预览、Compose 目录、小组件和导航。
+
+Source: https://www.hasscn.top/contributors/companion/android/compose/
+
+Android 应用中所有新的 UI 都使用 [Jetpack Compose](https://developer.android.com/compose)。不再使用新的 XML 布局、数据绑定或视图绑定。新的小组件使用 [Jetpack Glance](https://developer.android.com/develop/ui/compose/glance)；旧的 RemoteViews 小组件不再扩展。
+
+## 设计系统
+
+应用在 Material 3 之上拥有自己的设计系统，位于 `:common` 模块的 `io.homeassistant.companion.android.common.compose` 中：
+
+- **`HATheme`** 在浅色和深色模式下应用 Home Assistant 的配色。在 `setContent` 中应用一次即可，不要在屏幕 composable 内部应用。
+- **`HA*` 组件**，例如 `HAAccentButton`、`HAFilledButton`、`HATextField`、`HACheckbox`、`HASwitch`、`HALoading`、`HADropdownMenu` 和 `HAModalBottomSheet`。它们位于主题旁边的 `composable` 包中。请使用它们而不是 Material 组件。
+- **`LocalHAColorScheme.current`** 用于获取颜色。切勿硬编码颜色。
+- **`HATextStyle`** 用于排版，**`HADimens.SPACE*`** 用于间距和尺寸。内边距不要使用魔法数字。
+
+直接使用原始的 Material 3 组件在浅色或深色模式下会得到错误的颜色。如果你需要的 `HA*` 封装组件还不存在，请先创建它，放在单独的 pull request 中，并附带截图测试和 Compose 目录中的一个页面。
+
+> [!NOTE]
+> 你还会发现 `HomeAssistantAppTheme`，这是一个基于 Material 2 的主题。它已被弃用，仅保留到使用它的剩余屏幕迁移完成。不要在新 UI 中使用它，也不要在同一屏幕中混用 Material 2 和 Material 3。
+
+### Compose 目录
+
+Debug 构建包含所有 `HA*` 组件的目录。从[开发者游乐场](https://www.hasscn.top/contributors/companion/android/debugging/#the-developer-playground)通过 **Start HA Compose Catalog** 打开它。在构建新内容之前请先查看它。
+
+## 编写屏幕
+
+遵循 [UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)：一个有状态的屏幕负责收集 ViewModel 状态，一个无状态的内容 composable 负责渲染它。这就是[状态提升](https://developer.android.com/develop/ui/compose/state-hoisting)（state hoisting），它能让你的 composable 保持可复用且易于预览。除此之外：
+
+- **保持 composable 简小。** 将大屏幕拆分为小的私有 composable，当文件变大时将它们移到各自的文件中。
+- **只传递 composable 所需的内容**，而不是整个状态。
+- **UI 中不包含逻辑。** 不要在 composable 中进行排序、过滤或映射。状态应携带可直接显示的数据。如果必须在组合期间进行计算，请使用 `remember`。
+- **以组件命名文件**，例如 `SettingsScreen.kt` 或 `UserCard.kt`。无状态层使用 `*Screen` 或 `*Content`。`*View` 是遗留命名。
+- **无障碍**：在自定义的可点击行上设置语义 `Role`，例如 `Modifier.clickable(role = Role.Checkbox)`，并为图片提供内容描述。
+- **错误和反馈**应显示在 snackbar 中，而不是 toast。
+- **文本**来自 `stringResource(R.string.*)`，字符串位于 [`common/src/main/res/values/strings.xml`](https://github.com/home-assistant/android/blob/main/common/src/main/res/values/strings.xml) 中。
+
+## 预览
+
+为每个主要的 composable 添加一个 `@Preview`，并包裹在 `HAThemeForPreview` 中，它还会绘制正确的背景：
+
+```kotlin
+@Preview
+@Composable
+private fun SettingsScreenPreview() {
+    HAThemeForPreview {
+        SettingsScreenContent(
+            uiState = SettingsUiState.Default,
+            onToggleSetting = {},
+        )
+    }
+}
+```
+
+预览是最快的迭代方式：无需构建、无需服务器、无需引导流程。请添加多个预览，覆盖每个有意义的状态、浅色和深色模式，以及不同的屏幕尺寸。截图测试渲染的是相同的 composable，因此一个好的预览就等于完成了一半的[截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/)。
+
+应用运行后，Android Studio 中的 Compose live edit 和热重载可以在不重新构建的情况下显示许多更改。结构性更改仍然需要重新构建。
+
+## 导航
+
+应用使用 Navigation Compose，并正在迁移到单个 activity 和单个导航图，该导航图由各功能的子图构建而成。新屏幕放入导航图中；旧的 activity 会随时间逐步迁移。
+
+使用类型安全的路由：
+
+```kotlin
+@Serializable
+data class FeatureRoute(val value: Int)
+
+fun NavGraphBuilder.featureNavGraph(navController: NavController) {
+    composable<FeatureRoute> {
+        FeatureScreen(
+            value = it.toRoute<FeatureRoute>().value,
+            onNavigateBack = { navController.popBackStack() },
+        )
+    }
+}
+```
+
+导航需要测试，包括返回栈。
+
+---
+
+# Android 调试工具
+
+> Android 应用调试构建中的开发者游乐场、Compose 目录、StrictMode 和 LeakCanary。
+
+Source: https://www.hasscn.top/contributors/companion/android/debugging/
+
+Android 应用的调试构建（debug build）自带一些工具，可以加快开发速度并尽早发现问题。这些工具都不会出现在发布构建（release build）中。
+
+## 开发者游乐场
+
+应用依赖服务器和网页视图，因此想尝试某个功能往往意味着要先完成引导流程并经过几个界面。开发者游乐场跳过了这些步骤。它是调试构建中的一个[应用快捷方式](https://developer.android.com/develop/ui/views/launch/shortcuts/creating-shortcuts#static)：长按应用图标并选择 **DevPlayground**。在 Android Studio 中，`dev playground` 运行配置可以直接打开它。它的代码位于 `app/src/debug` 源集中，因此永远不会进入发布版本。
+
+在游乐场中，你可以（除其他功能外）故意让应用崩溃或触发快速失败（fail fast）、启动 NFC 标签模拟器，以及打开包含所有 `HA*` 组件的 [Compose 目录](https://www.hasscn.top/contributors/companion/android/compose/#the-compose-catalog)。
+
+请随意使用游乐场。但只提交对其他开发者也有帮助的更改，例如用于测试崩溃报告的崩溃按钮，或展示所有组件和主题的目录。已提交的游乐场代码与其他代码一样，需遵循[代码风格](https://www.hasscn.top/contributors/companion/android/code-style/)和[最佳实践](https://www.hasscn.top/contributors/companion/android/best-practices/)。那里不需要翻译。
+
+## StrictMode
+
+[StrictMode](https://developer.android.com/reference/android/os/StrictMode) 在 Android 12 或更新版本的设备上的调试构建中是开启的。它会捕获主线程上的磁盘和网络访问，以及较新 Android 版本已弃用的行为，这使得迁移到新的 Android API 级别更加容易。
+
+无论是 [VM 策略](https://developer.android.com/reference/android/os/StrictMode.VmPolicy.Builder)还是[线程策略](https://developer.android.com/reference/android/os/StrictMode.ThreadPolicy.Builder)的违规，都会进入 `FailFast`，因此调试构建会因此崩溃。来自项目无法控制的代码的已知违规（例如 WebView 或厂商框架），会通过 [`app/src/main/kotlin/io/homeassistant/companion/android/util/IgnoreViolationRules.kt`](https://github.com/home-assistant/android/blob/main/app/src/main/kotlin/io/homeassistant/companion/android/util/IgnoreViolationRules.kt) 中的规则被忽略。
+
+如果 StrictMode 阻碍了你，可以在某次构建中将其关闭：
+
+```bash
+./gradlew :app:assembleFullDebug -PnoStrictMode
+```
+
+或者在 `gradle.properties` 中取消注释 `noStrictMode=true`。如果你不得不将其关闭，请提交一个 issue 或在 [Discord](https://www.home-assistant.io/join-chat/) 上提及，以便从根本上解决问题。
+
+## LeakCanary
+
+[LeakCanary](https://square.github.io/leakcanary/) 已包含在调试构建中，会在你工作时报告内存泄漏，以便你尽早修复。如果它报告了泄漏，请提交一个 issue。如果泄漏来自某个库且目前无法修复，请将其记录下来。
+
+要在构建时不包含它，例如进行性能测试时：
+
+```bash
+./gradlew :app:assembleFullDebug -PnoLeakCanary
+```
+
+或者在 `gradle.properties` 中设置 `noLeakCanary=true`，可以在项目中设置，也可以在你的 Gradle 用户主目录中设置。
+
+> [!WARNING]
+> 没有 LeakCanary 时，解析出的依赖项会发生变化，Gradle 会针对锁文件报错。请按照[依赖项](https://www.hasscn.top/contributors/companion/android/dependencies/#lockfiles)中的说明在本地更新锁文件，但不要提交这些更改。拉取请求上的锁文件检查会在包含 LeakCanary 的情况下重新生成锁文件，如果与你提交的内容不同则会失败。
+
+## FailFast
+
+`FailFast` 会在捕获到发布构建可以默默容忍的错误时使调试构建崩溃。日志中会显示一个带有堆栈跟踪的大号 `CRITICAL FAILURE: FAIL-FAST` 横幅。参见[快速失败](https://www.hasscn.top/contributors/companion/android/best-practices/#fail-fast)。
+
+---
+
+# 测试 Android 应用
+
+> 如何为 Android 应用编写测试，以及如何使用 JUnit、MockK、Robolectric 和 Turbine 编写单元测试。
+
+Source: https://www.hasscn.top/contributors/companion/android/testing/
+
+测试之所以存在，是因为人都会犯错。一个能在缺陷发布前将其捕获的测试，可以让用户免受困扰，也让你免于调试之苦。每个改变行为的拉取请求（pull request）都应附带测试。
+
+## 测试的种类
+
+| 种类 | 运行环境 | 用途 | 页面 |
+| --- | --- | --- | --- |
+| 单元测试 | JVM，必要时使用 Robolectric | 逻辑：ViewModel、管理器、仓库 | 本页 |
+| 截图测试 | JVM | Compose UI 的外观 | [截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/) |
+| 插桩测试 | 模拟器 | 真实 Android 运行时上的行为 | [插桩测试](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/) |
+| 端到端测试 | 模拟器，对接真实的 Home Assistant | 关键路径，从登录到仪表盘 | [端到端测试](https://www.hasscn.top/contributors/companion/android/e2e-testing/) |
+
+从单元测试开始。它们速度快，而且大多数代码都应该能以这种方式测试。只有在不得已时才向上面的列表逐级提升。
+
+## 测试命名
+
+按照 [GIVEN, WHEN, THEN](https://en.wikipedia.org/wiki/Given-When-Then) 的方式，把测试命名为句子。这样不用读测试内容就能知道哪里出了问题：
+
+```kotlin
+@Test
+fun `Given user authenticated when opening app then show dashboard`() {
+    // Test implementation
+}
+```
+
+- **Given** 是起始状态，即准备工作。
+- **When** 是你要测试的动作或事件。
+- **Then** 是你期望的结果。
+
+## 测试什么
+
+- **通过公共 API 测试行为**，而不是实现细节。遵循公共接口的测试能在重构中存活下来。
+- **不要为了测试而放宽可见性。** 通过公共入口点进行测试。实在没有其他办法时，可以使用 [`@VisibleForTesting`](https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting)，例如针对接受 `CoroutineScope` 或 `Clock` 的构造函数。Lint 会标记在测试之外使用此类成员的任何情况，CI 会因 lint 警告而失败。
+- **测试你自己的代码，而不是库。** 如果你发现自己在测试某个库，请把测试贡献给那个库。当你确实想固定某个库的行为时，请在测试中说明原因。
+- **边构建边写测试。** 测试是开发过程中的工具，而不是事后的负担。它们让你无需运行整个应用就能检查代码，而且尽早编写测试能让代码保持可测试性。
+- **不要为了测试而测试。** 跳过琐碎的代码。一个测试应该能在此刻或将来帮到你或下一个人。
+- **保持测试相互独立。** 一个测试不得依赖另一个测试，也不得依赖它们的运行顺序。
+- **每个测试只测一个行为。** 将几乎相同的测试合并为一个使用 `@ParameterizedTest` 的参数化测试。
+- **把一个功能的测试放在同一个类中**，与 `src/test/kotlin/` 下的源码结构保持一致。
+- **绝不使用 `Thread.sleep`。** 使用可以伪造时间的 `runTest`。
+
+## 单元测试
+
+```bash
+./gradlew test
+./gradlew :common:test
+```
+
+### 框架
+
+- **[JUnit Jupiter](https://junit.org/)** 用于单元测试。仅在 Robolectric 需要时使用 JUnit 4；两者都运行在 JUnit Platform 上。
+- **[MockK](https://mockk.io/)** 用于模拟（mock）。尽可能优先使用真实对象或伪造对象（fake）。
+- **[Turbine](https://github.com/cashapp/turbine)** 用于所有 Flow 测试。
+- **[Robolectric](https://robolectric.org/)** 用于那些你无法很好地模拟或伪造的、需要 Android API 的代码。相比插桩测试，优先使用它。
+
+一个测试大致如下：
+
+```kotlin
+@Test
+fun `Given a valid user ID when fetching details then return user`() {
+    // Given
+    val expectedUser = User(id = "12345", name = "John Doe")
+    every { userRepository.getUser("12345") } returns expectedUser
+
+    // When
+    val result = userService.getUserDetails("12345")
+
+    // Then
+    assertEquals(expectedUser, result)
+}
+```
+
+### Robolectric
+
+每个 Robolectric 测试类都需要同时加上这两个注解。没有它们，Robolectric 会启动真实的应用程序，从而开启 StrictMode 和 FailFast，可能导致测试 JVM 崩溃：
+
+```kotlin
+@RunWith(RobolectricTestRunner::class)
+@Config(application = HiltTestApplication::class)
+class MyTest {
+    // Tests
+}
+```
+
+Robolectric 只支持 JUnit 4（参见[这个 Robolectric issue](https://github.com/robolectric/robolectric/issues/3477)），因此项目为这些测试保留了 JUnit 4。如果你的代码依赖 Android 系统的真实状态，请改为编写[插桩测试](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/)。
+
+### Flow
+
+使用 Turbine 来测试 Flow。使用 `awaitItem`、`awaitComplete` 和 `expectNoEvents` 进行断言。当你同时收集多个 flow 时，使用 `turbineScope` 和 `testIn`。通过 `shareIn` 创建的 flow 永远不会完成：应以 `expectNoEvents()` 和 `cancelAndConsumeRemainingEvents()` 结束，而不是 `awaitComplete()`。
+
+绝不要使用闩锁（latch）、睡眠或 `verify(timeout = ...)` 来同步发射（emission）。
+
+### 协程与主调度器
+
+在 `viewModelScope` 中运行的代码使用主调度器（main dispatcher），而它在 JVM 上并不存在。请使用与你的框架匹配的辅助工具，将其替换为测试调度器：
+
+```kotlin
+// JUnit Jupiter
+@ExtendWith(MainDispatcherJUnit5Extension::class)
+class MyViewModelTest
+
+// JUnit 4 and Robolectric
+@get:Rule
+val mainDispatcherRule = MainDispatcherJUnit4Rule()
+```
+
+只把它添加到真正涉及主调度器的测试中。两者都使用 `StandardTestDispatcher`；用 `runTest` 和 `advanceUntilIdle` 来推进它。不要为了让测试通过而切换到 `UnconfinedTestDispatcher`。那会掩盖测试本应检查的顺序问题。
+
+### 共享测试辅助工具
+
+`:testing-unit` 模块存放着多个模块的测试所使用的辅助工具。在编写新的辅助工具之前，先去那里看看。其中包括上述主调度器辅助工具、一个 `FakeClock` 和 `TestSharedFlow`。保持 `:testing-unit` 独立于 `:common`，以避免循环依赖。
+
+必须对模块中每个测试都生效的规则，例如重置进程级状态，是通过 `ServiceLoader` 注册的 JUnit Platform 监听器。Robolectric 在自己的类加载器中运行测试，因此这类规则还需要一个 Robolectric 插件。现有的 `TestStateResetPlatformListener` 和 `TestStateResetRobolectricPlugin` 展示了具体做法。
+
+---
+
+# Android 截图测试
+
+> 使用 Compose Preview Screenshot Testing，确保 Android 应用中的 Compose UI 只在有意的更改时才发生变化。
+
+Source: https://www.hasscn.top/contributors/companion/android/screenshot-testing/
+
+Last verified on 2026-11-06, against https://github.com/home-assistant/android/blob/main/.github/workflows/pr.yml.
+
+截图测试会将 UI 与仓库中的参考图像进行比较。当渲染出的 UI 不再与其参考图像匹配时，测试就会失败，因此每一次 UI 更改都是有意的。它们只测试外观，从不测试逻辑。
+
+当 UI 库更新时，它们尤其有用。它们在 Wear Compose 等库的 beta 版本上已经证明了自身的价值，因为库中的更改可能会改变应用的外观。
+
+## 工作原理
+
+该应用使用 [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing-with-testsuites)，并将其设置为 Android Gradle Plugin 的一个测试套件。它在 JVM 上渲染 composable，因此无需模拟器。这使得它们比仪器测试更快、更便宜。
+
+测试位于每个模块的 `src/screenshotTest` 中。这是该套件编译的唯一源集：没有 flavor 或构建类型的变体。该套件针对每个模块的一个变体运行，参考图像存储在其旁边：
+
+| 模块 | 变体 | 参考图像 |
+| --- | --- | --- |
+| `:app` | `fullDebug` | `src/screenshotTestDefaultFullDebug/reference` |
+| `:common` 和 `:wear` | `debug` | `src/screenshotTestDefaultDebug/reference` |
+
+## 编写截图测试
+
+- **渲染真实的 composable**，而不是简化的副本，并覆盖每个有意义的状态：加载中、空、错误，以及在有多个服务器有影响时包含多个服务器的情况。
+- **复用你的预览。** 使用相同的 composable 和预览注解，这样预览和测试就不会产生偏差。
+- **覆盖尺寸和主题**：从 Wear OS 手表这样的小屏幕到电视这样的大屏幕，并覆盖浅色和深色模式。使用配置注解来设置设备尺寸、主题和其他参数。
+
+## 运行和更新
+
+检查是否有任何变化：
+
+```bash
+./gradlew \
+  testDebugScreenshotTestDefaultTestSuite \
+  testFullDebugScreenshotTestDefaultTestSuite
+```
+
+第一个任务覆盖 `:common` 和 `:wear`，第二个覆盖 `:app`，后者有 flavor。Android Studio 在 **Screenshot tests verification** 运行配置中也有相同的两个任务。当测试失败时，模块中 `build/reports/tests/<task name>/index.html` 的报告会显示参考图像、新图像以及它们的差异。
+
+CI 在每个 pull request 上运行相同的验证，在 **Screenshot Tests** 任务中，差异会导致检查失败，直到问题解决。
+
+在有意的 UI 更改之后，更新参考图像：
+
+```bash
+./gradlew \
+  updateDebugScreenshotTestDefaultTestSuite \
+  updateFullDebugScreenshotTestDefaultTestSuite
+```
+
+更新后不要立即运行测试任务：它会与你刚刚从相同代码生成的图像进行比较。相反，请查看更新后的图像，并检查只有你打算更改的内容发生了变化。在你的 pull request 中解释这些更改。
+
+## 当 CI 与你的机器不一致时
+
+不同操作系统之间的渲染会略有差异，例如在抗锯齿方面（参见这个 [Google issue](https://issuetracker.google.com/issues/348590914)）。阈值被保持在尽可能低的水平，这样真实的问题就不会被掩盖。这意味着你在本地生成的图像可能会在 CI 上失败。
+
+不要在本地纠结于像素差异。如果你的截图测试仅仅因为这些差异而失败，维护者会在审查过程中处理。他们可以运行 **Update Screenshots** 工作流（`updateScreenshot.yml`），该工作流会在与 CI 所用主机相同类型的环境中重新生成图像，并将其提交到你的分支。运行它需要对仓库的写权限，并且它只适用于主仓库中的分支，不适用于 fork。该工作流不会重新触发 pull request 检查：之后请推送一个新的 commit 来触发它们。
+
+---
+
+# Android 插桩测试（instrumentation tests）
+
+> 在真实的 Android 运行时上测试 Android 应用，覆盖每个受支持 API 级别的模拟器。
+
+Source: https://www.hasscn.top/contributors/companion/android/instrumentation-testing/
+
+单元测试运行在你的 JVM 上。而用户是在 Android 上运行应用的，Android 拥有[自己的运行时](https://source.android.com/docs/core/runtime)，并且在较旧版本上仅支持部分 [Java 语言特性和 API](https://developer.android.com/studio/write/java8-support)。插桩测试（instrumentation tests）弥补了这一差距：它们运行在模拟器上，与用户使用的是相同的运行时。
+
+先编写单元测试。当行为依赖于真实的 Android 系统时，再使用插桩测试。
+
+## 为什么它们很重要
+
+有些 bug 只会在特定 Android 版本的运行时上出现。[Jackson](https://github.com/FasterXML/jackson) 库就是一个真实的例子：从 2.14 版本开始它需要 API 26，但在应用运行在较旧的设备上之前，什么都不会报错。只有插桩测试，或者用户的崩溃报告，才能发现这类问题。请参阅[这个 pull request](https://github.com/home-assistant/android/pull/5108) 了解事情的经过。
+
+## 它们覆盖什么
+
+- **界面（screens）**，使用 [Espresso](https://developer.android.com/training/testing/espresso) 和 Compose UI 测试，检查用户与界面交互时界面的表现。
+- **无 UI 的代码**，例如[前台服务（foreground services）](https://developer.android.com/develop/background-work/services/fgs)，你可以检查数据以及与系统的交互。
+
+这些测试中的大多数不应依赖于 Home Assistant 服务器。请用假实现（fakes）或来自 [MockK](https://mockk.io/) 的模拟（mocks）来替代服务器。假实现是更好的选择：它们让你对行为有更多控制。针对真实服务器的测试是[端到端测试（end-to-end tests）](https://www.hasscn.top/contributors/companion/android/e2e-testing/)的职责。
+
+## 它们在哪里运行
+
+在每个 pull request 中，`:app` 的插桩测试会在 [Emulator.wtf](https://emulator.wtf) 上运行，覆盖从 `androidSdk-min` 到 `androidSdk-target` 的每个 API 级别。整个运行只需几秒钟。请参阅[持续集成](https://www.hasscn.top/contributors/companion/android/ci/#instrumentation-tests)了解在 fork 中如何运作。
+
+`:wear`、`:automotive`、`:common` 和 `:microwakeword` 的测试在 GitHub Actions 上的常规 Android 模拟器中运行，因为 Emulator.wtf 不提供这些目标。这会更慢，因此它们覆盖的 API 级别更少。
+
+## WebView 过时的模拟器
+
+应用在 WebView 中显示 Home Assistant 前端。模拟器系统镜像自带发布时最新的 WebView。API 级别越旧，WebView 就越旧。
+
+当 WebView 对于你运行的前端来说太旧时，前端无法渲染，或者 WebView 会崩溃。你最有可能在应用支持的最旧 API 级别上遇到这种情况。
+
+如何更新 WebView 取决于系统镜像：
+
+- 带有 Google Play 的镜像包含 [Play Store 应用](https://developer.android.com/studio/run/managing-avds)。登录并在那里更新 WebView，就像在真实设备上一样。Android 9 及更早版本只能获得[这些版本的最后一次 WebView 发布](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/prerelease.md)，因此在这些 API 级别上，更新可能还不够。
+- 没有 Play Store 的镜像，例如 Google APIs 和 AOSP 镜像，需要手动安装较新的 WebView APK。[这个 Stack Overflow 回答](https://stackoverflow.com/a/79514205/3289338)展示了如何操作，其中包含一个为 API 21 模拟器编写的脚本。它需要模拟器处于可写模式，并且你需要根据你的模拟器调整其变量。
+
+如果你运行自己的[前端开发服务器](https://www.hasscn.top/contributors/frontend/development/run/)，你也可以使用 `ES5=1` 启动它。它还会构建前端的旧版本，较旧的 WebView 可以运行该版本：
+
+```shell
+ES5=1 pnpm dev
+```
+
+## 不稳定的模拟器
+
+Android 模拟器有时会毫无缘由地失败。解决办法是重新运行该任务（job）。只有维护者才能重新运行任务，所以如果你认为这只是偶然失败，请在 pull request 中说明。
+
+---
+
+# 提交 Android 拉取请求
+
+> 检查清单、拉取请求模板、应用内更新日志，以及 Android 仓库中评审的流程。
+
+Source: https://www.hasscn.top/contributors/companion/android/submitting/
+
+你的改动在自己的机器上运行正常。接下来它需要一个拉取请求（pull request）、一次评审和一次合并。本页介绍评审者期望的内容，以便评审顺利进行。
+
+## 打开拉取请求之前
+
+- **格式化并测试。** 运行 `./gradlew :build-logic:convention:ktlintFormat ktlintFormat` 和 `./gradlew test`。其他检查请参阅[代码风格与 lint](https://www.hasscn.top/contributors/companion/android/code-style/)。
+- **构建所有内容。** 共享代码会进入手机、汽车和手表应用。请确认 `:app`、`:automotive` 和 `:wear` 仍然可以构建。
+- **为你修改的行为添加测试。** 参阅[测试](https://www.hasscn.top/contributors/companion/android/testing/)。
+- **遵循指南**：[最佳实践](https://www.hasscn.top/contributors/companion/android/best-practices/)、[UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/)以及 [Compose 与设计系统](https://www.hasscn.top/contributors/companion/android/compose/)。
+- **保持改动小巧。** 每个拉取请求只包含一个想法。大型重构应通过 `WIPFeature` 标志分小步进行，参见[小步发布大改动](https://www.hasscn.top/contributors/companion/android/best-practices/#ship-big-changes-in-small-steps)。
+- **阅读 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)。** 你可以使用 AI 工具，但必须理解并能够解释你提交的每一行代码。来自自主智能体的拉取请求将被关闭。
+
+## 拉取请求
+
+按照 [GitHub 文档](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)中的说明，从你的 fork 向 `main` 创建拉取请求。GitHub 会自动填入模板。不要从中删除任何内容，除非模板要求你这样做，比如不适用于你改动的章节。请填写：
+
+- **摘要（Summary）**：你改了什么、为什么改，以及对用户意味着什么。链接相关 issue。
+- **检查清单（Checklist）**：测试、代码风格、边界情况、向后兼容性以及 AI 政策。不向后兼容的改动，根据影响对象不同，写入面向用户的更新日志，或写入面向开发者的代码中。另外，请从描述你如何使用 AI 的选项中恰好勾选一项。
+- **截图（Screenshots）**：针对前端之外的 UI 改动，需提供浅色和深色模式下的截图。
+- **文档（Documentation）**：如果你的改动新增、修改或删除了用户可见的内容，请在[用户文档](https://github.com/home-assistant/companion.home-assistant)中打开一个拉取请求并链接它。在该功能上线生产环境之前，请用 `<span class='beta'>BETA</span>` 标记新功能。如果改动影响开发者依赖的内容，比如如何构建、测试或发布应用，模板还会要求提交一个更新开发者文档的拉取请求。
+
+### 更新日志
+
+如果你的改动新增了功能、明显改变了用户可见的行为，或破坏了用户依赖的内容，请将其添加到 [`app/src/main/kotlin/io/homeassistant/companion/android/changelog/ChangelogContent.kt`](https://github.com/home-assistant/android/blob/main/app/src/main/kotlin/io/homeassistant/companion/android/changelog/ChangelogContent.kt) 中的应用内更新日志。小的 bug 修复不需要单独的条目：常设的“Bug fixes and dependency updates”条目已涵盖它们。
+
+`ChangelogContent.kt` 保存这些条目，按新增、改进和修复分组，每个条目都标注了适用的平台。每个条目的文本是 [`common/src/main/res/values/strings_changelog.xml`](https://github.com/home-assistant/android/blob/main/common/src/main/res/values/strings_changelog.xml) 中的一个字符串，因此会被翻译。有一个截图测试会渲染真实的更新日志，因此更新日志的改动还需要更新[截图参考](https://www.hasscn.top/contributors/companion/android/screenshot-testing/)。
+
+## 草稿拉取请求
+
+当你想尽早获得方向上的反馈但工作尚未完成时，可以打开草稿拉取请求。当你修改 CI 本身时，这也很有用。不过使用 CI 要小心：每次推送都会运行完整的流水线，消耗大量资源。在还没有可查看的内容之前，不要打开拉取请求（无论是否为草稿）。你可以随意频繁地推送到自己的 fork。
+
+如果这是你的首次贡献，维护者必须在每次 CI 运行开始前进行批准。
+
+## 评审
+
+任何人都可以评审拉取请求，欢迎你参与。哪怕十分钟的评审也有帮助。不方便评审代码？从拉取请求安装 APK，并报告你发现的问题：bug、崩溃，或 UI 和 UX 反馈。参见[测试拉取请求构建](https://www.hasscn.top/contributors/companion/android/get-started/#test-a-pull-request-build)。
+
+要合并拉取请求，需要维护者的批准。请保持耐心和友善。他们的反馈以评论形式出现，可能是请求修改，也可能是提问。请用自己的话回答问题，不要用 AI 生成的输出。
+
+当你处理完反馈且 CI 通过后，可以请求再次评审。
+
+## 保持分支最新
+
+如果你的分支落后于 `main` 或存在冲突，你可以将 `main` 合并到你的分支并[解决冲突](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)，或者在其上[变基（rebase）](https://docs.github.com/en/get-started/using-git/about-git-rebase)：
+
+- **尚未评审**：合并或变基均可，由你选择。
+- **已经评审**：合并。变基可能破坏已有的评审评论并丢失这些反馈。
+
+该仓库使用 [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits)，因此你的分支历史不需要保持整洁。
+
+## 合并
+
+一切通过且维护者批准后，他们会进行合并。你无需做任何事。你的改动会立即推送给内部测试人员，并在下个周末推送到 beta 渠道。参见[发布](https://www.hasscn.top/contributors/companion/android/releases/)。
+
+## 过期的拉取请求
+
+机器人会在拉取请求 30 天无活动后将其标记为过期，issue 则是 90 天。如果之后 7 天内仍无动静，机器人会将其关闭。带有 `under investigation` 或 `Help wanted` 标签的内容不受影响。
+
+---
+
+# Android 持续集成
+
+> Android 应用的 GitHub Actions 工作流。哪些会在你的拉取请求上运行、合并后运行，以及定时运行。
+
+Source: https://www.hasscn.top/contributors/companion/android/ci/
+
+Last verified on 2026-10-27, against https://github.com/home-assistant/android/tree/main/.github/workflows.
+
+Android 应用在所有环节都使用 GitHub Actions：检查拉取请求、构建发布版本，并通过 [Fastlane](https://fastlane.tools/) 将其发布到应用商店。共享的步骤以本地 action 的形式存放在 `.github/actions` 中。
+
+该应用与 Home Assistant Core 一样，使用[日历版本号](https://calver.org/)：`YYYY.MM.patch`。
+
+## 工作流
+
+| 工作流 | 运行时机 | 作用 |
+| --- | --- | --- |
+| `pr.yml` | 每次拉取请求 | Lint、构建、测试并附加 APK |
+| `pr-emulator-wtf.yml` | 在 `pr.yml` 完成后 | 在 Emulator.wtf 上运行 `:app` 插桩测试 |
+| `zizmor.yml` | 每次拉取请求，以及每周一 05:30 UTC | 使用 [zizmor](https://docs.zizmor.sh/) 扫描工作流和本地 action 本身，并将发现上传到代码扫描 |
+| `onPush.yml` | 每次推送到 `main` | 构建发布版本并发布到 Play Store 的内部测试轨道 |
+| `weekly.yml` | 每周日 04:00 UTC | 标记新版本并以 `beta` 标志运行 `onPush.yml`，这会创建 GitHub 预发布版本并将构建提升到 beta 轨道 |
+| `e2e.yml` | 每天 05:00 UTC | 针对真实的 Home Assistant 运行[端到端测试](https://www.hasscn.top/contributors/companion/android/e2e-testing/)。失败时，它会启动 `e2e-triage`，一个代理工作流，调查失败并在 issue 中报告 |
+| `monthly.yml` | 每月第一天 | 创建当月第一个版本标签 `YYYY.MM.0` |
+| `release.yml` | 当预发布版本成为正式版本时，或手动触发 | 将 beta 版本提升到 Play Store 的生产环境 |
+| `updateScreenshot.yml` | 由维护者手动触发 | 重新生成[截图](https://www.hasscn.top/contributors/companion/android/screenshot-testing/)参考 |
+| `renovate-lockfiles.yml` | 每次推送到 `renovate/` 分支 | 更新 Renovate 拉取请求的[锁文件](https://www.hasscn.top/contributors/companion/android/dependencies/)并推送它们 |
+
+## 在你的拉取请求上
+
+`pr.yml` 会检查你的更改：
+
+- KTLint、Detekt、Android Lint 和 Yamllint。参见[代码风格和 lint](https://www.hasscn.top/contributors/companion/android/code-style/)。
+- 锁文件与版本目录匹配。
+- 所有依赖项的许可证与项目的 Apache 2.0 许可证兼容，使用 [`.github/scripts/check_licenses.py`](https://github.com/home-assistant/android/blob/main/.github/scripts/check_licenses.py) 检查。
+- 单元测试和截图测试。
+- 每个应用都能以 debug 和 release 模式构建。
+- `common/schemas` 中现有的数据库模式未被更改，并且构建不会产生你忘记提交的模式更改。要更改数据库，请改为增加其版本号。
+- 如果你的拉取请求更改了 `.github/actions/download-translations` 中的 Lokalise 设置，翻译仍然可以下载。
+- `zizmor.yml` 以 pedantic 模式使用 [zizmor](https://docs.zizmor.sh/) 扫描每个工作流和本地 action，无论你的拉取请求是否触及它们。生成的 `e2e-triage.lock.yml` 会被跳过，因为它无法手动编辑。任何发现都会导致检查失败，并且这些发现也会作为代码扫描注释出现在你的拉取请求上。参见[修改工作流](https://www.hasscn.top/contributors/companion/android/ci/#changing-a-workflow)。
+- 它将 APK 作为工件上传，以便任何人都可以[测试你的更改](https://www.hasscn.top/contributors/companion/android/get-started/#test-a-pull-request-build)。
+
+CI 上的 debug 构建使用 [`.github/mock-google-services.json`](https://github.com/home-assistant/android/blob/main/.github/mock-google-services.json) 中的模拟 Firebase 文件。
+
+当某项检查失败时，请修复它并推送一个新的提交：这会重新启动工作流。当你快速推送多个提交时，只有最新的一个会被构建。更早的运行会被取消。
+
+如果你是新贡献者，维护者必须先批准你拉取请求上的每次 CI 运行。运行 CI 会消耗大量资源，所以在你的工作准备好供人查看之前，不要打开拉取请求，即使是草稿也不行。随时推送到你自己的 fork 则没有问题。
+
+### 插桩测试
+
+`:app` 的插桩测试在 [Emulator.wtf](https://emulator.wtf) 上运行，覆盖从 `androidSdk-min` 到 `androidSdk-target` 的每个 API 级别，只需几秒钟。
+
+这需要两个工作流。`pr.yml` 构建测试 APK 和设备列表。然后，在 `pr.yml` 完成时触发的 `pr-emulator-wtf.yml` 运行它们，并在拉取请求上报告结果。这种拆分正是它能在 fork 上运行的原因：由 fork 启动的工作流无法访问 secrets，因此无法连接到 Emulator.wtf。第二个工作流在主仓库的上下文中运行，并且只运行第一个工作流构建的 APK，绝不会运行来自 fork 的代码。
+
+`:wear`、`:automotive`、`:common` 和 `:microwakeword` 的插桩测试在 GitHub Actions 的常规 Android 模拟器上运行。Emulator.wtf 只提供手机、平板和显示器设备，因此这是 Wear OS 和 Automotive 的唯一选择。一个 runner 上只能容纳一个模拟器，所以每个 API 级别和设备配置都是独立的任务，而且每个任务都比整个 Emulator.wtf 运行慢得多。这就是为什么这些目标只覆盖少数几个 API 级别。
+
+## 合并之后
+
+每次推送到 `main` 都会经过 `onPush.yml`。它会从 Lokalise 下载最新翻译，根据已合并的拉取请求生成发布说明，构建所有应用的发布版本，将 APK 附加到工作流运行中，并发布到 Play Store 的内部测试轨道。签名密钥和发布所需的其他文件来自仓库的 secrets，并且只在运行期间添加。
+
+所有商店部署都通过 [Fastlane](https://fastlane.tools/) 进行。它的配置（包括工作流调用的 lane）位于 `fastlane` 文件夹中。
+
+带 `beta` 标志运行时（`weekly.yml` 每周日都会这样做），它还会创建一个包含 APK 的 GitHub 预发布版本，准备 Amazon 商品页面，并将构建提升到 beta 轨道。
+
+因此，每个合并的拉取请求都会到达内部测试人员。关于通往生产环境的其余流程，请参见[发布](https://www.hasscn.top/contributors/companion/android/releases/)。
+
+## 修改工作流
+
+- 将多个工作流需要的步骤放在 `.github/actions` 中的本地 action 中，而不是复制它们。
+- 仔细选择触发器。每次运行都会消耗资源，因此工作流只应在其结果重要时运行。
+- 切勿将 secrets 放在工作流文件中。像现有工作流那样，在运行时从仓库 secrets 中传入它们。
+- 让 [zizmor](https://docs.zizmor.sh/) 满意：为每个作业命名，只给它需要的权限并附上原因注释，设置 `concurrency` 组，并将 action 固定到提交 SHA。
+- 在标记的行上使用 `# zizmor: ignore[rule-name]` 并附上原因来抑制误报，就像 `pr-emulator-wtf.yml` 所做的那样。不要忽略整个文件。
+- 周一的运行还会检查新的公告和过期的固定版本，并在失败时打开或评论 `zizmor-failure` issue。
+
+## F-Droid
+
+[F-Droid](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/) 会根据每个 GitHub 发布版本自行构建 `minimal` 应用，遵循其[元数据](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.homeassistant.companion.android.minimal.yml)。每个发布版本为此包含三个文件：
+
+- `version_code.txt`：构建的版本号。
+- `strings.zip`：构建时来自 Lokalise 的翻译。
+- `locales_config.xml`：根据这些翻译生成的[区域设置配置](https://developer.android.com/guide/topics/resources/app-languages#use-localeconfig)。
+
+发布版本何时出现在 F-Droid 上由 F-Droid 决定。
+
+---
+
+# Android 版本发布
+
+> 对 Android 应用的更改如何从合并的拉取请求（pull request）流转到内部测试人员、Beta 版和生产环境，以及如何自行构建签名的发布版本。
+
+Source: https://www.hasscn.top/contributors/companion/android/releases/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/android/tree/main/.github/workflows.
+
+每个合并的拉取请求都会立即发布给内部测试人员。每周，最新的构建版本会发布到公开 Beta 版。当 Beta 版稳定后，维护者会将其提升为生产版本。本页介绍这一流程，以及如何在自己的机器上构建签名的发布版本。
+
+## 从合并到生产
+
+### 内部测试
+
+当拉取请求合并到 `main` 分支时，CI 会构建发布版本并将其发布到 Play Store 的内部测试轨道。内部测试人员会立即获得每一项更改。这个应用功能繁多，因此他们无法在每个构建版本上测试每个功能。
+
+`main` 分支上每个提交的 APK 也会附加到 [On Push 工作流运行](https://github.com/home-assistant/android/actions/workflows/onPush.yml)中。
+
+### 每周 Beta
+
+每周日 04:00 UTC（美洲时间为周六晚上），CI 会标记一个新版本，创建包含 APK 的 GitHub 预发布版本，并将最新的 `main` 构建版本提升为公开 Beta 版。在此截止时间之前，`ChangelogContent.kt` 中的应用内更新日志应列出本周的新功能和不向后兼容的更改。
+
+任何人都可以[在 Google Play 上加入 Beta 测试](https://play.google.com/apps/testing/io.homeassistant.companion.android)。Beta 用户能发现测试和内部测试人员无法发现的问题。
+
+Google 会审核每一个进入公开 Beta 版的构建版本。审核所需时间不定，可能超过一周。当上一个每周 Beta 版仍在审核中而下一个每周 Beta 版到来时，上一个会被丢弃。这不会阻塞任何流程，但当你疑惑为什么某个 Beta 版延迟时，了解这一点会很有帮助。
+
+### 提升为生产版本
+
+当 Beta 版稳定后，维护者会将其提升为生产版本，并推送给所有从 [Google Play](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android) 安装该应用的用户。
+
+在提升之前：
+
+- 在 Beta 版发布后等待几天，让 Beta 用户有时间发现回归问题。
+- 检查 [`app/src/main/kotlin/io/homeassistant/companion/android/changelog/ChangelogContent.kt`](https://github.com/home-assistant/android/blob/main/app/src/main/kotlin/io/homeassistant/companion/android/changelog/ChangelogContent.kt) 中的应用内更新日志是否涵盖了本次发布的内容。
+- 检查 Sentry 中 Beta 版的问题数量是否异常。
+- 检查 [Google Play Console](https://play.google.com/console) 是否有崩溃、ANR 和其他异常情况。
+- 在[配套应用文档](https://github.com/home-assistant/companion.home-assistant)中准备一个拉取请求，移除本次发布中各功能的 Beta 标签。
+
+提升步骤：
+
+1. 在 [GitHub](https://github.com/home-assistant/android/releases) 上编辑最新的 Beta 版发布。保留自动生成的提交列表，并在顶部添加一个与 `ChangelogContent.kt` 相符的**本次发布亮点**部分。示例请参见 [2026.6.1](https://github.com/home-assistant/android/releases/tag/2026.6.1)。
+2. 取消勾选 **pre-release**（预发布）复选框，并将其设置为 **latest**（最新）发布。
+
+这会触发 `release.yml`，它使用 Fastlane 将 Beta 轨道提升为生产版本，涵盖手机、Wear OS 和 Automotive 应用。Google 会先审核该发布，这通常需要几天时间。审核期间无需进行任何操作。
+
+### 其他商店
+
+Play Store 仅覆盖 `full` 变体。发布之后：
+
+- 将 `minimal` Automotive 应用发送到 Harman Ignite 商店。
+- 在 [Amazon 开发者控制台](https://developer.amazon.com/apps-and-games/console/apps/list.html)中提交发布以供审核。APK 和更新日志在构建 Beta 版时已由 `onPush.yml` 中的 `prep_amazon` Fastlane lane 上传。
+- 在 Meta Quest 商店上发布 `minimal` 应用。
+- F-Droid 会在几天后自行构建发布版本。参见 [F-Droid](https://www.hasscn.top/contributors/companion/android/ci/#f-droid)。
+
+### 发布上线后
+
+- 合并移除 Beta 标签的文档拉取请求。
+- 如果本次发布修复了自上一个生产版本以来的安全问题，请在 GitHub 发布说明中亮点部分之后添加一个**已披露的安全公告**部分，并为每个公告提供链接。
+- 对于包含重大更改或出色新功能的发布，请社区经理协助宣传，例如发布博客文章或在社交媒体上推广。
+
+## 自行构建签名发布版本
+
+只有在你发布自己的构建版本时才需要这样做。发布构建必须经过签名。
+
+> [!WARNING]
+> 请妥善保管你的密钥库（keystore）及其密码，切勿提交到代码库中。
+
+1. 在 Android Studio 中通过 **Build** > **Generate Signed App Bundle or APK** 创建密钥库，或使用现有的密钥库。记住密码和密钥别名。
+2. 将其命名为 `release_keystore.keystore`，并放到你构建的每个应用模块中：[`app/`](https://github.com/home-assistant/android/tree/main/app)、[`wear/`](https://github.com/home-assistant/android/tree/main/wear) 或 [`automotive/`](https://github.com/home-assistant/android/tree/main/automotive)。或者将 `KEYSTORE_PATH` 设置为它的位置。
+3. 设置签名变量：
+   - `KEYSTORE_PASSWORD`
+   - `KEYSTORE_ALIAS`
+   - `KEYSTORE_ALIAS_PASSWORD`
+   - `KEYSTORE_PATH`（如果密钥库在其他位置）
+
+   读取这些变量的签名配置位于 [`build-logic/convention/src/main/kotlin/AndroidApplicationConventionPlugin.kt`](https://github.com/home-assistant/android/blob/main/build-logic/convention/src/main/kotlin/AndroidApplicationConventionPlugin.kt)。
+4. 为所有应用或单个模块构建 APK 或应用包（app bundle）：
+
+```bash
+# APKs
+./gradlew assembleRelease
+./gradlew :app:assembleRelease
+
+# App bundles
+./gradlew bundleRelease
+./gradlew :wear:bundleRelease
+```
+
+你也可以在 Android Studio 中通过 **Build** > **Generate Signed App Bundle or APK** 进行构建。
+
+---
+
+# Android UI 架构
+
+> Android 应用中一个屏幕是如何构建的。视图、ViewModel、它的三种输出，以及其下方的处理器、管理器、用例和仓库。
+
+Source: https://www.hasscn.top/contributors/companion/android/ui-architecture/
+
+每个新屏幕都遵循相同的模式。这是对 Google [推荐应用架构](https://developer.android.com/topic/architecture) 的一种类 MVI 的实现：同样的 UI、领域和数据层，并对输入和输出的流动方式制定了严格的契约。现有屏幕会逐步迁移到该模式。[前端屏幕](https://www.hasscn.top/contributors/companion/android/frontend-screen/) 是参考实现。
+
+## 为什么采用这种模式
+
+一个屏幕同时有许多输入：用户、系统回调（如权限结果）、定时器和外部消息。该模式将它们全部简化为少数几个定义明确的输出，因此屏幕保持可预测且易于测试。
+
+它还能让屏幕保持小巧。没有结构的话，屏幕会成长为一个无所不知、无法安全测试或修改的 ViewModel。在这里，每个关注点都位于自己的小模块中，只做一件事。
+
+## 数据流
+
+输入向下进入 ViewModel。ViewModel 将工作委托给其下方的模块，并将它们的结果简化为最多三种输出，向上流回视图。数据只沿一个方向流动：
+
+```mermaid
+flowchart TB
+    View -->|"Interactions, callbacks"| ViewModel
+    ViewModel -->|"State, events, actions"| View
+    ViewModel -->|"Delegates work"| Blocks["Handlers, managers,<br/>use cases, repositories"]
+    Blocks -->|"Results, flows"| ViewModel
+```
+
+三种输出：
+
+| 输出 | 是什么 | 示例 |
+| --- | --- | --- |
+| 状态（State） | 要渲染的内容。单一值，始终为最新 | 服务器列表、加载标志 |
+| 事件（Event） | 必须恰好发生一次的一次性效果 | 返回上一页、显示 snackbar |
+| 动作（Action） | 针对仅由视图持有的对象的命令 | 重新加载 web view、滚动到顶部 |
+
+大多数输入只会产生一个新状态。大多数屏幕从不需要动作。
+
+## 视图
+
+视图是 Compose 屏幕。它渲染状态、通过回调报告交互，并持有任何下层不得触碰的 UI 句柄，例如 `WebView` 或 `LazyListState`。
+
+将每个屏幕拆分为一个有状态的入口点和一个无状态的内容 composable。这样预览、截图测试和 Compose 测试就可以直接驱动内容：
+
+```kotlin
+@Composable
+internal fun SettingsScreen(viewModel: SettingsViewModel) {
+    val viewState by viewModel.viewState.collectAsStateWithLifecycle()
+
+    SettingsScreenContent(
+        viewState = viewState,
+        onNameChange = viewModel::onNameChange,
+    )
+}
+
+@Composable
+internal fun SettingsScreenContent(
+    viewState: SettingsViewState,
+    onNameChange: (String) -> Unit,
+) {
+    // Renders viewState, reports interactions through the callbacks
+}
+```
+
+## ViewModel
+
+ViewModel 持有这些输出，并将各模块连接起来：
+
+```kotlin
+val viewState: StateFlow<UiState> // what to render
+val events: Flow<UiEvent>         // one-shot effects, from a Channel
+val actions: Flow<UiAction>       // only if the view owns a handle
+```
+
+规则：
+
+- 它绝不引用 Compose 或平台 UI 类型，因此其逻辑可以作为普通的 JVM 单元测试运行。
+- 它的生命周期长于配置变更。`viewModelScope` 只在屏幕永久消失时才会被取消，因此屏幕旋转不会重启加载或流收集。
+- 保持精简。小屏幕可以将其逻辑保留在 ViewModel 中。当它变大时，将内聚的逻辑移到下方的[模块](https://www.hasscn.top/contributors/companion/android/ui-architecture/#the-blocks)中。
+
+### 状态
+
+状态是屏幕上所显示内容的唯一事实来源。
+
+- **不可变。** 使用 `val` 和不可变集合，并通过 `copy()` 进行修改。原地修改会破坏 Compose 的变更检测。
+- **结构相等。** 使用 data class。`StateFlow` 会跳过与当前值相等的值，因此再次发出相同的状态没有任何开销。
+- **读取开销低。** Compose 在主线程上、每次重组时都会读取状态。绝不要在 getter 中计算。在构建状态时、在后台调度器上计算：
+
+```kotlin
+// Bad: maps the list on every recomposition, on the main thread
+data class UiState(val servers: List<Server>) {
+    val serverItems: List<HADropdownItem<Int>>
+        get() = servers.map { HADropdownItem(it.id, it.friendlyName) }
+}
+
+// Good: mapped once, when the state is created
+data class UiState(val serverItems: List<HADropdownItem<Int>>)
+```
+
+根据屏幕来设计状态的结构。当屏幕外观始终一致时，一个 data class 就够了。当屏幕有明显的不同模式时，使用密封层次结构（sealed hierarchy），这样编译器会强制你处理每种模式，且一种模式的字段不会泄漏到另一种模式中：
+
+```kotlin
+sealed interface UiState {
+    data object Loading : UiState
+    data class Content(val items: List<Item>) : UiState
+    data class Error(val error: ErrorReason) : UiState
+}
+```
+
+### 事件
+
+事件是“发出即忘”的：导航、显示 snackbar、打开链接。将它们建模为密封接口（sealed interface），这样处理器的 `when` 就是穷尽的：
+
+```kotlin
+sealed interface UiEvent {
+    data object NavigateBack : UiEvent
+    data class ShowSnackbar(@StringRes val messageResId: Int) : UiEvent
+}
+```
+
+通过 `Channel` 发送它们，以 `receiveAsFlow()` 的形式暴露为 `Flow`，并且每个事件只消费一次，通常在导航层消费。带缓冲的 `Channel` 为其单一消费者持有事件，因此在收集器启动之前发送的事件仍然会到达，而没有重放的 `SharedFlow` 会丢弃它。参见[选择流类型](https://www.hasscn.top/contributors/companion/android/architecture/#picking-a-flow-type)。绝不要重放事件：在重组后重放“返回导航”会导致导航两次。如果 UI 在旋转后必须再次显示某些内容，那是状态，而不是事件。
+
+### 动作
+
+有些对象必须存在于视图中，因为它们由 Compose 创建：`WebView`、`LazyListState`、焦点请求器。ViewModel 无法持有它们。然而对它们的一些操作是命令式的，比如“立即重新加载”。
+
+对于这些情况，ViewModel 发出一个带类型的动作，视图对它持有的对象执行该动作。每个动作都带有自己的 `run`：
+
+```kotlin
+sealed interface WebViewAction {
+    fun run(webView: WebView)
+
+    data object Reload : WebViewAction {
+        override fun run(webView: WebView) = webView.reload()
+    }
+}
+
+// In the view, the only place that holds the WebView
+LaunchedEffect(webView) {
+    webViewActions.collect { action -> action.run(webView) }
+}
+```
+
+该流是一个带有少量额外缓冲的 `SharedFlow`，只消费一次。它不重放：在视图消失时发送的动作会被丢弃，这适合那些只对视图当前持有的对象有意义的命令。当动作不能被丢弃时，先等待收集器，就像 `FrontendViewModel` 在发出之前用 `subscriptionCount` 所做的那样。需要结果的动作可以携带一个 `CompletableDeferred`。
+
+动作不是状态：作为状态持有的命令会在每次重组时再次执行。它也不是事件：事件是宿主做出反应的信号，比如导航，而动作驱动的是该屏幕拥有的某一个对象。
+
+只对必须存在于视图中的对象使用动作。例如，媒体播放器可以存在于管理器中并作为状态暴露。实际上，一个屏幕最多只有一个这样的对象，通常一个都没有。
+
+### 选择输出
+
+问自己这个输出是什么，而不是它来自哪里：
+
+| 如果该输出 | 使用 | 原因 |
+| --- | --- | --- |
+| 决定渲染的内容，并且必须在重组和旋转后保留 | 状态 | 再次发出相同的值是无操作 |
+| 是必须恰好发生一次的副作用 | 事件 | 重放它会导致导航两次或显示两次 snackbar |
+| 是针对视图持有的对象的命令 | 动作 | ViewModel 保持不含 UI 类型 |
+| 向用户提问并等待回答 | 管理器中的提示 | 一次只显示一个提示，调用方挂起直到用户回答 |
+
+## 模块
+
+ViewModel 将功能逻辑委托给四种模块。按其类型为每个类命名：`*Repository`、`*UseCase`、`*Manager`、`*Handler`。
+
+| 模块 | 是什么 | 可以依赖 |
+| --- | --- | --- |
+| 仓库（Repository） | 单一数据源或通道的唯一事实来源：存储、网络、Room DAO、外部总线 | 仅数据源，绝不能是另一个仓库 |
+| 用例（Use case） | 一个无状态、可复用的操作，以 `operator fun invoke()` 形式暴露 | 仓库 |
+| 管理器（Manager） | 一个功能关注点的逻辑和内存中的状态 | 仓库、用例、平台 API。绝不能是另一个管理器 |
+| 处理器（Handler） | 协调一个或多个管理器的逻辑 | 管理器、用例、仓库。绝不能是另一个处理器 |
+
+管理器和处理器之间的区别只在于一个问题：它是否依赖某个管理器？如果是，它就是处理器。无论它是否持有状态、是转换单个输入还是驱动多步流程，都无关紧要：处理器可以是其中任何一种。这条规则从定义上使管理器之间的依赖成为不可能。
+
+处理器将其工作以密封结果（sealed result）或结果流的形式返回给 ViewModel。它可以为自身的功能保留状态，ViewModel 会将其映射到屏幕状态中。屏幕的状态始终属于 ViewModel。
+
+管理器以三种方式与屏幕通信：它将待处理状态暴露为视图渲染的 `StateFlow`，它从 `suspend` 函数返回密封结果，或者它暴露一个结果的 `Flow`。
+
+管理器也是提示（prompt）所在之处：等待用户回答的对话框、权限请求或文件选择器。对它们使用 `SingleSlotQueue`。它一次只显示一个提示，将当前请求暴露为状态，并让调用方 `awaitResult` 直到用户回答。提示不是第四种输出：它是视图渲染的待处理状态，回答作为普通输入返回。
+
+当逻辑被多个调用方需要，或者会使 ViewModel 或管理器臃肿，但自身没有状态时，就使用用例。例如 `CheckLocalNetworkPermissionUseCase` 和 `ServerChooserItemsUseCase`。
+
+数据库访问也要通过仓库：Room DAO 是数据源，而仓库是应用其余部分所看到的东西。组合多个数据源属于逻辑，因此它属于用例、管理器或处理器，而不是仓库。
+
+### 选择模块
+
+自上而下地判断。第一个符合的行胜出：
+
+| 你有 | 使用 |
+| --- | --- |
+| 对数据源或通信通道的访问 | 仓库 |
+| 一个无状态的可复用操作 | 用例 |
+| 一个拥有自己状态的功能关注点 | 管理器 |
+| 协调管理器的逻辑 | 处理器 |
+| 屏幕级的状态和协调 | ViewModel |
+
+## 层次与依赖
+
+视图和 ViewModel 属于 UI 层。处理器、管理器和用例属于领域层。仓库属于数据层。依赖只向下指向：
+
+- ViewModel 可以直接使用任何模块。
+- 处理器使用管理器、用例和仓库。
+- 管理器使用用例和仓库。
+- 用例使用仓库。
+- 没有处理器使用另一个处理器。在 ViewModel 中协调处理器。
+- 只有当协调管理器会使 ViewModel 臃肿时，ViewModel 才提取出一个处理器。
+
+以图的形式表示同样的规则，每条箭头都向下指向：
+
+```mermaid
+flowchart TB
+    subgraph ui["UI layer"]
+        View["View"]
+        ViewModel["ViewModel"]
+    end
+
+    subgraph domain["Domain layer"]
+        Handlers["Handlers"]
+        Managers["Managers"]
+        UseCases["Use cases"]
+    end
+
+    subgraph data["Data layer"]
+        Repositories["Repositories"]
+    end
+
+    View --> ViewModel
+    ViewModel --> Handlers & Managers & UseCases & Repositories
+    Handlers --> Managers & UseCases & Repositories
+    Managers --> UseCases & Repositories
+    UseCases --> Repositories
+```
+
+没有任何东西向上或横向指向。这使图保持无环，并且每个模块都可以独立测试。
+
+## 作用域
+
+根据状态需要存活的时间来为模块设定作用域：
+
+- 属于单个屏幕的模块使用 `@ViewModelScoped`。该屏幕会话中的所有内容共享一个实例，会话结束时它会重置。
+- 代表应用级关注点的模块通常使用 `@Singleton`。
+
+共享实例很重要。如果 ViewModel 和一个处理器都注入了一个有状态的管理器，它们必须得到同一个对象，否则它们对状态的视图会逐渐偏离。未设定作用域的绑定会给每个消费者一个自己的副本。这就是有状态与否重要的地方：有状态的模块需要一个与其状态存活时间相匹配的作用域。
+
+通过 Hilt 提供一切。绝不要手动创建这些模块。
+
+## 测试
+
+这种拆分正是屏幕可测试的原因：
+
+| 层 | 测试类型 | 检查什么 |
+| --- | --- | --- |
+| ViewModel | 单元测试 | 哪个输入产生哪个状态、事件或动作 |
+| 处理器、管理器、用例 | 单元测试 | 每个关注点独立测试 |
+| 无状态内容 | Compose UI | 每种状态下的渲染，以及交互是否调用了正确的回调 |
+| 事件处理 | Compose UI | 每个事件触发正确的导航或效果 |
+| 屏幕 | 截图测试 | 仅外观，不含逻辑 |
+
+参见[测试](https://www.hasscn.top/contributors/companion/android/testing/)和[截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/)。
+
+---
+
+# Android 端到端测试
+
+> 每晚针对真实 Home Assistant 在所有 API 级别上运行 Android 应用的 Maestro 测试，以及如何调试失败。
+
+Source: https://www.hasscn.top/contributors/companion/android/e2e-testing/
+
+Last verified on 2026-11-05, against https://github.com/home-assistant/android/blob/main/.github/workflows/e2e.yml.
+
+所有其他测试都模拟服务器。端到端（E2E）测试则不然：它们像用户一样，针对真实的 Home Assistant 运行真实的应用程序。这能捕获其他测试无法发现的问题，例如 Core 或前端的更改破坏了引导流程，或某个特定 Android 版本上的 web view 问题。
+
+共有两个测试：一个通过普通 HTTP 进行引导，另一个通过需要客户端证书的代理进行引导，即双向 TLS（mTLS）。
+
+## 运行时机
+
+`e2e.yml` 工作流在以下情况运行：
+
+- 每晚 05:00 UTC 在 `main` 分支上运行，针对 Home Assistant 的 `dev` 镜像（最新的开发构建版本）。
+- 在任意分支上通过 **Run workflow** 手动运行。可选的 `home-assistant-version` 输入用于选择要测试的镜像标签。
+
+它不属于拉取请求（pull request）检查的一部分。它需要为每个受支持的 API 级别启动一个模拟器，对每个拉取请求来说开销太大。
+
+## 它做什么
+
+1. 为 mTLS 测试生成证书。这些证书仅在该次运行期间存在。
+2. 构建 `fullDebug` APK，关闭 [StrictMode](https://www.hasscn.top/contributors/companion/android/debugging/#strictmode)，并信任该次运行的证书颁发机构（CA）。
+3. 安装 [Maestro](https://maestro.dev/) CLI，并根据其发布的校验和检查下载内容。
+4. 从 `.github/e2e/homeassistant` 中的配置启动 Home Assistant，并检查 `mobile_app` 是否已加载。
+5. 在 Home Assistant 前启动 mTLS 代理，并检查它是否拒绝没有客户端证书的请求。
+6. 在 Emulator.wtf 上为每个 API 级别（从 API 29 到 `androidSdk-target`）启动一个模拟器，并安装该应用。
+7. 在所有模拟器上并行运行普通流程。
+8. 在模拟器上打开证书安装程序，并运行 mTLS 流程。这仅在普通流程通过后才会发生。
+9. 无论结果如何，都会上传调试所需的文件。
+
+设备列表从 API 29 开始，尽管应用支持更旧的版本。在更旧的镜像上，web view 会渲染前端，但其内容永远不会出现在 Maestro 能看到的内容中，因此其上的所有检查都会失败。拉取请求上的[插桩测试](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/)仍然覆盖完整范围，直到应用的最低 API 级别。
+
+Home Assistant 容器和代理在 GitHub runner 上运行，模拟器在 Emulator.wtf 上运行。一个隧道连接它们，在模拟器内部，`homeassistant.internal` 解析到 runner：端口 8123 是 Home Assistant，端口 8443 是代理。
+
+## mTLS 测试如何工作
+
+`.github/e2e/mtls` 中的代理是 Home Assistant 前面的 nginx。它拒绝每个没有客户端证书的请求，从引导的第一页开始。
+
+其服务器证书由仅在该次运行期间存在的 CA 签名。为了使应用信任它，工作流使用 Gradle 属性 `debugExtraResDir` 进行构建。这会用 `.github/e2e/mtls` 中的副本替换应用的网络安全配置，该副本在可调试构建中信任该 CA。没有该属性的构建则保持不变。
+
+客户端证书的安装方式与用户相同：工作流打开系统证书安装程序，流程会经过它。
+
+> [!IMPORTANT]
+> [`.github/e2e/mtls/network_security_config.xml`](https://github.com/home-assistant/android/blob/main/.github/e2e/mtls/network_security_config.xml) 是 [`app/src/main/res/xml/network_security_config.xml`](https://github.com/home-assistant/android/blob/main/app/src/main/res/xml/network_security_config.xml) 的副本，并添加了一个部分。当你更改应用的配置时，请在副本中进行相同的更改。
+
+## 流程
+
+流程位于仓库根目录的 `.maestro` 文件夹中，测试的每一步都写在那里：
+
+- [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml) 通过普通 HTTP 进行引导。
+- [`.maestro/onboarding-mtls.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding-mtls.yaml) 安装客户端证书，然后通过代理进行引导。
+
+它们通过 `.maestro/subflows` 共享步骤，并覆盖应用最关键路径：
+
+- **登录**：真实的登录页面，使用真实凭据，走完整个授权流程。
+- **注册**：应用向 `mobile_app` 注册自己，其他一切都依赖于此。
+- **前端渲染**：能够到达概览仪表盘（dashboard）证明 web view 在该 API 级别上正常工作。
+- **外部总线双向工作**：只有在应用通过[外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)（external bus）宣告自己之后，前端才会在其设置中显示 **Companion app** 条目，而选中它会让前端请求应用打开其原生设置。
+
+流程从三个参数获取要测试的实例：`HOME_ASSISTANT_URL`、`HOME_ASSISTANT_USERNAME` 和 `HOME_ASSISTANT_PASSWORD`。mTLS 流程还需要两个参数，`MTLS_P12_PASSWORD` 和 `MTLS_CERT_ALIAS`：证书文件的密码，以及给证书的名称。
+
+当你更改流程时：
+
+- 它驱动调试应用 `io.homeassistant.companion.android.debug`。不要更改 `appId`。
+- 它在每个 API 级别上运行，因此任何特定于版本的内容都必须是条件性的，例如现有的权限对话框步骤。
+- 步骤匹配屏幕上的文本。如果你在应用中重命名了标签，请在同一个拉取请求中更新流程。
+- 将多个流程需要的步骤放在子流程中。
+
+[Maestro 文档](https://docs.maestro.dev/api-reference/commands)列出了所有命令。
+
+## 本地运行
+
+安装 [Maestro CLI](https://docs.maestro.dev/getting-started/installing-maestro)，启动一个模拟器或连接一台设备，然后运行：
+
+```bash
+./gradlew :app:installFullDebug
+maestro test \
+  -e HOME_ASSISTANT_URL=http://homeassistant.local:8123 \
+  -e HOME_ASSISTANT_USERNAME=<username> \
+  -e HOME_ASSISTANT_PASSWORD=<password> \
+  .maestro/onboarding.yaml
+```
+
+该流程会先清除应用状态，因此总是从全新的引导流程开始。请使用一次性实例：每次运行都会在其上注册一台新设备。
+
+### 运行 mTLS 流程
+
+要运行带 mTLS 的测试，你需要在 Home Assistant 前设置一个需要 mTLS 的反向代理，并为你的证书文件打开证书安装程序对话框。达到此状态的最简单方法是使用下面描述的步骤，这些步骤也在 GitHub Actions 上运行。你需要使用模拟器、Docker，以及在你机器 8123 端口上的 Home Assistant。从模拟器来看，你的机器是 `10.0.2.2`。
+
+1. 生成证书，服务器证书中包含该地址：
+
+   ```bash
+   OUT=/tmp/mtls
+   .github/e2e/mtls/generate-certs.sh "$OUT" \
+     "DNS:homeassistant.internal,IP:10.0.2.2"
+   ```
+
+2. 启动代理。使用 Docker Desktop 时，`host.docker.internal` 是你的机器：
+
+   ```bash
+   TEMPLATE=/etc/nginx/templates/default.conf.template
+   docker run -d --name e2e-mtls-proxy -p 8443:8443 \
+     -e E2E_MTLS_UPSTREAM=host.docker.internal:8123 \
+     -v "$OUT:/etc/nginx/certs:ro" \
+     -v "$PWD/.github/e2e/mtls/nginx.conf.template:$TEMPLATE:ro" \
+     nginx:stable-alpine
+   ```
+
+3. 安装构建为信任该 CA 的应用：
+
+   ```bash
+   ./gradlew :app:installFullDebug -PdebugExtraResDir="$OUT/res"
+   ```
+
+4. 在模拟器上打开证书安装程序：
+
+   ```bash
+   .github/e2e/mtls/open-cert-installer.sh emulator-5554 "$OUT/client.p12"
+   ```
+
+   在 API 32 及以下版本，脚本会改为安装同一文件夹中的 `client_legacy.p12`，因为这些版本的证书安装程序无法读取 `client.p12`。要使用另一个旧版文件，请将其路径作为可选的第三个参数传递。
+
+5. 运行流程，使用 `generate-certs.sh` 的默认密码和名称：
+
+   ```bash
+   maestro test \
+     -e HOME_ASSISTANT_URL=https://10.0.2.2:8443 \
+     -e HOME_ASSISTANT_USERNAME=<username> \
+     -e HOME_ASSISTANT_PASSWORD=<password> \
+     -e MTLS_P12_PASSWORD=e2ep12pass \
+     -e MTLS_CERT_ALIAS=e2eclient \
+     .maestro/onboarding-mtls.yaml
+   ```
+
+## 调试失败
+
+每次运行都会上传一个 `e2e-artifacts` 工件：
+
+| 文件 | 内容 |
+| --- | --- |
+| `maestro-results/` | 每个流程和分片的命令跟踪、`maestro.log` 以及失败截图 |
+| `logcat-*.txt` | 完整的 logcat，每个模拟器一个文件 |
+| `mtls-proxy.log` | mTLS 代理的日志，每个请求一行 |
+| `homeassistant.log` | Home Assistant 日志 |
+| `homeassistant-config.json` | `/api/config` 响应，包含版本和已加载组件 |
+| `homeassistant-container.json` | 容器详细信息，包括确切的镜像 |
+
+按此顺序阅读它们，并在第一个能解释失败的文件处停止。大多数失败会显示在失败的 Maestro 命令及其截图中：这可以区分损坏的屏幕和 Maestro 无法看到的元素。从 Home Assistant 日志开始通常会浪费时间。在代理日志中，`400` 表示没有客户端证书的请求。
+
+只有在排除了应用和流程之后，才去查看上游。`dev` 镜像每晚都会变化，因此请与上一次通过的运行进行比较：两份 `homeassistant-config.json` 文件给出了故障两侧的 Home Assistant 版本。然后查看在此期间 [Core](https://github.com/home-assistant/core) 或[前端](https://github.com/home-assistant/frontend)合入了什么。
+
+## 自动化分诊
+
+夜间运行失败会启动一个 `e2e-triage` 工作流。一个 AI 代理会下载失败运行和上一次成功运行的工件，并遵循 `.agents/skills/ha-android-e2e-debugging` 技能中的流程。它只做诊断：从不更改文件或打开拉取请求。它会在 Android 仓库中报告到一个单独的 `e2e-failure` issue 中，包括供维护者带到 Core 或前端的上游发现。下一次通过的运行会关闭该 issue。
+
+---
+
+# Android 最佳实践
+
+> 每次 Android 代码审查中都会出现的编码规则。强类型、时间、并发、依赖注入、日志记录，以及快速失败。
+
+Source: https://www.hasscn.top/contributors/companion/android/best-practices/
+
+这些是审查者在 Android 应用中关注的实践。大多数归结为一个理念：让编译器和工具来发现错误，而不是靠人。
+
+## 通用原则
+
+- **SOLID、KISS 和 DRY。** 常规原则。
+- **跟随社区。** 对于本页面未涵盖的内容，[Now in Android](https://github.com/android/nowinandroid) 应用展示了本项目所遵循的实践。
+- **保持直接。** 不要为单一实现或可能永远不会到来的未来添加抽象。直接使用库或 API，当出现第二个真实使用场景时再抽象，或者为了隐藏模块之外的实现而抽象（例如在 `:common` 中定义公共接口，并通过 Hilt 绑定 `internal` 实现）。
+- **不要存储可以从现有状态推导出的内容。**
+- **先找根因再修复。** 缺陷修复应说明实际原因以及如何复现。不要使用只修补症状的投机性变通方案。
+- **小类、小函数。** 一个难以命名的函数承担了太多职责。
+- **组合优于继承。** 用小的、可复用的部分构建行为，而不是深层的类层次结构。
+- **经得起时间考验的注释。** 为公共函数编写文档，在有帮助的地方添加注释，并保持注释与代码同步更新。问问自己：六个月后你还能看懂吗？
+
+## 使用强类型表达逻辑
+
+字符串用于显示以及来自外部的原始值。不要用它们来控制行为：拼写错误也能正常编译，却会在运行时出错。请改用密封类（sealed class）或接口，必要时可以使用 `enum`。
+
+```kotlin
+private const val DESTINATION_KEY = "destination"
+
+@Parcelize
+sealed interface Destination : Parcelable {
+    data object General : Destination
+    data class Notifications(val title: String) : Destination
+    data object Privacy : Destination
+}
+
+fun newInstance(destination: Destination): Intent =
+    Intent().apply { putExtra(DESTINATION_KEY, destination) }
+```
+
+密封类型优于枚举：每个分支都可以携带自己的数据，比如上面的 `title`。而且当你用 `when` 处理它们时，不要写 `else` 分支：
+
+```kotlin
+fun onIntent(intent: Intent) {
+    val destination = IntentCompat.getParcelableExtra(
+        intent,
+        DESTINATION_KEY,
+        Destination::class.java,
+    )
+    when (destination) {
+        Destination.General -> showGeneral()
+        is Destination.Notifications -> showNotifications(destination.title)
+        Destination.Privacy -> showPrivacy()
+        null -> showDefault()
+    }
+}
+```
+
+这样，新增一个分支时，所有尚未处理它的地方都会导致构建失败，这正是你想要的效果。你的 IDE 还能找到使用某个特定目的地的所有位置，这是字符串永远无法提供的。详情请参阅 [Kotlin 密封类文档](https://kotlinlang.org/docs/sealed-classes.html)。
+
+如果必须使用字符串，请将其定义为 `const val`（参见[禁止魔法数字或字符串](https://www.hasscn.top/contributors/companion/android/code-style/#no-magic-numbers-or-strings)），或者将其包装在[内联值类](https://kotlinlang.org/docs/inline-classes.html)中。
+
+## 使用真实类型表示时间
+
+永远不要用裸数字表示时间或时长。单位很容易混淆。使用 `Instant`、`Duration` 及其相关类型，并尽早转换那些返回毫秒的 API 的值：
+
+```kotlin
+// Bad: seconds or milliseconds?
+const val THRESHOLD = 600000
+
+// Good
+val THRESHOLD = 10.minutes
+```
+
+永远不要调用 `System.currentTimeMillis()`。通过 Hilt 注入 `kotlin.time.Clock`，这样测试就可以控制时间。如果确实需要原始值，请把单位写进名称：`THRESHOLD_MS`。
+
+## 不可变性
+
+优先使用不可变的数据类，并通过 `copy()` 或返回新实例的函数来产生变更。可见性默认使用 `private` 或 `internal`。
+
+## 并发
+
+- 将协程绑定到生命周期，例如 `viewModelScope` 或 `lifecycleScope`，以避免泄漏。
+- 任何被多个协程访问的内容都必须是线程安全的。如果不是，就让它变得安全，或者不要共享它。
+- 竞态条件非常难以调试。要提前为此做好设计。
+
+## 依赖注入
+
+所有可以注入的内容都通过 [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) 提供。永远不要手动创建被注入的类。
+
+当你需要同一类型的两个绑定时，请使用自定义限定符注解，而不是 `@Named("...")`。自定义注解可以进行类型检查、易于查找，并且重命名安全。`NoNamedAnnotation` lint 规则会在使用 `@Named` 时使构建失败：
+
+```kotlin
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class NamedKeyChain
+
+@Inject
+@NamedKeyChain
+lateinit var keyChainRepository: KeyChainRepository
+```
+
+[Pull request #5667](https://github.com/home-assistant/android/pull/5667) 展示了一次从 `@Named("keyChainRepository")` 到 `@NamedKeyChain` 的真实迁移。
+
+## 日志记录
+
+使用 [Timber](https://github.com/JakeWharton/timber)，永远不要使用 `android.util.Log`。linter 会在出现 `Log` 调用时使构建失败。只记录有助于他人调试问题的内容，而不是所有内容，消息要说明什么失败了以及针对什么。永远不要记录令牌、密码或其他敏感数据。对于在 debug 构建中有帮助的用户数据，请将其包装在 `sensitive()` 中，它会在 debug 构建中显示该数据，并在 release 构建中隐藏它。
+
+## 快速失败
+
+发现缺陷越晚，修复就越困难。尽可能在构建时捕获错误：使用带穷举 `when` 的密封类型，以及在编译器无法强制约束时使用 [lint 规则](https://www.hasscn.top/contributors/companion/android/code-style/#custom-lint-rules)。当同一条意见在审查中反复出现时，把它变成工具，而不是依赖记忆：自定义 lint 规则、KTLint 覆盖、`FailFast` 检查，或测试监听器。
+
+不要吞掉异常。至少要记录它们。更好的做法是：使用 `FailFast`。它会记录错误、在 debug 构建中崩溃以便你注意到，并在 release 构建中回退到安全值：
+
+```kotlin
+import io.homeassistant.companion.android.common.util.FailFast
+
+val value = FailFast.failOnCatch(
+    message = { "Couldn't read value, state: ${api.state()}" },
+    fallback = "fallback",
+) {
+    api.value()
+}
+```
+
+当 `FailFast` 触发时，Logcat 会显示来自 `CrashFailFastHandler` 的大号 `CRITICAL FAILURE: FAIL-FAST` 横幅，随后是你的消息和堆栈跟踪，因此很难被忽略。
+
+## 以小步骤交付大改动
+
+小的 pull request 能更快地被审查。把一个大改动拆分成多个步骤，每一步都保持应用可用。如果一次重构无法在一个小的 pull request 中交付，就把新路径放在 `WIPFeature` 对象中的一个标志后面，该标志通常仅在 debug 构建中通过 `BuildConfig.DEBUG` 启用。在用户继续使用旧路径的同时合并这些步骤，功能完成后移除该标志。其余内容请参阅[提交 pull request](https://www.hasscn.top/contributors/companion/android/submitting/)。
+
+---
+
+# Android 代码风格与代码检查
+
+> Android 应用中的 KTLint、Detekt、Android Linter 和 Yamllint。如何运行它们、抑制问题，以及使用基线（baseline）。
+
+Source: https://www.hasscn.top/contributors/companion/android/code-style/
+
+Android 应用使用工具来强制执行代码风格，这样代码评审就可以专注于逻辑而不是格式。CI 会在你的拉取请求（pull request）上运行所有这些工具，并将发现的问题以 diff 中的评论形式报告。
+
+## 这些工具
+
+| 工具 | 检查内容 | 配置位置 |
+| --- | --- | --- |
+| [KTLint](https://pinterest.github.io/ktlint) | Kotlin 格式化 | `.editorconfig` |
+| [Detekt](https://detekt.dev/) | 可维护性和正确性 | [`.detekt/detekt.yml`](https://github.com/home-assistant/android/blob/main/.detekt/detekt.yml) |
+| Android Lint | Android API 使用和项目规则 | [`build-logic/convention/src/main/kotlin/AndroidCommonConventionPlugin.kt`](https://github.com/home-assistant/android/blob/main/build-logic/convention/src/main/kotlin/AndroidCommonConventionPlugin.kt) |
+| [Yamllint](https://github.com/adrienverge/yamllint) | YAML 文件 | `.yamllint` |
+
+通过所有这些检查并不意味着代码就是好的。它只意味着评审者可以专注于真正重要的东西。
+
+## 运行它们
+
+```bash
+# Format Kotlin, run before every commit
+./gradlew :build-logic:convention:ktlintFormat ktlintFormat
+
+# Check formatting without changing files
+./gradlew ktlintCheck :build-logic:convention:ktlintCheck --continue
+
+# Detekt, with type resolution, as CI runs it
+./gradlew detektMain :build-logic:convention:detektMain --continue
+
+# Android Lint
+./gradlew lint --continue
+
+# YAML
+yamllint --strict --format github .
+```
+
+`--continue` 会报告所有模块中的问题，而不是在第一次失败时就停止。`build-logic` 是一个包含构建（included build），因此它的任务需要显式调用。对于单个模块，使用模块路径，例如 `./gradlew :app:detektMain`。
+
+要在每次提交前运行 KTLint 检查，请安装一次 git 钩子（hook）：
+
+```bash
+./gradlew addKtlintCheckGitPreCommitHook
+```
+
+Yamllint 不会修复任何东西；请自行修复它报告的问题。
+
+## Android Lint 设置
+
+Android Lint 非常严格：警告会被视为错误，任何不在基线（baseline）中的问题都会导致构建失败。有几条规则是特意调整过的：
+
+- `LogNotTimber` 是错误级别，因此所有日志都通过 Timber 输出。
+- `MissingTranslation` 已关闭，因为翻译只在发布构建中通过 Lokalise 提供。
+- 依赖版本检查已关闭，因为更新由 Renovate 负责。
+
+## 抑制某个问题
+
+只要有可能，请修复问题而不是抑制它们。当你无法修复时：
+
+- 对于单个位置，在尽可能小的代码结构上使用 `@Suppress("rule-id")`。
+- 对于 Android Lint，问题也可以放入模块的 `lint-baseline.xml` 中，详见[基线](https://www.hasscn.top/contributors/companion/android/code-style/#baselines)。
+- 要为整个项目修改某条规则，请打开一个专门的拉取请求并说明原因。对于 Android Lint，修改 `AndroidCommonConventionPlugin.kt` 中的 `lint` 块。对于 KTLint，修改 `.editorconfig` 并在该规则上方添加注释说明原因，如果需要更多解释，请附上 GitHub issue 的链接。如果修改涉及代码，请使用两个提交：一个用于规则，一个用于它所影响的代码。
+
+## 基线
+
+各模块都有基线文件，记录了在启用某个工具之前就存在的问题：
+
+- Android Lint 使用 `lint-baseline.xml`。
+- Detekt 使用 `detekt-baseline-*.xml`。Android 模块每个变体（variant）有一个，例如 `detekt-baseline-release.xml`；JVM 模块使用 `detekt-baseline-main.xml`。
+
+新问题会导致 CI 失败。基线中的问题则不会。
+
+> [!TIP]
+> 修复基线中的一个问题并将其从文件中移除，是一个很好的首次贡献。
+
+当 Android Gradle Plugin 或 Detekt 的更新改变了规则时，请重新生成基线并查看变化：
+
+```bash
+./gradlew updateLintBaseline
+./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain \
+  --continue
+```
+
+然后逐条查看新增的条目。能在同一个拉取请求中修复的就修复，必须等待的则打开一个 issue。
+
+## 自定义 lint 规则
+
+`:lint` 模块包含项目自己的 lint 规则。它们检查诸如 Kotlinx.serialization 缺少 `@Serializable` 注解、Room 实体上的可变属性，以及 `evaluateJavascript` 的使用等问题。如果你在评审中反复看到同样的错误，可以提议添加一条规则。
+
+## CI 中的 SARIF 报告
+
+这些检查工具会生成 SARIF 报告，GitHub 会将其作为标注（annotation）显示在你的拉取请求上。每个模块都会生成自己的报告，而 GitHub 每次运行只接受一份，因此 CI 会使用 [`.github/scripts/merge_sarif.py`](https://github.com/home-assistant/android/blob/main/.github/scripts/merge_sarif.py) 将它们合并。你在本地不需要这样做，但可以在检查工具运行之后执行它：`python3 .github/scripts/merge_sarif.py` 会在你运行它的目录中生成 `merged_results.sarif`。
+
+## 约定
+
+这些工具无法捕获所有问题。以下约定同样适用。
+
+### 英语
+
+所有代码和注释都使用英语。拼写错误在所难免，而且许多贡献者并非英语母语者。评审者可能会提出修改建议；在 IDE 中使用拼写检查器会有帮助。
+
+### 不使用魔法数字或字符串
+
+用命名常量替换无法解释的值，并在定义该值的地方加以说明：
+
+```kotlin
+// Explanation, or a link, about why the threshold is 42
+const val SUPER_IMPORTANT_THRESHOLD = 42
+
+if (value == SUPER_IMPORTANT_THRESHOLD) {
+    // Do something
+}
+```
+
+常量遵循 [Kotlin 命名约定](https://kotlinlang.org/docs/coding-conventions.html#property-names)。
+
+### 常量放在哪里
+
+1. 在文件之外使用的常量，在导入时必须能通过其自身名称或其父级名称轻松识别。
+2. 大多数常量放在它们所属类的文件中，作为 `private const val` 放在文件顶部、类之外。
+3. 仅在常量必须从外部访问，或者同一文件中的多个类需要同名常量（例如 `DEFAULT_TIMEOUT`）时，才使用 `companion object`。
+4. 当一个文件中的常量过多，或者它们跨模块共享时，将它们移到 `*Constants.kt` 文件中，并分组到一个 `object` 里。
+
+如果测试需要使用一个私有常量，请将其标记为 `@VisibleForTesting`，而不是将其设为公开。
+
+这些规则还比较新，所以你会在代码中发现一些尚未遵循这些规则的常量。遇到时可以随手修复。
+
+### TODO 需要关联 issue
+
+TODO 容易被遗忘。请避免使用。当你和评审者一致认为某件事需要以后再做时，添加一个 TODO，并附上指向 GitHub issue 的完整链接：
+
+```kotlin
+// TODO Missing feature https://github.com/home-assistant/android/issues/404
+```
+
+始终使用完整链接，绝不要只写 `#404`：纯数字在 GitHub 之外是有歧义的。链接到代码时，请使用永久链接（permalink，在 GitHub 上按 <kbd>y</kbd> 键），这样链接在后续变更后仍然有效。
+
+---
+
+# Android 依赖
+
+> Android 应用中的版本目录、依赖锁定文件和 Renovate。
+
+Source: https://www.hasscn.top/contributors/companion/android/dependencies/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/android/blob/main/.github/workflows/renovate-lockfiles.yml.
+
+Android 应用对其依赖进行严格管控。每个库都在一处声明，每个解析出的版本都被锁定，并且有一个机器人负责保持它们更新。
+
+## 版本目录
+
+所有依赖都声明在[版本目录](https://docs.gradle.org/current/userguide/version_catalogs.html) [`gradle/libs.versions.toml`](https://github.com/home-assistant/android/blob/main/gradle/libs.versions.toml) 中。这是添加依赖的唯一方式：在目录之外声明的依赖不会被接受。所有版本集中在一处，每个模块都使用相同版本的共享库，一次更新即可作用于整个项目。模块通过 `libs` 访问器引用它：
+
+```kotlin
+dependencies {
+    implementation(libs.kotlinx.coroutines.android)
+}
+```
+
+## 锁定文件
+
+项目使用 Gradle [依赖锁定](https://docs.gradle.org/current/userguide/dependency_locking.html)。每个模块都有一个 `gradle.lockfile`，其中包含每个直接依赖和传递依赖的确切版本，因此在每台机器上构建结果都相同，传递依赖也不会在无人察觉的情况下悄悄变化。
+
+在目录中添加或更改任何内容后，请更新锁定文件并提交：
+
+```bash
+./gradlew alldependencies --write-locks
+```
+
+当目录发生了变化但锁定文件没有更新时，CI 会失败。
+
+## Renovate
+
+[Renovate](https://docs.renovatebot.com/) 会打开拉取请求来更新依赖，其配置位于 `renovate.json5`。它会在版本发布三天后才提议更新，以便让其他用户先发现早期的问题。相关的库（例如 AndroidX 或 Kotlin 的库）会被归组到同一个拉取请求中。
+
+Renovate 本身不会修改锁定文件。`Auto-update Renovate lockfiles` 工作流（[`.github/workflows/renovate-lockfiles.yml`](https://github.com/home-assistant/android/blob/main/.github/workflows/renovate-lockfiles.yml)）会在每个 Renovate 分支上运行，更新锁定文件，并将其推送到同一分支。
+
+## 仅使用稳定版本
+
+项目避免使用库的 alpha、beta 和候选发布版本。当某个功能仅在预发布版本中可用时，可以在拉取请求中协商例外情况。这会带来代价：API 可能随每次更新而变化，必须有人来处理这些问题。
+
+---
+
+# Android 入门
+
+> 安装 Android Studio，fork 并克隆仓库，构建应用，并在模拟器或手机上运行。
+
+Source: https://www.hasscn.top/contributors/companion/android/get-started/
+
+Last verified on 2026-11-06, against https://github.com/home-assistant/android/blob/main/.github/workflows/pr.yml.
+
+Android Studio 是你唯一需要的工具。它自带 Android SDK、模拟器和 JDK。本页面将带你从零开始，直到应用在模拟器上运行。
+
+## 1. 安装 Android Studio
+
+安装最新稳定版的 [Android Studio](https://developer.android.com/studio)。
+
+本项目还需要 NDK 和 CMake，用于原生唤醒词代码。Android Studio 通常会在首次 Gradle 同步时自动安装它们。如果失败，请自行安装：
+
+1. 打开 **Settings** > **Languages & Frameworks** > **Android SDK** > **SDK Tools**。
+2. 勾选 **NDK (Side by side)** 和 **CMake**。
+3. 安装 [`gradle/libs.versions.toml`](https://github.com/home-assistant/android/blob/main/gradle/libs.versions.toml) 中 `androidNdk` 和 `cmake` 下列出的版本。
+
+## 2. Fork、克隆和创建分支
+
+1. 在 GitHub 上 fork [home-assistant/android](https://github.com/home-assistant/android)。不熟悉 fork？GitHub 解释了[如何 fork 一个仓库](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)。
+2. 克隆你的 fork，并进入它创建的文件夹：
+
+   ```bash
+   git clone https://github.com/<your-github-username>/android.git
+   cd android
+   ```
+
+   或者在 Android Studio 中，使用 **File** > **New** > **Project from Version Control**。在项目文件夹中运行以下命令。
+
+3. 为你的改动创建一个分支，分支名要能说明你在做什么：
+
+   ```bash
+   git checkout -b fix-sensor-crash
+   ```
+
+## 3. 添加 Firebase 配置
+
+`full` flavor 使用 Firebase 发送推送通知，构建时每个应用模块都需要一个 `google-services.json` 文件。除非你从事推送通知的开发，否则请使用仓库中的模拟文件。在 `android` 文件夹中运行以下命令：
+
+```bash
+cp .github/mock-google-services.json app/google-services.json
+cp .github/mock-google-services.json automotive/google-services.json
+cp .github/mock-google-services.json wear/google-services.json
+```
+
+使用模拟文件时，通知仍然可以通过 WebSocket 连接工作，只是不经过 Firebase。如果你需要真实的推送通知，请参阅[推送通知](https://www.hasscn.top/contributors/companion/android/push-notifications/)。
+
+## 4. 构建和运行
+
+在 Android Studio 中：
+
+1. 打开项目并等待 Gradle 同步完成。
+2. 选择 `app` 运行配置以及一个模拟器或已连接的设备。
+3. 选择 **Run**。
+
+在终端中，将 `JAVA_HOME` 设置为 JDK 21（CI 使用的版本），然后运行：
+
+```bash
+./gradlew assembleDebug
+```
+
+在 Windows 上，使用 `gradlew.bat assembleDebug`。这会构建两个 [flavor](https://www.hasscn.top/contributors/companion/android/flavors-and-targets/) 的 debug 变体。要在正在运行的模拟器或设备上安装 `full` debug 应用：
+
+```bash
+./gradlew :app:installFullDebug
+```
+
+debug 构建有自己的应用 ID，即 `io.homeassistant.companion.android.debug`，因此它会与 Play 商店的应用并列安装。它的图标是红色背景，方便你区分两者。
+
+需要签名的 release 构建？请参阅[自行构建签名的 release 版本](https://www.hasscn.top/contributors/companion/android/releases/#build-a-signed-release-yourself)。
+
+应用运行起来后，将其连接到一个 Home Assistant 实例。如果可以，请使用测试实例：每次你完成引导设置，应用都会在该服务器上注册一个新设备。
+
+## 常用命令
+
+这些是你最常用的命令，与 CI 运行的命令相同：
+
+```bash
+# 格式化代码，每次提交前运行
+./gradlew :build-logic:convention:ktlintFormat ktlintFormat
+
+# 单元测试，或对单个模块使用 :common:test
+./gradlew test
+
+# 静态分析
+./gradlew detektMain :build-logic:convention:detektMain --continue
+./gradlew lint --continue
+
+# Screenshot tests, per module
+./gradlew :app:testFullDebugScreenshotTestDefaultTestSuite
+./gradlew :wear:testDebugScreenshotTestDefaultTestSuite
+./gradlew :common:testDebugScreenshotTestDefaultTestSuite
+
+# 更改依赖之后
+./gradlew alldependencies --write-locks
+```
+
+## 测试拉取请求（pull request）构建
+
+你无需构建任何东西就可以尝试别人的改动。CI 会为每个拉取请求构建 APK：
+
+1. 在 GitHub 上打开该拉取请求，进入 **Checks** 标签页。
+2. 选择 **Pull Request** 工作流，向下滚动到 **Artifacts**。
+3. 下载 **APKs** artifact。你必须登录 GitHub 才能执行此操作。
+4. 解压它。其中包含手机、Wear OS 和 Android Automotive 应用的 debug APK。对于手机，请选择 `full` 或 `minimal` APK。
+5. 通过手机上的文件管理器安装，或使用 `adb install path/to/app.apk`。
+
+只有构建任务完成后 artifact 才会出现。该任务会等待 lockfile 和 KTLint 检查，因此如果其中任何一项失败，就不会有 APK。
+
+debug APK 会与你的常规应用并列安装，图标为红色，因此你可以在不丢失现有配置的情况下进行测试。
+
+## AI 工具
+
+仓库在 `AGENTS.md` 中提供了 AI 编程工具的使用说明，并在 [`.agents/skills/`](https://github.com/home-assistant/android/tree/main/.agents/skills) 中提供了技能，例如 `ha-android-architecture`、`ha-android-testing` 和 `ha-android-review`。拉取请求模板会询问你是否使用了 AI 以及如何使用。[使用 AI 工具贡献](https://www.hasscn.top/contributors/start/ai-tools/)列出了所有技能，并解释了 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)对你的要求。
+
+## 接下来做什么
+
+- 阅读[架构](https://www.hasscn.top/contributors/companion/android/architecture/)文档，熟悉代码结构。
+- 看看[开发者游乐场](https://www.hasscn.top/contributors/companion/android/debugging/#the-developer-playground)，这是一个仅限 debug 版本的界面，用于快速尝试各种功能。
+- 遇到问题？请在 Discord 上的 [Android 项目讨论帖](https://discord.com/channels/330944238910963714/1346948551892009101)中提问。
+
+---
+
+# Android 上的推送通知
+
+> 设置你自己的 Firebase 项目和推送服务，适用于开发通过 Firebase Cloud Messaging 传递的通知时。
+
+Source: https://www.hasscn.top/contributors/companion/android/push-notifications/
+
+`full` 版本通过 Firebase Cloud Messaging（FCM）接收通知。Home Assistant 将通知发送到项目的推送服务，推送服务将其交给 FCM，再由 FCM 传递到手机。[移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/) 描述了这一约定。
+
+只有在你开发这条路径时才需要自己的设置。对于其他所有情况，[入门指南](https://www.hasscn.top/contributors/companion/android/get-started/#3-add-a-firebase-configuration)中的模拟 Firebase 文件就足够了，通知仍会通过 WebSocket 连接到达应用。`minimal` 版本也是通过这种方式获取通知的。
+
+> [!TIP]
+> 设置 FCM 需要一些精力。如果你能用 WebSocket 通知测试你的更改，就那样做。
+
+## 设置你自己的 FCM 项目
+
+1. 在 [Firebase 控制台](https://console.firebase.google.com)中创建一个项目。
+2. 为以下每个应用 ID 向项目添加一个 Android 应用：
+   - `io.homeassistant.companion.android`
+   - `io.homeassistant.companion.android.debug`
+   - `io.homeassistant.companion.android.minimal`
+   - `io.homeassistant.companion.android.minimal.debug`
+3. 在你的 Firebase 项目中创建默认的 Cloud Firestore 数据库。推送服务将其速率限制保存在那里，除非你将其配置为使用 Valkey。
+4. 将 [home-assistant/mobile-apps-fcm-push](https://github.com/home-assistant/mobile-apps-fcm-push) 中的推送服务部署到你的 Firebase 项目。
+5. 将应用指向你的服务。将已部署的 `androidV1` 函数的 URL 添加到 Gradle 用户主目录（`~/.gradle/gradle.properties`）中的 `gradle.properties`，而不是仓库中的那个文件：
+
+   ```properties
+   homeAssistantAndroidPushUrl=https://push.example.com/api/sendPush/android/v1
+   ```
+
+   （可选）也可以将速率限制检查指向你的服务：
+
+   ```properties
+   homeAssistantAndroidRateLimitUrl=https://push.example.com/api/checkRateLimits
+   ```
+
+   如果没有这些覆盖配置，应用将使用仓库 `gradle.properties` 中设置的项目自带的推送服务。
+
+6. 从你的 Firebase 项目下载 `google-services.json`，并将其放入 [`app/`](https://github.com/home-assistant/android/tree/main/app)、[`automotive/`](https://github.com/home-assistant/android/tree/main/automotive) 和 [`wear/`](https://github.com/home-assistant/android/tree/main/wear) 中。
+
+`google-services.json` 文件必须包含所有四个应用 ID 的客户端。如果缺少其中一个，FCM 将无法在该构建中工作，只有 WebSocket 通知能够到达。
+
+---
+
+# Apple
+
+> 适用于 iPhone、iPad、Mac、Apple Watch 和 CarPlay 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+
+Source: https://www.hasscn.top/contributors/companion/apple/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/iOS/blob/main/CONTRIBUTING.md.
+
+Apple 应用将 Home Assistant 带到了 iPhone、iPad、Mac、Apple Watch 和 CarPlay 上。与 Android 应用一样，它的核心是一个加载 Home Assistant 前端的网页视图。围绕它，很多东西都是原生的：引导流程、设置、传感器、位置、通知和实时活动（Live Activities）、小组件和控制、App Intents 和快捷指令、手表应用及其复杂功能（complications），以及 CarPlay。
+
+所有这些都位于同一个仓库 [home-assistant/iOS](https://github.com/home-assistant/iOS) 中，使用 Swift 编写。Mac 应用通过 Mac Catalyst 从同一份代码构建。
+
+## 仓库
+
+所有内容都在 [home-assistant/iOS](https://github.com/home-assistant/iOS) 中。它是一个 Xcode 项目 `HomeAssistant.xcodeproj`，源代码分布在几个主要文件夹中：
+
+| 文件夹 | 内容 |
+| --- | --- |
+| `Sources/App` | iPhone 和 iPad 应用 |
+| `Sources/Shared` | 所有 target 共享的代码：API、数据库、传感器、通知 |
+| `Sources/Extensions` | 小组件、App Intents、通知、分享和 Matter 扩展 |
+| `Sources/Watch`、`Sources/WatchApp` | Apple Watch 应用 |
+| `Sources/CarPlay` | CarPlay |
+| `Sources/MacBridge` | Catalyst 构建专用的 Mac 代码 |
+| `Sources/PushServer` | 推送中继服务器，一个独立的 Swift 包 |
+| `Tests` | 单元测试、UI 测试、快照测试和小组件测试 |
+
+完整列表见[架构](https://www.hasscn.top/contributors/companion/apple/architecture/#the-source-folders)。
+
+## 环境搭建
+
+- [入门](https://www.hasscn.top/contributors/companion/apple/get-started/)：安装 Xcode 和相关工具，配置签名，并运行应用。
+
+## 架构
+
+- [架构](https://www.hasscn.top/contributors/companion/apple/architecture/)：代码的组织方式、将一切串联起来的 `Current` 环境，以及应用如何与 Home Assistant 通信。
+- [Target](https://www.hasscn.top/contributors/companion/apple/targets/)：应用、扩展、手表、CarPlay 和 Mac，以及一次改动可能影响哪些部分。
+
+## 编写代码
+
+- [代码风格](https://www.hasscn.top/contributors/companion/apple/code-style/)：SwiftFormat、SwiftLint 以及项目的约定。
+
+## 测试
+
+- [测试](https://www.hasscn.top/contributors/companion/apple/testing/)：单元测试、快照测试、UI 测试和端到端测试，以及补丁覆盖率门槛。
+
+## 发布
+
+- [提交拉取请求](https://www.hasscn.top/contributors/companion/apple/submitting/)：检查清单、模板和审查流程。
+- [持续集成](https://www.hasscn.top/contributors/companion/apple/ci/)：你的拉取请求上会运行什么，以及合并之后会发生什么。
+- [发布](https://www.hasscn.top/contributors/companion/apple/releases/)：从合并的拉取请求到 App Store Connect，以及 GitHub 上的 Mac 版发布。
+
+## 翻译
+
+应用的文本在 Lokalise 上翻译，位于其独立的 iOS 项目中。你不需要 Mac 或 Xcode。参见[你的第一次翻译](https://www.hasscn.top/contributors/translate/first-contribution/)。
+
+## 联系谁
+
+- [Home Assistant Discord](https://www.home-assistant.io/join-chat) 上的 [**#apple-apps**](https://discord.com/channels/330944238910963714/1481713628553019392) 频道。请先在 **Channels & Roles** 下选择开发者角色。
+- iOS 仓库中的 [Issues](https://github.com/home-assistant/iOS/issues)，用于提交缺陷和功能请求。
+- 想提前测试新功能？加入 [TestFlight 测试版](https://www.home-assistant.io/ios/beta/)。
+- 有关应用在用户端的工作方式，请参阅[伴侣应用文档](https://companion.home-assistant.io/)。
+
+---
+
+# Apple 入门
+
+> 安装 Xcode 和 Ruby 工具链，设置代码签名，并在模拟器或你自己的设备上运行 Home Assistant 应用。
+
+Source: https://www.hasscn.top/contributors/companion/apple/get-started/
+
+你需要一台 Mac。本页面将带你从全新克隆到应用在模拟器中运行。
+
+## 要求
+
+- **Xcode**：项目当前要求的版本见 [README](https://github.com/home-assistant/iOS#getting-started)。该项目会很快跟进新的 Xcode 版本，因此有时需要使用来自 [Apple Developer Downloads](https://developer.apple.com/download/) 的 beta 版本。
+- **Ruby**：用于运行代码检查器和测试的 Bundler 和 Fastlane。版本见 `.ruby-version`。
+- **Apple 开发者团队 ID**，用于代码签名。
+
+第三方库是 Swift 包。Xcode 会自行解析它们。
+
+## 1. Fork、克隆和创建分支
+
+1. 在 GitHub 上 fork [home-assistant/iOS](https://github.com/home-assistant/iOS)。
+2. 克隆你的 fork 并创建一个分支：
+
+   ```bash
+   git clone https://github.com/<your-github-username>/iOS.git
+   cd iOS
+   git checkout -b fix-widget-refresh
+   ```
+
+## 2. 安装 Ruby 工具链
+
+选择一种安装 Ruby 的方式，然后安装 gems。使用 [mise](https://mise.jdx.dev/)：
+
+```bash
+brew install mise
+mise install
+bundle install
+```
+
+使用 [rbenv](https://github.com/rbenv/rbenv)：
+
+```bash
+brew install rbenv ruby-build
+rbenv install
+bundle install
+```
+
+Ruby 版本在 `.ruby-version` 中。如果你已经有匹配的 Ruby，只需运行 `bundle install` 即可。
+
+## 3. 设置代码签名
+
+应用使用了需要代码签名的 entitlements，即使在模拟器中也是如此。Debug 构建使用自动配置，但你需要告诉 Xcode 使用哪个团队和 bundle ID。
+
+创建 `Configuration/HomeAssistant.overrides.xcconfig`：
+
+```text
+DEVELOPMENT_TEAM = YourTeamID
+BUNDLE_ID_PREFIX = some.bundle.prefix
+```
+
+- `DEVELOPMENT_TEAM` 是你的团队 ID，来自 [Apple 开发者门户](https://developer.apple.com/account)。它形如 `ABCDEFG123`。
+- `BUNDLE_ID_PREFIX` 是一个由你控制的前缀，以便 Xcode 能为它创建配置描述文件。
+
+Git 会忽略此文件。Xcode 会为你的团队生成描述文件，而你的团队没有的功能（如重要提醒）将被关闭。
+
+## 4. 运行应用
+
+1. 在 Xcode 中打开 `HomeAssistant.xcodeproj`。
+2. 选择 **App-Debug** scheme。
+3. 选择一个模拟器或你的设备。
+4. 构建并运行。
+
+如果可以，请将它连接到 Home Assistant 的测试实例：每次引导流程都会在服务器上注册一个新设备。
+
+## 常用命令
+
+```bash
+# Check formatting and lint, without changing files
+bundle exec fastlane lint
+
+# Fix what can be fixed automatically
+bundle exec fastlane autocorrect
+
+# Run the unit tests
+bundle exec fastlane test
+
+# Run autocorrect before every commit
+bundle exec fastlane install_git_hooks
+```
+
+## 仅测试前端
+
+正在开发[前端](https://www.hasscn.top/contributors/frontend/)并想在应用中查看效果？你不需要构建应用：
+
+1. 安装 Xcode，并从 **Xcode** > **Open Developer Tool** > **Simulator** 打开模拟器。
+2. 从 `main` 分支上最近一次 [CI workflow](https://github.com/home-assistant/iOS/actions/workflows/ci.yml) 运行中下载 `ios-simulator` 构建产物。
+3. 将 `.app` 拖到模拟器上并启动。
+4. 在 Safari 中，在高级设置里开启 **Develop** 菜单。然后使用 **Develop** > **Simulator** 在应用的 web 视图上打开 Web Inspector。
+
+## AI 工具
+
+仓库在 `AGENTS.md` 中提供了 AI 编程工具的使用说明，并在 [`.agents/skills/`](https://github.com/home-assistant/iOS/tree/main/.agents/skills) 中提供了技能，例如 `ha-ios-architecture`、`ha-ios-testing` 和 `ha-ios-workflow-ci`。拉取请求模板会询问你是否使用了 AI 以及如何使用。[使用 AI 工具参与贡献](https://www.hasscn.top/contributors/start/ai-tools/)列出了所有技能，并解释了 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)对你的要求。
+
+## 接下来
+
+- 阅读[架构](https://www.hasscn.top/contributors/companion/apple/architecture/)和[目标](https://www.hasscn.top/contributors/companion/apple/targets/)。
+- 在提交第一个拉取请求之前，请查看[代码风格](https://www.hasscn.top/contributors/companion/apple/code-style/)。
+
+---
+
+# Apple 架构
+
+> Home Assistant Apple 应用是如何组织的。源代码文件夹、共享代码、Current 环境，以及每次改动都要遵循的规则。
+
+Source: https://www.hasscn.top/contributors/companion/apple/architecture/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/iOS/blob/main/Package.resolved.
+
+Apple 应用最初是一个带有少量原生附加功能的网页视图，后来发展成一个混合代码库，包含原生引导流程、传感器、小组件、App Intents、Apple Watch 应用、CarPlay 和实时活动。一个仓库即可构建所有这些内容，覆盖 iOS、iPadOS、watchOS，以及通过 Mac Catalyst 运行的 macOS。
+
+## 技术栈
+
+- **Swift**，新 UI 使用 SwiftUI。较旧的界面以及 Apple 框架需要的地方仍在使用 UIKit。
+- **Xcode**，使用 `HomeAssistant.xcodeproj`。依赖项为 Swift 包。
+- **[Fastlane](https://fastlane.tools/)** 用于代码检查、测试、版本管理和分发。
+- **[WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)** 用于前端，应用与前端之间通过 JavaScript 消息总线通信。
+- **[WidgetKit](https://developer.apple.com/documentation/widgetkit)** 和 **[App Intents](https://developer.apple.com/documentation/appintents)** 用于小组件、控件和快捷指令。
+
+你最常接触到的库：
+
+- [HAKit](https://github.com/home-assistant/HAKit)：Home Assistant API 客户端，用于 WebSocket 和 REST API。
+- [GRDB.swift](https://github.com/groue/GRDB.swift)：SQLite 存储。
+- [Alamofire](https://github.com/Alamofire/Alamofire)：HTTP。
+- [PromiseKit](https://github.com/mxcl/PromiseKit)：较旧代码中的 promise。新代码使用 async 和 await。
+- [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)：类型安全的 SF Symbols。
+- [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)：钥匙串存储。
+- [XCGLogger](https://github.com/DaveWoodCom/XCGLogger)：日志记录，通过 `Current.Log` 使用。
+- [ObjectMapper](https://github.com/tristanhimmelman/ObjectMapper)：较旧模型中的 JSON 映射。
+
+## 源代码文件夹
+
+| 文件夹 | 内容 |
+| --- | --- |
+| `Sources/App` | iPhone 和 iPad 应用：引导流程、设置、网页视图、摄像头、通知、kiosk 模式 |
+| `Sources/Shared` | 所有 target 共享的代码：API 和网络、数据库、模型、传感器、位置、Assist、通知、小组件支持 |
+| `Sources/Extensions` | 应用扩展：小组件、App Intents、intent、分享、通知服务和内容、推送提供方，以及 Matter |
+| `Sources/Watch`, `Sources/WatchApp` | Apple Watch 应用及其与手机的通信 |
+| `Sources/CarPlay` | CarPlay 模板和操作 |
+| `Sources/MacBridge` | Catalyst 构建的 Mac 专用代码 |
+| `Sources/Thread` | Thread 凭据的管理与共享 |
+| `Sources/Improv` | 使用 Improv 通过蓝牙设置设备 |
+| `Sources/PushServer` | 推送中继服务器，一个独立的 Swift 包 |
+| `Sources/SharedPush` | 推送通知负载的解析。推送服务器保留自己的副本 |
+| `Sources/SharedTesting` | 测试辅助工具 |
+| `Tests` | 单元测试、UI 测试、快照测试和小组件测试 |
+| `Configuration` | Xcode 构建设置 |
+| `fastlane` | Fastlane lanes |
+
+仓库在 [`Sources/`](https://github.com/home-assistant/iOS/tree/main/Sources) 下还有更小的模块，例如 `HADesignSystem` 和 `HAModels`。
+
+## 代码放在哪里
+
+一个功能往往出现在不止应用一个地方。一个实体（entity）操作可能同时出现在应用、小组件、手表、快捷指令和 CarPlay 中。在动手之前，先决定代码应该放在哪里：
+
+1. 多个 target 都需要的逻辑放在 `Sources/Shared`。
+2. 只属于某一个界面的代码放在对应的 target 中，例如 `Sources/Extensions/Widgets` 或 `Sources/CarPlay`。
+3. 大多数功能从 `Sources/App` 开始。先去那里看看事情是怎么做的。
+4. 在编写新代码之前，先看看 `Tests/App` 和 `Tests/Shared` 中的示例。
+
+扩展在严格的限制下运行，无法使用应用能用的所有 API。共享代码必须保证在扩展中可以安全使用。
+
+## Current 环境
+
+代码库中最重要的模式是全局的 `Current`，它是一个 `AppEnvironment`，持有所有依赖项：日期、服务器、日志器、数据库等等。它遵循 Point-Free 的 [How to control the world](https://www.pointfree.co/blog/posts/21-how-to-control-the-world) 中的"World"模式。
+
+生产代码从它读取：
+
+```swift
+let now = Current.date()
+let server = Current.servers.all.first
+Current.Log.info("Something happened")
+```
+
+测试则替换它们需要的部分：
+
+```swift
+Current.date = { Date(timeIntervalSince1970: 1_000_000) }
+Current.servers = FakeServerManager()
+```
+
+绝不要在测试之外对 `Current` 赋值。一旦这样做，一条自定义 SwiftLint 规则会让 CI 失败。
+
+## 每次改动都要遵循的规则
+
+这些规则来自项目自身的指南，评审者会将它们应用于每一个拉取请求（pull request）：
+
+- **每个文件一个类型**，文件以该类型命名。唯一例外是嵌套在类型内部的小型私有辅助类型。
+- **每个 SwiftUI 视图都有一个 `#Preview`。**
+- **每个屏幕一个标题。** 如果一个屏幕的 `List` 以 `AppleLikeListTopRowHeader` 开头，它的标题已经显示在该头部中，因此不要再设置 `.navigationTitle`。否则用户滚动时会出现两个标题叠加。
+- **确认对话框放在它的触发器上。** 把 `.confirmationDialog` 放在打开它的那个 `Button` 上，而不是放在父级 `List`、`Section` 或其他容器上。这样对话框就与它自己的控件绑定，不会因无关的控件而触发。
+- **仅限 Beta 的功能使用 `Current.isTestFlight`**，不要用其他任何方式：不用构建设置、`#if` 分支或隐藏的设置。每个将功能置于该开关之后的拉取请求，都要附带第二个草稿状态的拉取请求，用于移除该开关，它从第一个拉取请求分出并与之关联。这样把功能移出 Beta 只需一次合并。
+- **传感器是可选加入的。** 在用户开启传感器之前，任何东西都不会上报，应用更新也绝不会开始上报新的内容。当前无法读取的传感器仍会列出，状态（state）为 `unavailable`。如果它需要某项权限，开启它的操作就是请求该权限的时机。启用是按服务器进行的：新添加的服务器默认不启用任何东西。
+
+## 与 Home Assistant 通信
+
+与 Android 应用一样，该应用通过两种方式与 Home Assistant 通信：
+
+- **移动应用 API。** 在引导流程中，`HomeAssistantAPI`（位于 [`Sources/Shared/API/HAAPI.swift`](https://github.com/home-assistant/iOS/blob/main/Sources/Shared/API/HAAPI.swift)）会向 `mobile_app` 集成（integration）注册该应用。此后，传感器、位置更新和其他设备（device）数据通过它获得的 webhook，经由 `WebhookManager` 发送到服务器。应用注册时支持加密，`WebhookPayloadCrypto` 负责加密负载。传感器位于 `Sources/Shared/API/Webhook/Sensors`。相关服务器端内容请参阅[移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/)。
+- **WebSocket 和 REST API**，通过 [HAKit](https://github.com/home-assistant/HAKit) 使用，用于实体状态和操作等。新的服务器调用请使用它，并配合 `async` 和 `await`。
+
+## 与前端通信
+
+网页视图加载 Home Assistant 前端，并通过外部认证向其传递访问令牌，因此用户无需登录两次。应用与前端通过外部总线交换消息，例如打开原生设置或扫描二维码。前端一侧的内容记录在[外部认证](https://www.hasscn.top/contributors/frontend/reference/external-auth/)和[外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)中。
+
+---
+
+# Apple 目标
+
+> Apple 项目中的应用、扩展、Apple Watch、CarPlay 和 Mac 目标，以及当你的改动涉及共享代码时需要检查的内容。
+
+Source: https://www.hasscn.top/contributors/companion/apple/targets/
+
+Xcode 项目从同一套代码构建出许多产品。共享代码中的改动可能会影响到所有产品，因此请检查你的改动涉及哪些产品。
+
+## 各个 scheme
+
+| Scheme | 构建内容 |
+| --- | --- |
+| `App-Debug` | 应用，用于本地开发。从这里开始 |
+| `App-Release` | 应用，发布版本 |
+| `Tests-Unit` | CI 运行的单元测试 |
+| `Tests-UI` | UI 测试和端到端引导测试 |
+| `WatchApp` | Apple Watch 应用 |
+| `Extensions-*` | 每个应用扩展各一个，例如 `Extensions-Widgets` |
+
+## iPhone 和 iPad
+
+主应用，位于 `Sources/App`。大多数功能都从这里开始。
+
+## 小组件、控件和 App Intents
+
+`Sources/Extensions/Widgets` 和 `Sources/Extensions/AppIntents` 支持主屏幕和锁定屏幕小组件、控制中心控件以及快捷指令。它们以扩展的形式运行，在应用之外。
+
+出现在小组件、手表、CarPlay 和快捷指令中的条目共享同一个模型 `MagicItem`。如果你添加一种新的条目或操作类型，它很可能需要在所有这些地方都能正常工作。
+
+## 通知
+
+多个目标负责处理通知：
+
+- 通知服务扩展（notification service extension），在通知显示之前对其进行修改，例如下载附件。
+- 通知内容扩展（notification content extension），用于通知的展开视图，例如摄像头画面。
+- 推送提供方扩展（push provider extension），用于家庭网络中的本地推送。
+
+实时活动（Live Activities）是应用和小组件的一部分。在处理通知时，请检查所有这些部分。请参阅[用户文档](https://companion.home-assistant.io/docs/notifications/notifications-basic)了解用户可以用它们做什么。
+
+## Apple Watch
+
+手表应用位于 `Sources/Watch` 和 `Sources/WatchApp`，其复杂功能（complications）和小组件位于 `Sources/WatchWidgets`。对操作、通知、复杂功能或共享设置的改动通常也需要在手表上进行测试。手表有自己的测试，由 `bundle exec fastlane test` 在手表模拟器上运行。
+
+## CarPlay
+
+`Sources/CarPlay` 包含受支持实体的模板、列表项、筛选器和操作。
+
+## 分享和 Matter
+
+分享扩展处理从其他应用分享到 Home Assistant 的内容。Matter 扩展是添加 Matter 设备流程的一部分。如果你的改动涉及传入内容或设备设置，请检查这些部分。
+
+## Mac
+
+Mac 应用使用 Mac Catalyst 从同一套代码构建。`Sources/MacBridge` 包含 Mac 特有的部分。即使你只开发 iOS 功能，共享代码也会为 Mac 编译，因此必须能在那里构建。
+
+## 推送服务器
+
+`Sources/PushServer` 是一个独立的 Swift 包，用于推送中继。它不属于 Xcode 项目，并且有自己的测试。它携带了 `Sources/SharedPush` 中通知解析器的一份副本：当你修改其中一处时，请判断另一处是否也需要相同的改动。请参阅[测试](https://www.hasscn.top/contributors/companion/apple/testing/#the-push-server)。
+
+---
+
+# Apple 代码风格
+
+> Apple 项目中的 SwiftFormat、SwiftLint、RuboCop 和 Yamllint，以及审查者关注的编码规范。
+
+Source: https://www.hasscn.top/contributors/companion/apple/code-style/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/iOS/blob/main/.github/workflows/ci.yml.
+
+Apple 项目会自动格式化并检查（lint）其代码，因此代码审查可以专注于行为和边界情况，而不是风格。
+
+## 工具
+
+| 工具 | 检查内容 | 配置文件 |
+| --- | --- | --- |
+| [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) | Swift 格式化 | `.swiftformat` |
+| [SwiftLint](https://github.com/realm/SwiftLint) | SwiftFormat 未覆盖的 Swift 规则，以及自定义规则 | `.swiftlint.yml` |
+| [RuboCop](https://rubocop.org) | Fastlane 的 Ruby 代码 | `.rubocop.yml` |
+| [Yamllint](https://yamllint.readthedocs.io/) | 工作流及其他 YAML | `.yamllint.yml` |
+
+## 运行它们
+
+```bash
+# Report problems, change nothing
+bundle exec fastlane lint
+
+# Fix what can be fixed automatically
+bundle exec fastlane autocorrect
+```
+
+在每次提交前运行 `autocorrect`。或者让 git 替你完成：
+
+```bash
+bundle exec fastlane install_git_hooks
+```
+
+在 Xcode 中，这些检查工具只显示警告，不会修改你的代码。CI 还会运行 Yamllint，它不属于 `lint` lane 的一部分。
+
+## 配置强制执行的内容
+
+- **格式化**：每行最多 120 个字符，参数和集合在第一个元素之前换行，仅在初始化器中使用 `self`，`guard` 和 `else` 位于同一行，且不使用文件头注释。
+- **SwiftLint** 使用规则白名单，而非所有默认规则。其中包括：禁止 `force_cast` 和 `force_try`，以及较低的圈复杂度。
+- **自定义 SwiftLint 规则**：在测试之外绝不向 `Current` 赋值，并使用 `SFSafeSymbols` 而不是原始的 SF Symbol 名称。
+
+```swift
+// Wrong
+Image(systemName: "house")
+
+// Right
+Image(systemSymbol: .house)
+```
+
+### 抑制某条规则
+
+使用 `// swiftlint:disable` 时要小心。CI 会在每个拉取请求（pull request）中查找新增的此类注释，并在发现时进行评论（针对来自仓库本身分支的拉取请求），以便维护者确认它确实有必要。每一次抑制都需要充分的理由。
+
+## 约定
+
+- **每个文件一个类型**，以该类型命名，并且每个 SwiftUI 视图都要有 `#Preview`。参见[每次更改的规则](https://www.hasscn.top/contributors/companion/apple/architecture/#rules-for-every-change)。
+- **使用 `Current.Log` 记录日志**，绝不使用 `print` 或 `NSLog`。
+- **小而命名良好的类型和函数**，便于独立测试。
+- **共享代码放入共享模块**，而不是在各个 target 之间复制。不要把对某个 target 的假设写进共享代码或扩展代码中。
+- **面向用户的文本**放在 `en.lproj/Localizable.strings` 中。SwiftGen 会生成你在代码中使用的 `L10n` 访问器，翻译来自 [Lokalise](https://www.hasscn.top/contributors/translate/)。
+
+## 生成的文件
+
+有些文件由工具或工作流生成，例如 `L10n` 访问器以及图标和颜色集。生成的文件通常会在顶部注释中说明这一点。不要手动编辑它们：修改源内容并运行相应工具。当你改动 Ruby 或工作流代码时，请确保其检查工具仍然通过。
+
+---
+
+# 测试 Apple 应用
+
+> Apple 项目中的单元测试、快照测试、UI 测试和端到端测试，使用 Current 进行模拟，以及补丁覆盖率门槛。
+
+Source: https://www.hasscn.top/contributors/companion/apple/testing/
+
+Apple 应用运行在多个目标（target）上，并且大量代码在这些目标之间共享。当人们不断修改引导流程、小组件、通知、手表应用等内容时，测试能让这些共享代码保持稳定。
+
+## 运行测试
+
+```bash
+bundle exec fastlane test
+```
+
+这会在 iPhone 模拟器上运行 `Tests-Unit` scheme，并在 Apple Watch 模拟器上运行手表测试。在 Xcode 中，选择 `Tests-Unit` scheme，然后按下 <kbd>Command</kbd>+<kbd>U</kbd>。
+
+## 测试的位置
+
+| 文件夹 | 测试内容 |
+| --- | --- |
+| `Tests/App` | 应用行为 |
+| `Tests/Shared` | 共享逻辑：模型、数据库、传感器、通知和工具类 |
+| `Tests/Widgets` | 小组件 |
+| `Tests/WatchAppTests`, `Tests/WatchComplications` | 手表应用及其表盘复杂功能 |
+| `Tests/UI` | UI 测试和端到端测试 |
+| `Tests/Mocks` | 各测试共享的模拟对象（mock） |
+
+测试的结构与 `Sources` 一致。共享的辅助代码位于 `Sources/SharedTesting`。
+
+## 使用 Current 进行模拟
+
+每个依赖项都存放在 [`Current`](https://www.hasscn.top/contributors/companion/apple/architecture/#the-current-environment) 中，因此测试只需在其 setup 中替换所需的部分：
+
+```swift
+override func setUp() {
+    super.setUp()
+    Current.date = { Date(timeIntervalSince1970: 1_000_000) }
+    Current.servers = FakeServerManager()
+}
+```
+
+## 快照测试
+
+新的 SwiftUI 视图会使用 `SharedTesting` 中的辅助工具进行快照测试，覆盖浅色和深色模式：
+
+```swift
+import SharedTesting
+
+func testMyView() {
+    assertLightDarkSnapshots(of: MyView())
+}
+```
+
+参考图像存放在测试旁边的 `__Snapshots__` 文件夹中。如果你有意修改了某个视图，请在提交更新后的图像之前先仔细查看它们。
+
+## 端到端测试
+
+[`Tests/UI/OnboardingE2ETests.swift`](https://github.com/home-assistant/iOS/blob/main/Tests/UI/OnboardingE2ETests.swift) 会针对真实的 Home Assistant 运行引导流程：从欢迎界面一直到前端通过外部总线打开的原生设置界面。它每晚在 `E2E` 工作流中运行，而不会在拉取请求（pull request）上运行。
+
+它所驱动的元素具有来自 [`Sources/App/Accessibility/`](https://github.com/home-assistant/iOS/tree/main/Sources/App/Accessibility) 中 `AccessibilityIdentifier` 的标识符。请在那里添加用例，而不要匹配可见文本，因为翻译会破坏文本匹配。
+
+如果要自己运行它，请先从 `.github/e2e/homeassistant` 启动 Home Assistant 实例（其 README 说明了具体方法），然后：
+
+```bash
+bundle exec fastlane e2e
+```
+
+## 推送服务器
+
+`Sources/PushServer` 是一个独立的 Swift 包，拥有自己的测试：
+
+```bash
+cd Sources/PushServer
+swift test
+```
+
+## 补丁覆盖率
+
+CI 要求你的拉取请求所更改的代码行至少有 90% 被单元测试覆盖。低于该标准时，**Patch coverage** 检查会失败，并且任务摘要会列出没有测试运行的代码行。对于来自仓库本身分支的拉取请求，机器人还会请求更改，并在一次推送达到标准后撤销该审查。
+
+只有可执行的代码行才计入。`Tests-Unit` 的任何目标都不会构建的文件（例如仅限手表或仅限小组件的代码）会被跳过，没有更改任何可覆盖代码的拉取请求也是如此。当代码确实无法进行单元测试时（例如 UIKit 的底层管道代码），维护者可以撤销该审查。请在拉取请求描述中说明原因。
+
+你可以在本地得到相同的数字。请从仓库根目录运行以下命令，而不是从 `Sources/PushServer` 运行：
+
+```bash
+bundle exec fastlane test
+python3 Tools/xccov_to_lcov.py \
+  fastlane/test_output/Tests-Unit.xcresult \
+  --lcov fastlane/test_output/coverage.lcov
+python3 Tools/diff_coverage.py fastlane/test_output/coverage.lcov \
+  --base origin/main
+```
+
+## 良好习惯
+
+- 每个测试只验证一种行为。
+- 优先编写确定性测试，而不是对时序敏感的测试。
+- 当某项更改会影响多个目标时，尽量在靠近共享逻辑的地方进行测试。
+
+---
+
+# 提交 Apple 拉取请求
+
+> Apple 仓库中的检查清单、拉取请求模板，以及审核过程中可以期待的内容。
+
+Source: https://www.hasscn.top/contributors/companion/apple/submitting/
+
+当你的更改准备就绪后，向 [home-assistant/iOS](https://github.com/home-assistant/iOS) 的 `main` 分支发起一个拉取请求（pull request）。
+
+## 在发起之前
+
+- **运行 autocorrect 和 lint**：先运行 `bundle exec fastlane autocorrect`，再运行 `bundle exec fastlane lint`。
+- **运行测试**：`bundle exec fastlane test`。为你修改的行为添加或更新测试。记住[补丁覆盖率](https://www.hasscn.top/contributors/companion/apple/testing/#patch-coverage)门槛。
+- **构建你改动过的部分。** 检查你的更改是否影响小组件、手表、CarPlay、扩展或 Mac。参见[目标](https://www.hasscn.top/contributors/companion/apple/targets/)。
+- **保持改动小巧。** 每个拉取请求只包含一个想法。如果它变大了，就拆分成后续的拉取请求。
+- **用 `Current.isTestFlight` 限制未完成的功能**，并同时发起移除该限制的草稿拉取请求。参见[每项更改的规则](https://www.hasscn.top/contributors/companion/apple/architecture/#rules-for-every-change)。
+- **阅读 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)。** 你可以使用 AI 工具，但必须理解并能够解释你提交的所有内容。来自自主代理的拉取请求会被关闭。
+
+## 拉取请求
+
+不要删除模板中的任何内容。请填写：
+
+- **AI 政策**：确认你已阅读，并准确选择一个描述你如何使用 AI 的选项。
+- **摘要**：你更改了什么以及为什么。
+- **截图**：针对前端之外的 UI 更改，需提供浅色和深色模式下的截图。
+- **文档**：添加、更改或移除功能的更改需要在[用户文档](https://github.com/home-assistant/companion.home-assistant)中提交拉取请求。请附上链接。
+
+草稿拉取请求是在一切完善之前，就方向或架构获取早期反馈的好方法。
+
+## 审核
+
+审核者会关注：
+
+- 是否正确。
+- 是否对其他目标造成回归。
+- 测试覆盖率。
+- 是否易于维护。
+- 共享代码是否位于正确的模块中。
+
+CI 是审核的一部分，而不是它的替代品。以聚焦的后续提交来处理评论，重新运行 linter 和测试，并在 CI 通过后请求再次审核。用自己的话回答维护者提出的问题。
+
+## 保持你的分支最新
+
+你不需要在 `main` 每次更新时都更新你的分支。只在有理由时更新：出现冲突、最近的更改导致 CI 失败，或者你需要 `main` 上的某个修复。在审核开始之前，rebase 是可以的。审核开始后，选择对现有讨论干扰最小的更新方式。
+
+## 字符串
+
+翻译在 [Lokalise](https://www.hasscn.top/contributors/translate/) 上管理。如果你添加或删除字符串，请保持生成的文件一致。不再使用的字符串会通过 **Lokalise: Delete Keys** 工作流从 Lokalise 和应用中移除，参见[持续集成](https://www.hasscn.top/contributors/companion/apple/ci/#on-your-pull-request)。
+
+---
+
+# Apple 持续集成
+
+> Apple 项目的 GitHub Actions 工作流。哪些会在你的拉取请求、合并之后以及按计划运行。
+
+Source: https://www.hasscn.top/contributors/companion/apple/ci/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/iOS/tree/main/.github/workflows.
+
+Apple 项目使用 GitHub Actions 和 Fastlane 进行代码检查、测试、构建、翻译和分发。CI 检查的不仅仅是代码能否编译：代码风格、字符串和覆盖率也是审查的一部分。
+
+## 在你的拉取请求上
+
+`ci.yml` 工作流会在每个拉取请求和每次推送到 `main` 时运行。
+
+**Lint** 在 Linux 上运行，因此速度很快：Yamllint、RuboCop、SwiftLint 和 SwiftFormat。参见[代码风格](https://www.hasscn.top/contributors/companion/apple/code-style/)。
+
+**Test** 在 macOS 上使用当前 Xcode 运行。它会解析 Swift 包并运行 `bundle exec fastlane test`。它会上传：
+
+- 代码覆盖率。
+- 测试结果和日志。
+- 应用的模拟器构建版本 `ios-simulator`，你可以用它来[测试前端更改](https://www.hasscn.top/contributors/companion/apple/get-started/#only-testing-the-frontend)，而无需构建应用。
+
+**Patch coverage** 检查你更改的行中至少 90% 被测试覆盖。参见[补丁覆盖率](https://www.hasscn.top/contributors/companion/apple/testing/#patch-coverage)。
+
+另外两项检查会查看你的差异（diff）。对于来自仓库本身分支的拉取请求，当它们发现问题时会留下评论：
+
+- 你的差异中新增的 `swiftlint:disable`。
+- 不再使用的本地化字符串，由 [`Tools/detect_unused_strings.py`](https://github.com/home-assistant/iOS/blob/main/Tools/detect_unused_strings.py) 检测。评论会列出这些键，供 **Lokalise: Delete Keys** 工作流使用，该工作流会从 Lokalise 中删除它们，并打开一个将它们从应用中移除的拉取请求。
+
+## 其他工作流
+
+| 工作流 | 运行时机 | 作用 |
+| --- | --- | --- |
+| `distribute.yml` | 每次推送到 `main` 时，或由维护者手动触发 | 构建并签名 iOS 和 Mac 应用，并上传到 App Store Connect。参见[发布](https://www.hasscn.top/contributors/companion/apple/releases/) |
+| `tag_macos_release.yml`、`release_macos.yml` | 手动触发，或在 `release/*/*` 标签上 | 将 Mac 构建版本发布为 GitHub release |
+| `e2e.yml` | 每天 05:00 UTC，或手动触发 | 针对真实的 Home Assistant 运行[端到端测试](https://www.hasscn.top/contributors/companion/apple/testing/#end-to-end-test) |
+| `push_ci.yml` | 在 `Sources/PushServer` 发生更改时 | 为推送服务器运行 `swift test` |
+| `push_deploy.yml` | 手动触发 | 构建推送服务器镜像并发布到 GitHub Container Registry |
+| `download_localized_strings.yml` | 每天 06:00 UTC，或手动触发 | 将新字符串上传到 Lokalise，下载翻译，并打开一个拉取请求 |
+| `delete_lokalise_keys.yml`、`auto_delete_unused_strings.yml` | 手动触发 | 从 Lokalise 和应用中删除未使用的字符串 |
+| `update_frontend_colors.yml`、`update_brand_icons.yml`、`update_material_design_icons.yml` | 每周，或手动触发 | 重新生成前端颜色、品牌图标和 Material Design Icons，并在它们发生变化时打开拉取请求 |
+| `set_version.yml` | 手动触发 | 更新 [`Configuration/Version.xcconfig`](https://github.com/home-assistant/iOS/blob/main/Configuration/Version.xcconfig) 中的版本并打开一个拉取请求 |
+
+macOS 运行器上没有 Docker，因此端到端测试会使用 pip 在运行器上的虚拟环境中安装 Home Assistant。默认情况下，它会从 `dev` 分支安装 Core。手动运行时可以选择安装最新发布版本，或从 PyPI 安装特定版本。
+
+---
+
+# Apple 版本发布
+
+> 对 Apple 应用的更改如何从合并的 pull request 一路到达 App Store Connect、版本号如何设置，以及 Mac 构建如何成为 GitHub release。
+
+Source: https://www.hasscn.top/contributors/companion/apple/releases/
+
+每个合并的 pull request 都会被构建、签名，并上传到 App Store Connect。构建从那里到达 TestFlight 测试人员和 App Store。本页介绍这条路径中位于仓库内的部分，以及如何自行构建一个 release。
+
+## 从合并到 App Store Connect
+
+### 每次推送到 main
+
+当 pull request 被合并到 `main` 时，`distribute.yml` 工作流会使用 Fastlane 构建两个应用：
+
+- **iOS**：`bundle exec fastlane ios build` 为 App Store 归档应用，并将其上传到 App Store Connect。
+- **Mac**：`bundle exec fastlane mac build` 从同一个归档构建 Mac 应用两次。一次构建 Developer ID 版本（由 Apple 进行公证），另一次构建 Mac App Store 软件包（上传到 App Store Connect）。
+
+每次运行还会将其构建保存为 artifacts：iOS 的 `.ipa`、Developer ID Mac 应用（`mac-developer-id.zip`）、Mac App Store 软件包，以及调试符号。
+
+构建号是 [`Configuration/Version.xcconfig`](https://github.com/home-assistant/iOS/blob/main/Configuration/Version.xcconfig) 中的 `CURRENT_PROJECT_VERSION`，后跟工作流运行的编号。该运行编号将 App Store Connect 中的构建与其来源的 commit 关联起来。
+
+### TestFlight
+
+任何人都可以[加入 TestFlight beta](https://www.home-assistant.io/ios/beta/)。Beta 用户能发现测试无法发现的问题。
+
+尚未准备好面向所有人的功能可以仅在 TestFlight 上发布，由 `Current.isTestFlight` 控制。将此类功能移出 beta 的方式，就是合并其移除该开关的草稿 pull request。参见[每次更改的规则](https://www.hasscn.top/contributors/companion/apple/architecture/#rules-for-every-change)。
+
+将构建推送给 TestFlight 测试人员以及发布到 App Store 的操作在 App Store Connect 中进行，而不是在仓库中。
+
+### 设置版本号
+
+用户看到的版本号是 [`Configuration/Version.xcconfig`](https://github.com/home-assistant/iOS/blob/main/Configuration/Version.xcconfig) 中的 `MARKETING_VERSION`。维护者通过 **Version: Set Version** 工作流（`set_version.yml`）来修改它，该工作流会运行 `bundle exec fastlane set_version`，并打开一个包含新版本的 pull request。
+
+### GitHub 上的 Mac 版本发布
+
+Developer ID Mac 应用也会发布在 [GitHub releases 页面](https://github.com/home-assistant/iOS/releases)上。
+
+1. 维护者使用 release 标签（例如 `release/2026.5.0/2026.1987`）和 `main` 上的一个 commit 运行 **Tag macOS Release** 工作流。标签中的最后一个数字是构建该 commit 的 Distribute 运行的编号。
+2. 该工作流会等待那个 Distribute 运行成功，为该 commit 打上标签，然后启动 **Release macOS** 工作流。
+3. **Release macOS** 会创建一个带有自动生成 release notes 的 GitHub pre-release，并附上来自 Distribute 运行的 Developer ID 应用。
+
+对已有的 release 再次运行会更新该 release，并按维护者之前设置的方式保留其 pre-release 状态。
+
+### 商店信息
+
+App Store 的描述、关键词和 release notes 位于 `fastlane/metadata` 中，每种语言一个文件夹。它们与应用的字符串一样，在 [Lokalise](https://www.hasscn.top/contributors/translate/) 上进行翻译。`update_lokalise_metadata` lane 将商店文本上传到 Lokalise，`update_asc_metadata` 将翻译上传到 App Store Connect。
+
+## 自行构建 release
+
+只有当你拥有该项目 Apple 开发者团队的访问权限时才需要这样做。两个 lane 都会使用团队的证书进行签名，并上传到 App Store Connect。
+
+Fastlane 从环境变量或 `.env` 文件读取其配置，例如 Apple ID 和团队 ID。相关值请参见 [`.env.sample`](https://github.com/home-assistant/iOS/blob/main/.env.sample)。然后运行：
+
+```bash
+# Build and upload the Mac app
+bundle exec fastlane mac build
+
+# Build and upload the iOS app
+bundle exec fastlane ios build
+```
+
+两者都会将其构建保存到 `build/` 中。
+
+对于你自己的设备，你不需要以上任何步骤：使用你自己的团队运行 `App-Debug` scheme，如[入门指南](https://www.hasscn.top/contributors/companion/apple/get-started/#3-set-up-code-signing)中所述。
+
+---
+
+# 移动应用 API
+
+> 应用如何通过 mobile_app 集成连接到 Home Assistant。包括注册、webhook、传感器、位置、通知以及 web 视图。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/
+
+官方伴侣应用（companion apps）通过 Core 中的 `mobile_app` 集成与 Home Assistant 通信。它是一个公开的 API：任何应用都可以使用它，在 Home Assistant 中显示为一个设备（device），上报传感器和位置信息，并接收通知。本节内容面向参与官方应用开发的人员，以及任何构建自己应用的人。
+
+## 整体运作方式
+
+1. **查找并登录。** 应用找到实例，用户通过 OAuth 2 登录。应用获得访问令牌（access token）和刷新令牌（refresh token）。
+2. **注册。** 应用使用这些令牌向 `mobile_app` 注册自身。Home Assistant 会为它创建一个设备，并返回一个 webhook ID，以及可选的用于加密的密钥和用于 Home Assistant Link 的 URL。
+3. **发送数据。** 从此以后，应用将传感器更新、位置信息和其他请求发送到 webhook。Webhook 请求无需令牌：webhook ID 本身就是凭证。
+4. **接收通知。** Home Assistant 通过 WebSocket 连接或应用使用的推送服务推送通知。
+5. **展示前端。** 应用在 web 视图中展示前端，并向其传递一个令牌，这样用户就不需要登录两次。
+
+[伴侣应用架构](https://www.hasscn.top/contributors/architecture/platform/companion-apps/) 提供了更宏观的介绍。
+
+## 页面
+
+- [连接与注册](https://www.hasscn.top/contributors/companion/mobile-app-api/setup/)：发现、登录以及注册调用。
+- [发送数据](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/)：webhook、其 URL、请求格式以及所有请求类型。
+- [加密](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/)：使用 libsodium 加密 webhook 流量。
+- [传感器](https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/)：注册和更新传感器，并保持其启用状态同步。
+- [通知](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/)：WebSocket 推送、云端推送，以及推送服务器的契约。
+- [Web 视图](https://www.hasscn.top/contributors/companion/mobile-app-api/webview/)：无需二次登录即可展示前端。
+
+## 代码位置
+
+该集成位于 Core 的 [`homeassistant/components/mobile_app/`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/mobile_app)：
+
+| 文件 | 作用 |
+| --- | --- |
+| `http_api.py` | 注册端点 |
+| `webhook.py` | Webhook 及大多数请求类型 |
+| `helpers.py` | 加密与响应 |
+| `websocket_api.py` | WebSocket 推送通道 |
+| `notify.py` | 发送通知 |
+| `live_activity/` | iOS 的 Live Activity 令牌及其两种请求类型 |
+
+当代码与本文档不一致时，以代码为准。对该集成的更改遵循正常的 [Core 贡献流程](https://www.hasscn.top/contributors/core/)。
+
+---
+
+# 连接与注册
+
+> 查找 Home Assistant 实例，使用 OAuth 2 登录用户，并通过 mobile_app 集成注册应用。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/setup/
+
+在应用能够发送任何内容之前，它需要找到实例、登录用户并完成自身注册。每个服务器只需执行一次。
+
+## 查找实例
+
+Home Assistant 通过 zeroconf 在本地网络上以 `_home-assistant._tcp.local.` 的形式对外宣告自己。浏览该服务即可为用户提供一个实例列表。如果没有找到任何实例，则请用户输入 URL。有关该服务宣告的内容，请参阅[实例发现](https://www.hasscn.top/contributors/core/internals/instance-discovery/)。
+
+## 登录用户
+
+Home Assistant 使用带有 [IndieAuth](https://indieauth.spec.indieweb.org/) 扩展的 OAuth 2 来进行客户端认证。无需客户端注册：客户端 ID 就是你的应用网站的 URL，并且重定向 URI 必须具有相同的 scheme、主机和端口。
+
+原生应用需要一个类似 `myapp://auth-callback` 的重定向 URI，它位于不同的主机上。为了允许这种情况，请在客户端 ID 对应的页面中添加一个 link 标签。Home Assistant 会读取该页面的前 10 kB 内容：
+
+```html
+<link rel="redirect_uri" href="myapp://auth-callback">
+```
+
+除了 link 标签之外，该页面也可以是一个 OAuth 客户端 ID 元数据文档：一个包含你的 `client_id` 和 `redirect_uris` 列表的 JSON 对象。
+
+流程如下：
+
+1. 在浏览器中打开 `/auth/authorize`，并以 `client_id`、`redirect_uri` 以及可选的 `state` 作为查询参数。
+2. 用户登录后，Home Assistant 会携带一个 `code` 重定向到你的重定向 URI。
+3. 通过向 `/auth/token` 发送 POST 请求（表单编码，包含 `grant_type=authorization_code`、该 `code` 以及相同的 `client_id`）来用授权码换取令牌。
+
+你将获得一个有效期为 30 分钟的访问令牌，以及一个用于获取新访问令牌的刷新令牌。有关令牌的工作原理，请参阅[身份验证](https://www.hasscn.top/contributors/core/internals/auth-api/)。
+
+> [!NOTE]
+> 官方应用使用固定的客户端 ID，即 `https://home-assistant.io/iOS` 和 `https://home-assistant.io/android`，并使用 `homeassistant://auth-callback` 重定向，以及 Android 的两个 Wear OS 回调。Core 允许这些客户端无需抓取网站即可使用，因此即使没有互联网访问也能登录。对于你自己的应用，请使用你自己的客户端 ID。
+
+## 确保 mobile_app 已加载
+
+`mobile_app` 是 `default_config` 的一部分，因此在大多数安装中都会被加载。如果用户移除了 `default_config`，则需要在他们的 `configuration.yaml` 中添加 `mobile_app:` 并重启。
+
+要进行检查，请携带访问令牌调用 `GET /api/config`，并在 `components` 中查找 `mobile_app`。如果注册返回 404，则说明该集成未加载。
+
+## 注册应用
+
+向 `/api/mobile_app/registrations` 发送经过身份验证的 POST 请求：
+
+```json
+{
+  "device_id": "ABCDEFGH",
+  "app_id": "awesome_home",
+  "app_name": "Awesome Home",
+  "app_version": "1.2.0",
+  "device_name": "Robbie's iPhone",
+  "manufacturer": "Apple",
+  "model": "iPhone X",
+  "os_name": "iOS",
+  "os_version": "17.4",
+  "supports_encryption": true,
+  "app_data": {
+    "push_websocket_channel": true
+  }
+}
+```
+
+| 键 | 是否必需 | 类型 | 描述 |
+| --- | --- | --- | --- |
+| `app_id` | 是 | string | 你的应用的唯一标识符 |
+| `app_name` | 是 | string | 你的应用的名称 |
+| `app_version` | 是 | string | 你的应用的版本 |
+| `device_name` | 是 | string | 设备的名称。用于命名该设备及其实体（entity） |
+| `manufacturer` | 是 | string | 设备的制造商 |
+| `model` | 是 | string | 设备的型号 |
+| `os_name` | 是 | string | 操作系统的名称 |
+| `os_version` | 否，但请发送 | string | 操作系统的版本。Home Assistant 中的设备会将其用作软件版本。注册调用接受不包含该字段的请求，但随后设置注册会失败，并且其 webhook 无法工作 |
+| `device_id` | 否，但请发送 | string | 设备的稳定且唯一的标识符。如果没有提供，Home Assistant 会生成一个随机的 |
+| `supports_encryption` | 否 | boolean | 应用是否[加密](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/)其 webhook 流量。默认为 `false` |
+| `app_data` | 否 | object | 应用特定的数据。用于启用[通知](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/) |
+
+`app_id` 和 `device_id` 共同标识一个注册。使用相同的一对值再次注册会替换旧的注册：你会获得新的 webhook ID 和密钥，而旧的将停止工作。如果没有提供 `device_id`，则每次注册都会创建一个新的注册。
+
+Home Assistant 会以 `201 Created` 作为响应。请永久保存该响应，因为这是你唯一一次获得它的机会：
+
+```json
+{
+  "cloudhook_url": "https://hooks.nabu.casa/randomlongstring123",
+  "remote_ui_url": "https://randomlongstring123.ui.nabu.casa",
+  "secret": "qwerty",
+  "webhook_id": "abcdefgh"
+}
+```
+
+| 键 | 描述 |
+| --- | --- |
+| `webhook_id` | 用于[发送数据](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/)的 webhook 的 ID |
+| `secret` | 用于加密的密钥。仅在你发送了 `supports_encryption` 时才会设置 |
+| `cloudhook_url` | 通过 Home Assistant Link 的 webhook URL。仅当实例拥有有效订阅、已连接到云端，且用户不是仅本地访问时才会设置 |
+| `remote_ui_url` | 通过 Home Assistant Link 访问该实例的远程 URL。条件相同，但不要求云端连接 |
+
+不适用的值将为 `null`。
+
+注册完成后，Home Assistant 会为你的应用创建一个新设备，并带有用于其位置的设备追踪器。该追踪器会被添加到执行注册的用户的对应人员（person）中。当你[注册传感器](https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/)时，它们会随之出现。
+
+---
+
+# 发送数据
+
+> mobile_app webhook。使用哪个 URL、请求格式、响应，以及该 webhook 接受的所有请求类型。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/
+
+完成[注册](https://www.hasscn.top/contributors/companion/mobile-app-api/setup/)后，应用发送的所有内容都指向同一个 webhook。它不需要访问令牌：webhook ID 本身就是凭证。请像对待密码一样对待它。
+
+## 使用哪个 URL
+
+使用 webhook ID 构建 webhook URL：`<instance_url>/api/webhook/<webhook_id>`。然后按以下顺序尝试你拥有的 URL，当请求失败时切换到下一个：
+
+1. `cloudhook_url`，如果注册时返回了该 URL。
+2. `<remote_ui_url>/api/webhook/<webhook_id>`，如果注册时返回了 `remote_ui_url`。
+3. `<instance_url>/api/webhook/<webhook_id>`，使用用户配置的 URL。
+
+两个 Home Assistant Link URL 都可能随用户订阅的变化而出现或消失。[`get_config`](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/#get_config) 的响应中包含当前的 URL。
+
+### 家庭与外出
+
+某些路由器无法通过外部地址访问本地网络中的设备（不支持 NAT 回环，即 hairpinning）。如果用户通过动态 DNS 域名访问 Home Assistant，来自家庭内部的请求会失败。让用户告诉应用哪个 Wi-Fi 网络是家庭网络，并在该网络下使用内部 URL。
+
+## 通过 WebSocket API 发送
+
+当应用已经建立了 [WebSocket](https://www.hasscn.top/contributors/core/internals/websocket-api/) 连接时，可以通过它使用 `webhook/handle` 命令发送 webhook 请求：
+
+```json
+{
+  "id": 5,
+  "type": "webhook/handle",
+  "webhook_id": "abcdefgh",
+  "method": "POST",
+  "body": "{\"type\": \"get_zones\"}",
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}
+```
+
+`method` 是 `GET`、`HEAD`、`POST` 或 `PUT` 之一。`body` 和 `query` 是可选的字符串，`headers` 是一个可选的、值为字符串的对象。结果中包含响应的 `body`、`status` 和 `headers`：
+
+```json
+{
+  "id": 5,
+  "type": "result",
+  "success": true,
+  "result": {
+    "body": "[]",
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
+```
+
+## 请求
+
+每个请求都是一个带有 JSON 请求体的 HTTP POST（也支持 PUT）：
+
+```json
+{
+  "type": "<type of request>",
+  "data": {}
+}
+```
+
+某些类型不需要 `data`。如果注册时启用了加密，则每个请求都必须加密，参见[加密](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/)。
+
+## 响应
+
+| 状态 | 含义 |
+| --- | --- |
+| `200` | 已处理。当载荷不符合该类型的 schema、加密载荷无法解密、或类型未知时，也会返回此状态码，并带有空的 `{}`。Home Assistant 会记录详细信息 |
+| `201` | 注册了一个传感器 |
+| `400` | 请求体不是有效的 JSON、在启用加密的情况下请求未加密、在加密已开启时发送了 `enable_encryption`、或 `stream_camera` 收到了未知的摄像头 |
+| `404` | webhook 端点不存在，因为 `webhook` 集成（integration）未加载 |
+| `405` | 请求使用了 `GET`。该 webhook 只接受 `POST` 和 `PUT` |
+| `410` | 注册已被删除。告知用户并重新注册。在删除后 Home Assistant 重启之前，该 webhook 会像未知的 webhook 一样响应，返回空的 `200` |
+
+Home Assistant 未知的 webhook ID 的请求会得到空的 `200`，当 `mobile_app` 本身未加载时也是如此。这样，API 就不会暴露哪些 webhook 存在。
+
+请求体中的错误如下所示：
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "encryption_required",
+    "message": "Encryption required"
+  }
+}
+```
+
+如果注册使用了加密，带有内容的响应也会被加密。以下内容不会被加密：空的 `{}` 响应、对 `enable_encryption` 的响应，以及上述格式中的两种错误：`encryption_required` 和 `encryption_already_enabled`。由请求类型自身作为结果返回的错误会像其他响应一样被加密。例如，`stream_camera` 对未知摄像头会返回加密的 `{"success": false}` 和 `400`。因此不要只看状态码：请检查请求体中是否设置了 `encrypted`。
+
+## 请求类型
+
+### `update_location`
+
+更新应用的设备追踪器。
+
+```json
+{
+  "type": "update_location",
+  "data": {
+    "gps": [12.34, 56.78],
+    "gps_accuracy": 120,
+    "battery": 45
+  }
+}
+```
+
+| 键 | 类型 | 描述 |
+| --- | --- | --- |
+| `gps` | 列表 | 纬度和经度。需要 `gps_accuracy` |
+| `gps_accuracy` | 数字 | 位置的精度，单位为米。零或更大 |
+| `location_name` | 字符串 | 设备所在的地理位置区域（zone）的名称 |
+| `in_zones` | 列表 | 设备所在的地理位置区域的实体（entity）ID |
+| `battery` | 整数 | 电量百分比。零或更大 |
+| `speed` | 整数 | 速度，单位为米每秒。零或更大 |
+| `altitude` | 数字 | 海拔高度，单位为米 |
+| `course` | 整数 | 行进方向的角度，相对于正北。零或更大 |
+| `vertical_accuracy` | 整数 | 海拔高度的精度，单位为米。零或更大 |
+
+所有键都是可选的。发送 `in_zones` 时，Home Assistant 会忽略 `location_name`。
+
+### `register_sensor` 和 `update_sensor_states`
+
+注册传感器，以及更新一个或多个传感器。参见[传感器](https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/)。
+
+### `call_service`
+
+在 Home Assistant 中执行[动作（action）](https://www.hasscn.top/contributors/glossary/action/)。类型和键仍使用旧名称 service（服务）。
+
+```json
+{
+  "type": "call_service",
+  "data": {
+    "domain": "light",
+    "service": "turn_on",
+    "service_data": {
+      "entity_id": "light.kitchen"
+    }
+  }
+}
+```
+
+| 键 | 类型 | 描述 |
+| --- | --- | --- |
+| `domain` | 字符串 | 动作的域 |
+| `service` | 字符串 | 动作的名称 |
+| `service_data` | 对象 | 动作的数据。可选 |
+
+该动作以注册应用的用户身份运行。如果失败，Home Assistant 会记录错误，响应是一个没有请求体的 `200`。
+
+### `fire_event`
+
+触发一个事件。
+
+```json
+{
+  "type": "fire_event",
+  "data": {
+    "event_type": "my_custom_event",
+    "event_data": {
+      "something": 50
+    }
+  }
+}
+```
+
+| 键 | 类型 | 描述 |
+| --- | --- | --- |
+| `event_type` | 字符串 | 事件的类型 |
+| `event_data` | 对象 | 事件的数据。可选 |
+
+### `render_template`
+
+在一个请求中渲染一个或多个模板。`data` 中的每个键都是你自己命名的模板：
+
+```json
+{
+  "type": "render_template",
+  "data": {
+    "greeting": {
+      "template": "Hello {{ name }}, you are {{ states('person.paulus') }}.",
+      "variables": {
+        "name": "Paulus"
+      }
+    }
+  }
+}
+```
+
+| 键 | 类型 | 描述 |
+| --- | --- | --- |
+| `template` | 字符串 | 要渲染的模板 |
+| `variables` | 对象 | 模板的额外变量。可选 |
+
+响应使用相同的键：`{"greeting": "Hello Paulus, you are home."}`。渲染失败的模板会在其键下返回 `{"error": "<message>"}`，其他模板仍会正常渲染。
+
+### `update_registration`
+
+更新注册信息，例如在应用更新后或推送令牌变更时。
+
+```json
+{
+  "type": "update_registration",
+  "data": {
+    "app_data": {
+      "push_token": "abcd",
+      "push_url": "https://push.example.com/push"
+    },
+    "app_version": "2.0.0",
+    "device_name": "Robbie's iPhone",
+    "manufacturer": "Apple",
+    "model": "iPhone XR",
+    "os_version": "17.4"
+  }
+}
+```
+
+| 键 | 必需 | 类型 | 描述 |
+| --- | --- | --- | --- |
+| `app_version` | 是 | 字符串 | 应用的版本 |
+| `device_name` | 是 | 字符串 | 设备的名称 |
+| `manufacturer` | 是 | 字符串 | 设备的制造商 |
+| `model` | 是 | 字符串 | 设备的型号 |
+| `os_version` | 否 | 字符串 | 操作系统的版本 |
+| `app_data` | 否 | 对象 | 替换应用数据，例如用于启用[通知](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/) |
+
+响应是更新后的注册信息，不包含机密值。
+
+### `get_config`
+
+返回用于配置应用的信息。
+
+```json
+{
+  "type": "get_config"
+}
+```
+
+响应包含实例的 `latitude`、`longitude`、`elevation`、`unit_system`、`location_name`、`time_zone`、`components`、`version` 和 `theme_color`，以及：
+
+| 键 | 描述 |
+| --- | --- |
+| `hass_device_id` | 应用的设备在设备注册表中的 ID |
+| `instance_id` | 实例的唯一 ID |
+| `cloudhook_url`, `remote_ui_url` | 当前的 Home Assistant Link URL，当实例拥有有效订阅且用户不是仅本地访问时 |
+| `entities` | 注册中每个实体的启用状态，以注册时使用的唯一 ID 为键，参见[保持传感器同步](https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/#keep-the-enabled-state-in-sync) |
+
+### `get_zones`
+
+返回所有地理位置区域的状态，按实体 ID 排序。
+
+```json
+{
+  "type": "get_zones"
+}
+```
+
+### `enable_encryption`
+
+为现有注册开启加密。参见[加密](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/#enable-it-later)。
+
+### `stream_camera`
+
+返回用于串流摄像头的路径。
+
+```json
+{
+  "type": "stream_camera",
+  "data": {
+    "camera_entity_id": "camera.front_door"
+  }
+}
+```
+
+```json
+{
+  "mjpeg_path": "/api/camera_proxy_stream/camera.front_door",
+  "hls_path": "/api/hls/<token>/master_playlist.m3u8"
+}
+```
+
+当摄像头无法串流时，`hls_path` 为 `null`。将这些路径与你访问实例所用的 URL 组合使用。未知摄像头会返回 `{"success": false}` 和 `400`。如果注册使用了加密，该请求体也会被加密。
+
+### `conversation_process`
+
+向 [Assist](https://www.hasscn.top/contributors/glossary/assist/) 发送一句话，并返回对话代理的响应。
+
+```json
+{
+  "type": "conversation_process",
+  "data": {
+    "text": "Turn on the lights",
+    "language": "en",
+    "conversation_id": "ABCD"
+  }
+}
+```
+
+只有 `text` 是必需的。响应的格式与[对话 API](https://www.hasscn.top/contributors/core/internals/conversation-api/) 相同。
+
+### `scan_tag`
+
+报告设备扫描了 NFC 标签或二维码。Home Assistant 会触发一个标签扫描事件，以应用的设备作为扫描者。
+
+```json
+{
+  "type": "scan_tag",
+  "data": {
+    "tag_id": "5f0ba733-172f-430d-a7f8-e4ad940c88d7"
+  }
+}
+```
+
+### `live_activity_token` 和 `live_activity_dismissed`
+
+由 iOS 应用用于 Live Activities。参见[通知](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/#live-activities)。
+
+---
+
+# 加密
+
+> 使用 libsodium 对称密钥加密来加密 mobile_app webhook 请求和响应。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/
+
+Webhook 请求通常通过家庭网络中的明文 HTTP 传输，并且携带位置和传感器数据。`mobile_app` 可以使用 [libsodium](https://doc.libsodium.org/) 对它们进行双向加密。只要有可能，请始终启用加密。
+
+## 开启加密
+
+有两种方式：
+
+- **注册时**：将 `supports_encryption` 设置为 `true`。响应中会包含一个 `secret`。
+- **之后**：发送 [`enable_encryption`](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/#enable-it-later) 请求。
+
+`secret` 就是你的密钥。请安全地存储它，并在该注册存在期间一直保留。没有办法找回它：用户无法在 UI 中查看它，你也不应该要求他们去翻找隐藏的存储文件。如果你丢失了密钥，或者加密一直失败，请创建一个新的注册并告知用户。
+
+一旦开启加密，Home Assistant 将拒绝来自该注册的未加密请求，返回 `400` 和错误代码 `encryption_required`。
+
+## 工作原理
+
+该 webhook 使用 libsodium 的[对称密钥认证加密](https://doc.libsodium.org/secret-key_cryptography/secretbox)，即 `crypto_secretbox`（XSalsa20 配合 Poly1305）。
+
+- **密钥**是 `secret`，一个由 64 个十六进制字符组成的字符串。将其从十六进制解码为 32 字节的密钥。
+- **明文**是原本会放在 `data` 中的 JSON。如果请求类型没有 `data`，例如 `get_config`，则加密一个空对象 `{}`。
+- **密文**是随机数（nonce）后跟加密的消息，使用原始字母表和填充进行 Base64 编码。也就是 `sodium_base64_VARIANT_ORIGINAL`。
+
+将其放入请求中以代替 `data`：
+
+```json
+{
+  "type": "update_location",
+  "encrypted": true,
+  "encrypted_data": "<Base64 nonce and ciphertext>"
+}
+```
+
+带有内容的响应会以相同的格式返回，即 `{"encrypted": true, "encrypted_data": "..."}`，并使用相同的密钥加密。用同样的方式解密它们。少数响应永远不会被加密，例如空的 `{}` 和 `encryption_required` 错误：[响应](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/#the-response)中列出了它们。在解密之前，请先检查响应体是否设置了 `encrypted`。
+
+> [!NOTE]
+> 旧版本的应用以不同的方式使用该 secret：将其前 32 个字符作为原始密钥字节。对于从未使用十六进制密钥发送过请求的注册，Home Assistant 仍然接受这种方式。第一个使用十六进制密钥成功解密的请求会将该注册永久切换过来，响应也会随之改变。新的应用应只使用十六进制解码后的密钥。
+
+## 选择一个库
+
+Libsodium 为大多数语言提供了绑定。对于 Swift，官方的 [swift-sodium](https://github.com/jedisct1/swift-sodium) 是一个不错的选择。对于其他语言，请参阅[绑定列表](https://doc.libsodium.org/bindings_for_other_languages)。当有多个选择时，请挑选一个积极维护且广泛使用的库。
+
+## 之后开启加密
+
+一个注册可能没有开启加密，例如因为它是由旧版本的应用创建的。可以通过以下请求开启：
+
+```json
+{
+  "type": "enable_encryption"
+}
+```
+
+响应中包含新的 secret：
+
+```json
+{
+  "secret": "<64 hexadecimal characters>"
+}
+```
+
+此请求不会被加密，其响应也不会。如果加密已经开启，未加密的请求会收到通常的 `encryption_required` 错误，而加密的请求会收到 `400` 和错误代码 `encryption_already_enabled`。
+
+---
+
+# 传感器
+
+> 从应用注册传感器和二进制传感器，更新其状态，并与 Home Assistant 保持启用状态同步。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/
+
+应用可以向其在 Home Assistant 中的设备添加自己的传感器和二进制传感器（binary sensor）：电池电量、步数、Wi-Fi 网络，以及设备所知的任何信息。这些传感器完全由应用管理。每个传感器都会成为应用设备的一个实体（entity）。
+
+## 注册传感器
+
+在更新之前，先注册每个传感器。每次请求注册一个传感器：
+
+```json
+{
+  "type": "register_sensor",
+  "data": {
+    "type": "sensor",
+    "unique_id": "battery_level",
+    "name": "Battery level",
+    "state": 42,
+    "device_class": "battery",
+    "unit_of_measurement": "%",
+    "state_class": "measurement",
+    "entity_category": "diagnostic",
+    "icon": "mdi:battery",
+    "attributes": {
+      "charging": false
+    }
+  }
+}
+```
+
+| 键 | 必填 | 类型 | 描述 |
+| --- | --- | --- | --- |
+| `type` | 是 | string | `sensor` 或 `binary_sensor` |
+| `unique_id` | 是 | string | 一个在此注册中唯一的 ID。每次更新都需要它 |
+| `name` | 是 | string | 传感器的名称。Home Assistant 会把设备名称放在它前面 |
+| `state` | 否 | boolean、number 或 string | 当前状态 |
+| `device_class` | 否 | string | [传感器](https://www.hasscn.top/contributors/core/entities/sensor/)或[二进制传感器](https://www.hasscn.top/contributors/core/entities/binary-sensor/)的设备类型 |
+| `unit_of_measurement` | 否 | string | 状态的单位 |
+| `state_class` | 否 | string | 状态类别。仅适用于传感器，不适用于二进制传感器 |
+| `entity_category` | 否 | string | `config` 或 `diagnostic` |
+| `icon` | 否 | string | 图标，例如 `mdi:battery`。默认为 `mdi:cellphone` |
+| `attributes` | 否 | object | 额外的状态属性 |
+| `disabled` | 否 | boolean | 该实体在 Home Assistant 中是否被禁用 |
+
+注册成功会返回 `201` 和 `{"success": true}`。实体会立即出现。
+
+注册一个已存在的传感器也没有问题。如果名称、设备类型、单位、实体类别、图标和启用状态发生了变化，Home Assistant 会更新它们，并像更新一样处理该请求。因此，请一并发送当前的 `state`、`icon` 和 `attributes`：省略 `state` 会使状态变为未知，省略 `icon` 或 `attributes` 会使其恢复为默认值。
+
+## 更新传感器
+
+可以在一次请求中更新任意数量的传感器。`data` 是一个列表：
+
+```json
+{
+  "type": "update_sensor_states",
+  "data": [
+    {
+      "type": "sensor",
+      "unique_id": "battery_level",
+      "state": 41,
+      "icon": "mdi:battery-40",
+      "attributes": {
+        "charging": false
+      }
+    }
+  ]
+}
+```
+
+| 键 | 必填 | 类型 | 描述 |
+| --- | --- | --- | --- |
+| `type` | 是 | string | `sensor` 或 `binary_sensor` |
+| `unique_id` | 是 | string | 注册传感器时使用的 ID |
+| `state` | 是 | boolean、number、string 或 `null` | 新状态。字符串 `unavailable` 会将传感器标记为不可用 |
+| `icon` | 否 | string | 图标。如果省略，会回退为 `mdi:cellphone`，因此如果设置了图标，请在每次更新时都发送它 |
+| `attributes` | 否 | object | 状态属性，会替换旧的属性 |
+
+更新分两步检查：
+
+1. 首先检查整个列表，验证每个传感器的 `type` 是否有效以及是否存在 `unique_id`。如果有一个传感器未通过此检查，整个请求都会被拒绝：你会收到一个带有 `200` 的空 `{}`，并且所有传感器都不会被更新。
+2. 然后逐个检查每个传感器。未注册的传感器会以 `not_registered` 失败。只允许使用上表中的键。其他任何内容，例如 `name`，或类型错误的状态，都会使该传感器以 `invalid_format` 失败。其他传感器仍会被更新。
+
+第二步之后，响应中会包含每个 `unique_id` 的结果：
+
+```json
+{
+  "battery_level": {
+    "success": true
+  },
+  "steps": {
+    "success": true,
+    "is_disabled": true
+  },
+  "pressure": {
+    "success": false,
+    "error": {
+      "code": "not_registered",
+      "message": "sensor pressure is not registered"
+    }
+  },
+  "light_level": {
+    "success": false,
+    "error": {
+      "code": "invalid_format",
+      "message": "<what is wrong>"
+    }
+  }
+}
+```
+
+`not_registered` 表示你需要先注册该传感器。`invalid_format` 表示更新不符合模式（schema）。
+
+## 保持启用状态同步
+
+用户可以在 Home Assistant 中禁用实体。被禁用的传感器不值得在手机上继续采集：它只会白白消耗电池电量。因此，应用和 Home Assistant 会在两个方向上保持每个传感器的启用状态同步：
+
+- **用户在应用中开启或关闭某个传感器**：再次为它发送 `register_sensor`，并将 `disabled` 设置为 `true` 或 `false`。
+- **应用更新了一个在 Home Assistant 中被禁用的传感器**：更新会成功，但结果中会包含 `"is_disabled": true`。将其视为一个信号，从 Home Assistant 获取启用状态。
+- **用户在 Home Assistant 中开启或关闭某个实体**：[`get_config`](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/#get_config) 响应中包含 `entities`，它将每个 `unique_id` 映射到其启用状态。在应用中应用它。
+
+```json
+{
+  "entities": {
+    "battery_level": {
+      "disabled": false
+    },
+    "steps": {
+      "disabled": true
+    }
+  }
+}
+```
+
+官方应用的用户按照[传感器文档](https://companion.home-assistant.io/docs/core/sensors)中所述管理他们的传感器。
+
+---
+
+# 通知
+
+> mobile_app 如何通过 WebSocket 连接或推送服务器向应用发送通知，以及推送服务器必须遵循的约定。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/
+
+Last verified on 2026-10-14, against https://github.com/home-assistant/mobile-apps-fcm-push/blob/main/functions/handlers.js.
+
+`mobile_app` 内置了通知功能。一旦应用启用了通知，Home Assistant 就会为其创建一个 notify 实体和一个 `notify.mobile_app_<device_name>` 动作，用户可以在自动化中发送通知。
+
+发送通知有两种方式：
+
+- **通过 WebSocket 连接**（本地推送），在应用已连接时使用。无需服务器，但应用必须保持连接打开。
+- **通过推送服务器**（云端推送）。Home Assistant 将通知 POST 到你运行的 URL，由你的服务器将其转交给 Apple、Google 或其他推送服务。
+
+应用可以同时支持两种方式。如果支持，Home Assistant 会在 WebSocket 连接打开时使用 WebSocket 通道，而在没有连接打开时，或应用未及时确认通知时，使用推送服务器。
+
+关于用户如何向官方应用发送通知，请参阅[通知文档](https://companion.home-assistant.io/docs/notifications/notifications-basic)。
+
+## 通过 WebSocket
+
+要启用此功能，请在[注册](https://www.hasscn.top/contributors/companion/mobile-app-api/setup/#register-the-app)时或通过 [`update_registration`](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/#update_registration) 在 `app_data` 中将 `push_websocket_channel` 设置为 `true`。
+
+然后在已认证的 [WebSocket](https://www.hasscn.top/contributors/core/internals/websocket-api/) 连接上打开一个通道：
+
+```json
+{
+  "id": 2,
+  "type": "mobile_app/push_notification_channel",
+  "webhook_id": "abcdefgh",
+  "support_confirm": true
+}
+```
+
+Webhook ID 必须属于该连接的用户。为同一个 webhook 打开新通道会关闭旧通道。
+
+通知以该订阅上的事件形式到达：
+
+```json
+{
+  "id": 2,
+  "type": "event",
+  "event": {
+    "message": "Hello world",
+    "title": "Hi",
+    "hass_confirm_id": "6d8c3e2a1f4b4f0b9c0d5e7a8b9c0d1e"
+  }
+}
+```
+
+使用 `support_confirm` 时，每条通知都有一个 `hass_confirm_id`，你有 10 秒钟的时间进行确认：
+
+```json
+{
+  "id": 3,
+  "type": "mobile_app/push_notification_confirm",
+  "webhook_id": "abcdefgh",
+  "confirm_id": "6d8c3e2a1f4b4f0b9c0d5e7a8b9c0d1e"
+}
+```
+
+如果未及时收到确认，Home Assistant 会关闭该通道，并将该通知以及其他任何未确认的通知改由推送服务器发送。如果没有推送服务器，未连接的应用将收不到通知，该动作会因设备未连接而报错失败。
+
+## 通过推送服务器
+
+要启用此功能，请在 `app_data` 中设置以下两个键：
+
+| 键 | 描述 |
+| --- | --- |
+| `push_token` | 设备的推送令牌，例如 APNs 令牌或 FCM 注册令牌 |
+| `push_url` | Home Assistant 将通知 POST 到的 URL |
+
+`mobile_app` 不关心通知如何到达设备。它将通知 POST 到你的服务器，其余工作由你负责。这让你可以完全掌控自己的推送设置。官方应用使用[该项目的推送服务](https://github.com/home-assistant/mobile-apps-fcm-push)，它通过 Firebase Cloud Messaging 向 Android 和 iOS 设备发送通知。其代码是构建你自己的推送服务的一个很好的起点。
+
+### 请求
+
+Home Assistant 发送一个带有 JSON 主体的 POST 请求，并在 10 秒后放弃：
+
+```json
+{
+  "message": "Hello World",
+  "title": "Test message",
+  "push_token": "my-secure-token",
+  "registration_info": {
+    "app_id": "io.robbie.HomeAssistant",
+    "app_version": "2026.10.0",
+    "os_version": "26.0",
+    "webhook_id": "abcdefgh"
+  },
+  "data": {
+    "key": "value"
+  }
+}
+```
+
+只有当用户设置了 `title` 和 `data` 时它们才会出现。`data` 包含用户传入的所有其他内容，也是应用特定选项所在的位置。
+
+### 响应
+
+当通知被接受时，请返回 `200`、`201` 或 `202`。始终发送带有 `application/json` 内容类型的 JSON 主体，即使没有任何内容需要报告，例如 `{}`。Home Assistant 将每个响应都当作 JSON 读取，无法读取的响应会像错误一样失败，无论状态码是什么。
+
+对于任何其他状态码，通知将失败并报错 `Error sending notification to <device>`。`429` 会报错 `Rate limit exceeded sending notification to <device>`，而耗时超过 10 秒的请求会报错 `Timeout sending notification to <device>`。notify 实体会抛出这些错误，因此其动作会失败。`notify.mobile_app_<device_name>` 动作只会记录这些错误——速率限制记为警告，其他记为错误——而动作本身会成功。你的 JSON 响应可以说明出了什么问题。Home Assistant 会在调试级别记录该说明：
+
+| 键 | 描述 |
+| --- | --- |
+| `message` | 按原样记录，并附注该消息来自 Home Assistant 之外 |
+| `errorMessage` | 附加到标准消息中："Internal server error, please try again later: ..." |
+
+请尽可能具体，并在你知道解决办法时告诉用户如何解决问题。
+
+### 速率限制
+
+推送服务需要花钱，而一个有问题的自动化可能会发送成千上万条通知。请使用速率限制。官方应用的推送服务默认允许每台设备每天 500 条通知，计数在 UTC 午夜重置。
+
+Home Assistant 本身不做任何限制。由你的服务器进行限制，并告知 Home Assistant。在响应中添加 `rateLimits`：
+
+```json
+{
+  "rateLimits": {
+    "successful": 1,
+    "errors": 5,
+    "maximum": 500,
+    "resetsAt": "2026-10-11T00:00:00.000Z"
+  }
+}
+```
+
+| 键 | 类型 | 描述 |
+| --- | --- | --- |
+| `successful` | integer | 此周期内已发送的通知数 |
+| `errors` | integer | 此周期内失败的通知数 |
+| `maximum` | integer | 每个周期的最大数量 |
+| `resetsAt` | timestamp | 周期结束时间，采用 ISO 8601 格式，UTC 时区 |
+
+Home Assistant 会在调试级别记录这些数字，以及距离重置的剩余时间。当用户达到限制时，请在周期结束前返回 `429`，并尽早拒绝请求。Home Assistant 会记录一条已达到限制的警告。
+
+## 实时活动（Live Activities）
+
+iOS 应用可以显示实时活动（Live Activities），例如锁定屏幕上的计时器或配送信息，通知可以启动、更新和结束这些活动。每个活动都有自己的推送令牌，`mobile_app` 会跟踪它们。这仅适用于通过推送服务器发送的通知，且注册时 `manufacturer` 为 `Apple`：
+
+- 在注册时，或之后通过 `update_registration`，应用会在 `app_data` 中放入一个 `start_live_activity_token`，用于启动新的实时活动。
+- 当设备上启动一个实时活动时，应用会通过 `live_activity_token` webhook 请求发送其更新令牌：包括活动的 `tag`、`push_token`，以及作为 Unix 时间戳的 `expires_at`。
+- 当用户在设备上关闭该活动时，应用会发送带有该 `tag` 的 `live_activity_dismissed`。
+
+当通知的 `data` 中包含 `tag` 和 `live_update: true` 时，Home Assistant 会在发送给推送服务器的请求中添加一个 `live_activity_token`，并在 `data` 中添加一个值为 `start`、`update` 或 `end` 的 `event`。带有相同标签的 `clear_notification` 消息会结束该活动。过期的令牌会被自动移除。
+
+面向用户的说明请参阅[实时活动文档](https://companion.home-assistant.io/docs/notifications/live-activities)。
+
+---
+
+# Web 视图
+
+> 在应用内显示 Home Assistant 前端，而无需用户再次登录。
+
+Source: https://www.hasscn.top/contributors/companion/mobile-app-api/webview/
+
+用户在设置您的应用时已经登录过了。他们不应该为了查看自己的仪表盘（dashboard）而再次登录。前端支持这一点：当前端运行在应用内时，它可以向应用请求访问令牌（access token），而不是显示登录页面。
+
+## 外部认证
+
+应用会向 Web 视图中注入一个小型的 JavaScript 桥接。当前端需要令牌时，它会通过该桥接调用应用，应用则以访问令牌作为回应。当用户在前端中注销时，前端会请求应用撤销该令牌。
+
+应用会使用在[登录](https://www.hasscn.top/contributors/companion/mobile-app-api/setup/#log-the-user-in)时获取的刷新令牌（refresh token）自行刷新访问令牌。前端永远不会看到刷新令牌。
+
+## 外部总线
+
+同一个桥接还承载着外部总线（external bus）：前端与应用之间的双向消息。通过它，前端可以打开应用的原生设置、启动条码扫描器、启动 Assist，或者将实体（entity）交给应用自身的 **Add to** 操作，而应用也可以告知前端它支持哪些功能。
+
+这两种协议都在前端一侧有文档说明：[外部认证](https://www.hasscn.top/contributors/frontend/reference/external-auth/)和[外部总线](https://www.hasscn.top/contributors/frontend/reference/external-bus/)。关于 Android 应用如何实现它们，请参阅[前端界面](https://www.hasscn.top/contributors/companion/android/frontend-screen/#talking-to-the-frontend)。
+
+## 需要直接连接
+
+Web 视图从实例本身加载前端：使用内部 URL、外部 URL 或 Home Assistant Link 的远程 URL。Webhook 的 cloudhook URL 在这里没有用处。

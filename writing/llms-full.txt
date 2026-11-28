@@ -1,0 +1,2579 @@
+# 撰写文档: full text
+
+> Every page of the 撰写文档 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/writing/llms.txt.
+
+# 编写文档
+
+> 通过改进 home-assistant.io 上的文档，帮助数百万人更好地使用 Home Assistant。
+
+Source: https://www.hasscn.top/contributors/writing/
+
+[home-assistant.io](https://www.home-assistant.io/) 上的文档往往是人们在设置设备、构建自动化（automation）或遇到问题时最先阅读的内容。那里的每一页都由社区撰写和改进。一句更清晰的表述、一个缺失的步骤，或一张修复的截图，都能帮助在你之后阅读该页面的每一个人。
+
+你不需要是开发者。只要你能把事情讲清楚，你就能提供帮助。
+
+想改进这个贡献者网站？请参阅[改进此贡献者网站](https://www.hasscn.top/contributors/writing/this-site/)。
+
+## 你为谁写作
+
+大多数阅读文档的人是通过 Home Assistant 的界面来使用它的，而不是通过 YAML 文件。请优先为他们写作：展示在 UI 中的操作路径，同时保留技术细节供需要的人查阅。[风格指南](https://www.hasscn.top/contributors/writing/reference/style/)解释了具体做法。
+
+## 两种贡献方式
+
+- **小修小补**只需几分钟，而且完全可以在浏览器中完成。比如一个错别字、一张过时的截图、一个与 UI 不再相符的步骤。每个页面都有一个 **Edit**（编辑）链接。
+- **较大的改动**，比如新页面或重构某个章节，使用网站的本地副本会更方便，这样你可以在分享之前预览你的工作。
+
+## 使用 AI 工具写作
+
+[文档仓库](https://github.com/home-assistant/home-assistant.io)在 `.claude/skills/` 中为 AI 工具提供了技能（skills）：一个用于写作风格，一个用于 Markdown 和 Liquid，一个用于 YAML 示例，以及用于集成（integration）页面的 `document-integration-docs`。仓库的指令会告诉智能体（agent）在编辑前先加载这些技能，并且除非你要求，否则不要凭空编造新的自动化、脚本或仪表盘（dashboard）示例。页面上的每一处论断仍需你对照代码进行核实。[使用 AI 工具贡献](https://www.hasscn.top/contributors/start/ai-tools/#write-documentation-on-home-assistantio)介绍了完整的工作流程。
+
+## 从这里开始
+
+- [你的第一个文档修复](https://www.hasscn.top/contributors/writing/first-contribution/)：直接在浏览器中修复一个小问题。
+- [文档是如何运作的](https://www.hasscn.top/contributors/writing/how-it-works/)：页面存放在哪里、该使用哪个分支，以及改动如何上线。
+
+## 指南
+
+- [组织页面结构](https://www.hasscn.top/contributors/writing/guides/structure/)：概念、任务、参考，以及何时使用哪一种。
+- [在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/)：在你自己的电脑上运行文档。
+- [编写集成文档](https://www.hasscn.top/contributors/writing/guides/integration/)：面向添加新集成的开发者。
+- [移动、重命名或删除页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/)：同时不破坏链接。
+
+## 参考
+
+- [风格指南](https://www.hasscn.top/contributors/writing/reference/style/)：语言、语气和格式。
+- [图片和视频](https://www.hasscn.top/contributors/writing/reference/images/)：截图、说明文字和嵌入的视频。
+- [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/)：My 链接、术语提示和文本框。
+- [YAML 风格](https://www.hasscn.top/contributors/writing/reference/yaml/)：YAML 示例应如何编写。
+- [自动化检查](https://www.hasscn.top/contributors/writing/reference/checks/)：你的拉取请求（pull request）上的检查会检查什么。
+- [集成 front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/)：集成页面顶部的每一个键。
+- [集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/)：集成页面的各个章节，以及用于填充它们的区块。
+- [品牌](https://www.hasscn.top/contributors/brand/)：Home Assistant 的个性与声音，每一页都应体现这一点。
+
+## 与谁交流
+
+- 读者通过 **Provide feedback**（提供反馈）链接在页面上留下反馈。这些反馈会成为 [GitHub 上的 issue](https://github.com/home-assistant/home-assistant.io/issues)，是寻找可做事项的好地方。
+- 对你的改动有疑问？在你的拉取请求中提问。审阅者很乐意帮你把它改好。
+- 想聊聊文档？加入 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上的 [**#documentation**](https://discord.com/channels/330944238910963714/1475552849835458691) 频道。
+
+---
+
+# 你的第一次文档修复
+
+> 直接在浏览器中修复文档中的小问题。无需任何环境配置。
+
+Source: https://www.hasscn.top/contributors/writing/first-contribution/
+
+最快的入门方式就是修复你自己注意到的问题。某个页面让你感到困惑？某个步骤已过时，或者截图来自旧版本？这就是你的第一次贡献。
+
+还没有想法？读者会通过每个页面上的反馈链接报告问题。这些报告是 [GitHub 上的公开议题（issue）](https://github.com/home-assistant/home-assistant.io/issues)，其中很多都是等待有人认领的小修复。
+
+你需要一个免费的 [GitHub](https://github.com/) 账号。刚接触 GitHub？[无需成为开发者也能使用 GitHub](https://www.hasscn.top/contributors/start/github/) 解释了你会遇到的术语，比如 fork、commit 和 pull request。
+
+不想自己动手编辑？那也没问题。在 [home-assistant.io](https://www.home-assistant.io/) 页面底部的 **帮助我们改进文档** 下选择 **提供反馈**，并描述问题所在。它会变成一个议题，供其他人认领处理。这同样需要一个 GitHub 账号。
+
+## 1. 打开页面
+
+1. 前往 [home-assistant.io](https://www.home-assistant.io/) 上你想要修复的页面。
+2. 滚动到底部的 **帮助我们改进文档**，然后选择 **编辑**。
+3. GitHub 会显示该页面的源代码。选择文件右上角的铅笔图标，**编辑此文件**。
+
+   如果铅笔图标没有出现，请登录你的 GitHub 账号。
+4. 第一次操作时，GitHub 会提供创建你自己的仓库副本，称为 [fork](https://www.hasscn.top/contributors/start/github/#fork)。接受它。你不需要对它做任何其他操作。
+
+## 2. 进行修改
+
+页面使用 Markdown 编写。大部分内容都是纯文本，所以你可以像编辑其他文本一样进行编辑。参考页面其余部分的处理方式，比如链接和列表，并照着做。
+
+保持修改聚焦：每个 pull request 只包含一个修复，比十个修复更容易审查。计划进行更大的改动，比如新增一个章节或一个新页面？请先阅读[风格指南](https://www.hasscn.top/contributors/writing/reference/style/)和[页面的结构](https://www.hasscn.top/contributors/writing/guides/structure/)。
+
+> [!TIP]
+> 审查者经常指出的小问题：提到界面时，请用粗体书写 **设置** > **设备与服务**，并且完整书写 "Home Assistant"。
+
+## 3. 提交修改
+
+1. 选择 **提交更改...**。
+2. 在弹出的窗口中，简要描述你所做的修改，比如“修复备份菜单的名称”。
+3. 选择 **提议更改**。
+
+GitHub 会将你的修改保存到你的 fork 中，并向你展示修改内容。这时发现自己在编辑中犯了错？没关系：照样打开 pull request，之后再修复即可。第 6 步会说明如何操作。
+
+## 4. 打开 pull request
+
+1. 选择 **创建 pull request**。
+2. 检查顶部的基准分支（base branch）。是修复现有文档吗？它必须显示为 `current`：即人们当前正在运行的版本的文档。如果显示的是其他内容，请在该菜单中更改。
+3. 填写模板。不要删除其中的任何文本：这对审查者有帮助。在 **更改类型** 下，勾选符合情况的选项，通常是 **拼写、语法或其他可读性改进** 或 **调整当前文档中缺失或错误的信息**。在 **检查清单** 下，勾选适用的选项。
+4. 选择 **创建 pull request**。
+
+就是这样。你的 pull request 现在已经公开，相关的人会自动收到通知。你不需要主动请求任何人进行审查。
+
+## 5. 检查预览
+
+在你打开 pull request 几分钟后，一个机器人会评论并附上一个 **部署预览** 的链接。那是包含你的修改的完整网站。打开它，检查你的页面是否如你所愿地显示。
+
+## 6. 审查与合并
+
+维护者会审查你的修改。当有动静时，GitHub 会根据你的设置，通过电子邮件或 github.com 向你发送通知。
+
+- **有建议？** 直接在 pull request 中使用 **提交建议** 接受它。
+- **想自己修改一些内容？** 在你的 fork 中、你 pull request 所在的分支上再次编辑该文件，pull request 会自动更新。[使用 GitHub](https://www.hasscn.top/contributors/start/github/#7-respond-to-the-review) 介绍了在哪里可以找到它。
+- **有不明白的问题？** 尽管问。审查者更愿意解释，而不是看你猜测。
+
+一旦你的 pull request 被合并，Netlify 就会将你的修复发布到 home-assistant.io。
+
+## 接下来做什么
+
+- 再修复一些其他问题。大多数文档的常驻贡献者都是从修正错别字开始的。
+- 更喜欢带每一步截图的详细教程？论坛上的社区指南 [Editing the documentation and creating a pull request on GitHub](https://community.home-assistant.io/t/editing-the-documentation-and-creating-a-pull-request-on-github/9573) 展示了这些内容。
+- 准备好进行更大的改动了吗？[在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/)。
+
+---
+
+# 文档是如何运作的
+
+> 页面存放在哪里、应使用哪个分支，以及一次更改如何从拉取请求（pull request）变为 home-assistant.io 上的内容。
+
+Source: https://www.hasscn.top/contributors/writing/how-it-works/
+
+文档和 [home-assistant.io](https://www.home-assistant.io/) 的其余部分都存放在同一个 GitHub 仓库中：[home-assistant/home-assistant.io](https://github.com/home-assistant/home-assistant.io)。该网站使用 [Jekyll](https://jekyllrb.com/) 构建。页面是 Markdown 文件，并使用一些 [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/) 来实现诸如链接到 Home Assistant 界面等功能。
+
+## 页面存放在哪里
+
+所有内容都在 `source` 文件夹中。你最常打交道的部分：
+
+- `source/_integrations`：每个集成（integration）一个页面，以其域名命名，例如 `hue.markdown`。
+- `source/_docs`：通用文档，例如自动化、脚本和备份指南。
+- `source/_dashboards`：仪表盘（dashboard）和卡片。
+- [`source/_data/glossary.yml`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_data/glossary.yml)：术语提示背后的术语表。
+- `source/_redirects`：页面移动后旧 URL 的重定向位置。
+- [`source/_includes/asides/docs_sitemap.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_sitemap.html)：通用文档的侧边栏。它由人工维护，因此 `source/_docs` 中需要在侧边栏占位的新页面会在那里添加一个链接。
+
+## 分支
+
+该仓库有两个可供选择的分支：
+
+- **`current`** 是人们当前使用的发行版所对应的文档。对现有文档的修复和改进应以此为目标分支。
+- **`next`** 是即将发布的发行版所对应的文档。当你为尚未发布的新集成或新功能撰写文档时，应以此为目标分支。
+
+选择正确的分支很重要：`next` 上的更改只有在下一个发行版发布后才会生效。拉取请求模板会提醒你，机器人也会提醒：当基础分支与你的拉取请求不匹配时，它会添加 `needs-rebase` 标签并留下一条评论，告诉你应使用哪个分支。
+
+要为来自核心（core）拉取请求的新功能撰写文档？请为每个核心拉取请求打开一个对应的文档拉取请求，并将它们相互链接。这样两者就可以在同一个发行版中一起合并。
+
+## 父拉取请求
+
+记录代码更改的文档拉取请求有一个_父级_：包含该代码更改的拉取请求，位于 core 或 frontend 等仓库中。请双向链接它们：在你的文档拉取请求的 **This PR belongs together with** 下列出父级，并在父级的同一行中列出你的文档拉取请求。
+
+机器人会跟踪这些链接，并为你的文档拉取请求添加标签：
+
+- `has-parent`：你的拉取请求及其父级相互列出。列出代码拉取请求的拉取请求预期以 `next` 为目标，而没有列出的则预期以 `current` 为目标。
+- `parent-merged`：父级已合并，因此文档可以跟进。
+- `needs-rebase`：拉取请求的目标分支错误。更改基础分支，并在需要时进行变基（rebase）。
+
+你还可能看到 `awaits-parent`，这表示该拉取请求正在等待其父拉取请求合并。
+
+机器人也会让两个拉取请求保持同步。当你的拉取请求只有一个父级，且父级在未合并的情况下被关闭时，你的文档拉取请求也会被关闭。当父级被重新打开时，你的也会被重新打开。
+
+因此，`next` 上的文档拉取请求会等待其父拉取请求。这可能需要一段时间，这没有问题：带有 `has-parent` 标签的拉取请求永远不会被标记为过期（stale）。
+
+## 从拉取请求到上线
+
+1. 你打开一个拉取请求。
+2. 自动检查运行：remark 检查 Markdown，textlint 检查拼写和术语，并构建网站的 Astro 部分。详情请参阅[自动检查](https://www.hasscn.top/contributors/writing/reference/checks/)。
+3. Netlify 会构建包含你的更改的完整网站的 **Deploy Preview**。
+4. 维护者审查该更改。
+5. 一旦合并到 `current`，Netlify 就会将更改发布到 home-assistant.io。`next` 上的更改会随发行版发布而上线。
+
+60 天内没有活动的拉取请求和议题（issue）会被标记为过期，并在 7 天后被关闭，除非有新的动静。一条评论或一个新的提交就足以让它们保持打开状态。
+
+---
+
+# 编写指南
+
+> 如何逐项任务地编写和修改文档。从构建页面结构到移动页面。
+
+Source: https://www.hasscn.top/contributors/writing/guides/
+
+每篇指南涵盖一个任务。对于小的修改，你不需要其中任何一篇：[你的第一次文档修改](https://www.hasscn.top/contributors/writing/first-contribution/) 就足够了。
+
+- [构建页面结构](https://www.hasscn.top/contributors/writing/guides/structure/)：围绕读者想要了解或做的事情来组织页面。
+- [在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/)：在你自己的机器上运行 home-assistant.io，以便在分享之前查看较大的改动。
+- [编写集成（integration）文档](https://www.hasscn.top/contributors/writing/guides/integration/)：新集成的文档需要包含哪些内容，以及如何让它与你的代码一起被合并。
+- [移动、重命名或删除页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/)：在不破坏指向它们的链接的情况下修改页面。
+
+---
+
+# 页面结构
+
+> 围绕读者想了解或想做的事情来组织文档，包括概念、任务、参考、教程和故障排除。
+
+Source: https://www.hasscn.top/contributors/writing/guides/structure/
+
+每位读者都是带着问题而来的。这是什么？我该如何设置？这个设置有什么作用？为什么它不工作？好的文档应该围绕这些问题来组织，而不是围绕功能是如何构建的。
+
+这种方法称为基于主题的写作（topic-based authoring）。一个主题回答一个主要问题。它可以是一整页，也可以是页面中的单个章节。你不需要为每个主题单独建一个页面。
+
+集成（integration）、触发器（trigger）、条件（condition）和动作（action）页面有各自固定的结构，因此它们的阅读方式都是一致的。对于这些页面，请从[编写集成文档](https://www.hasscn.top/contributors/writing/guides/integration/)和[集成页面](https://www.hasscn.top/contributors/writing/reference/integration-page/)参考开始。本页的指导则适用于其中的每个章节。
+
+## 从概述开始
+
+每页都以简短的介绍开头：这一页讲什么，面向谁。然后从基础到复杂逐步展开。大多数读者需要的信息放在前面，少数读者需要的细节放在后面。将较长的页面拆分为带有清晰标题的章节，以便读者能直接跳转到他们需要的部分。
+
+## 界面优先
+
+当某件事可以在 Home Assistant 界面中完成时，界面（UI）就是标准方式，你应该首先描述它。这适用于所有类型的主题：任务、参考、教程和故障排除。
+
+在受支持且有用的地方，欢迎提供 YAML 和命令行替代方案。将它们放在界面说明之后，放在各自的标题下，并说明什么情况下需要用到它们。当界面可以完成工作时，不要暗示编辑文件是设置过程的常规部分。
+
+## 每个章节一个目的
+
+文档中最常见的问题是，一个章节试图同时做所有事情：解释概念、逐步演示操作、并列出所有选项。这样读者就得费力去挖掘他们需要的部分。
+
+为每个目的设置各自的标题。例如，一个关于区域（area）的页面可以包含三个主题：
+
+```markdown
+## Areas
+<!-- Concept: what an area is, and why you would use one. -->
+
+## Creating an area
+<!-- Task: the steps to create one. -->
+
+## Area settings
+<!-- Reference: every setting, and what it means. -->
+```
+
+让每个主题聚焦于一个主题或目标：
+
+- 概念解释一个想法。
+- 任务完成一个目标。
+- 参考描述一组相关的事实或选项。
+- 故障排除主题处理一个问题。
+- 教程可以组合多个任务，只要它们服务于同一个学习目标。
+
+当你发现自己在描述第二个任务时，就为它单独设立一个主题。如果创建区域需要先创建楼层，那么楼层的步骤就应有自己的章节，可以在同一页上，也可以在另一页上。从区域步骤中链接过去。直接促成任务结果的步骤应放在一起。
+
+并非每一句上下文说明都需要单独的章节。简短的介绍、前提条件，或解释某个步骤为何重要的一句话，就应该紧挨着该步骤放置。较长的背景说明和完整的选项列表才是应该移出去的内容。
+
+一个父级标题可以通过子标题将多个主题归为一组。故障排除章节可以为每个问题设置一个详情折叠块。只需确保每个标题下的内容与该标题所承诺的一致。
+
+## 选择主题类型
+
+根据读者的需求来选择类型：
+
+- [概念](https://www.hasscn.top/contributors/writing/guides/structure/#concept)：理解某事物是什么、为什么重要，或它如何工作。
+- [任务](https://www.hasscn.top/contributors/writing/guides/structure/#task)：完成一个具体目标。
+- [参考](https://www.hasscn.top/contributors/writing/guides/structure/#reference)：查找某个事实、设置、取值或行为。
+- [教程](https://www.hasscn.top/contributors/writing/guides/structure/#tutorial)：通过跟随一个最终能得到可用结果的引导式练习来学习。
+- [故障排除](https://www.hasscn.top/contributors/writing/guides/structure/#troubleshooting)：识别问题并解决它。
+
+主题内容并不决定类型。区域可以同时是概念、任务和参考的主题，如上面的示例所示。界面和 YAML 也不是类型：它们是完成任务或描述配置的两种方式。
+
+## 概念
+
+概念解释某事物是什么，并帮助读者理解它。用于定义、事物之间的相互关系、设计选择，以及使用某项功能的理由。
+
+### 概念的标题
+
+- 使用名词或描述性短语："Areas"、"Parts of an automation" 或 "Wake word processing"。
+- 当问题能更清楚地表达读者想了解的内容时，可以使用问句："What is data polling?"
+- 避免使用 "Introduction" 或 "Overview"，除非你能直接说出主题的名称。
+
+### 概念的内容
+
+从平实的解释开始。添加一个具体的例子，并解释重要的关系或权衡。定义不熟悉的术语，或链接到其定义，例如使用[术语表提示](https://www.hasscn.top/contributors/writing/reference/liquid/#glossary-tooltips)。
+
+```markdown
+## Areas
+
+An area groups devices and entities that belong to a room or another part of your home. For example, a living room area lets you target all the lights in that room with one action.
+```
+
+不要在概念中包含设置说明，而是链接到相应的任务。一个变成选项列表或一长串界面步骤的概念就不再是概念了：把选项放到参考主题中，并链接过去。
+
+## 任务
+
+任务帮助读者达成一个具体目标。读者想把事情做完，而不是上一堂课。
+
+### 任务的标题
+
+- 说出动作及其对象："Creating an area"，而不是 "Task"。
+- 使用 `-ing` 短语，如 "Creating an area" 或 "Updating Home Assistant"，这与大多数现有页面的用法一致。
+- 祈使句适用于较长流程中的各个阶段："Write the image to your SD card"。当顺序重要时，为阶段编号。
+- 保持同级标题的平行结构。如果一个以 `-ing` 动词开头，那么所有同级标题都应如此。
+- 当任务有更具体的结果时，避免使用 "Usage"、"Configuration" 或 "Working with areas" 这类模糊的标题。
+
+### 任务的内容
+
+1. 如果标题没有说明清楚，用几句话说明何时或为何要执行此操作，并链接到相关信息。
+2. 在步骤之前，直接在 `Prerequisites:` 引导语下列出前提条件，如硬件、权限或必须先完成的设置。仅当要求适用于整个页面时，才使用单独的 `## Prerequisites` 章节。没有值得提及的前提条件？省略该列表。
+3. 将步骤写成编号列表。每一步以指令开头。将解释或预期结果放在其下方。
+4. 以结果结尾，并在有用时提供一种检查是否成功的方法。
+
+```markdown
+## Creating an area
+
+1. Go to {% my areas title="**Settings** > **Areas, labels & zones**" %} and select **Create area**.
+2. Enter a **Name** for the area.
+3. Select **Create**.
+   - Result: The new area appears in the list.
+```
+
+让步骤聚焦于目标。冗长的解释、对每个字段的描述以及其他流程应放在别处。改为链接到概念或参考。
+
+## 参考
+
+参考包含读者查阅的事实，无需遵循某个流程。用于设置、支持的取值、语法、响应数据以及其他已定义的行为。
+
+### 参考的标题
+
+- 写出信息的名称："Area settings"、"Blueprint inputs" 或 "Response data"。
+- 当内容有更具体的主题时，避免使用 "Important information" 或 "Good to know" 这类大而全的标题。
+
+### 参考的内容
+
+- **每个条目使用相同的结构。** 对于设置，在适用的情况下给出名称、作用、可接受的取值和默认值。
+- **清楚标明必填和可选。**
+- **使用读者看到的名称。** 界面设置用界面标签，YAML 选项用确切的键名。
+- **将约束条件放在其适用的设置旁边，** 而不是放在下面单独的列表中。
+- **便于快速浏览。** 使用列表，或[集成页面](https://www.hasscn.top/contributors/writing/reference/integration-page/)中描述的配置块。避免使用表格，参见[风格指南](https://www.hasscn.top/contributors/writing/reference/style/#tables)。
+
+```markdown
+## Area settings
+
+- **Name**: The name of the area. Required.
+- **Alias**: Another name a voice assistant can use for the area.
+```
+
+简短的示例可以展示有效的取值或正确的语法。不要让它演变成教程，也不要把设置步骤藏在字段描述中。
+
+## 教程
+
+教程通过一个引导式的示例来教授一项技能。结束时，读者会得到一个可用的成果，可以保留或修改它。
+
+教程与任务的区别在于目的，而不是难度。任务帮助读者完成他们自己的工作。教程给读者提供一个可以学习的练习。一个简单的流程并不自动就是教程，而教程也可以教授复杂的内容。
+
+### 教程的标题
+
+- 标题以 "Tutorial:" 开头，后接动作和结果："Tutorial: Create your first automation"。
+- 按读者在每个阶段所做的事情来命名各阶段，并保持措辞一致。
+- 当阶段的顺序很重要时，为阶段编号。
+
+### 教程的内容
+
+说明读者将构建什么、学到什么，以及开始之前需要什么。然后引导他们沿着一条选定的路径前进，每个阶段都足够小、便于跟随。在过程中展示预期结果，并以最终检查收尾。
+
+```markdown
+## What you will build
+<!-- An automation that turns on a light before sunset. -->
+
+## Prerequisites
+
+## Step 1: Create the automation
+
+## Step 2: Add the sunset trigger
+
+## Step 3: Add the light action
+
+## Step 4: Save and test the automation
+
+## Next steps
+```
+
+- 让解释紧挨着它所辅助的步骤。
+- 链接到概念和参考，而不是在练习中插入它们。
+- 不要在过程中展示每个替代方案或可选功能。将扩展内容放在主练习之后，例如放在 "Next steps" 之下。
+- 一堆代码示例不是教程。教程引导读者经历一个学习过程。
+
+## 故障排除
+
+故障排除主题帮助读者识别问题并解决它。
+
+### 故障排除的位置
+
+将页面的故障排除内容放在一个地方，以便读者在出现问题时知道去哪里查找：
+
+- 在页面的一个章节中：将问题放在页面末尾的 `## Troubleshooting` 章节中。在集成页面上，该章节按其位置放在[章节顺序](https://www.hasscn.top/contributors/writing/reference/integration-page/#sections)中。
+- 在单独的页面上：当某个功能有许多问题时，将它们移到单独的故障排除页面。从该功能的页面链接到它。
+
+不要将故障排除放在页面中与之相关的部分旁边，例如放在某个功能或设置下的故障排除小节中。将问题放在页面的故障排除章节中。如果有帮助，从页面中相关的部分链接到故障排除章节。
+
+### 故障排除的标题
+
+- 将每个问题放在各自的[详情折叠块](https://www.hasscn.top/contributors/writing/reference/liquid/#collapsible-details)中。
+- 使用症状或确切的错误消息作为块的标题，如 `Can't access Home Assistant in my browser` 或 `Stuck at "Preparing Home Assistant"`。
+- 对于单独的故障排除页面，使用 "Troubleshooting" 后接主题："Troubleshooting Assist"。
+- 避免使用只有知道原因后才能理解的标题。读者搜索的是他们看到的内容，而不是哪里出了问题。
+
+### 故障排除的内容
+
+在每个块内，使用相同的三个部分：
+
+1. **症状：** 读者看到的现象，用他们的话描述。如有错误消息，请包含确切的错误消息。
+2. **描述：** 在有帮助时说明发生了什么。不要把可能的原因当作确定的原因来陈述。
+3. **解决方法：** 该怎么做。把简单的检查放在复杂的检查之前，在读者执行某个操作之前解释它的作用，并告诉他们如何确认问题已解决。
+
+当某个部分没有提供任何价值时可以省略，例如对于非常简短的主题可以省略描述。它在页面上的样子如下：
+
+```liquid
+## Troubleshooting
+
+{% details "The device shows as unavailable" %}
+
+### Symptom
+
+All entities of the device show as unavailable.
+
+#### Description
+
+Home Assistant can't reach the device on your network. This often happens when the device gets a new IP address from your router.
+
+#### Resolution
+
+1. Check that the device is powered on and connected to your network.
+2. Give the device a fixed IP address in your router.
+3. Go to {% my integrations title="**Settings** > **Devices & services**" %}, select the integration, and reload it.
+
+The entities become available again within a minute.
+
+{% enddetails %}
+```
+
+如果这些检查没有解决问题，请链接到合适的求助渠道，并说明应提供哪些信息，例如日志或诊断信息。仅提供一个社区论坛链接并不算故障排除。
+
+把常规的设置步骤保留在任务主题中。当遗漏某个设置步骤可能是问题的原因时，链接到那个任务，而不是重复它。
+
+---
+
+# 在本地预览网站
+
+> 在自己的电脑上运行 home-assistant.io，以便在分享之前查看较大的改动。
+
+Source: https://www.hasscn.top/contributors/writing/guides/local-preview/
+
+对于小的修复，拉取请求（pull request）上的 Deploy Preview 就足够了。对于较大的改动，比如新页面或重构的章节，在编写时就能在本地看到成果会更快。
+
+## 使用 devcontainer
+
+最简单的方法是使用带 devcontainer 的 Visual Studio Code。它会为你设置好一切，无需在电脑上安装 Ruby。
+
+1. Fork [home-assistant.io 仓库](https://github.com/home-assistant/home-assistant.io)并在 Visual Studio Code 中打开它。
+2. 收到提示时，在容器中重新打开该文件夹。
+3. 打开命令面板并运行 **Tasks: Run Task** > **Preview**。
+4. 在浏览器中打开 `http://localhost:4000`。
+
+## 不使用 devcontainer
+
+你需要 Ruby 和 Node.js。项目使用的版本记录在仓库的 [`.ruby-version`](https://github.com/home-assistant/home-assistant.io/blob/current/.ruby-version) 和 [`.nvmrc`](https://github.com/home-assistant/home-assistant.io/blob/current/.nvmrc) 文件中。需要 Node.js 是因为生成网站时也会构建其 Astro 部分。
+
+1. 为你的系统安装 Ruby、Bundler 和 Node.js。你的 Linux 发行版自带的 Ruby 包可能比 `.ruby-version` 中的版本旧。如果 `bundle` 因此失败，请改用 mise 安装 Ruby。Ruby 和 Bundler 的安装方法：
+
+   - Fedora：
+
+     ```shell
+     sudo dnf -y install \
+       gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json rubygem-rake
+     ```
+
+   - Debian 或 Ubuntu：
+
+     ```shell
+     sudo apt-get install \
+       ruby ruby-dev ruby-bundler ruby-json g++ zlib1g-dev
+     ```
+
+   - macOS，如果系统自带的 Ruby 无法使用，可使用 Homebrew：
+
+     ```shell
+     RUBY_FORMULA="ruby@$(cut -d . -f 1,2 .ruby-version)"
+     brew install "$RUBY_FORMULA"
+     export PATH="$(brew --prefix "$RUBY_FORMULA")/bin:$PATH"
+     ```
+
+   - 使用 [mise](https://mise.jdx.dev/)：仓库会让 mise 从 `.ruby-version` 读取 Ruby 版本。运行 `mise trust`、`mise install ruby` 和 `gem install bundler`。如果你的系统有预编译的 Ruby，mise 会直接下载，否则会从源码构建。该构建需要编译器和开发库。
+
+2. 在你克隆的仓库中，安装依赖：
+
+   ```shell
+   bundle
+   npm install
+   ```
+
+3. 生成一次网站。第一次需要一分钟：
+
+   ```shell
+   bundle exec rake generate
+   ```
+
+4. 启动预览：
+
+   ```shell
+   bundle exec rake preview
+   ```
+
+5. 打开 `http://127.0.0.1:4000`。对文件的更改会被自动检测到，刷新浏览器即可看到。
+
+集成（integration）页面位于 `source/_integrations`，通用文档位于 `source/_docs`。[文档的工作方式](https://www.hasscn.top/contributors/writing/how-it-works/#where-pages-live)列出了其他文件夹。
+
+### 在另一台机器上
+
+预览只监听 `127.0.0.1`，因此无法从其他电脑访问。在没有显示器的服务器上工作？传入它应监听的 IP 地址：
+
+```shell
+bundle exec rake "preview[192.168.0.123]"
+```
+
+或者保持原样，从你自己的电脑通过 SSH 转发端口：
+
+```shell
+ssh -L 4000:localhost:4000 user@ip-of-the-server
+```
+
+## 运行检查
+
+在拉取请求上运行的相同检查也可以在你的电脑上运行。它们需要 Node.js：
+
+```shell
+npm install
+npm run markdown:lint
+npm run textlint
+```
+
+`markdown:lint` 检查 Markdown 结构。`textlint` 检查拼写和术语。[自动化检查](https://www.hasscn.top/contributors/writing/reference/checks/)说明了它们检查的内容，以及如何处理误报。
+
+---
+
+# 编写集成文档
+
+> 面向为 Home Assistant 添加新集成的开发者。文档需要包含哪些内容，以及如何让文档与代码一起合并。
+
+Source: https://www.hasscn.top/contributors/writing/guides/integration/
+
+Home Assistant 中的每个集成（integration）在 [home-assistant.io](https://www.home-assistant.io/) 上都有一个页面。当你添加一个集成时，它的页面也是工作的一部分。用户通过该页面找到集成，集成概览也是由它生成的。
+
+## 开始之前
+
+- 目标分支为 `next`。你的集成尚未发布，因此其页面也尚未发布。
+- 每个核心拉取请求对应一个文档拉取请求，并在另一个请求中列出每个请求，标注为 **This PR belongs together with**。
+- 将集成的图标和徽标添加到 [brands 仓库](https://github.com/home-assistant/brands)，并以相同方式将该拉取请求与核心拉取请求配对。
+
+## 创建页面
+
+1. 将[集成页面模板](https://github.com/home-assistant/home-assistant.io/blob/current/source/_integrations/_integration_docs_template.markdown)复制到 [`source/_integrations/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations)。
+2. 以集成的域名（domain）命名文件，并使用 `.markdown` 扩展名，例如 `my_device.markdown`。
+3. 填写 front matter。它驱动集成概览、质量等级徽章等。每个键都在[集成 front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/) 中有说明。
+4. 按照模板的结构编写页面。[集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/)解释了每个部分的用途。
+5. 将该集成及其集成负责人添加到文档仓库的 `CODEOWNERS` 文件中。如果你拥有该集成，你也就拥有它的文档：你会被要求审阅对该页面的更改，并且在读者留下反馈时会收到通知。
+6. 在将拉取请求标记为可以审阅之前，请删除模板中的注释。
+
+## 优秀的集成页面应涵盖的内容
+
+模板会引导你完成各个部分。审阅者会关注以下几点：
+
+- **集成的作用**，以及用户可以用它做什么，写在开头几行。
+- **支持的设备**，以及已知无法工作的设备。在重要的情况下，请提及你测试时所用的固件版本。
+- **如何获取凭据**，例如 API 密钥或访问令牌，逐步说明。
+- 步骤或示例中**不使用自定义集成或自定义卡片**。一切都应能通过 Home Assistant 自带的功能实现。
+- **已知的限制和故障排除**，让用户不必通过踩坑才发现。
+
+## 当功能被移除时
+
+在功能被弃用（deprecated）时就应立即移除其文档，而不是等到它被删除时：从集成页面中删除其对应的部分，并且不要添加弃用通知。当整个集成被弃用或删除时，请参阅[移动、重命名或删除页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/)。
+
+---
+
+# 移动、重命名或删除页面
+
+> 文档页面会被各种地方链接引用。这里介绍如何在不破坏这些链接的情况下进行修改。
+
+Source: https://www.hasscn.top/contributors/writing/guides/move-or-remove/
+
+文档页面会被论坛帖子、博客文章、其他网站以及 Home Assistant 本身链接。当 URL 发生变化时，这些链接应该保持有效。
+
+## 移动或重命名页面
+
+在 `source/_redirects` 中添加一条从旧 URL 到新 URL 的重定向：
+
+```text
+/integrations/old_name  /integrations/new_name  301
+```
+
+当你把某个章节移动到另一个页面时也是如此：将旧地址重定向到内容现在所在的位置。
+
+## 删除集成页面
+
+当某个集成（integration）从 Home Assistant 中移除，或整个集成被弃用时，其文档也应一并删除：
+
+1. 从 `source/_integrations` 中删除该页面，如果它包含触发、条件和动作，也一并删除 `source/_triggers`、`source/_conditions` 和 `source/_actions` 中的相应内容。
+2. 从[品牌仓库](https://github.com/home-assistant/brands)中移除其图标和标志。
+3. 从 `CODEOWNERS` 文件中移除其条目。
+4. 在 `source/_redirects` 中为已移除的集成添加一条重定向。所有已移除的集成都指向同一个页面，该页面向访客解释发生了什么：
+
+   ```text
+   /integrations/old_name  /more-info/removed-integration  301
+   ```
+
+## 已弃用的功能
+
+不要等到功能被移除才行动。[文档仓库](https://github.com/home-assistant/home-assistant.io)中的规则是："当某个功能被弃用或某个集成从 Home Assistant 中移除时，删除其文档。"
+
+- 如果某个功能被弃用，请从集成页面中删除其章节。
+- 不要在文档中添加弃用声明。
+- 如果整个集成被弃用，请按照[删除集成页面](https://www.hasscn.top/contributors/writing/guides/move-or-remove/#remove-an-integration-page)中的说明删除其页面。
+
+---
+
+# 写作参考
+
+> 写作时需要查阅的细节。风格、图片、Liquid、YAML、自动化检查以及集成页面。
+
+Source: https://www.hasscn.top/contributors/writing/reference/
+
+本节中的页面用于查阅信息。如需了解如何完成某项任务，请从[指南](https://www.hasscn.top/contributors/writing/guides/)开始。
+
+- [文档风格指南](https://www.hasscn.top/contributors/writing/reference/style/)：适用于每个页面的语言、语气和 Markdown 规则。
+- [图片和视频](https://www.hasscn.top/contributors/writing/reference/images/)：添加截图、图表和视频，并为所有读者描述它们。
+- [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/)：home-assistant.io 在 Markdown 基础上添加的所有 Liquid 标签。
+- [YAML 风格](https://www.hasscn.top/contributors/writing/reference/yaml/)：YAML 示例应呈现的样子。
+- [文档自动化检查](https://www.hasscn.top/contributors/writing/reference/checks/)：拉取请求（pull request）上的检查会查找什么，以及如何自行运行这些检查。
+- [集成前置元数据（front matter）](https://www.hasscn.top/contributors/writing/reference/front-matter/)：集成页面顶部的所有键。
+- [集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/)：集成页面的各个章节，以及填充这些章节的内容块。
+
+---
+
+# 文档风格指南
+
+> home-assistant.io 上每个页面的语言、语气和 Markdown 格式规则。
+
+Source: https://www.hasscn.top/contributors/writing/reference/style/
+
+文档遵循 [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)。在拼写和用词方面，它使用 [Merriam-Webster](https://www.merriam-webster.com/)，也就是 Microsoft 所依赖的同一本词典。本页列出了我们在此基础上增加的规则，以及你最常遇到的规则。
+
+页面使用 [GitHub Flavored Markdown](https://github.github.com/gfm/) 编写，并使用一些 [Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/)来实现 Markdown 无法完成的功能。图片和视频有[单独的页面](https://www.hasscn.top/contributors/writing/reference/images/)，[YAML 示例](https://www.hasscn.top/contributors/writing/reference/yaml/)也是如此。如何组织页面请参阅[组织页面结构](https://www.hasscn.top/contributors/writing/guides/structure/)。
+
+## 语言和语气
+
+- **使用美式英语写作。** Home Assistant 在全世界范围内被使用，许多读者并非以英语为母语。简短的句子和朴实的词语对每个人都有帮助。
+- **与读者对话。** 使用“你”和“你的”，而不是“用户”。
+- **友好而直接。** 像向一位喜欢技术的朋友解释某件事那样写作。要有信息量且亲切，而不是正式或技术化。
+- **为使用 UI 的用户写作。** 大多数读者从不打开 YAML 文件。先展示 UI 路径，将 YAML 或其他手动配置作为需要时的选项。
+- **让 Home Assistant 显得平易近人。** 避免使用让它听起来脆弱、困难或容易出错的措辞。不要将 YAML 或更复杂的功能称为“高级”，除非产品本身使用了这个词。
+- **诚实。** 不要用营销语言掩盖局限性或复杂性。如实说明某项功能能做什么、不能做什么。
+- **包容。** 保持写作客观，避免性别偏见、两极分化的言论，以及任何基于种族或宗教排斥他人的内容。不遵守此要求的写作可能违反[行为准则](https://github.com/home-assistant/home-assistant.io/blob/current/CODE_OF_CONDUCT.md)。
+
+## 词语和术语
+
+- **完整书写“Home Assistant”。** 不要写“HA”或“HASS”。
+- **使用“选择”（select），而不是“点击”（click）。** “Click”只适用于鼠标。“Select”也适用于触摸屏、键盘和屏幕阅读器。只有在描述特定的鼠标操作（如右键单击或双击）时才使用“click”。
+- **避免拉丁语缩写。** 不要写“e.g.”、“i.e.”、“etc.”或“etcetera”。改用“like”、“for example”或“such as”。
+- **不要使用“master/slave”。** 使用符合上下文的[替代词](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave)，例如“client/server”、“leader/follower”、“main/replica”或“controller/device”。
+- **匹配名称的官方拼写。** 品牌、服务、协议、集成（integration）和平台的书写方式与其所有者的写法一致。例如，是“Z-Wave”，而不是“Zwave”、“Z-wave”、“Z Wave”或“ZWave”。“GitHub”、“WebSocket”和“Wi-Fi”也是如此。
+- **一致地使用术语表中的术语。** 当页面使用 Home Assistant 的术语（如实体（entity）、设备（device）或集成）时，请按照[术语表](https://www.hasscn.top/contributors/glossary/)定义的方式使用。在 [home-assistant.io](https://www.home-assistant.io/) 上，你可以将定义显示为工具提示，参见[术语表工具提示](https://www.hasscn.top/contributors/writing/reference/liquid/#glossary-tooltips)。
+
+自动检查会强制执行一份很长的品牌和产品拼写列表。该列表位于[`.textlintrc.json`](https://github.com/home-assistant/home-assistant.io/blob/current/.textlintrc.json)中。如果检查标记了一个拼写正确的名称，请在同一个 pull request 中将其添加到那里。有关检查的工作方式，请参阅[自动检查](https://www.hasscn.top/contributors/writing/reference/checks/)。
+
+## 标点和语法
+
+- **使用牛津逗号。** 在包含三个或更多项目的列表中，在“and”或“or”之前加逗号：“Zigbee, Z-Wave, and Matter”。
+- **句子以句号结尾。** 遵循正常的语法规则，包括作为完整句子的列表项。
+- **句号后使用一个空格。** 绝不要两个。
+- **少用破折号。** 太多破折号会产生冗长、纠缠的句子，而且它们是机器生成文本的常见标志。应改为重组句子：
+  - 将长句拆分为两个较短的句子。
+  - 要引出列表或解释？使用冒号。
+  - 要插入补充说明？使用括号或逗号。
+
+  如果破折号确实是最佳选择，请遵循 [Merriam-Webster 风格](https://www.merriam-webster.com/grammar/em-dash-en-dash-how-to-use)：em dash（长破折号）前后不加空格。复合词中的连字符，如“built-in”或“Z-Wave”，没有问题。
+
+## 格式基础
+
+- **每个句子单独一行。** 没有行长度限制，因此不要按固定宽度换行。
+  相反，将段落的每个句子放在新的一行，使用单个换行符。
+  Markdown 仍会将这几行渲染为一个段落。
+  这使审阅更容易：当你更改一个句子时，差异只显示该行，审阅者可以准确评论或建议更改该句子。
+  这是可选的，但推荐这样做，将整个段落保持在一行上也是可以的。
+  当你更改一个单行的段落时，只将该段落拆分为句子，并保持其他段落不变。
+  不要进行仅更改段落换行方式的编辑。
+- **优先使用 Markdown 而不是 HTML。** 仅在 Markdown 无法完成时使用 HTML，例如带标题的图片。
+- **用空行包围块。** 标题、列表、代码块和文本框前后都需要一个空行。
+
+## 标题
+
+页面的标题就是它的一级标题。它来自文件顶部 front matter 中的 `title`，所以你永远不需要自己写 `#` 标题：
+
+```markdown
+---
+title: "Create an automation"
+---
+```
+
+页面内容从二级标题开始。使用带 `#` 字符的 Markdown 标题，从二级到六级：
+
+```markdown
+## Heading level 2
+### Heading level 3
+#### Heading level 4
+##### Heading level 5
+###### Heading level 6
+```
+
+- **使用句首大写。** 仅首单词和专有名词大写：“Create an automation”，而不是“Create An Automation”。Microsoft 有[更多关于大写的内容](https://learn.microsoft.com/en-us/style-guide/capitalization)。
+- **不要跳级。** 四级标题必须位于三级标题之下。
+- **了解目录中显示的内容。** 在 home-assistant.io 上，只有二级和三级标题会出现在页面旁边的目录中。将读者需要单独查找的任何内容放在二级或三级标题下。
+- **为主题命名。** 像“区域设置”这样的标题能告诉读者接下来的内容。“概述”或“须知”则不能。[组织页面结构](https://www.hasscn.top/contributors/writing/guides/structure/)针对每种类型的章节提供了建议。
+
+## 强调
+
+- **使用斜体进行强调。** 使用下划线：`_emphasized words_`。不要使用单个星号。
+- **不要用大写字母进行强调。** 全大写的文字读起来像在喊叫。
+- **不要用粗体进行强调。** 粗体保留给 UI 元素使用。也不要用粗体文本代替标题。
+
+请节制使用强调。当所有内容都很突出时，就没有内容突出了。
+
+## UI 元素和步骤
+
+使用双星号以粗体书写 UI 元素或显示的 UI 文本（如传感器状态）的名称：`**Settings**`。按照界面中的原样书写。
+
+要描述界面中的路径，请在各步骤之间使用大于号（`>`）。`>` 本身不加粗：
+
+```markdown
+1. Go to **Settings** > **Devices & services**.
+2. Select **Restart Home Assistant** > **Quick reload**.
+```
+
+要书写你在 UI 中看到的错误消息，不要使用粗体。将消息括在引号中。
+
+当路径从 Home Assistant 中的页面开始时，使用 [My 链接](https://www.hasscn.top/contributors/writing/reference/liquid/#my-links)，以便读者可以直接跳转到他们自己安装中的该页面。要指向界面中的图标，请使用[内联图标](https://www.hasscn.top/contributors/writing/reference/liquid/#inline-icons)。
+
+## 文件路径、名称和输入
+
+对文件路径、文件名、变量名以及读者在字段中输入的任何文本使用反引号：
+
+- `/boot/config.txt` 文件
+- `configuration.yaml` 文件
+- `this` 变量
+- 输入 `/newbot`
+
+当示例中的某个值需要替换为读者自己的值时，请用大写字母加下划线书写，例如 `YOUR_API_KEY` 或 `REPLACE_ME`。
+
+## 列表
+
+- **选择正确的类型。** 按顺序执行的步骤使用编号列表。顺序无关紧要时使用项目符号。
+- **项目符号使用 `-`。** 不要使用 `*` 或 `+`。
+- **正确编号有序列表。** 写 `1.`、`2.`、`3.`，而不是每行都写 `1.`。
+- **每个项目以大写字母开头**，除非有理由不这样做，例如命令或代码值。
+- **保持标点一致。** 如果至少有一个项目是完整句子，则每个项目都以句号结尾。如果都不是，则完全不加句号。
+- **不要以分号、逗号或“and”、“or”结尾项目。**
+- **列表前后留一个空行。**
+
+```markdown
+1. Select **Create area**.
+2. Enter a **Name** for the area.
+3. Select **Create**.
+```
+
+## 代码块
+
+使用三个反引号的围栏代码块，并始终在起始反引号后注明语言：
+
+````markdown
+```yaml
+automation:
+  - alias: "Turn on the porch light at sunset"
+```
+````
+
+home-assistant.io 上的语法高亮使用 [Prism](https://prismjs.com/)。常用的语言名称有：
+
+- `yaml` 用于配置和自动化（YAML 中的模板也会被高亮）
+- `template` 或 `jinja2` 用于独立模板
+- `bash` 或 `shell` 用于命令
+- `json`
+- `python`
+- `markdown`
+- `html`
+- `text` 用于纯文本输出，例如日志行
+
+代码块还有一些其他规则：
+
+- **每行不超过 80 个字符。** 过长的行会迫使读者横向滚动，尤其是在手机上。
+- **命令前不要加 `$` 提示符。** 读者会直接从页面复制命令，提示符会破坏这一点。只有当代块同时显示输出，且需要提示符来区分命令与其输出时才使用。
+- **用更多反引号嵌套围栏。** 要在代码块内显示代码块，请让外层围栏的反引号多于内层。内层使用三个反引号的块用四个反引号包围，内层使用四个的用五个包围。
+
+`````markdown
+````markdown
+```yaml
+key: value
+```
+````
+`````
+
+YAML 示例在缩进、引号等方面有自己的规则。请参阅 [YAML 风格](https://www.hasscn.top/contributors/writing/reference/yaml/)。
+
+## 表格
+
+避免使用表格。许多人在手机上阅读文档，小屏幕上的宽表格很难使用。列表几乎总是更好：
+
+- 两列的表格是伪装的列表。直接写成列表。
+- 如果无法避免表格，请保持列数较少，且每个单元格中的文字简短。
+- 对于配置选项，请改用[集成页面](https://www.hasscn.top/contributors/writing/reference/integration-page/)中描述的块。
+
+## 链接
+
+指向 home-assistant.io 上其他页面的链接遵循已发布的 URL，而不是仓库中的文件：
+
+- **使用绝对路径**，以 `/` 开头。
+- **省略 `source` 目录。**
+- **省略第一个目录的前导下划线。**
+- **以斜杠结尾，而不是文件扩展名**，如 `.markdown`、`.md` 或 `.mdx`。
+- **不要写完整域名。** 使用 `/integrations/date/`，而不是 `https://www.home-assistant.io/integrations/date/`。
+
+例如，要链接到 [`source/_integrations/date.markdown`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_integrations/date.markdown)：
+
+```markdown
+[Date](/integrations/date/)
+```
+
+当页面提到某个集成或平台时，将其名称链接到其文档页面，例如 `[Philips Hue](/integrations/hue/)`。这样读者可以直接跳转到详细信息。
+
+对于一般链接：
+
+- **不要使用裸 URL。** 不要将 `https://example.org` 或 `<https://example.org>` 直接粘贴到文本中。为每个链接提供描述性文字。
+- **不要使用联盟或跟踪链接。**
+- **链接文字应描述目标。** 避免使用“这里”或“此链接”。
+
+## 缩写和首字母缩略词
+
+尽量少用缩写和首字母缩略词。确实需要时，请将其包裹在 `<abbr>` 标签中。这样读者会看到完整术语的工具提示：
+
+```html
+<abbr title="Audio & video">A/V</abbr>
+<abbr title="current transformers">CT</abbr>
+<abbr title="Dutch smart meter requirement">DSMR</abbr>
+<abbr title="embedded MultiMediaCard">eMMC</abbr>
+<abbr title="flash video">FLV</abbr>
+<abbr title="Large Language Models">LLMs</abbr>
+<abbr title="Model Context Protocol">MCP</abbr>
+<abbr title="pan, tilt, and zoom">PTZ</abbr>
+<abbr title="real-time messaging protocol">RTMP</abbr>
+<abbr title="real-time streaming protocol">RTSP</abbr>
+<abbr title="USB-On-The-Go">USB-OTG</abbr>
+```
+
+对于 Home Assistant 自己的术语，[术语表工具提示](https://www.hasscn.top/contributors/writing/reference/liquid/#glossary-tooltips)是更好的选择。
+
+---
+
+# 图片和视频
+
+> 如何在 home-assistant.io 的页面上添加截图、图表和 YouTube 视频，以及如何为每位读者描述它们。
+
+Source: https://www.hasscn.top/contributors/writing/reference/images/
+
+一张好的截图可以省去一段解释。一个视频可以展示文字无法表达的内容。本页介绍图片存放的位置、如何将图片添加到页面，以及如何嵌入视频。
+
+## 图片存放的位置
+
+将每张图片都存放在文档仓库中，位于 [`source/images`](https://github.com/home-assistant/home-assistant.io/tree/current/source/images) 下。选择与页面匹配的子文件夹：
+
+- `source/images/integrations/<domain>/` 用于集成（integration），例如 [`source/images/integrations/matter/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/images/integrations/matter)。
+- `source/images/docs/<topic>/` 用于一般文档。
+- [`source/images/dashboards/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/images/dashboards) 用于仪表盘（dashboard）和卡片。
+
+不要链接到托管在其他地方的图片，例如你自己的 GitHub 仓库或图床服务。外部图片会消失、变更，或拖慢页面加载速度。
+
+在页面上，通过图片的发布路径来引用它。也就是去掉 `source` 之后的路径，因此 [`source/images/integrations/matter/matter_device-info.png`](https://github.com/home-assistant/home-assistant.io/blob/current/source/images/integrations/matter/matter_device-info.png) 会变成 `/images/integrations/matter/matter_device-info.png`。
+
+> [!NOTE]
+> GitHub 上的 **Edit** 按钮不支持上传图片。要添加图片，请在 fork 上操作，可以在你自己的电脑上进行，或者先将文件上传到你在 GitHub 上的 fork。参见[在本地预览网站](https://www.hasscn.top/contributors/writing/guides/local-preview/)。
+
+## 添加图片
+
+尽可能使用 Markdown 来添加图片：
+
+```markdown
+![Screenshot of the tile card with a brightness slider](/images/dashboards/features/screenshot-tile-feature-grid.png)
+```
+
+图片也可以用来展示某个步骤。将其缩进，使其属于该列表项：
+
+```markdown
+1. To adjust the brightness, move the slider:
+   ![Screenshot of the tile card with a brightness slider](/images/dashboards/features/screenshot-tile-feature-grid.png)
+2. Select **Save**.
+```
+
+## 添加图注
+
+Markdown 没有图注语法。要在图片下方显示图注，请将其包裹在带有 `img` 类的段落中，并把图注文字放在图片之后：
+
+```html
+<p class='img'>
+  <img
+    src='/images/dashboards/features/screenshot-tile-feature-grid.png'
+    alt='Screenshot of the tile card with a brightness slider'
+  >
+  The tile card with a brightness slider
+</p>
+```
+
+这样，图片和图注会获得带边框、居中的布局，图注以斜体显示。
+
+## 深色模式和 invertDark
+
+对于在深色模式下显示时应反转颜色的图片，请添加 `invertDark` 类。这适用于在透明或白色背景上使用深色线条的简单图表和绘图。不要在截图或照片上使用它：反转会使它们看起来不正常。
+
+```html
+<p class='img'>
+  <img
+    class='invertDark'
+    src='/images/integrations/infrared/infrared-overview.png'
+    alt='Diagram of how commands reach a device through an infrared adapter'
+  >
+  How commands reach an infrared device
+</p>
+```
+
+> [!NOTE]
+> [home-assistant.io](https://www.home-assistant.io/) 目前没有深色模式，其样式表也尚未定义 `invertDark`，因此该类目前在网站上没有可见效果。已有少数页面在使用它。
+
+## 灯箱效果
+
+在 home-assistant.io 上，读者可以在文档页面或博客文章中选择一张图片，在灯箱（lightbox）中以全尺寸打开它。它也支持键盘操作。你无需为此做任何事情：图片会自动获得灯箱效果，除非：
+
+- 图片很小。显示尺寸小于 160×100 像素、且原始尺寸也小于 300 像素的图片会被跳过。这是为了排除内联图标。
+- 它是一个链接，或位于链接或按钮之内。
+- 它是 SVG 文件。
+- 它看起来像徽标。品牌徽标会被跳过，依据是其类名、包含 `logo` 或 `brand` 等字样的路径，或提到徽标的替代文本。
+- 它被选择退出。
+
+要让某张图片不使用灯箱，请添加 `data-no-lightbox` 属性或 `no-lightbox` 类。你可以将其中任意一个放在图片本身上，或放在其周围的元素上，以让整组图片退出灯箱：
+
+```html
+<img
+  src="/images/example.png"
+  alt="Description of the image"
+  data-no-lightbox
+>
+```
+
+```html
+<img
+  class="no-lightbox"
+  src="/images/example.png"
+  alt="Description of the image"
+>
+```
+
+## 编写良好的替代文本
+
+每张图片都需要替代文本（alt text）。屏幕阅读器会将其朗读出来，并且在图片加载失败时会显示它。替代文本也是灯箱打开图片时播报的内容。
+
+- **描述图片展示的内容**，以及它为什么在那里。“集成设置页面的截图，轮询间隔设置为 30 秒”是有帮助的。只写“截图”则没有帮助。
+- **保持简短。**通常一句话就足够了。
+- **不要以“图片”开头。**屏幕阅读器已经会播报这是一张图片。“……的截图”或“……的图表”是可以的，因为它告诉读者图片的类型。
+- **不要逐字重复图注。**如果图注已经说明了一切，替代文本可以改为描述视觉细节。
+- **不要把信息只放在图片里。**读者完成某个步骤所需的任何内容也应写在正文中。
+
+## 保持截图的实用性
+
+- 只展示屏幕上重要的部分。裁剪掉其余部分。
+- 使用 Home Assistant 的默认[主题](https://www.hasscn.top/contributors/glossary/theme/)和语言，使截图看起来与读者所见一致。
+- 移除或模糊个人信息，例如姓名、地址、令牌和 IP 地址。
+- 替换不再与界面相符的截图。过时的截图比没有截图更让人困惑。
+
+## 嵌入 YouTube 视频
+
+使用 `lite-youtube` 元素来嵌入 YouTube 视频。它首先显示一个轻量级的预览，只有当读者开始播放视频时才加载实际的 YouTube 播放器。这能保持页面的速度。
+
+```html
+<lite-youtube
+  videoid="ZgoaoTpIhm8"
+  videotitle="Introducing the Home Assistant Voice Preview Edition"
+></lite-youtube>
+```
+
+- `videoid` 是 YouTube URL 中 `watch?v=` 之后的部分。对于 `https://www.youtube.com/watch?v=ZgoaoTpIhm8`，即 `ZgoaoTpIhm8`。
+- `videotitle` 是视频的标题。屏幕阅读器会使用它，因此请务必添加。
+- `videoStartAt` 从特定时刻开始播放，以从开头算起的秒数为单位。当长视频中只有部分内容相关时可以使用它。
+
+例如，要让上面的视频从 1 小时 5 分 7 秒处开始播放：
+
+```html
+<lite-youtube
+  videoid="ZgoaoTpIhm8"
+  videoStartAt="3907"
+  videotitle="Introducing the Home Assistant Voice Preview Edition"
+></lite-youtube>
+```
+
+要在视频下方添加图注，请将其包裹在带有 `img` 类的段落中，方式与[图片图注](https://www.hasscn.top/contributors/writing/reference/images/#add-a-caption)相同：
+
+```html
+<p class='img'>
+  <lite-youtube
+    videoid="ZgoaoTpIhm8"
+    videoStartAt="3907"
+    videotitle="Introducing the Home Assistant Voice Preview Edition"
+  ></lite-youtube>
+  Watch the Voice Preview Edition announcement
+</p>
+```
+
+视频永远不能替代书面步骤。不是每个人都能观看视频，而且文字更易于浏览和翻译。
+
+---
+
+# Liquid 辅助工具
+
+> home-assistant.io 在 Markdown 之上添加的所有 Liquid 标签，从 My 链接和术语表提示框到文本框和可复用片段。
+
+Source: https://www.hasscn.top/contributors/writing/reference/liquid/
+
+[home-assistant.io](https://www.home-assistant.io/) 使用 Jekyll 构建，并采用 [Liquid](https://shopify.github.io/liquid/) 进行模板渲染。在纯 Markdown 的基础上，网站添加了一组 Liquid 标签，用于实现 Markdown 无法完成的功能：指向读者自己 Home Assistant 的链接、术语表提示框、图标、文本框等等。
+
+请在能帮助读者的地方使用它们，而不是因为它们存在就用。包裹内容的标签（如文本框）都有一个以 `end` 开头的对应闭合标签：
+
+```liquid
+{% tip %}
+This text is inside the tag.
+{% endtip %}
+```
+
+## My 链接
+
+My 链接会在读者自己的 Home Assistant 安装中打开一个页面。每当你需要把读者引导到界面中的某个位置时，都可以使用它，这样读者可以直接跳转过去，而不用在菜单中翻找：
+
+```liquid
+Go to {% my integrations title="**Settings** > **Devices & services**" %} and select your integration.
+```
+
+`my` 后面的第一个单词是页面的名称。`title` 是链接文本。请按照 UI 路径的格式书写，使用粗体并在各步骤之间用 `>` 分隔，与任何 [UI 路径](https://www.hasscn.top/contributors/writing/reference/style/#ui-elements-and-steps)的写法一致。
+
+以下是你最常用到的 My 链接：
+
+```liquid
+- {% my areas title="**Settings** > **Areas, labels & zones**" %}
+- {% my automations title="**Settings** > **Automations & scenes**" %}
+- {% my backup title="**Settings** > **System** > **Backups**" %}
+- {% my general title="**Settings** > **System** > **General**" %}
+- {% my integrations title="**Settings** > **Devices & services**" %}
+- {% my labs title="**Settings** > **System** > **Labs**" %}
+- {% my logs title="**Settings** > **System** > **Logs**" %}
+- {% my network title="**Settings** > **System** > **Network**" %}
+- {% my profile title="**User profile**" %}
+```
+
+### 查找页面名称
+
+在 Home Assistant 中打开该页面，然后按键盘上的 `m`。如果该页面有对应的 My 链接，Home Assistant 就会显示出来。名称是链接的最后一部分：例如 `https://my.home-assistant.io/redirect/logs/` 的名称就是 `logs`。
+
+[My 链接生成器](https://my.home-assistant.io/create-link/)列出了所有 My 链接及其接受的参数。
+
+### 其他选项
+
+大多数 My 链接只需要一个 `title`。针对特殊情况，还有一些额外的选项：
+
+- `badge` 将链接显示为 My 徽章图片，而不是文本。徽章不能有 `title`。
+- `domain` 为需要集成的页面设置集成，例如 `config_flow_start`，它会开始设置特定的集成。
+- `addon`、`blueprint_url`、`brand`、`repository_url` 和 `service` 传递页面应打开的应用程序、蓝图、品牌、仓库或操作。
+- `search` 在带有搜索字段的页面（如 `logs`）上填充搜索字段。
+- `provider`、`integration` 和 `raw` 选择 `logs` 页面显示的内容。`provider` 是要打开的日志，如 `supervisor` 或应用程序 slug。`integration` 将 Home Assistant Core 日志过滤为一个或多个集成，用逗号分隔。`raw` 显示完整的 Home Assistant Core 日志，而不仅仅是错误。
+
+```liquid
+{% my config_flow_start badge domain="hue" %}
+{% my blueprint_import badge blueprint_url="https://example.com/blueprint.yaml" %}
+{% my logs title="**Settings** > **System** > **Logs**"
+   provider="supervisor" search="token" %}
+```
+
+没有 `title` 时，链接会回退到默认文本。该默认文本并不总是符合[风格指南](https://www.hasscn.top/contributors/writing/reference/style/)的要求，因此在正文中的链接请添加 `title`。
+
+## 术语表提示框
+
+Home Assistant 有自己的词汇体系：实体（entity）、设备（device）、集成（integration）、区域（area）等等。[术语表](https://www.home-assistant.io/docs/glossary/)对它们进行了解释。在页面上标记一个术语，读者就能在提示框中看到它的定义，通常还带有了解更多信息的链接：
+
+```liquid
+{% term <term> [<text>] %}
+```
+
+一些示例：
+
+```liquid
+{% term integration %}
+{% term entity %}
+{% term "configuration.yaml" %}
+{% term "Home Assistant Operating System" %}
+```
+
+- **含有空格或点的术语需要加引号。** 单个单词可以不加引号。
+- **别名也可以使用。** 每个术语表条目都可以列出别名，例如复数形式。所以 `automations` 和 `automation` 一样可用。匹配时忽略大小写。
+- **术语必须存在。** 如果术语不在术语表中，构建就会失败，因此 Deploy Preview 会帮你发现拼写错误。
+
+默认情况下，提示框将术语本身显示为文本。若要将提示框放在其他词语上，请在术语后面添加文本：
+
+```liquid
+I used an {% term automation "automation to turn on the lights" %} at sunset.
+```
+
+你不需要标记术语的每一次出现。在它首次出现在页面上时标记，或者在读者最可能感到困惑的地方标记即可。
+
+### 向术语表添加术语
+
+缺少某个术语，或者发现某个定义可以写得更清楚？请编辑 [`source/_data/glossary.yml`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_data/glossary.yml)。条目按字母顺序排序，每个条目可以包含以下键：
+
+- `term`：术语本身。必填。
+- `definition`：完整的解释，显示在术语表页面上。必填。
+- `excerpt`：用于提示框的较短版本。当定义较长时请添加。
+- `link`：读者可以了解更多信息的页面。
+- `aliases`：应当匹配的术语其他形式，例如复数形式。
+
+```yaml
+- term: Scene
+  definition: >-
+    Scenes capture the states you want certain entities to be. For example, a
+    scene can specify that light A should be turned on and light B should be
+    bright red.
+  link: /integrations/scene/
+  aliases:
+    - scenes
+```
+
+[本站的术语表](https://www.hasscn.top/contributors/glossary/)是另一个术语表。它解释的是为 Home Assistant 做贡献时使用的术语。
+
+## 行内图标
+
+要指向界面中的某个图标时，请将其行内显示。这些图标来自 [Iconify 上的 Material Design Icons 图标集](https://icon-sets.iconify.design/mdi/)，与 Home Assistant 使用的图标集相同：
+
+```liquid
+Select the three dots {% icon "mdi:dots-vertical" %} menu.
+```
+
+图标会根据其名称获得一个提示框。若要自定义，请添加 `title`：
+
+```liquid
+{% icon "mdi:dots-vertical" title="Three dots menu" %}
+```
+
+你最常用到的图标：
+
+```liquid
+- Three dots menu: {% icon "mdi:dots-vertical" %}
+- Hamburger menu: {% icon "mdi:menu" %}
+- Edit: {% icon "mdi:edit" %}
+- Revert: {% icon "mdi:restore" %}
+- Eye: {% icon "mdi:eye" %}
+- Trash: {% icon "mdi:trash" %}
+- Cog: {% icon "mdi:cog" %}
+- Cog outline: {% icon "mdi:cog-outline" %}
+- Drag: {% icon "mdi:drag" %}
+- Move cursor: {% icon "mdi:cursor-move" %}
+- Arrow left: {% icon "mdi:arrow-left-bold" %}
+- Arrow right: {% icon "mdi:arrow-right-bold" %}
+- Checkbox list: {% icon "mdi:order-checkbox-ascending" %}
+- Upload network: {% icon "mdi:upload-network" %}
+- Security network: {% icon "mdi:security-network" %}
+- Routes: {% icon "mdi:routes" %}
+```
+
+要查找其他图标的名称，请在 Iconify 上搜索，然后在名称前面加上 `mdi:`。
+
+## 可折叠详情
+
+详情块会隐藏内容，直到读者将其展开。请将它用于大多数读者可以跳过的内容，例如如何从供应商处获取凭据，或者故障排除问题列表（每位读者通常只需要其中一条）：
+
+```liquid
+{% details "Generate a client ID and client secret" %}
+
+1. Register your account as a developer account at the vendor's developer portal.
+2. Create a new application.
+3. Enter an **Application name** of your choice, for example **Home Assistant**.
+
+{% enddetails %}
+```
+
+- **标题是必填的**，需放在引号中。标题要让读者不用展开就能知道里面是什么内容。对于故障排除，请使用症状或错误信息。
+- **标题中可以使用 Markdown**，例如用反引号标记代码。
+- **可以在标题前添加图标**，使用 `icon` 选项，例如 `icon="mdi:information"`。
+- **在开始标签之后和闭合标签之前保留空行**，这样内部的 Markdown 才能正确渲染。
+
+请使用 Liquid 详情块，而不是 HTML 的 `<details>` 元素。Liquid 版本与网站的外观保持一致。
+
+## 文本框
+
+文本框能让信息从周围的文本中突显出来。它们只有在少量使用时才有效：一个满是文本框的页面反而没有任何东西能突显出来。在添加文本框之前，先问问自己一句普通的话是否就够了。
+
+共有六种类型。请选择与信息内容相匹配的那一种：
+
+- **Tip（提示）：** 让某件事更简单或更好的建议。即使读者跳过也不会出问题。
+- **Note（注意）：** 有帮助的额外信息，但不属于主要流程的一部分。
+- **Important（重要）：** 读者若想成功就不能错过的内容，例如某项要求。
+- **Caution（谨慎）：** 可能导致数据丢失、意外行为或其他难以撤销后果的操作。
+- **Warning（警告）：** 对系统安全或完整性的风险，或造成人身伤害的风险。这是最强烈的文本框，只在真正需要时使用。
+- **Labs：** 标记某个功能是 Labs 预览功能，并告诉读者如何启用它。
+
+```liquid
+{% tip %}
+Group your lights in an area, so you can turn them all off with one action.
+{% endtip %}
+
+{% note %}
+The integration updates the data every 5 minutes.
+{% endnote %}
+
+{% important %}
+Your device needs firmware version 2.0 or later.
+{% endimportant %}
+
+{% caution %}
+Removing the integration also removes all its entities from your automations.
+{% endcaution %}
+
+{% warning %}
+Disconnect the power before you open the device.
+{% endwarning %}
+
+{% labs %}
+Requires the **Feature name** Labs preview feature. Enable it at {% my labs title="**Settings** > **System** > **Labs**" %}.
+{% endlabs %}
+```
+
+每个文本框都会将其类型显示为标题，例如 **Tip**。若要在此标题上追加内容，请使用 `title`。若要替换默认图标，请使用 `icon`：
+
+```liquid
+{% note title="Older devices" icon="mdi:router-wireless" %}
+Devices from before 2020 need a firmware update first.
+{% endnote %}
+```
+
+该文本框会显示 **Note: Older devices** 作为其标题。
+
+## 示例块
+
+`example` 块用于展示自动化、脚本、模板或其他代码，并在其上方显示标签，同时内置术语表提示框和语法高亮。请将它用于希望读者理解并加以改编的示例，而不是普通的代码块。
+
+内容是 YAML。它的第一个键设置标签，代码则以 `|` 块的形式放在其下方：
+
+```liquid
+{% example %}
+automation: |
+  alias: "Match fan to ceiling light"
+  triggers:
+    - trigger: light.brightness_changed
+      target:
+        entity_id: light.living_room_ceiling
+      options:
+        threshold: 10
+  actions:
+    - action: fan.set_percentage
+      target:
+        entity_id: fan.living_room
+      data:
+        percentage: >-
+          {{ state_attr('light.living_room_ceiling', 'brightness_pct') | int }}
+{% endexample %}
+```
+
+这些键用于设置输入的类型以及显示在其上方的标签。它们定义在 [`plugins/example.rb`](https://github.com/home-assistant/home-assistant.io/blob/current/plugins/example.rb) 中：
+
+- `action`
+- `automation`
+- `condition`
+- `script`
+- `template`
+- `trigger`
+
+每个块只能使用其中一个。另外还有三个可选键可以添加更多信息：
+
+- `output` 在代码下方显示其运行结果，中间用一个箭头分隔。这对模板尤其有用。
+- `type` 指明结果的类型，显示在输出标签旁边。例如 `string` 或 `number`。
+- `title` 为标签添加简短描述，例如 **Template: Format a temperature**。
+
+```liquid
+{% example %}
+template: |
+  {% from 'formatter.jinja' import format_entity %}
+  {{ format_entity('sensor.outdoor_temperature') }}
+  {{ format_entity('sensor.indoor_temperature') }}
+output: |
+  Outdoor temperature: 22.5
+  Indoor temperature: 21.0
+{% endexample %}
+```
+
+代码块的 80 字符限制在这里同样适用。对于较长的模板，请使用 `>-` 将其拆分为多行，就像第一个示例中那样。
+
+## 可复用文本
+
+有些文本会出现在许多页面上，例如添加集成的步骤。与其复制它，不如从 [`source/_includes`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_includes) 中包含一个共享片段：
+
+```liquid
+{% include integrations/config_flow.md %}
+```
+
+路径是相对于 `source/_includes` 的。当共享文本发生更改时，所有包含它的页面都会随之更新。
+
+有些片段接受参数。请查看片段文件以了解它读取哪些参数：文件中以 `include.<name>` 形式书写的任何内容都是参数。
+
+```liquid
+{% include integrations/wwha.md url="https://www.eltako.com" name="Eltako" %}
+```
+
+在集成页面上常见的片段：
+
+- `integrations/config_flow.md`：如何通过 UI 添加集成。
+- `integrations/option_flow.md`：如何在设置完成后更改集成的选项。
+- `integrations/remove_device_service.md`：如何移除集成。
+- `integrations/supported_brand.md`：用于通过其他集成支持的品牌。
+
+## 配置块
+
+集成页面使用 `configuration_basic` 块描述在 UI 中设置的选项，使用 `configuration` 块描述 YAML 选项。两者都在[集成页面](https://www.hasscn.top/contributors/writing/reference/integration-page/)中有介绍。
+
+---
+
+# YAML style
+
+> 文档中的 YAML 示例应当是什么样子，让它们易于阅读、复制和改写。
+
+Source: https://www.hasscn.top/contributors/writing/reference/yaml/
+
+人们会把 YAML 示例原样复制到自己的配置里。当所有示例都遵循同一种风格时，它们就更容易阅读、更容易对比，也更容易一次写对。
+
+本页分为两部分。第一部分讲通用 YAML，适用于你写的任何 YAML。第二部分讲 Home Assistant 特有的选择——在 Home Assistant 里，同一件事往往有不止一种写法。
+
+## 通用 YAML
+
+### 缩进
+
+用 2 个空格缩进。
+
+```yaml
+# Good
+lighting:
+  brightness: 80
+
+# Bad
+lighting:
+    brightness: 80
+```
+
+### 布尔值
+
+只使用小写的 `true` 和 `false`。`yes`、`no`、`on`、`off` 这些值看起来亲切，但会让 YAML 新手感到困惑。YAML 1.2 也已将它们从布尔值中移除，所以坚持用 `true` 和 `false` 能让示例经得起未来变化。
+
+```yaml
+# Good
+enabled: true
+visible: false
+
+# Bad
+enabled: True
+visible: off
+debug: yes
+```
+
+### 注释
+
+注释帮助读者理解示例的作用。
+
+- 注释单独占一行，放在它所解释的那一行的上方。行尾注释在小屏幕上很难阅读。
+- 注释的缩进层级与它所属的行保持一致。
+- `#` 后面加一个空格，注释以大写字母开头。
+
+```yaml
+# Good
+sensor:
+  # Check every five minutes
+  scan_interval: 300
+
+# Acceptable, but prefer the style above
+sensor:
+  scan_interval: 300 # Check every five minutes
+
+# Bad
+sensor:
+# Check every five minutes
+  scan_interval: 300
+  #Check every five minutes
+  timeout: 10
+  # check every five minutes
+  retries: 3
+```
+
+### 列表
+
+YAML 里称为序列（sequence）。在文档中，请称它们为列表（list）。
+
+列表用块样式（block style）书写，每个条目缩进到它的键下面。
+
+```yaml
+# Good
+colors:
+  - red
+  - green
+  - blue
+
+# Bad
+colors:
+- red
+- green
+- blue
+```
+
+避免流样式（flow style），也就是带方括号的行内写法。它看起来紧凑，但一旦值变长就很难阅读。如果确实要用，逗号后面加一个空格，括号内侧不留空格。
+
+```yaml
+# Acceptable
+colors: [red, green, blue]
+
+# Bad
+colors: [ red, green, blue ]
+colors: [red,green,blue]
+lights: ["light.living_room_window", "light.living_room_corner"]
+```
+
+### 映射
+
+映射（mapping）也被称为字典、哈希表或键值对。在文档中，请称它们为映射。
+
+映射始终用块样式书写。不允许使用看起来像 JSON 的流样式。
+
+```yaml
+# Good
+position:
+  x: 10
+  y: 20
+
+# Bad
+position: { x: 10, y: 20 }
+```
+
+### 空值
+
+空值留空即可。不要写 `null` 或 `~`。
+
+```yaml
+# Good
+history:
+
+# Bad
+history: null
+history: ~
+```
+
+### 字符串
+
+字符串用双引号。Home Assistant 示例中的某些值是例外，参见[不加引号的字符串](https://www.hasscn.top/contributors/writing/reference/yaml/#strings-that-stay-unquoted)。
+
+```yaml
+# Good
+greeting: "Welcome home!"
+
+# Avoid
+greeting: Welcome home!
+
+# Bad
+greeting: 'Welcome home!'
+```
+
+### 长字符串
+
+不要用 `\n` 来换行，也不要把长字符串写成一行。改用块标量（block scalar）：
+
+- 字面样式（literal style）`|` 保留你写下的换行。
+- 折叠样式（folded style）`>` 把多行合并成一行，行之间以空格相连。
+
+```yaml
+# Good
+message: |
+  The washing machine is done.
+  Time to empty it.
+summary: >
+  This text is spread over several lines in YAML,
+  but Home Assistant reads it as one single line.
+
+# Bad
+message: "The washing machine is done.\nTime to empty it.\n"
+```
+
+优先使用不带修剪指示符（chomping indicator）的 `|` 和 `>`。如果示例需要对结尾换行做特殊处理，可以使用：
+
+- 剥离指示符（strip indicator）`|-` 或 `>-`，去掉结尾换行及其后的空行。
+- 保留指示符（keep indicator）`|+` 或 `>+`，保留结尾换行及其后的空行。
+
+## Home Assistant YAML
+
+Home Assistant 常常接受不止一种写法的相同配置。以下规则各选其一，让所有示例看起来一致。
+
+### 省略默认值和空小节
+
+不要写已经取默认值的选项。例外情况是：示例本身就是专门讲这个选项的。
+
+空小节同理，比如 `conditions: []` 或 `data: {}`，还有 `mode: single`——它是自动化和脚本的默认模式。
+
+```yaml
+# Good
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.front_door
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.hallway
+
+# Bad
+mode: single
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.front_door
+conditions: []
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.hallway
+    data: {}
+```
+
+### 占位符
+
+当需要读者自己填入一个值时，占位符用大写字母，单词之间用下划线分隔。这样一眼就能看出哪里需要替换。
+
+```yaml
+api_key: YOUR_API_KEY
+host: YOUR_DEVICE_IP_ADDRESS
+```
+
+除非文中明确说明，示例都应当能在 `configuration.yaml` 文件中直接工作。
+
+### 不加引号的字符串
+
+字符串一律加双引号，只有一个例外。以下这些值不加引号反而更易读，所以保持不加引号：
+
+- 实体 ID，例如 `binary_sensor.front_door`
+- 实体属性，例如 `temperature`
+- 设备 ID
+- 区域 ID
+- 平台类型，例如 `light` 或 `switch`
+- 触发器类型，例如 `state` 或 `time`
+- 条件类型，例如 `state` 或 `numeric_state`
+- 动作名称，例如 `light.turn_on`
+- 设备类别（device class），例如 `motion` 或 `problem`
+- 事件名称
+- 只接受一组固定选项的值，例如自动化中的 `mode`
+
+```yaml
+# Good
+actions:
+  - action: notify.mobile_app_phone
+    data:
+      message: "The front door is open."
+  - action: light.turn_on
+    target:
+      entity_id: light.hallway
+      area_id: entrance
+    data:
+      transition: 5
+
+# Bad
+actions:
+  - action: "notify.mobile_app_phone"
+    data:
+      message: The front door is open.
+```
+
+### 动作的目标
+
+把动作指向一个实体有三个位置：`target` 键下、直接写在动作上、或放在 `data` 里。始终使用 `target`。
+
+它是最灵活的方式。除了实体，目标还可以包含设备、区域、楼层和标签（label），而且可以组合使用。
+
+```yaml
+# Good
+actions:
+  # Target one entity
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room
+  # Target every light in an area
+  - action: light.turn_on
+    target:
+      area_id: living_room
+  # Combine an area, an entity, and a device
+  - action: light.turn_on
+    target:
+      area_id: living_room
+      entity_id: light.office_desk
+      device_id: 8f2b6e4c1a9d4e7b9c3f5a1d2e6b8c4f
+
+# Bad
+actions:
+  - action: light.turn_on
+    entity_id: light.living_room
+  - action: light.turn_on
+    data:
+      entity_id: light.living_room
+```
+
+### 单个值还是值列表
+
+很多选项既接受单个值，也接受值列表。有些还接受逗号分隔的字符串。对于这些选项：
+
+- 只有一个值时用单个值，不要包成列表。
+- 多于一个值时用块样式的列表。
+- 绝不要把多个值塞进一个逗号分隔的字符串里。
+
+```yaml
+# Good
+entity_id: light.living_room
+
+# Good
+entity_id:
+  - light.living_room
+  - light.kitchen
+
+# Bad
+entity_id: light.living_room, light.kitchen
+
+# Bad
+entity_id: [light.living_room, light.kitchen]
+
+# Bad
+entity_id:
+  - light.living_room
+```
+
+### 单个映射还是映射列表
+
+`triggers`、`conditions`、`actions` 和 `sequence` 这类选项既接受单个映射，也接受映射列表。始终使用列表，哪怕只有一项。
+
+列表让读者知道还可以继续添加条目，也让他们能把其中一项直接复制进自己的配置，而不用改动结构。
+
+```yaml
+# Good
+actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.living_room
+
+# Bad
+actions:
+  action: light.turn_on
+  target:
+    entity_id: light.living_room
+```
+
+## 模板
+
+模板很强大，但对新手来说很难读懂。如果纯 YAML 能做到，就用纯 YAML。
+
+还有另一个原因。在 [home-assistant.io](https://www.home-assistant.io/) 上，模板需要额外的转义，否则网站会把它们误认为 Liquid。参见 [Liquid helpers](https://www.hasscn.top/contributors/writing/reference/liquid/)。不写模板，就不用转义。
+
+```yaml
+# Good
+conditions:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 4
+
+# Bad
+conditions:
+  - condition: template
+    value_template: "{{ state_attr('sun.sun', 'elevation') < 4 }}"
+```
+
+### 模板中的引号
+
+模板本身是字符串，所以外面用双引号，模板内部用单引号。
+
+```yaml
+# Good
+greeting: "{{ 'Good morning' if now().hour < 12 else 'Hello' }}"
+
+# Bad
+greeting: '{{ "Good morning" if now().hour < 12 else "Hello" }}'
+```
+
+### 长模板
+
+把长模板拆成多行，让读者能跟上逻辑。为此使用块标量，参见[长字符串](https://www.hasscn.top/contributors/writing/reference/yaml/#long-strings)。
+
+```yaml
+# Good
+conditions:
+  - >-
+    {{
+      is_state('lock.front', 'locked')
+      and is_state('lock.back', 'locked')
+    }}
+
+# Bad
+conditions:
+  - "{{ is_state('lock.front', 'locked') and is_state('lock.back', 'locked') }}"
+```
+
+这个反例还算短。想象它再叠加五个条件，你就明白为什么这种方式撑不住了。
+
+### 短条件语法
+
+模板条件请用简写形式。更短、更干净。
+
+```yaml
+# Good
+conditions: "{{ states('sensor.outdoor_temperature') | float(0) > 25 }}"
+
+# Bad
+conditions:
+  - condition: template
+    value_template: >-
+      {{ states('sensor.outdoor_temperature') | float(0) > 25 }}
+```
+
+### 过滤器
+
+过滤器管道符 `|` 两侧各留一个空格。如果这样让表达式不够清晰，就加括号。
+
+```yaml
+# Good
+conditions:
+  - "{{ states('sensor.humidity') | float(0) > 60 }}"
+  - "{{ target == (states('input_number.target') | int(0)) }}"
+
+# Bad
+conditions:
+  - "{{ states('sensor.humidity')|float(0) > 60 }}"
+  - "{{ target == (states('input_number.target')|int(0)) }}"
+```
+
+### 状态与属性
+
+读取状态和属性请使用辅助函数：`states()`、`is_state()`、`state_attr()` 和 `is_state_attr()`。不要直接从 `states` 对象上读取。
+
+这些辅助函数能正确处理尚未就绪的实体，比如 Home Assistant 启动期间。直接读 `states` 对象在这种情况下会报错。
+
+```yaml
+# Good
+temperature: "{{ states('sensor.temperature') }}"
+target: "{{ state_attr('climate.living_room', 'temperature') }}"
+
+# Bad
+temperature: "{{ states.sensor.temperature.state }}"
+target: "{{ states.climate.living_room.attributes.temperature }}"
+```
+
+---
+
+# 自动化文档检查
+
+> 文档拉取请求上的自动化检查会检查什么，如何自己运行这些检查，以及如何修改它们。
+
+Source: https://www.hasscn.top/contributors/writing/reference/checks/
+
+每个提交到 [home-assistant.io 仓库](https://github.com/home-assistant/home-assistant.io) 的拉取请求都会运行一组自动化检查。它们能发现一些小问题，比如没有指定语言的代码块或拼写错误的产品名称，这样审阅者就可以专注于内容本身。
+
+这些检查在 [`test.yml`](https://github.com/home-assistant/home-assistant.io/blob/current/.github/workflows/test.yml) GitHub Actions 工作流中运行。其中两项与你的写作有关：
+
+- **Lint Markdown** 使用 [remark](https://remark.js.org/) 检查你的 Markdown 的结构和格式。
+- **Lint Text** 使用 [textlint](https://textlint.github.io/) 检查拼写、术语和措辞。
+
+Markdown 任务还会检查 [`source/_integrations/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations) 中的集成页面是否使用 `.markdown` 文件扩展名。该目录下的 `.md` 文件会导致检查失败。
+
+第三个任务 **Build Astro site** 会构建 `astro` 文件夹中的网站部分。它不会检查你的写作，但也必须通过。
+
+## 在本地运行检查
+
+你需要 [Node.js](https://nodejs.org/)。CI 中的 lint 任务使用版本 20。仓库的 `.nvmrc` 文件和 devcontainer 使用版本 26。
+
+1. 在你克隆的仓库中，安装依赖项：
+
+   ```shell
+   npm install
+   ```
+
+2. 运行 Markdown 检查：
+
+   ```shell
+   npm run markdown:lint
+   ```
+
+3. 运行文本检查：
+
+   ```shell
+   npm run textlint
+   ```
+
+这些命令与 CI 运行的命令相同。它们定义在 [`package.json`](https://github.com/home-assistant/home-assistant.io/blob/current/package.json) 中。
+
+要在工作时检查单个页面，可以直接对该文件运行这些工具：
+
+```shell
+npx remark --quiet --frail source/_integrations/my_integration.markdown
+npx textlint source/_integrations/my_integration.markdown
+```
+
+> [!TIP]
+> 仓库推荐使用 Visual Studio Code 的 textlint 和 markdownlint 扩展。安装这些扩展后，你可以在输入时就在编辑器中看到大部分问题。
+
+## Markdown 检查
+
+`markdown:lint` 脚本会在整个仓库上运行 `remark --quiet --frail .`。`--frail` 标志会将警告转换为失败，因此每个发现的问题都会阻塞检查。
+
+这些规则位于 [`.remarkrc.js`](https://github.com/home-assistant/home-assistant.io/blob/current/.remarkrc.js) 中。它们检查：
+
+- **代码块**：每个围栏代码块都要指定其语言。Shell 示例的每一行不应以 `$` 开头，因为这会破坏复制粘贴。当你需要将命令与其输出区分开时，使用 `$` 是可以的。
+- **标题**：标题使用 `#` 样式，并且一次只能下降一级。不允许从 `##` 直接跳到 `####`。
+- **列表**：无序列表使用 `-`。有序列表在数字后使用句点，如 `1.`，并且编号方式要一致。递增编号 `1.`、`2.`、`3.` 是约定俗成的做法。
+- **名称拼写**：一份禁止字符串列表，比如用 `Github` 代替 `GitHub`、用 `websocket` 或 `Websocket` 代替 `WebSocket`、用 `Speech-To-Text` 代替 `Speech-to-text`。
+- **指向本站的链接**：完整的 `https://www.home-assistant.io/` 链接应使用相对路径，如 `/integrations/hue/`。
+
+某些文件会被有意跳过，比如博客文章和更新日志。它们列在 [`.remarkignore`](https://github.com/home-assistant/home-assistant.io/blob/current/.remarkignore) 中。
+
+### 添加 remark 规则
+
+1. 安装该规则的软件包，这会更新 `package.json` 和 `package-lock.json`：
+
+   ```shell
+   npm install --save-dev remark-lint-some-rule
+   ```
+
+2. 在 `.remarkrc.js` 中启用并配置该规则。
+3. 运行 `npm run markdown:lint`。
+4. 修复现有的违规项，或者在 `.remarkignore` 中添加有正当理由的排除项。
+
+## 文本检查
+
+`textlint` 脚本会检查以下文件夹：
+
+- `source/_docs`
+- `source/_faq`
+- `source/_integrations`
+- `source/_dashboards`
+- `source/cloud`
+- `source/getting-started`
+- `source/hassio`
+- `source/dashboards`
+
+其他文件夹（如博客）不会被 CI 检查。要检查 `source` 下的所有内容，请运行 `npm run textlint:all`。
+
+这些规则位于 [`.textlintrc.json`](https://github.com/home-assistant/home-assistant.io/blob/current/.textlintrc.json) 中：
+
+- `common-misspellings` 捕捉常见的拼写错误。
+- `terminology` 强制执行产品名称、首选术语和措辞。它会跳过引用块中的文本。
+- `comments` 过滤器允许你为页面的某一部分关闭 textlint。
+- `allowlist` 过滤器会忽略那些原本会产生误报的文本，比如 `mqtt:` 或 `homeassistant:` 这样的 YAML 键。
+
+### 添加术语条目
+
+术语位于 `.textlintrc.json` 中 `terminology` 规则的 `terms` 列表里。条目有两种形式之一。
+
+普通字符串是一个必须保持完全相同拼写和大小写的术语：
+
+```json
+"Home Assistant",
+"Z-Wave",
+"GitHub"
+```
+
+一个键值对标记一种拼写并建议另一种拼写。第一个值是要匹配的模式，第二个值是向贡献者显示的建议：
+
+```json
+["addon", "add-on"],
+["colour", "color"],
+["repo\\b", "repository"]
+```
+
+该模式是 JSON 字符串中的正则表达式。请转义在其中任何一方具有特殊含义的字符，比如上面 `\\b` 中的反斜杠。
+
+将新条目放在相关条目的附近。然后运行 `npm run textlint` 来查看这一更改会捕捉到什么。
+
+### 为页面的某一部分禁用 textlint
+
+有时 textlint 会标记一些实际上是正确的内容。在这种情况下，请将该文本包裹在 HTML 注释中：
+
+```html
+<!-- textlint-disable -->
+
+Text that textlint should skip.
+
+<!-- textlint-enable -->
+```
+
+要只关闭某一条规则，请添加其名称：
+
+```html
+<!-- textlint-disable terminology -->
+
+Text that the terminology rule should skip.
+
+<!-- textlint-enable terminology -->
+```
+
+一些准则：
+
+- 让被禁用的部分尽可能小。
+- 在每条注释前后各放一个空行，除非这会破坏周围的 Markdown。
+- 不要将这些注释放在[文本框](https://www.hasscn.top/contributors/writing/reference/liquid/#text-boxes)内。
+
+### 添加 textlint 规则
+
+1. 将该规则的软件包添加到 `package.json`，并更新 `package-lock.json`。
+2. 在 `.textlintrc.json` 中启用并配置该规则。
+3. 运行 `npm run textlint`。
+4. 修复现有的违规项，或者在 `.textlintrc.json` 的 `allowlist` 中添加范围狭窄的排除项。
+
+## Markdownlint
+
+仓库中还有一个 [`.markdownlint.json`](https://github.com/home-assistant/home-assistant.io/blob/current/.markdownlint.json) 文件。它为编辑器配置 [markdownlint](https://github.com/DavidAnson/markdownlint)：
+
+- 页面的第一个标题为 2 级（`MD002`），因为标题来自 front matter。
+- 没有行长度限制（`MD013`），因此你可以书写流畅的文本。
+- 允许存在文本相同的标题，只要它们不是同一父级下的同级标题（`MD024`）。
+- 允许内联 HTML（`MD033`）。
+
+markdownlint 扩展位于 [`.vscode/extensions.json`](https://github.com/home-assistant/home-assistant.io/blob/current/.vscode/extensions.json) 推荐的扩展列表中，因此你可能会在 Visual Studio Code 中看到它的警告。
+
+> [!NOTE]
+> Markdownlint 不会在 CI 中运行，也没有对应的 `package.json` 脚本。它的警告只是提示，而不是阻塞项。如果必须在拉取请求上强制执行某条 markdownlint 规则，它还需要一个脚本以及工作流中的一个步骤。
+
+---
+
+# 集成页面的 front matter
+
+> 集成页面顶部可用的每个键、其作用以及可接受的取值。
+
+Source: https://www.hasscn.top/contributors/writing/reference/front-matter/
+
+每个集成页面都以 front matter 开头：位于两行 `---` 之间的一块 YAML。它不仅仅是元数据。它驱动着[集成概览](https://www.home-assistant.io/integrations/)、设置按钮、发现文本、质量等级徽章以及页面侧边栏。
+
+许多键与 Home Assistant Core 中的集成清单（manifest）相对应。这些键必须与清单完全一致。其中一些键（例如 `ha_quality_scale`）会通过从核心代码库同步的文档更新，因此在第一个版本之后你很少需要改动它们。但在新页面中把它们写对仍然是你的责任。
+
+## 示例
+
+一个通过 UI（用户界面）设置的集成的典型页面：
+
+```yaml
+---
+title: Awesome Lights
+description: Control your Awesome Lights from Home Assistant.
+ha_release: 2026.11
+ha_categories:
+  - lighting.lighting_systems
+ha_iot_class: Local Push
+ha_config_flow: true
+ha_codeowners:
+  - "@your-github-username"
+ha_domain: awesome_lights
+ha_integration_type: hub
+ha_platforms:
+  - light
+  - sensor
+ha_quality_scale: bronze
+ha_zeroconf: true
+related:
+  - docs: /docs/automation/
+    title: Automations
+  - url: https://www.example.com/awesome-lights/manual
+    title: Awesome Lights user manual
+---
+```
+
+下面的键按用途分组。不适用于你的集成的键直接省略即可。不要将某个键设置为 `false` 来表示“否”。
+
+## 基础键
+
+这些键应出现在每个集成页面上。
+
+- `title`：集成的名称。使用清单中的 `name`，并按其原样书写。
+- `description`：一句话描述页面的内容。搜索引擎和链接预览会显示它。
+- `ha_domain`：集成的域名（domain）。它必须与清单中的 `domain` 以及页面的文件名一致。对于上面的示例，即 `source/_integrations/awesome_lights.markdown`。
+- `ha_release`：首次包含该集成的 Home Assistant 发布版本，格式为 `YYYY.M`。对于新集成，即下一个发布版本：如果当前版本是 2026.10，则使用 2026.11。如果缺少此键，站点构建将失败。
+- `ha_codeowners`：负责该集成的 GitHub 用户名或团队，每个都以 `@` 开头。与清单中的 `codeowners` 保持一致。每个条目都要加引号，因为裸的 `@` 在 YAML 值的开头是无效的。
+
+> [!IMPORTANT]
+> 以零结尾的版本号要加引号，例如 `ha_release: "2025.10"`。如果不加引号，YAML 会将 `2025.10` 读取为数字 2025.1，页面就会显示错误的版本。
+
+## 分类
+
+这些键描述集成是什么以及做什么。它们为集成概览上的筛选器提供数据。
+
+- `ha_categories`：一到三个类别标识符的列表。对于拥有自己 Core 实现的集成，使用与其清单中 `categories` 相同的标识符。类别描述的是产品或服务，而不是它提供的实体（entity）平台。第一个条目是主要类别。
+  - 使用类别，例如 `lighting`，或子类别，例如 `lighting.lighting_systems`。
+  - 不要列出重复项，也不要将某个类别与其自身的子类别同时列出。
+  - 标识符及如何选择请参阅[集成类别](https://www.hasscn.top/contributors/core/integrations/categories/)。
+  - 没有 `ha_categories` 的页面不会出现在集成概览中。实体和系统页面是有意省略此键的。
+  - 旧的 `ha_category` 键已不再被接受。
+- `ha_integration_type`：集成的类型。它必须与清单中的 `integration_type` 一致：`device`、`entity`、`hardware`、`helper`、`hub`、`service`、`system` 或 `virtual`。如果清单未设置，则类型为 `hub`。
+- `ha_iot_class`：集成与设备或服务通信的方式。使用 `Local Polling`、`Local Push`、`Cloud Polling`、`Cloud Push`、`Assumed State` 或 `Calculated`，与清单中的 `iot_class` 一致。取决于设置方式的集成使用 `Configurable`。[IoT class 博客文章](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/)解释了每个类别。
+- `ha_platforms`：集成实现的实体平台，例如 `light` 和 `sensor`。当集成支持下载诊断信息时，也要列出 `diagnostics`。
+- `ha_config_flow`：如果集成通过 UI 设置，则设置为 `true`。这会在页面侧边栏中添加设置按钮。否则请省略此键。
+- `ha_quality_scale`：集成在质量等级（quality scale）中的级别：`bronze`、`silver`、`gold` 或 `platinum`。Home Assistant 内部的集成使用 `internal`，尚未评分的较旧集成使用 `legacy`。对于新集成，使用 `bronze`。此键会通过从核心代码库同步的文档更新，因此通常不需要手动编辑。
+
+### 协议与连接器
+
+根据集成的用途选择类别。引入多种设备类型的集线器和无线电协议使用 `hubs_protocols`。用于串口、Modbus 或 Web API 的通用连接器使用 `diy_makers`。针对特定产品的集成使用该产品的类别，无论它使用什么协议。请参阅[如何选择集成类别](https://www.hasscn.top/contributors/core/integrations/categories/#how-to-choose)。
+
+## 发现
+
+当集成可以通过相应方式被发现时，将这些键设置为 `true`。它们必须与清单中的发现条目一致。不适用的键请省略。
+
+- `ha_bluetooth`：通过蓝牙（Bluetooth）发现。
+- `ha_dhcp`：通过 DHCP 发现。
+- `ha_homekit`：通过 HomeKit 发现。
+- `ha_mqtt`：通过 MQTT 发现。
+- `ha_ssdp`：通过 SSDP 发现。
+- `ha_zeroconf`：通过 mDNS（也称为 Zeroconf）发现。
+
+当设置了 `ha_dhcp`、`ha_homekit`、`ha_mqtt`、`ha_ssdp` 或 `ha_zeroconf` 时，页面上的标准配置文本会告诉读者 Home Assistant 可以自动找到他们的设备。请参阅[集成页面结构](https://www.hasscn.top/contributors/writing/reference/integration-page/#reusable-text)。
+
+## 相关链接
+
+`related` 会在页面末尾添加链接。每个条目是一个链接：
+
+- `docs`：指向 home-assistant.io 上某个页面的路径，例如 `/docs/automation/`。它可以包含锚点。这些链接显示在**相关主题**下。`title` 是可选的：如果没有提供，则使用所链接页面的标题。
+- `url`：指向其他网站的链接。这些链接显示在**相关链接**下，并在新标签页中打开。务必添加 `title`，否则将显示裸 URL。
+
+```yaml
+related:
+  - docs: /voice_control/s3_box_voice_assistant/
+    title: Create an ESP32-S3-BOX-3 voice assistant
+  - url: https://esphome.io/projects/
+    title: ESPHome projects
+```
+
+指向不存在页面的 `docs` 条目会被静默丢弃，因此请检查你的路径。
+
+## 虚拟集成与品牌
+
+有些页面并不记录拥有自己代码的集成。它们的存在是为了让人们能够通过品牌名称找到产品。
+
+*虚拟集成（virtual integration）*是通过另一个集成工作的产品。它的清单使用 `integration_type: virtual`，并且分为两种。
+
+“由……支持”类型指向实际执行工作的集成。例如，Dacia 汽车通过 Renault 集成工作。
+
+- `ha_supporting_domain`：执行工作的集成的域名，例如 `renault`。它必须与虚拟集成清单中的 `supported_by` 一致。页面上的设置按钮和链接使用此域名。
+- `ha_supporting_integration`：该集成的名称，例如 `Renault`。生成的页面使用它来告诉读者应设置哪个集成。
+
+“IoT 标准”类型是其设备使用标准协议的品牌：
+
+- `ha_iot_standard`：产品使用的标准：`zigbee`、`zwave` 或 `homekit`。它必须与清单中的 `iot_standards` 一致。Matter 产品的品牌页面使用 `matter`。对于 Zigbee 和 Z-Wave，页面会显示一个按钮，用于开始添加使用该标准的设备。
+
+*品牌（brand）*页面将同一制造商的多个集成或产品归到一个名称下。例如，Google 品牌页面归组了 Google 的各个集成，而 Inovelli 品牌页面指向其设备使用的 Zigbee 和 Z-Wave 标准。品牌不等同于虚拟集成。
+
+- `ha_brand`：如果页面代表的是品牌而非实际集成，则设置为 `true`。此时页面将从品牌图片而不是集成图片中获取其徽标。在常规集成页面上请省略此键。
+
+设置了 `ha_supporting_domain` 的虚拟集成在自身未设置 `ha_categories` 时，会继承其支持集成的类别。没有支持集成的品牌页面（例如 Matter、Zigbee 和 Z-Wave 品牌）不会继承类别，需要自己的 `ha_categories`。
+
+## 仅限维护者
+
+不要自行添加这些键。它们由维护者设置。
+
+- `works_with`：将品牌标记为 [Works with Home Assistant](https://works-with.home-assistant.io/) 合作伙伴计划的一部分。它会添加该计划的徽章，并在页面上生成关于该计划的文本。每个值是产品通过认证的一种连接方式。如果适用，可以列出多个，例如同时列出 `zigbee` 和 `matter`。
+  - `zwave`：显示为 Z-Wave，并添加 Z-Wave 徽章和入门文本。
+  - `zigbee`：显示为 Zigbee，并添加 Zigbee 徽章和入门文本。
+  - `matter`：显示为 Matter，并添加 Matter 徽章和入门文本。
+  - `bluetooth`：产品通过蓝牙连接。
+  - `local`：产品在本地工作，例如通过本地网络。
+  - 任何其他值将按原样显示，首字母大写。
+- `featured`：设置为 `true` 以在集成概览中突出显示该集成。请注意，此键没有 `ha_` 前缀。
+
+---
+
+# 集成页面结构
+
+> 集成页面的各个章节的顺序，以及用于填充它们的区块和可复用文本。
+
+Source: https://www.hasscn.top/contributors/writing/reference/integration-page/
+
+每个集成页面都遵循相同的结构。熟悉一个页面的读者可以在所有页面中找到方向，审阅者也能一眼看出缺少了什么。
+
+你不必从零开始。复制[集成页面模板](https://github.com/home-assistant/home-assistant.io/blob/current/source/_integrations/_integration_docs_template.markdown)，其中包含每个章节及示例内容。围绕它的步骤，比如使用哪个分支以及品牌拉取请求，见[编写集成文档](https://www.hasscn.top/contributors/writing/guides/integration/)。页面顶部的键见[集成 front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/)。
+
+## 章节
+
+按以下顺序使用这些章节。省略不适用于你的集成的章节。
+
+1. **简介**，不带标题。集成做什么、连接哪个品牌或服务，以及一个用例：人们可以用它做什么。链接到制造商或服务的网站。如果该集成是其他集成使用的构建模块，请添加[可复用文本](https://www.hasscn.top/contributors/writing/reference/integration-page/#reusable-text)中的构建模块文本。
+2. **支持的设备**：已知可以工作的设备和型号。当市面上有多个版本时，提及你测试过的版本，包括固件。
+3. **不支持的设备**：已知无法工作的设备，免得有人费力去发现。
+4. **前提条件**：设置之前读者需要的一切，以编号步骤呈现。比如安装制造商的应用、创建账户，或获取 API 密钥或访问令牌。逐步说明如何获取凭据。
+5. **配置**：如何添加集成。对于从 UI 设置的集成，使用标准配置文本，后跟一个解释设置表单每个字段的 [`configuration_basic` 区块](https://www.hasscn.top/contributors/writing/reference/integration-page/#the-configuration_basic-block)。对于仅支持 YAML 的集成，展示 `configuration.yaml` 的示例，后跟一个 [`configuration` 区块](https://www.hasscn.top/contributors/writing/reference/integration-page/#the-configuration-block)。
+6. **配置选项**：设置后读者可以更改的选项，放在 `configuration_basic` 区块中。
+7. **支持的功能**：集成提供的实体（entity），按平台分组，每个平台一个标题，比如 **Sensors** 或 **Buttons**。对于每个实体，给出简短描述，并在有帮助时说明哪些设备具有它以及任何备注。
+8. **触发器列表**、**条件列表**和**动作列表**：从单独的文件生成。见[触发器、条件和动作](https://www.hasscn.top/contributors/writing/reference/integration-page/#triggers-conditions-and-actions)。
+9. **示例**：展示集成用途的自动化示例。见[示例](https://www.hasscn.top/contributors/writing/reference/integration-page/#examples)。
+10. **数据更新**：集成如何获取数据。是否轮询，频率如何？设备是否推送更新？
+11. **已知限制**：集成无法做到的事情，以及与读者预期不同的工作方式。
+12. **故障排除**：常见问题，包括症状、原因和解决方法。
+13. **社区笔记**：可选。社区分享的技巧和经验，比如某个特定设备的表现。
+14. **移除集成**：如何移除它。以标准移除文本开头，并添加读者需要做的任何额外操作，比如从制造商的应用中移除 Home Assistant。
+
+适用于整个页面的几条规则：
+
+- 步骤和示例应使用 Home Assistant 自带的功能。不要依赖自定义集成或自定义卡片。
+- 提到其他集成时，链接到其页面。
+- 先描述 UI 方式。YAML 放在后面，如果有的话。
+- 在将拉取请求标记为准备好审阅之前，删除模板中的注释。
+
+### 支持的功能
+
+以嵌套列表的形式列出每个实体及其详细信息：
+
+```markdown
+### Sensors
+
+- **Boiler temperature**
+  - **Description**: Current temperature of the boiler.
+  - **Available for machines**: all
+  - **Remarks**: About 3 degrees higher than the target temperature,
+    because it is measured in a different place.
+```
+
+对于选择（select）实体，添加一个列出选项的 **Options** 条目。
+
+### 示例
+
+每个示例以一个简短的标题和一句说明它解决什么问题的话开头。然后按照读者在 UI 中构建的方式描述自动化，并将 YAML 版本放在可折叠部分中：
+
+```liquid
+### Automation: Turn off the status LEDs at night
+
+The status LEDs are bright. Turn them off when the sun goes down.
+
+- **Trigger**: Sun: after sunset
+- **Action**: Turn off light
+
+{% details "YAML example for turning off the LEDs at night" %}
+
+{% example %}
+automation: |
+  alias: "Turn off the LEDs at night"
+  triggers:
+    - trigger: sun
+      event: sunset
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.device_leds
+{% endexample %}
+
+{% enddetails %}
+```
+
+在示例部分顶部添加一次关于将 YAML 粘贴到可视化编辑器中的提示：
+
+```liquid
+{% include docs/paste_yaml_tip.md %}
+```
+
+`example` 区块接受一种输入：`automation`、`script`、`trigger`、`condition`、`action` 或 `template`。在其中按照 [YAML 风格](https://www.hasscn.top/contributors/writing/reference/yaml/)编写 YAML。
+
+蓝图（blueprint）放在仓库的 [`source/blueprints/integrations/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations) 文件夹中，大多数放在以集成域名命名的文件夹中，或者放在社区论坛的[蓝图交流区](https://community.home-assistant.io/c/blueprints-exchange)。使用 `blueprint_example` 标签在页面上展示它们。对于仓库中的蓝图，给出它在那个文件夹内的路径：
+
+```liquid
+{% blueprint_example blueprint="example/example_notification.yaml" %}
+```
+
+该标签会渲染一个导入蓝图的按钮。对于仓库中的蓝图，它还会以 YAML 形式渲染相同的自动化、脚本或模板实体，供喜欢手动设置的读者使用。因此蓝图文件是示例的唯一副本：不要在页面上重复它的 YAML。蓝图可以是 `automation`、`script` 或 `template` 蓝图。
+
+对于托管在其他地方的蓝图，给出其 URL。此时标签只渲染导入按钮：
+
+```liquid
+{% blueprint_example blueprint="https://community.home-assistant.io/t/example/123" %}
+```
+
+### 故障排除
+
+为每个问题提供单独的可折叠部分，以症状作为标题，后跟描述和解决方法：
+
+```liquid
+{% details "Can't set up the device" %}
+
+### Symptom: "This device can't be reached"
+
+When you try to set up the integration, the form shows the message
+"This device can't be reached".
+
+#### Description
+
+The device does not allow local connections yet.
+
+#### Resolution
+
+1. Make sure the device is powered on.
+2. In the app of the manufacturer, turn on local access.
+
+{% enddetails %}
+```
+
+## 触发器、条件和动作
+
+集成的每个触发器、条件和动作都有自己的文件，以及网站上的独立页面。集成页面通过一个 include 列出它们，该 include 从这些文件构建列表：
+
+```liquid
+{% include integrations/triggers.md %}
+
+{% include integrations/conditions.md %}
+
+{% include integrations/actions.md %}
+```
+
+每个 include 会添加自己的二级标题。如果集成还没有该类型的已记录条目，include 会说明这一点，并链接到所有条目的概览。如果集成三者都有，你可以改用一个 include：
+
+```liquid
+{% include integrations/triggers_conditions_actions.md %}
+```
+
+### 文件放在哪里
+
+以集成的域名和条目名称命名每个文件，使用 `.markdown` 扩展名：
+
+- 触发器放在 [`source/_triggers/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_triggers) 中，比如 `light.brightness_changed.markdown`。
+- 条件放在 [`source/_conditions/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_conditions) 中，比如 `light.is_on.markdown`。
+- 动作放在 [`source/_actions/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_actions) 中，比如 `light.turn_on.markdown`。
+
+### Front matter
+
+- `title`：名称，与 UI 中显示的一致，比如 `Light brightness changed`。
+- `trigger`、`condition` 或 `action`：条目的完整名称，比如 `light.brightness_changed`。使用与文件类型匹配的键。
+- `domain`：集成的域名，比如 `light`。集成页面用它来查找属于它的文件。
+- `description`：一句关于该条目功能的话。
+- `related_triggers`、`related_conditions` 或 `related_actions`：可选。同类相关条目的列表，会从页面链接过去。
+- `since`：仅用于动作，可选。引入该动作的 Home Assistant 版本，以带引号的字符串表示。
+
+### 页面布局
+
+触发器文件如下所示。条件和动作遵循相同的布局，只是使用它们自己的 include：`conditions/...` 和 `actions/...` 而不是 `triggers/...`。
+
+```liquid
+---
+title: "Light brightness changed"
+trigger: light.brightness_changed
+domain: light
+description: "Triggers when the brightness of one or more lights changes."
+related_triggers:
+  - light.brightness_crossed_threshold
+---
+
+The **Light brightness changed** trigger fires after... Use it to...
+
+{% include triggers/ui_header.md %}
+
+To use this trigger in an automation:
+
+1. Go to {% my automations title="**Settings** > **Automations & scenes**" %}.
+2. Open an existing automation, or select **Create automation** >
+   **Create new automation**.
+3. In the **When** section, select **Add trigger**.
+4. Search for and select **Light brightness changed**.
+5. Under **Targets**, select what you want to watch.
+6. Select **Save**.
+
+### Options in the UI
+
+{% options_ui %}
+Threshold type:
+  description: How much the brightness has to change before it fires.
+{% endoptions_ui %}
+
+{% include triggers/yaml_header.md %}
+
+In YAML, refer to this trigger as `light.brightness_changed`:
+
+{% example %}
+trigger: |
+  trigger: light.brightness_changed
+  target:
+    entity_id: light.living_room
+  options:
+    threshold: 10
+{% endexample %}
+
+### Options in YAML
+
+{% options_yaml %}
+threshold:
+  description: The minimum change in brightness, in percent.
+  required: false
+  type: any
+{% endoptions_yaml %}
+
+{% include triggers/targets.md %}
+
+{% include triggers/behavior.md %}
+
+## Good to know
+
+- Anything else the reader should know.
+
+{% include triggers/try_it.md %}
+
+{% include triggers/more_examples.md %}
+
+### Automation: A real use case
+
+{% include triggers/stuck.md %}
+
+{% include triggers/related.md %}
+```
+
+各类型之间的差异：
+
+- **条件**在 **And if** 部分中添加，使用 **Add condition**。
+- **动作**在 **Then do** 部分中添加，使用 **Add action**。脚本也使用动作，并且不需要触发器。
+- 如果条目支持目标（target），保留 `targets.md` include。如果它支持带行为选项的多个目标，保留 `behavior.md`。动作没有 `behavior.md`。
+- 在 **More examples** 下，按照[示例](https://www.hasscn.top/contributors/writing/reference/integration-page/#examples)的格式添加一个或多个示例。
+
+### 按照 UI 的方式命名条目
+
+在 UI 步骤或示例中提到触发器、条件或动作时，使用 UI 显示的名称。
+
+对于不与品牌、产品或服务绑定的通用集成，比如 `fan`、`vacuum`、`media_player` 或 `climate`，不要在名称前加上集成名：
+
+- 好：`**Action**: Turn on fan`
+- 差：`**Action**: Fan: Turn on fan`
+
+对于与品牌、产品或服务绑定的集成，把集成名称放在前面。这有助于读者将它们与同名的通用条目区分开：
+
+- 好：`**Action**: Jellyfin: Play media`
+
+### options_ui 区块
+
+`options_ui` 区块按照 UI 显示的方式列出触发器、条件或动作的选项。使用 UI 中的标签作为键。
+
+- 每个选项都需要一个 `description`。没有它构建会失败。
+- `required` 是可选的，接受 `true` 或 `false`。设置后，该选项会显示 **Required** 或 **Optional** 标签。
+- 没有 `type`。UI 会为读者处理这一点。
+
+### options_yaml 区块
+
+`options_yaml` 区块以 YAML 键的形式列出选项。它遵循与 [`configuration` 区块](https://www.hasscn.top/contributors/writing/reference/integration-page/#the-configuration-block)相同的规则：
+
+- 每个选项都需要一个 `description` 和一个 `type`。
+- 将 `required` 设置为 `true` 或 `false`。有默认值的选项不是必需的。
+- 如果有 `default`，请记录它。
+- 如果接受多种类型，列出它们，比如 `type: [string, integer]`。
+
+## 可复用文本
+
+有些文本在许多集成页面上是相同的。与其重新编写，不如从 [`source/_includes/integrations/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_includes/integrations) 中包含它。[Liquid 辅助工具](https://www.hasscn.top/contributors/writing/reference/liquid/)页面解释了 include 和其他标签。
+
+### 配置
+
+标准配置文本会添加 **Configuration** 标题、一个启动设置的 My 按钮，以及按钮不起作用时的手动步骤：
+
+```liquid
+{% include integrations/config_flow.md %}
+```
+
+文本会根据页面进行调整：
+
+- 如果在 [front matter](https://www.hasscn.top/contributors/writing/reference/front-matter/#discovery) 中设置了某个发现键，它会告诉读者 Home Assistant 可以自行发现设备。
+- 对于辅助元素（helper），步骤会通过 **Helpers** 标签页进行。
+- 添加 `name="..."` 以使用与页面标题不同的名称，或添加 `domain="..."` 以启动另一个域名的设置。
+
+对于集成的选项，对应的文本会添加一个 **Options** 标题，并说明如何打开它们：
+
+```liquid
+{% include integrations/option_flow.md %}
+```
+
+### 其他片段
+
+- `integrations/building_block_integration.md`：一条说明，解释该集成是一个构建模块，被其他集成使用，读者无法自行添加。
+- `integrations/remove_device_service.md`：移除集成实例的标准步骤。
+- `integrations/serial_connected.md`：说明设备需要串口连接，直接连接或通过串口代理。
+- `integrations/infrared_controlled.md` 和 `integrations/radio_frequency_controlled.md`：说明该集成需要一个已经设置好的红外或射频适配器。
+- `integrations/restart_ha_after_config_inclusion.md`：对于 YAML 集成，告诉读者在更改 `configuration.yaml` 后重启 Home Assistant。
+
+在 [`source/_includes/integrations/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/_includes/integrations) 中查看每个片段的当前文本。
+
+## configuration_basic 区块
+
+使用 `configuration_basic` 区块来解释设置表单的字段，或从 UI 设置的集成的选项。使用 UI 中的标签作为键：
+
+```liquid
+{% configuration_basic %}
+Host:
+  description: "The IP address or hostname of your bridge. For example,
+    `192.168.1.100`. You can find it in the app, under **Bridge settings**
+    > **Local API**."
+Local access token:
+  description: "The local access token of your bridge. You can find it in
+    the app, under **Bridge settings** > **Local API**."
+{% endconfiguration_basic %}
+```
+
+每个字段只接受一个 `description`，这是必需的。没有 `required` 或 `type`。UI 已经把这些说清楚了。
+
+## configuration 区块
+
+使用 `configuration` 区块来记录在 YAML 中设置的集成的变量。它紧跟在 `configuration.yaml` 的示例之后：
+
+```liquid
+{% configuration %}
+api_key:
+  description: The API key of your account.
+  required: true
+  type: string
+name:
+  description: The name of the sensor in Home Assistant.
+  required: false
+  type: string
+  default: Awesome sensor
+monitored_conditions:
+  description: The conditions to create sensors for.
+  required: true
+  type: list
+  keys:
+    temperature:
+      description: The current temperature.
+    humidity:
+      description: The current humidity.
+{% endconfiguration %}
+```
+
+每个变量的键：
+
+- `description`：变量的作用。必需。这里可以使用 Markdown。
+- `required`：必需。`true` 将变量显示为 **Required**，`false` 显示为 **Optional**。有默认值的变量永远不是必需的，所以将其设置为 `false`。对于必须一起使用或不能组合使用的变量，你也可以使用 `inclusive` 或 `exclusive`。
+- `type`：变量接受的值的类型。必需，嵌套在 `list` 或 `template` 下的变量除外。使用下面类型之一。如果接受多种类型，列出它们：`type: [string, integer]`。
+- `default`：默认值，如果有的话。对于 `boolean` 类型的可选变量是必需的。
+- `keys`：`map` 或 `list` 类型变量的嵌套变量。嵌套变量使用相同的键。参见[模板集成](https://www.home-assistant.io/integrations/template/)页面以获取详细示例。
+
+接受的类型：
+
+- `action`
+- `any`
+- `boolean`
+- `date`
+- `datetime`
+- `device_class`
+- `float`
+- `icon`
+- `integer`
+- `list`
+- `map`
+- `selector`
+- `string`
+- `template`
+- `time`
+- `timedelta`
+
+构建过程会检查这些规则。缺少描述、未知类型、`required` 值不是上述四种之一，或者可选的 boolean 没有默认值，都会导致网站构建失败，并报出指出该变量的错误。
+
+## 图片、图标和标志
+
+### 图标和标志
+
+集成的图标和标志来自[品牌仓库](https://github.com/home-assistant/brands)。你不需要在文档中为它们添加任何内容。页面会根据集成的域名自动获取它们。
+
+- 在品牌仓库中打开一个拉取请求，将图片添加到 `core_integrations/<domain>/`。在核心拉取请求中将其列在 **This PR belongs together with** 下，并在品牌拉取请求的同一行列出核心拉取请求。
+- 至少添加一个 `icon.png`。欢迎提供 `logo.png`、深色背景版本以及高分辨率 `@2x` 版本。[品牌 README](https://github.com/home-assistant/brands/blob/master/README.md) 列出了确切尺寸和要求。
+- 如果该集成最初是自定义集成，现在已成为 Home Assistant 的一部分，请将其图片从 `custom_integrations` 移动到 `core_integrations`。
+
+### 其他图片
+
+将截图和其他图片存储在文档仓库中，放在你的集成的文件夹里：
+
+- 集成页面的图片放在 `source/images/integrations/<domain>/` 中。
+- 博客文章的图片放在 [`source/images/blog/`](https://github.com/home-assistant/home-assistant.io/tree/current/source/images/blog) 中。
+
+[图片和视频](https://www.hasscn.top/contributors/writing/reference/images/)介绍了如何拍摄好的截图以及编写替代文本。
+
+---
+
+# 改进本贡献者网站
+
+> 修复或添加 contributors.home-assistant.io 上的页面，在您自己的机器上预览，并保持链接和重定向正常工作。
+
+Source: https://www.hasscn.top/contributors/writing/this-site/
+
+本区域的其他内容都是关于 [home-assistant.io](https://www.home-assistant.io/) 上的用户文档的。本页面介绍的是您现在正在阅读的这个网站。它同样是开源的，并且以同样的方式变得更好：有人发现错误或缺失的内容，然后修复它。
+
+源代码位于 [contributors.home-assistant.io 仓库](https://github.com/home-assistant/contributors.home-assistant.io)。它的 README 是维护者指南，包含每个脚本以及各组成部分如何协同工作。本页面介绍编辑一个页面所需了解的内容。
+
+## 修复小问题
+
+每个页面底部都有一个 **Edit this page**（编辑此页面）链接。它会在 GitHub 上打开该页面，您可以在浏览器中修改它并发起拉取请求（pull request）。对于拼写错误、病句或过时的信息，这就足够了。
+
+页面是 Markdown 格式，位于 `src/content/docs/`。写作规则在仓库的 [`.github/copilot-instructions.md`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/copilot-instructions.md) 中：语言、Markdown 和 YAML 风格，以及网站的结构。
+
+## 使用 AI 工具
+
+写作规则同时也是 AI 工具的指令：`AGENTS.md` 和 `CLAUDE.md` 链接到它们。工作流以技能（skill）的形式存放在 `.github/skills/`（也可以通过 `.claude/skills/` 访问），例如用于添加或修改页面的 `write-page`、用于对照源仓库核查页面的 `fact-check`，以及用于审查变更的 `review`。Copilot 代码审查也遵循 `.github/instructions/` 中的检查清单，一份针对页面，一份针对网站代码。
+
+其中最重要的规则是：绝不编造任何内容。本网站上的每一条陈述都需要有可供阅读的来源。[使用 AI 工具贡献](https://www.hasscn.top/contributors/start/ai-tools/#what-to-check-yourself-every-time)列出了能够发现审查中最常见错误的检查项。
+
+## 在本地预览网站
+
+对于比小修复更大的改动，请在您自己的机器上运行网站。
+
+最简单的方法是使用开发容器（dev container）：网站所需的一切都是现成的，在 Windows、macOS 和 Linux 上都一样。在安装了 Docker 和 **Dev Containers** 扩展的 [VS Code](https://code.visualstudio.com/docs/devcontainers/containers) 中打开该仓库，然后选择 **Reopen in Container**。或者在仓库上启动 [GitHub Codespace](https://docs.github.com/en/codespaces)，它在浏览器中运行，您的机器上无需安装任何东西。无论哪种方式，依赖项都会在容器创建时安装好，您只需运行 `pnpm dev`。要运行与拉取请求相同的检查，请在 VS Code 中选择 **Terminal** > **Run Task**，然后选择 **Pull request checks**。
+
+如果不使用开发容器，您需要 Node.js 24（版本号在 `.node-version` 中）和 pnpm。然后安装并启动网站：
+
+```shell
+pnpm install
+pnpm dev
+```
+
+网站现在位于 `http://localhost:4321`，保存页面时会自动重新加载。搜索功能只在构建后可用：
+
+```shell
+pnpm build
+pnpm preview
+```
+
+在发起拉取请求之前，请运行 `pnpm check`。它会检查代码和每个页面的 front matter。
+
+## 添加页面
+
+网站分为多个区域，例如 Core 和集成（integration），或 Design。每个区域是 `src/content/docs/` 中的一个文件夹，每个页面都放在其所属区域的文件夹中。子文件夹会成为侧边栏中的一个分组。页面最多只能放在一级子文件夹中。
+
+每个页面都以 front matter 开头：
+
+```yaml
+---
+title: "Fetch data"
+description: "How your integration gets data from a device or a service."
+order: 3
+---
+```
+
+- `title` 是页面的标题。使用句首大写（sentence case）。
+- `description` 显示在标题下方、搜索结果中以及链接预览中。
+- `order` 决定页面在侧边栏中的位置，数值小的在前。没有 `order` 的页面排在最后，按标题排序。
+- `sidebarLabel` 是侧边栏中较短的标签，用于标题过长的情况。
+- `sidebarGroup` 将页面放入侧边栏中的一个命名分组，而不改变其 URL。文件夹的 `index.md` 可以通过 `sidebarGroups` 设置这些分组的顺序。
+
+文件夹的 `index.md` 是它的概览页面。每个区域的结构都相同：概览、首次贡献、指南、参考，以及联系谁。在添加页面之前，先看看相邻的页面，并遵循它的做法。
+
+## 术语表条目
+
+在 Home Assistant 中有特定含义的词语，例如 [config entry](https://www.hasscn.top/contributors/glossary/config-entry/)，在[术语表](https://www.hasscn.top/contributors/glossary/)中都有一个页面。请使用这些术语；当某个术语缺失时，请在术语表中添加它，而不是在您的页面上解释。
+
+术语可以自动链接：其页面 `autolink` 列表中的词语，在页面首次使用时会变成链接。只在那里添加无论出现在哪里都表示该术语的词语。在 `pnpm dev` 运行期间，对 `autolink` 列表的更改会重启服务器，因此每个页面都会获取新词语。
+
+## 实时演示
+
+[Design 区域](https://www.hasscn.top/contributors/design/)在页面上实时展示 Home Assistant 前端的真实组件，使用 MDX 页面中的 `<Demo>` 块。可以从现有的组件页面复制一个演示来开始。组件本身是从前端源码构建并提交的，因此您无需前端即可编辑页面。添加尚未构建的组件是维护者的工作：README 中有说明。
+
+## 检查您的链接
+
+链接到其他页面时使用完整路径和末尾斜杠，例如 `/design/foundations/color/`。要检查网站的所有链接，请构建网站并运行链接检查：
+
+```shell
+pnpm build
+pnpm links
+```
+
+它会列出所有指向不存在页面或标题的链接，以及这些链接所在的页面。同样的检查会在每个拉取请求上运行。
+
+## 移动或重命名页面
+
+移动或重命名页面会改变其 URL，其他网站、书签和搜索引擎中指向旧 URL 的链接将会失效。因此：
+
+1. 移动页面，并更新本网站上指向它的链接。`pnpm links` 可以找出您遗漏的链接。
+2. 在您的拉取请求中提及每一个被移动的页面。
+
+然后维护者会为旧 URL 添加重定向。重定向存放在仓库的 `redirects/` 文件夹中，每个区域一个小表，构建过程会将它们转换为网站的重定向。
+
+重命名标题会改变其锚点（anchor），指向该标题的链接将落在页面顶部而不是原位置。当重命名能让页面更好时可以重命名标题，但要知道指向它的旧链接会失去定位。

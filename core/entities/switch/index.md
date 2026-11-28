@@ -1,0 +1,156 @@
+# 开关实体
+
+> 为您可以打开和关闭的东西（如继电器或智能插座）构建开关实体。
+
+Source: https://www.hasscn.top/contributors/core/entities/switch/
+
+开关实体（switch entity）用于打开或关闭某物：继电器、智能插座，或设备上的设置，如“儿童锁”或“LED 指示灯”。继承自 `homeassistant.components.switch` 中的 `SwitchEntity`。
+
+选择与该东西实际类型相匹配的平台：
+
+- 它有开和关的状态，但 Home Assistant 无法改变它，比如只上报状态的墙壁开关：请使用[二进制传感器（binary sensor）](https://www.hasscn.top/contributors/core/entities/binary-sensor/)。
+- 它没有状态，只是触发某个操作，比如重启设备：请使用[按钮（button）](https://www.hasscn.top/contributors/core/entities/button/)。
+- 它是供人按下的物理按键：请使用[事件（event）](https://www.hasscn.top/contributors/core/entities/event/)实体。
+- 它是灯、风扇或阀门：请使用对应的平台。这样可以为用户提供正确的控制方式，为语音助手提供正确的设备类型，并为您提供正确的功能。
+
+关于前端如何显示开关，请参见[开关更多信息视图](https://www.hasscn.top/contributors/design/more-info/switch/)。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo. A smart plug in a tile card. The card is live: turn it off and on.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <script type="application/json">
+    [
+      {
+        "entity_id": "switch.coffee_machine",
+        "state": "on",
+        "attributes": {
+          "friendly_name": "Coffee machine",
+          "device_class": "outlet"
+        }
+      }
+    ]
+  </script>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "switch.coffee_machine",
+        "features": [
+          {
+            "type": "toggle"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 属性
+
+| 名称 | 类型 | 默认值 | 描述 |
+| --- | --- | --- | --- |
+| `is_on` | `bool \| None` | `None` | 开关是否处于打开状态。`None` 表示状态未知。 |
+| `device_class` | `SwitchDeviceClass \| None` | `None` | 此开关属于哪种类型。参见[设备类](https://www.hasscn.top/contributors/core/entities/switch/#device-classes)。 |
+
+每个实体都具有的通用属性（如 `name`、`available` 和 `unique_id`）记录在[实体类](https://www.hasscn.top/contributors/core/entities/entity-class/)中。
+
+## 支持的功能
+
+此实体没有支持的功能。
+
+## 设备类
+
+| 常量 | 描述 |
+| --- | --- |
+| `SwitchDeviceClass.OUTLET` | 电源插座，如智能插座或插排上的插孔。 |
+| `SwitchDeviceClass.SWITCH` | 通用开关。 |
+
+语音助手使用设备类（device class）来选择匹配的设备类型。
+
+## 方法
+
+### 打开和关闭
+
+两者都需要实现，同步或异步版本任选其一。Home Assistant 会将额外参数作为关键字参数传递，因此请在函数签名中保留 `**kwargs`。
+
+```python
+class MySwitch(SwitchEntity):
+    # Implement one of each pair.
+
+    def turn_on(self, **kwargs: Any) -> None:
+        """Turn the switch on."""
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        """Turn the switch on."""
+
+    def turn_off(self, **kwargs: Any) -> None:
+        """Turn the switch off."""
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        """Turn the switch off."""
+```
+
+### 切换
+
+您通常不需要实现此方法。基类已经实现了 `async_toggle`：当 `is_on` 为 true 时，它会调用您的关闭方法，否则会调用您的打开方法。只有当设备具有原生的切换命令时，才需要重写 `async_toggle`。同步的 `toggle` 是最终方法（final）：Home Assistant 从不调用它，因此请不要实现它。
+
+## 状态
+
+基类根据 `is_on` 构建状态：
+
+| 状态 | 时机 |
+| --- | --- |
+| `on` | `is_on` 为 `True` |
+| `off` | `is_on` 为 `False` |
+| `unknown` | `is_on` 为 `None` |
+
+您无需自行设置状态。`unavailable` 来自 `available` 属性，所有实体都是如此。
+
+## 示例
+
+```python
+from typing import Any
+
+from homeassistant.components.switch import (
+    SwitchDeviceClass,
+    SwitchEntity,
+)
+
+
+class ExampleOutlet(SwitchEntity):
+    """A smart plug."""
+
+    _attr_has_entity_name = True
+    _attr_name = None
+    _attr_device_class = SwitchDeviceClass.OUTLET
+
+    def __init__(self, device: ExampleDevice) -> None:
+        """Initialize the outlet."""
+        self._device = device
+        self._attr_unique_id = device.serial
+        self._attr_is_on = device.is_on
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        """Turn the outlet on."""
+        await self._device.turn_on()
+        self._attr_is_on = True
+        self.async_write_ha_state()
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        """Turn the outlet off."""
+        await self._device.turn_off()
+        self._attr_is_on = False
+        self.async_write_ha_state()
+```
+
+插座是其设备的主要功能，因此 `_attr_name = None` 会让实体使用设备的名称。参见[实体命名](https://www.hasscn.top/contributors/core/entities/naming/)。

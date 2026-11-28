@@ -1,0 +1,14 @@
+# 品牌
+
+> Home Assistant 是谁、说话是什么腔调，以及如何使用它的名称和标志。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/brand/llms-full.txt.
+
+## 品牌
+
+- [品牌](https://www.hasscn.top/contributors/brand/index.md): Home Assistant 是谁、它听起来是什么样，以及如何使用它的名称和标志。面向每一位为项目写作、设计、翻译或代言的人。
+- [你的第一次品牌贡献](https://www.hasscn.top/contributors/brand/first-contribution/index.md): 选择一个页面或一段界面文本，对照 Home Assistant 的个性来阅读它，并加以改进。
+- [我们的故事与价值观](https://www.hasscn.top/contributors/brand/our-story/index.md): 开放之家（Open Home），Home Assistant 每一个决策背后的三大价值观，以及这个项目的由来。
+- [品牌个性](https://www.hasscn.top/contributors/brand/personality/index.md): 描述 Home Assistant 是什么的五个特质，每个特质的含义，以及每个特质不是什么。
+- [语气与风格](https://www.hasscn.top/contributors/brand/voice-and-tone/index.md): Home Assistant 的个性在文档、界面、错误消息、社区回复、发布说明和社交媒体中如何呈现。
+- [名称与标志](https://www.hasscn.top/contributors/brand/name-and-logo/index.md): 如何书写 Home Assistant 名称、如何使用标志，以及两者与 Open Home Foundation 的关系。

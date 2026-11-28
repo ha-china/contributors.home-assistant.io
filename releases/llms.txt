@@ -1,0 +1,25 @@
+# 版本发布
+
+> 试用 beta、报告问题，了解一个版本是如何发布的。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/releases/llms-full.txt.
+
+## 版本发布
+
+- [版本发布](https://www.hasscn.top/contributors/releases/index.md): Home Assistant 每月的新版本是如何诞生的，以及你可以如何帮助测试、讲解和发布它。
+- [你的第一次 Beta 测试](https://www.hasscn.top/contributors/releases/first-contribution/index.md): 加入 Beta 渠道，比其他人提前一周运行下一个版本，并报告出现的问题。
+- [版本发布是如何运作的](https://www.hasscn.top/contributors/releases/how-it-works/index.md): Home Assistant 的月度发布周期，从第一行代码到最后一个补丁版本。
+
+## 指南
+
+- [发布指南](https://www.hasscn.top/contributors/releases/guides/index.md): 如何逐项任务协助一次发布的完成。从发布说明到将修复纳入补丁版本。
+- [发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/index.md): 每月发布说明是如何完成的，你可以如何帮助改进它们，以及发布派对是什么。
+- [记录不向后兼容的变更](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/index.md): 当你的变更意味着用户需要做某些操作时，告诉他们什么会失效、如何修复以及原因。这些文字会出现在发布说明中。
+- [弃用某些功能](https://www.hasscn.top/contributors/releases/guides/deprecations/index.md): Home Assistant 的弃用政策、它对使用者意味着什么，以及弃用如何在发布说明中呈现。
+- [如何让修复进入补丁版本](https://www.hasscn.top/contributors/releases/guides/patch-releases/index.md): Bug 修复如何进入 beta 版和补丁版本，以及你可以做些什么来帮助它达成这一目标。
+
+## 参考
+
+- [发布参考](https://www.hasscn.top/contributors/releases/reference/index.md): 供您查阅的详细信息。版本号、发布渠道，以及发布过程中各角色的职责分工。
+- [版本与渠道](https://www.hasscn.top/contributors/releases/reference/versions/index.md): Home Assistant 版本号的含义，以及 stable、beta 和 dev 渠道。
+- [谁负责什么](https://www.hasscn.top/contributors/releases/reference/roles/index.md): 参与 Home Assistant 发布的人员，以及他们各自的工作。

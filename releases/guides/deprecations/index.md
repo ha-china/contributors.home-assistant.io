@@ -1,0 +1,39 @@
+# 弃用某些功能
+
+> Home Assistant 的弃用政策、它对使用者意味着什么，以及弃用如何在发布说明中呈现。
+
+Source: https://www.hasscn.top/contributors/releases/guides/deprecations/
+
+[弃用](https://www.hasscn.top/contributors/glossary/deprecation/)（deprecation）是一种计划在未来进行的、不向后兼容的变更。旧方式在一段时间内仍然可用，所有使用它的人都会收到警告，只有在这段时间过后它才会被移除。这让人们可以按照自己的节奏进行迁移。
+
+本页面介绍的是这项政策，以及它对用户和发布说明意味着什么。关于如何在代码中弃用某些内容，包括修复问题（repair issues）、翻译字符串以及正确的严重级别，请参阅 Core 与集成部分：[弃用](https://www.hasscn.top/contributors/core/development/deprecating/)。
+
+## 规则
+
+任何要被移除的内容都必须先经过弃用。即使你认为只有少数人在使用它，这条规则依然适用，因为一个实体（entity）、动作（action）或选项可能被用于其他人无法看到的自动化、脚本和仪表盘中。
+
+## 时限
+
+| 受影响的对象 | 最短期限 |
+| --- | --- |
+| 用户：YAML 配置、动作、实体、属性、集成 | 6 个月 |
+| 开发者：自定义集成所使用的常量、辅助元素（helper）、实体属性和平台 API | 12 个月 |
+
+弃用公告中会指明旧方式将在哪个版本中被移除。当人们需要更多时间时，期限可以延长，但绝不会缩短。
+
+## 用户会看到什么
+
+需要用户采取行动的弃用会以[修复](https://www.hasscn.top/contributors/glossary/repair/)（repair）的形式出现在 **设置** > **系统** > **修复** 中，且只出现在受影响的安装实例上。该修复会说明什么内容将被移除、何时移除，以及应该怎么做。受影响的人会收到通知，而不受影响的人则不会被打扰。
+
+## 在发布说明中
+
+一项弃用会在发布说明中出现两次：
+
+1. **开始时。** 弃用某项内容的版本的发布说明可以将其列在 **向后不兼容的变更** 下，例如：“运行时间传感器已被弃用，并将在未来版本中移除。请改用新的上次重启传感器。”
+2. **结束时。** 在弃用期结束后移除旧方式的拉取请求，如果它仍可能影响未按弃用说明操作的用户，则属于向后不兼容的变更。该拉取请求中的文本会出现在该版本的同一部分中。请参阅[何时属于向后不兼容](https://www.hasscn.top/contributors/releases/guides/backward-incompatible-changes/#when-it-is-backward-incompatible)。
+
+影响自定义集成开发者的 Python API 弃用会在[开发者博客](https://www.hasscn.top/contributors/blog/)上公告。发布说明会链接该版本中最值得关注的文章，而旧代码在仍然可用期间会记录一条警告。
+
+## 在拉取请求中
+
+[核心仓库](https://github.com/home-assistant/core)的拉取请求模板为此提供了一种变更类型：当破坏发生在未来时，勾选 **弃用**；当破坏立即发生时，勾选 **破坏性变更**。启动弃用的拉取请求属于前者。结束弃用的拉取请求属于后者，除非它只是移除了 Home Assistant Core 中不再使用的核心 API。

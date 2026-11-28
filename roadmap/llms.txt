@@ -1,0 +1,11 @@
+# Roadmap
+
+> 想法如何变成计划中的工作，以及你在哪里能参与塑造接下来的一切。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/roadmap/llms-full.txt.
+
+## Roadmap
+
+- [路线图](https://www.hasscn.top/contributors/roadmap/index.md): 在 Open Home Foundation，想法如何变成计划中的工作、目前正在推进的内容，以及你可以在哪里参与塑造未来的方向。
+- [你的第一次路线图贡献](https://www.hasscn.top/contributors/roadmap/first-contribution/index.md): 分享功能请求，或为现有的功能请求添加你的使用场景。想法就是这样进入路线图的。
+- [从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/index.md): Home Assistant 的较大工作如何在公开环境中规划：从功能请求到路线图机遇（opportunity）、史诗（epic）、任务和拉取请求，以及你在整个过程中可以在哪里参与。

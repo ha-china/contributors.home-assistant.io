@@ -1,0 +1,178 @@
+# 按钮卡片
+
+> 按钮卡片是一个带有图标和名称的大方形按钮。它执行一个操作，例如切换灯的开关或激活一个场景。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/button-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "light.living_room_lamp"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "scene.movie_night"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "lock.front_door"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+按钮卡片是一个大目标：一个图标，下方是名称。选中它会执行一个操作。对于可切换的实体（entity），例如灯、开关或风扇，就是切换操作。对于其他所有实体，则会打开更多信息对话框。长按按钮也会打开更多信息对话框。
+
+当一个操作最重要，并且人们希望不用多看一眼就能点到它时，可以使用按钮卡片，例如在壁挂平板上。对于大多数实体，[平铺卡片](https://www.hasscn.top/contributors/design/dashboards/tile-card/) 是更合适的选择：它显示状态，占用空间更小，并且可以通过功能添加更多控件。
+
+按钮卡片不需要实体。如果没有实体，它就是一个执行其 `tap_action` 的普通按钮，例如导航到另一个仪表盘（dashboard）或执行一个操作。
+
+### 显示状态
+
+按钮显示名称和图标。添加 `show_state: true` 可以在名称下方显示状态，并使用 `show_name` 和 `show_icon` 来隐藏其中任意一项。仅显示图标的按钮需要一个其图标本身含义足够明确的实体。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "light.hallway",
+        "show_state": true
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "switch.desk_plug",
+        "show_name": false
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "light.kitchen_ceiling",
+        "show_icon": false,
+        "show_state": true
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 图标大小
+
+默认情况下，图标会随卡片缩放：它占卡片宽度的 40%。设置 `icon_height`，例如 `40px`，可以获得固定且更小的图标，让按钮看起来更简洁。当所有按钮使用相同高度时，按钮网格的阅读体验更好。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "light.living_room_lamp",
+        "icon_height": "40px"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "button",
+        "entity": "light.hallway",
+        "icon_height": "40px"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 内容
+
+- 名称保持一到两个词。它位于图标下方，居中显示，很容易换行。
+- 让操作可预测。如果按钮执行的操作不是切换，例如运行脚本，名称应说明会发生什么。
+- 使用[网格卡片](https://www.hasscn.top/contributors/design/dashboards/grid-card/) 对按钮进行分组，使它们对齐排列。
+
+## 配置
+
+- `entity`（字符串）：按钮对应的实体。
+- `name`（字符串）：要显示的名称。默认为实体的名称。
+- `icon`（字符串）：要显示的图标。默认为实体的图标。
+- `icon_height`（字符串）：图标的高度，例如 `40px`。默认情况下，图标会随卡片宽度缩放。
+- `color`（字符串）：实体处于活动状态时图标的颜色。默认为 `state`，即状态的颜色。使用 `none` 表示默认图标颜色。
+- `show_name`（布尔值）：是否显示名称。默认为 `true`。
+- `show_icon`（布尔值）：是否显示图标。默认为 `true`。
+- `show_state`（布尔值）：是否显示状态。默认为 `false`。
+- `theme`（字符串）：此卡片使用的主题。
+- `tap_action`（操作）：选中按钮时会发生什么。对于可切换的实体，默认为 `toggle`，其余默认为 `more-info`。
+- `hold_action`（操作）：长按按钮时会发生什么。默认为 `more-info`。
+- `double_tap_action`（操作）：双击按钮时会发生什么。默认为 `none`。
+
+```yaml
+type: button
+entity: scene.movie_night
+icon_height: "40px"
+tap_action:
+  action: perform-action
+  perform_action: scene.turn_on
+  target:
+    entity_id: scene.movie_night
+```
+
+旧的类型名称 `entity-button` 仍然可用。它创建相同的按钮，但需要一个 `entity`。
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-button-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-button-card.ts)，元素为 `<hui-button-card>`。`entity-button` 类型是 `hui-entity-button-card.ts` 中的 `<hui-entity-button-card>`，这是一个只添加了实体检查的小型子类。
+
+在分区视图中，带有图标以及名称或状态的按钮占 12 列中的 6 列和两行。仅有图标或仅有文本的按钮占 3 列和一行。两者都可以缩小到 2 列。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-button-card.ts)

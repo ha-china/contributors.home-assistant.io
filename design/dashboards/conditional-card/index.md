@@ -1,0 +1,147 @@
+# 条件卡片
+
+> 条件卡片（conditional card）仅在其条件满足时显示另一张卡片，例如灯处于开启状态，或屏幕足够宽。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/conditional-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 6">
+    <script type="application/json">
+      {
+        "type": "conditional",
+        "conditions": [
+          {
+            "condition": "screen",
+            "media_query": "(min-width: 768px)"
+          }
+        ],
+        "card": {
+          "type": "tile",
+          "entity": "media_player.living_room_speaker",
+          "features": [
+            {
+              "type": "media-player-playback"
+            }
+          ]
+        },
+        "grid_options": {
+          "columns": 6
+        }
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 6">
+    <script type="application/json">
+      {
+        "type": "conditional",
+        "conditions": [
+          {
+            "condition": "screen",
+            "media_query": "(max-width: 767px)"
+          }
+        ],
+        "card": {
+          "type": "tile",
+          "entity": "media_player.living_room_speaker"
+        },
+        "grid_options": {
+          "columns": 6
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+条件卡片包裹另一张卡片，并且仅在所有条件都满足时才显示它。当条件不满足时，该卡片完全不占用空间。可以用它让仪表盘（dashboard）保持简洁：在洗衣机运行时显示其卡片，或仅在门打开时显示警告。
+
+上面的演示包含两张带有屏幕条件的条件卡片。在宽屏幕上，你会看到带有播放控件的磁贴（tile），在窄屏幕上则是普通磁贴。把浏览器窗口调窄一些，就能看到它们切换。
+
+### 每张卡片上的可见性
+
+其他每张卡片在其编辑器中都有一个**可见性（Visibility）**选项卡，包含相同的条件。它们以 `visibility` 的形式存储在卡片自身的配置中。对于新仪表盘来说，这是更好的选择：卡片仍然是一张卡片，你无需包裹它。条件卡片依然存在，使用它的仪表盘也能继续正常工作。
+
+```yaml
+type: tile
+entity: binary_sensor.kitchen_window
+visibility:
+  - condition: state
+    entity: binary_sensor.kitchen_window
+    state: "on"
+```
+
+### 条件
+
+- `state`：实体的状态是（或不是）给定状态之一。
+- `numeric_state`：实体的状态高于或低于某个数值。
+- `screen`：屏幕匹配某个媒体查询（media query），例如最小宽度。
+- `user`：正在查看仪表盘的用户是给定用户之一。
+- `time`：当前时间在某个范围内，且处于给定的工作日。
+- `location`：正在查看仪表盘的人位于给定的地理位置区域（zone）之一。
+- `view_columns`：分区视图（sections view）的列数在某个范围内。
+- `and`、`or` 和 `not`：组合其他条件。
+
+关于屏幕、用户、时间和位置的条件在浏览器中检查。关于实体状态的条件由 Home Assistant 检查，并在结果变化时通知前端。本网站的演示背后没有 Home Assistant 来执行此操作，因此它们只展示在浏览器中运行的条件。
+
+```yaml
+type: conditional
+conditions:
+  - condition: state
+    entity: binary_sensor.front_door
+    state: "on"
+  - condition: numeric_state
+    entity: sensor.outdoor_temperature
+    below: 5
+card:
+  type: tile
+  entity: binary_sensor.front_door
+```
+
+### 编辑模式
+
+在你编辑仪表盘时，无论条件如何，卡片始终显示。否则你将无法选中当前处于隐藏状态的卡片。要测试条件，请退出编辑模式。
+
+### 内容
+
+- 不要隐藏人们要找的东西。一张时隐时现的卡片适合临时状态，例如打开的门，但对于人们期望在固定位置看到的内容来说则会造成困扰。
+- 当一张隐藏的卡片留下看起来奇怪的空隙时，应重新考虑布局，而不是添加更多条件。
+
+## 配置
+
+- `conditions`（列表，必填）：要检查的条件。所有条件都必须满足。
+- `card`（映射，必填）：要显示的卡片。
+
+```yaml
+type: conditional
+conditions:
+  - condition: screen
+    media_query: "(min-width: 768px)"
+card:
+  type: tile
+  entity: media_player.living_room_speaker
+  features:
+    - type: media-player-playback
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-conditional-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-conditional-card.ts)，元素为 `<hui-conditional-card>`。它继承自 [`src/panels/lovelace/components/hui-conditional-base.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/components/hui-conditional-base.ts) 中的 `HuiConditionalBase`，[实体卡片](https://www.hasscn.top/contributors/design/dashboards/entities-card/)的条件行也使用了它。
+
+条件由 [`src/mixins/conditional-listener-mixin.ts`](https://github.com/home-assistant/frontend/blob/dev/src/mixins/conditional-listener-mixin.ts) 中的 `ConditionalListenerMixin` 求值，`<hui-card>` 在 `visibility` 选项中也使用了同一个 mixin。关于状态的条件通过 `subscribe_condition` 订阅发送给 Home Assistant。其他条件则在本地检查。条件的类型定义在 [`src/panels/lovelace/common/validate-condition.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/common/validate-condition.ts) 中。
+
+当卡片显示或隐藏时，它会触发 `card-visibility-changed` 事件，以便其周围的分区（section）或堆叠（stack）可以更新其布局。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-conditional-card.ts)

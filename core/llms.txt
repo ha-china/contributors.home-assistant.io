@@ -1,0 +1,322 @@
+# 核心与集成
+
+> Python、核心与集成平台。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/core/llms-full.txt.
+
+## 核心与集成
+
+- [核心与集成](https://www.hasscn.top/contributors/core/index.md): Python、核心与集成平台。构建和改进集成、参与 Home Assistant Core 本身开发所需的一切。
+- [你对 core 的首次贡献](https://www.hasscn.top/contributors/core/first-contribution/index.md): 搭建开发环境，找一些小的修复任务，然后向 Home Assistant Core 发起你的第一个拉取请求（pull request）。
+
+## 开发工作流
+
+- [开发工作流](https://www.hasscn.top/contributors/core/development/index.md): 代码如何从你的机器进入 Home Assistant 发布版本。包括环境、工具、检查和评审流程。
+
+### Write code
+
+- [搭建你的开发环境](https://www.hasscn.top/contributors/core/development/environment/index.md): 通过开发容器或在 Linux、macOS 或 Windows 上手动安装，获得一个可用的 Home Assistant Core 开发环境。
+- [代码风格](https://www.hasscn.top/contributors/core/development/style/index.md): Home Assistant Core 中 Python 的风格规则。格式化、docstring、日志、错误处理，以及审查者所关注的约定。
+- [类型提示](https://www.hasscn.top/contributors/core/development/typing/index.md): Home Assistant Core 如何使用类型提示和 mypy，以及如何让模块启用严格检查。
+- [运行测试](https://www.hasscn.top/contributors/core/development/testing/index.md): 使用 pytest 运行 Home Assistant Core 的测试，检查覆盖率，更新快照，并了解 CI 会运行哪些内容。
+- [编写测试](https://www.hasscn.top/contributors/core/development/tests/index.md): 集成的测试是如何组织的，如何通过 Home Assistant 而不是绕过它进行测试，以及如何使用 fixture、mock 和快照。
+- [Linter、hassfest 与 CI](https://www.hasscn.top/contributors/core/development/checks/index.md): 每次 commit 和每个针对 Home Assistant Core 的 pull request 都会运行的检查，以及如何自己运行它们。
+- [验证输入](https://www.hasscn.top/contributors/core/development/input-validation/index.md): 在配置流程、动作和 YAML 中，使用 probatio 模式（schema）以及 config_validation 中的辅助函数来验证用户提交给集成的数据。
+
+### Pull requests
+
+- [开发检查清单](https://www.hasscn.top/contributors/core/development/checklist/index.md): 在提交之前，请对照此清单检查你的更改，以便你的拉取请求（pull request）可以进入评审。
+- [提交拉取请求](https://www.hasscn.top/contributors/core/development/submitting/index.md): Home Assistant Core 拉取请求的特有事项，从分支和提交信息到模板、新集成以及依赖更新。
+- [打开拉取请求之后](https://www.hasscn.top/contributors/core/development/review-process/index.md): 打开 Home Assistant Core 的拉取请求后会发生什么，以及你可以做些什么来推动它。
+- [保持分支最新](https://www.hasscn.top/contributors/core/development/catching-up/index.md): 将 Home Assistant Core 的 dev 分支的最新更改合并到你的分支，并解决冲突。
+- [审查拉取请求](https://www.hasscn.top/contributors/core/development/reviewing/index.md): 关于审查 Home Assistant Core 拉取请求的实用指南。首先检查什么、针对不同类型的变更关注什么，以及如何给出反馈。
+- [技巧与窍门](https://www.hasscn.top/contributors/core/development/tips/index.md): 一些让 Home Assistant Core 开发更轻松的小技巧，从堆叠拉取请求（pull request）到在自己的系统上测试更改。
+
+### Changing behavior
+
+- [弃用](https://www.hasscn.top/contributors/core/development/deprecating/index.md): 如何在不一夜之间破坏用户家庭的情况下移除或更改 Home Assistant Core 中的行为。弃用期、修复问题，以及面向开发者 API 的辅助工具。
+- [版本管理](https://www.hasscn.top/contributors/core/development/versioning/index.md): Home Assistant Core 的版本是如何构建的，从稳定版到 beta 版、nightly 版和开发版本。
+- [Labs 预览功能](https://www.hasscn.top/contributors/core/development/labs/index.md): 发布一个已完成的功能，让用户可以通过 Home Assistant Labs 选择启用，收集反馈，并将其转正为标准功能。
+
+## 构建集成
+
+- [构建集成](https://www.hasscn.top/contributors/core/integrations/index.md): 关于集成组成的全部内容，从清单文件（manifest）和配置流程到数据获取、发现和诊断。
+
+### Getting started
+
+- [集成如何融入整体](https://www.hasscn.top/contributors/core/integrations/concepts/index.md): 用通俗的语言介绍每个集成所基于的少数几个核心概念，并提供指向更深入页面的链接。
+- [构建 Python 库](https://www.hasscn.top/contributors/core/integrations/api-library/index.md): 为什么集成需要通过独立的库与设备通信、该库必须满足哪些要求，以及如何设计身份验证和数据模型的结构。
+- [集成文件结构](https://www.hasscn.top/contributors/core/integrations/file-structure/index.md): 集成的文件、每个文件的用途，以及 Home Assistant 在何处查找集成。
+
+### Setup and configuration
+
+- [配置项](https://www.hasscn.top/contributors/core/integrations/config-entries/index.md): 配置项（config entry）如何被设置、卸载、删除和迁移，以及你的集成将运行时数据存储在哪里。
+- [配置流程](https://www.hasscn.top/contributors/core/integrations/config-flow/index.md): 让用户通过配置流程（config flow）从 UI 添加您的集成，并确保同一设备永远不会被设置两次。
+- [表单、菜单与进度](https://www.hasscn.top/contributors/core/integrations/flow-steps/index.md): 配置流程、选项流程和修复流程的构建基石，涵盖从表单和分区到菜单、外部步骤和进度。
+- [选项流程](https://www.hasscn.top/contributors/core/integrations/options-flow/index.md): 让用户在设置完成后更改集成的行为方式，并在更改时重新加载集成。
+- [配置子条目](https://www.hasscn.top/contributors/core/integrations/subentries/index.md): 将配置条目拆分为用户逐个添加的部分，例如天气服务的各个位置。
+- [重新认证与重新配置](https://www.hasscn.top/contributors/core/integrations/reauth-reconfigure/index.md): 让用户修复过期的凭据并更改现有配置条目（config entry）的连接详细信息，而无需删除后重新添加。
+- [YAML 配置](https://www.hasscn.top/contributors/core/integrations/yaml/index.md): 集成何时仍可以在 configuration.yaml 中进行配置，以及 Home Assistant 如何验证该配置。
+
+### Data and updates
+
+- [获取数据](https://www.hasscn.top/contributors/core/integrations/fetching-data/index.md): 通过轮询（poll）或推送（push）从您的设备或服务获取数据，并使用数据更新协调器（data update coordinator）在实体（entity）之间共享数据。
+- [集成中的事件](https://www.hasscn.top/contributors/core/integrations/events/index.md): 让设备的事件对用户可用，并使用事件辅助元素（helper）响应 Home Assistant 内部发生的事情。
+- [获取实例 URL](https://www.hasscn.top/contributors/core/integrations/instance-url/index.md): 查找设备、服务或用户浏览器可用来访问 Home Assistant 的 URL。
+
+### Discovery
+
+- [发现](https://www.hasscn.top/contributors/core/integrations/discovery/index.md): Home Assistant 如何通过网络、USB 或蓝牙查找你的设备，并将其交给你的配置流程。
+- [网络发现](https://www.hasscn.top/contributors/core/integrations/network-discovery/index.md): 在您的集成运行时，使用 Home Assistant 的 zeroconf、SSDP、DHCP、USB、MQTT 和网络 API 来查找设备。
+- [Bluetooth 集成](https://www.hasscn.top/contributors/core/integrations/bluetooth/index.md): 使用 Bluetooth 的集成的最佳实践，以及 Bluetooth 集成的 API。
+- [获取蓝牙数据](https://www.hasscn.top/contributors/core/integrations/bluetooth-data/index.md): 为蓝牙设备选择合适的协调器，并将其广播数据转换为实体。
+
+### Devices and registries
+
+- [设备注册表](https://www.hasscn.top/contributors/core/integrations/device-registry/index.md): 注册集成的设备，将它们链接到集线器，把产品拆分为子设备，并允许用户删除设备。
+- [实体注册表](https://www.hasscn.top/contributors/core/integrations/entity-registry/index.md): 在实体注册表中查找集成的实体，并在其唯一 ID 发生变化时对它们进行迁移。
+- [区域注册表](https://www.hasscn.top/contributors/core/integrations/area-registry/index.md): Home Assistant 对区域的了解，以及你的集成如何为设备建议区域。
+
+### Integration features
+
+- [集成中的动作](https://www.hasscn.top/contributors/core/integrations/actions/index.md): 注册用户可从自动化、脚本和仪表盘中调用的动作，在 services.yaml 中描述这些动作，并返回响应数据。
+- [触发器和条件](https://www.hasscn.top/contributors/core/integrations/triggers-and-conditions/index.md): 通过触发器和条件平台为您的集成提供自动化触发器和条件，并进行命名，让用户能够预测它们。
+- [设备自动化](https://www.hasscn.top/contributors/core/integrations/device-automations/index.md): 面向已拥有设备自动化的集成，介绍设备触发器、条件和动作的工作方式。
+- [诊断](https://www.hasscn.top/contributors/core/integrations/diagnostics/index.md): 让用户下载配置条目或设备的数据，以便他们在报告问题时进行分享，且不会泄露机密信息。
+- [系统健康](https://www.hasscn.top/contributors/core/integrations/system-health/index.md): 在系统信息页面上显示您的集成的状态，例如服务器是否可访问以及剩余配额还有多少。
+- [请求重启](https://www.hasscn.top/contributors/core/integrations/restart-required/index.md): 告诉 Home Assistant 需要重启才能应用更改，而无需创建修复（repair）问题。
+- [维修](https://www.hasscn.top/contributors/core/integrations/repairs/index.md): 告知用户需要处理的问题，并通过维修流程（repair flow）帮助他们解决这些问题。
+- [重现状态](https://www.hasscn.top/contributors/core/integrations/reproduce-state/index.md): 通过将存储的状态转换回动作调用，让场景与您的实体集成中的实体协同工作。
+- [重大变化](https://www.hasscn.top/contributors/core/integrations/significant-change/index.md): 告诉导出数据的集成（如语音助手），您的实体类型有哪些状态变化是重要的。
+- [媒体来源](https://www.hasscn.top/contributors/core/integrations/media-source/index.md): 在 Home Assistant 的媒体浏览器中公开您的集成提供的可浏览、可搜索和可播放的媒体。
+
+### Reference
+
+- [集成清单（manifest）](https://www.hasscn.top/contributors/core/integrations/manifest/index.md): manifest.json 中每个键的作用及其接受的值。
+- [集成品牌与图片](https://www.hasscn.top/contributors/core/integrations/brands/index.md): 为您的集成添加图标和标志，并将同一品牌的集成归为一组，方便用户查找。
+- [集成翻译](https://www.hasscn.top/contributors/core/integrations/translations/index.md): 集成的 strings.json 的各个章节、引用与占位符的工作方式，以及自定义集成如何提供自己的翻译。
+- [集成分类](https://www.hasscn.top/contributors/core/integrations/categories/index.md): 用户浏览集成时依据的分类，以及如何为你的集成选择合适的分类。
+
+### 入门
+
+- [构建你的第一个集成](https://www.hasscn.top/contributors/core/integrations/tutorial/index.md): 逐步构建一个小而完整的集成，从脚手架（scaffold）到配置流程（config flow）、协调器（coordinator）、传感器、测试，以及一个达到 Bronze 级别的拉取请求（pull request）。
+- [创建集成](https://www.hasscn.top/contributors/core/integrations/create/index.md): 使用脚手架脚本生成一个新的集成，并了解最小规模的集成是什么样子。
+
+### 设置与配置
+
+- [OAuth 2.0 和应用凭据](https://www.hasscn.top/contributors/core/integrations/oauth2/index.md): 通过 OAuth 2.0 链接用户在云服务上的帐户，并让 Home Assistant 为您处理令牌。
+- [设置失败与异常](https://www.hasscn.top/contributors/core/integrations/setup-failures/index.md): 设备离线时重试设置，凭据失效时启动重新身份验证，并在动作中抛出正确的异常。
+
+### 集成功能
+
+- [备份](https://www.hasscn.top/contributors/core/integrations/backup/index.md): 添加一个备份代理（backup agent）来存储 Home Assistant 备份，或者为备份准备你的集成。
+
+## 实体
+
+- [实体](https://www.hasscn.top/contributors/core/entities/index.md): 实体在 Home Assistant Core 中的工作原理，以及每个实体平台（从传感器和灯光到语音和 AI）的参考。
+
+### Basics
+
+- [实体类](https://www.hasscn.top/contributors/core/entities/entity-class/index.md): 每个实体都构建于其上的 Entity 基类、设置其属性的三种方式，以及每个实体都拥有的通用属性。
+- [更新状态](https://www.hasscn.top/contributors/core/entities/state-updates/index.md): 通过轮询或推送让实体与其设备保持同步，在恰当的时机写入状态，并如实报告可用性。
+- [实体生命周期](https://www.hasscn.top/contributors/core/entities/lifecycle/index.md): Home Assistant 添加和移除实体时会发生什么，以及你用来订阅、清理和响应注册表（registry）变化的钩子（hook）。
+- [状态与属性](https://www.hasscn.top/contributors/core/entities/state-attributes/index.md): 哪些内容会进入实体的状态对象、何时应添加额外的属性，以及如何让属性不进入历史记录。
+- [图标](https://www.hasscn.top/contributors/core/entities/icons/index.md): 在 icons.json 中使用图标翻译（icon translations）为实体提供跟随其状态变化的图标，以及何时应改用 icon 属性。
+
+### Sensors and status
+
+- [日历实体](https://www.hasscn.top/contributors/core/entities/calendar/index.md): 暴露一个包含具有开始和结束时间的事件的日历，并可选地允许用户创建、更新和删除这些事件。
+- [设备跟踪器实体](https://www.hasscn.top/contributors/core/entities/device-tracker/index.md): 报告设备在哪里：或者通过其位置，或者通过它是否连接到网络或信标。
+- [事件实体](https://www.hasscn.top/contributors/core/entities/event/index.md): 将物理世界中发生的事情（如按下按钮或门铃响起）转化为可用于自动化的实体。
+- [地理位置实体](https://www.hasscn.top/contributors/core/entities/geo-location/index.md): 在地图上显示来自外部数据源且带有位置的事件，例如地震或野火。
+- [传感器实体](https://www.hasscn.top/contributors/core/entities/sensor/index.md): 报告只读值（如温度、功率读数或时间戳）及其单位，并可选择加入长期统计。
+- [天气实体](https://www.hasscn.top/contributors/core/entities/weather/index.md): 报告当前天气状况，并提供每日、每小时或每日两次的天气预报。
+
+### Lights and climate
+
+- [气候实体（climate entity）](https://www.hasscn.top/contributors/core/entities/climate/index.md): 为控制温度、湿度和风扇的恒温器、空调和热泵构建气候实体。
+- [风扇实体](https://www.hasscn.top/contributors/core/entities/fan/index.md): 构建一个可控制转速、转动方向、摆动和预设模式的风扇实体。
+- [加湿器实体](https://www.hasscn.top/contributors/core/entities/humidifier/index.md): 为向空气中增加湿气或去除湿气的设备构建加湿器实体。
+- [灯实体](https://www.hasscn.top/contributors/core/entities/light/index.md): 构建一个可以开关、调光以及更改颜色或色温的灯实体。
+- [热水器实体（Water heater entity）](https://www.hasscn.top/contributors/core/entities/water-heater/index.md): 为将水加热至目标温度的锅炉和水箱构建热水器实体。
+
+### Openings and security
+
+- [报警控制面板实体](https://www.hasscn.top/contributors/core/entities/alarm-control-panel/index.md): 构建一个可布防、撤防并触发安防系统的报警控制面板实体。
+- [卷帘实体](https://www.hasscn.top/contributors/core/entities/cover/index.md): 构建用于百叶窗、遮光帘、车库门、大门及其他可开合物体的卷帘实体。
+- [锁实体](https://www.hasscn.top/contributors/core/entities/lock/index.md): 为智能门锁构建锁实体（lock entity），可进行上锁、解锁，并可选择性地打开门。
+- [警报器实体](https://www.hasscn.top/contributors/core/entities/siren/index.md): 构建一个警报器实体，适用于以音调、音量和持续时间发声的警报器和门铃。
+- [阀门实体](https://www.hasscn.top/contributors/core/entities/valve/index.md): 为控制水或气体流动的设备构建阀门实体。
+
+### Media
+
+- [摄像头实体](https://www.hasscn.top/contributors/core/entities/camera/index.md): 显示摄像头的静态图像，以及可选的通过 HLS 或 WebRTC 传输的实时视频流。
+- [图片实体](https://www.hasscn.top/contributors/core/entities/image/index.md): 显示一张会不时变化的静态图片，例如地图、快照或二维码。
+- [媒体播放器实体](https://www.hasscn.top/contributors/core/entities/media-player/index.md): 控制任何播放音频或视频的设备，从智能音箱到电视或 AV 功放。
+
+### Remotes and signals
+
+- [红外实体](https://www.hasscn.top/contributors/core/entities/infrared/index.md): 在集成之间共享红外硬件，让一个集成负责收发信号，另一个集成知道这些信号的含义。
+- [遥控器实体](https://www.hasscn.top/contributors/core/entities/remote/index.md): 向其他设备发送命令，就像万能遥控器上的按钮一样，还可以在多个活动之间切换。
+
+### Voice and AI
+
+- [Assist 卫星实体](https://www.hasscn.top/contributors/core/entities/assist-satellite/index.md): 为监听语音命令并说出响应的设备构建 Assist 卫星实体。
+- [语音转文本实体](https://www.hasscn.top/contributors/core/entities/stt/index.md): 构建一个语音转文本实体，将音频流转换为 Assist 所需的文本。
+- [文本转语音实体](https://www.hasscn.top/contributors/core/entities/tts/index.md): 构建一个文本转语音实体，将文本转换为音频，可一次性完成，也可在语言模型书写的同时流式生成。
+- [唤醒词检测实体](https://www.hasscn.top/contributors/core/entities/wake-word/index.md): 构建一个唤醒词实体，监听音频流并在有人说出唤醒词时进行报告。
+
+### Appliances
+
+- [割草机实体](https://www.hasscn.top/contributors/core/entities/lawn-mower/index.md): 为能割草、暂停并返回基座的机器人割草机构建割草机实体。
+- [更新实体](https://www.hasscn.top/contributors/core/entities/update/index.md): 构建一个更新实体，告知用户有新的固件或软件版本可用，并允许他们进行安装。
+- [吸尘器实体](https://www.hasscn.top/contributors/core/entities/vacuum/index.md): 为能够清扫、回充并清扫家中特定区域的扫地机器人构建吸尘器实体。
+
+### Inputs and helpers
+
+- [日期实体](https://www.hasscn.top/contributors/core/entities/date/index.md): 构建一个日期实体，让人们能够在设备上设置一个日历日期，例如假期模式的开始日期。
+- [日期时间实体](https://www.hasscn.top/contributors/core/entities/datetime/index.md): 构建一个日期时间实体，让人们能够在设备上设置一个时间点，例如充电会话开始的时间。
+- [通知实体](https://www.hasscn.top/contributors/core/entities/notify/index.md): 构建一个向设备或服务发送消息的通知（notify）实体，例如聊天、电子邮件地址或显示器。
+- [数字实体](https://www.hasscn.top/contributors/core/entities/number/index.md): 构建一个数字实体（number entity），让人们可以在设备上设置一个数值，例如目标档位或超时时间。
+- [场景实体](https://www.hasscn.top/contributors/core/entities/scene/index.md): 为存储在设备或集线器上的场景构建场景实体，以便用户可以从 Home Assistant 中激活它。
+- [Select 实体](https://www.hasscn.top/contributors/core/entities/select/index.md): 构建一个选择实体（select entity），让用户从固定列表中选择一个选项，例如运行模式。
+- [开关实体](https://www.hasscn.top/contributors/core/entities/switch/index.md): 为您可以打开和关闭的东西（如继电器或智能插座）构建开关实体。
+- [文本实体](https://www.hasscn.top/contributors/core/entities/text/index.md): 构建一个文本实体，让人们能够在设备上设置简短的文本值，例如显示屏上的消息或网络名称。
+- [时间实体](https://www.hasscn.top/contributors/core/entities/time/index.md): 构建一个时间实体，让人们可以在设备上设置一天中的某个时间，例如唤醒时间。
+- [待办事项列表实体](https://www.hasscn.top/contributors/core/entities/todo/index.md): 为购物清单、任务列表或任何其他带有状态的有序项目列表构建待办事项列表实体。
+
+### 传感器与状态
+
+- [二元传感器实体](https://www.hasscn.top/contributors/core/entities/binary-sensor/index.md): 报告只有开或关两种状态的事物，例如打开的门或检测到的移动。
+- [空气质量实体](https://www.hasscn.top/contributors/core/entities/air-quality/index.md): 已弃用的空气质量实体，以及应使用的替代方案。
+
+### 基础
+
+- [实体命名](https://www.hasscn.top/contributors/core/entities/naming/index.md): has_entity_name、翻译键和设备类如何为您的实体命名，以及 Home Assistant 如何将其转换为友好名称和实体 ID。
+- [实体注册表](https://www.hasscn.top/contributors/core/entities/registry/index.md): 为实体提供一个唯一 ID，让实体注册表能够记住它们、将它们关联到设备，并决定它们初始时是否启用、是否可见或是否分类。
+
+### 语音与 AI
+
+- [AI 任务实体](https://www.hasscn.top/contributors/core/entities/ai-task/index.md): 构建一个 AI 任务实体，让自动化可以请求模型生成数据或图像，或评估问题。
+- [对话实体](https://www.hasscn.top/contributors/core/entities/conversation/index.md): 构建一个对话代理，接收来自 Assist 的文本并作出回答，背后可以有或没有语言模型。
+
+### 输入与辅助元素
+
+- [按钮实体](https://www.hasscn.top/contributors/core/entities/button/index.md): 构建一个按钮实体，用于触发设备或服务上的单个操作，例如重启。
+
+### 遥控与信号
+
+- [射频实体](https://www.hasscn.top/contributors/core/entities/radio-frequency/index.md): 在集成之间共享射频发射器和接收器，使一个集成拥有无线电，另一个集成知道设备的编码。
+
+## 集成质量等级
+
+- [集成质量等级](https://www.hasscn.top/contributors/core/quality-scale/index.md): 描述集成好坏程度的等级与规则：集成如何获得某个等级，以及如何提升等级。
+- [等级](https://www.hasscn.top/contributors/core/quality-scale/tiers/index.md): 铜牌（Bronze）、银牌（Silver）、金牌（Gold）和白金（Platinum）的含义，以及质量等级之外的等级，如 internal 和 legacy。
+- [所有规则](https://www.hasscn.top/contributors/core/quality-scale/rules/index.md): 集成质量标准（integration quality scale）各等级的每一条规则，并附有可复制到你的拉取请求（pull request）中的清单。
+- [提升集成的等级](https://www.hasscn.top/contributors/core/quality-scale/raise-tier/index.md): 一次攻克一条规则，逐步提升质量标准，并让新等级经过审核后发布。
+- [质量分级文件](https://www.hasscn.top/contributors/core/quality-scale/quality-scale-file/index.md): quality_scale.yaml 的格式，以及确保集成如实对待其各项规则的 hassfest、pylint 和评审检查。
+
+### Bronze
+
+- [在 async_setup 中注册动作](https://www.hasscn.top/contributors/core/quality-scale/action-setup/index.md): 铜牌规则 action-setup：动作在集成加载时注册，而不是针对每个配置条目注册。
+- [以适当的间隔轮询](https://www.hasscn.top/contributors/core/quality-scale/appropriate-polling/index.md): 铜牌规则 appropriate-polling：轮询型集成使用与其数据相匹配的间隔。
+- [提供品牌资产](https://www.hasscn.top/contributors/core/quality-scale/brands/index.md): 铜牌规则 brands：该集成在 brands 仓库中拥有 logo 和图标。
+- [将通用模式放在通用模块中](https://www.hasscn.top/contributors/core/quality-scale/common-modules/index.md): 铜牌规则 common-modules：协调器（coordinator）位于 coordinator.py 中，基础实体（entity）位于 entity.py 中。
+- [使用配置流程从 UI 进行设置](https://www.hasscn.top/contributors/core/quality-scale/config-flow/index.md): 铜级（Bronze）规则 config-flow：集成通过用户界面（UI）进行设置，并带有清晰的配置流程（config flow），将其数据存储在正确的位置。
+- [全面测试配置流程](https://www.hasscn.top/contributors/core/quality-scale/config-flow-test-coverage/index.md): 青铜规则 config-flow-test-coverage：配置流程具有完整的测试覆盖率，包括从错误中恢复。
+- [使用透明的依赖项](https://www.hasscn.top/contributors/core/quality-scale/dependency-transparency/index.md): 铜级（Bronze）规则 dependency-transparency：依赖项必须是开源的、发布在 PyPI 上，并通过公开的 CI 构建和发布。
+- [为动作编写文档](https://www.hasscn.top/contributors/core/quality-scale/docs-actions/index.md): 铜牌规则 docs-actions：文档描述集成的动作。
+- [记录条件](https://www.hasscn.top/contributors/core/quality-scale/docs-conditions/index.md): 青铜规则 docs-conditions：文档描述集成的条件。
+- [描述品牌、产品或服务](https://www.hasscn.top/contributors/core/quality-scale/docs-high-level-description/index.md): 青铜规则 docs-high-level-description：文档描述该集成所连接的对象。
+- [记录安装步骤](https://www.hasscn.top/contributors/core/quality-scale/docs-installation-instructions/index.md): 青铜规则 docs-installation-instructions：文档包含分步设置说明，并列出前提条件。
+- [记录如何移除集成](https://www.hasscn.top/contributors/core/quality-scale/docs-removal-instructions/index.md): 铜牌（Bronze）规则 docs-removal-instructions：文档需说明如何移除集成。
+- [记录触发器](https://www.hasscn.top/contributors/core/quality-scale/docs-triggers/index.md): 青铜规则 docs-triggers：文档描述集成的触发器。
+- [在实体生命周期中订阅事件](https://www.hasscn.top/contributors/core/quality-scale/entity-event-setup/index.md): 铜级规则 entity-event-setup：实体在 async_added_to_hass 中订阅，并在移除时取消订阅。
+- [为实体提供唯一 ID](https://www.hasscn.top/contributors/core/quality-scale/entity-unique-id/index.md): 青铜规则 entity-unique-id：每个实体都有一个唯一 ID，以便用户可以对其进行自定义。
+- [使用 has_entity_name](https://www.hasscn.top/contributors/core/quality-scale/has-entity-name/index.md): 铜牌规则 has-entity-name：实体将 has_entity_name 设置为 True，并以所属设备为上下文进行命名。
+- [在 runtime_data 中存储运行时数据](https://www.hasscn.top/contributors/core/quality-scale/runtime-data/index.md): Bronze 规则 runtime-data：运行时数据存储在 ConfigEntry.runtime_data 中，并使用带类型的配置条目。
+- [在配置流程中测试连接](https://www.hasscn.top/contributors/core/quality-scale/test-before-configure/index.md): 青铜规则 test-before-configure：配置流程在创建条目之前测试连接。
+- [在设置期间检查连接](https://www.hasscn.top/contributors/core/quality-scale/test-before-setup/index.md): 青铜规则 test-before-setup：设置时会检查其能否正常工作，如果不能，则抛出正确的异常。
+- [防止重复的配置条目](https://www.hasscn.top/contributors/core/quality-scale/unique-config-entry/index.md): 铜级规则 unique-config-entry：同一设备或服务不能被设置两次。
+
+### Silver
+
+- [操作失败时抛出异常](https://www.hasscn.top/contributors/core/quality-scale/action-exceptions/index.md): Silver 级规则 action-exceptions：操作失败时抛出 ServiceValidationError 或 HomeAssistantError。
+- [支持卸载配置项（config entry）](https://www.hasscn.top/contributors/core/quality-scale/config-entry-unloading/index.md): 银级规则 config-entry-unloading：集成（integration）可以在不重启的情况下被卸载并重新加载。
+- [记录选项](https://www.hasscn.top/contributors/core/quality-scale/docs-configuration-parameters/index.md): 白银级规则 docs-configuration-parameters：文档描述了选项流（options flow）的每一个选项。
+- [记录设置参数](https://www.hasscn.top/contributors/core/quality-scale/docs-installation-parameters/index.md): 白银级规则 docs-installation-parameters：文档描述设置过程中要求填写的每个字段。
+- [在适当的时候将实体标记为不可用](https://www.hasscn.top/contributors/core/quality-scale/entity-unavailable/index.md): 银级规则 entity-unavailable：当设备或服务无法连接时，实体会变为不可用。
+- [拥有集成负责人](https://www.hasscn.top/contributors/core/quality-scale/integration-owner/index.md): 银级（Silver）规则 integration-owner：该集成至少拥有一位集成负责人。
+- [不可用时记录一次日志，恢复时再记录一次](https://www.hasscn.top/contributors/core/quality-scale/log-when-unavailable/index.md): 银级规则 log-when-unavailable：集成在连接丢失时记录一次日志，并在连接恢复时再记录一次。
+- [设置并行更新的数量](https://www.hasscn.top/contributors/core/quality-scale/parallel-updates/index.md): 白银规则 parallel-updates：每个实体平台都设置 PARALLEL_UPDATES。
+- [从 UI 重新进行身份验证](https://www.hasscn.top/contributors/core/quality-scale/reauthentication-flow/index.md): Silver 规则 reauthentication-flow：用户无需移除集成即可输入新的凭据。
+- [测试覆盖超过 95% 的代码](https://www.hasscn.top/contributors/core/quality-scale/test-coverage/index.md): Silver 级规则 test-coverage：测试覆盖集成每个模块中超过 95% 的代码。
+
+### Gold
+
+- [创建设备](https://www.hasscn.top/contributors/core/quality-scale/devices/index.md): 黄金规则 devices：实体归入设备，并填写完整的设备信息。
+- [实现诊断](https://www.hasscn.top/contributors/core/quality-scale/diagnostics/index.md): Gold 规则 diagnostics：用户可以下载诊断信息，其中敏感数据已被脱敏。
+- [支持发现](https://www.hasscn.top/contributors/core/quality-scale/discovery/index.md): 黄金规则 discovery：设备会被自动发现，因此用户无需自行查找。
+- [通过发现更新网络信息](https://www.hasscn.top/contributors/core/quality-scale/discovery-update-info/index.md): Gold 级规则 discovery-update-info：发现（discovery）会在地址变化时更新已知设备的地址。
+- [记录数据更新方式](https://www.hasscn.top/contributors/core/quality-scale/docs-data-update/index.md): Gold 规则 docs-data-update：文档说明数据如何更新以及更新的频率。
+- [记录自动化示例](https://www.hasscn.top/contributors/core/quality-scale/docs-examples/index.md): Gold 规则 docs-examples：文档提供自动化示例或蓝图。
+- [记录已知限制](https://www.hasscn.top/contributors/core/quality-scale/docs-known-limitations/index.md): 黄金规则 docs-known-limitations：文档中列出已知限制。
+- [记录支持的设备](https://www.hasscn.top/contributors/core/quality-scale/docs-supported-devices/index.md): Gold（金牌）规则 docs-supported-devices：文档中列出已知支持和不支持的设备。
+- [记录支持的功能](https://www.hasscn.top/contributors/core/quality-scale/docs-supported-functions/index.md): Gold 规则 docs-supported-functions：文档描述了集成（integration）提供的实体（entity）和功能。
+- [故障排查文档](https://www.hasscn.top/contributors/core/quality-scale/docs-troubleshooting/index.md): 金牌规则 docs-troubleshooting：文档帮助用户自行解决常见问题。
+- [记录用例](https://www.hasscn.top/contributors/core/quality-scale/docs-use-cases/index.md): 金牌规则 docs-use-cases：文档展示了你可以用集成（integration）做什么。
+- [自动添加新设备](https://www.hasscn.top/contributors/core/quality-scale/dynamic-devices/index.md): Gold 规则 dynamic-devices：设置后出现的设备无需重新加载即可自动添加。
+- [分配实体类别](https://www.hasscn.top/contributors/core/quality-scale/entity-category/index.md): 金牌（Gold）规则 entity-category：配置类和诊断类实体会拥有实体类别。
+- [使用设备类](https://www.hasscn.top/contributors/core/quality-scale/entity-device-class/index.md): 黄金级规则 entity-device-class：实体（entity）在适用的地方都会使用设备类（device class）。
+- [禁用噪声大或不太常用的实体](https://www.hasscn.top/contributors/core/quality-scale/entity-disabled-by-default/index.md): 金牌规则 entity-disabled-by-default：只有少数用户需要的实体默认禁用。
+- [翻译实体名称](https://www.hasscn.top/contributors/core/quality-scale/entity-translations/index.md): 黄金规则 entity-translations：实体名称来自 strings.json，因此可以被翻译。
+- [翻译异常消息](https://www.hasscn.top/contributors/core/quality-scale/exception-translations/index.md): 黄金级规则 exception-translations：向用户显示的错误来自 strings.json，因此可以被翻译。
+- [使用图标翻译](https://www.hasscn.top/contributors/core/quality-scale/icon-translations/index.md): 金牌规则 icon-translations：实体图标在 icons.json 中定义。
+- [从 UI 重新配置](https://www.hasscn.top/contributors/core/quality-scale/reconfiguration-flow/index.md): Gold 规则 reconfiguration-flow：用户无需删除配置项即可更改其设置。
+- [当用户需要采取行动时提出修复问题](https://www.hasscn.top/contributors/core/quality-scale/repair-issues/index.md): 黄金规则 repair-issues：集成会针对用户可以修复的问题提出修复问题。
+- [移除失效设备](https://www.hasscn.top/contributors/core/quality-scale/stale-devices/index.md): Gold 规则 stale-devices：已消失的设备会被移除，或者可以由用户自行移除。
+
+### Platinum
+
+- [使用异步依赖](https://www.hasscn.top/contributors/core/quality-scale/async-dependency/index.md): 白金规则 async-dependency：集成所使用的库基于 asyncio。
+- [传入 Web 会话](https://www.hasscn.top/contributors/core/quality-scale/inject-websession/index.md): 铂金规则 inject-websession：库接受 Home Assistant 的 Web 会话。
+- [使用严格类型检查](https://www.hasscn.top/contributors/core/quality-scale/strict-typing/index.md): 白金级规则 strict-typing：集成（integration）已完全类型化，并使用严格的 mypy 设置进行检查。
+
+## 核心的工作原理
+
+- [核心的工作原理](https://www.hasscn.top/contributors/core/internals/index.md): Home Assistant Core 的内部构造。包括 hass 对象、事件、状态、asyncio、身份认证、各类 API，以及语音和 AI 构建模块。
+
+### The core
+
+- [Python 中的 hass 对象](https://www.hasscn.top/contributors/core/internals/hass/index.md): 每个集成（integration）都会获得的 HomeAssistant 实例、它上面挂载了什么，以及 hass.config 上的核心配置。
+- [事件总线](https://www.hasscn.top/contributors/core/internals/events/index.md): 事件总线的工作原理、如何触发你自己的事件，以及如何在监听事件时不泄漏监听器。
+- [状态](https://www.hasscn.top/contributors/core/internals/states/index.md): 状态机如何保存每个实体的当前状态、状态对象包含哪些内容，以及为什么集成要通过实体来写入状态。
+- [动作注册表](https://www.hasscn.top/contributors/core/internals/actions/index.md): 动作注册表（action registry）的底层工作原理、动作处理程序会接收到什么，以及如何从代码中调用动作。
+
+### Async
+
+- [Home Assistant 中的异步](https://www.hasscn.top/contributors/core/internals/asyncio/index.md): 为什么 Home Assistant 运行在单个 asyncio 事件循环上、你所编写的函数有哪些类型，以及如何将工作移入和移出事件循环。
+- [线程安全](https://www.hasscn.top/contributors/core/internals/thread-safety/index.md): 当代码在事件循环（event loop）之外运行时应调用哪个 API，以及如何修复 Home Assistant 报告的线程安全错误。
+- [阻塞操作](https://www.hasscn.top/contributors/core/internals/blocking-operations/index.md): 如何避免阻塞 I/O 和缓慢的导入进入事件循环，以及如何修复 Home Assistant 报告的阻塞调用。
+
+### Authentication
+
+- [身份验证的工作原理](https://www.hasscn.top/contributors/core/internals/auth/index.md): Home Assistant 中的用户、用户组、凭据和令牌，以及用于验证用户身份的身份验证提供程序和多因素模块。
+- [权限](https://www.hasscn.top/contributors/core/internals/permissions/index.md): 权限策略的结构与合并方式，以及如何在动作、HTTP 视图和 WebSocket 命令中检查权限。
+- [认证 API](https://www.hasscn.top/contributors/core/internals/auth-api/index.md): 应用如何使用 OAuth 2 登录 Home Assistant 实例、刷新和撤销令牌，以及发起经过身份验证的请求。
+
+### APIs
+
+- [REST API](https://www.hasscn.top/contributors/core/internals/rest-api/index.md): `/api/` 下的 HTTP 端点，用于读取状态、调用动作、触发事件和渲染模板，并列出每个端点所需的权限。
+- [WebSocket API](https://www.hasscn.top/contributors/core/internals/websocket-api/index.md): 前端使用的 API。介绍连接的工作方式、核心命令、错误处理，以及如何从集成中添加你自己的命令。
+- [实例发现](https://www.hasscn.top/contributors/core/internals/instance-discovery/index.md): Home Assistant 如何使用 Zeroconf 在本地网络上宣布自己的存在，使应用程序无需用户输入地址即可找到它。
+- [Modbus 设备](https://www.hasscn.top/contributors/core/internals/modbus/index.md): 如何使用 modbus-connection 为 Modbus 设备编写库，以及您的集成如何与其他集成共享同一个 Modbus 连接。
+- [LoRaWAN 设备](https://www.hasscn.top/contributors/core/internals/lorawan/index.md): 连接集成如何注册 LoRaWAN 网络服务器，以及设备集成如何查找并公开其上的设备。
+
+### Voice and AI
+
+- [意图](https://www.hasscn.top/contributors/core/internals/intents/index.md): 什么是意图（intent）、集成如何处理意图，以及如何从代码或通过 HTTP 触发一个意图。
+- [内置意图处理器](https://www.hasscn.top/contributors/core/internals/built-in-intents/index.md): Home Assistant 自带意图的处理器位于 Core 中的何处、它们如何找到实体，以及在哪里可以查询每个意图及其槽位。
+- [对话 API](https://www.hasscn.top/contributors/core/internals/conversation-api/index.md): 通过 REST 或 WebSocket API 向对话代理发送文本，并读取其返回的响应。
+- [Assist 管道](https://www.hasscn.top/contributors/core/internals/assist-pipelines/index.md): 语音如何在 Home Assistant 中流转，以及如何通过 WebSocket API 运行 Assist 管道、向其流式传输音频并跟踪其事件。
+- [LLM API](https://www.hasscn.top/contributors/core/internals/llm-api/index.md): 大型语言模型（LLM）在获得工具之后，能做的远不止聊天。Home Assistant 中的 LLM API 是一组工具，外加一段解释如何使用这些工具的提示词。封装语言模型的对话代理（conversation agent）会把用户所选 API 的工具交给模型，并执行模型调用的工具。

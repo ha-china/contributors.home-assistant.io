@@ -1,0 +1,427 @@
+# 品牌: full text
+
+> Every page of the 品牌 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/brand/llms.txt.
+
+# 品牌
+
+> Home Assistant 是谁、它听起来是什么样，以及如何使用它的名称和标志。面向每一位为项目写作、设计、翻译或代言的人。
+
+Source: https://www.hasscn.top/contributors/brand/
+
+Home Assistant 品牌不仅仅是一个带天线的蓝色房子。它是一种个性：Home Assistant 如何对待他人、它在解释事情时听起来是什么样，以及它拒绝成为什么。你会在按钮标签、错误信息、一页文档、一篇发布文章，以及[论坛](https://community.home-assistant.io/)上的一条回复中遇见它。
+
+正因如此，品牌拥有自己的一片领域。它属于每一位贡献者，而不仅仅是设计师：
+
+- **文档作者**，向每一位使用 Home Assistant 的人解释它
+- **开发者和设计师**，编写界面中的文字
+- **翻译者**，把同样的声音带入自己的语言
+- **版主和社区成员**，他们的回复往往是许多人与项目的第一次接触
+- **博客和发布说明作者**，告诉人们有什么新内容
+
+这一切都始于 Home Assistant 所代表的东西：开放之家（Open Home），以及它的三大价值观——隐私、选择和可持续。个性和声音都源自这些价值观。
+
+你不需要把规则背下来。把故事和个性读一遍，你就会认出它，并注意到什么时候某些东西不合适。
+
+## 从这里开始
+
+- [你的第一次品牌贡献](https://www.hasscn.top/contributors/brand/first-contribution/)：对照个性审查一页文档或一段界面文字，并加以改进。
+- [我们的故事和价值观](https://www.hasscn.top/contributors/brand/our-story/)：开放之家、它的三大价值观，以及 Home Assistant 的由来。
+- [个性](https://www.hasscn.top/contributors/brand/personality/)：描述 Home Assistant 是谁的五个特质，以及每个特质不是什么。
+
+## 指南和参考
+
+- [语气和语调](https://www.hasscn.top/contributors/brand/voice-and-tone/)：个性在文档、界面、错误信息、社区回复、发布说明和社交媒体中听起来是什么样。
+- [名称和标志](https://www.hasscn.top/contributors/brand/name-and-logo/)：如何书写名称、如何使用标志，以及两者与开放之家基金会（Open Home Foundation）的关系。
+
+## 相关领域
+
+品牌描述的是 Home Assistant 听起来是什么样。各类文字的详细规则由撰写它们的人负责：
+
+- [风格指南](https://www.hasscn.top/contributors/writing/reference/style/)：文档的语言和格式规则。
+- [界面文字](https://www.hasscn.top/contributors/design/ui-text/)：界面如何说话，包括应使用和避免的词语。
+- [翻译规则](https://www.hasscn.top/contributors/translate/reference/rules/)：在每种语言中保持不变的内容。
+- [欢迎新人](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/)：如何回复刚刚到来的人。
+
+另一种品牌：集成（integration）也有品牌，即 Home Assistant 所连接设备的公司的标志和名称。它们位于核心（Core）领域的[集成品牌](https://www.hasscn.top/contributors/core/integrations/brands/)参考中。
+
+## 联系谁
+
+- 个性指南和标志指南位于本领域。你可以在 [UX 设计讨论区](https://github.com/OpenHomeFoundation/ux-design/discussions)中建议修改，或向[本网站](https://github.com/home-assistant/contributors.home-assistant.io)提交 pull request。
+- 有关于设计或界面说话方式的问题？[Home Assistant Discord](https://www.home-assistant.io/join-chat-design) 上的 [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) 频道是设计师们交流的地方。
+- 想在商业上使用标志？请发送电子邮件至开放之家基金会的 [partner@openhomefoundation.org](mailto:partner@openhomefoundation.org)。
+- 有关于社交媒体的问题，或发现冒充官方的账号？请发送电子邮件至社区团队的 [community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+
+---
+
+# 你的第一次品牌贡献
+
+> 选择一个页面或一段界面文本，对照 Home Assistant 的个性来阅读它，并加以改进。
+
+Source: https://www.hasscn.top/contributors/brand/first-contribution/
+
+品牌本身并不是你直接贡献的对象。它体现在其他一切事物中：一页文档、一个对话框、一条错误消息。因此，最好的第一次贡献是微小而具体的：选取一段文本，带着品牌个性去阅读它，然后让它变得更好。
+
+不需要设计技能或编程知识，只需要一个 GitHub 账号。对于文档，你可以在浏览器中亲自完成修改。对于界面文本，你可以指出问题所在并让开发者去修改，或者如果你熟悉代码仓库，也可以亲自修改。
+
+## 1. 阅读品牌个性
+
+通读一遍[个性](https://www.hasscn.top/contributors/brand/personality/)。注意每个特质“不是什么”的列表。它们能帮你发现某个特质被推得太过了：坦率变成了生硬，支持变成了居高临下，热情变成了谄媚。
+
+## 2. 选择要阅读的内容
+
+从你非常熟悉的内容开始，这样你才能判断它是否正确：
+
+- **一页文档**，位于 [home-assistant.io](https://www.home-assistant.io/) 上，关于你自己设置过的内容。
+- **一段界面文本**，比如你遇到过的对话框或错误消息。
+
+保持在一个页面或一个对话框的范围内。小的修改更容易被审阅。
+
+## 3. 对照特质来阅读
+
+阅读时问自己几个问题：
+
+- **热情**：它是否以读者能理解的水平与他们交流，还是居高临下？它是否假设了读者可能不具备的知识？
+- **坦率**：它是否表达了真正的意思？它是否隐瞒了某个限制，或者把某件事说得比实际更简单？
+- **支持**：当出现问题时，它是否说明了下一步该怎么做？
+- **慷慨**：它是否把读者需要的内容提供给他们，而不是把它埋没起来？
+- **独立**：它听起来像 Home Assistant，还是像一个企业科技品牌？
+
+同时检查基本规范："Home Assistant" 是否完整书写，是否用 "select" 而不是 "click"，术语是否按照[术语表](https://www.hasscn.top/contributors/glossary/)的定义使用。[语气和语调](https://www.hasscn.top/contributors/brand/voice-and-tone/)展示了这些特质在不同类型文本中的表现。
+
+## 4. 进行修改
+
+在哪里修改取决于你选择的内容：
+
+- **文档**：home-assistant.io 上的每个页面都有一个 **Edit** 链接。[你的第一次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/)会引导你直接在浏览器中完成操作。
+- **界面文本，不写代码**：在[前端仓库](https://github.com/home-assistant/frontend/issues)中提交一个 issue，说明所在的界面、引用当前的文本，并建议你的版本。或者，如果你不确定合适的措辞，可以先把它带到 [Home Assistant Discord](https://www.home-assistant.io/join-chat-design) 的 [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) 频道。在建议新措辞之前，请先阅读 [UI 文本](https://www.hasscn.top/contributors/design/ui-text/)。
+- **界面文本，以 pull request 形式**：界面的英文文本位于[前端仓库](https://github.com/home-assistant/frontend)的 [`src/translations/en.json`](https://github.com/home-assistant/frontend/blob/dev/src/translations/en.json) 中，而集成的文本位于[核心仓库](https://github.com/home-assistant/core)中该集成的 `strings.json` 里。这些是代码仓库：在那里提交 pull request 会运行自动化检查，并且需要签署[贡献者许可协议](https://www.hasscn.top/contributors/start/licensing/)（Contributor License Agreement），机器人会在你第一次提交时要求签署。
+
+不要在翻译工具中修改英文文本。翻译人员以英文源文本为依据，所以请在英文源文本中修复，翻译会随之更新。
+
+在你的 issue 或 pull request 中，解释哪里感觉不对，以及为什么你的版本更好。指出相关的特质会很有帮助：“原文隐瞒了这只能在本地使用的事实，所以我让它对此保持坦率”，这样的说明很容易审阅。
+
+刚接触 GitHub？请参阅[使用 GitHub，无需成为开发者](https://www.hasscn.top/contributors/start/github/)。
+
+## 接下来做什么
+
+- 阅读[语气和语调](https://www.hasscn.top/contributors/brand/voice-and-tone/)，了解品牌个性在其他地方的表现。
+- 喜欢改进文字？[写作文档](https://www.hasscn.top/contributors/writing/)区域和 [UI 文本](https://www.hasscn.top/contributors/design/ui-text/)还有很多事情可做。
+- 会说其他语言？在[翻译](https://www.hasscn.top/contributors/translate/)中把同样的语气带到那种语言中。
+
+---
+
+# 我们的故事与价值观
+
+> 开放之家（Open Home），Home Assistant 每一个决策背后的三大价值观，以及这个项目的由来。
+
+Source: https://www.hasscn.top/contributors/brand/our-story/
+
+品牌不仅仅是一个标志和一种语气。Home Assistant 的品牌始于这个项目所代表的东西。它的个性、语气和视觉设计都在表达同一件事：一个属于居住者的智能家居。
+
+## 开放之家（Open Home）
+
+开放之家是 Home Assistant 背后对智能家居的愿景。它定义了项目中每一个决策的核心价值观。这些价值观贯穿于架构、许可协议、社区以及其他一切之中。
+
+拥有 Home Assistant 的[开放之家基金会（Open Home Foundation）](https://www.openhomefoundation.org/)用三个词概括它：隐私、选择和可持续性。
+
+### 隐私
+
+你的家应该是你的安全空间：一个你可以做自己的地方，无需为了不让算法对你的行为进行归类而改变自己的行为方式。对于开放之家来说，隐私意味着设备在本地工作。当你开灯或调节恒温器时，不需要让其他任何人知道。
+
+产品可以提供云连接，但它应该是额外的、可选加入的功能。
+
+### 选择
+
+你家里的设备会收集关于它们自身及其周围环境的数据。那是你的数据。供应商不应限制你对这些数据的访问，也不应限制你的设备与家中其他设备的协同工作方式。
+
+对于开放之家来说，选择意味着设备通过本地 API 提供其数据。这避免了供应商锁定，让人们可以用来自不同制造商的设备来构建自己的智能家居。
+
+### 可持续性
+
+科技公司擅长推出新产品，而让它们持续工作却常常是事后才考虑的事情：供应商停止支持某个设备，功能就会损坏，或者设备完全停止工作。家里的设备越多，这一点就越重要。任何人都不应该因为制造商转向了新方向，就每隔几年把所有东西重新买一遍。
+
+对于开放之家来说，这意味着设备的设计和制造要保证持续工作。不只是今年，而是未来十年。
+
+## 这些价值观对品牌意味着什么
+
+这些价值观是品牌之所以呈现这种语气的原因。一个把人们的隐私和选择放在首位的项目，也不能居高临下地说话、隐藏局限性，或者用言辞把用户锁住。这正是[品牌个性](https://www.hasscn.top/contributors/brand/personality/)的来源：热情、坦率、乐于助人、慷慨和独立。
+
+这些价值观也以各自的方式塑造着项目的其他方面：
+
+- [我们的原则](https://www.hasscn.top/contributors/start/principles/)：这些价值观如何体现在我们的协作方式中
+- [架构原则](https://www.hasscn.top/contributors/architecture/principles/)：它们对代码意味着什么
+- [设计原则](https://www.hasscn.top/contributors/design/principles/)：它们对界面意味着什么
+
+## Home Assistant 的由来
+
+- **2013 年**：Paulus Schoutsen 于 9 月开始将 Home Assistant 作为一个 Python 应用程序开发，并于 11 月在 GitHub 上发布。
+- **2017 年**：7 月，Hass.io——一个带有 Supervisor 的托管操作系统，可以安装、备份和更新 Home Assistant——让它更容易在 Raspberry Pi 等单板计算机上运行。12 月，[Home Assistant Cloud](https://www.home-assistant.io/blog/2017/12/17/introducing-home-assistant-cloud/) 作为免费公测版发布，Amazon Alexa 是它的第一个服务。
+- **2018 年**：4 月，[Google Assistant 支持](https://www.home-assistant.io/blog/2018/04/24/launch-google-assistant-support/)紧随其后，仍处于免费测试阶段。9 月，Home Assistant 的创始人和核心贡献者创立了 Nabu Casa，从那时起[以订阅方式运营 Home Assistant Cloud](https://www.home-assistant.io/blog/2018/09/17/thinking-big/)。
+- **2019 年**：3 月，Home Assistant Cloud 为你的 Home Assistant 添加了[安全的远程访问](https://www.home-assistant.io/blog/2019/03/20/release-90/)功能。
+- **2020 年**：1 月，为了更容易区分各个部分，名称发生了变化。Python 应用程序更名为 Home Assistant Core。包含操作系统和 Supervisor 的完整套件则称为 Home Assistant。
+- **2024 年**：Home Assistant 和其他项目被移交给非营利组织开放之家基金会。
+- **2025 年**：所有参与基金会项目工作的人员从 Nabu Casa 转入开放之家基金会。Nabu Casa 继续作为基金会的商业合作伙伴。
+- **2026 年**：Home Assistant Cloud 更名为 [Home Assistant Link](https://www.home-assistant.io/blog/2026/10/02/big-tech-ruined-the-cloud-so-were-renaming-ours/)。
+
+[项目的组织方式](https://www.hasscn.top/contributors/start/organization/)介绍了如今基金会、其合作伙伴和贡献者是如何协作的。
+
+## 资料来源
+
+- 开放之家与历史：发布在 design.home-assistant.io 上的"Our story"页面，本页面已将其取代
+- 价值观与基金会：[openhomefoundation.org](https://www.openhomefoundation.org/) 及其[结构页面](https://www.openhomefoundation.org/structure/)
+- Nabu Casa：[关于 Nabu Casa](https://www.nabucasa.com/about/)
+
+---
+
+# 品牌个性
+
+> 描述 Home Assistant 是什么的五个特质，每个特质的含义，以及每个特质不是什么。
+
+Source: https://www.hasscn.top/contributors/brand/personality/
+
+这五个特质描述的是 Home Assistant 是什么，而不是它如何说话。语气，包括其中的温暖、随性和趣味，应当自然地由此而来。[语音与语气](https://www.hasscn.top/contributors/brand/voice-and-tone/)展示了这在实践中是什么样子。
+
+## 这些特质如何相互配合
+
+前四个特质关乎关系。它们描述了 Home Assistant 如何对待使用它的人：
+
+- **热情好客**是我们如何迎接他们。
+- **坦诚直率**是我们如何与他们交谈。
+- **支持帮助**是我们如何帮助他们。
+- **慷慨大方**是我们给予他们什么。
+
+如果其中一些感觉相似，那是因为它们是同一个角色，在不同的时刻展现出来。
+
+**独立自主**则不同。它是根基：Home Assistant 的核心所在。正因为 Home Assistant 是独立的，其他四个特质才是真诚的，而不是表演出来的。一个企业品牌可以努力做到热情好客、坦诚直率、支持帮助和慷慨大方，但如果没有独立性，这些特质就总是被刻意管理和约束的。
+
+每个特质都配有描述它是什么的词语，以及描述它不是什么的词语。第二份清单同样重要。
+
+## 热情好客
+
+Home Assistant 感觉就像一位博学的朋友，而不是一个产品。我们在你所处的水平上与你相遇，从不居高临下地对你说话，并让你感到被重视，无论你的技术水平如何。
+
+这不是一种表演。它体现在细微之处：错误是如何被解释的，文档是如何编写的，以及社区是如何与新来者交流的。
+
+- **是**：温暖开放、友善、友好、平易近人、乐于包容
+- **不是**：讨好、迎合、阿谀奉承、曲意逢迎
+
+## 坦诚直率
+
+Home Assistant 说的就是它想表达的。我们不会用虚假的简单来掩盖复杂性，不会退回到营销套话，也不会假装限制不存在。
+
+我们足够尊重他人，愿意直言相告：Home Assistant 能做什么、不能做什么，以及它为什么以现在的方式运作。这才是建立真正信任的关键。
+
+- **是**：直接、诚实、透明、不装腔作势
+- **不是**：不友好、粗鲁、生硬、缺乏同理心
+
+## 支持帮助
+
+Home Assistant 是你的后盾。无论你是刚刚起步，还是深入复杂的配置中，我们都会引导你前进，而不会越俎代庖。
+
+这种支持是真诚的：实用、耐心，并在最需要的时候出现。Home Assistant 希望每个人都能成功构建一个以隐私、选择和可持续性为核心的智能家居。
+
+- **是**：有帮助、引导、鼓励、有同理心、真诚
+- **不是**：发号施令、空洞、居高临下、专横
+
+## 慷慨大方
+
+Home Assistant 为你提供今天所需的一切，并随着你的配置增长而持续提供。没有任何附加条件：没有人为限制，没有锁定在付费层级之后的功能，也没有旨在将你束缚在封闭平台上的欺骗性设计。我们信任人们，给予他们控制权、访问权和透明度。
+
+这种慷慨是双向的。社区自由奉献的时间、知识和关怀，正是让 Home Assistant 蓬勃发展并保持真正开放的原因。
+
+- **是**：赋能、信任、给予、分享
+- **不是**：令人应接不暇、不加区分、摆出恩赐姿态、控制欲强
+
+## 独立自主
+
+Home Assistant 不觉得自己需要表现得像一个成熟的科技品牌，也不需要遵循企业规则。由于没有需要迎合的股东或风险投资家，我们可以畅所欲言，按自己的方式做事，也不必把自己看得太严肃。
+
+这种自由源于自信：了解自己的价值观，并知道社区与之共享。
+
+- **是**：有原则、自由、自信、不完美
+- **不是**：自负、固执、反复无常、封闭排外
+
+## 指南的所在之处
+
+本页面是 Home Assistant 的品牌个性指南。它取代了 design.home-assistant.io 上的版本。[home-assistant.io](https://github.com/home-assistant/home-assistant.io) 和本网站的写作说明对其进行了概括。
+
+要提出修改建议，请在 [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) 中发起讨论，或向[本网站](https://github.com/home-assistant/contributors.home-assistant.io)提交 pull request。
+
+---
+
+# 语气与风格
+
+> Home Assistant 的个性在文档、界面、错误消息、社区回复、发布说明和社交媒体中如何呈现。
+
+Source: https://www.hasscn.top/contributors/brand/voice-and-tone/
+
+[个性](https://www.hasscn.top/contributors/brand/personality/)是 Home Assistant 是谁。语气（voice）则是这个“人”在写作时听起来的样子。无论你撰写一页文档、一个按钮标签，还是在[论坛](https://community.home-assistant.io/)上的一条回复，语气都是一致的。变化的是风格（tone）：错误消息需要与发布公告不同的风格。
+
+本页介绍语气在每个场景中的运用。详细的规则，如语法、大小写和格式，见文档的[风格指南](https://www.hasscn.top/contributors/writing/reference/style/)，界面的规则见 [UI 文本](https://www.hasscn.top/contributors/design/ui-text/)。本页不再重复这些内容。
+
+## 通用原则
+
+无论在哪里写作，以下几点都适用：
+
+- **与读者对话。** 使用“你”和“你的”，而不是“用户”或“用户们”。
+- **面向全世界写作。** 使用美式英语，句子简短，用词平实。许多读者的第一语言并不是英语。
+- **友好且信息丰富。** 不要过于正式，也不要比必要的更技术化。
+- **包容。** 保持写作客观，不带偏见，不包含任何排斥他人的内容。
+- **完整书写"Home Assistant"。** 不要使用"HA"或"HASS"。参见[名称与标志](https://www.hasscn.top/contributors/brand/name-and-logo/)。
+- **使用术语表中的词汇。** 按照[术语表](https://www.hasscn.top/contributors/glossary/)定义的方式使用术语，不要使用已弃用的名称，例如用"service"指代[动作（action）](https://www.hasscn.top/contributors/glossary/action/)、用"add-on"指代应用，或用"Lovelace"指代仪表盘（dashboard）。
+
+## 文档
+
+[home-assistant.io](https://www.home-assistant.io/) 上的文档往往是人们最先阅读的内容，它面向广泛的受众。大多数读者通过界面使用 Home Assistant，其中许多人并不是开发者。
+
+- **热情友好**：假设读者主要使用 UI。先展示通过界面操作的路径，将 YAML、模板和代码作为供有需要的人使用的可选路径。
+- **坦诚直率**：不要用营销语言掩盖局限性或复杂性。如实说明某项功能能做什么、不能做什么。
+- **给予支持**：让 Home Assistant 显得平易近人。避免让它听起来脆弱、困难或容易损坏的措辞。
+- **慷慨大方**：为读者提供他们所需的内容，先讲基础，后讲细节，不要让读者迷失其中。
+- **不设门槛**：不要将 YAML 或更复杂的功能标记为“高级”，除非产品本身使用了这个词。
+
+同样的风格也适用于 home-assistant.io 上的博客文章。参见[撰写文档](https://www.hasscn.top/contributors/writing/)和[风格指南](https://www.hasscn.top/contributors/writing/reference/style/)。
+
+## 界面文本
+
+标签、按钮、对话框和辅助文本往往在一秒钟内被读完，而且常常是在用户正忙于其他事情的时候。
+
+- 简洁清晰，使用主动语态。
+- 同时面向技术型和非技术型读者。在熟悉的家庭自动化术语可用时，避免使用行话。
+- 在合适的情况下，直接用“你”和“你的”称呼用户。
+- 选择与实际发生的情况相符的词，例如可恢复的操作用"remove"（移除），永久删除的操作用"delete"（删除）。参见[移除还是删除](https://www.hasscn.top/contributors/design/ui-text/remove-delete/)。
+
+完整的指南和示例见 [UI 文本](https://www.hasscn.top/contributors/design/ui-text/)。界面中的每个字符串都会被翻译，因此在添加字符串时请参见[让你的字符串可翻译](https://www.hasscn.top/contributors/translate/guides/developers/)。
+
+## 错误消息
+
+错误是最能体现个性的时刻：指南将错误说明的方式列为体现热情友好的细节之一。此时有人被卡住了，想要继续前进。
+
+- **热情友好**：用平实的语言解释出了什么问题，让不了解代码的人也能明白。
+- **坦诚直率**：如实说明发生了什么。不要用模糊的消息掩盖局限性。
+- **给予支持**：在有下一步可做时，说明该怎么做。
+
+[消息](https://www.hasscn.top/contributors/design/ui-text/messages/)详细介绍了错误、警告、修复和空状态。
+
+## 社区回复
+
+社区如何与新手交流是指南中另一个被点名强调的场景。论坛、[Discord](https://www.home-assistant.io/join-chat/) 或拉取请求（pull request）中的回复都代表着 Home Assistant 在说话，即使你是以个人身份撰写的。
+
+- **热情友好**：在对方的水平上交流，绝不居高临下。每个人都是从新手开始的。
+- **给予支持**：帮助人们前进而不越俎代庖。指出确切能帮到他们的页面，并解释原因。
+- **坦诚但不生硬**：当某事不可行时如实相告，但表达方式要友善。
+
+[欢迎新手](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/)提供了实用建议，[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)适用于所有场合。
+
+## 发布说明和博客文章
+
+发布说明解释了有哪些新功能、有什么变化，以及人们需要做什么。对许多人来说，这是他们了解一个版本所阅读的唯一内容。
+
+- **坦诚直率**：对[不向后兼容的变更（backward-incompatible change）](https://www.hasscn.top/contributors/glossary/backward-incompatible-change/)以及人们需要采取的措施直言不讳。不要把它们藏在亮点之后。
+- **慷慨大方**：通过截图或短视频展示某项功能能为用户的家庭带来什么，并链接到文档。
+- **不设门槛**：可以直截了当，可以有点不走寻常路，不必把自己看得太严肃。Home Assistant 不需要听起来像一个企业科技品牌。
+
+有关发布说明如何成文，请参见[发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/)。
+
+## 社交媒体
+
+只有[官方账号](https://www.hasscn.top/contributors/community/guides/social-media/#the-official-accounts)才能代表 Home Assistant 发言。当你用自己的账号分享 Home Assistant 时，你是以个人身份发言，但同样的个性依然适用：友好，如实说明哪些可行、哪些不可行，并且友善。行为准则同样适用于社交媒体。可以有不同意见，但不可以起哄围攻。
+
+参见[在社交媒体上提供帮助](https://www.hasscn.top/contributors/community/guides/social-media/)。
+
+---
+
+# 名称与标志
+
+> 如何书写 Home Assistant 名称、如何使用标志，以及两者与 Open Home Foundation 的关系。
+
+Source: https://www.hasscn.top/contributors/brand/name-and-logo/
+
+名称和标志是品牌中最显眼的部分。本页介绍如何书写名称、标志的工作方式，以及哪些用途需要获得许可。
+
+## 书写名称
+
+- **完整书写 "Home Assistant"**，H 和 A 大写，中间有一个空格。绝不要写成 "HA"、"HASS" 或 "Home-Assistant"。这适用于所有地方：文档、界面、博客文章以及本网站。
+- **不要使用旧名称。** "Hass.io" 现在就是 Home Assistant，"HassOS" 则是 Home Assistant Operating System。[home-assistant.io](https://github.com/home-assistant/home-assistant.io) 的自动检查会标记出这两者。
+- **不要翻译它。** 在任何语言中，名称都保持为 "Home Assistant"。请参阅[翻译规则](https://www.hasscn.top/contributors/translate/reference/rules/)。
+
+完整的软件套件称为 Home Assistant。其中最主要的软件，即 Python 应用程序，称为 Home Assistant Core。这个命名始于 2020 年 1 月，当时调整了品牌命名，使项目的各个部分更容易区分。
+
+名称有时会变化。Home Assistant Cloud 于 2026 年 10 月更名为 Home Assistant Link。在代码中，它仍然是 `cloud` 集成（integration）。
+
+## Open Home Foundation
+
+Home Assistant 由非营利组织 [Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/) 所有。[home-assistant.io](https://www.home-assistant.io/) 的页脚是这样表述的："Home Assistant is a project from the Open Home Foundation."
+
+基金会的商业合作伙伴，例如 [Nabu Casa](https://www.hasscn.top/contributors/glossary/nabu-casa/) 和 Apollo Automation，可以创建获得 Open Home Foundation 品牌授权的产品。基金会的[结构页面](https://www.openhomefoundation.org/structure/)解释了其运作方式。
+
+## 商标与许可
+
+该标志是商标，归 Open Home Foundation 所有。未经基金会书面许可，不得将其用于商业用途。商业用途指任何旨在营销或推广待售产品、软件或服务的行为。如需申请，请发送电子邮件至 [partner@openhomefoundation.org](mailto:partner@openhomefoundation.org)。
+
+home-assistant.io 的[服务条款](https://www.home-assistant.io/tos/)将 Home Assistant 的名称和标志列为商标，并声明使用该网站并不授予使用它们的权利。
+
+运营关于 Home Assistant 的粉丝账号、群组或频道？请在其名称或描述中明确说明它不是官方账号，以免有人误认为是官方账号。参见[社交媒体帮助](https://www.hasscn.top/contributors/community/guides/social-media/)。
+
+### Works with Home Assistant
+
+通过 [Works with Home Assistant](https://works-with.home-assistant.io/) 认证的设备制造商拥有自己的[徽章和品牌指南](https://works-with.home-assistant.io/resources/badge-and-brand-guidelines/)。这些指南仅适用于已认证的合作伙伴。例如，合作伙伴可以说某设备是 "Certified by the Works with Home Assistant program"，但不能说它是 "Recommended by Home Assistant" 或 "Home Assistant product"。
+
+## 标志
+
+标志是带有天线的蓝色房子。每个部分都有其含义：
+
+![Home Assistant 标志：一座蓝色的房子，里面有一根白色天线，旁边是深色文字的 Home Assistant 字样](https://www.hasscn.top/contributors/_astro/logo.BTSG4HRx_ZNRhLD.webp)
+
+- **蓝色**给人稳定和不可或缺的感觉。明亮的天蓝色充满喜悦、清晰且无云。
+- **房子**代表家，简化为其最具标志性的形状：一座带斜屋顶的正交房子，没有山墙，也没有烟囱。
+- **天线**是旧标志中最易识别的部分。有人把它看作一棵树、一组节点或一块电路板。它代表着智能、互联且常青生长的技术。
+
+Download every version of the logo from the [assets repository](https://github.com/OpenHomeFoundation/brand-assets/tree/main/home-assistant/logo).
+
+## 布局
+
+![四种布局变体：水平布局的标志图形与文字标志、仅标志图形、垂直布局的标志图形与文字标志，以及使用较小标志图形的垂直布局](https://www.hasscn.top/contributors/_astro/logo-layout-variants.BnywapBj_Z28DOO9.webp)
+
+标志有四种布局：
+
+- **文字标志，水平**：默认布局。它提供了最清晰的上下文，因此在需要介绍 Home Assistant 时请使用它。
+- **标志图形**：仅房子图形，用于显然是指 Home Assistant 标志的场合，例如应用内部。标志图形可以不带文字标志使用，但文字标志绝不能脱离标志图形单独使用。
+- **文字标志，垂直**：用于宽高比低于 4:3 的空间，例如衣服上的方形位置。
+- **文字标志，垂直并带小标志图形**：当 Home Assistant 与相关项目并列出现时使用，例如语音管道示意图中。
+
+## 颜色与背景
+
+- **浅色背景**：使用彩色版本配深色文字。这是默认设置。
+- **深色背景**，例如深色主题中的页面：使用彩色版本配浅色文字。
+- **深色或摄影背景**：浅色单色版本也可以。
+- **浅色或摄影背景**：使用彩色版本，不要使用单色版本。
+- **无法使用颜色时**，例如印刷品：使用单色版本。
+
+标志只能与黑色、白色以及非双色调摄影搭配使用。
+
+## 禁止事项
+
+- 不要将标志图形放入方形、彩色形状或任何其他容器中。唯一的例外是其他公司的应用市场有此要求时，例如 iOS 应用图标。
+- 不要添加投影。如果标志在背景上难以辨认，请更换背景以增加对比度。只有在万不得已时，才可使用重度模糊的投影。
+- 不要使用描边版本。此标志没有描边版本。请改用单色版本。
+
+## 留白
+
+给标志留出空间。在标志周围保留至少标志图形高度四分之一的净空。
+
+![水平标志的构造网格，其间距以标志图形的部分来度量，文字标志沿基线与房子内边框对齐](https://www.hasscn.top/contributors/_astro/logo-exclusion-zone.BihERha__SWinq.webp)
+
+## 动画
+
+静态标志是默认形式。动画版本仅用作引导，例如视频开头或加载画面。
+
+带声音的版本只应在人们预期有声音的场合使用，例如视频开头。切勿在界面中使用，例如加载画面。不要重复播放动画。
+
+## 小尺寸
+
+针对非常小的空间（约 16 x 16 dp）有专门的迷你版本：网站的 favicon、Android 上的通知图标，或 macOS 的菜单栏图标。
+
+## 规则的归属
+
+本页面包含 Home Assistant 的标志指南。它取代了 design.home-assistant.io 上的标志页面。如需建议修改，请在 [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) 中发起讨论，或向[本网站](https://github.com/home-assistant/contributors.home-assistant.io)提交 pull request。

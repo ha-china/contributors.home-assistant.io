@@ -1,0 +1,539 @@
+# 社区: full text
+
+> Every page of the 社区 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/community/llms.txt.
+
+# 社区
+
+> 帮助他人，保持友好的交流氛围，让智能家居爱好者在线上和线下相聚。
+
+Source: https://www.hasscn.top/contributors/community/
+
+Home Assistant 由其社区共同打造，而其中许多工作并非编写代码。人们在[论坛](https://community.home-assistant.io/)上回答问题，在 [Discord](https://www.home-assistant.io/join-chat/) 上帮助他人调试自动化（automation），在 Reddit 上分享自己的作品，或者在自己所在的城市组织线下聚会。这些同样是贡献，其重要性不亚于任何 pull request。
+
+如果你想帮助他人充分利用 Home Assistant、维护我们空间的友好氛围，或者让大家相聚一堂，那么这个板块就是为你准备的。
+
+刚接触社区？home-assistant.io 上的[社区页面](https://www.home-assistant.io/community/)是所有 Home Assistant 用户的大门：在这里可以找到志同道合的人、你附近的聚会、社区日（Community Day）以及新闻通讯。而这个板块关注的是你加入之后如何出一份力。
+
+## 参与方式
+
+- **回答问题。** 有人正被你上个月刚解决的问题困住。你的回答能为他们节省数小时。
+- **欢迎新成员。** 一条友好的首次回复，往往决定了一个人是否愿意留下来。
+- **维护空间健康。** 标记不当内容，帮助版主让讨论保持在正轨上。
+- **分享与创作。** 展示你的作品，撰写指南，或制作关于 Home Assistant 的视频。
+- **线下相聚。** 参加或组织本地聚会。
+
+## 从这里开始
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/community/first-contribution/)：在论坛上回答一个问题。
+- [社区的聚集地](https://www.hasscn.top/contributors/community/reference/channels/)：官方的交流场所，如论坛、Discord 和 Reddit。
+
+## 指南
+
+- [欢迎新成员](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/)：如何帮助刚加入的人。
+- [审核机制](https://www.hasscn.top/contributors/community/guides/moderation/)：版主的职责，以及他们遵循的准则。
+- [报告问题](https://www.hasscn.top/contributors/community/guides/reporting/)：当某些内容或某些人越界时该怎么做。
+- [组织聚会](https://www.hasscn.top/contributors/community/guides/meetups/)：在你所在的城市让社区成员相聚。
+- [在社交媒体上帮忙](https://www.hasscn.top/contributors/community/guides/social-media/)：分享、推广，触达更多人。
+
+## 参考
+
+- [社区的聚集地](https://www.hasscn.top/contributors/community/reference/channels/)：官方渠道，以及各自的用途。
+- [计划](https://www.hasscn.top/contributors/community/reference/programs/)：创作者网络（Creator Network）和 Works with Home Assistant。
+- [活动与日历](https://www.hasscn.top/contributors/community/reference/events/)：即将到来的发布日期和社区同步会议。
+- [行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)：适用于所有空间的规则。
+- [品牌](https://www.hasscn.top/contributors/brand/)：Home Assistant 的个性，以及如何使用其名称和标志。
+
+## 联系谁
+
+- 关于社区的问题或建议？请发送邮件至 Open Home Foundation 的社区团队：[community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+- 发现不安全的内容或违反行为准则的行为？请使用平台的举报功能，或发送邮件至 [safety@home-assistant.io](mailto:safety@home-assistant.io)。参见[报告问题](https://www.hasscn.top/contributors/community/guides/reporting/)。
+- 内容创作者？请了解一下[创作者网络](https://creators.home-assistant.io/)。
+
+---
+
+# 你的第一次社区贡献
+
+> 在社区论坛回答一个问题。大约只需十五分钟，而且你懂的比你以为的要多。
+
+Source: https://www.hasscn.top/contributors/community/first-contribution/
+
+开始提供帮助最简单的方式就是回答一个问题。你不需要是专家。如果你在自己家里把某样东西跑通了，你也可以帮助别人做到同样的事。
+
+## 1. 创建论坛账号
+
+前往[社区论坛](https://community.home-assistant.io/)并注册一个免费账号。
+
+## 2. 阅读论坛指南
+
+论坛有一份关于[如何提出好问题](https://community.home-assistant.io/t/how-to-help-us-help-you-or-how-to-ask-a-good-question/114371)的简短指南。它是为求助的人写的，但阅读它能让你了解一个好问题是什么样的，以及当问题缺少细节时应该追问什么。
+
+## 3. 找一个你能回答的问题
+
+打开[最新主题](https://community.home-assistant.io/latest)，寻找你熟悉的领域中还没有回复的问题。你自己的配置就是最好的指南：如果你使用 Zigbee，就找 Zigbee 相关的问题。如果你写了很多自动化（automation），就去 configuration 分类里看看。
+
+如果一时找不到也不要担心。先读几个主题，明天再回来看看。新问题全天都会不断出现。
+
+## 4. 撰写你的回答
+
+- 回答别人提出的问题。如果需要更多信息，就先追问，比如 Home Assistant 的版本、安装类型或日志信息。
+- 以文本形式在代码块中分享配置，而不是截图。在 YAML 中，空格是有意义的。
+- 在有帮助的地方链接到文档，这样对方下次就知道去哪里查找。
+- 不确定时要诚实。“这在我的环境里有效，但我没有在你的设备上试过”是一个完全没问题的回答。
+
+> [!IMPORTANT]
+> 不要粘贴由 ChatGPT 或类似工具生成的回答。论坛指南明确要求了这一点：这类回答往往看起来正确，但实际上不完整、有误导性，或者干脆就是错的。请根据自己的经验来回答。
+
+## 5. 跟进
+
+回访那个主题。如果你的回答有帮助，提问者可以将其标记为解决方案，这样下一个遇到同样问题的人就能立刻找到它。如果没有帮助，就继续跟进，或者交给别人来处理。这两种结果都可以。
+
+## 接下来做什么
+
+- 阅读[欢迎新成员](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/)。很多问题来自刚刚安装 Home Assistant 的人。
+- 加入 [Discord 服务器](https://www.home-assistant.io/join-chat)，进行更快捷的实时交流。
+- 在回答问题中学到了什么？文档很可能也用得上它。参见[撰写文档](https://www.hasscn.top/contributors/writing/)。
+
+---
+
+# 社区指南
+
+> 如何逐项帮助社区，从欢迎新用户到组织线下聚会。
+
+Source: https://www.hasscn.top/contributors/community/guides/
+
+每篇指南介绍一种帮助社区的方式。请选择适合你时间和技能的那一篇。
+
+- [欢迎新用户](/community/guides/welcome-newcomers/）：帮助刚安装 Home Assistant 的人感到宾至如归。
+- [审核机制如何运作](/community/guides/moderation/）：版主（moderator）的职责，以及有人违反规则时他们会采取的步骤。
+- [举报问题](/community/guides/reporting/）：当有人违反行为准则，或有人感到不安全时该怎么做。
+- [组织线下聚会](/community/guides/meetups/）：把你所在城市的智能家居爱好者聚集起来。
+- [在社交媒体上提供帮助](/community/guides/social-media/）：帮助 Home Assistant 触达更多人。
+
+---
+
+# 欢迎新成员
+
+> 如何帮助刚安装 Home Assistant 的人感到宾至如归，并找到属于自己的路。
+
+Source: https://www.hasscn.top/contributors/community/guides/welcome-newcomers/
+
+每天都有人第一次安装 Home Assistant。他们中的许多人从未用过 YAML，从未见过日志文件，也不了解我们每天使用的那些术语。他们收到的第一条回复，往往决定了他们是留下还是离开。
+
+## 记住你自己的起点
+
+你可能也经历过一头雾水的时刻：一个迟迟不出现的集成（integration），一个从未触发的自动化（automation），一个从未听过的术语。用你当年希望被对待的方式去回答。
+
+## 从他们想做什么开始
+
+新人常常问的是他们以为自己需要的解决方案，而不是他们实际遇到的问题。在深入细节之前，先问问他们想实现什么。“你到家时希望发生什么？”往往比调试他们从别处复制来的模板更能推进问题。
+
+## 解释那些术语
+
+实体（entity）、集成（integration）或应用（app）这些术语，一旦了解就显而易见，不了解之前却令人困惑。简要解释一下，或者链接到[术语表](https://www.hasscn.top/contributors/glossary/)或[用户文档](https://www.home-assistant.io/docs/)。一句简短的“实体是 Home Assistant 可以读取或控制的一个事物，比如一盏灯或一个温度传感器”就很有帮助。
+
+## 友善地指向文档
+
+链接文档能帮助人们下次自己解决问题。链接到确切的页面或章节，并说明它为什么有帮助。只丢下一句“去读文档”就像关上了一扇门。
+
+## 保持简单
+
+- 优先建议从 UI 入手的方法。YAML 很强大，但不是大多数人的起点。
+- 一次只建议一个改动。当五件事同时改变时，没人知道是哪一件解决了问题。
+- 在边缘情况变得重要之前，先跳过它们。
+
+## 对缺失的细节保持耐心
+
+新人还不知道哪些细节是重要的。不带责备地询问：Home Assistant 的版本、安装类型、他们尝试过什么，以及日志里说了什么。论坛上关于[如何提出一个好问题](https://community.home-assistant.io/t/how-to-help-us-help-you-or-how-to-ask-a-good-question/114371)的指南是个友善的链接，前提是你同时也提供帮助。
+
+## 告诉他们接下来去哪里
+
+- home-assistant.io 上的[入门指南](https://www.home-assistant.io/getting-started/)。
+- [社区论坛](https://community.home-assistant.io/)，用于需要一些时间的问题，以及搜索别人已经解决过的问题。
+- [Discord 服务器](https://www.home-assistant.io/join-chat)，用于实时交流。
+- [本地聚会](https://luma.com/homeassistant)，结识附近同样使用 Home Assistant 的人。
+
+## 当事情不顺利时
+
+有时新成员会感到沮丧，而且会表现出来。保持冷静，专注于问题本身，不要往心里去。如果有人越界，不要在公开场合争论：举报它，让版主来处理。参见[报告问题](https://www.hasscn.top/contributors/community/guides/reporting/)。
+
+---
+
+# 审核机制是如何运作的
+
+> 审核员做什么、他们遵循的准则，以及当有人违反规则时他们会采取的步骤。
+
+Source: https://www.hasscn.top/contributors/community/guides/moderation/
+
+审核员（moderator）让 Home Assistant 的社区空间保持友好、有用和安全。他们是社区成员，付出自己的时间，让每个人都能获得帮助、分享想法，而不必应对垃圾信息、辱骂或骂战。
+
+每个平台都有自己的审核团队：[论坛](https://community.home-assistant.io/)、[Discord](https://www.home-assistant.io/join-chat/) 服务器和 subreddit。他们都基于同一个基础开展工作，即[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)。
+
+## 行为准则
+
+[Home Assistant 行为准则](https://www.home-assistant.io/code_of_conduct/)适用于每一个社区空间：GitHub、论坛、Discord、社交媒体以及各类活动。当有人以官方身份公开代表社区时，它同样适用，例如使用官方账号发帖或在活动上发言。
+
+它基于 Contributor Covenant。简而言之，它要求每个人：
+
+- 对他人展现同理心和善意。
+- 尊重不同的意见、观点和经历。
+- 提供建设性的反馈，并优雅地接受反馈。
+- 为错误承担责任、道歉并从中学习。
+- 关注对整个社区最有利的事情，而不仅仅是对自己有利的事情。
+
+同时，它明确禁止（除其他事项外）公开或私下的骚扰、挑衅（trolling）、侮辱、针对个人或政治的攻击、性化的语言或关注，以及未经许可发布他人的私人信息。
+
+## 审核员做什么
+
+行为准则赋予执行准则的人（文中称为社区领袖）权利和责任，去移除、编辑或拒绝不符合行为准则的评论、帖子、代码、issue 以及其他贡献。在适当的时候，他们会解释自己的审核决定。
+
+在实践中，审核员会：
+
+- 处理来自社区的举报和标记。
+- 移除垃圾信息，以及违反行为准则或平台规则的帖子。
+- 将话题移动到合适的位置，合并重复话题，并关闭已经结束的话题。
+- 在激烈的讨论演变成人身攻击之前使其平息。
+- 对持续违反规则的人采取行动，遵循下述步骤。
+
+审核员还会保护举报事件者的隐私和安全。行为准则对此有明确要求。
+
+## 平台准则
+
+在行为准则之上，每个平台还有自己的运作准则。例如，论坛要求人们：
+
+- 提问前先搜索，并阅读文档。
+- 用英文书写。使用翻译工具没有问题。
+- 以代码块中的文本形式分享配置和日志，而不是截图。
+- 不要通过 @ 提及他人来索要回答，也不要在私信中寻求支持。
+- 不要发布由 ChatGPT 或类似工具生成的回答。
+- 问题解决后不要删除提问，以便他人从中学习。
+
+完整内容见论坛指南[如何提出一个好问题](https://community.home-assistant.io/t/how-to-help-us-help-you-or-how-to-ask-a-good-question/114371)。Discord 和 Reddit 则在服务器和 subreddit 上展示各自的规则。
+
+## 执行步骤
+
+行为准则描述了四个步骤。审核员会根据发生的情况选择合适的步骤，因此严重事件可以直接封禁。
+
+| 步骤 | 适用情形 | 处理方式 |
+| --- | --- | --- |
+| 纠正 | 使用不当语言，或其他不专业或不受欢迎的行为。 | 私下的书面警告，说明错在哪里以及为什么。可能会被要求公开道歉。 |
+| 警告 | 违规行为，无论是单次事件还是一系列行为。 | 发出警告，并说明如继续违规的后果。在规定期限内不得与相关人员互动。 |
+| 临时封禁 | 严重违规，包括持续的不当行为。 | 在规定期限内不得与社区进行任何互动或公开交流。 |
+| 永久封禁 | 屡次违规的模式、对个人的骚扰，或对群体的攻击。 | 永久禁止在社区内进行任何公开互动。 |
+
+在警告或临时封禁期间，当事人也不得与相关人员互动。这包括主动联系执行处罚的审核员。违反这些条款可能导致进入下一步骤。
+
+## 对决定有异议
+
+审核员也是人，他们也可能犯错。如果你认为某个决定不公平，请不要在公开场合重新挑起讨论。
+
+目前还没有正式的申诉流程。在正式流程建立之前，请按以下方式提出。
+
+如果你收到了警告或临时封禁，上述禁止联系规则同样适用于审核员：请等到期限结束后再提出。否则，请私下联系该平台的审核员，冷静地解释你不同意的原因，并给他们时间来处理。[行为准则](https://www.home-assistant.io/code_of_conduct/#enforcement-guidelines)中包含完整的执行指南。
+
+## 成为审核员
+
+你不能申请成为审核员。由其他审核员提名，Open Home Foundation 的社区经理会审议提名并做出决定。帮助审核工作的最佳方式，就是成为审核员已经信赖的那种成员：帮助他人、保持冷静，并标记问题而不是与之争斗。想了解更多？请询问你所在平台的审核员。
+
+---
+
+# 报告问题
+
+> 当有人违反行为准则，或者你或他人感到不安全时，该怎么做。
+
+Source: https://www.hasscn.top/contributors/community/guides/reporting/
+
+社区中的大多数交流都是友好的。当遇到不友好的情况时，你不必独自应对，也不应该独自应对。以下是应对方法。
+
+## 不要在公开场合争执
+
+在同一帖子下回复挑衅者或侮辱性言论几乎总是会让情况更糟。这会让该帖子获得更多关注，还可能让你自己也违反规则。退一步，改为举报它。
+
+## 使用平台的举报功能
+
+我们使用的每个平台都有向管理员举报帖子或消息的方式。[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)将此列为两种举报方式之一。
+
+- **论坛**：使用帖子下方的举报（flag）按钮。
+- **Discord**：举报该消息，或联系服务器的管理员。
+- **Reddit**：使用帖子或评论上的举报选项。
+- **GitHub**：在 issue、pull request 或评论的菜单中使用 **Report content**。
+
+对于垃圾信息、离题帖子、粗鲁回复以及大多数其他日常问题，这是正确的选择。
+
+## 发送邮件给安全团队
+
+对于任何严重的情况，或任何不适合单个帖子的情况，请发送邮件至 [safety@home-assistant.io](mailto:safety@home-assistant.io)。例如：
+
+- 骚扰、威胁，或在你要求对方停止后仍不断联系你的人。
+- 跨平台的行为，比如有人从[论坛](https://community.home-assistant.io/)一路跟到你的社交媒体。
+- 有人发布私人信息，比如地址。
+- 线下活动中发生的问题。
+- 对管理员的投诉。
+
+请描述发生了什么、在哪里、何时发生。链接和截图会有帮助。如果你举报的是发生在他人身上的事情，请说明这一点。
+
+所有投诉都会得到及时、公正的审查和调查。处理投诉的人员有义务尊重举报人的隐私和安全。
+
+## 如果有人处于危险之中
+
+社区团队无法在紧急情况下提供帮助。如果你认为有人面临受到伤害的风险，请首先联系当地的紧急服务部门。
+
+## 在聚会和活动中
+
+行为准则同样适用于聚会和其他活动。如果发生了什么事，请告知活动的主办方。任何人也可以在活动期间或之后发送邮件至 [safety@home-assistant.io](mailto:safety@home-assistant.io)。
+
+## 接下来会发生什么
+
+管理员会查看举报并决定如何处理，遵循行为准则的[执行步骤](https://www.hasscn.top/contributors/community/guides/moderation/#the-steps-of-enforcement)。你不一定会收到关于处理结果的回复，因为所有相关人员的隐私同样重要。这并不意味着什么都没有发生。
+
+---
+
+# 举办线下聚会
+
+> 让你所在城市的智能家居爱好者聚在一起。创建活动、提交收录，并获得费用报销。
+
+Source: https://www.hasscn.top/contributors/community/guides/meetups/
+
+Home Assistant 线下聚会（meetup）在世界各地都有举办。它们是免费、非正式的聚会，大家聊自己的智能家居，展示自己的作品，并互相帮助。如果你的城市还没有，你可以自己发起一个。
+
+## 查找现有的聚会
+
+所有 Home Assistant 聚会都列在 [Luma 上的 Home Assistant Meetups 日历](https://luma.com/homeassistant)中。home-assistant.io 的[社区页面](https://www.home-assistant.io/community/)会在地图上展示它们。在举办聚会之前先参加一两次，是了解别人如何组织的好方法。
+
+## 创建你自己的聚会
+
+1. 在 [Luma](https://luma.com/) 上创建一个账户，然后打开 [Home Assistant Meetups](https://luma.com/homeassistant) 日历。
+2. 选择 **Submit Event**，然后选择 **Create New Event**。该按钮位于日历上方。
+3. 使用[社区页面](https://www.home-assistant.io/community/)上的邀请图作为活动图片。
+4. 填写活动名称、时区、日期、时间、地点、人数上限和主持人。
+5. 创建活动。
+6. 让大家知道：发布到 [Discord](https://www.home-assistant.io/join-chat/) 上的聚会讨论帖，或[社区论坛](https://community.home-assistant.io/)的 **Social** 版块。
+
+## 费用
+
+开放之家基金会（Open Home Foundation）会为举办聚会的某些费用提供报销。哪些费用可以报销以及如何申请，请参阅[社区聚会操作手册](https://www.openhomefoundation.org/assets/documents/community-meetups-playbook-07-sep-2026.pdf)。在花钱之前请先阅读它。
+
+## 社区日（Community Day）
+
+2026 年，开放之家基金会将首次举办[社区日（Community Day）](https://www.openhomefoundation.org/community-day/)，时间为 11 月 7 日星期六：在这一天，世界各地的主持人为所有使用基金会项目（如 Home Assistant、ESPHome 和 Music Assistant）的人组织聚会。社区日活动在 [Luma 上有自己的日历](https://luma.com/communityday2026)。你可以按照与普通聚会相同的方式举办一场。
+
+## 举办好聚会的技巧
+
+- 选择一个交通便利、人们能彼此听清说话的场所。
+- 在门口迎接来宾，并把新来的人介绍给其他人。不是每个人都能自在地走进一个满是陌生人的房间。
+- 给大家一些可以聊的话题：一个简短的演示、作品展示，或者一个开场问题。
+- [行为准则](https://www.home-assistant.io/code_of_conduct/)同样适用于聚会。如果发生了问题，请参阅[报告问题](https://www.hasscn.top/contributors/community/guides/reporting/)。
+
+## 疑问
+
+如有疑问，请发送电子邮件至社区团队：[community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+
+---
+
+# 在社交媒体上提供帮助
+
+> 你可以如何帮助 Home Assistant 在社交媒体上触达更多人，以及该联系谁。
+
+Source: https://www.hasscn.top/contributors/community/guides/social-media/
+
+大多数人是从别人那里听说 Home Assistant 的：朋友、视频、Reddit 上的帖子。分享你用 Home Assistant 做的事情，是帮助这个项目成长最有效的方式之一。
+
+## 官方账号
+
+以下是 Home Assistant 的官方账号：
+
+- [YouTube](https://youtube.com/@home_assistant)
+- [Bluesky](https://bsky.app/profile/home-assistant.io)
+- [Mastodon](https://fosstodon.org/@homeassistant)
+- [X](https://x.com/home_assistant)
+- [Facebook](https://www.facebook.com/homeassistantio)
+- [Instagram](https://www.instagram.com/homeassistant/)
+- [LinkedIn](https://www.linkedin.com/company/home-assistant)
+
+只有这些账号代表 Home Assistant 发言。如果你运营粉丝账号、群组或频道，请在名称或简介中明确说明，以免有人误以为是官方账号。
+
+## 你可以如何帮助
+
+- **分享你的成果。** 一个让你自豪的仪表盘（dashboard）、一个为你节省时间的自动化（automation）、一个成功实现本地控制的设备。真实的家庭案例比任何公告都更有说服力。
+- **分享新闻。** 转发版本发布公告和博客文章。每个版本发布都有 YouTube 上的发布派对直播，非常值得分享。参见[发布说明与发布派对](https://www.hasscn.top/contributors/releases/guides/release-notes/)。
+- **在人们提问的地方回答问题。** 并不是每个人都能找到[论坛](https://community.home-assistant.io/)。在社交媒体帖子下的一条有帮助的回复同样有用。
+- **推荐社区精选。** 看到别人做出的好东西？[推荐它作为社区精选](https://www.home-assistant.io/suggest-community-highlight)。
+- **保持友善。** 当你代表或谈论社区时，[行为准则](https://www.home-assistant.io/code_of_conduct/)同样适用于社交媒体。与人意见不合没有问题，但跟风围攻不可以。
+
+## 制作内容
+
+如果你制作关于 Home Assistant 的视频、教程或评测，请了解一下 [Creator Network](https://www.hasscn.top/contributors/community/reference/programs/#creator-network)。它将内容创作者与团队联系起来。
+
+## 使用名称和标志
+
+想使用 Home Assistant 的名称或标志？[名称与标志](https://www.hasscn.top/contributors/brand/name-and-logo/)说明了如何书写名称以及使用标志。对于产品包装和营销，Works with Home Assistant 的[徽章与品牌指南](https://works-with.home-assistant.io/resources/badge-and-brand-guidelines/)中有单独的规定。
+
+## 联系谁
+
+有关社交媒体的问题，或者如果你发现冒充官方的账号，请发送电子邮件至社区团队：[community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+
+---
+
+# 社区参考
+
+> 社区交流的场所，以及支持社区的各项计划。
+
+Source: https://www.hasscn.top/contributors/community/reference/
+
+本节中的页面用于查阅信息。如需了解如何提供帮助，请从[指南](https://www.hasscn.top/contributors/community/guides/)开始。
+
+- [社区的聚集地](https://www.hasscn.top/contributors/community/reference/channels/)：社区交流的官方场所，以及各自的用途。
+- [计划](https://www.hasscn.top/contributors/community/reference/programs/)：面向内容创作者的 Creator Network，以及面向设备制造商的 Works with Home Assistant。
+- [活动与日历](https://www.hasscn.top/contributors/community/reference/events/)：即将到来的发布日期和社区同步会议，以及如何订阅日历。
+
+---
+
+# 社区聚集地
+
+> Home Assistant 社区的官方聚集场所，以及每个场所的用途。
+
+Source: https://www.hasscn.top/contributors/community/reference/channels/
+
+Home Assistant 社区分布在几个不同的地方。每个地方都有自己的特色，也有自己的管理员。[行为准则](https://www.home-assistant.io/code_of_conduct/)适用于所有这些场所。
+
+## 社区论坛
+
+[社区论坛](https://community.home-assistant.io/)是规模最大、历史最悠久的求助场所。问题和答案会长期保留，并且易于搜索，因此一个已解决的帖子可以持续帮助人们多年。论坛还有用于分享项目、蓝图（blueprint）和社区指南的版块，以及一个 **Social** 版块，用于发布聚会信息。
+
+适合在论坛使用的情况：需要一些时间才能解答的问题、分享你构建的作品，以及任何其他人日后应该能够找到的内容。
+
+## Discord
+
+[Home Assistant Discord 服务器](https://www.home-assistant.io/join-chat)用于实时交流。它快速而随意，非常适合快速提问或闲聊。贡献者也使用它：这里有用于开发和设计的频道，还有一个供测试下一版本的人使用的 [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) 频道。
+
+Discord 上的内容日后很难再找到。当你解决了其他人可能也会遇到的问题时，请考虑同时发布到论坛上。
+
+## Reddit
+
+[r/homeassistant](https://www.reddit.com/r/homeassistant/) 子版块是许多人分享自己的配置、仪表盘（dashboard）和经历，并寻求建议的地方。它由自己的管理员管理，有自己的规则。
+
+## Facebook
+
+[Home Assistant Facebook 主页](https://www.facebook.com/homeassistantio)分享新闻。还有一个 [Facebook 群组](https://www.facebook.com/groups/HomeAssistant/)，人们可以在那里寻求和提供帮助。
+
+## 社交媒体
+
+官方账号分享新闻、版本发布以及来自社区的精彩内容。完整列表请参阅[社交媒体帮助](https://www.hasscn.top/contributors/community/guides/social-media/)。
+
+## 新闻通讯
+
+[Open Home Foundation 新闻通讯](https://newsletter.openhomefoundation.org/)将 Home Assistant 以及基金会其他项目的新闻发送到你的收件箱。
+
+## 聚会和活动
+
+本地聚会列在 [Luma 上的 Home Assistant Meetups 日历](https://luma.com/homeassistant)以及[社区页面](https://www.home-assistant.io/community/)的地图上。请参阅[举办聚会](https://www.hasscn.top/contributors/community/guides/meetups/)。
+
+## 地区社区
+
+还有其他语言和地区的社区。[社区页面](https://www.home-assistant.io/community/)列出了团队所了解的社区（并非详尽列表），例如法语论坛、德语 Discord 服务器和论坛，以及澳大利亚和新西兰、日本、挪威等地的群组。你的社区不在列表中？请发送电子邮件至 [community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+
+## GitHub
+
+GitHub 是代码和文档所在的地方，也是报告缺陷（bug）的地方。它不是支持渠道：关于使用 Home Assistant 的问题应发布在论坛或 Discord 上。功能请求请提交到[功能请求讨论区](https://github.com/home-assistant/feature-requests/discussions)，而不是问题跟踪器。
+
+---
+
+# 计划
+
+> 面向内容创作者的创作者网络（Creator Network），以及面向设备制造商的 Works with Home Assistant 认证计划。
+
+Source: https://www.hasscn.top/contributors/community/reference/programs/
+
+除了日常社区之外，Open Home Foundation 还运营着两个计划，将 Home Assistant 与项目之外的人员和公司联系起来。
+
+## 创作者网络（Creator Network）
+
+[创作者网络（Creator Network）](https://creators.home-assistant.io/)是一群定期制作 Home Assistant 相关内容的创作者：他们在 YouTube、TikTok、Instagram 和其他平台上发布教程、产品评测以及项目展示。
+
+### 成员可以获得什么
+
+- 在测试版发布日与 Home Assistant 团队举行月度会议，并有机会在版本发布之前提供反馈。
+- 一个私有的 Discord 频道，可以向开发团队提问并提供反馈。
+- 获取合作伙伴的产品，以及活动的提前邀请。
+- 免费获得最新的官方 Home Assistant 硬件，以及来自 Nabu Casa 的 Home Assistant Link 订阅。
+
+成员可以在其内容中自由分享对 Home Assistant 的真实看法和建设性反馈。会员免费，成员也不会从 Open Home Foundation 获得报酬。他们可以自由地通过自己的内容赚钱。
+
+### 加入条件
+
+创作者网络寻找在社区中拥有良好声誉的创作者，他们在自己的频道上拥有忠实的粉丝群，具有独特的声音或知识，并按照[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)的规定尊重他人。
+
+### 如何加入
+
+填写[申请表](https://forms.gle/R5z7yUS1tDJuio8N6)。申请每周审核一次，每个人都会得到答复，即使未被接受也是如此。
+
+## Works with Home Assistant
+
+[Works with Home Assistant](https://works-with.home-assistant.io/) 是一项面向设备制造商的计划。该计划中的产品由 Open Home Foundation 测试，以确保其与 Home Assistant 良好协作，并且制造商承诺保持其正常工作。该计划突出展示本地运行、保护隐私、安全可靠且经久耐用的设备。
+
+对于社区而言，该计划意味着一件事：一份[认证产品列表](https://works-with.home-assistant.io/certified-products/)，其中列出了已知能与 Home Assistant 良好协作的产品。
+
+该计划面向制造商。如果您在制造商工作，或者知道有应该加入的制造商，联系地址是 [partner@openhomefoundation.org](mailto:partner@openhomefoundation.org)。
+
+## 不属于计划，但密切相关
+
+- [社区日（Community Day）](https://www.openhomefoundation.org/community-day/)：为期一天的全球聚会活动，首次举办于 2026 年。参见[举办聚会](https://www.hasscn.top/contributors/community/guides/meetups/)。
+- 设备数据库：Home Assistant 用户可以分享关于其设备的匿名数据，以构建一个开放的数据库，记录设备在真实家庭中的表现。参见[数据](https://www.hasscn.top/contributors/data/)。
+
+---
+
+# 活动与日历
+
+> 即将到来的发布日期、社区同步会议、聚会和社区日（Community Day），以及如何将它们添加到您自己的日历中。
+
+Source: https://www.hasscn.top/contributors/community/reference/events/
+
+Open Home Foundation 为与基金会开发相关的一切维护着一个公开日历。其中包含发布日、每个 beta 版本开始的时间，以及社区同步会议（community syncs）：围绕某个项目（如 Matter、Voice 和 Assist、Music Assistant 或设备数据库）进行的视频通话。日历中的说明指出，每次同步会议对所有对该项目感兴趣的人开放。
+
+聚会以线下形式进行，由社区成员组织，并发布在 Luma 上的 [Home Assistant Meetups](https://luma.com/homeassistant) 日历中。社区日（Community Day）是全球各地举办本地聚会的一天，拥有自己的[社区日日历](https://luma.com/communityday2026)。下面的列表将社区日显示为一个活动，其中包含各个聚会。home-assistant.io 上的[社区页面](https://www.home-assistant.io/community/)在地图上显示这些聚会，并提供供您自己举办聚会的邀请图。
+
+## 即将到来
+
+这些是未来三个月的活动。列表每天更新一次，因此如有临时变动，请查看日历本身。
+
+- Monday, November 30, 2026, 15:00 UTC: Device Database Community Sync ([Join with Google Meet](https://meet.google.com/pxv-dprf-yjp), [Agenda and notes](https://drive.google.com/open?id=1JMIDghAF7j0VLU7El5KM4XURgWv2RJwZwE5LnR-9RQQ))
+- Wednesday, December 2, 2026, all day: Home Assistant Core Release
+- Wednesday, December 2, 2026, all day: ESPHome Beta Release
+- Thursday, December 3, 2026, 17:00 UTC: [Home Assistant Meetup Köln](https://luma.com/83fycwc9)
+- Wednesday, December 9, 2026, 18:30 UTC: Voice and Assist Community Sync ([Join with Google Meet](https://meet.google.com/wka-pnqs-njh), [Agenda and notes](https://drive.google.com/open?id=19MpQ5x08gJ-ycRYgeZ6kYSD4lOo-SkE8qSZ305LiFKE))
+- Saturday, December 12, 2026, 08:30 UTC: [Home Assistant Meetup - Carpi](https://luma.com/yjfnms6a)
+- Wednesday, December 16, 2026, all day: Music Assistant Stable Release
+- Wednesday, December 16, 2026, all day: ESPHome Stable Release
+- Wednesday, December 23, 2026, 18:30 UTC: Music Assistant Community Sync ([Join with Google Meet](https://meet.google.com/tyg-dnmb-wky), [Agenda and notes](https://drive.google.com/open?id=13JxXUqmNaj2u8emNOG5KpZfKIFG9ft6ulO9V7EUxKLY))
+- Wednesday, December 30, 2026, all day: Home Assistant Core Beta Release
+- Monday, January 4, 2027, 18:00 UTC: Matter Community Sync ([Join with Google Meet](https://meet.google.com/mkd-eyys-wkx), [Agenda and notes](https://drive.google.com/open?id=1JJaTWYCZBz6lntyrWYo9ISgA3G6ZxrG9lZdJ5VuXGXg))
+- Wednesday, January 6, 2027, all day: Home Assistant Core Release
+- Wednesday, January 6, 2027, all day: ESPHome Beta Release
+- Saturday, January 9, 2027, 14:00 UTC: [Orlando Home Assistant Meetup: Get-Together & Gear Swap](https://luma.com/qpe49nll)
+- Monday, January 11, 2027, 15:00 UTC: Device Database Community Sync ([Join with Google Meet](https://meet.google.com/pxv-dprf-yjp), [Agenda and notes](https://drive.google.com/open?id=1JMIDghAF7j0VLU7El5KM4XURgWv2RJwZwE5LnR-9RQQ))
+- Wednesday, January 20, 2027, all day: ESPHome Stable Release
+- Wednesday, January 20, 2027, 18:30 UTC: Voice and Assist Community Sync ([Join with Google Meet](https://meet.google.com/wka-pnqs-njh), [Agenda and notes](https://drive.google.com/open?id=19MpQ5x08gJ-ycRYgeZ6kYSD4lOo-SkE8qSZ305LiFKE))
+- Tuesday, January 26, 2027, 04:30 UTC: [Home Assistant Community Meetup - Tauranga](https://luma.com/0nai7yth)
+- Wednesday, January 27, 2027, all day: Home Assistant Core Beta Release
+- Wednesday, February 3, 2027, all day: Home Assistant Core Release
+- Wednesday, February 3, 2027, all day: ESPHome Beta Release
+- Wednesday, February 3, 2027, 18:30 UTC: Music Assistant Community Sync ([Join with Google Meet](https://meet.google.com/tyg-dnmb-wky), [Agenda and notes](https://drive.google.com/open?id=13JxXUqmNaj2u8emNOG5KpZfKIFG9ft6ulO9V7EUxKLY))
+- Monday, February 15, 2027, 18:00 UTC: Matter Community Sync ([Join with Google Meet](https://meet.google.com/mkd-eyys-wkx), [Agenda and notes](https://drive.google.com/open?id=1JJaTWYCZBz6lntyrWYo9ISgA3G6ZxrG9lZdJ5VuXGXg))
+- Wednesday, February 17, 2027, all day: ESPHome Stable Release
+- Monday, February 22, 2027, 15:00 UTC: Device Database Community Sync ([Join with Google Meet](https://meet.google.com/pxv-dprf-yjp), [Agenda and notes](https://drive.google.com/open?id=1JMIDghAF7j0VLU7El5KM4XURgWv2RJwZwE5LnR-9RQQ))
+- Wednesday, February 24, 2027, all day: Home Assistant Core Beta Release
+
+## 将日历添加到您自己的日历
+
+订阅后，每个活动都会显示在您自己的日历应用中，并按您所在的时区显示。变更会自动同步。开发者日历还提供拨入同步会议的电话号码，如果您更喜欢电话而非视频通话的话。
+
+对于发布和同步会议：
+
+- **Google 日历**：将[该日历](https://calendar.google.com/calendar/r?cid=p07n98go11onamd08d0kmq6jhs%40group.calendar.google.com)添加到您的 Google 账户。
+- **Apple 日历、Outlook 及其他**：通过 URL 订阅[日历订阅源](https://calendar.google.com/calendar/ical/p07n98go11onamd08d0kmq6jhs%40group.calendar.google.com/public/basic.ics)。大多数应用将此功能称为**新建日历订阅**或**从网页订阅**。
+
+对于聚会，请在 Luma 上打开 [Home Assistant Meetups](https://luma.com/homeassistant) 或[社区日](https://luma.com/communityday2026)日历，然后选择**订阅**。
+
+## 相关内容
+
+- [发布是如何运作的](https://www.hasscn.top/contributors/releases/how-it-works/)：日历中 beta 和发布日会发生什么。
+- [我们的交流渠道](https://www.hasscn.top/contributors/start/where-we-talk/)：在同步会议之间联系贡献者的途径。

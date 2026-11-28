@@ -1,0 +1,111 @@
+# 网页卡片
+
+> 网页卡片通过 iframe 在仪表盘中嵌入另一个网页。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/iframe-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "iframe",
+        "url": "https://www.home-assistant.io",
+        "aspect_ratio": "50%"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+网页卡片在仪表盘（dashboard）中显示另一个网页。在卡片选择器中它被称为**网页**，在 YAML 中其类型为 `iframe`，因为它本质上就是：卡片中的一个 iframe。
+
+将它用于 Home Assistant 没有对应卡片、但存在于网页上的内容：本地天气雷达、网络上另一个系统的仪表盘，或某个设备的状态页面。只要有真正的卡片可用，就优先使用卡片。卡片会遵循 Home Assistant 的主题、语言和状态。而嵌入的页面则不会，并且它会在仪表盘内部自行滚动。
+
+默认情况下，该卡片没有内边距，也没有标题。页面会填满整个卡片，直到边缘，并带有卡片的圆角。
+
+### 标题
+
+使用 `title` 后，卡片会在页面上方显示一个标题栏。当页面本身无法清楚表明其内容时，可以使用它。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "iframe",
+        "title": "Home Assistant",
+        "url": "https://www.home-assistant.io",
+        "aspect_ratio": "75%"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 宽高比
+
+在分区视图（sections view）之外，卡片的高度由 `aspect_ratio` 决定：即高度占宽度的百分比，例如 `50%`，或者一个比例，例如 `16:9`。如果不设置，卡片的高度为其宽度的一半。在分区视图中，大小由网格决定，宽高比会被忽略。
+
+### 隐藏背景
+
+使用 `hide_background` 后，卡片将没有背景、边框和阴影。适用于自带背景的页面，这样它看起来就像是仪表盘的一部分，而不是框在盒子里的一个页面。
+
+### 可能出现的问题
+
+并非所有页面都可以被嵌入。许多网站会告诉浏览器不要在 iframe 中显示它们，此时卡片将保持空白。对此卡片无能为力。
+
+当 Home Assistant 通过 HTTPS 提供服务时，页面也必须使用 HTTPS。浏览器会阻止混合内容，因此卡片不会显示为空白，而是显示一个说明原因的错误。
+
+### 内容
+
+- 选择一个在卡片尺寸下能正常显示的页面，最好是为嵌入而设计的页面。
+- 请记住，该页面运行在 Home Assistant 内部。只嵌入你信任的页面。
+
+## 配置
+
+- `url`（字符串，必填）：要显示的页面的地址。
+- `title`（字符串）：页面上方的标题。
+- `aspect_ratio`（字符串）：卡片的高度，以宽度百分比或比例表示。默认为 `50%`。在分区视图和面板视图中会被忽略。
+- `hide_background`（布尔值）：移除卡片的背景、边框和阴影。默认为 `false`。
+- `allow`（字符串）：iframe 的权限策略，例如 `fullscreen; camera`。默认为 `fullscreen`。
+- `allow_open_top_navigation`（布尔值）：允许页面中由用户点击的链接在整个窗口中打开。默认为 `false`。
+- `disable_sandbox`（布尔值）：移除 iframe 的沙箱。默认为 `false`。
+
+```yaml
+type: iframe
+url: "https://www.home-assistant.io"
+aspect_ratio: "75%"
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-iframe-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-iframe-card.ts)，元素为 `<hui-iframe-card>`。它在 `<ha-card>` 内部渲染一个 `<iframe>`。宽高比会转换为包裹容器上的 `padding-top`，iframe 则以绝对定位的方式覆盖在其上。
+
+iframe 默认是沙箱化的，权限来自 [`src/util/iframe.ts`](https://github.com/home-assistant/frontend/blob/dev/src/util/iframe.ts) 中的 `IFRAME_SANDBOX`：其中包括表单、弹窗、脚本以及同源。对于会被清理为 `about:blank` 的地址（例如 `javascript:` URL），卡片会抛出 `Invalid URL`，因为沙箱会保持同源。
+
+在分区视图中，卡片占据全宽和 4 行，并且可以缩小到 3 列 2 行。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-iframe-card.ts)

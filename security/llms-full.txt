@@ -1,0 +1,1080 @@
+# Security: full text
+
+> Every page of the Security area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/security/llms.txt.
+
+# 安全
+
+> 报告漏洞，并构建能够保护其所运行家庭的软件。
+
+Source: https://www.hasscn.top/contributors/security/
+
+Home Assistant 运行着用户家中的门锁、警报器、摄像头和供暖设备。Home Assistant 中的一个安全漏洞，就是某人家前门上的一个漏洞。因此，在这里安全不是某个独立团队的问题：它出现在每一个集成（integration）、每一张卡片、每一个应用，以及每一次依赖升级中。
+
+本区域面向所有贡献者。你将了解如何报告漏洞、在编写或审查代码时应注意什么，以及哪些检查机制已经在为你保驾护航。
+
+> [!IMPORTANT]
+> 发现了漏洞？请不要就此公开提交 issue、pull request 或聊天消息。请通过 [GitHub 安全公告](https://github.com/home-assistant/core/security/advisories/new)私下报告。有关应包含的内容以及后续流程，请参阅[报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)。
+
+## 本区域面向谁
+
+- **安全研究人员和用户**：如果你发现了问题，请从[报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)开始。
+- **集成开发者**：你编写的代码运行在 Core 内部，可以访问一切。[集成指南](https://www.hasscn.top/contributors/security/guides/integrations/)涵盖了凭据、证书、脱敏、仅管理员访问、webhook 和文件路径。
+- **前端开发者**：到达界面的名称、属性和 Markdown 可能来自任何地方。请参阅[前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/)。
+- **应用开发者**：你的应用运行在自己的容器中，与系统的其他部分相邻。请参阅[保护你的应用](https://www.hasscn.top/contributors/apps/guides/security/)和[安全评级](https://www.hasscn.top/contributors/apps/reference/security-rating/)，以及[保护应用](https://www.hasscn.top/contributors/security/guides/apps/)中来自过往公告的经验教训。
+- **伴侣应用（Companion app）开发者**：伴侣应用保存着用户的登录信息，因此任何能让它自行执行操作的因素都是风险。请参阅[保护伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/)。
+- **审查者**：你是代码进入用户家中的最后一道防线。请参阅[带着安全意识进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/)。
+
+## 从这里开始
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/security/first-contribution/)：检查你正在使用的某个集成的诊断数据，找出其中不应存在的数据。
+- [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)：Home Assistant 信任谁、它可能在哪里受到攻击，以及系统已经为你做了什么。
+- [报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)：如何报告、什么情况符合条件，以及可以期待什么。
+
+## 指南
+
+- [保护集成安全](https://www.hasscn.top/contributors/security/guides/integrations/)：让集成保持安全的模式和辅助元素（helper）。
+- [前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/)：转义、净化和安全链接。
+- [保护应用安全](https://www.hasscn.top/contributors/security/guides/apps/)：关于应用和 Supervisor 的公告带给我们的启示。
+- [保护伴侣应用安全](https://www.hasscn.top/contributors/security/guides/companion-apps/)：链接、导出的组件、WebView 和 JavaScript 桥接。
+- [依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/)：Home Assistant 对一个库有哪些要求，以及它如何进行检查。
+- [带着安全意识进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/)：在 pull request 中应该注意什么。
+
+## 参考
+
+- [安全辅助元素](https://www.hasscn.top/contributors/security/reference/helpers/)：Core 和前端的每个辅助元素（helper）汇总在一页上。
+- [自动化安全检查](https://www.hasscn.top/contributors/security/reference/checks/)：检查代码、依赖和工作流程的工具。
+- [过往公告](https://www.hasscn.top/contributors/security/reference/advisories/)：所有已发布的公告，按类型分组，包含问题所在和经验教训。
+
+## 相关内容
+
+- [身份验证](https://www.hasscn.top/contributors/core/internals/auth/)和[权限](https://www.hasscn.top/contributors/core/internals/permissions/)：用户、令牌，以及如何检查某人可以执行哪些操作。
+- [诊断](https://www.hasscn.top/contributors/core/integrations/diagnostics/)：让用户分享数据，而不泄露机密。
+- [保护你的 Home Assistant](https://www.home-assistant.io/docs/configuration/securing/)：用户侧的内容，从密码到远程访问。
+
+## 联系谁
+
+- **漏洞**：请通过 [GitHub 安全公告](https://github.com/home-assistant/core/security/advisories/new)报告，切勿公开。项目的 [security.txt](https://www.home-assistant.io/.well-known/security.txt) 列出了 `security@home-assistant.io` 作为联系方式。
+- **撰写关于 Home Assistant 安全性的文章**：[安全政策](https://www.home-assistant.io/security/)要求你先通过 [hello@home-assistant.io](mailto:hello@home-assistant.io) 联系我们，以便核实所有声明。
+- **关于编写安全代码的疑问**（非漏洞）：请在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道中提问，或在你的 pull request 中提问。看不到该频道？在 **Channels & Roles** 下，选择 **I want to contribute dev skills to Home Assistant**。
+
+---
+
+# 你的第一次安全贡献
+
+> 检查你正在使用的某个集成的诊断信息，找出其中不应存在的数据，并修复发现的问题。
+
+Source: https://www.hasscn.top/contributors/security/first-contribution/
+
+要为 Home Assistant 的安全做出贡献，你不需要是一名安全研究人员。一个很好的起点就用你已有的东西：你自己的 Home Assistant，以及你每天都在使用的某个集成。
+
+用户会把[诊断](https://www.hasscn.top/contributors/glossary/diagnostics/)文件附加到公开的 GitHub issue 上，因此集成必须先从中移除密码、令牌（token）和其他私密数据。这是通过一个需要脱敏的键（key）列表来实现的。当某个键不在这个列表中时，私密数据就会暴露在公开场合。检查这一点具体、工作量小，而且很有用。
+
+## 1. 下载诊断文件
+
+1. 前往 **设置** > **设备与服务**。
+2. 选择一个你正在使用的集成。与云服务通信或需要登录的集成是不错的选择，因为它有需要保护的机密信息。
+3. 打开三点菜单，选择 **下载诊断**。
+
+并非每个集成都有诊断功能。如果没有，该选项就不会显示：换一个集成即可。
+
+## 2. 阅读文件
+
+在文本编辑器中打开该文件。已被移除的值会显示为 `**REDACTED**`。查找那些本应被移除却未被移除的内容：
+
+- 密码、API 密钥和令牌（token），包括访问令牌和刷新令牌
+- 位置数据，例如坐标和地址
+- 个人信息，例如姓名和电子邮件地址
+- 能指向你或你设备的标识符，例如序列号或账户 ID
+
+来自 API 的数据往往包含集成作者意料之外的内容，所以也要查看嵌套的数据。
+
+## 3. 判断它是什么
+
+大多数时候，你什么也找不到。这是一个好结果，而且你也了解了诊断功能的工作方式。
+
+如果你发现了问题，想一想谁能看到它。如果这些数据本不应出现在用户公开分享的文件中，那就需要修复。如果你认为它可能以其他方式让用户面临风险，或者你不确定，就把它当作漏洞并[私下报告](https://www.hasscn.top/contributors/security/report-a-vulnerability/)。一个最终被证实无害的私下报告代价很小；而一个最终被证实是漏洞的公开披露则会危及家庭安全。
+
+## 4. 修复它
+
+修复通常只需一行代码。诊断代码位于[核心仓库](https://github.com/home-assistant/core)中集成文件夹下的 `diagnostics.py` 文件里。大多数集成会维护一组键，通常命名为 `TO_REDACT`，并将数据通过 `async_redact_data` 处理：
+
+```python
+TO_REDACT = {CONF_API_KEY, CONF_PASSWORD, "serial_number"}
+```
+
+将缺失的键添加到该集合中。然后更新诊断测试的快照，让审查者看到该值变为 `**REDACTED**`：
+
+```bash
+pytest tests/components/example --snapshot-update
+```
+
+初次接触 Core？[你对 core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)会帮你搭建开发环境，并带你完成第一个 pull request。[诊断](https://www.hasscn.top/contributors/core/integrations/diagnostics/)更详细地解释了相关代码。
+
+## 接下来做什么
+
+- 阅读[安全的集成](https://www.hasscn.top/contributors/security/guides/integrations/)，了解保障集成安全的其他模式。
+- 带着[安全意识](https://www.hasscn.top/contributors/security/guides/reviewing/)审查一个 pull request。依赖项更新是一个很好的切入点：[检查清单](https://www.hasscn.top/contributors/core/development/reviewing/#dependency-updates)很短，而风险却是真实存在的。
+
+---
+
+# Home Assistant 如何处理信任
+
+> Home Assistant 信任谁、它可能在哪里受到攻击，以及系统在运行你的代码之前已经做了哪些保护。
+
+Source: https://www.hasscn.top/contributors/security/how-it-works/
+
+Home Assistant 控制着人们家中的门锁、警报器、摄像头和供暖设备。Home Assistant 的安全问题，就是某人家前门的问题。本页解释其背后的模型：Home Assistant 信任谁、它可能在哪里受到攻击，以及在你的代码运行之前已经有哪些保护措施。[指南](https://www.hasscn.top/contributors/security/guides/)会把这些落实到你所编写的代码上。
+
+## Home Assistant 信任谁
+
+| 谁 | 被信任的内容 |
+| --- | --- |
+| **管理员** | 一切。他们可以安装自定义集成（integration）和应用，这些会运行代码，并且可以读取所有设置。 |
+| **用户** | 使用这个家：查看状态（state）、执行操作。不能更改设置。 |
+| **只读用户** | 查看状态。 |
+| **其他任何人** | 什么都不行。除了 webhook ID，它本身就是一种权限。参见 [webhooks](https://www.hasscn.top/contributors/architecture/connections/)。 |
+
+这些角色决定了界面和 API 所提供的内容，但它们并不是安全边界。[安全策略](https://www.home-assistant.io/security/)指出，Home Assistant 假定每个已登录的用户都是可信的，并且不强制执行用户权限，因此已登录用户获得更多权限不算作漏洞。
+
+在 Home Assistant 内部运行的代码是完全可信的。[自定义集成](https://www.hasscn.top/contributors/glossary/custom-integration/)是与 Core 运行在同一进程中的 Python，可以做 Core 能做的一切。[应用](https://www.hasscn.top/contributors/apps/how-apps-work/)运行在自己的容器中，但可以请求广泛的访问权限。安装其中任何一种都是管理员的选择，Home Assistant 正因如此会对自定义集成发出警告。
+
+代码中最重要的一条界线是管理员与其他所有人之间的界线。参见[身份验证](https://www.hasscn.top/contributors/core/internals/auth/)和[权限](https://www.hasscn.top/contributors/core/internals/permissions/)。
+
+## Home Assistant 可能在哪里受到攻击
+
+- **它的 Web 服务器。** 许多家庭让 Home Assistant 可以从互联网访问。每一个不需要登录的端点，以及每一个需要登录的端点，都是一扇门。
+- **来自设备和服务的数据。** 集成会从网络、云服务或设备读取数据。这些数据可能是错误的，也可能是被故意伪造的。
+- **它的依赖项。** 每一个[依赖项（requirement）](https://www.hasscn.top/contributors/glossary/requirement/)都是在 Core 中运行的代码。一个被攻陷的库会攻陷 Home Assistant。
+- **用户自己的配置**，例如转发了错误请求头的反向代理。Home Assistant 无法修复这些问题，但它可以拒绝信任本不该信任的内容。
+
+## Home Assistant 已经做了什么
+
+- 每个请求都需要有效的令牌，除了 webhook 和少数有意公开的端点，例如登录页面。
+- 登录失败会报告给用户，并且当用户开启了该功能时，来自同一地址的重复登录失败可能导致封禁。
+- 带有路径欺骗或可疑字节的请求会在到达任何集成之前被拒绝。
+- 在反向代理之后，只有用户配置过的代理所转发的地址才会被信任。
+- 共享的 Web 会话（来自 `async_get_clientsession`）会检查 SSL 证书，并拒绝从互联网重定向到本地机器。
+- 在用户给定的路径上读取或写入文件的功能，例如拍摄摄像头快照或在通知中附加文件，会根据用户允许的文件夹（`allowlist_external_dirs`）检查该路径。这是这些功能所调用的检查，而不是沙箱：集成运行时的文件访问权限与 Core 相同。
+
+这些保护措施内置于 Home Assistant 中。它们并不涵盖你自己的代码对所获得的数据或所拥有的访问权限所做的处理。这部分取决于你，[安全](https://www.hasscn.top/contributors/security/)区域会按贡献类型展示具体做法。
+
+---
+
+# 报告漏洞
+
+> 如何私下报告 Home Assistant 的安全漏洞、哪些情况符合条件，以及报告之后会发生什么。
+
+Source: https://www.hasscn.top/contributors/security/report-a-vulnerability/
+
+在 Home Assistant 中发现了安全漏洞？感谢您抽出时间。本页面逐节总结了官方的[安全政策](https://www.home-assistant.io/security/)，并附上每一节的链接。如果此处内容与政策有任何出入，以政策为准。
+
+## 私下报告
+
+请通过 core 仓库的 [GitHub 安全公告表单](https://github.com/home-assistant/core/security/advisories/new)报告漏洞。只有您和维护者可以看到它。这被称为[协同披露](https://en.wikipedia.org/wiki/Coordinated_vulnerability_disclosure)（coordinated disclosure）：项目在细节公开之前有时间修复问题。
+
+切勿在公开的 issue、pull request、论坛帖子或聊天频道中报告漏洞。公开的细节会让攻击者抢先一步，攻击所有尚未更新的家庭。
+
+当您作为贡献者发现问题时也是如此：在您审查的 pull request 中、在您处理的代码中，或在某个依赖项中。请先私下报告，公开讨论留到修复之后再进行。
+
+政策：[报告漏洞](https://www.home-assistant.io/security/#reporting-a-vulnerability)。
+
+## 应包含的内容
+
+政策要求您描述清晰且符合实际的影响。一份好的报告应回答：
+
+- 受影响的内容：Home Assistant 的哪个部分，以及哪个版本
+- 攻击者需要什么：网络访问、一个账户，或其他任何条件
+- 如何逐步复现
+- 攻击者能获得什么
+
+项目最感兴趣的是来自熟悉并经常使用 Home Assistant 的人的报告，但所有高质量的报告都受欢迎。
+
+## 严重性评分
+
+如果您了解 [CVSS 3.1](https://www.first.org/cvss/v3.1/specification-document)，请在报告中以向量字符串的形式添加评分。[计算器](https://www.first.org/cvss/calculator/3.1)可以提供帮助。如果您不确定如何评分，或无法评分，请在报告中说明，项目会进行研究。
+
+只有熟悉 CVSS 才添加评分。政策建议先阅读[规范](https://www.first.org/cvss/v3.1/specification-document)和[评分指南](https://www.first.org/cvss/v3.1/user-guide#Scoring-Guide)：使用不当的 CVSS 报告将不被接受。
+
+政策：[严重性评分](https://www.home-assistant.io/security/#severity-scoring)。
+
+## 接下来会发生什么
+
+- 项目会尽力在 7 天内回复，并在问题解决过程中随时向您通报进展。Home Assistant 高度依赖志愿者，因此回复可能比您期望的要慢。
+- 请给项目至少 90 天的时间发布修复，并且在未事先通知项目的情况下不要公开漏洞。
+- 对于符合[以下标准](https://www.hasscn.top/contributors/security/report-a-vulnerability/#public-disclosure-and-cve-assignment)的有效漏洞，项目会发布 GitHub 安全公告。
+- 已发布的公告列在安全页面的[历史公告](https://www.home-assistant.io/security/#past-advisories)下。[历史公告参考](https://www.hasscn.top/contributors/security/reference/advisories/)按类型对它们进行分组，并附上每一条的教训。
+
+政策：[报告漏洞](https://www.home-assistant.io/security/#reporting-a-vulnerability)。
+
+## 支持的版本
+
+仅接受针对最新稳定官方版本的 Home Assistant，或处于开发或 beta 测试阶段的更新版本的报告。最新版本可在[发布页面](https://github.com/home-assistant/core/releases)上找到。
+
+不接受针对 Home Assistant 分叉（fork）的报告。
+
+政策：[支持的版本](https://www.home-assistant.io/security/#supported-versions)。
+
+## 哪些情况不符合条件
+
+以下类型的报告不被接受：
+
+- 来自自动化工具或扫描器的报告
+- 没有可利用证明的理论性攻击
+- 来自第三方应用程序或库的攻击（请向其维护者报告）
+- 社会工程学
+- 需要访问 Home Assistant 所运行的主机系统的攻击
+- 需要物理接触用户设备，或已经严重受损的设备或网络的攻击，例如中间人攻击
+- 需要用户安装其他恶意软件的攻击，例如第三方集成（[自定义集成](https://www.hasscn.top/contributors/glossary/custom-integration/)）、[应用](https://www.hasscn.top/contributors/glossary/app/)或插件
+- 用户只能对自己的设置执行的攻击
+- 已登录用户的权限提升
+
+最后一条会让人们感到意外。政策解释了原因：Home Assistant 假定每个用户都是可信的，并且不强制执行用户权限。它假定每个已登录用户都拥有与所有者账户相同的访问权限。用户文档在[用户账户](https://www.home-assistant.io/docs/authentication/#user-accounts)下对此进行了说明。
+
+政策：[不符合条件的漏洞](https://www.home-assistant.io/security/#non-qualifying-vulnerabilities)。
+
+## 公开披露与 CVE 分配
+
+对于满足以下条件的有效漏洞，项目会发布 GitHub 安全公告，并通过它申请 CVE：
+
+- 位于 Home Assistant 本身，而非第三方库中
+- 项目此前不知晓
+- 公众此前不知晓
+
+只有严重性为中等或更高时才会申请 CVE。
+
+政策：[公开披露与 CVE 分配](https://www.home-assistant.io/security/#public-disclosure--cve-assignment)。
+
+## 悬赏
+
+Home Assistant 是一个开源项目，无法为安全漏洞提供悬赏。如果您愿意，您将被署名为漏洞的发现者。
+
+政策：[悬赏](https://www.home-assistant.io/security/#bounties)。
+
+## 撰写安全相关内容
+
+如果您计划撰写有关 Home Assistant 安全性的内容，政策要求您先通过 [hello@home-assistant.io](mailto:hello@home-assistant.io) 联系我们，以便核实所有声明。
+
+## 相关内容
+
+- [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)：系统的信任模型。
+- [历史公告](https://www.hasscn.top/contributors/security/reference/advisories/)：过去出了什么问题，以及可以学到什么。
+- [安全政策](https://www.home-assistant.io/security/)：官方政策，以及历史公告的完整列表。
+
+---
+
+# 安全指南
+
+> 针对不同类型的贡献，如何保证你编写或审查的代码安全。
+
+Source: https://www.hasscn.top/contributors/security/guides/
+
+每篇指南涵盖一种贡献类型。它们建立在[Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)的基础上，如果你还没有读过，请先阅读那篇文档。
+
+- [安全的集成（integration）](https://www.hasscn.top/contributors/security/guides/integrations/)：凭据、证书、脱敏、仅管理员访问、webhook 和文件路径。
+- [前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/)：转义、净化和安全链接。
+- [安全的应用](https://www.hasscn.top/contributors/security/guides/apps/)：关于应用和 Supervisor 的安全公告带来的启示。
+- [安全的伴侣应用（companion apps）](https://www.hasscn.top/contributors/security/guides/companion-apps/)：链接、导出的组件、WebView 和 JavaScript 桥接。
+- [依赖项与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/)：Home Assistant 对一个库有哪些要求，以及如何进行检查。
+- [带着安全意识进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/)：在拉取请求（pull request）中应该关注什么，以及发现问题后该怎么做。
+
+---
+
+# 安全的集成
+
+> 凭据、证书、脱敏、仅管理员访问、webhook 和文件路径。让集成保持安全的模式和辅助工具。
+
+Source: https://www.hasscn.top/contributors/security/guides/integrations/
+
+[集成](https://www.hasscn.top/contributors/glossary/integration/)运行在 Home Assistant Core 内部，处于同一进程中，可以访问一切。它与网络上的设备和服务通信，存储用户的凭据，并且可以添加进入 Home Assistant 的新途径，比如动作、WebSocket 命令和 webhook。其中每一项都是可能因失误而造成伤害的地方。
+
+好消息是：Home Assistant 几乎为其中每一项都提供了辅助工具。本指南介绍应该使用哪一个，以及为什么。要了解 Home Assistant 信任对象的更大背景，请先阅读 [Home Assistant 如何处理信任](https://www.hasscn.top/contributors/security/how-it-works/)。
+
+## 安全地与网络通信
+
+### 使用共享的 web 会话
+
+从 Home Assistant 获取你的 HTTP 会话，并将其传递给你的库：
+
+```python
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+session = async_get_clientsession(hass)
+client = ExampleClient(entry.data[CONF_HOST], session=session)
+```
+
+对于 HTTPX，请使用 `homeassistant.helpers.httpx_client` 中的 `get_async_client(hass)`。两者默认都会检查 SSL 证书（`verify_ssl=True`）。aiohttp 会话还会拒绝从网络上的地址重定向到本机（环回地址）的请求，这可以防范服务器端请求伪造。
+
+传入会话也是质量等级的规则之一：[inject-websession](https://www.hasscn.top/contributors/core/quality-scale/inject-websession/)。
+
+### 保持证书检查开启
+
+默认情况下绝不要关闭证书检查。有些设备只有自签名证书，这时用户需要一条出路。可以把它作为[配置流程](https://www.hasscn.top/contributors/glossary/config-flow/)中的一个选项，默认开启检查，就像 Core 中的几个集成所做的那样：
+
+```python
+from homeassistant.const import CONF_VERIFY_SSL
+
+STEP_USER_DATA_SCHEMA = probatio.Schema(
+    {
+        probatio.Required(CONF_HOST): str,
+        probatio.Required(CONF_VERIFY_SSL, default=True): bool,
+    }
+)
+```
+
+然后把用户的选择传递给会话：
+
+```python
+session = async_get_clientsession(hass, entry.data[CONF_VERIFY_SSL])
+```
+
+证书检查很重要。2025 年的一份安全公告涉及 Core 及其使用的库中[对外请求的 SSL 验证](https://github.com/home-assistant/core/security/advisories/GHSA-m3pm-rpgg-5wj6)问题。
+
+## 保守秘密
+
+### 将凭据存储在配置条目中
+
+凭据和连接细节应放在[配置条目](https://www.hasscn.top/contributors/glossary/config-entry/)的 `data` 中，而不是它的 `options` 中。options 用于用户稍后在[选项流程](https://www.hasscn.top/contributors/glossary/options-flow/)中更改的设置。
+
+当凭据失效时，通过[重新认证流程](https://www.hasscn.top/contributors/glossary/reauthentication/)向用户询问新的凭据，而无需重新设置集成。
+
+### 对诊断信息进行脱敏
+
+用户会在公开的 issue 中发布[诊断信息](https://www.hasscn.top/contributors/glossary/diagnostics/)。将所有私密内容通过 `async_redact_data` 处理，它会把你列出的键的值替换为 `**REDACTED**`，包括嵌套的字典和列表：
+
+```python
+from homeassistant.components.diagnostics import async_redact_data
+
+TO_REDACT = {CONF_API_KEY, CONF_PASSWORD, "serial_number"}
+
+return {"entry_data": async_redact_data(entry.data, TO_REDACT)}
+```
+
+不要只想到密码：还有令牌、坐标、地址、姓名、电子邮件地址和序列号。完整信息（包括测试）请参阅[诊断](https://www.hasscn.top/contributors/core/integrations/diagnostics/)。
+
+### 避免在日志中泄露秘密
+
+用户在报告问题时也会把调试日志附在 issue 上。当某条日志需要标识某个键或 ID 时，使用 `homeassistant.helpers.redact` 中的 `partial_redact` 对其大部分内容进行遮蔽。它会保留前 4 个和后 4 个字符，并完全替换较短的值：
+
+```python
+from homeassistant.helpers.redact import partial_redact
+
+_LOGGER.debug("Using API key %s", partial_redact(api_key))
+```
+
+同一个模块中还有它自己的 `async_redact_data`。它还接受从键到函数的映射，因此你可以部分遮蔽某个值，而不是将其完全移除。
+
+## 将传入的数据视为不可信
+
+来自设备、云服务或用户的数据可能是错误的，也可能是被故意构造的。
+
+- 使用 schema 验证用户的输入。参见[输入验证](https://www.hasscn.top/contributors/core/development/input-validation/)。Home Assistant 会在你的处理函数运行之前根据 schema 检查动作的数据，因此你无需再次检查这些字段。
+- 来自设备或服务的数据不会经过这些 schema。在使用这些值之前，先检查它们是否符合预期。
+- 当某个值会进入 URL 或文件路径时，先用严格的模式（比如 slug）检查它。否则其中的 `../` 或 `?` 可能会把请求指向别处。
+- 绝不要把外部数据传给 `eval()`、`exec()` 或 shell。Core 的代码检查工具 Ruff 会标记 `exec`（`S102`）、`eval`（`S307`）以及 `shell=True` 的 `subprocess`（`S602`）等有风险的调用。
+
+传入的数据最终也会出现在界面上：设备名称或实体（entity）名称会到达仪表盘和卡片。前端必须将这些内容视为不可信。参见[前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/)。
+
+## 守护进入的途径
+
+你添加的每一个动作、WebSocket 命令、HTTP 视图和 webhook 都是进入 Home Assistant 的一扇新门。要决定谁可以使用它。
+
+### 仅管理员可用的动作
+
+更改配置或具有其他安全影响的动作应要求管理员用户。使用 `async_register_admin_service` 注册它，它会替你完成这项检查：
+
+```python
+from homeassistant.helpers.service import async_register_admin_service
+
+async_register_admin_service(
+    hass, DOMAIN, "clear_cache", async_handle_clear_cache
+)
+```
+
+作用于实体的动作也需要权限检查。参见[权限](https://www.hasscn.top/contributors/core/internals/permissions/)。
+
+### 仅管理员可用的 WebSocket 命令
+
+在顶部加上 `require_admin` 装饰器：
+
+```python
+@websocket_api.require_admin
+@websocket_api.websocket_command({probatio.Required("type"): "example/info"})
+@websocket_api.async_response
+async def handle_info(
+    hass: HomeAssistant,
+    connection: websocket_api.ActiveConnection,
+    msg: dict[str, Any],
+) -> None:
+    """Return information about the example."""
+```
+
+### HTTP 视图
+
+`HomeAssistantView` 默认要求已登录的用户（`requires_auth = True`）。只有在别无他法时才设置 `requires_auth = False`，然后由你自己检查请求，并且要在视图的每个方法中都进行检查：`get` 与 `post` 和 `put` 一样需要。对于仅管理员可用的视图，请使用 `homeassistant.components.http` 中的 `require_admin` 装饰处理函数：
+
+```python
+from homeassistant.components.http import HomeAssistantView, require_admin
+
+
+class ExampleUploadView(HomeAssistantView):
+    """Accept an upload from an admin."""
+
+    url = "/api/example/upload"
+    name = "api:example:upload"
+
+    @require_admin
+    async def post(self, request: web.Request) -> web.Response:
+        """Handle the upload."""
+```
+
+### Webhook
+
+webhook 不需要登录：任何知道 webhook ID 的人都可以调用它。这使得该 ID 成为一个秘密。使用 `webhook.async_generate_id()` 生成它，它会返回 64 个随机的十六进制字符。
+
+当调用你的 webhook 的设备或服务位于本地网络时，将其注册为仅限本地：
+
+```python
+webhook.async_register(
+    hass, DOMAIN, entry.title, entry.entry_id, handle_webhook, local_only=True
+)
+```
+
+这样，Home Assistant 会忽略来自本地网络之外、或通过 Home Assistant Link 传入的请求。它会记录一条警告并以 `200 OK` 应答，因此调用者不会得到任何信息。Webhook 默认接受 `POST` 和 `PUT`。如果需要其他方法，请使用 `allowed_methods`。
+
+2023 年的一份安全公告涉及[可从外部访问的仅限本地的 webhook](https://github.com/home-assistant/core/security/advisories/GHSA-wx3j-3v2j-rf45)，攻击途径是 Home Assistant Link（当时称为 Home Assistant Cloud）的远程连接。
+
+## 检查文件路径
+
+当用户给你的集成提供一个要读写的路径时，比如用于保存快照的文件夹，请使用 `hass.config.is_allowed_path()` 对照用户配置的允许列表进行检查。它会先解析路径，因此 `..` 之类的伎俩无法得逞。它会执行阻塞式 I/O，因此要在执行器（executor）中运行：
+
+```python
+allowed = await hass.async_add_executor_job(
+    hass.config.is_allowed_path, file_path
+)
+if not allowed:
+    raise ServiceValidationError(
+        translation_domain=DOMAIN,
+        translation_key="path_not_allowed",
+        translation_placeholders={"path": file_path},
+    )
+```
+
+对于 URL，`hass.config.is_allowed_external_url()` 会对允许的外部 URL 做同样的检查。
+
+## 过去出过什么问题
+
+这些[过去的安全公告](https://www.hasscn.top/contributors/security/reference/advisories/)涉及集成和 Core。每一份都对应本指南的一个章节。
+
+- **一个无需登录、且只检查了部分方法的 HTTP 视图。** 旧版 Konnected 集成在 `POST` 和 `PUT` 上检查了令牌，但[在 `GET` 上没有](https://github.com/home-assistant/core/security/advisories/GHSA-x84v-g949-293w)。参见 [HTTP 视图](https://www.hasscn.top/contributors/security/guides/integrations/#http-views)。
+- **登录前泄露信息。** 登录页面向本地网络上的任何人展示了[所有用户账户](https://github.com/home-assistant/core/security/advisories/GHSA-jqpc-rc7g-vf83)。
+- **本地不等于可信。** 仅限本地的 webhook 曾通过 Home Assistant Cloud（现为 Home Assistant Link）的远程连接[从互联网上被访问到](https://github.com/home-assistant/core/security/advisories/GHSA-wx3j-3v2j-rf45)。参见 [webhook](https://www.hasscn.top/contributors/security/guides/integrations/#webhooks)。
+- **请求路径中的外部数据。** 某个动作的字段最终进入了 [Supervisor API 请求](https://github.com/home-assistant/core/security/advisories/GHSA-4r74-h49q-rr3h)的路径中。参见[将传入的数据视为不可信](https://www.hasscn.top/contributors/security/guides/integrations/#treat-what-comes-in-as-untrusted)。
+- **证书检查被关闭而无人察觉。** aiohttp 的一个参数被[以错误的方式替换](https://github.com/home-assistant/core/security/advisories/GHSA-m3pm-rpgg-5wj6)。参见[保持证书检查开启](https://www.hasscn.top/contributors/security/guides/integrations/#keep-certificate-checks-on)。
+
+## 相关内容
+
+- [安全辅助工具](https://www.hasscn.top/contributors/security/reference/helpers/)：所有辅助工具汇总在一页上。
+- [依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/)：Home Assistant 对你的集成所使用的库有哪些要求。
+- [身份验证](https://www.hasscn.top/contributors/core/internals/auth/)与[权限](https://www.hasscn.top/contributors/core/internals/permissions/)：用户、群组和权限检查。
+
+---
+
+# 前端中的不可信内容
+
+> 实体名称、属性、Markdown 和 URL 可能来自任何地方。前端如何对它们进行转义、清理和检查，以及你需要做什么。
+
+Source: https://www.hasscn.top/contributors/security/guides/frontend/
+
+前端展示的数据并非它自己编写的。设备名称来自设备。属性来自云服务。Markdown 卡片显示的是用户或模板放入的内容。这些内容中的任何一个都可能包含 HTML，如果前端按原样渲染该 HTML，它就会在打开仪表盘（dashboard）的每个人的浏览器中运行。这就是跨站脚本攻击（XSS）。
+
+这并非纸上谈兵。XSS 是 Home Assistant [历史安全公告](https://www.hasscn.top/contributors/security/reference/advisories/#cross-site-scripting)中最常见的错误类型。请参阅[以前出过什么问题](https://www.hasscn.top/contributors/security/guides/frontend/#what-went-wrong-before)。
+
+规则很简单：把每一个到达前端的字符串都当作数据，绝不当作标记（markup）。
+
+## 让 Lit 来做转义
+
+Lit 会转义你放入模板中的值，因此一个充满 HTML 的名称会以文本形式显示。这是渲染任何内容最安全的方式，也是前端将其图表提示框（tooltip）迁移到 Lit 模板的原因：像友好名称和设备名称这样由用户控制的字段会被自动转义，而不必依赖对每个字符串单独进行过滤。
+
+```ts
+// Escaped by Lit: a name with HTML in it shows as text
+return html`${entityName}: ${value}`;
+```
+
+当你把 HTML 构建为字符串，并将该字符串交给某个会渲染它的东西时，麻烦就开始了。
+
+- 不要用外部数据设置 `innerHTML`。改用 `textContent`。地图卡片的修复正是这样做的。
+- 避免 `unsafeHTML`。目前，前端仅在 `ha-markdown-element` 中使用它，用于渲染已经过清理的 Markdown。
+- 一些库，例如图表和地图，接受 HTML 字符串作为提示框或弹窗。当库支持 Lit 模板时，优先使用 Lit 模板。
+
+## 当你必须构建 HTML 字符串时
+
+如果实在无法避免使用字符串，请将每个不可信的部分通过 [`src/common/util/xss.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/util/xss.ts) 中的 `filterXSS` 进行处理：
+
+```ts
+import { filterXSS } from "../../common/util/xss";
+
+return `${filterXSS(path.name ?? "")}<br>${formattedTime}`;
+```
+
+`filterXSS` 的允许列表（allowlist）为空，因此任何标签都无法通过。请将它用于最终会进入 HTML 的纯文本，而不是用于应保留其格式的内容。
+
+## Markdown
+
+使用 `<ha-markdown>` 组件渲染 Markdown。它会将 Markdown 转换为 HTML，然后使用标签和属性的允许列表过滤结果。只有列表中的内容才能通过。
+
+`<ha-markdown>` 有一个 `allow-svg` 选项。代码对此说得很清楚：不要在不可信内容上允许 SVG，它会导致 XSS。在前端中，它仅在配置流程对话框和操作编辑器等地方启用。
+
+## 链接
+
+URL 也可能是危险的：链接中的 `javascript:` URL 会在有人点击它时运行代码。每一个作为数据到达前端的 URL，无论是来自集成（integration）清单、应用程序、配置流程还是实体（entity）属性，都应该先经过检查。这些辅助函数位于 [`src/common/url/sanitize-http-url.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/url/sanitize-http-url.ts) 中：
+
+- `sanitizeHttpUrl(url)` 仅当 URL 是绝对的 `http:` 或 `https:` URL 时才返回该 URL，否则返回 `undefined`。
+- `sanitizeLinkUrl(url)` 还接受 `homeassistant://` 深度链接，并将它们转换为前端内部的路径。仅替换协议（scheme）是不够的：`homeassistant:///example.com` 会变成 `//example.com`，这会指向另一个站点。
+
+```ts
+const releaseUrl = sanitizeHttpUrl(stateObj.attributes.release_url);
+```
+
+## 以前出过什么问题
+
+- **提示框中的名称。** [能源仪表盘的图表提示框](https://github.com/home-assistant/core/security/advisories/GHSA-mq77-rv97-285m)中的实体名称、[历史图表卡片](https://github.com/home-assistant/core/security/advisories/GHSA-46j8-vpx8-6p72)中的实体名称，以及[地图卡片](https://github.com/home-assistant/core/security/advisories/GHSA-r584-6283-p7xc)中的设备名称，最终都进入了 HTML 字符串。能源仪表盘中的名称可能来自集成的云服务，而不仅仅来自用户。
+- **没有清理器的 Markdown。** 2017 年的第一份安全公告就是 [Markdown 输出中的 XSS](https://github.com/home-assistant/frontend/pull/514)。
+- **一个 `javascript:` URL。** 登录客户端发布的 `redirect_uri` 未检查其协议，并[在前端运行了代码](https://github.com/home-assistant/core/security/advisories/GHSA-jvxq-x42r-f7mv)。
+- **一个选择服务器的 URL 参数。** 一个登录链接可以让前端[连接到伪造的 WebSocket 服务器](https://github.com/home-assistant/core/security/advisories/GHSA-cr83-q7r2-7f5q)，然后该服务器可以向它发送任何它想要的内容。
+
+## 相关内容
+
+- [历史安全公告](https://www.hasscn.top/contributors/security/reference/advisories/)：每一份安全公告，按类型分组。
+- [安全辅助函数](https://www.hasscn.top/contributors/security/reference/helpers/#frontend)：以表格形式呈现的前端辅助函数。
+- [安全的集成](https://www.hasscn.top/contributors/security/guides/integrations/)：另一面，即数据的来源。
+- [前端](https://www.hasscn.top/contributors/frontend/)：前端是如何构建的。
+
+---
+
+# 保护应用安全
+
+> 在应用领域安全指南的基础上，关于应用和 Supervisor 的安全公告带给我们的经验教训。
+
+Source: https://www.hasscn.top/contributors/security/guides/apps/
+
+[应用](https://www.hasscn.top/contributors/glossary/app/)运行在自己的容器中，与 Home Assistant 和 [Supervisor](https://www.hasscn.top/contributors/glossary/supervisor/) 并存。应用领域已经介绍了如何保证应用安全：[保护你的应用](https://www.hasscn.top/contributors/apps/guides/security/)讲解了需要申请哪些权限、AppArmor、保护模式、API 角色和登录，而[安全评级](https://www.hasscn.top/contributors/apps/reference/security-rating/)则展示了用户如何看待你的选择。请从这里开始。
+
+本页补充了[过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/#apps-and-the-supervisor)中与应用和 Supervisor 相关的经验教训。
+
+## 不要仅依赖网络隔离
+
+应用中一个常见的模式：运行在宿主网络上，并在 Supervisor 的内部网络 `hassio` 上提供一个无需登录的端点。当时的想法是只有其他容器才能访问该地址。2026 年，一份安全公告表明这[并非事实](https://github.com/home-assistant/core/security/advisories/GHSA-gh5m-4m97-c95h)。本地网络上的一台设备可以通过宿主机添加一条通往内部地址的路由，从而直接访问这些端点。该公告点名了一个终端应用中的 shell，以及另外两个应用的 WebSocket API。
+
+Supervisor 2026.03.2 为所有安装修复了此问题：它在宿主机上添加了防火墙规则，丢弃发往该网络网关地址的流量，除非流量来自该网络本身或来自宿主机。
+
+这一教训的意义远不止这一次修复。端点监听的位置并不等于登录。
+
+- 为每个可以更改内容或显示私密内容的端点添加登录。为此请使用 [Home Assistant 用户](https://www.hasscn.top/contributors/apps/guides/security/#use-home-assistant-users)，而不是自己实现。
+- 对于 Web 界面，请使用 [ingress](https://www.hasscn.top/contributors/apps/guides/ingress/)，并且只接受来自 Supervisor 在 `172.30.32.2` 的连接。这样登录就由 Home Assistant 处理。
+- 只有当你的应用确实需要时才使用宿主网络。使用宿主网络还会降低[安全评级](https://www.hasscn.top/contributors/apps/reference/security-rating/)。
+
+## Supervisor API 绕过漏洞
+
+2023 年，一份安全公告表明攻击者可以绕过身份验证，并通过 Home Assistant 远程访问 [Supervisor API](https://github.com/home-assistant/core/security/advisories/GHSA-2j8f-h4mr-qr25)。该 API 可以安装更新、管理应用和备份。[公告](https://www.home-assistant.io/blog/2023/03/08/supervisor-security-disclosure/)指出，这个问题自 2017 年 Supervisor 推出以来就一直存在。
+
+Core 和 Supervisor 中的修复展示了两种适用于任何转发请求的应用的模式：
+
+- **只转发白名单中的内容。** Core 中 Supervisor API 的代理现在只转发与显式列表匹配的路径，其中一份列表用于无需登录的请求，另一份用于管理员。其他所有请求都会被拒绝。
+- **先解码再检查。** Core 会拒绝解码后发生变化的路径。Supervisor 会在检查路径和查询字符串中是否存在 `../` 之类的模式之前，根据需要进行多次解码。
+
+同年的一份相关安全公告展示了一个由外部数据构建的路径：`hassio.addon_stdin` 动作的 `addon` 字段最终进入了 [Supervisor API 请求](https://github.com/home-assistant/core/security/advisories/GHSA-4r74-h49q-rr3h)的路径中。Core 现在会根据严格的 slug 模式检查该字段。如果你的应用根据输入构建 URL 或路径，请以同样的方式检查该输入。
+
+## 申请最小的角色
+
+Supervisor API 会保护自己，但你的应用持有它的令牌。如果你的应用被攻破，攻击者将获得该令牌所允许的一切。选择能正常工作的最低 [API 角色](https://www.hasscn.top/contributors/apps/guides/security/#api-roles)，并且只在需要调用时才启用 `hassio_api`、`homeassistant_api` 或 `auth_api`。
+
+## 相关内容
+
+- [保护你的应用](https://www.hasscn.top/contributors/apps/guides/security/)：应用领域的完整指南。
+- [安全评级](https://www.hasscn.top/contributors/apps/reference/security-rating/)：每项选择如何影响评级。
+- [过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/)：按类型分组的所有安全公告。
+
+---
+
+# 保护伴侣应用（companion apps）的安全
+
+> Android 和 iOS 应用的安全公告中关于链接、导出组件、WebView 和 JavaScript 桥接的教训。
+
+Source: https://www.hasscn.top/contributors/security/guides/companion-apps/
+
+[伴侣应用（companion app）](https://www.hasscn.top/contributors/glossary/companion-app/)登录到用户的 Home Assistant 服务器，并将该登录状态保存在手机上。这使得应用成为通往家的一把钥匙。任何能让应用自行执行操作的东西——比如同一部手机上的另一个应用、消息中的链接，或框架中的网页——都可以在不知道密码的情况下使用这把钥匙。
+
+伴侣应用的大多数安全公告都归结为这一个理念。本指南按错误类型逐一讲解，并说明应用目前采取的措施。关于这些应用是如何构建的，请参阅[伴侣应用](https://www.hasscn.top/contributors/companion/)。
+
+## 在根据链接执行操作前先询问
+
+这些应用会对链接和标签做出反应：NFC 标签、二维码、`homeassistant://` 链接，以及指向 `https://www.home-assistant.io/tag/` 的通用链接。操作系统会将这些内容传递给应用，而不关心是谁发送的。手机上的另一个应用可以发送同样的链接，而无需用户参与。
+
+这曾两次出问题：
+
+- 2023 年，一个链接或二维码可以让 iOS 和 macOS 应用在服务器上[调用动作（action）](https://github.com/home-assistant/core/security/advisories/GHSA-h2jp-7grc-9xpp)，而无需询问。
+- 2026 年，其他应用可以在 [Android 应用](https://github.com/home-assistant/core/security/advisories/GHSA-2xqv-hwrf-983f)和 [iOS 应用](https://github.com/home-assistant/core/security/advisories/GHSA-j23v-9672-677j)中打开标签链接，扫描结果会直接发送到服务器。标签通常与解锁门或解除警报的自动化（automation）绑定。
+
+教训：链接是一个请求，而不是命令。当它会在服务器上更改某些内容时，用户必须先在应用内批准。
+
+应用目前采取的措施：
+
+- 两个应用在将来自链接的标签扫描发送到服务器之前都会询问，提供**仅允许一次**和**始终允许**选项。用户可以通过设置撤回已始终允许的标签。
+- iOS 应用在因 URL 而调用动作、触发事件或发送位置之前会请求确认。
+
+如果你添加了作用于服务器的新链接、新 intent 或新快捷方式，请为它提供同样的确认。
+
+## 显示你连接的是哪台服务器
+
+Android 应用的一条邀请链接携带了服务器的地址，应用会针对该地址开始引导流程，而[不显示该地址](https://github.com/home-assistant/core/security/advisories/GHSA-68f4-97mf-f68w)。随后登录页面在一个没有地址栏的 WebView 中加载。一个伪造的服务器可以展示一个完美的登录页面副本并收集密码。
+
+教训：当链接决定应用连接到哪里时，在任何事情发生之前先向用户显示连接目标。Android 应用现在会显示一个邀请界面，其中包含服务器地址、一条“只接受来自你信任的人的邀请”的警告，以及**接受**和**拒绝**按钮。
+
+## 让内部 URL 留在家里
+
+服务器的内部 URL 通常是纯 `http:`，这在家庭网络中没问题，但在其他任何地方都不行。iOS 应用曾[回退到内部 URL](https://github.com/home-assistant/core/security/advisories/GHSA-cm5v-547m-qh5h)，即使所在网络不在用户列出的家庭 Wi-Fi 网络之列。在公共网络上，令牌可能以明文形式发送给在该地址上应答的任何人。
+
+教训：一个旨在限制某事发生范围的列表，必须在每条路径上都进行限制，包括回退路径。iOS 应用现在为每台服务器提供连接安全级别。当内部 URL 是服务器的唯一 URL 且不是 `https:` 时，这个选择很重要。选择**最安全**时，应用只在用户列出的家庭网络上使用该 URL。选择**较不安全**时，它会在任何地方使用该 URL，用户需自行接受这一风险。Android 应用为每台服务器保留了类似的选择，即 `allowInsecureConnection`。
+
+## 保持组件私有
+
+在 Android 上，带有 `android:exported="true"` 的 activity、service 或 receiver 可以被手机上的任何应用以任意数据启动。Android 应用的位置 receiver 曾被导出，并[接受来自任何应用的位置更新](https://github.com/home-assistant/core/security/advisories/GHSA-77r5-pw5w-mgj3)。一个恶意应用可以发送伪造的位置，并触发对某人回家做出反应的自动化。
+
+修复方案展示了这一模式：
+
+- 处理位置数据的 receiver 不再被导出。
+- 一个小的、独立的 receiver 保持导出，用于 Tasker 等工具使用的公开 action。它只接受那一个 action，丢弃调用方随附的任何数据，并在应用内部传递请求。
+
+```xml
+<receiver
+    android:name=".sensors.LocationSensorReceiver"
+    android:exported="false" />
+```
+
+在导出一个组件之前，问问还有谁需要访问它。如果答案是没有人，就设置 `android:exported="false"`。如果其他应用必须访问它，就接受能工作的最小方案，并且永远不要信任随之而来的数据。
+
+Android 仓库的[架构技能](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-architecture/SKILL.md)增加了一条相关规则：始终设置 `PendingIntent` 的可变性，并默认使用 `FLAG_IMMUTABLE`，因为不必要的可变性会扩大攻击面。
+
+## 在 WebView 中只加载服务器
+
+应用的 WebView 运行前端，并可以访问令牌。2023 年，一个链接可以让 Android 应用在该 WebView 中[加载任意 URL](https://github.com/home-assistant/core/security/advisories/GHSA-jvpm-q3hq-86rg)。攻击者的页面随后将以与前端相同的权限运行。
+
+教训：来自链接、intent 或通知的 URL 是不可信的。在 WebView 加载它之前，先检查它指向哪里。
+
+## 保护 JavaScript 桥接
+
+前端通过一个 JavaScript 桥接与应用通信：Android 上是 `window.externalApp`，iOS 上是 `getExternalAuth` 等消息处理器。前端通过它请求访问令牌。
+
+2026 年，[两个错误叠加在一起](https://github.com/home-assistant/core/security/advisories/GHSA-7jp2-p2fw-mgvf)，让框架中的网页——比如仪表盘（dashboard）上的网页卡片——能够获取该令牌：
+
+1. 桥接响应了每一个框架，包括来自其他源的框架。
+2. 应用将消息中的回调名称未经检查地放入了它在主框架中运行的 JavaScript 中。
+
+应用目前采取的措施：
+
+- 在 Android 上，较新的桥接 `externalAppV2` 使用 `addWebMessageListener`，并忽略来自框架的消息，以及与已加载服务器不匹配的源的消息。当服务器和 WebView 支持时，应用会使用它。
+- 在 Android 上，`getExternalAuth` 和 `revokeExternalAuth` 只接受前端使用的两个回调名称 `externalAuthSetToken` 和 `externalAuthRevokeToken`，对两个桥接均如此。
+- 在 iOS 上，`SafeScriptMessageHandler` 只传递来自主框架、且 scheme、host 和端口与服务器 URL 匹配的消息。
+
+Android 检查的核心如下所示：
+
+```kotlin
+if (!isMainFrame) {
+    Timber.w("Ignored message from iframe")
+    return@addWebMessageListener
+}
+val currentUri = stateProvider().url?.toUri()
+if (!sourceOrigin.hasSameOrigin(currentUri)) {
+    return@addWebMessageListener
+}
+```
+
+教训：按框架和按源来决定谁可以与桥接通信。并且永远不要把消息中的值变成代码：改为将它与一个固定列表进行比较。
+
+## 让机密远离日志
+
+用户在报告问题时会分享日志。Android 仓库的[日志技能](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-logging-errors/SKILL.md)要求你将用户数据包裹在 `sensitive()` 中，这样它就不会出现在发布版日志中。实体（entity）ID 没问题。URL 以及任何能识别服务器或用户的内容则不行。对于存储在手机上的数据，[架构技能](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-architecture/SKILL.md)指向了 `EncryptedSharedPreferences`。
+
+## 相关内容
+
+- [过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/#companion-apps)：伴侣应用的所有安全公告汇总在一张表中。
+- [前端中的不可信内容](https://www.hasscn.top/contributors/security/guides/frontend/)：前端一侧，即应用所展示的内容。
+- [伴侣应用](https://www.hasscn.top/contributors/companion/)：这些应用是如何构建的。
+
+---
+
+# 依赖与供应链
+
+> Home Assistant 安装的每个库都在其中运行。Home Assistant 对依赖项有什么要求、会自动检查什么，以及它自身的工作流是如何受到保护的。
+
+Source: https://www.hasscn.top/contributors/security/guides/dependencies/
+
+集成（integration）通过库与设备和服务通信，而这些库来自 PyPI。每个[依赖要求](https://www.hasscn.top/contributors/glossary/requirement/)都是最终进入 Home Assistant 的代码，进入每一个安装了它的用户的家中。如果攻击者接管了一个库，或者在其依赖中塞入一个恶意包，他们就进来了。这就是供应链攻击，也是 Home Assistant 对依赖来源严格把关的原因。
+
+## Home Assistant 对一个库的要求
+
+质量分级中的[依赖透明度](https://www.hasscn.top/contributors/core/quality-scale/dependency-transparency/)规则设定了基线。每个带有外部依赖的集成都必须满足它，从 Bronze 级开始：
+
+- 源代码在 OSI 认可的许可证下可用。
+- 该包在 PyPI 上可用。
+- PyPI 上的包由公开的 CI 流水线构建并发布。
+- PyPI 上的每个版本都对应公开仓库中的一个带标签的发布。
+
+这条规则的存在，是为了让项目能够信任它随每个版本一起发布的依赖。
+
+## 自动检查的内容
+
+你不必手动检查所有这些。有几个工具会审查每一个更改依赖要求的拉取请求（pull request）。
+
+### hassfest
+
+hassfest 会验证每个集成的清单（manifest）中的 `requirements`：
+
+- 核心集成必须将每个依赖要求固定到确切的版本，例如 `"example-library==1.2.3"`。
+- 它会遍历完整的依赖树，而不仅仅是直接依赖，并标记不应存在的包：作为运行时依赖的测试、构建或文档工具、`types-` 包，以及一些无人维护的包。
+- 它会标记安装了顶层 `test`、`tests`、`doc` 或 `docs` 文件夹，或顶层 `.pth` 或 `.start` 文件的包。
+
+### Check requirements
+
+更改 Core 依赖要求文件的拉取请求会收到来自 **Check requirements** 工作流的一条评论，每个更改的包占一行：
+
+| 检查项 | 检查内容 |
+| --- | --- |
+| No Advisories | PyPI 报告新版本没有已知漏洞。 |
+| Not Yanked | 新版本没有从 PyPI 上被撤回（yanked）。 |
+| Repo Public | 源仓库可公开访问。 |
+| CI Upload | PyPI 上的发布带有证明（attestation），显示是哪个流水线发布的。 |
+| Release Pipeline | 该库的发布工作流：由标签、发布或受保护的分支触发，最好使用 OIDC 而不是存储的令牌来发布，并且没有绕过它的上传途径。 |
+| Security | 对库源代码的快速扫描，查找明显的供应链危险信号。 |
+| PR Link | 新包链接到其源仓库。版本升级链接到提到两个版本的更新日志或比较。 |
+| Async Safe | 库中 `async` 函数内的阻塞调用。 |
+
+这些检查的一部分由 AI 代理完成，其余由脚本完成。请正确看待 **Security** 这一行：它只是一次廉价的初筛，而不是安全审查。通过显示为 ☑️，而不是 ✅，这样就不会有人把它当作认可的印章。
+
+### 许可证
+
+Core 的 CI 会提取每个已安装包的许可证，并使用 [`script/licenses.py`](https://github.com/home-assistant/core/blob/dev/script/licenses.py) 检查其是否获得 OSI 认可。
+
+## 当你添加或更新依赖时
+
+- 对于新库，在拉取请求中链接其源仓库；对于更新，链接更新日志或两个版本之间的比较。Check requirements 工作流会查找它，审查者也需要它。
+- 只更改版本和重新生成的依赖要求文件，以及新版本所需的代码更改。运行 `python3 -m script.gen_requirements_all` 来重新生成这些文件。
+- 如果新版本引入了它自己的新依赖，请在拉取请求中说明。
+- 如果你是该库的维护者：从公开的 CI 流水线发布它，并在 PyPI 上使用可信发布（trusted publishing），以便发布可以追溯到其源代码。
+
+审查者会遵循一份[依赖更新检查清单](https://www.hasscn.top/contributors/core/development/reviewing/#dependency-updates)。在提交之前值得先读一读。
+
+## GitHub 工作流
+
+项目自身的 CI 也是供应链的一部分。[core 仓库](https://github.com/home-assistant/core)中的工作流遵循几种你在审查中会看到的模式：
+
+- **Action 固定到 commit SHA**，并在注释中注明版本，例如 `actions/checkout@<sha> # v7.0.1`。Renovate 会保持这些固定项是最新的。
+- **权限从零开始。** 工作流在顶部设置 `permissions: {}`，每个作业列出它所需的权限，例如 `contents: read`。
+- **检出（checkout）不保留凭据**：在 `actions/checkout` 上设置 `persist-credentials: false`。
+- **zizmor**，一个 GitHub 工作流的 linter，在 core 仓库中以 pedantic 模式运行，作为 pre-commit 钩子并在 CI 中运行。[frontend 仓库](https://github.com/home-assistant/frontend)对其工作流运行 `actionlint`。
+
+如果你修改了工作流，请遵循这些模式。
+
+### 以前出过什么问题
+
+2023 年，GitHub Security Lab 在 [actions 仓库](https://github.com/home-assistant/actions)中的一个共享 action `helpers/version` 里发现了一个[表达式注入](https://github.com/home-assistant/core/security/advisories/GHSA-jff5-5j3g-vhqc)漏洞。它将 `${{ github.head_ref }}`（拉取请求的分支名称）直接放入 `run:` 脚本中。GitHub 会在 shell 运行之前填充表达式，因此包含 shell 代码的分支名称会成为脚本的一部分。根据安全公告，攻击者可以利用这一点泄露机密并更改仓库。
+
+永远不要将包含外部数据（如分支名称、标题或评论）的表达式放入 `run:` 脚本中。将其作为环境变量传入，让 shell 将其视为数据：
+
+```yaml
+- name: Show the branch
+  env:
+    HEAD_REF: ${{ github.head_ref }}
+  run: echo "Branch: ${HEAD_REF}"
+```
+
+zizmor 会标记这种模板注入。
+
+## 相关内容
+
+- [带着安全意识进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/)：在拉取请求中要注意什么。
+- [自动检查](https://www.hasscn.top/contributors/security/reference/checks/)：所有检查汇总在一张表中。
+- [依赖要求](https://www.hasscn.top/contributors/core/integrations/manifest/#requirements)：清单中的 `requirements` 键。
+
+---
+
+# 以安全为重进行审查
+
+> 在拉取请求（pull request）中应关注什么，以避免安全问题进入用户的家中，以及发现问题后该怎么做。
+
+Source: https://www.hasscn.top/contributors/security/guides/reviewing/
+
+审查者是代码发布前的最后一道防线。你不需要是安全专家就能发现大多数问题：它们往往出现在同样几个地方。本页列出了这些地方，让你知道该往哪里看。
+
+本页为常规审查指南增加了安全视角。完整流程请参阅 Core 的[拉取请求审查](https://www.hasscn.top/contributors/core/development/reviewing/)。
+
+## 如果你发现漏洞
+
+你在审查中发现的一些问题并不是新代码中缺少检查，而是已经发布的代码中存在的漏洞。不要在所有人都能看到的拉取请求中讨论它，而应[私下报告](https://www.hasscn.top/contributors/security/report-a-vulnerability/)。
+
+## 从过去的错误中学习
+
+Home Assistant 的[历史安全公告](https://www.hasscn.top/contributors/security/reference/advisories/)是最好的培训材料。它们反复出现同样的主题：
+
+- **名称被渲染为 HTML。** 通过图表提示框（tooltip）和历史图表卡片中的实体（entity）名称，以及地图卡片中的设备（device）名称造成的存储型 XSS。
+- **不安全的 URL。** 通过登录回调中的 `javascript:` URL 实现的完全接管，以及 Core 中的部分服务端请求伪造。
+- **无需登录的端点。** 某个集成的警报面板状态，以及 Home Assistant 的用户账户，可被本地网络上的任何人读取。应用（app）的未认证端点通过 host 网络模式在本地网络上可达。
+- **证书检查。** Core 及其使用的库中，对外请求的 SSL 验证不正确。
+- **伴侣应用（companion app）擅自行动。** 链接和其他应用使应用在未经询问的情况下向服务器发送标签扫描、位置或操作，以及框架中的网页访问到了 JavaScript 桥。
+- **项目自身的工具。** GitHub Action 中的表达式注入。
+
+[参考页面](https://www.hasscn.top/contributors/security/reference/advisories/)按类型对每条公告进行分组，并附上经验教训和 GitHub 上详情的链接。阅读其中几篇会改变你阅读代码的方式。
+
+## 需要关注什么
+
+### 入口
+
+- 新的 HTTP 视图：是否需要 `requires_auth = False`？如果是，每个方法（包括 `get`）是否都自行检查请求？
+- 修改配置的新操作（action）、WebSocket 命令或视图：是否仅限管理员？参见[守护入口](https://www.hasscn.top/contributors/security/guides/integrations/#guard-the-ways-in)。
+- 新的 webhook：是否应为 `local_only`？其 ID 是否使用 `webhook.async_generate_id()` 生成？
+- 来自用户的路径：是否使用 `hass.config.is_allowed_path()` 进行检查？
+
+### 数据
+
+- 凭据应放在配置条目（config entry）的 `data` 中，而不是其他任何地方。
+- 诊断信息应隐去所有隐私内容。检查测试中的快照：你看到的就是用户会分享的内容。
+- 日志行不包含密码、令牌或完整密钥。
+- 来自设备或服务的数据不会被传入 `eval()`、`exec()` 或 shell。
+
+不要对操作（action）的 schema 已经校验的字段要求额外检查。Home Assistant 会在处理程序运行之前检查这些字段。应要求数据跳过 schema 或被转换为不太安全的形式时进行检查。
+
+### 网络
+
+- 集成使用 Home Assistant 的共享 Web 会话。
+- 证书检查默认开启。如果有关闭它们的选项，那应是用户的选择，且关闭不是默认值。
+
+### 前端
+
+- 名称、属性和其他数据通过 Lit 模板到达页面，而不是 `innerHTML` 或 HTML 字符串。
+- 如果某个库需要 HTML 字符串，不可信的部分应通过 `filterXSS` 处理。
+- 来自数据的 URL 应通过 `sanitizeHttpUrl` 或 `sanitizeLinkUrl` 处理。
+- 带有 `allow-svg` 的 `<ha-markdown>` 只渲染受信任的内容。
+
+### 依赖
+
+- 新的库符合[依赖透明度](https://www.hasscn.top/contributors/core/quality-scale/dependency-transparency/)规则。
+- 对于更新，阅读上游 diff，并查看 Check requirements 工作流的评论。参见[依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/)。
+
+### 应用
+
+- 应用中每个会更改内容的端点都有登录验证，或只接受通过 ingress 访问的 Supervisor。监听内部地址不等于登录。参见[保护应用安全](https://www.hasscn.top/contributors/security/guides/apps/)。
+
+### 伴侣应用
+
+- 会更改服务器内容的新链接、intent 或快捷方式应先询问用户。
+- 新的 Android 组件不被导出（exported），除非其他应用必须访问它。
+- 发送到 JavaScript 桥的消息只来自服务器的主框架，且消息中的任何值都不会变成代码。参见[保护伴侣应用安全](https://www.hasscn.top/contributors/security/guides/companion-apps/)。
+
+### 工作流
+
+- 新的操作固定到 commit SHA。
+- 在 `run:` 脚本中不使用包含外部数据（如分支名称或标题）的 `${{ }}` 表达式。参见[过去的错误](https://www.hasscn.top/contributors/security/guides/dependencies/#what-went-wrong-before)。
+- 权限尽可能小，仅满足任务所需，检出（checkout）使用 `persist-credentials: false`。
+
+## 当你不确定时
+
+提问。说出你担心什么，以及为什么。提问永远好过猜测。如果作者也不确定，可以到 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道咨询，前提是这是关于新代码的问题，而不是已发布代码中的漏洞。
+
+如果你自己编写代码，并且对其安全性有疑虑，请在你的拉取请求中说明。这有助于审查者关注正确的地方。
+
+---
+
+# 安全参考
+
+> 供您查阅的详细信息。安全辅助工具、自动化检查，以及所有过往的安全公告。
+
+Source: https://www.hasscn.top/contributors/security/reference/
+
+本节中的页面用于查阅信息。有关如何使用它们，请从[指南](https://www.hasscn.top/contributors/security/guides/)开始。
+
+- [安全辅助工具](https://www.hasscn.top/contributors/security/reference/helpers/)：Core 和前端用于证书、脱敏、管理员访问、webhook、路径和不可信内容的所有辅助工具（helper）。
+- [自动化安全检查](https://www.hasscn.top/contributors/security/reference/checks/)：用于检查代码、依赖项和工作流的工具，以及它们的运行位置。
+- [过往安全公告](https://www.hasscn.top/contributors/security/reference/advisories/)：所有已发布的安全公告（advisory），按类型分组，包含问题所在及经验教训。
+
+---
+
+# 安全辅助函数
+
+> Home Assistant Core 和前端中处理证书、脱敏、管理员访问、Webhook、路径和不可信内容的辅助函数。
+
+Source: https://www.hasscn.top/contributors/security/reference/helpers/
+
+所有与安全相关的辅助函数（helper）汇总在一页。各指南说明了何时以及为何使用它们：[集成（integration）](https://www.hasscn.top/contributors/security/guides/integrations/)和[前端](https://www.hasscn.top/contributors/security/guides/frontend/)。
+
+## Core
+
+### 网络
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `async_get_clientsession(hass, verify_ssl=True)` | `homeassistant.helpers.aiohttp_client` | 共享的 aiohttp 会话。默认检查证书，并拒绝从网络重定向到回环地址。 |
+| `async_create_clientsession(hass, verify_ssl=True)` | `homeassistant.helpers.aiohttp_client` | 具有相同保护措施的新 aiohttp 会话，适用于需要自己创建会话的情况，例如需要使用 cookie。 |
+| `get_async_client(hass, verify_ssl=True)` | `homeassistant.helpers.httpx_client` | 共享的 HTTPX 客户端。默认检查证书。 |
+| `CONF_VERIFY_SSL` | `homeassistant.const` | 用于关闭证书检查选项的标准键。 |
+
+### 脱敏
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `async_redact_data(data, to_redact)` | `homeassistant.components.diagnostics` | 将所列键的值替换为 `**REDACTED**`，包括嵌套的字典和列表。空值和 `None` 保持不变。 |
+| `async_redact_data(data, to_redact)` | `homeassistant.helpers.redact` | 同上，但 `to_redact` 还可以将键映射到一个用于遮蔽该值的函数。 |
+| `partial_redact(value, unmasked_prefix=4, unmasked_suffix=4)` | `homeassistant.helpers.redact` | 保留开头和结尾的字符，其余替换为 `***`。较短的值和非字符串值会变为 `**REDACTED**`。 |
+
+### 访问
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `async_register_admin_service(hass, domain, service, handler)` | `homeassistant.helpers.service` | 注册一个仅管理员可调用的动作（action）。 |
+| `@websocket_api.require_admin` | `homeassistant.components.websocket_api` | 将 WebSocket 命令限制为仅管理员可用。 |
+| `@require_admin` | `homeassistant.components.http` | 将 HTTP 视图的方法限制为仅管理员可用。 |
+| `requires_auth` | `HomeAssistantView` | 默认为 `True`：该视图需要已登录的用户。 |
+
+有关实体（entity）的检查，请参见[权限](https://www.hasscn.top/contributors/core/internals/permissions/)。
+
+### Webhook
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `async_generate_id()` | `homeassistant.components.webhook` | 由 64 个随机十六进制字符组成的 webhook ID。 |
+| `async_register(..., local_only=True)` | `homeassistant.components.webhook` | 忽略来自本地网络之外的请求，以及通过 Home Assistant Link 的请求。 |
+| `async_register(..., allowed_methods=...)` | `homeassistant.components.webhook` | webhook 接受的 HTTP 方法。默认为 `POST` 和 `PUT`。 |
+
+### 文件和 URL
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `hass.config.is_allowed_path(path)` | `homeassistant.core_config` | 判断路径是否位于用户允许的文件夹内。会先解析路径。包含阻塞式 I/O：请在执行器（executor）中运行。 |
+| `hass.config.is_allowed_external_url(url)` | `homeassistant.core_config` | 判断 URL 是否以用户允许的外部 URL 之一开头。 |
+
+## 前端
+
+| 辅助函数 | 位置 | 作用 |
+| --- | --- | --- |
+| `filterXSS(html)` | [`src/common/util/xss.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/util/xss.ts) | 从字符串中移除所有标签，用于必须放入 HTML 字符串的文本。 |
+| `sanitizeHttpUrl(url)` | [`src/common/url/sanitize-http-url.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/url/sanitize-http-url.ts) | 仅当 URL 是绝对的 `http:` 或 `https:` URL 时才返回它。 |
+| `sanitizeLinkUrl(url)` | [`src/common/url/sanitize-http-url.ts`](https://github.com/home-assistant/frontend/blob/dev/src/common/url/sanitize-http-url.ts) | 类似于 `sanitizeHttpUrl`，并且还会将 `homeassistant://` 深度链接转换为前端内部的安全路径。 |
+| `<ha-markdown>` | [`src/components/ha-markdown.ts`](https://github.com/home-assistant/frontend/blob/dev/src/components/ha-markdown.ts) | 渲染 Markdown，并使用标签和属性的允许列表进行过滤。仅对可信内容使用 `allow-svg`。 |
+
+---
+
+# 自动化安全检查
+
+> 用于检查 Home Assistant 的代码、依赖项和工作流是否存在安全问题的工具，以及它们的运行位置。
+
+Source: https://www.hasscn.top/contributors/security/reference/checks/
+
+这些检查会自动运行，因此许多问题在审阅者查看之前就会被发现。它们不能取代审阅：它们只能捕获已知的模式，而不是所有错误。除非表格中另有说明，否则所有检查都在[核心仓库](https://github.com/home-assistant/core)中运行。
+
+| 检查 | 运行位置 | 捕获内容 |
+| --- | --- | --- |
+| hassfest requirements | CI 中，以及本地通过 `python3 -m script.hassfest` 运行 | Core 集成中未使用 `==` 固定版本的依赖要求。依赖树中不应作为运行时依赖的包，或无人维护的包。安装了顶层 `test`、`tests`、`doc` 或 `docs` 文件夹，或顶层 `.pth` 或 `.start` 文件的包。 |
+| 许可证审计 | CI 中，当依赖要求发生变化时 | 未获得 OSI 批准许可证的已安装包（[`script/licenses.py`](https://github.com/home-assistant/core/blob/dev/script/licenses.py)）。 |
+| Check requirements | 更改依赖要求文件的拉取请求 | PyPI 上的已知漏洞和被撤回的版本、私有源代码仓库、没有发布证明的版本、薄弱的发布流水线、源代码中明显的危险信号、缺失的更新日志链接，以及 `async` 代码中的阻塞调用。参见[依赖项与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/#check-requirements)。 |
+| Ruff 安全规则 | pre-commit 钩子，也在 CI 中 | 类似 `exec`（`S102`）、`eval`（`S307`）、使用 `shell=True` 的 `subprocess`（`S602`）的调用、不安全的 XML 解析、`pickle`、硬编码的临时文件，以及作为默认值的硬编码密码。完整列表位于 `pyproject.toml` 中 `[tool.ruff.lint]` 的 `select` 下。 |
+| CodeQL | 每周一次 | 由 GitHub 对 Python 代码进行的代码扫描。 |
+| zizmor | pre-commit 钩子，也在 CI 中 | GitHub 工作流中的安全问题，以 pedantic 模式运行。 |
+| actionlint | [前端仓库](https://github.com/home-assistant/frontend)的 CI | GitHub 工作流中的错误。 |
+| Renovate | 其自身的拉取请求 | 更新依赖项、pre-commit 钩子和固定版本 GitHub Actions 的拉取请求。 |
+
+## 相关内容
+
+- [依赖项与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/)：这些检查对你的拉取请求意味着什么。
+- [拉取请求上的检查](https://www.hasscn.top/contributors/core/development/checks/)：Core 的所有检查，不仅限于安全。
+
+---
+
+# 过往安全公告
+
+> Home Assistant 已发布的所有安全公告，按类型分组，说明出了什么问题以及对贡献者的教训。
+
+Source: https://www.hasscn.top/contributors/security/reference/advisories/
+
+Home Assistant 会为每一个符合[安全政策标准](https://www.hasscn.top/contributors/security/report-a-vulnerability/#public-disclosure-and-cve-assignment)的有效漏洞发布安全公告。本页面按类型对它们进行分组，用一句话说明出了什么问题，并指出相应的教训。每条公告都链接到 GitHub 上的完整详情，每条教训都链接到涵盖该内容的指南。
+
+包含严重程度、CVE、发现者和修复版本的列表本身位于[安全页面](https://www.home-assistant.io/security/#past-advisories)。那份列表是官方版本。本页面只是帮助你从中学习。
+
+同样的一些错误不断重复出现。请阅读与你所负责代码相匹配的分组。
+
+## 跨站脚本
+
+到达前端的数据被当作 HTML 渲染，因此一个精心构造的名称或消息可以在查看者的浏览器中运行代码。
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2026‑03‑27 | 一个包含 HTML 的设备名称在[地图卡片](https://github.com/home-assistant/core/security/advisories/GHSA-r584-6283-p7xc)的工具提示中作为代码运行。 | 名称是数据，绝不是标记。让 Lit 来渲染它们，或者设置 `textContent`。参见[前端](https://www.hasscn.top/contributors/security/guides/frontend/#let-lit-do-the-escaping)。 |
+| 2026‑03‑27 | 一个实体（entity）名称在[历史图表卡片](https://github.com/home-assistant/core/security/advisories/GHSA-46j8-vpx8-6p72)的工具提示中作为代码运行。 | 另一个卡片中的同样错误：检查每一个构建 HTML 字符串的地方。参见[前端](https://www.hasscn.top/contributors/security/guides/frontend/#when-you-must-build-an-html-string)。 |
+| 2025‑10‑14 | 一个实体名称在能源仪表盘的[图表工具提示](https://github.com/home-assistant/core/security/advisories/GHSA-mq77-rv97-285m)中作为代码运行。该名称可能来自集成的云服务，而不仅仅来自用户。 | 任何名称都可能来自外部，包括集成设置的默认名称。参见[前端](https://www.hasscn.top/contributors/security/guides/frontend/)。 |
+| 2017‑10‑11 | 前端没有对[Markdown 输出](https://github.com/home-assistant/frontend/pull/514)进行净化，例如在持久通知中。 | 通过净化器渲染 Markdown。如今那就是 `<ha-markdown>`。参见[前端](https://www.hasscn.top/contributors/security/guides/frontend/#markdown)。 |
+
+## 登录与前端
+
+来自 [Cure53 的 2023 年审计](https://www.home-assistant.io/blog/2023/10/19/security-audits-of-home-assistant/)的四项发现，全部在 Home Assistant Core 2023.9 中修复。
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2023‑10‑19 | 登录客户端发布的 `redirect_uri` 没有检查其协议方案，因此一个 [`javascript:` URL](https://github.com/home-assistant/core/security/advisories/GHSA-jvxq-x42r-f7mv) 可以在前端运行代码。 | 每个来自外部的 URL 在被用作链接或重定向之前都要检查其协议方案。参见[前端](https://www.hasscn.top/contributors/security/guides/frontend/#links)。 |
+| 2023‑10‑19 | 一个登录链接可能将授权码发送到攻击者控制的[另一个站点](https://github.com/home-assistant/core/security/advisories/GHSA-qhhj-7hrc-gqj5)。 | 重定向目标需要与其所属客户端严格匹配。 |
+| 2023‑10‑19 | 登录链接中的一个参数决定前端将其 WebSocket 连接到哪个服务器，因此一个链接可以[将其连接到伪造的服务器](https://github.com/home-assistant/core/security/advisories/GHSA-cr83-q7r2-7f5q)。 | 绝不要让 URL 参数选择前端信任的服务器。 |
+| 2023‑10‑19 | Home Assistant 没有设置 `X-Frame-Options` 头，因此其他站点可以将其加载到框架中进行[点击劫持](https://github.com/home-assistant/core/security/advisories/GHSA-935v-rmg9-44mw)。 | Core 现在默认发送 `X-Frame-Options: SAMEORIGIN`。不要绕过它。 |
+
+## 无需登录的端点
+
+一个不检查请求者身份就响应的端点。处于本地网络上并不等于已登录。
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2026‑06‑18 | 旧版 [Konnected 集成](https://github.com/home-assistant/core/security/advisories/GHSA-x84v-g949-293w)的一个 HTTP 视图设置了 `requires_auth = False`，并在 `POST` 和 `PUT` 上检查令牌，但在 `GET` 上没有。网络上的任何人都可以读取报警面板的状态。该集成已被移除。 | 使用 `requires_auth = False` 时，视图的每个方法都要自行检查请求。参见[集成](https://www.hasscn.top/contributors/security/guides/integrations/#http-views)。 |
+| 2023‑12‑14 | 登录页面向本地网络上打开它的任何人显示[所有用户账户](https://github.com/home-assistant/core/security/advisories/GHSA-jqpc-rc7g-vf83)。 | 在登录之前不要泄露关于用户的信息，即使在本地网络上也不行。 |
+| 2023‑10‑19 | 标记为仅限本地的 Webhook 可以通过 Home Assistant Cloud（现为 Home Assistant Link）的远程连接[从互联网访问](https://github.com/home-assistant/core/security/advisories/GHSA-wx3j-3v2j-rf45)，该连接使请求看起来像是本地的。 | 请求来自哪里与谁发送它并不是一回事。使用 webhook 辅助元素（helper）中的 `local_only`，它会处理这种情况。参见[集成](https://www.hasscn.top/contributors/security/guides/integrations/#webhooks)。 |
+
+## 服务器端请求伪造
+
+来自调用者的数据最终进入了 Home Assistant 自己使用自身凭据发送的请求中。
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2023‑10‑19 | `hassio.addon_stdin` 动作的 `addon` 字段被放入 Supervisor API 请求的路径中，因此调用者可以访问[其他 Supervisor 端点](https://github.com/home-assistant/core/security/advisories/GHSA-4r74-h49q-rr3h)。 | 使用严格的模式验证每一个进入 URL 或路径的值。Core 现在会根据 slug 模式检查该字段。参见[集成](https://www.hasscn.top/contributors/security/guides/integrations/#treat-what-comes-in-as-untrusted)。 |
+
+## 证书检查
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2025‑02‑18 | 当 aiohttp 的 `verify_ssl` 选项被 `ssl` 取代时，一些集成和库[将旧值直接传递下去](https://github.com/home-assistant/core/security/advisories/GHSA-m3pm-rpgg-5wj6)。根据公告，这关闭了证书检查。 | 使用 Home Assistant 的共享 Web 会话，并将用户的选择作为 `verify_ssl` 传递。参见[集成](https://www.hasscn.top/contributors/security/guides/integrations/#keep-certificate-checks-on)。 |
+
+## 应用与 Supervisor
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2026‑03‑27 | 使用主机网络的应用在 Supervisor 的内部网络上提供[无需登录的端点](https://github.com/home-assistant/core/security/advisories/GHSA-gh5m-4m97-c95h)，并假设没有其他东西能访问它。本地网络上的设备却可以。 | 绑定到内部地址并不等于已登录。参见[应用](https://www.hasscn.top/contributors/security/guides/apps/#do-not-trust-the-network-alone)。 |
+| 2023‑03‑08 | 攻击者可以绕过身份验证，并通过 Home Assistant 访问 [Supervisor API](https://github.com/home-assistant/core/security/advisories/GHSA-2j8f-h4mr-qr25)。 | 代理只转发显式列表中的内容。参见[应用](https://www.hasscn.top/contributors/security/guides/apps/#the-supervisor-api-bypass)。 |
+
+## 伴侣应用
+
+[伴侣应用](https://www.hasscn.top/contributors/companion/)持有用户服务器的令牌。任何能让应用自行执行操作的东西都会使用该令牌。
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2026‑07‑31 | 其他应用可以在 Android 应用中打开标签链接，该应用会在不询问用户的情况下将[标签扫描发送到服务器](https://github.com/home-assistant/core/security/advisories/GHSA-2xqv-hwrf-983f)。 | 来自应用外部的操作需要用户的批准。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#ask-before-acting-on-a-link)。 |
+| 2026‑07‑31 | [iOS 应用](https://github.com/home-assistant/core/security/advisories/GHSA-j23v-9672-677j)也是如此，通过通用链接实现。 | 同样的教训，在两个平台上都适用。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#ask-before-acting-on-a-link)。 |
+| 2026‑07‑26 | 一个邀请链接可以让 Android 应用针对[任意服务器](https://github.com/home-assistant/core/security/advisories/GHSA-68f4-97mf-f68w)开始引导流程，而不显示其地址。随后一个伪造的登录页面可以收集密码。 | 在用户信任一个链接之前，向他们展示该链接会将他们带到哪里。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#show-which-server-you-connect-to)。 |
+| 2026‑06‑25 | iOS 应用对内部 URL [忽略了家庭 Wi-Fi 网络列表](https://github.com/home-assistant/core/security/advisories/GHSA-cm5v-547m-qh5h)，因此它可能在任何网络上通过纯 HTTP 发送其令牌。 | 只在用户标记为家庭的网络上使用内部 `http:` URL。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#keep-the-internal-url-at-home)。 |
+| 2026‑06‑17 | Android 应用的一个[导出的接收器](https://github.com/home-assistant/core/security/advisories/GHSA-77r5-pw5w-mgj3)接受来自任何应用的位置更新，并将其作为真实位置发送到服务器。 | 不要导出组件。当某个东西必须可访问时，只接受它所需的那个操作，并丢弃随之而来的数据。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#keep-components-private)。 |
+| 2026‑05‑11 | 两个应用的 JavaScript 桥会响应来自[其他来源](https://github.com/home-assistant/core/security/advisories/GHSA-7jp2-p2fw-mgvf)的帧，例如网页卡片，并将消息中的回调名称放入其运行的代码中。框架中的页面可以获取访问令牌。 | 只有服务器的主框架与桥通信，消息中的任何内容都不会变成代码。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#guard-the-javascript-bridge)。 |
+| 2023‑10‑19 | Android 应用可能被诱导在其 WebView 中加载[任意 URL](https://github.com/home-assistant/core/security/advisories/GHSA-jvpm-q3hq-86rg)。 | WebView 只加载用户的服务器。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#load-only-the-server-in-the-webview)。 |
+| 2023‑10‑19 | 一个链接或二维码可以让 iOS 和 macOS 应用在不询问的情况下[调用服务器上的动作](https://github.com/home-assistant/core/security/advisories/GHSA-h2jp-7grc-9xpp)。 | 来自应用外部的操作需要用户的批准。参见[伴侣应用](https://www.hasscn.top/contributors/security/guides/companion-apps/#ask-before-acting-on-a-link)。 |
+
+## 工作流
+
+| 日期 | 出了什么问题 | 教训 |
+| --- | --- | --- |
+| 2023‑10‑19 | 项目的一个共享 GitHub Action 将拉取请求的分支名称直接放入 shell 脚本中，这是一次[表达式注入](https://github.com/home-assistant/core/security/advisories/GHSA-jff5-5j3g-vhqc)。 | 绝不要将包含外部数据的 `${{ }}` 表达式放入 `run:` 步骤中。参见[依赖与供应链](https://www.hasscn.top/contributors/security/guides/dependencies/#what-went-wrong-before)。 |
+
+## 相关内容
+
+- [报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)：如何报告，以及什么符合条件。
+- [以安全意识进行审查](https://www.hasscn.top/contributors/security/guides/reviewing/)：在拉取请求中应该查看哪些地方。

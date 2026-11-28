@@ -1,0 +1,61 @@
+# 操作系统与 Supervisor
+
+> 操作系统、硬件板与更新。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/os/llms-full.txt.
+
+## 操作系统与 Supervisor
+
+- [操作系统与 Supervisor](https://www.hasscn.top/contributors/os/index.md): 参与 Home Assistant OS 和 Supervisor 的开发工作，这两个组件将一块开发板或一台虚拟机变成一个能够运行、自我更新和自我修复的 Home Assistant 系统。
+- [你对 Supervisor 的首次贡献](https://www.hasscn.top/contributors/os/first-contribution/index.md): 在开发容器中运行 Supervisor，做一个小改动，运行测试，然后提交你的第一个 pull request。
+- [安装类型](https://www.hasscn.top/contributors/os/installation-types/index.md): Home Assistant OS 和 Supervisor 在哪些安装类型中使用，在哪些中不使用，以及这对你的代码意味着什么。
+
+## Home Assistant OS
+
+- [Home Assistant OS](https://www.hasscn.top/contributors/os/operating-system/index.md): Home Assistant OS 的组成、启动方式，以及其代码仓库的组织结构。
+
+### Guides
+
+- [构建镜像](https://www.hasscn.top/contributors/os/operating-system/build/index.md): 设置构建容器并为开发板构建 Home Assistant OS。
+- [测试你的构建](https://www.hasscn.top/contributors/os/operating-system/test/index.md): 在 QEMU 中启动你的镜像、运行自动化测试，并将你的构建安装到真实设备上。
+- [配置主机](https://www.hasscn.top/contributors/os/operating-system/configuration/index.md): 使用 CONFIG USB 驱动器，或直接在主机的持久化文件夹中更改 Home Assistant OS 的主机设置。
+- [配置网络](https://www.hasscn.top/contributors/os/operating-system/networking/index.md): Home Assistant OS 如何通过 NetworkManager 管理网络，以及如何配置 UI 未覆盖的部分。
+- [调试主机](https://www.hasscn.top/contributors/os/operating-system/debugging/index.md): 通过 SSH 或控制台在 Home Assistant OS 上获取 root shell，并找到所需的日志。
+- [发布与构建](https://www.hasscn.top/contributors/os/operating-system/releases/index.md): Home Assistant OS 的更改如何从拉取请求（pull request）走到发布，包括涉及的分支、版本号和构建流水线。
+
+### Reference
+
+- [分区](https://www.hasscn.top/contributors/os/operating-system/partitions/index.md): Home Assistant OS 的磁盘布局、每个分区的内容，以及数据磁盘功能如何移动数据分区。
+- [更新系统](https://www.hasscn.top/contributors/os/operating-system/update-system/index.md): Home Assistant OS 如何通过 RAUC 和双启动槽位进行自我更新、更新包如何签名，以及如何安装自己构建的版本。
+- [板卡元数据](https://www.hasscn.top/contributors/os/operating-system/board-metadata/index.md): 每块板卡的 meta 文件中的变量，以及所有板卡共享的版本文件。
+
+### Boards
+
+- [支持的开发板](https://www.hasscn.top/contributors/os/operating-system/boards/index.md): Home Assistant OS 构建所面向的每一块开发板，包括其构建目标、引导加载程序和机器类型。
+- [Raspberry Pi](https://www.hasscn.top/contributors/os/operating-system/raspberry-pi/index.md): Home Assistant OS 在 Raspberry Pi 上的特定内容，例如串行控制台、I2C 以及从 USB 启动。
+- [ODROID](https://www.hasscn.top/contributors/os/operating-system/odroid/index.md): Hardkernel ODROID 在 Home Assistant OS 下的 specifics，例如 eMMC 安装、M1 和 M1S 的启动流程以及控制台。
+- [通用系统](https://www.hasscn.top/contributors/os/operating-system/generic/index.md): 通用 x86-64 和 aarch64 目标，适用于通过 UEFI 启动的 PC 和其他系统。
+- [虚拟机](https://www.hasscn.top/contributors/os/operating-system/virtual-machine/index.md): ova 目标、它构建的虚拟磁盘格式，以及运行 Home Assistant OS 的虚拟机所需的条件。
+
+## Supervisor
+
+- [Supervisor](https://www.hasscn.top/contributors/os/supervisor/index.md): Supervisor 的作用、它运行的内容，以及它与应用和 Supervisor API 的关系。
+
+### How it works
+
+- [任务](https://www.hasscn.top/contributors/os/supervisor/jobs/index.md): Supervisor 如何以任务（job）的形式运行工作，包括条件、并发限制、节流，以及客户端可以跟踪的进度。
+- [解决中心](https://www.hasscn.top/contributors/os/supervisor/resolution-center/index.md): Supervisor 如何通过检查和评估发现问题、将其跟踪为议题，并通过建议进行修复。
+- [插件](https://www.hasscn.top/contributors/os/supervisor/plugins/index.md): Supervisor 在 Home Assistant Core 旁边运行的五个插件、每个插件的作用，以及它们的代码所在位置。
+
+### Guides
+
+- [调试 Supervisor](https://www.hasscn.top/contributors/os/supervisor/debugging/index.md): 将 Python 调试器附加到本地或远程设备上正在运行的 Supervisor，并查找其日志。
+- [将 Core 连接到 Supervisor](https://www.hasscn.top/contributors/os/supervisor/core-connection/index.md): 在你的开发环境中运行 Home Assistant Core，连接真实的 Supervisor，以便开发 hassio 集成。
+
+### 工作原理
+
+- [Supervisor 架构](https://www.hasscn.top/contributors/os/supervisor/architecture/index.md): Supervisor 代码是如何组织的、它如何启动，以及更新和备份在其中的工作方式。
+
+### 指南
+
+- [搭建开发环境](https://www.hasscn.top/contributors/os/supervisor/development/index.md): 在开发容器中从源码运行 Supervisor，运行测试和代码检查工具，并在真实系统上试用你的构建版本。

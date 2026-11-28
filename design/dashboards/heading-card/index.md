@@ -1,0 +1,218 @@
+# 标题卡片
+
+> 标题卡片在一组卡片上方显示标题，并可通过可选的徽章显示该组的状态。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/heading-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "heading",
+        "heading": "Living room",
+        "icon": "mdi:sofa",
+        "badges": [
+          {
+            "type": "entity",
+            "entity": "sensor.living_room_temperature"
+          },
+          {
+            "type": "entity",
+            "entity": "sensor.living_room_humidity"
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "light.living_room_lamp"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+标题卡片为一组卡片命名。在分区视图中，每个新分区都以一个标题卡片开始，因此大多数分区的顶部都有一个标题卡片。它没有背景也没有边框：它看起来像是页面的一部分，而不是一张卡片。
+
+用标题来说明其下方的卡片有什么共同点，比如一个房间或一个主题。不要为一张已经有自己名称的单独卡片使用标题。
+
+### 标题和副标题
+
+`title` 样式是默认样式，用于分区顶部。`subtitle` 样式更小更轻，用于分区内的一个组。使用副标题来拆分较长的分区，比如同一房间的灯光和气候。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "heading",
+        "heading": "Bedroom"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "heading",
+        "heading": "Climate",
+        "heading_style": "subtitle"
+      }
+    </script>
+  </ha-embed-card>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "tile",
+        "entity": "climate.bedroom_air_conditioner"
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 徽章
+
+徽章位于标题的另一侧，可以一目了然地概括该组的情况，比如房间的温度，或者门是否打开。实体（entity）徽章显示实体的图标和状态。除非你为它设置了操作，否则选中它时不会有任何反应。按钮徽章显示一个图标或一段简短文字，并执行一个操作。
+
+徽章数量要控制在几个以内。当它们放不下时，会横向滚动，超出视野的徽章很容易被忽略。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "heading",
+        "heading": "Hallway",
+        "heading_style": "subtitle",
+        "badges": [
+          {
+            "type": "entity",
+            "entity": "binary_sensor.front_door"
+          },
+          {
+            "type": "entity",
+            "entity": "lock.front_door"
+          },
+          {
+            "type": "entity",
+            "entity": "light.hallway",
+            "show_state": false
+          }
+        ]
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 操作
+
+默认情况下，选中标题时不会有任何反应。为它设置一个 `tap_action`，比如导航到房间的仪表盘（dashboard），标题旁边就会出现一个箭头图标，表示它可以跳转到某处。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "heading",
+        "heading": "Garden",
+        "icon": "mdi:flower",
+        "tap_action": {
+          "action": "navigate",
+          "navigation_path": "/dashboard-garden"
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+### 内容
+
+- 标题保持一到两个词即可。区域（area）或主题就足够了。
+- 图标是可选的。当它有助于人们在滚动时找到某个分区时才使用，并且要么在视图中的每个标题上都使用，要么都不使用。
+- 徽章用于显示状态，而不是第二行控件。如需控件，请在标题下方使用[磁贴卡片](https://www.hasscn.top/contributors/design/dashboards/tile-card/)。
+
+## 配置
+
+- `heading`（字符串）：标题的文字。
+- `heading_style`（字符串）：`title` 或 `subtitle`。默认为 `title`。
+- `icon`（字符串）：标题前面的图标。
+- `tap_action`、`hold_action`、`double_tap_action`（操作）：选中标题时会发生什么。默认为 `none`。
+- `badges`（列表）：要显示的徽章。每个徽章都有一个 `type`：`entity`（默认）或 `button`。
+
+实体徽章可以接受：
+
+- `entity`（字符串，必填）：要显示的实体。
+- `name`（字符串）：实体的名称，用于徽章的工具提示。
+- `icon`（字符串）：图标。默认为实体的图标。
+- `color`（字符串）：图标的颜色。使用 `state` 可采用状态的颜色。不设置时，图标没有颜色。
+- `show_state`（布尔值）：是否显示状态。默认为 `true`。
+- `show_icon`（布尔值）：是否显示图标。默认为 `true`。
+- `state_content`（字符串或列表）：作为状态显示的内容，比如某个属性。
+- `tap_action`、`hold_action`、`double_tap_action`（操作）：选中徽章时会发生什么。默认为 `none`。
+
+按钮徽章可以接受 `text`、`icon`、`color` 以及相同的操作。
+
+```yaml
+type: heading
+heading: "Living room"
+icon: mdi:sofa
+badges:
+  - entity: sensor.living_room_temperature
+  - entity: sensor.living_room_humidity
+```
+
+## 代码位置
+
+该卡片位于 [`src/panels/lovelace/cards/hui-heading-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-heading-card.ts)，元素为 `<hui-heading-card>`。徽章是 `<hui-heading-badge>` 元素，它们根据 [`src/panels/lovelace/heading-badges/`](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/heading-badges) 中的内容为每种类型创建徽章。
+
+在分区视图中，标题始终占据分区的全部宽度，其高度随内容而定。标题和副标题样式可以通过 `--ha-heading-card-title-*` 和 `--ha-heading-card-subtitle-*` 变量进行主题设置。
+
+[源代码](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-heading-card.ts)

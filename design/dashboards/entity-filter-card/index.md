@@ -1,0 +1,133 @@
+# 实体筛选卡片
+
+> 实体筛选卡片只显示列表中符合筛选条件的实体，例如已打开的灯。它会包装另一张卡片，默认为实体卡片。
+
+Source: https://www.hasscn.top/contributors/design/dashboards/entity-filter-card/
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "entity-filter",
+        "entities": [
+          "light.living_room_lamp",
+          "light.hallway",
+          "light.kitchen_ceiling"
+        ],
+        "conditions": [
+          {
+            "condition": "state",
+            "state": "on"
+          }
+        ],
+        "card": {
+          "title": "Lights on"
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+## 用法
+
+实体筛选卡片（entity filter card）接受一个实体（entity）列表，只显示符合筛选条件的那些实体。当状态（state）发生变化时，列表也会随之变化。可以用它来回答那些答案会变化的问题：哪些灯开着，哪些门开着，哪些房间缺水。
+
+它本身不显示任何内容，而是把匹配的实体交给另一张卡片，默认是[实体卡片](https://www.hasscn.top/contributors/design/dashboards/entities-card/)，除非你选择其他卡片，例如[概览卡片](https://www.hasscn.top/contributors/design/dashboards/glance-card/)。你放在 `card` 中的任何内容都会传递给那张卡片，比如 `title`。
+
+Live demo of dashboard cards, from the embed of the Home Assistant demo, connected to the sample home of this site.
+
+```html
+<ha-embed-provider
+  style="
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    max-width: 500px;
+  "
+>
+  <ha-embed-card style="grid-column: span 12">
+    <script type="application/json">
+      {
+        "type": "entity-filter",
+        "entities": [
+          "sensor.living_room_humidity",
+          "sensor.outdoor_humidity",
+          "sensor.monstera_moisture"
+        ],
+        "conditions": [
+          {
+            "condition": "numeric_state",
+            "below": 50
+          }
+        ],
+        "card": {
+          "type": "glance",
+          "title": "Running dry"
+        }
+      }
+    </script>
+  </ha-embed-card>
+</ha-embed-provider>
+```
+
+要根据状态显示或隐藏整张卡片，请使用[条件卡片](https://www.hasscn.top/contributors/design/dashboards/conditional-card/)，或在分区视图中使用卡片自身的可见性选项。
+
+### 条件
+
+列表中的每个实体都会与 `conditions` 进行比对，只有全部满足时才会显示。这些条件与卡片的可见性条件相同，只是不包含实体：卡片会为每个实体自动填入。`state` 条件检查状态，`numeric_state` 条件使用 `above` 和 `below` 检查数值。
+
+实体可以拥有自己的 `conditions`，它会替换该实体的卡片条件。
+
+较旧的 `state_filter` 选项仍然可用：它是一个状态列表，或由 `operator`、`value` 和可选的 `attribute` 组成的映射列表。只要实体匹配其中任意一项就会显示。一张卡片不能同时使用 `conditions` 和 `state_filter`。
+
+### 没有匹配项时
+
+当没有实体匹配时，卡片会显示不带行的被包装卡片。设置 `show_empty: false` 可以改为隐藏卡片。这通常正是你想要的效果：一张空无一物的“Lights on”卡片只会增加视觉噪音。
+
+### 内容
+
+- 给被包装的卡片起一个能说明筛选含义的标题，例如“Open windows”。没有标题的话，人们只会看到一个列表，还得猜测这些实体为什么会出现在里面。
+- 列出所有可能匹配的实体。这张卡片只负责筛选，不会替你查找实体。
+
+## 配置
+
+- `entities`（列表，必填）：要筛选的实体。每一项是一个实体 ID，或是一个包含 `entity`、它自己的 `conditions` 或 `state_filter`，以及该实体在被包装卡片中的选项（如 `name`）的映射。
+- `conditions`（列表）：实体必须满足才能显示的条件。必填，除非你使用 `state_filter`。
+- `state_filter`（列表）：较旧的筛选方式，基于状态或属性值。
+- `card`（映射）：显示匹配实体的卡片。默认为实体卡片。
+- `show_empty`（布尔值）：在没有实体匹配时是否显示卡片。默认为 `true`。
+
+```yaml
+type: entity-filter
+show_empty: false
+entities:
+  - light.living_room_lamp
+  - light.hallway
+  - light.kitchen_ceiling
+conditions:
+  - condition: state
+    state: "on"
+card:
+  title: "Lights on"
+```
+
+## 代码实现
+
+该卡片位于 [`src/panels/lovelace/cards/hui-entity-filter-card.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-entity-filter-card.ts)，元素为 `<hui-entity-filter-card>`。它渲染一个包含被包装卡片的 `<hui-card>`，并在匹配的实体发生变化时为其提供新的 `entities` 列表。条件通过 `checkConditionsMet` 检查，较旧的状态筛选通过 [`src/panels/lovelace/common/evaluate-filter.ts`](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/common/evaluate-filter.ts) 中的 `evaluateStateFilter` 处理。
+
+当卡片因为没有匹配项而隐藏自身时，会触发 `card-visibility-changed`，以便分区可以填补空缺。
+
+[Source](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/cards/hui-entity-filter-card.ts)

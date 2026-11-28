@@ -1,0 +1,1 @@
+var e=(()=>{try{return decodeURIComponent(location.hash.slice(1))}catch{return``}})();e&&!document.getElementById(e)&&fetch(`/redirect-fragments.json`).then(e=>e.json()).then(t=>{let n=document.getElementById(t[location.pathname]?.[e]??``);n&&(history.replaceState(null,``,`#`+n.id),n.scrollIntoView())}).catch(()=>{});

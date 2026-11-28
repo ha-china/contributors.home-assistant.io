@@ -1,0 +1,38 @@
+# 架构
+
+> 各部分如何衔接，以及背后的决策。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/architecture/llms-full.txt.
+
+## 架构
+
+- [架构](https://www.hasscn.top/contributors/architecture/index.md): 各部分如何协同工作，以及背后的决策。
+- [全局概览](https://www.hasscn.top/contributors/architecture/big-picture/index.md): 在一页中展示 Home Assistant 的所有组成部分、各自的作用，以及它们之间如何通信。
+- [架构原则](https://www.hasscn.top/contributors/architecture/principles/index.md): Home Assistant 构建方式背后的理念。了解它们之后，代码评审中的许多规则就不再令人意外。
+- [架构决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/index.md): 架构在哪里讨论、决策如何记录，以及你如何参与其中。
+- [代码仓库](https://www.hasscn.top/contributors/architecture/repositories/index.md): Home Assistant 的代码在 GitHub 上的分布情况，以及针对不同需求应前往哪个仓库。
+
+## 深入了解 Core
+
+- [深入了解 Home Assistant Core](https://www.hasscn.top/contributors/architecture/core/index.md): 一场关于 Home Assistant 核心所在 Python 应用的导览，并指引通往每个部分细节的路径。
+- [从启动到运行](https://www.hasscn.top/contributors/architecture/core/startup/index.md): Home Assistant Core 从启动那一刻到你的家准备就绪之间做了什么，以及它如何再次关闭。
+- [获取数据](https://www.hasscn.top/contributors/architecture/core/data-updates/index.md): 集成如何通过推送或轮询从设备和服务获取新数据，以及协调器（coordinator）如何让这一过程保持高效。
+- [注册表与存储](https://www.hasscn.top/contributors/architecture/core/registries/index.md): Home Assistant 将其对实体、设备和区域的了解保存在哪里，用户的更改如何与集成报告的内容分开保存，以及数据是如何存储的。
+- [历史与统计](https://www.hasscn.top/contributors/architecture/core/history/index.md): 记录器（recorder）如何将每次状态变更写入数据库，以及历史、日志簿和长期统计如何读取这些数据。
+
+## 架构, continued
+
+- [各部分如何通信](https://www.hasscn.top/contributors/architecture/connections/index.md): Home Assistant Core 与其周围一切之间的 API，以及每个连接者如何证明自己的身份。
+
+## 前端
+
+- [前端](https://www.hasscn.top/contributors/architecture/frontend/index.md): Web 界面在整个 Home Assistant 中的位置，以及在哪里可以找到它的详细信息。
+- [仪表盘是如何工作的](https://www.hasscn.top/contributors/architecture/frontend/dashboards/index.md): 仪表盘如何由视图、分区、卡片和徽章组成，策略如何生成它们，以及自定义卡片如何融入其中。
+
+## 围绕 Core
+
+- [围绕 Core](https://www.hasscn.top/contributors/architecture/platform/index.md): 与 Home Assistant Core 一起运行、或从别处与之通信的软件，以及它们如何协同工作。
+- [Supervisor（管理程序）](https://www.hasscn.top/contributors/architecture/platform/supervisor/index.md): 在 Home Assistant OS 上运行 Home Assistant Core、应用、备份和更新的程序，各自运行在独立的容器中。
+- [伴侣应用（companion apps）如何融入](https://www.hasscn.top/contributors/architecture/platform/companion-apps/index.md): Android 和 Apple 设备上的 Home Assistant：应用中的前端，加上来自设备本身的传感器、通知、小组件等。
+- [Home Assistant Link](https://www.hasscn.top/contributors/architecture/platform/cloud/index.md): Home Assistant Link 如何让家庭从任何地方都能访问，并将其连接到语音助手，而无需向互联网开放。
+- [语音是如何工作的](https://www.hasscn.top/contributors/architecture/platform/voice/index.md): 一句话如何变成一个动作：唤醒词、语音转文本、对话代理和文本转语音，以及每一步在哪里运行。

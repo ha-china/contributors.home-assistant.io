@@ -1,0 +1,1351 @@
+# 快速上手: full text
+
+> Every page of the 快速上手 area of Home Assistant 贡献者, in the order of the sidebar. Each page starts with its title as a heading and its URL. The index of this area is at https://www.hasscn.top/contributors/start/llms.txt.
+
+# 快速上手
+
+> Home Assistant 项目是如何运作的、大家在哪里交流，以及无论你的技能水平如何，如何做出你的第一次贡献。
+
+Source: https://www.hasscn.top/contributors/start/
+
+Home Assistant 由成千上万的人共同构建。有些人编写 Python 或 TypeScript，但很多人并不写代码。他们翻译界面、修改文档中的一句话、设计更好的对话框、在[论坛](https://community.home-assistant.io/)上帮助他人，或者测试 beta 版本。这些都可以算作贡献，而每一份贡献都让 Home Assistant 变得对数百万家庭更好。
+
+这个板块面向所有想要参与进来的人。它介绍了项目是如何组织的、大家在哪里交流，以及你的第一次贡献如何从想法变为合并。
+
+## 从这里开始
+
+1. [你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/)：选择一条适合你技能的路径，迈出第一步。大多数路径都不需要编写任何代码。
+2. [使用 GitHub，而不必成为开发者](https://www.hasscn.top/contributors/start/github/)：你在 GitHub 上会遇到的术语，以及如何在浏览器中做出修改。
+3. [我们的交流场所](https://www.hasscn.top/contributors/start/where-we-talk/)：Discord、社区论坛和 GitHub，以及每个板块的人可以在哪里找到。
+
+## 指南
+
+- [报告缺陷（bug）](https://www.hasscn.top/contributors/start/report-a-bug/)：应该使用哪个仓库、缺陷报告表单会询问什么，以及报告之后会发生什么。
+- [拉取请求（pull request）与代码评审](https://www.hasscn.top/contributors/start/pull-requests/)：如何创建一个易于评审的拉取请求，以及创建之后会发生什么，适用于任何仓库。
+- [作为贡献者不断成长](https://www.hasscn.top/contributors/start/grow/)：你的第一次拉取请求之后是什么，从评审和分类，到负责一个集成（integration）或承担一个角色。
+
+## 背景知识
+
+你不需要在第一次贡献之前阅读这些内容。当你想了解事物的运作方式时，它们会对你有所帮助。
+
+- [项目是如何组织的](https://www.hasscn.top/contributors/start/organization/)：Open Home Foundation、其商业合作伙伴、各个仓库，以及维护它们的人。
+- [从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/)：较大的工作是如何规划的，从一个功能请求到一个发布版本，以及你可以在哪里参与进来。
+- [我们的原则](https://www.hasscn.top/contributors/start/principles/)：Home Assistant 所代表的价值，以及这对你的工作意味着什么。
+- [使用 AI 工具做贡献](https://www.hasscn.top/contributors/start/ai-tools/)：仓库中为智能体（agent）提供的说明和技能、常见任务的工作流程，以及你需要自行检查的内容。
+- [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)：在贡献时你可以如何使用 AI 工具，以及哪些行为是不允许的。
+- [许可协议与 CLA](https://www.hasscn.top/contributors/start/licensing/)：各种许可证，以及你为代码仓库只需签署一次的贡献者许可协议（Contributor License Agreement）。
+- [行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)：我们如何彼此相待，以及如何报告问题。
+
+## 想知道这一切是如何组合在一起的？
+
+[架构（Architecture）](https://www.hasscn.top/contributors/architecture/)板块介绍了 Home Assistant 的各个部分如何协同工作，从[整体概览](https://www.hasscn.top/contributors/architecture/big-picture/)到[决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/)。你不需要在第一次贡献之前阅读它，但当你走得更远时，它会对你有所帮助。
+
+## 找谁交流
+
+- 不确定从哪里开始？在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上提问。那里的人对这个问题习以为常。加入之后，请关注 [Building in the open](https://discord.com/channels/330944238910963714/1257022408385237072)——面向贡献者的公告频道，了解项目中正在发生的事情。
+- 关于某个具体修改的问题？请在 GitHub 上的 issue 或拉取请求中提问，这样了解那段代码的人才能回答。
+- 本网站的每个板块都有自己的"找谁交流"部分，列出了适合该类工作的交流渠道。
+
+---
+
+# 你的第一次贡献
+
+> 选择适合你技能的路径，迈出一小步作为开始。大多数路径不需要任何代码。
+
+Source: https://www.hasscn.top/contributors/start/first-contribution/
+
+你的第一次贡献不需要很大。修复一个错别字、翻译十个字符串、在[论坛](https://community.home-assistant.io/)上回答一个问题：这些都是实实在在的贡献，而且会让你了解这个项目是如何运作的。从小处着手，完整地走一遍这个循环，下一次就会更容易。
+
+大多数帮助方式完全不需要编写代码，所以它们在本页中排在最前面。每条路径都说明了你需要什么账户，并链接到一个包含具体步骤的页面。
+
+## 开始之前
+
+无论你选择哪条路径，有两件事是相同的：
+
+- **阅读[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)。**它很短，而且适用于所有地方。
+- **知道去哪里提问。**你不需要获得许可才能开始，但知道遇到困难时该去哪里会很有帮助。[Home Assistant Discord](https://www.home-assistant.io/join-chat/) 是提问能最快得到回应的地方。在代码上卡住了？可以在[通用编码支持](https://discord.com/channels/330944238910963714/1257019582112334014)里提问。请参阅[我们在哪里交流](https://www.hasscn.top/contributors/start/where-we-talk/)，找到适合你所在领域的场所。
+
+许多路径会用到 GitHub。从未用过，或者一直没弄明白？请先阅读[不是开发者也能使用 GitHub](https://www.hasscn.top/contributors/start/github/)。它解释了相关术语，并引导你在浏览器中完成一次修改。
+
+## 无需编写代码
+
+### 你会说其他语言
+
+Home Assistant 由使用它的人来翻译。如果你的母语是其他语言，几分钟内就可以开始。界面翻译在你的浏览器中通过 Lokalise 完成。
+
+- **你需要：**一个免费的 [Lokalise](https://www.hasscn.top/contributors/glossary/lokalise/) 账户。当你加入项目时，Lokalise 会要求你创建一个。
+- **从这里开始：**[你的第一次翻译](https://www.hasscn.top/contributors/translate/first-contribution/)。
+
+想让 Assist 在你与它对话时听懂你的语言？这项工作在 GitHub 上的 YAML 文件中进行，通过拉取请求（pull request）提交，因此你需要为此准备一个免费的 [GitHub](https://github.com/signup) 账户。从[语音](https://www.hasscn.top/contributors/translate/voice/)开始。
+
+### 你喜欢写作
+
+home-assistant.io 上的文档由社区编写。直接在浏览器中就能修复一些小问题。
+
+- **你需要：**一个免费的 [GitHub](https://github.com/signup) 账户。
+- **从这里开始：**[你的第一次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/)。
+
+### 你做设计
+
+流程、界面、组件和 UI 文本。你不需要编写代码，也能帮助塑造 Home Assistant 的运作方式。
+
+- **你需要：**一个 [Discord](https://www.home-assistant.io/join-chat-design) 账户，以便在 [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) 频道与设计师们交流；以及一个免费的 [GitHub](https://github.com/signup) 账户，以便在讨论和 issue 中分享提案。
+- **从这里开始：**[你的第一次设计贡献](https://www.hasscn.top/contributors/design/first-contribution/)。
+
+### 你喜欢帮助他人
+
+在论坛和 Discord 上回答问题、欢迎新成员、组织线下聚会，或者帮助分享新闻。
+
+- **你需要：**一个[社区论坛](https://community.home-assistant.io/)的免费账户。
+- **从这里开始：**[回答你的第一个问题](https://www.hasscn.top/contributors/community/first-contribution/)。
+
+### 你想在所有人之前进行测试
+
+每个月，下一个版本的 beta 版都会在正式发布前一周发布。运行它并报告哪里出了问题，就能让错误远离其他人的家。
+
+- **你需要：**一个即使出问题也只是小麻烦而非灾难的 Home Assistant 安装实例，以及一个免费的 [GitHub](https://github.com/signup) 账户，用于报告你发现的错误。
+- **从这里开始：**[加入 beta 测试](https://www.hasscn.top/contributors/releases/first-contribution/)。
+
+你是否有拉取请求需要在上面进行测试的设备或浏览器？一些领域让你可以在更改被合并之前试用它，而无需构建任何东西。请参阅[试用前端拉取请求](https://www.hasscn.top/contributors/frontend/development/builds/#try-out-a-pull-request)和[测试 Android 拉取请求构建](https://www.hasscn.top/contributors/companion/android/get-started/#test-a-pull-request-build)。然后在拉取请求上留下评论，说明你的发现。“我用我的设备试过了，可以正常工作”就是一条很有用的评审意见。
+
+### 你想分享数据
+
+在你自己的 Home Assistant 中打开分析功能，帮助项目了解正在使用哪些集成（integration）、版本和安装类型。除非你主动打开，否则不会共享任何内容。
+
+- **你需要：**一个 Home Assistant 安装实例。无需账户。
+- **从这里开始：**[分享你的分析数据](https://www.hasscn.top/contributors/data/first-contribution/)。
+
+### 把错误报告好
+
+有什么东西坏了吗？一个附带重现步骤的清晰 issue 能为维护者节省大量时间。[报告错误](https://www.hasscn.top/contributors/start/report-a-bug/)会告诉你应该使用哪个仓库、表单会询问什么，以及在哪里找到它们所需的日志和版本信息。
+
+- **你需要：**一个免费的 [GitHub](https://github.com/signup) 账户。
+
+### 报告安全问题
+
+发现了可能让人们家中的安全面临风险的问题？不要创建 issue：issue 是公开的。请私下报告，以便在细节公开之前把问题修复。[报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)会告诉你如何报告，以及需要包含哪些内容。
+
+- **你需要：**一个免费的 [GitHub](https://github.com/signup) 账户。
+
+### 你构建了值得分享的东西
+
+一个在你家里运行良好的自动化（automation）也能帮助他人。把它做成蓝图（blueprint）并分享出来。构建了自己的仪表盘（dashboard）卡片、主题或集成？将它发布到 Marketplace 是推荐的第一步：你可以积累经验，还能更快地迭代。你不需要在 Home Assistant 的仓库中提交拉取请求：它就放在你自己的仓库里。
+
+- **你需要：**一个免费的 [GitHub](https://github.com/signup) 账户。如果是蓝图，则不需要编程。
+- **从这里开始：**[分享你的第一个蓝图](https://www.hasscn.top/contributors/marketplace/first-contribution/)。
+
+## 需要编写代码
+
+这些路径最终都会以 GitHub 上的一次拉取请求收尾，并且所在仓库适用[贡献者许可协议（Contributor License Agreement）](https://www.hasscn.top/contributors/start/first-contribution/#the-contributor-license-agreement)。为自己构建一个应用（app）是例外：你可以从自己的仓库发布它。每个首次贡献页面都会告诉你如何搭建开发环境。
+
+### 你编写 Python
+
+Home Assistant Core 是处于一切核心的 Python 应用程序：自动化引擎和数千个集成都在其中。从修复一个小错误或补上一个缺失的测试开始。
+
+- **从这里开始：**[你对 Core 的第一次贡献](https://www.hasscn.top/contributors/core/first-contribution/)。
+
+### 你编写 TypeScript 或从事 Web 界面工作
+
+前端（frontend）是你在浏览器和伴侣应用（companion app）中看到的一切：仪表盘、设置和对话框。它使用 Lit 和 TypeScript 构建。
+
+- **从这里开始：**[你的第一次前端贡献](https://www.hasscn.top/contributors/frontend/first-contribution/)。
+
+### 你构建移动应用
+
+Android 和 iOS 的伴侣应用（也有 macOS、Wear OS 和 Apple Watch 版本）使用 Kotlin 和 Swift 编写。
+
+- **从这里开始：**[你的第一次伴侣应用贡献](https://www.hasscn.top/contributors/companion/first-contribution/)。
+
+### 你从事 Linux、嵌入式系统或容器方面的工作
+
+Home Assistant OS 和 Supervisor 负责安装、更新和运行所有东西。这项工作涉及 Linux、Docker、开发板和 Python。
+
+- **从这里开始：**[你对 Supervisor 的第一次贡献](https://www.hasscn.top/contributors/os/first-contribution/)。
+
+### 你想打包软件
+
+应用（app，旧称 add-on）是 Supervisor 在 Home Assistant 旁边运行的容器，比如数据库或 Zigbee 网桥。你可以为自己构建一个，不需要任何人的批准。
+
+- **从这里开始：**[你的第一个应用](https://www.hasscn.top/contributors/apps/first-app/)。
+
+## 贡献者许可协议
+
+Home Assistant 的代码仓库，例如 Core、前端、伴侣应用、Supervisor、Home Assistant OS 和官方应用，都要求你签署[贡献者许可协议](https://www.hasscn.top/contributors/start/licensing/)。当你第一次在其中某个仓库里创建拉取请求时，会有一个机器人发表评论并附上链接。你只需要做一次，而且它也涵盖你未来的贡献。在你签署之前，你的拉取请求无法被合并。
+
+无需代码的路径不需要它：翻译、修复文档、贡献语音句子、回答问题、测试 beta 版本以及分享分析数据。
+
+## 接下来会发生什么
+
+已经创建了拉取请求？[拉取请求与评审](https://www.hasscn.top/contributors/start/pull-requests/)会告诉你可以期待什么。评审需要时间，因为拉取请求比评审者更多。保持耐心，坚持下去。一旦你走完了这个过程，[作为贡献者成长](https://www.hasscn.top/contributors/start/grow/)会告诉你接下来可以走向何方。
+
+---
+
+# 使用 GitHub，无需成为开发者
+
+> 什么是仓库、issue、fork、分支、commit 和 pull request，以及如何完全在浏览器中对 Home Assistant 做一个小改动。
+
+Source: https://www.hasscn.top/contributors/start/github/
+
+Home Assistant 的大部分内容都存放在 [GitHub](https://github.com/home-assistant) 上：代码、文档、错误报告，以及关于改动的讨论。GitHub 是开发者做给开发者用的，这一点显而易见。术语很奇怪，界面很繁杂，第一次使用就像走进别人家的厨房。
+
+不过，你不需要是开发者也能使用它。修改文档中的一句话、报告一个 bug，或者提议修改一个翻译文件，这些都可以在浏览器中完成，无需安装任何软件。本页将解释你会遇到的术语，并带你从头到尾完成一个小改动。
+
+## 创建账号
+
+你需要一个免费的 GitHub 账号才能报告 bug、发表评论或提议改动。不注册也可以阅读。
+
+1. 前往 [github.com/signup](https://github.com/signup)。
+2. 按照步骤操作。GitHub 会要求你验证电子邮箱地址：请务必完成，因为有些功能在验证之前无法使用。
+3. 开启[双因素认证](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)。GitHub 强烈建议开启，因为它能保护你的账号安全。
+
+你的用户名是公开的，你在 GitHub 上写的一切也是公开的。选一个你乐于看到出现在自己贡献旁边的名字。
+
+## 术语的通俗解释
+
+GitHub 反复使用着少数几个术语。了解它们之后，界面就好理解多了。
+
+### 仓库
+
+[仓库](https://www.hasscn.top/contributors/glossary/repository/)（repository，或简称 "repo"）就是一个项目：一个文件文件夹，加上对其中每个文件所做过的全部更改历史。Home Assistant 有很多仓库。文档位于 [home-assistant/home-assistant.io](https://github.com/home-assistant/home-assistant.io)，界面位于 [home-assistant/frontend](https://github.com/home-assistant/frontend)，Home Assistant Core 位于 [home-assistant/core](https://github.com/home-assistant/core)。每个仓库都有自己的 issue、pull request 和维护者。
+
+### Issue
+
+[issue](https://www.hasscn.top/contributors/glossary/issue/) 是对某个问题的报告，比如一个 bug 或一个有误的页面。任何人都可以在公开仓库中发起 issue，任何人都可以评论。Issue 不是寻求支持或提出功能建议的地方：请参阅[我们的交流渠道](https://www.hasscn.top/contributors/start/where-we-talk/)了解这些内容应该去哪里。
+
+### Fork
+
+[fork](https://www.hasscn.top/contributors/glossary/fork/) 是你自己账号下的一份仓库副本。你不能直接修改 Home Assistant 的仓库，但你可以修改自己的副本，然后向原始仓库提议你的改动。你不必自己创建 fork：第一次编辑文件时，GitHub 会主动帮你创建。
+
+### 分支
+
+[分支](https://www.hasscn.top/contributors/glossary/branch/)（branch）是仓库内部一条独立的改动线。它让你可以在不触碰主版本的情况下处理某项工作。每个仓库都有一个接收 pull request 的主分支：Home Assistant Core 和前端使用 `dev`，文档修复使用 `current`。每个领域的第一篇贡献页面会告诉你该使用哪个分支。
+
+### Commit
+
+[commit](https://www.hasscn.top/contributors/glossary/commit/) 是一次保存的更改：你修改了哪些文件、谁改的、什么时候改的，以及一条说明你做了什么的简短信息。当你在 GitHub 上保存一次编辑时，你就创建了一个 commit。
+
+### Pull request
+
+[pull request](https://www.hasscn.top/contributors/glossary/pull-request/) 是一个提议：“这里有一个改动，请采纳”。它会准确显示你改了什么，对其运行自动化检查，并有一个专门的讨论区供大家讨论。尽管名字里有 "pull"，但你并不需要拉取任何东西。可以把它理解为请求维护者把你的改动拉取进去。
+
+### 审查
+
+[审查](https://www.hasscn.top/contributors/glossary/review/)（review）是指在改动合入之前有人阅读你的 pull request。审查者可以批准它、对它发表评论，或要求修改。有时他们会建议一个具体的编辑，你只需选中一下即可接受。
+
+### 合并
+
+[合并](https://www.hasscn.top/contributors/glossary/merge/)（merge）一个 pull request 就是把它的改动纳入仓库。只有维护者才能合并。当你的 pull request 显示 **Merged** 时，你的改动就合入了：干得漂亮。
+
+### 还会遇到的几个术语
+
+- **Push**：把 commit 从别处发送到 GitHub。如果你只在浏览器中编辑，GitHub 会替你完成，你可以忽略这个词。
+- **合并冲突（merge conflict）**：你的改动和另一个改动触及了同一文件的相同行，Git 无法决定保留哪一个。参见[当 GitHub 提示存在冲突时](https://www.hasscn.top/contributors/start/github/#when-github-says-there-is-a-conflict)。
+- **草稿（Draft）**：尚未准备好接受审查的 pull request。
+- **检查（Checks）**：在每个 pull request 上运行的自动化测试。绿色对勾表示通过，红色叉号表示有失败。参见 [CI](https://www.hasscn.top/contributors/glossary/ci/)。
+
+## 在浏览器中做一个小改动
+
+这是完整的流程，从你发现一个问题到修复被合并。示例是对 [home-assistant.io](https://www.home-assistant.io/) 文档的修复，因为大多数人都从这里开始。其他仓库的流程相同，只是分支和模板不同。
+
+### 1. 打开文件
+
+文档的每个页面底部都有一个 **Help us improve our documentation** 部分，其中有一个 **Edit** 链接。选中它，GitHub 就会打开该页面的源文件。
+
+在其他任何仓库中，在文件列表中浏览到该文件并选中其名称。
+
+### 2. 开始编辑
+
+选中文件上方的铅笔图标。第一次操作时，GitHub 会告诉你需要拥有自己的仓库副本才能进行修改。选择 **Fork this repository**。GitHub 会在你的账号上创建 fork 并打开编辑器。
+
+### 3. 进行修改
+
+在编辑器中修改文本。只改一件事：一个错别字、一个过时的步骤、一句不清楚的话。小改动比大改动审查得快得多。
+
+选择 **Preview** 查看你的改动效果。
+
+### 4. 提议改动
+
+1. 选择 **Commit changes...**。
+2. 在 **Commit message** 字段中，简要描述你改了什么，比如“修复设置菜单的名称”。
+3. 选择 **Propose changes**。
+
+GitHub 会将你的改动作为一个 commit 保存到你的 fork 中，并向你展示你改了什么。
+
+### 5. 发起 pull request
+
+1. 选择 **Create pull request**。
+2. 检查顶部的基础分支（base branch）：即你的 pull request 要合入的分支。对于文档修复，那是 `current`。如果显示的是其他分支，请在该菜单中更改。
+3. 写一个清晰的标题，比如“修复备份页面上过时的菜单名称”。
+4. 填写描述中的模板。保留其中的标题和复选框，并勾选适用的选项。模板是为了帮助审查者，而不是为了考你。
+5. 选择 **Create pull request**。
+
+就是这样。你的提议现在是公开的，相关的人会自动收到通知。你不需要主动请求任何人来审查。
+
+### 6. 让机器人完成它们的工作
+
+几分钟内，会发生几件事：
+
+- 机器人会添加标签，自动化检查开始运行。
+- 对于文档，机器人会发布一个 [Deploy Preview](https://www.hasscn.top/contributors/glossary/deploy-preview/) 的链接：包含你的改动的完整网站。打开它并检查你的页面。
+- 在代码仓库（如 Home Assistant Core 或前端）中，机器人会在你第一次时要求你签署[贡献者许可协议](https://www.hasscn.top/contributors/start/licensing/)。点击它的链接。这只需做一次，在此之前你的 pull request 无法被合并。
+
+如果某项检查失败而你不明白原因，请在你的 pull request 下发评论询问。这是很正常的问题，没有人会指望你第一次就能看懂检查日志。
+
+### 7. 回应审查
+
+迟早会有审查者查看你的改动。这可能需要几小时或几周，取决于仓库的繁忙程度。[Pull request 与审查](https://www.hasscn.top/contributors/start/pull-requests/#waiting-for-a-review)解释了原因，以及等待期间你可以做什么。
+
+审查的评论会显示在你 pull request 的 **Conversation** 标签页中，以及 **Files changed** 标签页中相关代码行的旁边。
+
+- **要回复一条评论**，在其下方写下你的回复。
+- **要接受一条建议的改动**，选择 **Commit suggestion**。有多条建议？对每一条选择 **Add suggestion to batch**，然后选择 **Commit suggestions** 一次性应用。
+- **要自己修改某些内容**，前往你的 fork，通过文件列表上方的分支菜单切换到你 pull request 的分支，然后像之前一样编辑文件。提交时，选择直接提交到该分支。你的 pull request 会自动更新。
+- **当你处理完一条评论后**，选择 **Resolve conversation**，这样大家都能看到还剩什么没处理。
+
+审查评论针对的是改动，而不是你本人。如果你认为审查者错了，请礼貌地说出来并解释原因。如果你看不懂某条评论，就问。审查者宁愿解释，也不愿看到你瞎猜。
+
+在许多 Home Assistant 仓库中，当审查者要求修改时，机器人会把你的 pull request 转为草稿。处理完所有事项后，选择 **Ready for review** 通知他们。
+
+### 8. 合并
+
+当维护者合并你的 pull request 时，它会显示 **Merged**。你的改动现在成为 Home Assistant 的一部分。`current` 分支上的文档修复会自动上线：该分支就是 [home-assistant.io](https://www.home-assistant.io) 发布的内容。代码改动会随下一个版本发布给所有用户。
+
+有时 pull request 会在未合并的情况下被关闭。审查者通常会说明原因：问题已经用其他方式修复了，或者改动不合适。经验丰富的贡献者也会遇到这种情况，这并不是对你个人的评判。
+
+## 当 GitHub 提示存在冲突时
+
+如果你的 pull request 在等待期间，别人修改了相同的行，GitHub 会显示该分支存在冲突。对于简单的冲突，你可以在浏览器中修复：
+
+1. 在你的 pull request 上，选择 **Resolve conflicts**。
+2. GitHub 会显示两个版本，位于 `<<<<<<<`、`=======` 和 `>>>>>>>` 等标记之间。编辑文本，只保留你想要的版本，并删除这些标记。
+3. 选择 **Mark as resolved**，然后选择 **Commit merge**。
+
+并非所有冲突都能在浏览器中解决。如果 **Resolve conflicts** 不可用，或者你不确定该保留什么，请在你的 pull request 下发评论寻求帮助。
+
+如果你的分支只是落后了而没有冲突？那么 GitHub 会在 pull request 靠近底部的位置显示一个 **Update branch** 按钮。点击它即可拉取最新的改动。
+
+## 说实话，容易让人困惑的地方
+
+有几件事几乎每个人第一次都会被绊住：
+
+- **你的改动似乎消失了。** 提议改动之后，它存在于你的 fork 中，而不是 Home Assistant 仓库中。这是正常的。当 pull request 被合并时，它才会移过去。
+- **所有东西都有两份。** 你的 fork 和原始仓库看起来几乎一样。查看左上角的名称：是你的用户名，还是 `home-assistant`。
+- **基础分支选错了。** 针对错误分支发起 pull request 是常见的新手错误。你可以在事后更改：选择 pull request 标题旁边的 **Edit title**，在基础分支菜单中选择另一个分支，然后选择 **Change base**。
+- **通知的数量。** 一旦你发起了 pull request，GitHub 会就其上发生的一切给你发邮件。你可以在[通知设置](https://docs.github.com/en/subscriptions-and-notifications/get-started/configuring-notifications)中调整。
+- **沉默。** 一段时间没有回应并不意味着没人在意。pull request 的数量比审查者多。
+
+## 接下来去哪里
+
+- [你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/)：选择你想做的事情。
+- [你的第一次文档修复](https://www.hasscn.top/contributors/writing/first-contribution/)：针对文档的这个流程。
+- [Pull request 与审查](https://www.hasscn.top/contributors/start/pull-requests/)：更详细地介绍发起 pull request 之后会发生什么。
+- GitHub 官方的 [Hello World](https://docs.github.com/en/get-started/start-your-journey/hello-world) 教程，如果你想先在自己的仓库中练习一下。
+
+---
+
+# 我们在哪里交流
+
+> Discord、社区论坛和 GitHub。哪个地方适合做什么，以及每个领域的人可以在哪里找到。
+
+Source: https://www.hasscn.top/contributors/start/where-we-talk/
+
+Home Assistant 有几个人们聚集的地方。每个地方各有所长。选对地方能让你更快得到答案，也能让对话留在别人日后可以找到的地方。
+
+## 简要版本
+
+| 你想要 | 去哪里 |
+| --- | --- |
+| 快速提问，或结识其他贡献者 | [Discord](https://www.home-assistant.io/join-chat/) |
+| 为你自己的配置寻求帮助 | [社区论坛](https://community.home-assistant.io/) |
+| 报告缺陷（bug） | GitHub 上相应仓库的 issue 跟踪器。参见[报告缺陷](https://www.hasscn.top/contributors/start/report-a-bug/) |
+| 建议新功能 | GitHub 上的[功能请求](https://github.com/home-assistant/feature-requests/discussions) |
+| 讨论 Home Assistant 的构建方式 | GitHub 上的[架构讨论](https://github.com/home-assistant/architecture/discussions) |
+| 询问某个具体的更改 | 对应的 issue 或 pull request 本身 |
+| 参加社区同步会议 | [活动日历](https://www.hasscn.top/contributors/community/reference/events/) |
+
+## 按领域划分
+
+本站的每个领域都有一个“与谁交流”部分。下表将它们汇总在一起，让你一眼就能看到从事某项工作的人在哪里。
+
+| 领域 | 相关人员交流的地方 |
+| --- | --- |
+| [Architecture](https://www.hasscn.top/contributors/architecture/) | [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) on Discord, and the [architecture discussions](https://github.com/home-assistant/architecture/discussions) on GitHub |
+| [Security](https://www.hasscn.top/contributors/security/) | A vulnerability: a [GitHub security advisory](https://github.com/home-assistant/core/security/advisories/new), never in public. Other questions: [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) on Discord |
+| [Core and integrations](https://www.hasscn.top/contributors/core/) | [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) on Discord for general development questions, like whether an integration belongs in core, a thread in [**#coding-support**](https://discord.com/channels/330944238910963714/1257019582112334014) for a technical question, and [home-assistant/core](https://github.com/home-assistant/core) on GitHub |
+| [Frontend](https://www.hasscn.top/contributors/frontend/) | [**#frontend**](https://discord.com/channels/330944238910963714/1475552784278360176) on Discord, and [home-assistant/frontend](https://github.com/home-assistant/frontend) on GitHub. Design questions: [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284), [**#product-and-ux**](https://discord.com/channels/330944238910963714/1475553148847526123), or the [UX design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) |
+| [Apps](https://www.hasscn.top/contributors/apps/) | [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) on Discord ([**#operating-system**](https://discord.com/channels/330944238910963714/1475552965954900018) for questions about the Supervisor), the issues of [home-assistant/supervisor](https://github.com/home-assistant/supervisor/issues) and [home-assistant/addons](https://github.com/home-assistant/addons/issues), and [Share your Projects](https://community.home-assistant.io/c/projects/9) on the forum |
+| [Companion apps](https://www.hasscn.top/contributors/companion/) | [**#apple-apps**](https://discord.com/channels/330944238910963714/1481713628553019392) on Discord, the [Android project thread](https://discord.com/channels/330944238910963714/1346948551892009101) on Discord, and the issues of [home-assistant/android](https://github.com/home-assistant/android/issues) and [home-assistant/iOS](https://github.com/home-assistant/iOS/issues) |
+| [OS and Supervisor](https://www.hasscn.top/contributors/os/) | [**#operating-system**](https://discord.com/channels/330944238910963714/1475552965954900018) on Discord, and [home-assistant/operating-system](https://github.com/home-assistant/operating-system) and [home-assistant/supervisor](https://github.com/home-assistant/supervisor) on GitHub |
+| [Design](https://www.hasscn.top/contributors/design/) | [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) and [**#product-and-ux**](https://discord.com/channels/330944238910963714/1475553148847526123) on Discord, the [ux-design discussions](https://github.com/OpenHomeFoundation/ux-design/discussions) for ideas and proposals, and frontend [issues with the `UX` label](https://github.com/home-assistant/frontend/labels/UX) for concrete problems |
+| [Writing docs](https://www.hasscn.top/contributors/writing/) | [**#documentation**](https://discord.com/channels/330944238910963714/1475552849835458691) on Discord, your pull request, and the [issues of home-assistant.io](https://github.com/home-assistant/home-assistant.io/issues) |
+| [Translations](https://www.hasscn.top/contributors/translate/) | A comment on the string in Lokalise, and the [localization discussions](https://github.com/home-assistant/frontend/discussions/categories/localization) on GitHub |
+| [Voice](https://www.hasscn.top/contributors/translate/voice/) | The [intents discussions](https://github.com/OHF-Voice/intents/discussions), the language leader of your language, and [**#language-leaders**](https://discord.com/channels/330944238910963714/1257022942961991781) on Discord |
+| [Releases](https://www.hasscn.top/contributors/releases/) | [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) on Discord during the beta week, and the issue tracker of the part that broke |
+| [Community](https://www.hasscn.top/contributors/community/) | Email the community team at [community@openhomefoundation.org](mailto:community@openhomefoundation.org) |
+| [Data](https://www.hasscn.top/contributors/data/) | The device database channel on Discord, and the [analytics.home-assistant.io repository](https://github.com/home-assistant/analytics.home-assistant.io) |
+
+## Discord
+
+[Home Assistant Discord](https://www.home-assistant.io/join-chat/) 是贡献者实时聊天的地方。这是询问“我该从哪里开始？”或“这是个好主意吗？”的最快方式，也是认识项目背后的人的好机会。
+
+在你选择角色之前，贡献者频道是隐藏的。在侧边栏中，选择 **Channels & Roles**，然后选择适合你工作内容的角色。例如：
+
+- **I want to contribute dev skills to Home Assistant** 会给你开发者角色。它会打开 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道和其他开发相关频道。
+- 设计师在 [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) 相聚。[这个链接](https://www.home-assistant.io/join-chat-design)可以直接带你到那里。
+- 测试测试版的人在 [**#beta**](https://discord.com/channels/330944238910963714/427516175237382144) 相聚。
+
+贡献者频道：
+
+| 频道 | 用途 |
+| --- | --- |
+| [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) | 一般开发 |
+| [**#core**](https://discord.com/channels/330944238910963714/1475552721515053268) | 核心与集成 |
+| [**#frontend**](https://discord.com/channels/330944238910963714/1475552784278360176) | 前端 |
+| [**#operating-system**](https://discord.com/channels/330944238910963714/1475552965954900018) | Home Assistant OS 和 Supervisor |
+| [**#apple-apps**](https://discord.com/channels/330944238910963714/1481713628553019392) | Apple 应用 |
+| [**#designers**](https://discord.com/channels/330944238910963714/1463606665311158284) | 设计 |
+| [**#product-and-ux**](https://discord.com/channels/330944238910963714/1475553148847526123) | 产品与 UX 讨论 |
+| [**#user-researchers**](https://discord.com/channels/330944238910963714/1518940566576959618) | 用户研究 |
+| [**#documentation**](https://discord.com/channels/330944238910963714/1475552849835458691) | 文档 |
+| [**#language-leaders**](https://discord.com/channels/330944238910963714/1257022942961991781) | 语言负责人 |
+
+服务器上有几个地方面向所有贡献者：
+
+- [Building in the open](https://discord.com/channels/330944238910963714/1257022408385237072) 是面向贡献者的公告频道。关注它以了解项目中的动态。
+- [General coding support](https://discord.com/channels/330944238910963714/1257019582112334014) 是你在代码上遇到困难时提问的地方。
+- [project forum](https://discord.com/channels/330944238910963714/1346914401508392980) 用于持续时间较长的项目，以及团队正在冲刺的较大主题。
+
+本站上的频道链接会打开频道本身。它们只有在你[加入服务器](https://www.home-assistant.io/join-chat/)之后才能使用。
+
+一些领域还有自己的帖子，比如伴侣应用。[上表](https://www.hasscn.top/contributors/start/where-we-talk/#by-area)列出了它们。
+
+一些有帮助的习惯：
+
+- 直接提出你的问题，并提供足够的上下文以便回答。“有人能帮忙吗？”比直接说出问题得到的回答要少。
+- Discord 是聊天，聊天记录会滚走。任何对决策重要的内容都应该放在 GitHub 上，以便日后可以找到。
+- 不要直接私聊别人请求审查。参见 [pull request 与审查](https://www.hasscn.top/contributors/start/pull-requests/)。
+
+## 社区论坛
+
+[社区论坛](https://community.home-assistant.io/)是用户互相帮助的地方：配置、自动化和设备。它也是不写代码就能做贡献的好地方。回答问题是你能做的最有价值的事情之一。参见[社区](https://www.hasscn.top/contributors/community/)。
+
+本页介绍的是贡献者协作的地方。想了解 Home Assistant 社区聚集的所有地方，比如 Reddit、Facebook、线下聚会和地区社区？参见[社区聚集地](https://www.hasscn.top/contributors/community/reference/channels/)，或 home-assistant.io 上的[社区页面](https://www.home-assistant.io/community/)。
+
+## GitHub
+
+所有代码、文档和决策都存放在 [GitHub](https://github.com/home-assistant) 上。不同类型的对话会去那里不同的地方。
+
+### Issue
+
+Issue 用于缺陷（bug）：即没有按预期工作的问题。每个仓库都有自己的 issue 跟踪器，所以请在代码所在的地方报告问题。[报告缺陷](https://www.hasscn.top/contributors/start/report-a-bug/)帮助你选择仓库，并解释表单会问什么以及报告之后会发生什么。
+
+Issue 不用于支持问题或功能想法。Issue 表单会指引你到正确的位置：支持问题请前往[帮助页面](https://www.home-assistant.io/help/)，想法请前往功能请求。
+
+### 功能请求
+
+新想法请提交到 GitHub discussions 中的[功能请求](https://github.com/home-assistant/feature-requests/discussions)。先搜索，并对已有的请求投票，而不是开一个重复的请求。选择最合适的分类，比如 **Dashboards & cards** 或 **iOS & macOS**。解释你想解决的问题，而不仅仅是解决方案。其他用户会投票和讨论，产品团队会利用热门请求来制定[路线图](https://www.hasscn.top/contributors/roadmap/how-it-works/)。
+
+### 架构讨论
+
+关于 Home Assistant 构建方式的问题，比如一种新的实体（entity）类型或适用于所有集成的规则，请在[架构仓库](https://github.com/home-assistant/architecture/discussions)中发起。[架构决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/)解释了一个讨论如何变成决策。
+
+### Pull request
+
+一旦你开始着手某个更改，关于它的对话就会在 pull request 中进行。关于该更改的问题、审查意见和决策都保存在那里。
+
+## 语言
+
+GitHub 上的 issue、pull request 和讨论都使用英语，以便每个人都能跟上。Home Assistant Core 甚至有一个机器人会标记用其他语言撰写的 issue。英语不必完美。如果英语不是你的第一语言，使用工具辅助语法或翻译是可以的：[AI 政策](https://www.hasscn.top/contributors/start/ai-policy/#non-native-english-speakers)对此有说明。
+
+## 保持友善
+
+[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)适用于上述所有地方。如果你看到不当行为，请使用平台的举报或标记功能，或发送电子邮件至该页面上的地址。
+
+---
+
+# 报告缺陷（bug）
+
+> 应该在哪个仓库报告缺陷、缺陷报告表单会询问什么内容以及在哪里找到这些信息，以及报告之后会发生什么。
+
+Source: https://www.hasscn.top/contributors/start/report-a-bug/
+
+一份好的缺陷报告是您能为项目做出的最有用的事情之一。您不需要为此编写代码，只需要一个免费的 [GitHub](https://github.com/signup) 账号和一点耐心。本页面帮助您选择正确的位置、收集表单所需的信息，并了解之后会发生什么。
+
+缺陷报告用于那些没有按预期工作的问题。关于您自己配置的疑问请前往[帮助页面](https://www.home-assistant.io/help/)，新功能的想法请前往[功能请求](https://github.com/home-assistant/feature-requests/discussions)。
+
+## 报告之前
+
+- **先更新。** 确认问题在最新版本上仍然存在。多个表单都要求您确认这一点。
+- **搜索已有的 issue。** 使用仓库 **Issues** 标签页中的搜索框。找到了匹配的 issue？请添加 👍，或在评论中补充您知道的任何新信息，而不是再开一个新 issue。
+- **安全问题？** 不要在这里报告：issue 是公开的。请改为私下[报告漏洞](https://www.hasscn.top/contributors/security/report-a-vulnerability/)。
+- **用英文撰写。** 这样所有人都能看懂。使用翻译工具是可以的：请参阅 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/#non-native-english-speakers)。
+
+## 选择仓库
+
+Home Assistant 的每个部分都有自己的 issue 跟踪器。请在代码所在的地方报告问题：
+
+| 问题所在位置 | 在此报告 |
+| --- | --- |
+| 集成（integration）、自动化（automation）或 Home Assistant Core 中的其他任何内容 | [core](https://github.com/home-assistant/core/issues) |
+| 界面：仪表盘（dashboard）、卡片、设置页面和对话框 | [frontend](https://github.com/home-assistant/frontend/issues) |
+| Supervisor：更新、备份和安装应用 | [supervisor](https://github.com/home-assistant/supervisor/issues) |
+| Home Assistant OS，即操作系统本身 | [operating-system](https://github.com/home-assistant/operating-system/issues) |
+| 官方插件（add-on） | [addons](https://github.com/home-assistant/addons/issues) |
+| Android 应用、Wear OS 或 Android Auto | [android](https://github.com/home-assistant/android/issues) |
+| iOS、iPadOS、watchOS 或 macOS 应用 | [iOS](https://github.com/home-assistant/iOS/issues) |
+| home-assistant.io 上的文档 | [home-assistant.io](https://github.com/home-assistant/home-assistant.io/issues) |
+
+不确定？看起来显示异常的仪表盘属于 frontend，即使在伴侣应用（companion app）中也是如此。iOS 表单建议了一个快速测试：如果问题在 Safari 中也出现，请在 frontend 中报告。仍然不确定它属于哪里？请先在 [Discord](https://www.home-assistant.io/join-chat/) 上询问。
+
+在仓库的 **New issue** 页面上，选择缺陷报告表单。该页面上的其他选项会指引您前往正确的支持与功能请求位置。
+
+## 表单会询问什么
+
+每个表单都要求对问题进行清晰的描述，大多数还要求提供重现步骤。请将步骤写成别人可以照着做的编号步骤。然后每个表单还会要求各自的详细信息。
+
+### Home Assistant Core
+
+- 出现问题的 Home Assistant Core 版本，以及（如果您知道的话）最后一个正常的版本。
+- 您的安装类型：Home Assistant OS、Container、Supervised 或 Core。
+- 导致问题的集成，以及它在 home-assistant.io 上文档页面的链接。该链接能帮助相关的人找到您的 issue。
+- 设备或集成的[诊断信息](https://www.hasscn.top/contributors/glossary/diagnostics/)（如果它提供的话）。
+- 能重现问题的 YAML 示例（如果适用），以及日志中任何有用的内容。
+
+### Frontend
+
+- 一份检查清单：您已更新 Home Assistant、清除了浏览器缓存、尝试了其他浏览器，并尝试了[安全模式](https://www.home-assistant.io/blog/2023/11/01/release-202311/#restarting-into-safe-mode)以排除自定义卡片和其他自定义资源的影响。
+- 您期望发生什么，以及实际发生了什么。
+- Home Assistant Core 版本、您的浏览器及其版本，以及它运行的操作系统。
+- 对于实体（entity）显示方式的问题：其状态（state）和属性（attribute），可从更多信息对话框的 **Details** 视图中获取。
+- 相关卡片的 YAML，以及浏览器控制台中的任何错误。
+
+### Supervisor
+
+- 该表单仅适用于受支持的安装方式。它仍然提供 Home Assistant OS 和 Home Assistant Supervised 作为安装类型，但 Supervised 已不再是受支持的安装类型。请参阅[安装类型](https://www.hasscn.top/contributors/os/installation-types/)。
+- Supervisor 日志、系统信息，以及（如果可以的话）Supervisor 诊断信息。
+
+### Home Assistant OS
+
+- 您使用的镜像，例如 `generic-x86-64` 或 `rpi5-64`，以及 Home Assistant OS 的版本。
+- 问题是否在操作系统更新之后才出现。
+- 硬件细节，尤其是裸机 x86 安装，以及您连接的任何 USB 设备。在虚拟机中，则是虚拟机管理程序（hypervisor）及其版本。
+- Supervisor 日志和主机（host）日志。
+
+表单会要求您先在最新版本上测试。如果看起来像是回归问题（regression），请确认问题在之前的版本上是否消失。您可以使用 `ha os update --version x.y` 回退，其中 `x.y` 是您想要的版本。
+
+### Android
+
+- 应用版本、Android 版本和设备型号。对于 Wear OS，请同时列出手机和手表。
+- Home Assistant 版本，以及最后一个正常的版本。
+- 应用的日志，以及问题的截图或视频。对于通知问题，请附上您使用的 YAML。
+
+### iOS 和 macOS
+
+- 设备型号和软件版本，可在设备的 **Settings** > **General** > **About** 中找到。
+- 应用版本，可在应用中的 **App Configuration** > **About** 中找到。请包含括号中的数字。
+- Home Assistant Core 版本、您期望发生什么，以及截图。
+
+## 在哪里找到这些信息
+
+只要您知道去哪里找，Home Assistant 会显示表单所需的大部分信息。
+
+- **版本和安装类型：** 前往 **Settings** > **System** > **Repairs**，打开右上角的三点菜单，选择 **System information**。底部的复制按钮可以复制全部内容，适用于要求提供完整系统信息的表单。
+- **诊断信息：** 前往 **Settings** > **Devices & services**，打开该集成或设备，在其三点菜单中选择 **Download diagnostics**。将下载的文件拖入表单。不要粘贴其内容。home-assistant.io 上的 [Debug logs and diagnostics](https://www.home-assistant.io/docs/configuration/troubleshooting/#debug-logs-and-diagnostics) 有更多说明。
+- **日志：** 前往 **Settings** > **System** > **Logs**。在右上角选择 **Supervisor** 或 **Host** 以查看相应日志。在 Home Assistant CLI 中，`ha supervisor logs` 和 `ha host logs` 显示相同内容。
+- **Android 应用日志：** 在应用中，前往 **Settings** > **Companion App Troubleshooting** > **Show and Share Logs**。对于 Wear OS，表单要求提供手表的 LogCat 日志。
+- **浏览器错误：** 打开浏览器的开发者工具，并从其控制台复制错误。
+
+在粘贴任何内容之前，请删除密码、私有 URL 和其他个人隐私信息。
+
+## 报告之后
+
+frontend、Android 和 iOS 的缺陷报告表单会自动添加 `bug` 标签。Home Assistant Core 会做更多事情：
+
+- **集成标签。** 一个机器人会根据您报告中的文档链接添加类似 `integration: hue` 的[标签](https://www.hasscn.top/contributors/glossary/label/)。它还会提及该集成的[集成负责人](https://www.hasscn.top/contributors/glossary/integration-owner/)，让他们知道您的 issue。
+- **重复检查。** 一旦添加了集成标签，一个工作流会使用 AI 模型将您的 issue 与同一集成在过去六个月内的其他 issue 进行比较。如果发现可能的重复项，它会在评论中列出它们，并添加 `potential-duplicate` 标签。请查看它们：如果其中一个是相同的问题，请关闭您的 issue 并在那里补充您的详细信息。如果您的不同，请说明不同之处。
+- **语言检查。** 非英文的 issue 会被关闭并添加 `non-english` 标签，同时会有评论要求您用英文重新提交。
+- **提问。** 集成负责人或维护者可能会要求更多详细信息，例如日志或诊断信息，或添加 `needs-more-information` 标签。请尽可能回复。没有回复，issue 就无法推进。
+
+### 保持 issue 活跃
+
+一段时间没有活动的 issue 会被添加 `stale` 标签，如果之后仍无动静则会被关闭。在 Home Assistant Core 中，这个期限是 90 天，之后 7 天 issue 会被关闭。问题仍然存在？请确认它在最新版本上仍然出现，并在评论中说明。这会重置计时。issue 关闭后，机器人会在一段时间后将其锁定。[Stale and locked](https://www.hasscn.top/contributors/start/pull-requests/#stale-and-locked) 列出了每个仓库的时限。
+
+### 修复之后
+
+修复会以拉取请求（pull request）的形式提交，由接手的人完成。那个人可以是您。一旦合并，它会在下一个版本中到达所有用户。紧急修复可以更早进入补丁版本：由审查者决定，并将该拉取请求添加到下一个补丁版本的里程碑中。想比别人先体验下一个版本？[加入 beta 测试](https://www.hasscn.top/contributors/releases/first-contribution/)。
+
+---
+
+# 拉取请求与评审
+
+> 如何创建一个易于评审的拉取请求（pull request）、创建之后会发生什么，以及如何帮助它被合并。适用于所有仓库。
+
+Source: https://www.hasscn.top/contributors/start/pull-requests/
+
+[拉取请求](https://www.hasscn.top/contributors/glossary/pull-request/)（pull request）是更改进入 Home Assistant 的方式，无论是代码、文档还是设计标记。本页介绍在所有仓库中都相同的部分。每个领域还会补充自己的细节，例如 [Core 开发指南](https://www.hasscn.top/contributors/core/development/)或[前端的评审流程](https://www.hasscn.top/contributors/frontend/development/review-and-release/)。
+
+刚接触 GitHub？fork、branch、commit、push 这些词在[不写代码也能用好 GitHub](https://www.hasscn.top/contributors/start/github/)中有解释。该页面还会带你在浏览器中完成你的第一个拉取请求，无需安装任何软件。
+
+## 创建拉取请求之前
+
+### 确认它合适
+
+大多数更改不需要事先获得许可。修复一个 bug、改进文档或添加一个小功能，都可以直接提交拉取请求。较大的更改则不同：一种新的实体（entity）类型、对所有集成（integration）工作方式的改动，或者为所有人引入一个新的依赖。这些应该先从讨论开始，免得你做出来的东西不得不改变方向。参见[决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/)。
+
+所有架构决策都记录在[架构仓库](https://github.com/home-assistant/architecture)中。你的更改必须遵循这些决策。
+
+### 保持小而精
+
+一个拉取请求应该只做一件事：修复一个 bug、添加一个功能，或更新一个页面。过程中发现了其他问题？放到单独的拉取请求里。
+
+小的拉取请求评审得更快。更多人可以评审它们，冲突更少，而且对小改动的认真评审比快速浏览大改动能发现更多问题。许多小的拉取请求并不是效率更低，而是效率更高。
+
+依赖更新也应放在单独的拉取请求中，并附上发布说明或两个版本之间变更的链接，方便评审者查看改了什么。
+
+### 测试它
+
+运行你的更改并确认它能正常工作；如果是文档，确认显示正常。这听起来显而易见，但它能省去一整轮评审。
+
+### 从最新版本开始
+
+[分支](https://www.hasscn.top/contributors/glossary/branch/)（branch）是一条独立的更改线，这样你的工作不会与其他内容混在一起。为每个拉取请求创建一个新分支，基于仓库主分支的最新版本。例如，Home Assistant Core 和前端使用 `dev`，文档使用 `current` 或 `next`。各领域的指南会告诉你使用哪个分支。
+
+你的 [fork](https://www.hasscn.top/contributors/glossary/fork/)，也就是你自己的一份仓库副本，不会自动更新。如果你是很久以前创建的，它可能已经落后了：开始之前先拉取最新的更改。
+
+### 填写模板
+
+每个仓库都有拉取请求模板。请使用它，并且不要删除其中的章节。写一个清晰的标题，以及一段说明你*为什么*做这个更改的描述，而不仅仅是它做了什么。链接它所修复的 issue。如果你使用了 AI 工具，请遵循 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)：你必须能够用自己的话解释每一处更改。一些模板会通过复选框询问这一点。[拉取请求模板会问什么](https://www.hasscn.top/contributors/start/ai-policy/#what-the-pull-request-templates-ask)列出了这些内容。
+
+## 创建拉取请求之后
+
+### 机器人先行动
+
+几分钟内，一些事情会自动发生：
+
+- **CLA 检查。** 在代码仓库中，机器人会在你第一次贡献时要求你签署[贡献者许可协议](https://www.hasscn.top/contributors/start/licensing/)（Contributor License Agreement）。在你签署之前，你的拉取请求无法被合并。
+- **标签。** 机器人会给你的拉取请求打标签，例如按更改类型或它涉及的集成。标签帮助维护者找到他们可以评审的拉取请求。
+- **集成负责人。** 如果你更改了某个集成，GitHub 会请求其[集成负责人](https://www.hasscn.top/contributors/glossary/integration-owner/)（integration owner）进行评审。其他文件也可以有负责人，列在仓库的 `CODEOWNERS` 文件中。
+- **CI。** 自动化检查会构建你的更改、运行测试并检查代码风格。红色叉号表示有检查失败了。打开详情，修复与你的更改相关的部分，然后再次推送：把你的新提交发送到拉取请求的分支，检查会重新运行。参见 [CI](https://www.hasscn.top/contributors/glossary/ci/)。看不懂失败原因？在拉取请求的评论中提问。
+
+如果某个检查因为你的更改而失败，请在修复期间将你的拉取请求标记为草稿（draft）。这告诉评审者它还没准备好。如果你确定失败与你的更改无关，就保持打开状态并说明情况。
+
+### 等待评审
+
+这是最难的部分。评审需要时间，从几小时到几周不等，而且没有任何保证。拉取请求总是比评审者多。
+
+有些内容通常会被更快处理：bug 修复、小改动，以及带测试的拉取请求。大的拉取请求，或者需要具备特定知识的人的拉取请求，需要更长时间。
+
+在等待期间：
+
+- **保持最新。** 合并冲突（merge conflict）意味着别人修改了与你相同的行，Git 无法自行合并两者。GitHub 会在你的拉取请求上显示这一点。修复它，如果已经过了一段时间，还要用最新的更改更新你的分支。[当 GitHub 提示存在冲突时](https://www.hasscn.top/contributors/start/github/#when-github-says-there-is-a-conflict)介绍了如何在浏览器中操作。
+- **再看一遍。** 一天之后，你常常会自己发现一些问题。
+- **评审别人的工作。** 这是让队列向前推进的最好方式，对每个人都如此。测试一个拉取请求并评论“我在我的设备上试过了，可以正常工作”，就已经是一条有用的评审了。
+
+不要催促维护者或集成负责人进行评审，无论是在拉取请求中还是私信中。机器人会通知该通知的人。在描述中请求评审也是多余的：创建拉取请求本身就已经是在请求评审了。
+
+### 评审意见
+
+在某个时候，评审者会对你的工作发表评论，或要求更改。这不是针对你个人。评审者和你想要的是同样的东西：一个更好的 Home Assistant。看不懂某条评论就问。如果你认为评审者错了，礼貌地提出异议，并解释原因。
+
+在许多仓库中，当评审者要求更改时，机器人会把你的拉取请求转为草稿。当你处理完所有评论且检查通过后，选择 **Ready for review**。机器人随后会通知评审者你已完成。
+
+一些项目使用 AI 工具辅助评审。把它们的评论当作普通的评审意见对待：如果你认为某条不对，简短地说明即可。维护者拥有最终决定权。
+
+### 过期与锁定
+
+一段时间没有活动的拉取请求或 issue 会被机器人打上 `stale` 标签并附上评论。如果之后仍无动静，机器人会关闭它。任何活动都会重置计时：如果你仍在等待评审，一条评论就足够了。某些标签，比如 `no-stale`，可以让机器人不碰它。
+
+一旦某个内容被关闭，另一个机器人会在一段时间后锁定对话。此后，只有对仓库有写权限的人才能评论。又发现了同样的问题？创建一个新的 issue，并链接旧的。
+
+各仓库的时限不同：
+
+| 仓库 | Issue 过期时间 | 拉取请求过期时间 | 打标签后关闭时间 | 关闭后锁定时间 |
+| --- | --- | --- | --- | --- |
+| [core](https://github.com/home-assistant/core/blob/dev/.github/workflows/stale.yml) | 90 天 | 60 天 | 7 天 | Issue 30 天，拉取请求 1 天 |
+| [frontend](https://github.com/home-assistant/frontend/blob/dev/.github/workflows/stale.yaml) | 90 天 | 90 天 | 7 天 | Issue 30 天，拉取请求 1 天 |
+| [home-assistant.io](https://github.com/home-assistant/home-assistant.io/blob/current/.github/workflows/stale.yml) | 60 天 | 60 天 | 7 天 | Issue 30 天，拉取请求 1 天 |
+| [supervisor](https://github.com/home-assistant/supervisor/blob/main/.github/workflows/stale.yml) | 30 天（仅 bug） | 30 天 | 7 天 | Issue 30 天，拉取请求 1 天 |
+| [operating-system](https://github.com/home-assistant/operating-system/blob/dev/.github/workflows/stale.yml) | 90 天 | 90 天 | 7 天 | Issue 30 天，拉取请求 7 天 |
+| [addons](https://github.com/home-assistant/addons/blob/master/.github/workflows/stale.yml) | 30 天 | 未设置 | 7 天 | 未设置 |
+| android | 未启用 | 未启用 | 未启用 | 未设置 |
+| iOS | 未设置 | 未设置 | 未设置 | 未设置 |
+
+这些链接指向各仓库的配置文件，位于其 `.github` 文件夹中。锁定时限在旁边的 `lock.yml` 中（前端为 `lock.yaml`）。android 仓库仍保留着一个供旧机器人使用的 [`stale.yml`](https://github.com/home-assistant/android/blob/main/.github/stale.yml)（issue 90 天，拉取请求 30 天），但该机器人自 2021 年以来就没有在那里打过任何标签了。
+
+## 做一个好邻居
+
+- 同时打开的拉取请求不要超过五个。等一些被合并后再打开更多。
+- 不要打开依赖于其他尚未合并的拉取请求的拉取请求。
+- 只打开你打算完成的拉取请求。如果无法继续，说明情况并关闭它。这没什么可羞愧的。如果卡住了，可以在 [Discord](https://www.hasscn.top/contributors/start/where-we-talk/) 上寻求帮助。
+
+## 已合并
+
+恭喜，也谢谢你。你让每一个使用 Home Assistant 的人的体验变得更好了。
+
+大多数更改会在下一个版本中到达用户。需要进入补丁版本的修复？在描述中明确说明。由评审者决定，并将其添加到下一个补丁版本的里程碑中。
+
+然后继续前进：再开一个拉取请求，或者帮忙评审。每一次都会更容易。
+
+---
+
+# 作为贡献者成长
+
+> 第一次拉取请求之后是什么。审查、分类问题、负责一个集成、承担角色，以及这一切能通向哪里。
+
+Source: https://www.hasscn.top/contributors/start/grow/
+
+你的第一个贡献已合并。然后呢？本页展示了人们在那之后走过的路径，大致按大多数人走的顺序排列。你不必走完所有路径，也没有终点线。很多人多年来只把一件事做好，就一直在做贡献。
+
+每一步都说明它意味着什么、需要什么、以及如何达到。如果某件事在任何地方都没有书面说明，本页会如实说明，而不是猜测。
+
+## 1. 成为常客
+
+成长最简单的方式就是持续出现。在同一部分项目中提交第二、第三个拉取请求（pull request）比第一个让你学到更多，审查它们的人也开始记住你的名字。
+
+不过，让 Home Assistant 持续运转的大部分工作并不是编写新东西，而是帮助已经存在的人和变更。这正是常客发挥最大作用的地方。
+
+### 审查拉取请求
+
+拉取请求比审查者多。你给出的每一次审查都能让维护者的最终审查更快完成。审查不需要任何权限：任何人都可以在拉取请求上评论、测试或批准它。
+
+Core 和前端的拉取请求模板要求你在打开自己的拉取请求时，审查同一仓库中另外两个打开的拉取请求。它们还链接到一个搜索尚未有审查的拉取请求的入口。这是一个很好的起点。
+
+什么是有用的审查：
+
+- 用你自己的设备或环境测试变更，并说明你的发现。“我在我的设备上试过，可以正常工作”就很有帮助。
+- 检查基本项：模板是否填写完整、检查是否通过、它是否只做一件事？
+- 当有不清楚的地方时提出问题。如果你不理解它，下一个人也不会理解。
+
+各仓库的详细信息，请参阅 [Core 中审查拉取请求](https://www.hasscn.top/contributors/core/development/reviewing/) 和 [前端中的审查与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/)。总体流程见 [拉取请求与审查](https://www.hasscn.top/contributors/start/pull-requests/)。
+
+### 协助处理问题
+
+错误报告堆积得很快。很多缺少日志、版本号或复现步骤。你不需要任何特殊权限就能帮忙：
+
+- 在你自己的安装上尝试复现错误，并评论发生了什么。
+- 友善地询问缺失的细节。[报告错误](https://www.hasscn.top/contributors/start/report-a-bug/) 列出了每个仓库的表单要求填写的内容。
+- 发现重复问题时指出来。
+- 确认旧错误在最新版本上是否仍然存在，以免它被搁置。
+
+设置标签或关闭问题需要 GitHub 权限，大多数贡献者没有这些权限。你会看到用于此目的的标签包括 Core 和 [home-assistant.io](https://github.com/home-assistant/home-assistant.io) 上的 `needs-more-information`、前端的 `needs more information`，以及 Core 中的 `waiting-for-reply`。
+
+想找点自己能修复的东西？一些仓库会用 `good first issue` 或 `help-wanted` 标记问题，其中包括 Core、前端和 home-assistant.io。并非每个仓库都使用这些标签，而且任意时刻带有这些标签的问题数量差异很大。
+
+### 帮助他人
+
+回答问题也是一种贡献，而且是用户能立刻感受到的贡献。
+
+- 在[社区论坛](https://community.home-assistant.io/)和 [Discord](https://www.home-assistant.io/join-chat/) 上帮助人们解决他们的配置问题。[回答你的第一个问题](https://www.hasscn.top/contributors/community/first-contribution/) 展示了如何做，[欢迎新成员](https://www.hasscn.top/contributors/community/guides/welcome-newcomers/) 帮助你做得更好。
+- 在[功能请求](https://github.com/home-assistant/feature-requests/discussions)中帮助完善想法。解释请求背后的问题，指向已有的请求而不是重复提交，并投票。产品团队利用功能请求来制定[路线图](https://www.hasscn.top/contributors/roadmap/how-it-works/)。
+
+## 2. 成为集成负责人
+
+[集成负责人](https://www.hasscn.top/contributors/glossary/integration-owner/)（integration owner）负责照看一个集成。你最了解该设备或服务，因此当它发生变更时，审查者会听取你的意见。
+
+### 需要什么
+
+集成的负责人列在 Home Assistant Core 中其 `manifest.json` 的 `codeowners` 字段里。要成为负责人，请打开一个拉取请求，在其中添加你的 GitHub 用户名，然后运行 hassfest 来更新仓库的 `CODEOWNERS` 文件：
+
+```shell
+python3 -m script.hassfest
+```
+
+提交这两个文件。该拉取请求会像其他拉取请求一样被审查。如果先参与过该集成的开发会大有帮助。[成为集成负责人](https://www.hasscn.top/contributors/core/quality-scale/integration-owner/) 解释了这个角色以及它对你的要求：负责人需要长期照看该集成。没有活跃负责人的集成可能会在质量评级中失去位置。
+
+### 你能得到什么
+
+- **审查请求。** GitHub 会请你审查涉及你集成的拉取请求，因为 `CODEOWNERS` 文件是从清单（manifest）生成的。
+- **文档也一样。** home-assistant.io 的 `CODEOWNERS` 文件与 Core 同步。如果你拥有该集成，你也就拥有它的文档页面，并会被要求审查对它的更改。
+- **问题提及。** 当 Core 或 home-assistant.io 上的问题或拉取请求获得你集成的标签（`integration: <domain>`）时，机器人会指派你并在评论中提及你。
+- **机器人命令。** 该评论列出了只有该集成的负责人才能使用的命令，通过评论 `@home-assistant <command>` 来使用：关闭、重新打开或重命名问题，移除你集成的标签，以及添加或移除一些分类标签如 `needs-more-information`。在拉取请求上，你还可以将其标记为草稿、标记为可审查，或更新其分支。不指定集成的命令只在问题或拉取请求带有单一集成标签时才有效。
+- **任务问题。** 在 Core 和 home-assistant.io 中，只有 GitHub 组织成员和列在 `CODEOWNERS` 中的人才能打开 Task 类型的问题。其他人的任务问题会被自动关闭。
+
+机器人的源代码在 [OpenHomeFoundation/bots](https://github.com/OpenHomeFoundation/bots) 中。它展示了每个命令的确切作用。
+
+## 3. 在你的领域承担角色
+
+一些领域设有责任更大的角色。每个角色都有各自的授予方式。
+
+- **语言负责人。** Assist 支持的每种语言都有负责人，他们在 [intents 仓库](https://github.com/OHF-Voice/intents) 中审查其语言的变更。申请时，你需要是母语使用者，至少向 intents 仓库提交过两个拉取请求，并协助审查你语言的拉取请求。参见[语言负责人](https://www.hasscn.top/contributors/translate/voice/language-leaders/)。
+- **版主。** 版主保持论坛、Discord 和 subreddit 友好且安全。版主由其他版主提名，由 Open Home Foundation 的社区经理接受提名。参见[版主工作方式](https://www.hasscn.top/contributors/community/guides/moderation/#becoming-a-moderator)。
+- **Creator Network。** 如果你制作关于 Home Assistant 的视频、文章或其他内容，可以申请加入 [Creator Network](https://www.hasscn.top/contributors/community/reference/programs/#creator-network)。
+- **Works with Home Assistant。** 如果你在设备制造商工作，[Works with Home Assistant](https://www.hasscn.top/contributors/community/reference/programs/#works-with-home-assistant) 计划就是为你的公司准备的。
+
+## 4. 维护者与团队
+
+[维护者](https://www.hasscn.top/contributors/glossary/maintainer/)（maintainer）可以批准并合并仓库中的拉取请求。每个仓库都有自己的维护者，通常组织成 GitHub 团队，例如 `@home-assistant/core` 或 `@home-assistant/frontend`。[项目如何组织](https://www.hasscn.top/contributors/start/organization/#teams-in-codeowners) 列出了你会在 `CODEOWNERS` 文件中遇到的团队，以及每个团队负责的内容。
+
+一个人如何成为维护者，本站还没有书面说明。审查、分类问题和负责集成本身就很有价值，无论之后是什么。
+
+## 5. 获得认可
+
+你的工作会出现在用户阅读的地方：
+
+- **发布说明。** [Home Assistant 博客](https://www.home-assistant.io/blog/) 上的发布说明会按 GitHub 用户名感谢贡献者，标注在他们参与的功能旁边。帮助撰写发布说明的人也会被感谢。
+- **完整变更日志。** 每个版本都有 Home Assistant Core 的完整变更日志，从发布说明的 **All changes** 下链接。每个合并的拉取请求都会连同其作者一起列出。
+
+## 6. 与基金会一起走得更远
+
+Home Assistant 是 [Open Home Foundation](https://www.openhomefoundation.org/) 的项目之一。还有更多可以参与：
+
+- **路线图。** 在[路线图](https://www.hasscn.top/contributors/roadmap/)上了解基金会正在做什么，以及你可以在哪里提供帮助。
+- **聚会与社区日。** 与其他贡献者面对面交流，或者自己主办一场聚会。基金会会为主办者报销某些费用。参见[主办聚会](https://www.hasscn.top/contributors/community/guides/meetups/)。
+- **其他项目。** 基金会还拥有 ESPHome 和 Music Assistant 等项目，并与其他方合作。其[项目页面](https://www.openhomefoundation.org/projects/)列出了这些项目，并附有各自的链接。
+- **职位。** 基金会在其[职位页面](https://jobs.ashbyhq.com/openhomefoundation)上发布空缺职位。
+
+## 找谁交流
+
+- 不确定接下来做什么？在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 的 [**#developers**](https://discord.com/channels/330944238910963714/554842238073700352) 频道，或你所在领域的频道中询问。[我们的交流场所](https://www.hasscn.top/contributors/start/where-we-talk/#by-area) 列出了这些频道。[项目论坛](https://discord.com/channels/330944238910963714/1346914401508392980)上有运行时间较长的项目，以及团队正在冲刺的较大主题。
+- 想成为集成负责人？在该集成的拉取请求或问题中询问，让现任负责人能看到。
+- 有兴趣成为语言负责人？在 [intents 讨论区](https://github.com/OHF-Voice/intents/discussions) 发起一个话题。
+- 关于社区角色、聚会或社区日的问题？发送电子邮件至社区团队 [community@openhomefoundation.org](mailto:community@openhomefoundation.org)。
+
+---
+
+# 项目是如何组织的
+
+> 谁拥有 Home Assistant，谁为它出资，工作在哪里进行，以及由谁决定合并哪些内容。
+
+Source: https://www.hasscn.top/contributors/start/organization/
+
+Home Assistant 是一个开源项目，由一个非营利基金会拥有，并与贡献者社区共同构建。本页将解释这些组成部分如何相互配合，让你了解自己正在与谁合作。
+
+## 开放之家基金会（Open Home Foundation）
+
+Home Assistant 属于[开放之家基金会（Open Home Foundation）](https://www.openhomefoundation.org/)，这是一个非营利组织。Home Assistant 和其他项目于 2024 年移交给了该基金会。如今，基金会还拥有 ESPHome 和 Music Assistant 等项目。
+
+基金会雇佣了 50 多名全职员工。他们在相同的代码仓库中工作，遵循相同的审查流程，并在与所有人相同的频道中交流。你会在代码审查中遇到他们，但他们远非唯一进行审查和合并的人。
+
+基金会代表智能家居中的三个价值观：隐私、选择和可持续性。这些价值观体现在[我们的原则](https://www.hasscn.top/contributors/start/principles/)中。它的[结构页面](https://www.openhomefoundation.org/structure/)解释了基金会是如何治理和获得资助的。
+
+## 商业合作伙伴
+
+基金会的资金来自商业合作伙伴费用和捐赠。其目前的商业合作伙伴是 [Nabu Casa](https://www.nabucasa.com/) 和 Apollo Automation。根据合同要求，每家合作伙伴必须将其销售授权产品所得利润的大部分贡献给基金会。
+
+Nabu Casa 是 Home Assistant 产品和服务的官方提供商，例如 Home Assistant Link：一项可选订阅服务，提供远程访问、Amazon Alexa 和 Google Assistant 支持，以及 Assist 的云端语音功能。
+
+## 代码仓库
+
+所有工作都在 GitHub 上公开进行，隶属于 [home-assistant](https://github.com/home-assistant) 组织。你早期会接触到的一些代码仓库：
+
+- [core](https://github.com/home-assistant/core)：Home Assistant Core 以及所有内置集成（integration），使用 Python 编写。
+- [frontend](https://github.com/home-assistant/frontend)：网页界面，使用 TypeScript 编写。
+- [home-assistant.io](https://github.com/home-assistant/home-assistant.io)：用户文档。
+- [android](https://github.com/home-assistant/android) 和 [iOS](https://github.com/home-assistant/iOS)：伴侣应用（companion apps）。
+- [supervisor](https://github.com/home-assistant/supervisor) 和 [operating-system](https://github.com/home-assistant/operating-system)：负责安装、更新和运行一切的部分。
+- [architecture](https://github.com/home-assistant/architecture)：关于 Home Assistant 构建方式的讨论和决策。
+
+一些项目位于基金会的其他组织中，例如 [OHF-Voice](https://github.com/OHF-Voice/intents) 中的语音意图。[代码仓库](https://www.hasscn.top/contributors/architecture/repositories/)页面列出了所有仓库，并告诉你什么该去哪个仓库。
+
+## 维护者、团队和集成负责人
+
+任何人都可以提交 issue、拉取请求（pull request）或进行审查。由谁决定合并什么取决于具体的代码仓库：
+
+- **维护者（Maintainers）**可以批准并合并拉取请求。每个代码仓库都有自己的维护者，通常以 GitHub 团队的形式组织，例如 Home Assistant Core 的 `@home-assistant/core`。
+- **集成负责人（Integration owners）**负责某个集成。在 Home Assistant Core 中，每个集成都在其清单（manifest）的 `codeowners` 字段中列出其负责人。他们会收到该集成相关 issue 的通知，GitHub 也会请他们审查涉及该集成的拉取请求。
+- **审查者（Reviewers）**可以是任何人。来自贡献者的细致审查能帮助维护者更快地做出决定。
+
+更大的问题，比如新的实体（entity）类型或适用于所有集成的规则，会在 architecture 代码仓库中公开讨论。[架构决策是如何做出的](https://www.hasscn.top/contributors/architecture/decisions/)解释了其运作方式。
+
+### CODEOWNERS 中的团队
+
+`CODEOWNERS` 文件告诉 GitHub 应该请谁来审查。在 Home Assistant Core 和 [home-assistant.io](https://github.com/home-assistant/home-assistant.io) 中，它列出了人员以及 `home-assistant` 组织的几个 GitHub 团队：
+
+- `@home-assistant/core`：核心文件，以及核心团队拥有的集成
+- `@home-assistant/frontend`：`frontend`、`lovelace` 和 `panel_custom` 集成
+- `@home-assistant/supervisor`：`hassio` 集成，以及构建容器镜像的文件
+- `@home-assistant/cloud`：`cloud`、`alexa` 和 `google_assistant` 集成，位于 Home Assistant Link 背后
+- `@home-assistant/matter`：`matter` 集成
+- `@home-assistant/z-wave`：`zwave_js` 集成
+
+少数集成由组织之外的团队拥有，例如某个制造商的团队。在 Core 中，`CODEOWNERS` 文件是根据集成的清单生成的，因此清单变化时它也会随之变化。
+
+### 成为集成负责人
+
+集成的负责人列在其 `manifest.json` 的 `codeowners` 字段中。要成为负责人，请提交一个拉取请求，将你的 GitHub 用户名添加到那里。如果之前曾为该集成做过贡献，会大有帮助。[集成负责人](https://www.hasscn.top/contributors/core/quality-scale/integration-owner/)解释了这一角色对你的要求，以及如何更新相关文件。
+
+## 志愿者和员工
+
+有两类人为 Home Assistant 工作：
+
+- **员工（Staff）**受雇于开放之家基金会。基金会的资金来自其商业合作伙伴的费用和捐赠，用于支付他们的薪水。其[结构页面](https://www.openhomefoundation.org/structure/)有详细信息。
+- **志愿者（Volunteers）**没有报酬。他们在空闲时间做出贡献，因为他们关心 Home Assistant。
+
+两者都在相同的代码仓库中、按照相同的规则工作。大多数贡献者是志愿者。这塑造了项目的运作方式：审查可能需要一段时间，没有人欠任何人一次合并，耐心是双向的。这也意味着项目是由那些真正参与进来的人塑造的。如果你关心某件事，你就可以帮助它实现。
+
+## 项目的未来方向
+
+基金会公开规划较大的工作。其董事会制定[目标](https://github.com/OpenHomeFoundation/goals)。产品团队将一些功能请求转化为[路线图](https://github.com/OpenHomeFoundation/roadmap)上的机会（opportunity）：值得解决的问题，而不是一份带有日期的功能清单。机会通过相关工作所在的代码仓库中的史诗（epic）和任务来交付。
+
+你可以通过[功能请求](https://github.com/home-assistant/feature-requests/discussions)施加影响：分享你的想法、投票并参与讨论。[从想法到发布](https://www.hasscn.top/contributors/roadmap/how-it-works/)介绍了每一个步骤，并展示了你可以在哪里参与进来。
+
+---
+
+# 我们的原则
+
+> Home Assistant 所坚持的理念，以及我们如何协作。这些价值观是你在评审和讨论中看到的各项决定背后的依据。
+
+Source: https://www.hasscn.top/contributors/start/principles/
+
+Home Assistant 每天都要做出许多决定：在评审中、在讨论中、在决定接下来构建什么时。其中大部分都可以归结为几项价值观。了解它们有助于你理解评审者为什么要求修改，也有助于你自己做出同样的判断。
+
+## 开放之家
+
+Home Assistant 是 [Open Home Foundation](https://www.hasscn.top/contributors/start/organization/) 的一部分，该基金会代表智能家居中的三项价值观：
+
+- **隐私**：你的家属于你自己。Home Assistant 在本地运行，关于你家的数据会留在本地，除非你选择其他方式。云是一种选项，绝不是必需品。
+- **选择**：你可以选择任何品牌的设备，并按自己喜欢的方式组合使用。任何厂商都无法把你锁死。
+- **可持续性**：智能家居应该能持续工作多年，而不是在公司转向后就停止工作。
+
+每个领域都会以自己的方式践行这些价值观。[架构原则](https://www.hasscn.top/contributors/architecture/principles/)解释了它们对代码意味着什么，[设计原则](https://www.hasscn.top/contributors/design/principles/)解释了它们对界面意味着什么。
+
+## 我们如何协作
+
+### 公开透明
+
+代码、讨论和决定都在公开场合进行，在 GitHub 上和公开频道中。任何人都可以阅读，任何人都可以参与。当你在私下聊天中做出某个决定时，请把结果写在其他人能找到的地方。
+
+### 用户至上
+
+Home Assistant 运行在数百万个家庭中。人们依靠它来控制灯光、供暖和警报。因此，影响现有配置的更改会得到格外谨慎的对待，这也是为什么评审者可能会要求你保留某个你更想移除但仍在正常工作的功能。
+
+### 质量重于数量
+
+本项目宁愿少做一些事情，也要把它们做好。这就是为什么评审可能显得严格，为什么一个拉取请求（pull request）有时需要几轮修改。这绝不是针对个人：正是这一点让 Home Assistant 能为所有人正常工作。
+
+### 小步前进
+
+一个小的、专注的更改更容易理解、评审和合并。拿不准的时候，就把它拆分。[拉取请求与评审](https://www.hasscn.top/contributors/start/pull-requests/)解释了原因。
+
+### 尊重他人的时间
+
+许多贡献者贡献的是自己的空闲时间，而评审者的时间是有限的。请让这些时间发挥价值：在分享之前测试你的工作，填写模板，并理解你提交的内容。[AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)正是基于同样的理念。
+
+### 欢迎所有人
+
+你不需要是专家才能做出贡献，也不需要什么都懂才能提问。[行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/)规定了我们在任何地方应如何彼此相待。
+
+## Home Assistant 的声音
+
+Home Assistant 也有自己的个性：热情、坦率、支持、慷慨和独立。它体现在界面中、文档中，以及我们彼此交流的方式中。[个性](https://www.hasscn.top/contributors/brand/personality/)描述了每一项特质。
+
+---
+
+# 使用 AI 工具参与贡献
+
+> 在贡献时如何用好 AI 编程工具。AI 政策对你的要求、各仓库为智能体（agent）准备的指令和技能、常见任务的工作流程，以及每次都需要自己检查的内容。
+
+Source: https://www.hasscn.top/contributors/start/ai-tools/
+
+你可以在为 Home Assistant 做贡献时使用 AI 工具，而且多个仓库都带有专门为它们编写的指令和技能。本页是 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)的实操部分：如何从工具中获得高质量的成果，以及如何始终做一个理解并能为结果负责的人。
+
+AI 工具可以为你省去大量的阅读和打字，但它不能替你省去理解。审阅者能分辨出区别，而且政策对看起来像未经审阅的 AI 输出的拉取请求（pull request）有明确规定：它们会被关闭。
+
+## 政策在实践中的要求
+
+[AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)很短。在日常工作中，它归结为以下几点：
+
+- **你要理解每一处改动，并能用自己的话解释它。** 如果你解释不了某一行，就在打开拉取请求之前弄清楚它的作用，或者删掉它。
+- **你要始终掌控流程。** 不允许使用自主运行的智能体。智能体可以在你的机器上写代码，但由你决定提交什么。不要让工具在未经你审阅的情况下打开 issue 或拉取请求，或发表评论。
+- **你要亲自回答审阅者。** 用 AI 修正语法没问题，但回答的实质内容必须是你自己的。
+- **在模板要求的地方如实披露。** [Home Assistant Core](https://github.com/home-assistant/core/blob/dev/.github/PULL_REQUEST_TEMPLATE.md) 和[前端](https://github.com/home-assistant/frontend/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)的拉取请求模板中有两个复选框："I understand the code I am submitting and can explain how it works"（我理解我提交的代码并能解释其工作原理），以及 "Any generated code has been carefully reviewed for correctness and compliance with project standards"（所有生成的代码都经过仔细审阅，确保正确并符合项目标准）。[Android](https://github.com/home-assistant/android/blob/main/.github/pull_request_template.md) 和 [iOS](https://github.com/home-assistant/iOS/blob/main/.github/pull_request_template.md) 模板要求你确认已阅读政策，并从三个选项中恰好选择一个：未使用 AI、AI 辅助，或完全由 AI 生成且经你审阅并理解的代码。保留模板中的这些部分，并且只在属实的情况下勾选。
+- **你把 AI 的审阅评论当作普通审阅评论对待。** 一些项目使用 AI 工具进行审阅和分类。它们可能是错的。如果你认为某条评论有误，请简短地说明。
+
+智能体指令对工具说的也是同样的话。在 core、前端、两个应用、[home-assistant.io](https://github.com/home-assistant/home-assistant.io) 和 Supervisor 中，这些指令都以一个 "AI policy"（AI 政策）章节结尾，告诉智能体不要自主打开 issue 或拉取请求，也不要在未经你审阅的情况下替你发表评论。
+
+## 各仓库如何为你的智能体做准备
+
+你不必从零开始向 AI 工具解释 Home Assistant。大多数仓库为智能体准备了两种文件：
+
+- **指令（Instructions）**：一个 Markdown 文件，包含仓库的基本信息，比如如何搭建环境、运行测试、格式化代码，以及智能体经常搞错的规则。大多数工具在每次会话开始时都会读取它。
+- **技能（Skills）**：每个文件夹中包含一个 `SKILL.md` 文件。其 front matter 中有 `name` 和 `description`。当你的任务与其描述匹配，或者你按名称请求时，工具会加载该技能。在 Claude Code 中，技能还会变成一个命令：`ha-review` 技能可以通过 `/ha-review` 运行。
+
+两者都是纯 Markdown 文件，值得你自己读一读。例如，core 的集成技能用几十行就概括了审阅指南。
+
+### 哪个工具读取哪个文件
+
+每个工具会在自己的位置查找。以下是各工具官方文档的说明：
+
+| 文件或文件夹 | 读取者 |
+| --- | --- |
+| `AGENTS.md` | [Codex](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、[GitHub Copilot](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions)，以及在没有 `CLAUDE.md` 时的 [Claude Code](https://code.claude.com/docs/en/memory) |
+| `CLAUDE.md` | Claude Code。GitHub Copilot 也接受根目录下的 `CLAUDE.md` 或 `GEMINI.md` |
+| `.github/copilot-instructions.md` | GitHub Copilot |
+| `.github/instructions/*.instructions.md` | GitHub Copilot，针对匹配每个文件的 `applyTo` 模式的文件 |
+| `.claude/skills/` | [Claude Code](https://code.claude.com/docs/en/skills) 和 [GitHub Copilot](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) |
+| `.agents/skills/` | [Codex](https://learn.chatgpt.com/docs/build-skills) 和 GitHub Copilot |
+| `.github/skills/` | GitHub Copilot |
+
+为了用一个来源服务所有工具，这些仓库使用符号链接。例如在前端中，`CLAUDE.md` 和 `.github/copilot-instructions.md` 链接到 `AGENTS.md`，`.claude/skills` 链接到 `.agents/skills`。这样，大多数工具都能得到相同的指令。不过，并非每个工具都能找到每个技能文件夹。例如 Codex 读取 `.agents/skills/` 而不读取 `.claude/skills/`，所以在 core 和 home-assistant.io 中，你需要自己把它指向某个技能。
+
+- **[Core](https://github.com/home-assistant/core)**：`AGENTS.md`，`CLAUDE.md` 链接到它。`.github/copilot-instructions.md` 由 `script/gen_copilot_instructions.py` 从它生成，并带有针对 Copilot 代码审阅的额外规则。技能位于 `.claude/skills/`，`.claude/agents/` 中有一个 `raise-pull-request` 子智能体。
+- **[Frontend](https://github.com/home-assistant/frontend)**：`AGENTS.md`，`CLAUDE.md` 和 `.github/copilot-instructions.md` 链接到它。技能位于 `.agents/skills/`。
+- **[Android](https://github.com/home-assistant/android)**：`AGENTS.md`，`CLAUDE.md`、`GEMINI.md`、`.github/copilot-instructions.md` 和 `.junie/guidelines.md` 链接到它。技能位于 `.agents/skills/`，`.github/skills/` 中有一个。
+- **[iOS](https://github.com/home-assistant/iOS)**：`AGENTS.md`，`CLAUDE.md` 和 `.github/copilot-instructions.md` 链接到它。技能位于 `.agents/skills/`。
+- **[home-assistant.io](https://github.com/home-assistant/home-assistant.io)**：`.github/copilot-instructions.md`，`AGENTS.md`、`CLAUDE.md` 和 `GEMINI.md` 链接到它。技能位于 `.claude/skills/`。
+- **[Supervisor](https://github.com/home-assistant/supervisor)**：`.github/copilot-instructions.md`，`AGENTS.md` 和 `CLAUDE.md` 链接到它。没有技能。
+- **[本站](https://github.com/home-assistant/contributors.home-assistant.io)**：`.github/copilot-instructions.md`，`AGENTS.md` 和 `CLAUDE.md` 链接到它，审阅清单位于 `.github/instructions/`。技能位于 `.github/skills/`，`.claude/skills` 链接到它。
+
+[operating-system](https://github.com/home-assistant/operating-system) 仓库有 AI 政策，但没有智能体指令或技能。
+
+## 各仓库的技能
+
+每个技能一行。选择名称即可阅读技能本身。
+
+### Home Assistant Core
+
+| 技能 | 用途 |
+| --- | --- |
+| [`ha-integration-knowledge`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-integration-knowledge/SKILL.md) | 构建、测试和审阅集成。该技能要求在查看任何集成时都把它作为主要参考 |
+| [`ha-quality-scale-verify`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-quality-scale-verify/SKILL.md) | 检查集成是否遵循某条质量等级规则，或达到某个等级 |
+| [`ha-review`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-review/SKILL.md) | 对照目标分支审阅代码改动，每条发现都会被二次核对 |
+| [`ha-pr-reviewer`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-pr-reviewer/SKILL.md) | 在 GitHub 上审阅拉取请求。它只在你的终端中报告，不会在 GitHub 上执行操作 |
+| [`ha-pr-comment-audit`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-pr-comment-audit/SKILL.md) | 查找拉取请求上尚未处理的审阅评论 |
+| [`ha-merge-queue`](https://github.com/home-assistant/core/blob/dev/.claude/skills/ha-merge-queue/SKILL.md) | 查找已准备好合并的开放拉取请求。主要供维护者使用 |
+| [`bump-dependency`](https://github.com/home-assistant/core/blob/dev/.claude/skills/bump-dependency/SKILL.md) | 升级 Python 依赖、重新生成依赖文件，并准备拉取请求 |
+
+### Frontend
+
+| 技能 | 用途 |
+| --- | --- |
+| [`ha-frontend-components`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-components/SKILL.md) | 对话框、表单、警告、键盘快捷键、工具提示、面板、卡片和按钮 |
+| [`ha-frontend-contexts`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-contexts/SKILL.md) | Lit contexts，以及让组件摆脱宽泛的 `hass` 对象 |
+| [`ha-frontend-demo`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-demo/SKILL.md) | 独立演示、其配置及其模拟的 API |
+| [`ha-frontend-events`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-events/SKILL.md) | 事件的类型定义、派发和声明 |
+| [`ha-frontend-gallery`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-gallery/SKILL.md) | 画廊的页面、演示和内容 |
+| [`ha-frontend-lit`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-lit/SKILL.md) | Lit 约定：响应式属性、状态、生命周期和 DOM 查询 |
+| [`ha-frontend-review`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-review/SKILL.md) | 审阅前端改动、准备拉取请求，以及填写模板 |
+| [`ha-frontend-styling`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-styling/SKILL.md) | CSS、主题、间距、响应式布局、RTL 和视图过渡 |
+| [`ha-frontend-testing`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-testing/SKILL.md) | Lint、类型检查、Vitest、Playwright 和开发服务器 |
+| [`ha-frontend-types`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-types/SKILL.md) | TypeScript 约定以及与后端的数据契约 |
+| [`ha-frontend-user-facing-text`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-user-facing-text/SKILL.md) | 标签、错误、术语，以及需要翻译的字符串 |
+| [`ha-frontend-ux-readiness`](https://github.com/home-assistant/frontend/blob/dev/.agents/skills/ha-frontend-ux-readiness/SKILL.md) | 判断新的卡片、徽章、界面或交互模式是否需要设计团队的意见 |
+
+### Android 应用
+
+| 技能 | 用途 |
+| --- | --- |
+| [`ha-android-architecture`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-architecture/SKILL.md) | 模块、分层、Hilt、安全存储，以及调用 Home Assistant API |
+| [`ha-android-committing`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-committing/SKILL.md) | 完成一项改动：格式化、测试、更新日志、分支名称和拉取请求 |
+| [`ha-android-concurrency`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-concurrency/SKILL.md) | 协程、调度器、Flow 和线程安全 |
+| [`ha-android-e2e-debugging`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-e2e-debugging/SKILL.md) | 查明端到端测试失败的原因 |
+| [`ha-android-kotlin-style`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-kotlin-style/SKILL.md) | Kotlin 风格：常量、类型、时间、命名和注释 |
+| [`ha-android-logging-errors`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-logging-errors/SKILL.md) | 日志、错误处理，以及避免用户数据进入日志 |
+| [`ha-android-review`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-review/SKILL.md) | 从正确性、风格和安全性方面审阅改动 |
+| [`ha-android-skill-maintenance`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-skill-maintenance/SKILL.md) | 保持 `AGENTS.md` 和各技能的更新 |
+| [`ha-android-testing`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-testing/SKILL.md) | 单元测试、Robolectric、Flow 和截图测试 |
+| [`ha-android-ui`](https://github.com/home-assistant/android/blob/main/.agents/skills/ha-android-ui/SKILL.md) | Compose 界面、ViewModel、导航、小组件和设计系统 |
+| [`agentic-workflows`](https://github.com/home-assistant/android/blob/main/.github/skills/agentic-workflows/SKILL.md) | 在仓库中设计和调试 GitHub Agentic Workflows |
+
+Android 仓库还在 `.claude/settings.json` 中有一个 Claude Code 钩子，在智能体编辑测试时提醒它加载 `ha-android-testing`。
+
+### iOS 应用
+
+| 技能 | 用途 |
+| --- | --- |
+| [`ha-ios-architecture`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-architecture/SKILL.md) | 项目结构、target、`Current` 依赖模式，以及代码签名 |
+| [`ha-ios-code-style`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-code-style/SKILL.md) | Swift 风格、SwiftFormat、SwiftLint、图标和日志 |
+| [`ha-ios-concurrency`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-concurrency/SKILL.md) | async/await、actor、Combine，以及使用 HAKit 与服务器通信 |
+| [`ha-ios-localization`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-localization/SKILL.md) | 添加或修改面向用户的字符串 |
+| [`ha-ios-magicitem`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-magicitem/SKILL.md) | 由小组件、Apple Watch、CarPlay 和 App Shortcuts 共享的条目模型 |
+| [`ha-ios-persistence`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-persistence/SKILL.md) | 使用 GRDB、Realm 或 UserDefaults 存储数据 |
+| [`ha-ios-push-live-activities`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-push-live-activities/SKILL.md) | 推送通知和实时活动（Live Activities） |
+| [`ha-ios-skill-maintenance`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-skill-maintenance/SKILL.md) | 保持各技能和 `AGENTS.md` 的更新 |
+| [`ha-ios-testing`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-testing/SKILL.md) | 单元测试、快照测试和模拟依赖 |
+| [`ha-ios-ui`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-ui/SKILL.md) | SwiftUI 和 UIKit 约定，以及设计系统包 |
+| [`ha-ios-webview`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-webview/SKILL.md) | 显示前端的网页视图、其消息总线，以及深链接 |
+| [`ha-ios-workflow-ci`](https://github.com/home-assistant/iOS/blob/main/.agents/skills/ha-ios-workflow-ci/SKILL.md) | 提交前步骤的顺序、TestFlight 门槛，以及 CI 检查 |
+
+### home-assistant.io 上的文档
+
+| 技能 | 用途 |
+| --- | --- |
+| [`home-assistant-docs-writing-style`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/home-assistant-docs-writing-style/SKILL.md) | 任何文档、页面或面向用户的文字 |
+| [`home-assistant-markdown-liquid-style`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/home-assistant-markdown-liquid-style/SKILL.md) | Markdown、Liquid、链接、图片、术语表条目、My links 和文本框 |
+| [`home-assistant-yaml-style`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/home-assistant-yaml-style/SKILL.md) | YAML 示例、自动化、脚本和模板 |
+| [`document-integration-docs`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/document-integration-docs/SKILL.md) | 以分页格式编写或更新集成的文档 |
+| [`create-blog-post`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/create-blog-post/SKILL.md) | 把 Google Docs 草稿变成博客文章 |
+| [`create-astro-component`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/create-astro-component/SKILL.md) | 把网站的一部分重建为 Astro 组件 |
+| [`update-agent-instructions`](https://github.com/home-assistant/home-assistant.io/blob/current/.claude/skills/update-agent-instructions/SKILL.md) | 更新仓库的智能体指令 |
+
+### 本贡献者网站
+
+| 技能 | 用途 |
+| --- | --- |
+| [`write-page`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/write-page/SKILL.md) | 添加或修改页面，从选择区域到运行检查 |
+| [`review`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/review/SKILL.md) | 审阅拉取请求、页面或网站代码，每条论断都会对照源码核对 |
+| [`fact-check`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/fact-check/SKILL.md) | 对照源仓库核查现有页面，并修复不成立的内容 |
+| [`add-glossary-term`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/add-glossary-term/SKILL.md) | 添加或修改术语表条目 |
+| [`design-component-page`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/design-component-page/SKILL.md) | 设计（Design）区域中带实时演示的组件页面 |
+| [`update-demos`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/update-demos/SKILL.md) | 从较新的前端重建实时组件演示 |
+| [`port-developers-change`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/port-developers-change/SKILL.md) | 把旧开发者文档中的改动迁移到本站 |
+| [`create-blog-post`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/create-blog-post/SKILL.md) | 把草稿变成本站上的博客文章 |
+| [`update-agent-instructions`](https://github.com/home-assistant/contributors.home-assistant.io/blob/main/.github/skills/update-agent-instructions/SKILL.md) | 更新智能体指令，并同步与 home-assistant.io 共享的写作规则 |
+
+## 常见任务的工作流程
+
+这些工作流程把上述技能与本站上的指南结合起来。它们适用于任何会读取技能文件夹的工具。如果你的工具不读取，就自己把它指向相应的 `SKILL.md` 文件。
+
+### 修复集成中的 bug
+
+1. 先自己复现这个 bug，并在 GitHub 上找到对应的 issue。如果你从未见过它失败，智能体无法告诉你它的修复是否修好了*你的* bug。
+2. 让智能体在加载 `ha-integration-knowledge` 技能的情况下查找原因。要求它在修改代码之前先写一个因该 bug 而失败的测试。没有修复也能通过的测试证明不了任何东西。
+3. 让它修复代码，然后像[运行测试](https://www.hasscn.top/contributors/core/development/testing/)中那样，自己运行该集成的测试：`pytest tests/components/<domain>`。如果修复改动了 `strings.json`，core 的 `AGENTS.md` 会告诉智能体先重新生成英文翻译，因为测试会读取这些内容。
+4. 阅读 diff。智能体喜欢添加超出修复本身的内容：额外的"防御性"检查、复述代码的注释，以及顺手做的重构。Core 的指令告诉智能体避免复述代码的注释和验证已覆盖的检查，但你还是要自己检查，并删掉修复不需要的东西。
+5. 自己打开拉取请求，并填写好[模板](https://www.hasscn.top/contributors/core/development/submitting/)。Core 有一个 `raise-pull-request` 子智能体，可以运行检查并替你填写模板。要知道它会推送你的分支并以草稿形式打开拉取请求。它会把 "I understand the code..." 和 "Any generated code has been carefully reviewed..." 留作未勾选，等你确认属实后再勾选。
+
+### 构建新集成并达到 Bronze 等级
+
+新集成必须达到[质量等级](https://www.hasscn.top/contributors/core/quality-scale/)的 Bronze 等级，而且它的第一个拉取请求应保持较小。先阅读[创建集成](https://www.hasscn.top/contributors/core/integrations/create/)：它解释了新集成何时应进入 core，并设定了审阅者会要求的限制。
+
+1. **从库开始。** `ha-integration-knowledge` 技能指出集成应当是薄封装，协议和设备逻辑应放在 PyPI 上的独立库中。智能体会很乐意在你的集成里写一个 HTTP 客户端。不要让它这么做。参见[构建 Python 库](https://www.hasscn.top/contributors/core/integrations/api-library/)。
+2. **自己生成骨架**，使用 `python3 -m script.scaffold integration`。脚手架会在你的代码应放置的位置留下 `TODO` 注释，以及一个所有规则都设为 `todo` 的 `quality_scale.yaml`。
+3. **与智能体一起逐个平台填写**，并加载 `ha-integration-knowledge`。在继续之前，让它向你解释配置流程（config flow）和协调器（coordinator）。之后你需要向审阅者解释它们。
+4. **在 `quality_scale.yaml` 中如实标记 Bronze 规则**：`done`，或带原因的 `exempt`。[规则](https://www.hasscn.top/contributors/core/quality-scale/rules/)对每条都有解释。
+5. **用 `ha-quality-scale-verify` 验证。** 该技能一次检查一条规则，以及某个等级的所有 Bronze 规则。在工具存在时它会运行工具（如 hassfest），而不是从代码中猜测，并且在无法检查时把规则标记为未验证。一些 Bronze 规则在 core 仓库之外：`brands` 资源，以及需要你在 home-assistant.io 上提交文档拉取请求的 `docs-*` 规则。阅读报告，并修复或豁免它发现的问题。
+6. **自己运行检查**：你的集成的测试以及 `prek run --all-files`。参见 [Linters、hassfest 和 CI](https://www.hasscn.top/contributors/core/development/checks/)。
+7. **阅读每一行**，然后按上述方式打开拉取请求。审阅者会问某段代码为什么在那里。"AI 写的"不是政策接受的答案。
+
+### 审阅拉取请求
+
+审阅对整个项目都有帮助，core 模板也邀请你审阅另外两个拉取请求。AI 工具可以帮你在不熟悉的改动中找到方向，但你发布的审阅仍然必须是你自己的。
+
+- **Core**：`ha-pr-reviewer` 使用 GitHub CLI 读取拉取请求，用 `ha-review` 进行审阅，并用 `ha-pr-comment-audit` 检查开放的评论线程。它只在你的终端中报告。
+- **Frontend**：`ha-frontend-review`，以及与改动匹配的配套技能。它会先读取已有评论，并让人类反馈优先于智能体的反馈。
+- **Android**：`ha-android-review`。
+
+然后在写下来之前，把每条发现对照代码核实。删掉你无法确认或不理解的条目。用你自己的话发布审阅。不要粘贴工具的输出，也不要让工具替你发布。[审阅拉取请求](https://www.hasscn.top/contributors/core/development/reviewing/)说明了一次好的 core 审阅关注什么。
+
+### 在前端添加卡片
+
+对于新卡片，项目首先推荐通过 Marketplace 分享，参见[分享它](https://www.hasscn.top/contributors/frontend/custom-ui/#share-it)。以下步骤针对前端本身的卡片。
+
+1. 加载 `ha-frontend-components` 和 `ha-frontend-styling`。组件技能列出了卡片必须做到的事：验证其配置，处理加载、错误、不可用和实体缺失的情况，并在需要时提供编辑器。
+2. 在写大量代码之前先阅读 `ha-frontend-ux-readiness`。新卡片既是代码，也是设计决策。当方向尚未确定时，审阅者会请设计团队提供意见。参见[审阅与发布](https://www.hasscn.top/contributors/frontend/development/review-and-release/)和[我们的设计方式](https://www.hasscn.top/contributors/design/how-we-design/)。
+3. 把每个可见字符串都通过翻译系统处理，如 `ha-frontend-user-facing-text` 所解释的。
+4. 运行 `pnpm lint` 和 `pnpm test`，并亲自在浅色和深色模式以及手机上试用卡片。在拉取请求中附上截图或短视频：前端模板要求提供它们。
+
+你自己仓库中的自定义卡片没有可加载的技能。[自定义卡片指南](https://www.hasscn.top/contributors/frontend/custom-ui/card/)是那里的参考。
+
+### 在 home-assistant.io 上编写文档
+
+home-assistant.io 的指令告诉智能体在编辑之前加载匹配的技能，并加载所有适用的技能：
+
+- `home-assistant-docs-writing-style` 用于任何文字内容。
+- `home-assistant-markdown-liquid-style` 用于链接、图片、Liquid 和其他站点语法。
+- `home-assistant-yaml-style` 用于 YAML 示例。
+- `document-integration-docs` 用于集成页面。它接受域名参数，比如 Claude Code 中的 `/document-integration-docs <domain>`，并且当你把 core 和前端克隆在文档旁边时，它会读取 core 中该集成的触发、条件和动作。
+
+这些指令中有两条规则对 AI 工作最为重要。除非你要求，智能体不得编造新的仪表盘、卡片、自动化或脚本示例。而且 `document-integration-docs` 不得信任 issue 文本或现有文档，除非 core 予以确认。用同样的标准要求你自己的审阅：把每个选项、默认值和步骤对照代码核实，并在 Deploy Preview 中查看你的页面。[编写文档](https://www.hasscn.top/contributors/writing/)包含其余内容。
+
+### 翻译不是 AI 任务
+
+界面的翻译在 [Lokalise](https://www.hasscn.top/contributors/glossary/lokalise/) 中由人来完成。[翻译规则](https://www.hasscn.top/contributors/translate/reference/rules/)要求你只翻译成你的母语，因为机器翻译一眼就能看出来。两个应用的智能体指令从另一面表示赞同：智能体只添加或修改英文字符串。Android 技能指出翻译文件来自 Lokalise，绝不能添加或编辑；iOS 技能指出只能修改英文 `.strings` 文件。
+
+有一个已记录的例外。对于[语音意图](https://www.hasscn.top/contributors/translate/voice/style-guide/#drafts-from-an-ai-model)，[intents 仓库](https://github.com/OHF-Voice/intents)可以生成一个提示词，你把它粘贴到 AI 模型中来起草某个意图的句子。那只是草稿，需要由母语者重写。
+
+## 每次都要自己检查的内容
+
+工具的输出只是草稿。以下是能抓住那些在本站审阅中反复出现的错误的检查项。
+
+- **对照代码核实，且要在正确的分支上。** 事实依据是仓库的默认分支，比如 core 和前端的 `dev`。不是你的记忆，不是工具的记忆，也不是几周前的本地克隆。函数名、参数和命令都会变。
+- **关于人、流程和数字的论断需要来源。** 谁来决定、谁审阅、需要多长时间、有多少个。代码无法证明这些，而工具会用听起来合理的内容填补空白。找到官方页面，否则就删掉。
+- **留意绝对化的词语。** "总是"、"从不"、"每一个"、"只有"。寻找例外：第二条代码路径、回退机制、功能开关。工具在总结时常常会丢失条件。
+- **跨生命周期边界测试。** 在正常路径上工作的代码，会在第一次更新时、卸载和重新加载时、迁移之后、设备消失又回来时，或者列表为空时出问题。问问自己每种情况下会发生什么。
+- **从全新开始，按顺序运行每个步骤。** 工具编写的说明常常漏掉一个 `cd`、一次安装，或后续步骤需要的某个设置。
+- **不要让摘要代替来源。** 抓取页面或文件的工具给你的是它的摘要，而摘要会弄乱名称和数字。在依赖某个细节之前，自己阅读来源。
+- **提交之前阅读 diff。** 查找你没有要求的改动、承诺超出代码实际功能的注释，以及你无法解释的代码。
+
+## 为你的智能体提供关于本站的上下文
+
+本站发布了 [`/llms.txt`](https://www.hasscn.top/contributors/llms.txt)，一个按 [llms.txt 格式](https://llmstxt.org/)编写的、面向 AI 工具的区域和页面索引。在任务开始时把它交给你的智能体，这样它就能找到适用的指南，而不是靠猜测，或在别处阅读过时的页面。同样的规则也适用于它在其中找到的内容：那只是起点，代码才是依据。
+
+## 找谁咨询
+
+- 不确定你对 AI 的使用是否符合政策？在你的拉取请求中，或在 [Home Assistant Discord](https://www.home-assistant.io/join-chat/) 上询问维护者。
+- 某个技能给出了错误的建议？在携带它的仓库中打开 issue 或拉取请求。技能和其他文件一样被维护。
+
+---
+
+# AI 政策
+
+> Open Home Foundation 的 AI 政策。你可以在贡献时使用 AI 工具，但你要对自己提交的每一处更改负责，且不允许使用自主智能体（autonomous agents）。
+
+Source: https://www.hasscn.top/contributors/start/ai-policy/
+
+这是 [Open Home Foundation](https://www.hasscn.top/contributors/glossary/open-home-foundation/) 的 AI 政策。它适用于对 Home Assistant 以及该基金会其他项目的所有贡献：代码、文档、议题（issue）、拉取请求（pull request）、评论和审查。
+
+## 简而言之
+
+- 你可以使用 AI 工具来帮助你做贡献。
+- 你对自己提交的所有内容负责。你必须理解这些内容，并能够用自己的话解释每一处更改。
+- 不允许使用自主智能体（autonomous agents）。由它们创建的拉取请求和议题会被关闭。
+- 亲自回答维护者（maintainer）提出的问题，不要用 AI 来回答。
+
+## 为什么要有这项政策
+
+我们支持在贡献时将 AI（例如大型语言模型）作为工具使用。但你要对自己提交的贡献负责，我们要对我们合并和发布的贡献负责。我们对所有这些贡献都保持着很高的标准。
+
+维护者会花费他们的时间和专业知识来审查贡献。提交你自己没有审查和理解过的 AI 生成内容，会浪费这些时间，而且这样的内容不会被接受。
+
+## 自主智能体
+
+我们不允许自主智能体为我们的项目做贡献。我们会关闭我们认为是由自主智能体创建的拉取请求和议题，并且可能会将自动生成的评论标记为垃圾信息。这包括绕过议题或拉取请求模板的贡献。
+
+## 议题、拉取请求和审查
+
+你可以使用 AI 工具来帮助你写作。但不要让工具代表你发布你未曾审查过的内容。让你的回复只包含阐明观点所需的内容。我们可能会隐藏那些我们认为属于未经审查的 AI 输出的评论。
+
+当你创建拉取请求时，你必须能够用自己的话解释所提议的更改。这包括描述以及你对问题的回答。如果 AI 帮助你撰写了描述，请检查其技术上的准确性。
+
+不要用 AI 来回答维护者的问题。你应该理解自己的工作，并能够解释它。使用 AI 来改善语法或清晰度是可以的，但回答的实质内容必须是你自己的。
+
+想包含一些与 AI 对话中的内容？请使用 `>` 将其放入引用块中，并说明它来自哪里。添加你自己的评论，解释它为什么重要。不要分享冗长的片段。
+
+## 非英语母语者
+
+如果英语不是你的第一语言，AI 会很有用。使用它来改善你自己撰写的文本的语法或清晰度是可以的。
+
+如果你使用 AI 来翻译你的评论，请确保译文表达了你的意思。可以考虑像下面这样，将你的原文放在 details 折叠块中：
+
+```markdown
+<details>
+<summary>Original text</summary>
+
+Your text in your own language.
+
+</details>
+```
+
+这体现了你为贡献付出的努力，便于维护者在需要时核对译文，并让对话保持可读。
+
+## 代码和文档
+
+AI 可以是编写代码和文档的有用工具。但我们的项目是许多人赖以构建的开源基础，因此我们要求有人类参与其中（human in the loop），并理解 AI 产出的工作。
+
+在提交之前，请审查并理解每一项贡献。你应该能够解释拉取请求中的每一处更改。看起来像是未经审查的 AI 输出的拉取请求会被关闭，且不经过审查。
+
+## 我们如何使用 AI
+
+我们的一些项目使用 AI 工具来协助代码审查、议题分类、报告以及其他项目管理任务。这些工具可能会在你的拉取请求或议题上留下评论。和任何自动化工具一样，它们并不总是正确的。
+
+请把来自 AI 工具的评论当作其他任何审查评论来对待。如果你认为它不对，请直说。简短地解释一下即可。维护者始终拥有最终决定权。如有疑问，请询问维护者。
+
+## 执行
+
+不符合本政策的贡献会被关闭。屡次违规可能会导致你被禁止向 Open Home Foundation 的项目做贡献。如果你认为你的贡献是被误关的，请联系维护者沟通。
+
+## 拉取请求模板中的问题
+
+一些仓库在它们的拉取请求模板中询问与 AI 相关的问题。请保留这些部分，并如实回答。
+
+- **Home Assistant Core 和前端**在检查清单中有两个复选框：“我理解我提交的代码，并能解释它的工作原理”，以及“任何生成的代码都经过了仔细审查，以确保正确性并符合项目标准”。
+- **Android 和 iOS 应用**要求你确认已阅读 AI 政策，并从三个选项中恰好选择一个：你没有使用 AI、使用了 AI 辅助，或者代码完全由 AI 生成但你已审查并理解了它，并且会在审查过程中不使用 AI 进行回复。
+
+使用 AI 工具是允许的。重要的是你要理解自己提交的内容。
+
+有关实际操作方面的内容，例如仓库中为 AI 工具配备的技能（skills）以及常见任务的工作流程，请参阅[使用 AI 工具做贡献](https://www.hasscn.top/contributors/start/ai-tools/)。
+
+## 本政策的存放位置
+
+本政策的一份副本位于 [`AI_POLICY.md`](https://github.com/home-assistant/.github/blob/master/AI_POLICY.md)，它存放在 GitHub 上 Home Assistant 组织的 `.github` 仓库中。那里的贡献指南引用了该文件。如果两者出现不一致，该文件规定以已发布的版本为准。
+
+---
+
+# 许可与 CLA
+
+> Home Assistant 使用哪些许可证，贡献者许可协议（Contributor License Agreement）的内容是什么，以及如何签署。
+
+Source: https://www.hasscn.top/contributors/start/licensing/
+
+你为 Home Assistant 贡献的一切内容都会以开源许可证的形式与世界共享。在你的第一个代码贡献被合并之前，你需要通过签署贡献者许可协议（Contributor License Agreement，CLA）来确认你有权以这种方式分享它。这只需要做一次。
+
+## 许可证
+
+- **代码**以 [Apache License 2.0](https://www.home-assistant.io/developers/license/) 发布。这包括 Home Assistant Core、前端以及其他软件仓库。
+- home-assistant.io 上的**文档**以 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://github.com/home-assistant/home-assistant.io/blob/current/LICENSE.md) 发布。
+
+每个仓库的根目录下都有一个 `LICENSE` 文件。如有疑问，以该仓库中的这个文件为准。
+
+## 贡献者许可协议
+
+CLA 很简短。做出贡献即表示你证明以下内容：
+
+```txt
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the Apache 2.0 license; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the Apache 2.0 license; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it) is maintained indefinitely
+    and may be redistributed consistent with this project or the open
+    source license(s) involved.
+```
+
+简单来说：内容是你自己写的，或者它来自允许你分享的开源作品。同时你明白，你的贡献是公开的，并将保持公开。
+
+CLA 基于 Linux 项目的[开发者原产地证书（Developer Certificate of Origin）](https://elinux.org/Developer_Certificate_Of_Origin)，修改为指明 Apache 2.0 许可证，并去掉了签署（sign-off）部分。其文本根据 [Creative Commons Attribution-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-sa/3.0/) 授权使用。完整页面及其历史记录可在 [home-assistant.io](https://www.home-assistant.io/developers/cla/) 上查看。
+
+## 签署
+
+你无需提前做任何事情。Home Assistant 的代码仓库，例如 Core、前端、伴侣应用（companion apps）、Supervisor、Home Assistant OS 以及官方应用，都会检查每个拉取请求（pull request）是否已签署 CLA。当你第一次在其中某个仓库打开拉取请求而尚未签署时，一个机器人会发表评论并附上链接。按照该链接及其中的说明操作即可。签署一次后，它也将覆盖你未来的贡献。
+
+## 来自其他地方的代码
+
+当你引入并非由你编写的代码时，第 (b) 条就很关键，例如来自其他项目的代码片段。只有在其许可证允许的情况下才这样做，并在你的拉取请求中说明其来源。使用 AI 工具编写的代码也是如此：你要对自己提交的内容负责。请参阅 [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/)。
+
+## 致谢
+
+Home Assistant 有一个[致谢页面](https://www.home-assistant.io/developers/credits/)，列出了为该项目各个仓库做出贡献的人们。
+
+---
+
+# 行为准则
+
+> 我们在所有协作空间中如何彼此相待，以及遇到不妥之事时该如何处理。
+
+Source: https://www.hasscn.top/contributors/start/code-of-conduct/
+
+Home Assistant 由来自世界各地、拥有各种背景和经验水平的人们共同构建。[Home Assistant 行为准则](https://www.home-assistant.io/code_of_conduct/) 确保每个人都能在不受骚扰的情况下参与其中。参与贡献即表示您同意遵守该准则。
+
+## 适用范围
+
+适用于我们协作的所有场所：GitHub、[Discord](https://www.home-assistant.io/join-chat/)、[社区论坛](https://community.home-assistant.io/)、社交媒体以及各类活动。当有人以项目名义在公开场合出现时，例如使用官方账号或参加活动，本准则同样适用。
+
+## 我们期望的行为
+
+- 友善待人，展现同理心。
+- 尊重与自己不同的意见、观点和经历。
+- 提出建设性的反馈，并优雅地接受反馈。
+- 为自己的错误承担责任，向受影响的人道歉，并从中吸取教训。
+- 关注对社区最有利的事情，而不仅仅是对自己有利的。
+
+## 不可接受的行为
+
+- 性化的语言或图像，以及任何形式的性关注或性挑逗
+- 恶意挑衅（trolling）、侮辱以及人身或政治攻击
+- 骚扰，无论公开还是私下
+- 未经许可分享他人的私人信息，例如住址
+- 其他在专业环境中会被合理地认为不适当的行为
+
+## 报告问题
+
+如果您遭遇或看到不妥的行为，请进行报告。发送电子邮件至 [safety@home-assistant.io](mailto:safety@home-assistant.io)，或使用您所在平台的举报或标记功能。每一份报告都会得到及时、公正的审查和调查，报告者的隐私也会受到尊重。各平台如何处理报告，以及版主如何处理这些报告，请参阅[报告问题](https://www.hasscn.top/contributors/community/guides/reporting/)和[内容审核](https://www.hasscn.top/contributors/community/guides/moderation/)。
+
+## 后续处理
+
+社区负责人会根据影响程度决定相应的后果。后果包括私下书面警告、正式警告、临时封禁，直至对屡次严重违规者实施永久封禁。负责人还可以删除或编辑不符合行为准则的评论、代码、议题（issue）及其他贡献。
+
+[完整的行为准则](https://www.home-assistant.io/code_of_conduct/) 包含每个步骤的详细信息。它改编自 [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct/) 2.0 版本。

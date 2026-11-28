@@ -1,0 +1,78 @@
+# 伴侣应用
+
+> Android、iOS 与 macOS。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/companion/llms-full.txt.
+
+## 伴侣应用
+
+- [伴侣应用（Companion apps）](https://www.hasscn.top/contributors/companion/index.md): 适用于 Android、iOS、iPadOS、macOS、watchOS、Wear OS 以及车载系统的官方 Home Assistant 应用。它们是如何构建的，以及如何参与构建。
+- [你的第一次伴侣应用贡献](https://www.hasscn.top/contributors/companion/first-contribution/index.md): 选择 Android 或 Apple，在你的机器上构建应用，并提交你的第一个 pull request。
+
+## Android
+
+- [Android](https://www.hasscn.top/contributors/companion/android/index.md): 适用于 Android、Wear OS、Android Auto 和 Android Automotive 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+
+### Architecture
+
+- [Android 架构](https://www.hasscn.top/contributors/companion/android/architecture/index.md): Android 应用背后的原则、模块、技术栈，以及手机、汽车和手表应用如何协同工作。
+- [前端屏幕](https://www.hasscn.top/contributors/companion/android/frontend-screen/index.md): 在 Web 视图中显示 Home Assistant 前端的 Android 屏幕，包括其状态、JavaScript 桥接和外部总线。
+- [Android 版本类型与目标平台](https://www.hasscn.top/contributors/companion/android/flavors-and-targets/index.md): Android 应用的 full 和 minimal 版本类型，以及手机、Android Automotive、Wear OS 和 TV 构建。
+
+### Write code
+
+- [Compose 与设计系统](https://www.hasscn.top/contributors/companion/android/compose/index.md): 使用 Jetpack Compose、HATheme 和 `HA*` 组件构建 Android UI。预览、Compose 目录、小组件和导航。
+- [Android 调试工具](https://www.hasscn.top/contributors/companion/android/debugging/index.md): Android 应用调试构建中的开发者游乐场、Compose 目录、StrictMode 和 LeakCanary。
+
+### Test
+
+- [测试 Android 应用](https://www.hasscn.top/contributors/companion/android/testing/index.md): 如何为 Android 应用编写测试，以及如何使用 JUnit、MockK、Robolectric 和 Turbine 编写单元测试。
+- [Android 截图测试](https://www.hasscn.top/contributors/companion/android/screenshot-testing/index.md): 使用 Compose Preview Screenshot Testing，确保 Android 应用中的 Compose UI 只在有意的更改时才发生变化。
+- [Android 插桩测试（instrumentation tests）](https://www.hasscn.top/contributors/companion/android/instrumentation-testing/index.md): 在真实的 Android 运行时上测试 Android 应用，覆盖每个受支持 API 级别的模拟器。
+
+### Ship
+
+- [提交 Android 拉取请求](https://www.hasscn.top/contributors/companion/android/submitting/index.md): 检查清单、拉取请求模板、应用内更新日志，以及 Android 仓库中评审的流程。
+- [Android 持续集成](https://www.hasscn.top/contributors/companion/android/ci/index.md): Android 应用的 GitHub Actions 工作流。哪些会在你的拉取请求上运行、合并后运行，以及定时运行。
+- [Android 版本发布](https://www.hasscn.top/contributors/companion/android/releases/index.md): 对 Android 应用的更改如何从合并的拉取请求（pull request）流转到内部测试人员、Beta 版和生产环境，以及如何自行构建签名的发布版本。
+
+### 架构
+
+- [Android UI 架构](https://www.hasscn.top/contributors/companion/android/ui-architecture/index.md): Android 应用中一个屏幕是如何构建的。视图、ViewModel、它的三种输出，以及其下方的处理器、管理器、用例和仓库。
+
+### 测试
+
+- [Android 端到端测试](https://www.hasscn.top/contributors/companion/android/e2e-testing/index.md): 每晚针对真实 Home Assistant 在所有 API 级别上运行 Android 应用的 Maestro 测试，以及如何调试失败。
+
+### 编写代码
+
+- [Android 最佳实践](https://www.hasscn.top/contributors/companion/android/best-practices/index.md): 每次 Android 代码审查中都会出现的编码规则。强类型、时间、并发、依赖注入、日志记录，以及快速失败。
+- [Android 代码风格与代码检查](https://www.hasscn.top/contributors/companion/android/code-style/index.md): Android 应用中的 KTLint、Detekt、Android Linter 和 Yamllint。如何运行它们、抑制问题，以及使用基线（baseline）。
+- [Android 依赖](https://www.hasscn.top/contributors/companion/android/dependencies/index.md): Android 应用中的版本目录、依赖锁定文件和 Renovate。
+
+### 设置
+
+- [Android 入门](https://www.hasscn.top/contributors/companion/android/get-started/index.md): 安装 Android Studio，fork 并克隆仓库，构建应用，并在模拟器或手机上运行。
+- [Android 上的推送通知](https://www.hasscn.top/contributors/companion/android/push-notifications/index.md): 设置你自己的 Firebase 项目和推送服务，适用于开发通过 Firebase Cloud Messaging 传递的通知时。
+
+## Apple
+
+- [Apple](https://www.hasscn.top/contributors/companion/apple/index.md): 适用于 iPhone、iPad、Mac、Apple Watch 和 CarPlay 的 Home Assistant 应用。仓库里有什么，以及从哪里开始。
+- [Apple 入门](https://www.hasscn.top/contributors/companion/apple/get-started/index.md): 安装 Xcode 和 Ruby 工具链，设置代码签名，并在模拟器或你自己的设备上运行 Home Assistant 应用。
+- [Apple 架构](https://www.hasscn.top/contributors/companion/apple/architecture/index.md): Home Assistant Apple 应用是如何组织的。源代码文件夹、共享代码、Current 环境，以及每次改动都要遵循的规则。
+- [Apple 目标](https://www.hasscn.top/contributors/companion/apple/targets/index.md): Apple 项目中的应用、扩展、Apple Watch、CarPlay 和 Mac 目标，以及当你的改动涉及共享代码时需要检查的内容。
+- [Apple 代码风格](https://www.hasscn.top/contributors/companion/apple/code-style/index.md): Apple 项目中的 SwiftFormat、SwiftLint、RuboCop 和 Yamllint，以及审查者关注的编码规范。
+- [测试 Apple 应用](https://www.hasscn.top/contributors/companion/apple/testing/index.md): Apple 项目中的单元测试、快照测试、UI 测试和端到端测试，使用 Current 进行模拟，以及补丁覆盖率门槛。
+- [提交 Apple 拉取请求](https://www.hasscn.top/contributors/companion/apple/submitting/index.md): Apple 仓库中的检查清单、拉取请求模板，以及审核过程中可以期待的内容。
+- [Apple 持续集成](https://www.hasscn.top/contributors/companion/apple/ci/index.md): Apple 项目的 GitHub Actions 工作流。哪些会在你的拉取请求、合并之后以及按计划运行。
+- [Apple 版本发布](https://www.hasscn.top/contributors/companion/apple/releases/index.md): 对 Apple 应用的更改如何从合并的 pull request 一路到达 App Store Connect、版本号如何设置，以及 Mac 构建如何成为 GitHub release。
+
+## 移动应用 API
+
+- [移动应用 API](https://www.hasscn.top/contributors/companion/mobile-app-api/index.md): 应用如何通过 mobile_app 集成连接到 Home Assistant。包括注册、webhook、传感器、位置、通知以及 web 视图。
+- [连接与注册](https://www.hasscn.top/contributors/companion/mobile-app-api/setup/index.md): 查找 Home Assistant 实例，使用 OAuth 2 登录用户，并通过 mobile_app 集成注册应用。
+- [发送数据](https://www.hasscn.top/contributors/companion/mobile-app-api/sending-data/index.md): mobile_app webhook。使用哪个 URL、请求格式、响应，以及该 webhook 接受的所有请求类型。
+- [加密](https://www.hasscn.top/contributors/companion/mobile-app-api/encryption/index.md): 使用 libsodium 对称密钥加密来加密 mobile_app webhook 请求和响应。
+- [传感器](https://www.hasscn.top/contributors/companion/mobile-app-api/sensors/index.md): 从应用注册传感器和二进制传感器，更新其状态，并与 Home Assistant 保持启用状态同步。
+- [通知](https://www.hasscn.top/contributors/companion/mobile-app-api/notifications/index.md): mobile_app 如何通过 WebSocket 连接或推送服务器向应用发送通知，以及推送服务器必须遵循的约定。
+- [Web 视图](https://www.hasscn.top/contributors/companion/mobile-app-api/webview/index.md): 在应用内显示 Home Assistant 前端，而无需用户再次登录。

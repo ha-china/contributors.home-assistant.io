@@ -1,0 +1,21 @@
+# 快速上手
+
+> 了解项目如何运作，以及如何完成你的第一次贡献。
+
+An area of Home Assistant 贡献者, the contributor site of Home Assistant. The index of the whole site is at https://www.hasscn.top/contributors/llms.txt. The links below go to the Markdown version of each page, in the order of the sidebar. The full text of every page of this area is in https://www.hasscn.top/contributors/start/llms-full.txt.
+
+## 快速上手
+
+- [快速上手](https://www.hasscn.top/contributors/start/index.md): Home Assistant 项目是如何运作的、大家在哪里交流，以及无论你的技能水平如何，如何做出你的第一次贡献。
+- [你的第一次贡献](https://www.hasscn.top/contributors/start/first-contribution/index.md): 选择适合你技能的路径，迈出一小步作为开始。大多数路径不需要任何代码。
+- [使用 GitHub，无需成为开发者](https://www.hasscn.top/contributors/start/github/index.md): 什么是仓库、issue、fork、分支、commit 和 pull request，以及如何完全在浏览器中对 Home Assistant 做一个小改动。
+- [我们在哪里交流](https://www.hasscn.top/contributors/start/where-we-talk/index.md): Discord、社区论坛和 GitHub。哪个地方适合做什么，以及每个领域的人可以在哪里找到。
+- [报告缺陷（bug）](https://www.hasscn.top/contributors/start/report-a-bug/index.md): 应该在哪个仓库报告缺陷、缺陷报告表单会询问什么内容以及在哪里找到这些信息，以及报告之后会发生什么。
+- [拉取请求与评审](https://www.hasscn.top/contributors/start/pull-requests/index.md): 如何创建一个易于评审的拉取请求（pull request）、创建之后会发生什么，以及如何帮助它被合并。适用于所有仓库。
+- [作为贡献者成长](https://www.hasscn.top/contributors/start/grow/index.md): 第一次拉取请求之后是什么。审查、分类问题、负责一个集成、承担角色，以及这一切能通向哪里。
+- [项目是如何组织的](https://www.hasscn.top/contributors/start/organization/index.md): 谁拥有 Home Assistant，谁为它出资，工作在哪里进行，以及由谁决定合并哪些内容。
+- [我们的原则](https://www.hasscn.top/contributors/start/principles/index.md): Home Assistant 所坚持的理念，以及我们如何协作。这些价值观是你在评审和讨论中看到的各项决定背后的依据。
+- [使用 AI 工具参与贡献](https://www.hasscn.top/contributors/start/ai-tools/index.md): 在贡献时如何用好 AI 编程工具。AI 政策对你的要求、各仓库为智能体（agent）准备的指令和技能、常见任务的工作流程，以及每次都需要自己检查的内容。
+- [AI 政策](https://www.hasscn.top/contributors/start/ai-policy/index.md): Open Home Foundation 的 AI 政策。你可以在贡献时使用 AI 工具，但你要对自己提交的每一处更改负责，且不允许使用自主智能体（autonomous agents）。
+- [许可与 CLA](https://www.hasscn.top/contributors/start/licensing/index.md): Home Assistant 使用哪些许可证，贡献者许可协议（Contributor License Agreement）的内容是什么，以及如何签署。
+- [行为准则](https://www.hasscn.top/contributors/start/code-of-conduct/index.md): 我们在所有协作空间中如何彼此相待，以及遇到不妥之事时该如何处理。

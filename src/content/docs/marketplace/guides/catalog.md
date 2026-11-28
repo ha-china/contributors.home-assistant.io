@@ -23,7 +23,10 @@ lastVerified: 2026-10-12
 
 `marketplace_repository` 链接是 Home Assistant 2026.11 中新增的。较旧的 `hacs_repository` 链接接受相同的 `owner`、`repository` 和 `category`。它在 2026.11 之前打开 HACS，之后打开 Marketplace，因此可以覆盖两边的用户。HACS 在其 [My Home Assistant](https://hacs.xyz/docs/use/my/) 页面上对此进行了说明。
 
-## 谁可以提交
+> [!TIP]
+> The badge is for GitHub. On the page of your repository in the Marketplace, users already have an install button. Mark the badge, and any installation steps, to [leave them out of the Marketplace](/marketplace/reference/repository-structure/#leave-part-of-your-readme-out-of-the-marketplace).
+
+## Who can submit
 
 只有仓库的所有者或主要贡献者才能提交。
 

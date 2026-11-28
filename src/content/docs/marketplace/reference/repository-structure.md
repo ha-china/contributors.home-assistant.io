@@ -18,7 +18,40 @@ order: 2
 | 开启 Issues | 用户在此报告问题。目录（catalog）必需。 |
 | GitHub Releases | 建议所有类型都使用，模板和目录（catalog）必需。参见 [发布与更新](/marketplace/guides/releases/)。 |
 
-## 集成（integration）
+## Leave part of your README out of the Marketplace
+
+Your README does two jobs. On GitHub, it's where people find your repository, so it tells them how to install it, often with a [My link](/glossary/my-link/) badge or an install badge. In the Marketplace, it's shown on the page of your repository, right below an install button. There, those installation steps are in the way.
+
+Put the parts that are only for GitHub between two HTML comments, and the Marketplace leaves them out:
+
+```markdown title="README.md"
+# 3D printer dashboard
+
+Keep an eye on every print: progress, temperatures, and the camera...
+
+<!-- ha-marketplace:exclude-start -->
+## Installation
+
+Add this repository in the Marketplace, or install it through HACS.
+<!-- ha-marketplace:exclude-end -->
+
+...
+
+## Configuration
+
+...
+```
+
+GitHub doesn't show HTML comments, so there your README reads as before.
+
+- A section runs from the start marker to the next end marker. Without an end marker, it runs to the end of the README.
+- The spaces inside the markers are optional, so `<!--ha-marketplace:exclude-start-->` works too.
+- Markers inside a code block or inline code are text, not markers. That way, a template README can show them as an example.
+- You can mark as many sections as you like.
+
+Starting with Home Assistant 2026.12, the Marketplace leaves the marked sections out. Older versions show the whole README, so you can add the markers now.
+
+## Integrations
 
 ```text
 custom_components/awesome/__init__.py
@@ -86,26 +119,4 @@ README.md
 
 HACS 还支持 AppDaemon 应用（`apps/`）和 Python 脚本（`python_scripts/`），目录中也有它们的列表。但 Marketplace 不安装这两者。从 2026.11 开始，Home Assistant 还会屏蔽 HACS 自定义集成，因为 Marketplace 已取代它。因此在 2026.11 及更高版本上，这两者都无法安装。
 
-Marketplace 还会拒绝包含适用于 Home Assistant OS 的 [应用（app）](/glossary/app/) 的仓库。这些应用会作为应用仓库添加到 **设置** > **应用** 下：参见 [创建并分享仓库](/apps/guides/repository/)。
-
-## 在 Marketplace 中省略 README 的部分内容
-
-你的 README 会在两个地方被阅读：在 GitHub 上，人们在那里找到你的仓库；以及在 Marketplace 中，在你的仓库页面上。安装说明、[我的链接（My link）](/glossary/my-link/) 徽章或安装徽章在 GitHub 上有帮助，但 Marketplace 中的页面已经有安装按钮，所以这些内容在那里会碍事。将仅用于 GitHub 的部分放在两个 HTML 注释之间，Marketplace 就会省略它们：
-
-```markdown title="README.md"
-# Awesome card
-
-<!-- ha-marketplace:exclude-start -->
-## Installation
-
-Add this repository in the Marketplace, or install it through HACS.
-<!-- ha-marketplace:exclude-end -->
-
-## Configuration
-```
-
-GitHub 不显示 HTML 注释，所以 README 在那里读起来和以前一样。
-
-- 一个区块从开始标记运行到下一个结束标记。如果没有结束标记，则运行到 README 的末尾。
-- 标记内的空格是可选的。
-- 代码块或行内代码中的标记是文本，而不是标记，因此 README 可以将它们作为示例展示。
+The Marketplace also refuses repositories with [apps](/glossary/app/) for Home Assistant OS. Those are added as an app repository under **Settings** > **Apps** instead: see [create and share a repository](/apps/guides/repository/).
